@@ -13,6 +13,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminBeachesList from "./pages/admin/beaches/AdminBeachesList";
 import AdminBeachCreate from "./pages/admin/beaches/AdminBeachCreate";
 import AdminBeachEdit from "./pages/admin/beaches/AdminBeachEdit";
+import BeachDetail from "./pages/BeachDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
+            <Route path="/beach/:slug" element={<BeachDetail />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route 
               path="/admin" 

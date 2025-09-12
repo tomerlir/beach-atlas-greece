@@ -13,6 +13,7 @@ interface Beach {
   name: string;
   place_text: string;
   description?: string;
+  slug: string;
   latitude: number;
   longitude: number;
   organized: boolean;
