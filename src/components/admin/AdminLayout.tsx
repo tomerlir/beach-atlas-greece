@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, Outlet } from 'react-router-dom';
 import { Menu, X, MapPin, Upload, Settings, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 
-interface AdminLayoutProps {
-  children: React.ReactNode;
-}
-
-const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
+const AdminLayout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { signOut, profile } = useAuth();
   const navigate = useNavigate();
@@ -120,7 +116,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
         {/* Page content */}
         <main className="flex-1 p-6">
           <div className="max-w-7xl mx-auto">
-            {children}
+            <Outlet />
           </div>
         </main>
       </div>
