@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate, Outlet } from 'react-router-dom';
-import { Menu, X, MapPin, Upload, Settings, LogOut } from 'lucide-react';
+import { Menu, X, MapPin, Upload, Settings, LogOut, LayoutDashboard } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 
@@ -15,7 +15,8 @@ const AdminLayout: React.FC = () => {
   };
 
   const navigationItems = [
-    { name: 'Beaches', href: '/admin', icon: MapPin },
+    { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
+    { name: 'Beaches', href: '/admin/beaches', icon: MapPin },
     { name: 'Import/Export', href: '/admin/import-export', icon: Upload },
     { name: 'Settings', href: '/admin/settings', icon: Settings },
   ];
@@ -41,7 +42,7 @@ const AdminLayout: React.FC = () => {
       )}
 
       {/* Sidebar */}
-      <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-card border-r border-border transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 ${
+      <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-card border-r border-border transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 flex flex-col ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}>
         <div className="flex items-center justify-between h-16 px-4 border-b border-border">
@@ -59,11 +60,12 @@ const AdminLayout: React.FC = () => {
           </Button>
         </div>
         
-        <nav className="mt-4 px-4 space-y-2">
+        <nav className="mt-4 px-4 space-y-2 flex-1 overflow-y-auto">
           {navigationItems.map((item) => (
             <NavLink
               key={item.name}
               to={item.href}
+              end={item.href === '/admin'}
               className={getNavLinkClass}
               onClick={() => setSidebarOpen(false)}
             >
@@ -74,7 +76,7 @@ const AdminLayout: React.FC = () => {
         </nav>
 
         {/* User info and sign out */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-border bg-card">
+        <div className="mt-auto p-4 border-t border-border bg-card">
           <div className="space-y-2">
             <p className="text-xs text-muted-foreground">Signed in as:</p>
             <p className="text-sm font-medium text-foreground truncate">

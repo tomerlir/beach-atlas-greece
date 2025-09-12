@@ -10,6 +10,9 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminBeachesList from "./pages/admin/beaches/AdminBeachesList";
+import AdminBeachCreate from "./pages/admin/beaches/AdminBeachCreate";
+import AdminBeachEdit from "./pages/admin/beaches/AdminBeachEdit";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +37,9 @@ const App = () => (
               }
             >
               <Route index element={<AdminDashboard />} />
+              <Route path="beaches" element={<AdminBeachesList />} />
+              <Route path="beaches/new" element={<AdminBeachCreate />} />
+              <Route path="beaches/:id" element={<AdminBeachEdit />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

@@ -16,7 +16,7 @@ export type Database = {
     Tables: {
       beaches: {
         Row: {
-          amenities: string[] | null
+          amenities: string[]
           blue_flag: boolean
           created_at: string
           description: string | null
@@ -25,14 +25,19 @@ export type Database = {
           longitude: number
           name: string
           organized: boolean
-          parking: string | null
+          parking: string
           photo_url: string | null
           place_text: string
-          status: string
+          slug: string
+          source: string | null
+          status: 'ACTIVE' | 'HIDDEN' | 'DRAFT'
+          type: 'SANDY' | 'PEBBLY' | 'MIXED' | 'OTHER'
+          wave_conditions: 'CALM' | 'MODERATE' | 'WAVY' | 'SURFABLE'
+          verified_at: string | null
           updated_at: string
         }
         Insert: {
-          amenities?: string[] | null
+          amenities?: string[]
           blue_flag?: boolean
           created_at?: string
           description?: string | null
@@ -41,14 +46,19 @@ export type Database = {
           longitude: number
           name: string
           organized?: boolean
-          parking?: string | null
+          parking: 'NONE' | 'ROADSIDE' | 'SMALL_LOT' | 'LARGE_LOT'
           photo_url?: string | null
           place_text: string
-          status?: string
+          slug: string
+          source?: string | null
+          status?: 'ACTIVE' | 'HIDDEN' | 'DRAFT'
+          type: 'SANDY' | 'PEBBLY' | 'MIXED' | 'OTHER'
+          wave_conditions: 'CALM' | 'MODERATE' | 'WAVY' | 'SURFABLE'
+          verified_at?: string | null
           updated_at?: string
         }
         Update: {
-          amenities?: string[] | null
+          amenities?: string[]
           blue_flag?: boolean
           created_at?: string
           description?: string | null
@@ -57,10 +67,15 @@ export type Database = {
           longitude?: number
           name?: string
           organized?: boolean
-          parking?: string | null
+          parking?: 'NONE' | 'ROADSIDE' | 'SMALL_LOT' | 'LARGE_LOT'
           photo_url?: string | null
           place_text?: string
-          status?: string
+          slug?: string
+          source?: string | null
+          status?: 'ACTIVE' | 'HIDDEN' | 'DRAFT'
+          type?: 'SANDY' | 'PEBBLY' | 'MIXED' | 'OTHER'
+          wave_conditions?: 'CALM' | 'MODERATE' | 'WAVY' | 'SURFABLE'
+          verified_at?: string | null
           updated_at?: string
         }
         Relationships: []
