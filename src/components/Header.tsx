@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Waves } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const Header = () => {
   return (
@@ -7,19 +7,12 @@ const Header = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <Waves className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold text-foreground">Greek Beaches</span>
+          <Link to="/" className="flex items-center hover:opacity-80 transition-opacity">
+            <img src={logo} alt="Greek Beaches" className="h-10 w-10" />
           </Link>
           
           {/* Navigation */}
           <nav className="flex items-center gap-6">
-            <Link 
-              to="/" 
-              className="text-foreground hover:text-primary transition-colors font-medium"
-            >
-              Home
-            </Link>
             <Link 
               to="/about" 
               className="text-foreground hover:text-primary transition-colors font-medium"
