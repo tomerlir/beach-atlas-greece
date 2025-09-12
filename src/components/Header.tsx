@@ -12,16 +12,16 @@ const Header = () => {
           </Link>
           
           {/* Navigation */}
-          <nav className="flex items-center gap-6">
+          <nav className="flex items-center gap-6 min-w-[140px] justify-end">
             <Link 
               to="/about" 
-              className="text-foreground hover:text-primary transition-colors font-medium"
+              className="text-foreground hover:text-primary transition-colors font-medium inline-block"
             >
               About
             </Link>
             <a 
               href="mailto:info@greekbeaches.com" 
-              className="text-foreground hover:text-primary transition-colors font-medium"
+              className="text-foreground hover:text-primary transition-colors font-medium inline-block"
             >
               Feedback
             </a>
