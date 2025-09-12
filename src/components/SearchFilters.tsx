@@ -60,14 +60,14 @@ const SearchFilters = ({
       search: "",
       organized: null,
       blueFlag: false,
-      parking: "",
+      parking: "any",
       amenities: [],
       radius: 25
     });
   };
 
   const hasActiveFilters = filters.search || filters.organized !== null || filters.blueFlag || 
-                          filters.parking || filters.amenities.length > 0;
+                          (filters.parking && filters.parking !== "any") || filters.amenities.length > 0;
 
   return (
     <div className="space-y-4">
@@ -192,7 +192,7 @@ const SearchFilters = ({
                     <SelectValue placeholder="Any parking" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Any parking</SelectItem>
+                    <SelectItem value="any">Any parking</SelectItem>
                     <SelectItem value="ample">Ample parking</SelectItem>
                     <SelectItem value="limited">Limited parking</SelectItem>
                     <SelectItem value="none">No parking needed</SelectItem>

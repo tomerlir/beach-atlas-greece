@@ -38,7 +38,7 @@ const Index = () => {
     search: "",
     organized: null,
     blueFlag: false,
-    parking: "",
+    parking: "any",
     amenities: [],
     radius: 25
   });
@@ -83,7 +83,7 @@ const Index = () => {
       }
 
       // Parking filter
-      if (filters.parking && beach.parking !== filters.parking) {
+      if (filters.parking && filters.parking !== "any" && beach.parking !== filters.parking) {
         return false;
       }
 
