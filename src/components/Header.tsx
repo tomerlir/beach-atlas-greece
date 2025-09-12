@@ -8,7 +8,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center hover:opacity-80 transition-opacity">
-            <img src={logo} alt="Greek Beaches" className="h-10 w-10" />
+            <img src={logo} alt="Greek Beaches" className="h-10 w-8" />
           </Link>
           
           {/* Navigation */}
