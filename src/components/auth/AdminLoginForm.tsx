@@ -14,7 +14,7 @@ const AdminLoginForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   
-  const { signIn, user } = useAuth();
+  const { signIn, user, profile, loading } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,11 +24,11 @@ const AdminLoginForm = () => {
   }, []);
 
   useEffect(() => {
-    // Redirect if already logged in
-    if (user) {
+    // Redirect only when admin profile is confirmed
+    if (!loading && profile?.role === 'admin') {
       navigate('/admin');
     }
-  }, [user, navigate]);
+  }, [loading, profile, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,9 +45,8 @@ const AdminLoginForm = () => {
       } else {
         setError(error.message);
       }
-    } else {
-      navigate('/admin');
     }
+    // Success handled by auth state listener; redirect occurs when admin profile is loaded
     
     setIsLoading(false);
   };

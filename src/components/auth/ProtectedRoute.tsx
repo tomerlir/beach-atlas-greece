@@ -30,29 +30,29 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   }
 
   // Not authenticated
-  if (!user || !profile) {
+  if (!user) {
     if (fallback) {
       return <>{fallback}</>;
     }
     return <Navigate to="/admin/login" replace />;
   }
 
-  // Check role authorization
-  if (requiredRole && profile.role !== requiredRole) {
+  // Authenticated but profile not loaded yet (e.g., bootstrapping)
+  if (user && !profile) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
-        <div className="text-center space-y-4 max-w-md mx-auto px-4">
-          <div className="bg-destructive/10 p-4 rounded-lg">
-            <h2 className="text-lg font-semibold text-destructive mb-2">
-              Access Restricted
-            </h2>
-            <p className="text-muted-foreground" aria-live="polite">
-              You don't have permission to access this area. Redirecting to login...
-            </p>
-          </div>
+        <div className="text-center space-y-4">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto" />
+          <p className="text-muted-foreground" aria-live="polite">
+            Checking permissions...
+          </p>
         </div>
       </div>
     );
+  }
+
+  if (requiredRole && profile.role !== requiredRole) {
+    return <Navigate to="/admin/login" replace />;
   }
 
   return <>{children}</>;
