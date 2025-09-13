@@ -1,0 +1,106 @@
+import { useState } from "react";
+import { MapPin, Navigation } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+
+interface MapsSelectionDialogProps {
+  isOpen: boolean;
+  onClose: () => void;
+  latitude: number;
+  longitude: number;
+  beachName: string;
+}
+
+export const MapsSelectionDialog = ({
+  isOpen,
+  onClose,
+  latitude,
+  longitude,
+  beachName,
+}: MapsSelectionDialogProps) => {
+  const [isOpening, setIsOpening] = useState(false);
+
+  const openInGoogleMaps = () => {
+    setIsOpening(true);
+    const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+    window.open(url, '_blank');
+    setTimeout(() => {
+      setIsOpening(false);
+      onClose();
+    }, 1000);
+  };
+
+  const openInAppleMaps = () => {
+    setIsOpening(true);
+    const url = `https://maps.apple.com/?q=${latitude},${longitude}&ll=${latitude},${longitude}`;
+    window.open(url, '_blank');
+    setTimeout(() => {
+      setIsOpening(false);
+      onClose();
+    }, 1000);
+  };
+
+  return (
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle className="flex items-center gap-2">
+            <MapPin className="h-5 w-5" />
+            Open {beachName} in Maps
+          </DialogTitle>
+          <DialogDescription>
+            Choose your preferred mapping application to view the beach location.
+          </DialogDescription>
+        </DialogHeader>
+        
+        <div className="space-y-3">
+          <Button
+            onClick={openInGoogleMaps}
+            disabled={isOpening}
+            className="w-full justify-start"
+            variant="outline"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center">
+                <span className="text-white text-xs font-bold">G</span>
+              </div>
+              <div className="text-left">
+                <div className="font-medium">Google Maps</div>
+                <div className="text-xs text-muted-foreground">View location with Google Maps</div>
+              </div>
+            </div>
+          </Button>
+          
+          <Button
+            onClick={openInAppleMaps}
+            disabled={isOpening}
+            className="w-full justify-start"
+            variant="outline"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center">
+                <Navigation className="h-4 w-4 text-white" />
+              </div>
+              <div className="text-left">
+                <div className="font-medium">Apple Maps</div>
+                <div className="text-xs text-muted-foreground">View location with Apple Maps</div>
+              </div>
+            </div>
+          </Button>
+        </div>
+        
+        {isOpening && (
+          <div className="text-center text-sm text-muted-foreground">
+            Opening maps application...
+          </div>
+        )}
+      </DialogContent>
+    </Dialog>
+  );
+};

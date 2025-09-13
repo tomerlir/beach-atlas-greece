@@ -32,6 +32,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useIsMobile } from "@/hooks/use-mobile";
 import Header from "@/components/Header";
 import { Tables } from "@/integrations/supabase/types";
+import { MapsSelectionDialog } from "@/components/MapsSelectionDialog";
 
 type Beach = Tables<'beaches'>;
 
@@ -91,6 +92,7 @@ const BeachDetail = () => {
   // State management
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [shareTooltip, setShareTooltip] = useState(false);
+  const [isMapsDialogOpen, setIsMapsDialogOpen] = useState(false);
 
   // Note: Geolocation removed to prevent unwanted permission prompts
 
@@ -120,11 +122,9 @@ const BeachDetail = () => {
   // Note: Distance calculation removed since geolocation is not used on detail page
 
   // Action handlers
-  const handleDirections = useCallback(() => {
+  const handleOpenInMaps = useCallback(() => {
     if (!beach) return;
-    
-    const url = `https://www.google.com/maps/dir/?api=1&destination=${beach.latitude},${beach.longitude}`;
-    window.open(url, '_blank');
+    setIsMapsDialogOpen(true);
   }, [beach]);
 
   const handleShare = useCallback(async () => {
@@ -288,11 +288,11 @@ const BeachDetail = () => {
         {/* Actions */}
         <div className="flex flex-col sm:flex-row gap-3 mb-8">
           <Button 
-            onClick={handleDirections} 
+            onClick={handleOpenInMaps} 
             className="bg-primary text-primary-foreground hover:bg-primary/90 flex-1 sm:flex-none"
           >
-            <Navigation className="h-4 w-4 mr-2" aria-hidden="true" />
-            Directions
+            <MapPin className="h-4 w-4 mr-2" aria-hidden="true" />
+            Open in Maps
           </Button>
           <Button 
             variant="outline"
@@ -408,6 +408,17 @@ const BeachDetail = () => {
           )}
         </div>
       </main>
+      
+      {/* Maps Selection Dialog */}
+      {beach && (
+        <MapsSelectionDialog
+          isOpen={isMapsDialogOpen}
+          onClose={() => setIsMapsDialogOpen(false)}
+          latitude={beach.latitude}
+          longitude={beach.longitude}
+          beachName={beach.name}
+        />
+      )}
     </div>
   );
 };
