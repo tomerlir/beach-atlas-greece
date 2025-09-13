@@ -6,6 +6,7 @@ import SearchFilters from "@/components/SearchFilters";
 import BeachCard from "@/components/BeachCard";
 import Pagination from "@/components/Pagination";
 import { useGeolocation, calculateDistance } from "@/hooks/useGeolocation";
+import { Waves, MapPin } from "lucide-react";
 import heroImage from "@/assets/hero-beach.jpg";
 
 interface Beach {
@@ -163,9 +164,9 @@ const Index = () => {
         </div>
       </section>
 
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-12">
         {/* Search and Filters */}
-        <section className="mb-8">
+        <section className="mb-12">
           <SearchFilters
             filters={filters}
             onFiltersChange={setFilters}
@@ -176,23 +177,28 @@ const Index = () => {
         </section>
 
         {/* Results Summary */}
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-semibold text-foreground">
-            {filteredBeaches.length} beaches found
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-3">
+            <h2 className="text-3xl font-bold text-foreground">
+              {filteredBeaches.length} beaches found
+            </h2>
             {location && (
-              <span className="text-base text-muted-foreground ml-2">
-                (sorted by distance)
-              </span>
+              <div className="flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full">
+                <MapPin className="h-4 w-4 text-primary" />
+                <span className="text-sm font-medium text-primary">
+                  sorted by distance
+                </span>
+              </div>
             )}
-          </h2>
+          </div>
         </div>
 
         {/* Loading State */}
         {isLoading && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {Array.from({ length: 6 }).map((_, i) => (
               <div key={i} className="animate-pulse">
-                <div className="bg-muted rounded-lg h-64"></div>
+                <div className="bg-muted rounded-xl h-80 shadow-soft"></div>
               </div>
             ))}
           </div>
@@ -200,15 +206,18 @@ const Index = () => {
 
         {/* Error State */}
         {error && (
-          <div className="text-center py-12">
-            <p className="text-destructive">Failed to load beaches. Please try again.</p>
+          <div className="text-center py-16">
+            <div className="bg-destructive/10 border border-destructive/20 rounded-xl p-8 max-w-md mx-auto">
+              <p className="text-destructive font-medium text-lg">Failed to load beaches</p>
+              <p className="text-muted-foreground mt-2">Please try again later</p>
+            </div>
           </div>
         )}
 
         {/* Beach Grid */}
         {!isLoading && !error && (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {paginatedBeaches.map((beach) => (
                 <BeachCard 
                   key={beach.id} 
@@ -225,22 +234,29 @@ const Index = () => {
 
             {/* No Results */}
             {filteredBeaches.length === 0 && (
-              <div className="text-center py-12">
-                <p className="text-muted-foreground text-lg">
-                  No beaches match your current filters.
-                </p>
-                <p className="text-muted-foreground mt-2">
-                  Try adjusting your search criteria or clear some filters.
-                </p>
+              <div className="text-center py-16">
+                <div className="bg-muted/30 border border-muted rounded-xl p-12 max-w-lg mx-auto">
+                  <Waves className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
+                  <p className="text-muted-foreground text-xl font-medium mb-2">
+                    No beaches match your current filters
+                  </p>
+                  <p className="text-muted-foreground">
+                    Try adjusting your search criteria or clear some filters to see more results.
+                  </p>
+                </div>
               </div>
             )}
 
             {/* Pagination */}
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={setCurrentPage}
-            />
+            {totalPages > 1 && (
+              <div className="mt-12">
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={setCurrentPage}
+                />
+              </div>
+            )}
           </>
         )}
       </main>
