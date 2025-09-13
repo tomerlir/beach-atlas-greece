@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from "react";
 import { 
   MapPin, 
   Waves, 
@@ -68,23 +69,59 @@ const parkingConfig: Record<string, { label: string; icon: any; color: string }>
 };
 
 const BeachCard = ({ beach, distance }: BeachCardProps) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
   const parkingInfo = parkingConfig[beach.parking] || { 
     label: "Parking Unknown", 
     icon: AlertCircle, 
     color: "text-gray-500" 
   };
 
+  // Lazy loading with Intersection Observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && imgRef.current && beach.photo_url) {
+            const img = imgRef.current;
+            img.src = beach.photo_url;
+            img.onload = () => setImageLoaded(true);
+            img.onerror = () => setImageError(true);
+            observer.unobserve(img);
+          }
+        });
+      },
+      { rootMargin: '50px' }
+    );
+
+    if (imgRef.current) {
+      observer.observe(imgRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [beach.photo_url]);
+
   return (
-    <Link to={`/beach/${beach.slug}`} className="block">
+    <Link to={`/beach/${beach.slug}`} className="block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-xl">
       <Card className="group hover:shadow-strong transition-all duration-300 overflow-hidden border-0 bg-white shadow-soft hover:shadow-medium">
         {/* Beach Image */}
         <div className="aspect-video bg-gradient-ocean relative overflow-hidden">
-          {beach.photo_url ? (
-            <img 
-              src={beach.photo_url} 
-              alt={`${beach.name} beach`}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            />
+          {beach.photo_url && !imageError ? (
+            <>
+              {!imageLoaded && (
+                <div className="absolute inset-0 bg-gradient-ocean flex items-center justify-center">
+                  <Waves className="h-16 w-16 text-white opacity-60 animate-pulse" />
+                </div>
+              )}
+              <img 
+                ref={imgRef}
+                alt={`${beach.name} beach`}
+                className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                loading="lazy"
+              />
+            </>
           ) : (
             <div className="w-full h-full bg-gradient-ocean flex items-center justify-center">
               <Waves className="h-16 w-16 text-white opacity-60" />

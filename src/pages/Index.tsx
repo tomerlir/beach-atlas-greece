@@ -2,10 +2,14 @@ import { useState, useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
-import SearchFilters from "@/components/SearchFilters";
+import SearchHeader from "@/components/SearchHeader";
+import AllFiltersDrawer from "@/components/AllFiltersDrawer";
+import ResultsHeader from "@/components/ResultsHeader";
 import BeachCard from "@/components/BeachCard";
 import Pagination from "@/components/Pagination";
+import MobileFilterBar from "@/components/MobileFilterBar";
 import { useGeolocation, calculateDistance } from "@/hooks/useGeolocation";
+import { useUrlState } from "@/hooks/useUrlState";
 import { Waves, MapPin } from "lucide-react";
 import heroImage from "@/assets/hero-beach.jpg";
 
@@ -24,29 +28,12 @@ interface Beach {
   photo_url?: string;
 }
 
-interface Filters {
-  search: string;
-  organized: boolean | null;
-  blueFlag: boolean;
-  parking: string;
-  amenities: string[];
-  radius: number;
-}
-
 const BEACHES_PER_PAGE = 9;
 
 const Index = () => {
-  const [filters, setFilters] = useState<Filters>({
-    search: "",
-    organized: null,
-    blueFlag: false,
-    parking: "any",
-    amenities: [],
-    radius: 25
-  });
-  
-  const [currentPage, setCurrentPage] = useState(1);
+  const { filters, updateFilters, resetFilters } = useUrlState();
   const { location, isLoading: isLoadingLocation, getCurrentLocation } = useGeolocation();
+  const [isAllFiltersOpen, setIsAllFiltersOpen] = useState(false);
 
   // Fetch beaches from Supabase
   const { data: beaches = [], isLoading, error } = useQuery({
@@ -97,22 +84,16 @@ const Index = () => {
         if (!hasAllAmenities) return false;
       }
 
-      // Distance filter (if location is available)
-      if (location) {
-        const distance = calculateDistance(
-          location.coords.latitude,
-          location.coords.longitude,
-          beach.latitude,
-          beach.longitude
-        );
-        if (distance > filters.radius) return false;
-      }
+      // Distance filter (only when explicitly filtering by distance, not just sorting)
+      // This should be controlled by a separate "near me" filter, not by sort order
+      // For now, we'll remove this distance filtering since it's not properly implemented
+      // TODO: Add proper distance filtering when user explicitly enables "Near me" filter
 
       return true;
     });
 
     // Sort beaches
-    if (location) {
+    if (filters.sort === 'distance' && location) {
       // Sort by distance if location is available
       filtered = filtered.map(beach => ({
         ...beach,
@@ -123,8 +104,15 @@ const Index = () => {
           beach.longitude
         )
       })).sort((a, b) => a.distance - b.distance);
+    } else if (filters.sort === 'blueFlag') {
+      // Sort by Blue Flag first
+      filtered = [...filtered].sort((a, b) => {
+        if (a.blue_flag && !b.blue_flag) return -1;
+        if (!a.blue_flag && b.blue_flag) return 1;
+        return a.name.localeCompare(b.name);
+      });
     } else {
-      // Sort by name A-Z
+      // Sort by name A-Z (default)
       filtered = [...filtered].sort((a, b) => a.name.localeCompare(b.name));
     }
 
@@ -133,13 +121,38 @@ const Index = () => {
 
   // Pagination
   const totalPages = Math.ceil(filteredBeaches.length / BEACHES_PER_PAGE);
-  const startIndex = (currentPage - 1) * BEACHES_PER_PAGE;
+  const startIndex = (filters.page - 1) * BEACHES_PER_PAGE;
   const paginatedBeaches = filteredBeaches.slice(startIndex, startIndex + BEACHES_PER_PAGE);
 
-  // Reset page when filters change
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [filters]);
+  // Handle filter removal
+  const handleRemoveFilter = (filterType: keyof typeof filters, value?: any) => {
+    switch (filterType) {
+      case 'search':
+        updateFilters({ search: '', page: 1 });
+        break;
+      case 'organized':
+        updateFilters({ organized: null, page: 1 });
+        break;
+      case 'blueFlag':
+        updateFilters({ blueFlag: false, page: 1 });
+        break;
+      case 'parking':
+        updateFilters({ parking: 'any', page: 1 });
+        break;
+      case 'amenities':
+        const newAmenities = filters.amenities.filter(amenity => amenity !== value);
+        updateFilters({ amenities: newAmenities, page: 1 });
+        break;
+    }
+  };
+
+  const handleClearAllFilters = () => {
+    resetFilters();
+  };
+
+  const handleApplyFilters = (newFilters: typeof filters) => {
+    updateFilters(newFilters);
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -164,33 +177,30 @@ const Index = () => {
         </div>
       </section>
 
-      <main className="container mx-auto px-4 py-12">
-        {/* Search and Filters */}
-        <section className="mb-12">
-          <SearchFilters
-            filters={filters}
-            onFiltersChange={setFilters}
-            userLocation={location}
-            onLocationRequest={getCurrentLocation}
-            isLoadingLocation={isLoadingLocation}
-          />
-        </section>
+      {/* Search Header */}
+      <SearchHeader
+        filters={filters}
+        onFiltersChange={updateFilters}
+        userLocation={location}
+        onLocationRequest={getCurrentLocation}
+        isLoadingLocation={isLoadingLocation}
+        onOpenAllFilters={() => setIsAllFiltersOpen(true)}
+      />
 
-        {/* Results Summary */}
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-3">
-            <h2 className="text-3xl font-bold text-foreground">
-              {filteredBeaches.length} beaches found
-            </h2>
-            {location && (
-              <div className="flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full">
-                <MapPin className="h-4 w-4 text-primary" />
-                <span className="text-sm font-medium text-primary">
-                  sorted by distance
-                </span>
-              </div>
-            )}
-          </div>
+      {/* Results Header */}
+      <ResultsHeader
+        resultCount={filteredBeaches.length}
+        filters={filters}
+        onRemoveFilter={handleRemoveFilter}
+        onClearAllFilters={handleClearAllFilters}
+        onSortChange={(sort) => updateFilters({ sort, page: 1 })}
+        userLocation={location}
+      />
+
+      <main className="container mx-auto px-4 py-8 pb-20 md:pb-8">
+        {/* Screen reader announcements */}
+        <div aria-live="polite" aria-atomic="true" className="sr-only">
+          {!isLoading && !error && `${filteredBeaches.length} beaches found`}
         </div>
 
         {/* Loading State */}
@@ -251,15 +261,32 @@ const Index = () => {
             {totalPages > 1 && (
               <div className="mt-12">
                 <Pagination
-                  currentPage={currentPage}
+                  currentPage={filters.page}
                   totalPages={totalPages}
-                  onPageChange={setCurrentPage}
+                  onPageChange={(page) => updateFilters({ page })}
                 />
               </div>
             )}
           </>
         )}
       </main>
+
+      {/* All Filters Drawer */}
+      <AllFiltersDrawer
+        isOpen={isAllFiltersOpen}
+        onClose={() => setIsAllFiltersOpen(false)}
+        filters={filters}
+        onApplyFilters={handleApplyFilters}
+        userLocation={location}
+        onLocationRequest={getCurrentLocation}
+        isLoadingLocation={isLoadingLocation}
+      />
+
+      {/* Mobile Filter Bar */}
+      <MobileFilterBar
+        filters={filters}
+        onOpenFilters={() => setIsAllFiltersOpen(true)}
+      />
 
       {/* Footer */}
       <footer className="bg-muted py-8 mt-16">
