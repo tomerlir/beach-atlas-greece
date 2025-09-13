@@ -10,29 +10,17 @@ import Pagination from "@/components/Pagination";
 import MobileFilterBar from "@/components/MobileFilterBar";
 import { useGeolocation, calculateDistance } from "@/hooks/useGeolocation";
 import { useUrlState } from "@/hooks/useUrlState";
+import { useBeachFiltering } from "@/hooks/useBeachFiltering";
+import { useDistanceCalculation } from "@/hooks/useDistanceCalculation";
+import { Beach } from "@/types/beach";
 import { Waves, MapPin } from "lucide-react";
 import heroImage from "@/assets/hero-beach.jpg";
-
-interface Beach {
-  id: string;
-  name: string;
-  place_text: string;
-  description?: string;
-  slug: string;
-  latitude: number;
-  longitude: number;
-  organized: boolean;
-  blue_flag: boolean;
-  parking: string;
-  amenities: string[];
-  photo_url?: string;
-}
 
 const BEACHES_PER_PAGE = 9;
 
 const Index = () => {
   const { filters, updateFilters, resetFilters } = useUrlState();
-  const { location, isLoading: isLoadingLocation, getCurrentLocation } = useGeolocation();
+  const { location, isLoading: isLoadingLocation, getCurrentLocation, permission: locationPermission } = useGeolocation();
   const [isAllFiltersOpen, setIsAllFiltersOpen] = useState(false);
 
   // Fetch beaches from Supabase
@@ -50,74 +38,15 @@ const Index = () => {
     }
   });
 
+  // Calculate distances for beaches when location is enabled
+  const beachesWithDistance = useDistanceCalculation(
+    beaches,
+    location,
+    filters.nearMe && filters.sort === 'distance'
+  );
+
   // Filter and sort beaches
-  const filteredBeaches = useMemo(() => {
-    let filtered = beaches.filter(beach => {
-      // Search filter
-      if (filters.search) {
-        const searchTerm = filters.search.toLowerCase();
-        const matchesName = beach.name.toLowerCase().includes(searchTerm);
-        const matchesPlace = beach.place_text.toLowerCase().includes(searchTerm);
-        if (!matchesName && !matchesPlace) return false;
-      }
-
-      // Organized filter
-      if (filters.organized !== null && beach.organized !== filters.organized) {
-        return false;
-      }
-
-      // Blue Flag filter
-      if (filters.blueFlag && !beach.blue_flag) {
-        return false;
-      }
-
-      // Parking filter
-      if (filters.parking && filters.parking !== "any" && beach.parking !== filters.parking) {
-        return false;
-      }
-
-      // Amenities filter
-      if (filters.amenities.length > 0) {
-        const hasAllAmenities = filters.amenities.every(amenity => 
-          beach.amenities.includes(amenity)
-        );
-        if (!hasAllAmenities) return false;
-      }
-
-      // Distance filter (only when explicitly filtering by distance, not just sorting)
-      // This should be controlled by a separate "near me" filter, not by sort order
-      // For now, we'll remove this distance filtering since it's not properly implemented
-      // TODO: Add proper distance filtering when user explicitly enables "Near me" filter
-
-      return true;
-    });
-
-    // Sort beaches
-    if (filters.sort === 'distance' && location) {
-      // Sort by distance if location is available
-      filtered = filtered.map(beach => ({
-        ...beach,
-        distance: calculateDistance(
-          location.coords.latitude,
-          location.coords.longitude,
-          beach.latitude,
-          beach.longitude
-        )
-      })).sort((a, b) => a.distance - b.distance);
-    } else if (filters.sort === 'blueFlag') {
-      // Sort by Blue Flag first
-      filtered = [...filtered].sort((a, b) => {
-        if (a.blue_flag && !b.blue_flag) return -1;
-        if (!a.blue_flag && b.blue_flag) return 1;
-        return a.name.localeCompare(b.name);
-      });
-    } else {
-      // Sort by name A-Z (default)
-      filtered = [...filtered].sort((a, b) => a.name.localeCompare(b.name));
-    }
-
-    return filtered;
-  }, [beaches, filters, location]);
+  const filteredBeaches = useBeachFiltering(beachesWithDistance, filters, location);
 
   // Pagination
   const totalPages = Math.ceil(filteredBeaches.length / BEACHES_PER_PAGE);
@@ -185,6 +114,7 @@ const Index = () => {
         onLocationRequest={getCurrentLocation}
         isLoadingLocation={isLoadingLocation}
         onOpenAllFilters={() => setIsAllFiltersOpen(true)}
+        locationPermission={locationPermission}
       />
 
       {/* Results Header */}
@@ -193,7 +123,6 @@ const Index = () => {
         filters={filters}
         onRemoveFilter={handleRemoveFilter}
         onClearAllFilters={handleClearAllFilters}
-        onSortChange={(sort) => updateFilters({ sort, page: 1 })}
         userLocation={location}
       />
 
@@ -232,12 +161,7 @@ const Index = () => {
                 <BeachCard 
                   key={beach.id} 
                   beach={beach} 
-                  distance={location ? calculateDistance(
-                    location.coords.latitude,
-                    location.coords.longitude,
-                    beach.latitude,
-                    beach.longitude
-                  ) : undefined}
+                  distance={beach.distance}
                 />
               ))}
             </div>
@@ -280,6 +204,7 @@ const Index = () => {
         userLocation={location}
         onLocationRequest={getCurrentLocation}
         isLoadingLocation={isLoadingLocation}
+        locationPermission={locationPermission}
       />
 
       {/* Mobile Filter Bar */}
@@ -306,7 +231,7 @@ const Index = () => {
             </a>
           </div>
           <p className="text-muted-foreground text-sm">
-            © 2024 Greek Beaches Directory. Discover the beauty of Greece.
+            © 2025 Beaches of Greece . Discover the beauty of Greece.å
           </p>
         </div>
       </footer>

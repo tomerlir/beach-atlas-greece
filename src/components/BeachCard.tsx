@@ -104,8 +104,12 @@ const BeachCard = ({ beach, distance }: BeachCardProps) => {
   }, [beach.photo_url]);
 
   return (
-    <Link to={`/beach/${beach.slug}`} className="block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-xl">
-      <Card className="group hover:shadow-strong transition-all duration-300 overflow-hidden border-0 bg-white shadow-soft hover:shadow-medium">
+    <Link 
+      to={`/beach/${beach.slug}`} 
+      className="block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-xl min-h-[44px] min-w-[44px]"
+      aria-label={`View details for ${beach.name} beach`}
+    >
+      <Card className="group hover:shadow-strong transition-all duration-300 overflow-hidden border-0 bg-white shadow-soft hover:shadow-medium h-full">
         {/* Beach Image */}
         <div className="aspect-video bg-gradient-ocean relative overflow-hidden">
           {beach.photo_url && !imageError ? (

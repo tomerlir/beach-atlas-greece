@@ -1,7 +1,6 @@
-import { MapPin, X, ArrowUpDown } from 'lucide-react';
+import { MapPin, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { FilterState } from '@/hooks/useUrlState';
 
 interface ResultsHeaderProps {
@@ -9,7 +8,6 @@ interface ResultsHeaderProps {
   filters: FilterState;
   onRemoveFilter: (filterType: keyof FilterState, value?: any) => void;
   onClearAllFilters: () => void;
-  onSortChange: (sort: FilterState['sort']) => void;
   userLocation: GeolocationPosition | null;
 }
 
@@ -42,7 +40,6 @@ export default function ResultsHeader({
   filters,
   onRemoveFilter,
   onClearAllFilters,
-  onSortChange,
   userLocation,
 }: ResultsHeaderProps) {
   const hasActiveFilters = filters.search || 
@@ -149,28 +146,8 @@ export default function ResultsHeader({
             )}
           </div>
 
-          {/* Right side: Sort and Clear all */}
+          {/* Right side: Clear all */}
           <div className="flex items-center gap-4">
-            {/* Sort Dropdown */}
-            <div className="flex items-center gap-2">
-              <ArrowUpDown className="h-4 w-4 text-muted-foreground" />
-              <Select
-                value={filters.sort}
-                onValueChange={(value) => onSortChange(value as FilterState['sort'])}
-              >
-                <SelectTrigger className="w-40">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="name">Name A–Z</SelectItem>
-                  {userLocation && (
-                    <SelectItem value="distance">Distance</SelectItem>
-                  )}
-                  <SelectItem value="blueFlag">Blue Flag first</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
             {/* Clear all link */}
             {hasActiveFilters && (
               <Button

@@ -7,9 +7,9 @@ export interface FilterState {
   blueFlag: boolean;
   parking: string;
   amenities: string[];
-  radius: number;
   sort: 'name' | 'distance' | 'blueFlag';
   page: number;
+  nearMe: boolean; // New field to track if "Near me" is enabled
 }
 
 const defaultFilters: FilterState = {
@@ -18,9 +18,9 @@ const defaultFilters: FilterState = {
   blueFlag: false,
   parking: 'any',
   amenities: [],
-  radius: 25,
   sort: 'name',
   page: 1,
+  nearMe: false,
 };
 
 export function useUrlState() {
@@ -52,18 +52,16 @@ export function useUrlState() {
       state.amenities = amenities.split(',').filter(Boolean);
     }
     
-    // Parse radius
-    const radius = searchParams.get('radius');
-    if (radius) {
-      const parsedRadius = parseInt(radius, 10);
-      if (!isNaN(parsedRadius)) state.radius = parsedRadius;
-    }
     
     // Parse sort
     const sort = searchParams.get('sort');
     if (sort && ['name', 'distance', 'blueFlag'].includes(sort)) {
       state.sort = sort as FilterState['sort'];
     }
+    
+    // Parse nearMe
+    const nearMe = searchParams.get('nearMe');
+    if (nearMe === 'true') state.nearMe = true;
     
     // Parse page
     const page = searchParams.get('page');
@@ -124,14 +122,6 @@ export function useUrlState() {
         }
       }
       
-      // Update radius
-      if (updates.radius !== undefined) {
-        if (updates.radius !== defaultFilters.radius) {
-          newParams.set('radius', updates.radius.toString());
-        } else {
-          newParams.delete('radius');
-        }
-      }
       
       // Update sort
       if (updates.sort !== undefined) {
@@ -139,6 +129,15 @@ export function useUrlState() {
           newParams.set('sort', updates.sort);
         } else {
           newParams.delete('sort');
+        }
+      }
+      
+      // Update nearMe
+      if (updates.nearMe !== undefined) {
+        if (updates.nearMe) {
+          newParams.set('nearMe', 'true');
+        } else {
+          newParams.delete('nearMe');
         }
       }
       

@@ -5,6 +5,7 @@ interface GeolocationState {
   location: GeolocationPosition | null;
   isLoading: boolean;
   error: string | null;
+  permission: 'granted' | 'denied' | 'prompt' | null;
 }
 
 export const useGeolocation = () => {
@@ -12,13 +13,14 @@ export const useGeolocation = () => {
     location: null,
     isLoading: false,
     error: null,
+    permission: null,
   });
   const { toast } = useToast();
 
   const getCurrentLocation = useCallback(() => {
     if (!navigator.geolocation) {
       const error = 'Geolocation is not supported by this browser';
-      setState(prev => ({ ...prev, error }));
+      setState(prev => ({ ...prev, error, permission: 'denied' }));
       toast({
         title: "Location not supported",
         description: error,
@@ -35,6 +37,7 @@ export const useGeolocation = () => {
           location: position,
           isLoading: false,
           error: null,
+          permission: 'granted',
         });
         toast({
           title: "Location found",
@@ -43,10 +46,12 @@ export const useGeolocation = () => {
       },
       (error) => {
         let errorMessage = 'Unable to retrieve your location';
+        let permission: 'granted' | 'denied' | 'prompt' | null = 'prompt';
         
         switch (error.code) {
           case error.PERMISSION_DENIED:
             errorMessage = 'Location access denied. Please enable location services.';
+            permission = 'denied';
             break;
           case error.POSITION_UNAVAILABLE:
             errorMessage = 'Location information is unavailable.';
@@ -60,6 +65,7 @@ export const useGeolocation = () => {
           location: null,
           isLoading: false,
           error: errorMessage,
+          permission,
         });
         
         toast({

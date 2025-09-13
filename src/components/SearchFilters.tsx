@@ -36,7 +36,6 @@ interface Filters {
   blueFlag: boolean;
   parking: string;
   amenities: string[];
-  radius: number;
 }
 
 interface SearchFiltersProps {
@@ -89,8 +88,7 @@ const SearchFilters = ({
       organized: null,
       blueFlag: false,
       parking: "any",
-      amenities: [],
-      radius: 25
+      amenities: []
     });
   };
 
@@ -124,20 +122,6 @@ const SearchFilters = ({
              userLocation ? "Update location" : "Use my location"}
           </span>
         </Button>
-        
-        {userLocation && (
-          <Select value={filters.radius.toString()} onValueChange={(value) => updateFilters({ radius: parseInt(value) })}>
-            <SelectTrigger className="w-full sm:w-[180px] h-12 rounded-xl border-2">
-              <SelectValue placeholder="Search radius" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="5">5 km radius</SelectItem>
-              <SelectItem value="10">10 km radius</SelectItem>
-              <SelectItem value="25">25 km radius</SelectItem>
-              <SelectItem value="50">50 km radius</SelectItem>
-            </SelectContent>
-          </Select>
-        )}
       </div>
 
       {/* Filters Toggle */}
