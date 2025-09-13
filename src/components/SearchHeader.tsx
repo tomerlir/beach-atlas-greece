@@ -148,7 +148,7 @@ export default function SearchHeader({
                       <SelectItem 
                         key={option.value} 
                         value={option.value}
-                        disabled={option.value === 'distance' && !userLocation}
+                        disabled={option.value === 'distance' && (!userLocation || !filters.nearMe)}
                       >
                         {option.label}
                       </SelectItem>

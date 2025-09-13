@@ -111,7 +111,7 @@ export default function ResultsHeader({
               <h2 className="text-2xl font-bold text-foreground">
                 {resultCount} {resultCount === 1 ? 'beach' : 'beaches'}
               </h2>
-              {userLocation && filters.sort === 'distance' && (
+              {userLocation && filters.nearMe && filters.sort === 'distance' && (
                 <div className="flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full">
                   <MapPin className="h-4 w-4 text-primary" />
                   <span className="text-sm font-medium text-primary">

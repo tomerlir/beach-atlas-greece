@@ -46,7 +46,7 @@ export default function SortPopover({
             onValueChange={(value) => onSortChange(value as FilterState['sort'])}
           >
             {sortOptions.map((option) => {
-              const isDisabled = option.requiresLocation && !userLocation;
+              const isDisabled = option.requiresLocation && (!userLocation || !filters.nearMe);
               return (
                 <div key={option.value} className="flex items-center space-x-2">
                   <RadioGroupItem 
