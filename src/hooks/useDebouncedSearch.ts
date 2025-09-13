@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDebounce } from './useDebounce';
 
 export const useDebouncedSearch = (
@@ -8,22 +8,34 @@ export const useDebouncedSearch = (
 ) => {
   const [searchInput, setSearchInput] = useState(initialValue);
   const debouncedSearch = useDebounce(searchInput, delay);
+  const lastInitialValue = useRef(initialValue);
+  const isUserTyping = useRef(false);
 
-  // Update parent when debounced search changes
+  // Update parent when debounced search changes (only for user typing)
   useEffect(() => {
-    if (debouncedSearch !== initialValue) {
+    if (isUserTyping.current && debouncedSearch !== initialValue) {
       onSearchChange(debouncedSearch);
     }
   }, [debouncedSearch, initialValue, onSearchChange]);
 
-  // Update local input when parent value changes
+  // Update local input when parent value changes (programmatic changes)
   useEffect(() => {
-    setSearchInput(initialValue);
+    if (initialValue !== lastInitialValue.current) {
+      lastInitialValue.current = initialValue;
+      setSearchInput(initialValue);
+      isUserTyping.current = false; // Reset typing flag for programmatic changes
+    }
   }, [initialValue]);
+
+  // Track when user is typing
+  const handleSearchInputChange = (value: string) => {
+    isUserTyping.current = true;
+    setSearchInput(value);
+  };
 
   return {
     searchInput,
-    setSearchInput,
+    setSearchInput: handleSearchInputChange,
     debouncedSearch,
   };
 };
