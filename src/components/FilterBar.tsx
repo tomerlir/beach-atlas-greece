@@ -128,11 +128,12 @@ export default function FilterBar({
   const parkingTriggerRef = useRef<HTMLButtonElement>(null);
 
   // Debounced search with 250ms delay
-  const { searchInput, setSearchInput } = useDebouncedSearch(
+  const { searchInput, setSearchInput, clearSearchInput } = useDebouncedSearch(
     filters.search,
     (value: string) => onFiltersChange({ search: value, page: 1 }),
     250
   );
+
 
   // Handle filter changes
   const handleAmenityToggle = useCallback((amenityId: string) => {
@@ -224,17 +225,18 @@ export default function FilterBar({
   }, [onFiltersChange, filters.amenities]);
 
   const handleClearAllFilters = useCallback(() => {
+    clearSearchInput(); // Clear search input immediately
     onFiltersChange({
-      search: filters.search, // Keep search term
+      search: '', // Clear search term
       organized: null,
       blueFlag: false,
       parking: 'any',
       amenities: [],
-      sort: filters.sort,
+      sort: 'name.asc', // Reset to default sort
       page: 1,
       nearMe: false,
     });
-  }, [onFiltersChange, filters.search, filters.sort]);
+  }, [onFiltersChange, clearSearchInput]);
 
   // Calculate active filter counts
   const activeFiltersCount = [
@@ -613,6 +615,7 @@ export default function FilterBar({
                       </TooltipContent>
                     )}
                   </Tooltip>
+                  
                 </div>
               </div>
             ) : (

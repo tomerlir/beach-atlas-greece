@@ -33,9 +33,16 @@ export const useDebouncedSearch = (
     setSearchInput(value);
   };
 
+  // Programmatic clear that bypasses user typing flag
+  const clearSearchInput = () => {
+    isUserTyping.current = false;
+    setSearchInput('');
+  };
+
   return {
     searchInput,
     setSearchInput: handleSearchInputChange,
+    clearSearchInput,
     debouncedSearch,
   };
 };
