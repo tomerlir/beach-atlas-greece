@@ -7,7 +7,6 @@ import AllFiltersDrawer from "@/components/AllFiltersDrawer";
 import ResultsHeader from "@/components/ResultsHeader";
 import BeachCard from "@/components/BeachCard";
 import Pagination from "@/components/Pagination";
-import MobileFilterBar from "@/components/MobileFilterBar";
 import { useGeolocation, calculateDistance } from "@/hooks/useGeolocation";
 import { useUrlState } from "@/hooks/useUrlState";
 import { useBeachFiltering } from "@/hooks/useBeachFiltering";
@@ -205,12 +204,6 @@ const Index = () => {
         onLocationRequest={getCurrentLocation}
         isLoadingLocation={isLoadingLocation}
         locationPermission={locationPermission}
-      />
-
-      {/* Mobile Filter Bar */}
-      <MobileFilterBar
-        filters={filters}
-        onOpenFilters={() => setIsAllFiltersOpen(true)}
       />
 
       {/* Footer */}
