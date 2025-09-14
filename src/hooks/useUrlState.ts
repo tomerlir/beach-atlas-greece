@@ -7,7 +7,7 @@ export interface FilterState {
   blueFlag: boolean;
   parking: string;
   amenities: string[];
-  sort: 'name' | 'distance' | 'blueFlag';
+  sort: string | null;
   page: number;
   nearMe: boolean; // New field to track if "Near me" is enabled
 }
@@ -18,7 +18,7 @@ const defaultFilters: FilterState = {
   blueFlag: false,
   parking: 'any',
   amenities: [],
-  sort: 'name',
+  sort: 'name.asc',
   page: 1,
   nearMe: false,
 };
@@ -55,8 +55,8 @@ export function useUrlState() {
     
     // Parse sort
     const sort = searchParams.get('sort');
-    if (sort && ['name', 'distance', 'blueFlag'].includes(sort)) {
-      state.sort = sort as FilterState['sort'];
+    if (sort && ['name.asc', 'name.desc', 'distance.asc', 'distance.desc'].includes(sort)) {
+      state.sort = sort;
     }
     
     // Parse nearMe
@@ -125,9 +125,14 @@ export function useUrlState() {
       
       // Update sort
       if (updates.sort !== undefined) {
-        if (updates.sort !== defaultFilters.sort) {
+        if (updates.sort === null) {
+          // Explicitly turned off - remove from URL
+          newParams.delete('sort');
+        } else if (updates.sort !== defaultFilters.sort) {
+          // Not the default - add to URL
           newParams.set('sort', updates.sort);
         } else {
+          // Set to default - remove from URL to keep it clean
           newParams.delete('sort');
         }
       }

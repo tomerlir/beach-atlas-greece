@@ -20,9 +20,10 @@ interface SearchHeaderProps {
 
 // Sort options for the dropdown
 const sortOptions = [
-  { value: 'name', label: 'Name A–Z' },
-  { value: 'blueFlag', label: 'Blue Flag first' },
-  { value: 'distance', label: 'Distance (near me first)' },
+  { value: 'name.asc', label: 'Name A–Z' },
+  { value: 'name.desc', label: 'Name Z–A' },
+  { value: 'distance.asc', label: 'Distance (Near to Far)' },
+  { value: 'distance.desc', label: 'Distance (Far to Near)' },
 ];
 
 export default function SearchHeader({
@@ -44,8 +45,8 @@ export default function SearchHeader({
 
   // Auto-enable distance sorting when location is obtained and nearMe is enabled
   useEffect(() => {
-    if (userLocation && filters.nearMe && filters.sort !== 'distance') {
-      onFiltersChange({ sort: 'distance', page: 1 });
+    if (userLocation && filters.nearMe && !filters.sort?.startsWith('distance')) {
+      onFiltersChange({ sort: 'distance.asc', page: 1 });
     }
   }, [userLocation, filters.nearMe, filters.sort, onFiltersChange]);
 
@@ -56,15 +57,15 @@ export default function SearchHeader({
   const toggleNearMe = () => {
     if (filters.nearMe) {
       // Turn off "Near me" - revert to last non-distance sort
-      const newSort = filters.sort === 'distance' ? 'name' : filters.sort;
+      const newSort = filters.sort?.startsWith('distance') ? 'name.asc' : filters.sort;
       onFiltersChange({ nearMe: false, sort: newSort, page: 1 });
     } else {
       // Turn on "Near me" - request location if needed
       if (userLocation) {
-        onFiltersChange({ nearMe: true, sort: 'distance', page: 1 });
+        onFiltersChange({ nearMe: true, sort: 'distance.asc', page: 1 });
       } else {
         // Request location and enable near me mode
-        onFiltersChange({ nearMe: true, page: 1 });
+        onFiltersChange({ nearMe: true, sort: 'distance.asc', page: 1 });
         onLocationRequest();
       }
     }
@@ -148,7 +149,7 @@ export default function SearchHeader({
                       <SelectItem 
                         key={option.value} 
                         value={option.value}
-                        disabled={option.value === 'distance' && (!userLocation || !filters.nearMe)}
+                        disabled={option.value.startsWith('distance') && (!userLocation || !filters.nearMe)}
                       >
                         {option.label}
                       </SelectItem>

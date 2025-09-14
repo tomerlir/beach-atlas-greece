@@ -239,7 +239,7 @@ const BeachForm: React.FC<Props> = ({ mode }) => {
 
   if (mode === 'edit' && !d) {
     return (
-      <div className="min-h-[200px] flex items-center justify-center">
+      <div className="min-h-[140px] flex items-center justify-center">
         <div className="text-center space-y-2">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto" />
           <p className="text-muted-foreground" aria-live="polite">Loading beach…</p>

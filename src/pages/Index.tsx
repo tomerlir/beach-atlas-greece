@@ -2,17 +2,17 @@ import { useState, useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
-import SearchHeader from "@/components/SearchHeader";
+import FilterBar from "@/components/FilterBar";
 import AllFiltersDrawer from "@/components/AllFiltersDrawer";
 import ResultsHeader from "@/components/ResultsHeader";
 import BeachCard from "@/components/BeachCard";
 import Pagination from "@/components/Pagination";
-import { useGeolocation, calculateDistance } from "@/hooks/useGeolocation";
+import { useGeolocation } from "@/hooks/useGeolocation";
 import { useUrlState } from "@/hooks/useUrlState";
 import { useBeachFiltering } from "@/hooks/useBeachFiltering";
 import { useDistanceCalculation } from "@/hooks/useDistanceCalculation";
 import { Beach } from "@/types/beach";
-import { Waves, MapPin } from "lucide-react";
+import { Waves } from "lucide-react";
 import heroImage from "@/assets/hero-beach.jpg";
 
 const BEACHES_PER_PAGE = 9;
@@ -41,7 +41,7 @@ const Index = () => {
   const beachesWithDistance = useDistanceCalculation(
     beaches,
     location,
-    filters.nearMe && filters.sort === 'distance'
+    filters.nearMe && filters.sort?.startsWith('distance')
   );
 
   // Filter and sort beaches
@@ -52,31 +52,6 @@ const Index = () => {
   const startIndex = (filters.page - 1) * BEACHES_PER_PAGE;
   const paginatedBeaches = filteredBeaches.slice(startIndex, startIndex + BEACHES_PER_PAGE);
 
-  // Handle filter removal
-  const handleRemoveFilter = (filterType: keyof typeof filters, value?: any) => {
-    switch (filterType) {
-      case 'search':
-        updateFilters({ search: '', page: 1 });
-        break;
-      case 'organized':
-        updateFilters({ organized: null, page: 1 });
-        break;
-      case 'blueFlag':
-        updateFilters({ blueFlag: false, page: 1 });
-        break;
-      case 'parking':
-        updateFilters({ parking: 'any', page: 1 });
-        break;
-      case 'amenities':
-        const newAmenities = filters.amenities.filter(amenity => amenity !== value);
-        updateFilters({ amenities: newAmenities, page: 1 });
-        break;
-    }
-  };
-
-  const handleClearAllFilters = () => {
-    resetFilters();
-  };
 
   const handleApplyFilters = (newFilters: typeof filters) => {
     updateFilters(newFilters);
@@ -105,8 +80,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Search Header */}
-      <SearchHeader
+      {/* Filter Bar */}
+      <FilterBar
         filters={filters}
         onFiltersChange={updateFilters}
         userLocation={location}
@@ -114,15 +89,8 @@ const Index = () => {
         isLoadingLocation={isLoadingLocation}
         onOpenAllFilters={() => setIsAllFiltersOpen(true)}
         locationPermission={locationPermission}
-      />
-
-      {/* Results Header */}
-      <ResultsHeader
         resultCount={filteredBeaches.length}
-        filters={filters}
-        onRemoveFilter={handleRemoveFilter}
-        onClearAllFilters={handleClearAllFilters}
-        userLocation={location}
+        showCountBadge={false}
       />
 
       <main className="container mx-auto px-4 py-8 pb-20 md:pb-8">

@@ -1,11 +1,10 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { MapPin, Sun, CheckCircle, Car, Flag, X, ChevronDown, ChevronUp } from 'lucide-react';
+import { MapPin, Sun, CheckCircle, Car, Flag, X } from 'lucide-react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { useDebounce } from '@/hooks/useDebounce';
 import { useBeachCount } from '@/hooks/useBeachCount';
 import { useDraftState } from '@/hooks/useDraftState';
@@ -22,8 +21,8 @@ interface AllFiltersDrawerProps {
   locationPermission: 'granted' | 'denied' | 'prompt' | null;
 }
 
-// Top 8 amenities as specified
-const topAmenities = [
+// All amenities ordered by popularity
+const allAmenities = [
   { id: 'sunbeds', label: 'Sunbeds' },
   { id: 'umbrellas', label: 'Umbrellas' },
   { id: 'beach_bar', label: 'Beach Bar' },
@@ -32,10 +31,6 @@ const topAmenities = [
   { id: 'water_sports', label: 'Water Sports' },
   { id: 'family_friendly', label: 'Family Friendly' },
   { id: 'parking', label: 'Parking' },
-];
-
-// Remaining amenities for "Show more"
-const additionalAmenities = [
   { id: 'boat_trips', label: 'Boat Trips' },
   { id: 'fishing', label: 'Fishing' },
   { id: 'photography', label: 'Photography' },
@@ -62,7 +57,6 @@ export default function AllFiltersDrawer({
   isLoadingLocation,
   locationPermission,
 }: AllFiltersDrawerProps) {
-  const [showMoreAmenities, setShowMoreAmenities] = useState(false);
   const firstFocusableRef = useRef<HTMLButtonElement>(null);
   
   // Use draft state hook for proper state management
@@ -113,8 +107,8 @@ export default function AllFiltersDrawer({
       // Turning off near me
       updateDraft({ nearMe: false });
     } else {
-      // Turning on near me - request location
-      updateDraft({ nearMe: true });
+      // Turning on near me - request location and set distance sorting
+      updateDraft({ nearMe: true, sort: 'distance.asc' });
       onLocationRequest();
     }
   };
@@ -188,11 +182,11 @@ export default function AllFiltersDrawer({
             </div>
           </div>
 
-          {/* Organized Section */}
+          {/* Beach Setup Section */}
           <div className="space-y-4">
             <h3 className="font-semibold text-base flex items-center gap-2">
               <CheckCircle className="h-4 w-4 text-primary" />
-              Organized
+             Beach Setup
             </h3>
             
             <div className="grid grid-cols-3 gap-2">
@@ -281,9 +275,8 @@ export default function AllFiltersDrawer({
               )}
             </h3>
             
-            {/* Top 8 amenities */}
             <div className="space-y-2">
-              {topAmenities.map((amenity) => (
+              {allAmenities.map((amenity) => (
                 <Button
                   key={amenity.id}
                   variant="ghost"
@@ -298,36 +291,6 @@ export default function AllFiltersDrawer({
                 </Button>
               ))}
             </div>
-
-            {/* Show more expander */}
-            <Collapsible open={showMoreAmenities} onOpenChange={setShowMoreAmenities}>
-              <CollapsibleTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="w-full justify-between min-h-[44px]"
-                  aria-expanded={showMoreAmenities}
-                >
-                  <span>Show more (+{additionalAmenities.length})</span>
-                  {showMoreAmenities ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-                </Button>
-              </CollapsibleTrigger>
-              <CollapsibleContent className="space-y-2 mt-2">
-                {additionalAmenities.map((amenity) => (
-                  <Button
-                    key={amenity.id}
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => toggleAmenity(amenity.id)}
-                    className="w-full justify-start min-h-[44px] relative"
-                  >
-                    <span className="flex-1 text-left">{amenity.label}</span>
-                    {draftFilters.amenities.includes(amenity.id) && (
-                      <CheckCircle className="h-4 w-4 text-primary" />
-                    )}
-                  </Button>
-                ))}
-              </CollapsibleContent>
-            </Collapsible>
           </div>
         </div>
 

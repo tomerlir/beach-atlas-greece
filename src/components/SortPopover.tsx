@@ -13,9 +13,10 @@ interface SortPopoverProps {
 }
 
 const sortOptions = [
-  { value: 'name', label: 'Name A–Z' },
-  { value: 'distance', label: 'Distance', requiresLocation: true },
-  { value: 'blueFlag', label: 'Blue Flag first' },
+  { value: 'name.asc', label: 'Name A–Z' },
+  { value: 'name.desc', label: 'Name Z–A' },
+  { value: 'distance.asc', label: 'Distance (Near to Far)', requiresLocation: true },
+  { value: 'distance.desc', label: 'Distance (Far to Near)', requiresLocation: true },
 ];
 
 export default function SortPopover({

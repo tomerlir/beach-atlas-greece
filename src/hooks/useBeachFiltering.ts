@@ -43,22 +43,28 @@ export const useBeachFiltering = (
       return true;
     });
 
-    // Sort beaches
-    if (filters.sort === 'distance' && userLocation && filters.nearMe) {
-      // Sort by distance if location is available and nearMe is enabled
-      filtered = filtered.map(beach => ({
-        ...beach,
-        distance: beach.distance || 0
-      })).sort((a, b) => (a.distance || 0) - (b.distance || 0));
-    } else if (filters.sort === 'blueFlag') {
-      // Sort by Blue Flag first
-      filtered = [...filtered].sort((a, b) => {
-        if (a.blue_flag && !b.blue_flag) return -1;
-        if (!a.blue_flag && b.blue_flag) return 1;
-        return a.name.localeCompare(b.name);
-      });
+    // Sort beaches based on new sort format
+    if (filters.sort) {
+      const [sortKey, sortDir] = filters.sort.split('.');
+      
+      if (sortKey === 'name') {
+        // Sort by name
+        filtered = [...filtered].sort((a, b) => {
+          const comparison = a.name.localeCompare(b.name);
+          return sortDir === 'desc' ? -comparison : comparison;
+        });
+      } else if (sortKey === 'distance' && userLocation && filters.nearMe) {
+        // Sort by distance if location is available and nearMe is enabled
+        filtered = filtered.map(beach => ({
+          ...beach,
+          distance: beach.distance || 0
+        })).sort((a, b) => {
+          const comparison = (a.distance || 0) - (b.distance || 0);
+          return sortDir === 'desc' ? -comparison : comparison;
+        });
+      }
     } else {
-      // Sort by name A-Z (default)
+      // Default sort by name A-Z when no sort is specified
       filtered = [...filtered].sort((a, b) => a.name.localeCompare(b.name));
     }
 
