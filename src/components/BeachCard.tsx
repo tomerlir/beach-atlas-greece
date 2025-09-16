@@ -63,9 +63,10 @@ const amenityConfig: Record<string, { label: string; icon: any; color: string }>
 
 // Map parking types to icons and colors
 const parkingConfig: Record<string, { label: string; icon: any; color: string }> = {
-  none: { label: "No Parking", icon: XCircle, color: "text-red-500" },
-  limited: { label: "Limited Parking", icon: AlertCircle, color: "text-yellow-500" }, 
-  ample: { label: "Ample Parking", icon: CheckCircle, color: "text-green-500" }
+  NONE: { label: "No Parking", icon: XCircle, color: "text-red-500" },
+  ROADSIDE: { label: "Roadside Parking", icon: AlertCircle, color: "text-orange-500" },
+  SMALL_LOT: { label: "Small Lot", icon: AlertCircle, color: "text-yellow-500" },
+  LARGE_LOT: { label: "Large Lot", icon: CheckCircle, color: "text-green-500" }
 };
 
 const BeachCard = ({ beach, distance }: BeachCardProps) => {

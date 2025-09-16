@@ -232,22 +232,28 @@ const SearchFilters = ({
                         Any parking
                       </div>
                     </SelectItem>
-                    <SelectItem value="ample">
+                    <SelectItem value="LARGE_LOT">
                       <div className="flex items-center gap-2">
                         <CheckCircle className="h-4 w-4 text-green-500" />
-                        Ample parking
+                        Large lot
                       </div>
                     </SelectItem>
-                    <SelectItem value="limited">
+                    <SelectItem value="SMALL_LOT">
                       <div className="flex items-center gap-2">
                         <AlertCircle className="h-4 w-4 text-yellow-500" />
-                        Limited parking
+                        Small lot
                       </div>
                     </SelectItem>
-                    <SelectItem value="none">
+                    <SelectItem value="ROADSIDE">
+                      <div className="flex items-center gap-2">
+                        <AlertCircle className="h-4 w-4 text-orange-500" />
+                        Roadside
+                      </div>
+                    </SelectItem>
+                    <SelectItem value="NONE">
                       <div className="flex items-center gap-2">
                         <XCircle className="h-4 w-4 text-red-500" />
-                        No parking needed
+                        No parking
                       </div>
                     </SelectItem>
                   </SelectContent>

@@ -12,8 +12,8 @@ import { useUrlState } from "@/hooks/useUrlState";
 import { useBeachFiltering } from "@/hooks/useBeachFiltering";
 import { useDistanceCalculation } from "@/hooks/useDistanceCalculation";
 import { Beach } from "@/types/beach";
-import { Waves } from "lucide-react";
 import heroImage from "@/assets/hero-beach.jpg";
+import EmptyState from "@/components/EmptyState";
 
 const BEACHES_PER_PAGE = 9;
 
@@ -55,6 +55,19 @@ const Index = () => {
 
   const handleApplyFilters = (newFilters: typeof filters) => {
     updateFilters(newFilters);
+  };
+
+  // Empty state button handlers
+  const handleClearAllFilters = () => {
+    resetFilters();
+  };
+
+  const handleTurnOffNearMe = () => {
+    updateFilters({ nearMe: false, sort: 'name.asc', page: 1 });
+  };
+
+  const handleResetParking = () => {
+    updateFilters({ parking: 'any', page: 1 });
   };
 
   return (
@@ -135,17 +148,13 @@ const Index = () => {
 
             {/* No Results */}
             {filteredBeaches.length === 0 && (
-              <div className="text-center py-16">
-                <div className="bg-muted/30 border border-muted rounded-xl p-12 max-w-lg mx-auto">
-                  <Waves className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-                  <p className="text-muted-foreground text-xl font-medium mb-2">
-                    No beaches match your current filters
-                  </p>
-                  <p className="text-muted-foreground">
-                    Try adjusting your search criteria or clear some filters to see more results.
-                  </p>
-                </div>
-              </div>
+              <EmptyState
+                filters={filters}
+                userLocation={location}
+                onClearAllFilters={handleClearAllFilters}
+                onTurnOffNearMe={handleTurnOffNearMe}
+                onResetParking={handleResetParking}
+              />
             )}
 
             {/* Pagination */}
