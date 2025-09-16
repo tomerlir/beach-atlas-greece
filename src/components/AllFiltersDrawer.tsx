@@ -132,7 +132,7 @@ export default function AllFiltersDrawer({
               variant="ghost"
               size="sm"
               onClick={handleClearAll}
-              className="text-muted-foreground hover:text-foreground h-auto p-0"
+              className="text-muted-foreground hover:text-foreground h-auto p-2"
             >
               Clear all
             </Button>

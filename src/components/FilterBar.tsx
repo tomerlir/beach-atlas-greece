@@ -376,50 +376,51 @@ export default function FilterBar({
               </div>
             </div>
 
-
-            {/* Near Me Toggle */}
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant={filters.nearMe ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => handleNearMeToggle(!filters.nearMe)}
-                  disabled={isLoadingLocation}
-                  className="px-3 py-2 rounded-xl border h-auto"
-                  role="switch"
-                  aria-checked={filters.nearMe}
-                  aria-label={`Near me (${filters.nearMe ? 'on' : 'off'})`}
-                >
-                  <MapPin className="h-4 w-4 md:h-5 md:w-5" />
-                </Button>
-              </TooltipTrigger>
-              {locationPermission === 'denied' && (
-                <TooltipContent>
-                  <div className="flex items-center gap-2">
-                    <AlertCircle className="h-4 w-4" />
-                    <span>Location blocked in browser settings.</span>
-                  </div>
-                </TooltipContent>
-              )}
-            </Tooltip>
-
-
-            {/* Blue Flag Toggle */}
-            <Button
-              variant={filters.blueFlag ? "default" : "outline"}
-              size="sm"
-              onClick={() => handleBlueFlagToggle(!filters.blueFlag)}
-              className="px-3 py-2 rounded-xl border h-auto"
-              role="switch"
-              aria-checked={filters.blueFlag}
-              aria-label={`Blue Flag (${filters.blueFlag ? 'on' : 'off'})`}
-            >
-              <Flag className="h-4 w-4 md:h-5 md:w-5" />
-            </Button>
-
             {/* Facets Group */}
             {!isMobile ? (
               <div className="flex flex-wrap gap-2 md:gap-3 items-center">
+
+
+                {/* Near Me Toggle */}
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant={filters.nearMe ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => handleNearMeToggle(!filters.nearMe)}
+                      disabled={isLoadingLocation}
+                      className="px-3 py-2 rounded-xl border h-auto"
+                      role="switch"
+                      aria-checked={filters.nearMe}
+                      aria-label={`Near me (${filters.nearMe ? 'on' : 'off'})`}
+                    >
+                      <MapPin className="h-4 w-4 md:h-5 md:w-5" />
+                    </Button>
+                  </TooltipTrigger>
+                  {locationPermission === 'denied' && (
+                    <TooltipContent>
+                      <div className="flex items-center gap-2">
+                        <AlertCircle className="h-4 w-4" />
+                        <span>Location blocked in browser settings.</span>
+                      </div>
+                    </TooltipContent>
+                  )}
+                </Tooltip>
+
+
+                {/* Blue Flag Toggle */}
+                <Button
+                  variant={filters.blueFlag ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => handleBlueFlagToggle(!filters.blueFlag)}
+                  className="px-3 py-2 rounded-xl border h-auto"
+                  role="switch"
+                  aria-checked={filters.blueFlag}
+                  aria-label={`Blue Flag (${filters.blueFlag ? 'on' : 'off'})`}
+                >
+                  <Flag className="h-4 w-4 md:h-5 md:w-5" />
+                </Button>
+
                 {/* Amenities Dropdown */}
                 <Popover open={amenitiesOpen} onOpenChange={setAmenitiesOpen}>
                   <PopoverTrigger asChild>
@@ -627,6 +628,48 @@ export default function FilterBar({
             ) : (
               /* Mobile: Scrollable facet chips */
               <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide">
+
+
+                {/* Near Me Toggle */}
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant={filters.nearMe ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => handleNearMeToggle(!filters.nearMe)}
+                      disabled={isLoadingLocation}
+                      className="px-3 py-2 rounded-xl border h-auto"
+                      role="switch"
+                      aria-checked={filters.nearMe}
+                      aria-label={`Near me (${filters.nearMe ? 'on' : 'off'})`}
+                    >
+                      <MapPin className="h-4 w-4 md:h-5 md:w-5" />
+                    </Button>
+                  </TooltipTrigger>
+                  {locationPermission === 'denied' && (
+                    <TooltipContent>
+                      <div className="flex items-center gap-2">
+                        <AlertCircle className="h-4 w-4" />
+                        <span>Location blocked in browser settings.</span>
+                      </div>
+                    </TooltipContent>
+                  )}
+                </Tooltip>
+
+
+                {/* Blue Flag Toggle */}
+                <Button
+                  variant={filters.blueFlag ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => handleBlueFlagToggle(!filters.blueFlag)}
+                  className="px-3 py-2 rounded-xl border h-auto"
+                  role="switch"
+                  aria-checked={filters.blueFlag}
+                  aria-label={`Blue Flag (${filters.blueFlag ? 'on' : 'off'})`}
+                >
+                  <Flag className="h-4 w-4 md:h-5 md:w-5" />
+                </Button>
+
                 {/* Amenities Dropdown */}
                 <Popover open={amenitiesOpen} onOpenChange={setAmenitiesOpen}>
                   <PopoverTrigger asChild>
