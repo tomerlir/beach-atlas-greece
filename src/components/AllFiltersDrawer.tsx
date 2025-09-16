@@ -1,11 +1,13 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { MapPin, Sun, CheckCircle, Car, Flag, X } from 'lucide-react';
+import { MapPin, Sun, CheckCircle, Car, Flag, X, Search } from 'lucide-react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
 import { useDebounce } from '@/hooks/useDebounce';
+import { useDebouncedSearch } from '@/hooks/useDebouncedSearch';
 import { useBeachCount } from '@/hooks/useBeachCount';
 import { useDraftState } from '@/hooks/useDraftState';
 import { FilterState } from '@/hooks/useUrlState';
@@ -62,6 +64,13 @@ export default function AllFiltersDrawer({
   // Use draft state hook for proper state management
   const { draftFilters, updateDraft, resetDraft, clearDraft } = useDraftState(filters);
 
+  // Debounced search with 250ms delay - synchronized with FilterBar
+  const { searchInput, setSearchInput, clearSearchInput } = useDebouncedSearch(
+    draftFilters.search,
+    (value: string) => updateDraft({ search: value }),
+    250
+  );
+
   // Debounce the draft filters for live count updates
   const debouncedDraftFilters = useDebounce(draftFilters, 250);
 
@@ -92,7 +101,18 @@ export default function AllFiltersDrawer({
   };
 
   const handleClearAll = () => {
-    clearDraft();
+    clearSearchInput(); // Clear search input immediately
+    // Clear all filters including search
+    updateDraft({
+      search: '',
+      organized: null,
+      blueFlag: false,
+      parking: 'any',
+      amenities: [],
+      sort: 'name.asc',
+      page: 1,
+      nearMe: false,
+    });
   };
 
   const toggleAmenity = (amenityId: string) => {
@@ -145,6 +165,25 @@ export default function AllFiltersDrawer({
 
         {/* Scrollable Content */}
         <div className="flex-1 overflow-y-auto px-6 py-6 space-y-8">
+          {/* Search Section */}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-base flex items-center gap-2">
+              <Search className="h-4 w-4 text-primary" />
+              Search
+            </h3>
+            
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+              <Input
+                placeholder="Search beaches or places…"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                className="pl-10 h-10 bg-white border-border focus:ring-primary"
+                aria-label="Search beaches by name or location"
+              />
+            </div>
+          </div>
+
           {/* Near me Section */}
           <div className="space-y-4">
             <h3 className="font-semibold text-base flex items-center gap-2">
