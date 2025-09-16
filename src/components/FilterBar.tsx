@@ -1,13 +1,13 @@
 import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
-import { 
-  Search, 
-  MapPin, 
-  Filter, 
-  ChevronDown, 
-  AlertCircle, 
-  CheckCircle, 
-  Car, 
-  Flag, 
+import {
+  Search,
+  MapPin,
+  Filter,
+  ChevronDown,
+  AlertCircle,
+  CheckCircle,
+  Car,
+  Flag,
   Sun,
   X,
   Plus,
@@ -122,7 +122,7 @@ export default function FilterBar({
   const [amenitiesOpen, setAmenitiesOpen] = useState(false);
   const [organizedOpen, setOrganizedOpen] = useState(false);
   const [parkingOpen, setParkingOpen] = useState(false);
-  
+
   const amenitiesTriggerRef = useRef<HTMLButtonElement>(null);
   const organizedTriggerRef = useRef<HTMLButtonElement>(null);
   const parkingTriggerRef = useRef<HTMLButtonElement>(null);
@@ -162,28 +162,32 @@ export default function FilterBar({
     if (checked && !userLocation) {
       onLocationRequest();
     }
-    
+
     // When enabling Near me, automatically set distance sorting
+    // When disabling Near me, revert to A->Z sorting
     const updates: Partial<FilterState> = { nearMe: checked, page: 1 };
     if (checked) {
       updates.sort = 'distance.asc';
+    } else {
+      // When turning off near me, revert to A->Z sorting
+      updates.sort = 'name.asc';
     }
-    
+
     onFiltersChange(updates);
   }, [onFiltersChange, userLocation, onLocationRequest]);
 
   const handleSortChipClick = useCallback((clickedKey: string) => {
     const currentSort = parseSortState(filters.sort);
-    
+
     if (clickedKey === 'distance' && !filters.nearMe) {
       // Request location for distance sorting
       onLocationRequest();
       return;
     }
-    
+
     let newKey: string | null = null;
     let newDir: string | null = null;
-    
+
     if (currentSort.key !== clickedKey) {
       // Different key clicked - set to asc
       newKey = clickedKey;
@@ -197,7 +201,7 @@ export default function FilterBar({
       newKey = null;
       newDir = null;
     }
-    
+
     const newSort = formatSortState(newKey, newDir);
     onFiltersChange({ sort: newSort as FilterState['sort'], page: 1 });
   }, [onFiltersChange, filters.sort, filters.nearMe, onLocationRequest]);
@@ -246,11 +250,11 @@ export default function FilterBar({
     filters.amenities.length > 0,
   ].filter(Boolean).length;
 
-  const hasActiveFilters = filters.search || 
-                          filters.organized !== null || 
-                          filters.blueFlag || 
-                          filters.parking !== 'any' || 
-                          filters.amenities.length > 0;
+  const hasActiveFilters = filters.search ||
+    filters.organized !== null ||
+    filters.blueFlag ||
+    filters.parking !== 'any' ||
+    filters.amenities.length > 0;
 
   // Get filter pills for display
   const getFilterPills = useMemo(() => {
@@ -301,14 +305,14 @@ export default function FilterBar({
 
   // Get amenities count for badge and aria-label
   const amenitiesCount = filters.amenities.length;
-  const amenitiesAriaLabel = amenitiesCount > 0 
-    ? `Amenities, ${amenitiesCount} selected` 
+  const amenitiesAriaLabel = amenitiesCount > 0
+    ? `Amenities, ${amenitiesCount} selected`
     : 'Amenities';
 
   // Get sort chip states
   const currentSort = parseSortState(filters.sort);
   const isDistanceEnabled = filters.nearMe && userLocation;
-  
+
   const getSortChipState = (key: string) => {
     if (currentSort.key === key) {
       return currentSort.dir;
@@ -343,7 +347,7 @@ export default function FilterBar({
     if (!amenitiesOpen && !organizedOpen && !parkingOpen) {
       return;
     }
-    
+
     // Focus first focusable element in open dropdown
     const openDropdown = document.querySelector('[role="listbox"]:not([hidden])');
     if (openDropdown) {
@@ -372,6 +376,47 @@ export default function FilterBar({
               </div>
             </div>
 
+
+            {/* Near Me Toggle */}
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant={filters.nearMe ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => handleNearMeToggle(!filters.nearMe)}
+                  disabled={isLoadingLocation}
+                  className="px-3 py-2 rounded-xl border h-auto"
+                  role="switch"
+                  aria-checked={filters.nearMe}
+                  aria-label={`Near me (${filters.nearMe ? 'on' : 'off'})`}
+                >
+                  <MapPin className="h-4 w-4 md:h-5 md:w-5" />
+                </Button>
+              </TooltipTrigger>
+              {locationPermission === 'denied' && (
+                <TooltipContent>
+                  <div className="flex items-center gap-2">
+                    <AlertCircle className="h-4 w-4" />
+                    <span>Location blocked in browser settings.</span>
+                  </div>
+                </TooltipContent>
+              )}
+            </Tooltip>
+
+
+            {/* Blue Flag Toggle */}
+            <Button
+              variant={filters.blueFlag ? "default" : "outline"}
+              size="sm"
+              onClick={() => handleBlueFlagToggle(!filters.blueFlag)}
+              className="px-3 py-2 rounded-xl border h-auto"
+              role="switch"
+              aria-checked={filters.blueFlag}
+              aria-label={`Blue Flag (${filters.blueFlag ? 'on' : 'off'})`}
+            >
+              <Flag className="h-4 w-4 md:h-5 md:w-5" />
+            </Button>
+
             {/* Facets Group */}
             {!isMobile ? (
               <div className="flex flex-wrap gap-2 md:gap-3 items-center">
@@ -396,8 +441,8 @@ export default function FilterBar({
                       <ChevronDown className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent 
-                    className="w-80 p-0" 
+                  <PopoverContent
+                    className="w-80 p-0"
                     align="start"
                     onKeyDown={handleAmenitiesKeyDown}
                   >
@@ -509,45 +554,6 @@ export default function FilterBar({
                   </PopoverContent>
                 </Popover>
 
-                {/* Blue Flag Toggle */}
-                <Button
-                  variant={filters.blueFlag ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => handleBlueFlagToggle(!filters.blueFlag)}
-                  className="px-3 py-2 rounded-xl border h-auto"
-                  role="switch"
-                  aria-checked={filters.blueFlag}
-                  aria-label={`Blue Flag (${filters.blueFlag ? 'on' : 'off'})`}
-                >
-                  <Flag className="h-4 w-4 md:h-5 md:w-5" />
-                </Button>
-
-                {/* Near Me Toggle */}
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant={filters.nearMe ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => handleNearMeToggle(!filters.nearMe)}
-                      disabled={isLoadingLocation}
-                      className="px-3 py-2 rounded-xl border h-auto"
-                      role="switch"
-                      aria-checked={filters.nearMe}
-                      aria-label={`Near me (${filters.nearMe ? 'on' : 'off'})`}
-                    >
-                      <MapPin className="h-4 w-4 md:h-5 md:w-5" />
-                    </Button>
-                  </TooltipTrigger>
-                  {locationPermission === 'denied' && (
-                    <TooltipContent>
-                      <div className="flex items-center gap-2">
-                        <AlertCircle className="h-4 w-4" />
-                        <span>Location blocked in browser settings.</span>
-                      </div>
-                    </TooltipContent>
-                  )}
-                </Tooltip>
-
                 {/* All Filters Button */}
                 <Button
                   variant="outline"
@@ -615,7 +621,7 @@ export default function FilterBar({
                       </TooltipContent>
                     )}
                   </Tooltip>
-                  
+
                 </div>
               </div>
             ) : (
@@ -641,8 +647,8 @@ export default function FilterBar({
                       )}
                     </Button>
                   </PopoverTrigger>
-                  <PopoverContent 
-                    className="w-80 p-0" 
+                  <PopoverContent
+                    className="w-80 p-0"
                     align="start"
                     onKeyDown={handleAmenitiesKeyDown}
                   >
@@ -751,7 +757,7 @@ export default function FilterBar({
                     </div>
                   </PopoverContent>
                 </Popover>
-                
+
                 <Button
                   variant={filters.blueFlag ? "default" : "outline"}
                   size="sm"
@@ -763,7 +769,7 @@ export default function FilterBar({
                 >
                   <Flag className="h-4 w-4" />
                 </Button>
-                
+
                 <Button
                   variant={filters.nearMe ? "default" : "outline"}
                   size="sm"
@@ -776,7 +782,7 @@ export default function FilterBar({
                 >
                   <MapPin className="h-4 w-4" />
                 </Button>
-                
+
                 <Button
                   variant="outline"
                   size="sm"
@@ -850,7 +856,7 @@ export default function FilterBar({
                   </Button>
                 </Badge>
               ))}
-              
+
               <Button
                 variant="ghost"
                 size="sm"

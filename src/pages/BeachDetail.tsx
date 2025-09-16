@@ -33,6 +33,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import Header from "@/components/Header";
 import { Tables } from "@/integrations/supabase/types";
 import { MapsSelectionDialog } from "@/components/MapsSelectionDialog";
+import { DataFreshnessMeta } from "@/components/DataFreshnessMeta";
 
 type Beach = Tables<'beaches'>;
 
@@ -268,20 +269,18 @@ const BeachDetail = () => {
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-3">
             {beach.name}
           </h1>
-          <div className="flex items-center text-muted-foreground text-lg mb-4">
+          <div className="flex items-center text-muted-foreground text-lg mb-2">
             <MapPin className="h-5 w-5 mr-2" aria-hidden="true" />
             {beach.place_text}
           </div>
-          <div className="flex flex-wrap gap-2">
+          <DataFreshnessMeta beach={beach} />
+          <div className="flex flex-wrap gap-2 mt-4">
             {beach.blue_flag && (
               <Badge className="bg-blue-600 text-white">
                 <Flag className="h-3 w-3 mr-1" aria-hidden="true" />
                 Blue Flag
               </Badge>
             )}
-            <Badge variant={beach.organized ? "default" : "secondary"}>
-              {beach.organized ? "Organized" : "Unorganized"}
-            </Badge>
           </div>
         </div>
 

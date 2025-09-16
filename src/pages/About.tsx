@@ -47,6 +47,14 @@ const About = () => {
               Look for the Blue Flag badge on beach cards to find these premium destinations.
             </p>
             
+            <h2 id="credits" className="text-2xl font-semibold text-foreground mb-4">Credits</h2>
+            
+            <p className="text-muted-foreground mb-6">
+              Our beach data is carefully curated from multiple sources including official tourism boards, 
+              local authorities, and verified visitor information. We strive to keep all information 
+              accurate and up-to-date.
+            </p>
+            
             <h2 className="text-2xl font-semibold text-foreground mb-4">Contact Us</h2>
             
             <p className="text-muted-foreground">

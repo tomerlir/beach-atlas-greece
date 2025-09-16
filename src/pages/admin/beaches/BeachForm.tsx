@@ -47,6 +47,7 @@ const BeachForm: React.FC<Props> = ({ mode }) => {
   const slugInputRef = useRef<HTMLInputElement | null>(null);
   const [slugTouched, setSlugTouched] = useState(false);
   const lastGeneratedSlugRef = useRef<string>('');
+  const [markVerified, setMarkVerified] = useState(false);
 
   const id = params.id as string | undefined;
 
@@ -194,7 +195,12 @@ const BeachForm: React.FC<Props> = ({ mode }) => {
         // Keep slug unique, excluding current record
         const uniqueSlug = await ensureUniqueSlug(parsed.data.slug as string, id);
         (parsed.data as any).slug = uniqueSlug;
-        const payload: BeachUpdate = { ...(parsed.data as BeachUpdate), id };
+        const payload: BeachUpdate = { 
+          ...(parsed.data as BeachUpdate), 
+          id,
+          // Add verified_at if markVerified is true
+          ...(markVerified ? { verified_at: new Date().toISOString() } : {})
+        };
         const { data, error } = await supabase.from('beaches').update(payload).eq('id', id).select().single();
         if (error || !data) throw error || new Error('Update matched no rows');
         toast({ title: 'Saved', description: 'Beach updated.' });
@@ -314,6 +320,34 @@ const BeachForm: React.FC<Props> = ({ mode }) => {
           <label className="block text-sm font-medium">Blue flag</label>
           <input type="checkbox" name="blue_flag" defaultChecked={d?.blue_flag} />
         </div>
+        {mode === 'edit' && (
+          <div>
+            <label className="block text-sm font-medium">Verification Status</label>
+            <div className="space-y-2">
+              {d?.verified_at ? (
+                <div className="text-sm text-muted-foreground">
+                  <span className="font-medium">Verified:</span> {new Date(d.verified_at).toLocaleString()}
+                </div>
+              ) : (
+                <div className="text-sm text-muted-foreground">
+                  <span className="font-medium">Not verified</span>
+                </div>
+              )}
+              <div className="flex items-center space-x-2">
+                <input 
+                  type="checkbox" 
+                  id="mark-verified"
+                  checked={markVerified}
+                  onChange={(e) => setMarkVerified(e.target.checked)}
+                  className="rounded"
+                />
+                <label htmlFor="mark-verified" className="text-sm">
+                  Mark as verified on save
+                </label>
+              </div>
+            </div>
+          </div>
+        )}
         <div className="md:col-span-2">
           <label className="block text-sm font-medium">Amenities (comma separated)</label>
           <Input name="amenities" defaultValue={d?.amenities?.join(', ') ?? ''} />

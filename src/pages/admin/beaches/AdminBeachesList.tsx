@@ -159,6 +159,7 @@ const AdminBeachesList: React.FC = () => {
               <th scope="col" className="py-2 pr-2">Organized</th>
               <th scope="col" className="py-2 pr-2">Parking</th>
               <th scope="col" className="py-2 pr-2">Blue Flag</th>
+              <th scope="col" className="py-2 pr-2">Verified</th>
               <th scope="col" className="py-2 pr-2">Status</th>
               <th scope="col" className="py-2 pr-2">Updated</th>
               <th scope="col" className="py-2 pr-2"><span className="sr-only">Actions</span></th>
@@ -174,6 +175,19 @@ const AdminBeachesList: React.FC = () => {
                 <td className="py-2 pr-2">{b.organized ? 'Yes' : 'No'}</td>
                 <td className="py-2 pr-2">{b.parking}</td>
                 <td className="py-2 pr-2">{b.blue_flag ? <Badge>Blue Flag</Badge> : '-'}</td>
+                <td className="py-2 pr-2">
+                  {b.verified_at ? (
+                    <div className="flex items-center gap-1">
+                      <CheckCircle2 className="h-4 w-4 text-green-600" aria-hidden="true" />
+                      <span className="text-xs text-muted-foreground">Verified</span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-1">
+                      <Circle className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
+                      <span className="text-xs text-muted-foreground">Not verified</span>
+                    </div>
+                  )}
+                </td>
                 <td className="py-2 pr-2">{renderStatus(b.status)}</td>
                 <td className="py-2 pr-2 whitespace-nowrap">{formatRelativeUpdatedAt(b.updated_at)}</td>
                 <td className="py-2 pr-2">
@@ -190,7 +204,7 @@ const AdminBeachesList: React.FC = () => {
             ))}
             {!loading && items.length === 0 && (
               <tr>
-                <td colSpan={8} className="py-6 text-center text-muted-foreground">No results</td>
+                <td colSpan={9} className="py-6 text-center text-muted-foreground">No results</td>
               </tr>
             )}
           </tbody>
@@ -237,6 +251,22 @@ const AdminBeachesList: React.FC = () => {
               <div>
                 <dt className="text-muted-foreground">Blue Flag</dt>
                 <dd>{b.blue_flag ? 'Yes' : 'No'}</dd>
+              </div>
+              <div>
+                <dt className="text-muted-foreground">Verified</dt>
+                <dd>
+                  {b.verified_at ? (
+                    <div className="flex items-center gap-1">
+                      <CheckCircle2 className="h-3 w-3 text-green-600" aria-hidden="true" />
+                      <span className="text-xs">Verified</span>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-1">
+                      <Circle className="h-3 w-3 text-muted-foreground" aria-hidden="true" />
+                      <span className="text-xs">Not verified</span>
+                    </div>
+                  )}
+                </dd>
               </div>
               <div>
                 <dt className="text-muted-foreground">Updated</dt>

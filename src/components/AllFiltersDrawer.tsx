@@ -104,8 +104,8 @@ export default function AllFiltersDrawer({
 
   const handleNearMeToggle = () => {
     if (draftFilters.nearMe) {
-      // Turning off near me
-      updateDraft({ nearMe: false });
+      // Turning off near me - revert to A->Z sorting
+      updateDraft({ nearMe: false, sort: 'name.asc' });
     } else {
       // Turning on near me - request location and set distance sorting
       updateDraft({ nearMe: true, sort: 'distance.asc' });
