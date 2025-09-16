@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { MapPin, Sun, CheckCircle, Car, Flag, X, Search } from 'lucide-react';
+import { MapPin, Sun, CheckCircle, Car, Flag, X, Search, Check } from 'lucide-react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -304,31 +304,39 @@ export default function AllFiltersDrawer({
 
           {/* Amenities Section */}
           <div className="space-y-4">
-            <h3 className="font-semibold text-base flex items-center gap-2">
-              <Sun className="h-4 w-4 text-primary" />
-              Amenities
+            <h3 className="font-semibold text-base flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Sun className="h-4 w-4 text-primary" />
+                Amenities
+              </div>
               {selectedAmenitiesCount > 0 && (
-                <Badge variant="secondary" className="text-xs">
-                  {selectedAmenitiesCount}
-                </Badge>
+                <span className="text-muted-foreground text-xs font-normal">
+                  • {selectedAmenitiesCount} selected
+                </span>
               )}
             </h3>
             
-            <div className="space-y-2">
-              {allAmenities.map((amenity) => (
-                <Button
-                  key={amenity.id}
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => toggleAmenity(amenity.id)}
-                  className="w-full justify-start min-h-[44px] relative"
-                >
-                  <span className="flex-1 text-left">{amenity.label}</span>
-                  {draftFilters.amenities.includes(amenity.id) && (
-                    <CheckCircle className="h-4 w-4 text-primary" />
-                  )}
-                </Button>
-              ))}
+            <div className="space-y-1">
+              {allAmenities.map((amenity) => {
+                const isSelected = draftFilters.amenities.includes(amenity.id);
+                
+                return (
+                  <button
+                    key={amenity.id}
+                    onClick={() => toggleAmenity(amenity.id)}
+                    className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors min-h-[44px] rounded-md ${
+                      isSelected ? 'bg-muted/30' : ''
+                    }`}
+                    role="option"
+                    aria-selected={isSelected}
+                  >
+                    <span className="text-sm font-medium">{amenity.label}</span>
+                    {isSelected && (
+                      <Check className="h-4 w-4 text-primary" />
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>

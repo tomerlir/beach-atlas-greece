@@ -25,6 +25,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { useDebouncedSearch } from '@/hooks/useDebouncedSearch';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FilterState } from '@/hooks/useUrlState';
+import AmenitiesDropdown from '@/components/AmenitiesDropdown';
 
 interface FilterBarProps {
   filters: FilterState;
@@ -38,23 +39,6 @@ interface FilterBarProps {
   showCountBadge?: boolean;
 }
 
-// All amenities ordered by popularity
-const allAmenities = [
-  { id: 'sunbeds', label: 'Sunbeds' },
-  { id: 'umbrellas', label: 'Umbrellas' },
-  { id: 'beach_bar', label: 'Beach Bar' },
-  { id: 'taverna', label: 'Taverna' },
-  { id: 'snorkeling', label: 'Snorkeling' },
-  { id: 'water_sports', label: 'Water Sports' },
-  { id: 'family_friendly', label: 'Family Friendly' },
-  { id: 'parking', label: 'Parking' },
-  { id: 'boat_trips', label: 'Boat Trips' },
-  { id: 'fishing', label: 'Fishing' },
-  { id: 'photography', label: 'Photography' },
-  { id: 'hiking', label: 'Hiking' },
-  { id: 'birdwatching', label: 'Birdwatching' },
-  { id: 'music', label: 'Music' },
-];
 
 const organizedOptions = [
   { value: 'both', label: 'Both' },
@@ -119,11 +103,9 @@ export default function FilterBar({
   showCountBadge = false,
 }: FilterBarProps) {
   const isMobile = useIsMobile();
-  const [amenitiesOpen, setAmenitiesOpen] = useState(false);
   const [organizedOpen, setOrganizedOpen] = useState(false);
   const [parkingOpen, setParkingOpen] = useState(false);
 
-  const amenitiesTriggerRef = useRef<HTMLButtonElement>(null);
   const organizedTriggerRef = useRef<HTMLButtonElement>(null);
   const parkingTriggerRef = useRef<HTMLButtonElement>(null);
 
@@ -136,12 +118,6 @@ export default function FilterBar({
 
 
   // Handle filter changes
-  const handleAmenityToggle = useCallback((amenityId: string) => {
-    const newAmenities = filters.amenities.includes(amenityId)
-      ? filters.amenities.filter(id => id !== amenityId)
-      : [...filters.amenities, amenityId];
-    onFiltersChange({ amenities: newAmenities, page: 1 });
-  }, [filters.amenities, onFiltersChange]);
 
   const handleOrganizedChange = useCallback((value: string) => {
     const organized = value === 'both' ? null : value === 'organized';
@@ -303,11 +279,6 @@ export default function FilterBar({
     return pills;
   }, [filters, handleRemoveFilter]);
 
-  // Get amenities count for badge and aria-label
-  const amenitiesCount = filters.amenities.length;
-  const amenitiesAriaLabel = amenitiesCount > 0
-    ? `Amenities, ${amenitiesCount} selected`
-    : 'Amenities';
 
   // Get sort chip states
   const currentSort = parseSortState(filters.sort);
@@ -334,17 +305,10 @@ export default function FilterBar({
     return '';
   };
 
-  // Keyboard navigation for amenities dropdown
-  const handleAmenitiesKeyDown = useCallback((e: React.KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      setAmenitiesOpen(false);
-      amenitiesTriggerRef.current?.focus();
-    }
-  }, []);
 
   // Focus management
   useEffect(() => {
-    if (!amenitiesOpen && !organizedOpen && !parkingOpen) {
+    if (!organizedOpen && !parkingOpen) {
       return;
     }
 
@@ -354,7 +318,7 @@ export default function FilterBar({
       const firstFocusable = openDropdown.querySelector('button, [tabindex="0"]') as HTMLElement;
       firstFocusable?.focus();
     }
-  }, [amenitiesOpen, organizedOpen, parkingOpen]);
+  }, [organizedOpen, parkingOpen]);
 
   return (
     <TooltipProvider>
@@ -422,74 +386,12 @@ export default function FilterBar({
                 </Button>
 
                 {/* Amenities Dropdown */}
-                <Popover open={amenitiesOpen} onOpenChange={setAmenitiesOpen}>
-                  <PopoverTrigger asChild>
-                    <Button
-                      ref={amenitiesTriggerRef}
-                      variant="outline"
-                      size="sm"
-                      className="px-3 py-2 rounded-xl border h-auto max-w-[180px]"
-                      aria-expanded={amenitiesOpen}
-                      aria-haspopup="listbox"
-                      aria-label={amenitiesAriaLabel}
-                    >
-                      <span className="truncate">Amenities</span>
-                      {showCountBadge && amenitiesCount > 0 && (
-                        <Badge variant="secondary" className="ml-2 h-4 w-4 p-0 flex items-center justify-center text-xs">
-                          {amenitiesCount}
-                        </Badge>
-                      )}
-                      <ChevronDown className="h-4 w-4 ml-2 flex-shrink-0" />
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent
-                    className="w-80 p-0"
-                    align="start"
-                    onKeyDown={handleAmenitiesKeyDown}
-                  >
-                    <div className="p-4 border-b">
-                      <h3 className="font-semibold text-sm">Amenities</h3>
-                    </div>
-                    <div className="max-h-80 overflow-y-auto">
-                      <div className="p-2">
-                        {allAmenities.map((amenity) => (
-                          <Button
-                            key={amenity.id}
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => handleAmenityToggle(amenity.id)}
-                            className="w-full justify-start h-10"
-                            role="option"
-                            aria-selected={filters.amenities.includes(amenity.id)}
-                          >
-                            <Checkbox
-                              checked={filters.amenities.includes(amenity.id)}
-                              className="mr-3"
-                            />
-                            {amenity.label}
-                          </Button>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="p-4 border-t flex gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => onFiltersChange({ amenities: [], page: 1 })}
-                        className="flex-1"
-                      >
-                        Reset
-                      </Button>
-                      <Button
-                        size="sm"
-                        onClick={() => setAmenitiesOpen(false)}
-                        className="flex-1"
-                      >
-                        Apply
-                      </Button>
-                    </div>
-                  </PopoverContent>
-                </Popover>
+                <AmenitiesDropdown
+                  filters={filters}
+                  onFiltersChange={onFiltersChange}
+                  onOpenAllFilters={onOpenAllFilters}
+                  showCountBadge={showCountBadge}
+                />
 
                 {/* Organized Dropdown */}
                 <Popover open={organizedOpen} onOpenChange={setOrganizedOpen}>
@@ -671,73 +573,12 @@ export default function FilterBar({
                 </Button>
 
                 {/* Amenities Dropdown */}
-                <Popover open={amenitiesOpen} onOpenChange={setAmenitiesOpen}>
-                  <PopoverTrigger asChild>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="px-3 py-2 rounded-xl border h-auto whitespace-nowrap flex-shrink-0"
-                      aria-expanded={amenitiesOpen}
-                      aria-haspopup="listbox"
-                      aria-label={amenitiesAriaLabel}
-                    >
-                      <Sun className="h-4 w-4 mr-2" />
-                      Amenities
-                      {showCountBadge && amenitiesCount > 0 && (
-                        <Badge variant="secondary" className="ml-2 h-4 w-4 p-0 flex items-center justify-center text-xs">
-                          {amenitiesCount}
-                        </Badge>
-                      )}
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent
-                    className="w-80 p-0"
-                    align="start"
-                    onKeyDown={handleAmenitiesKeyDown}
-                  >
-                    <div className="p-4 border-b">
-                      <h3 className="font-semibold text-sm">Amenities</h3>
-                    </div>
-                    <div className="max-h-80 overflow-y-auto">
-                      <div className="p-2">
-                        {allAmenities.map((amenity) => (
-                          <Button
-                            key={amenity.id}
-                            variant="ghost"
-                            size="sm"
-                            onClick={() => handleAmenityToggle(amenity.id)}
-                            className="w-full justify-start h-10"
-                            role="option"
-                            aria-selected={filters.amenities.includes(amenity.id)}
-                          >
-                            <Checkbox
-                              checked={filters.amenities.includes(amenity.id)}
-                              className="mr-3"
-                            />
-                            {amenity.label}
-                          </Button>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="p-4 border-t flex gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => onFiltersChange({ amenities: [], page: 1 })}
-                        className="flex-1"
-                      >
-                        Reset
-                      </Button>
-                      <Button
-                        size="sm"
-                        onClick={() => setAmenitiesOpen(false)}
-                        className="flex-1"
-                      >
-                        Apply
-                      </Button>
-                    </div>
-                  </PopoverContent>
-                </Popover>
+                <AmenitiesDropdown
+                  filters={filters}
+                  onFiltersChange={onFiltersChange}
+                  onOpenAllFilters={onOpenAllFilters}
+                  showCountBadge={showCountBadge}
+                />
 
                 {/* Organized Dropdown */}
                 <Popover open={organizedOpen} onOpenChange={setOrganizedOpen}>
