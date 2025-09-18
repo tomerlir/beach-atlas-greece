@@ -41,6 +41,7 @@ interface Beach {
 interface BeachCardProps {
   beach: Beach;
   distance?: number;
+  showDistance?: boolean;
 }
 
 // Map amenities to readable labels and icons
@@ -69,7 +70,7 @@ const parkingConfig: Record<string, { label: string; icon: any; color: string }>
   LARGE_LOT: { label: "Large Lot", icon: CheckCircle, color: "text-green-500" }
 };
 
-const BeachCard = ({ beach, distance }: BeachCardProps) => {
+const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -153,7 +154,7 @@ const BeachCard = ({ beach, distance }: BeachCardProps) => {
           </div>
 
           {/* Distance Badge */}
-          {distance && (
+          {distance && showDistance && (
             <div className="absolute top-3 right-3">
               <Badge variant="outline" className="bg-white/95 text-foreground border-white/50 shadow-sm backdrop-blur-sm">
                 <MapPin className="h-3 w-3 mr-1" />

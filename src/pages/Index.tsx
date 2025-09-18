@@ -7,6 +7,7 @@ import AllFiltersDrawer from "@/components/AllFiltersDrawer";
 import ResultsHeader from "@/components/ResultsHeader";
 import BeachCard from "@/components/BeachCard";
 import Pagination from "@/components/Pagination";
+import { GeolocationErrorBanner } from "@/components/GeolocationErrorBanner";
 import { useGeolocation } from "@/hooks/useGeolocation";
 import { useUrlState } from "@/hooks/useUrlState";
 import { useBeachFiltering } from "@/hooks/useBeachFiltering";
@@ -19,8 +20,9 @@ const BEACHES_PER_PAGE = 9;
 
 const Index = () => {
   const { filters, updateFilters, resetFilters } = useUrlState();
-  const { location, isLoading: isLoadingLocation, getCurrentLocation, permission: locationPermission } = useGeolocation();
+  const { location, isLoading: isLoadingLocation, getCurrentLocation, permission: locationPermission, error: locationError } = useGeolocation();
   const [isAllFiltersOpen, setIsAllFiltersOpen] = useState(false);
+  const [showGeolocationError, setShowGeolocationError] = useState(false);
 
   // Fetch beaches from Supabase
   const { data: beaches = [], isLoading, error } = useQuery({
@@ -70,6 +72,30 @@ const Index = () => {
     updateFilters({ parking: 'any', page: 1 });
   };
 
+  // Show geolocation error banner when Near me is on but geolocation fails
+  // Also revert to Name sort when geolocation fails
+  useEffect(() => {
+    if (filters.nearMe && locationError && !location) {
+      setShowGeolocationError(true);
+      // Revert to Name sort when geolocation fails but Near me is still on
+      if (filters.sort?.startsWith('distance')) {
+        updateFilters({ sort: 'name.asc', page: 1 });
+      }
+    } else if (location || !filters.nearMe) {
+      setShowGeolocationError(false);
+    }
+  }, [filters.nearMe, locationError, location, filters.sort, updateFilters]);
+
+  // Handle geolocation retry
+  const handleGeolocationRetry = () => {
+    getCurrentLocation();
+  };
+
+  // Handle dismissing the geolocation error banner
+  const handleDismissGeolocationError = () => {
+    setShowGeolocationError(false);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -105,6 +131,17 @@ const Index = () => {
         resultCount={filteredBeaches.length}
         showCountBadge={false}
       />
+
+      {/* Geolocation Error Banner */}
+      {showGeolocationError && (
+        <div className="container mx-auto px-4 py-4">
+          <GeolocationErrorBanner
+            onRetry={handleGeolocationRetry}
+            onDismiss={handleDismissGeolocationError}
+            isRetrying={isLoadingLocation}
+          />
+        </div>
+      )}
 
       <main className="container mx-auto px-4 py-8 pb-20 md:pb-8">
         {/* Screen reader announcements */}
@@ -142,6 +179,7 @@ const Index = () => {
                   key={beach.id} 
                   beach={beach} 
                   distance={beach.distance}
+                  showDistance={!(filters.nearMe && locationError && !location)}
                 />
               ))}
             </div>
