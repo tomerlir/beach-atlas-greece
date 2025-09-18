@@ -13,6 +13,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminBeachesList from "./pages/admin/beaches/AdminBeachesList";
 import AdminBeachCreate from "./pages/admin/beaches/AdminBeachCreate";
 import AdminBeachEdit from "./pages/admin/beaches/AdminBeachEdit";
+import ImportExport from "./pages/admin/ImportExport";
 import BeachDetail from "./pages/BeachDetail";
 import NotFound from "./pages/NotFound";
 
@@ -42,6 +43,7 @@ const App = () => (
               <Route path="beaches" element={<AdminBeachesList />} />
               <Route path="beaches/new" element={<AdminBeachCreate />} />
               <Route path="beaches/:id" element={<AdminBeachEdit />} />
+              <Route path="import-export" element={<ImportExport />} />
             </Route>
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

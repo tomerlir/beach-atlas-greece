@@ -1,9 +1,67 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { MapPin, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { supabase } from '@/integrations/supabase/client';
+import type { Tables } from '@/integrations/supabase/types';
+import { formatRelativeUpdatedAt } from '@/lib/utils';
+
+type Beach = Tables<'beaches'>;
 
 const AdminDashboard = () => {
+  const [beaches, setBeaches] = useState<Beach[]>([]);
+  const [stats, setStats] = useState({
+    total: 0,
+    organized: 0,
+    blueFlag: 0,
+    locations: 0
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch all beaches for stats
+        const { data: allBeaches, error: beachesError } = await supabase
+          .from('beaches')
+          .select('*');
+        
+        if (beachesError) throw beachesError;
+
+        // Fetch recent updates (last 5 beaches updated)
+        const { data: recentBeaches, error: recentError } = await supabase
+          .from('beaches')
+          .select('*')
+          .order('updated_at', { ascending: false })
+          .limit(5);
+
+        if (recentError) throw recentError;
+
+        setBeaches(recentBeaches || []);
+        
+        // Calculate stats
+        const total = allBeaches?.length || 0;
+        const organized = allBeaches?.filter(b => b.organized).length || 0;
+        const blueFlag = allBeaches?.filter(b => b.blue_flag).length || 0;
+        const uniqueLocations = new Set(allBeaches?.map(b => b.place_text)).size;
+        
+        setStats({
+          total,
+          organized,
+          blueFlag,
+          locations: uniqueLocations
+        });
+      } catch (error) {
+        console.error('Error fetching dashboard data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -13,10 +71,12 @@ const AdminDashboard = () => {
             Manage the Greek beaches directory
           </p>
         </div>
-        <Button>
-          <Plus className="h-4 w-4 mr-2" />
-          Add Beach
-        </Button>
+        <Link to="/admin/beaches/new">
+          <Button>
+            <Plus className="h-4 w-4 mr-2" />
+            Add Beach
+          </Button>
+        </Link>
       </div>
 
       {/* Stats Cards */}
@@ -27,7 +87,7 @@ const AdminDashboard = () => {
             <MapPin className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">12</div>
+            <div className="text-2xl font-bold">{loading ? '...' : stats.total}</div>
             <p className="text-xs text-muted-foreground">
               Active beaches in directory
             </p>
@@ -40,7 +100,7 @@ const AdminDashboard = () => {
             <MapPin className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">8</div>
+            <div className="text-2xl font-bold">{loading ? '...' : stats.organized}</div>
             <p className="text-xs text-muted-foreground">
               With facilities
             </p>
@@ -53,7 +113,7 @@ const AdminDashboard = () => {
             <MapPin className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">5</div>
+            <div className="text-2xl font-bold">{loading ? '...' : stats.blueFlag}</div>
             <p className="text-xs text-muted-foreground">
               Certified beaches
             </p>
@@ -66,7 +126,7 @@ const AdminDashboard = () => {
             <MapPin className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">6</div>
+            <div className="text-2xl font-bold">{loading ? '...' : stats.locations}</div>
             <p className="text-xs text-muted-foreground">
               Islands & regions
             </p>
@@ -83,29 +143,35 @@ const AdminDashboard = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
-            <div className="flex items-center">
-              <div className="w-2 h-2 bg-primary rounded-full mr-3" />
-              <div className="text-sm">
-                <span className="font-medium">Navagio Beach</span> was updated
-                <span className="text-muted-foreground ml-1">2 hours ago</span>
+          {loading ? (
+            <div className="space-y-4">
+              <div className="flex items-center">
+                <div className="w-2 h-2 bg-muted rounded-full mr-3 animate-pulse" />
+                <div className="text-sm text-muted-foreground">Loading recent activity...</div>
               </div>
             </div>
-            <div className="flex items-center">
-              <div className="w-2 h-2 bg-green-500 rounded-full mr-3" />
-              <div className="text-sm">
-                <span className="font-medium">Elafonissi Beach</span> was added
-                <span className="text-muted-foreground ml-1">1 day ago</span>
-              </div>
+          ) : beaches.length === 0 ? (
+            <div className="text-sm text-muted-foreground">No recent activity</div>
+          ) : (
+            <div className="space-y-4">
+              {beaches.map((beach) => (
+                <div key={beach.id} className="flex items-center">
+                  <div className="w-2 h-2 bg-primary rounded-full mr-3" />
+                  <div className="text-sm">
+                    <Link 
+                      to={`/admin/beaches/${beach.id}`}
+                      className="font-medium hover:underline"
+                    >
+                      {beach.name}
+                    </Link>
+                    <span className="text-muted-foreground ml-1">
+                      was updated {formatRelativeUpdatedAt(beach.updated_at)}
+                    </span>
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="flex items-center">
-              <div className="w-2 h-2 bg-blue-500 rounded-full mr-3" />
-              <div className="text-sm">
-                <span className="font-medium">Balos Lagoon</span> photos updated
-                <span className="text-muted-foreground ml-1">3 days ago</span>
-              </div>
-            </div>
-          </div>
+          )}
         </CardContent>
       </Card>
     </div>
