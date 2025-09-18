@@ -11,6 +11,7 @@ import { useDebouncedSearch } from '@/hooks/useDebouncedSearch';
 import { useBeachCount } from '@/hooks/useBeachCount';
 import { useDraftState } from '@/hooks/useDraftState';
 import { FilterState } from '@/hooks/useUrlState';
+import { getAllAmenities } from '@/lib/amenities';
 
 interface AllFiltersDrawerProps {
   isOpen: boolean;
@@ -23,23 +24,8 @@ interface AllFiltersDrawerProps {
   locationPermission: 'granted' | 'denied' | 'prompt' | null;
 }
 
-// All amenities ordered by popularity
-const allAmenities = [
-  { id: 'sunbeds', label: 'Sunbeds' },
-  { id: 'umbrellas', label: 'Umbrellas' },
-  { id: 'beach_bar', label: 'Beach Bar' },
-  { id: 'taverna', label: 'Taverna' },
-  { id: 'snorkeling', label: 'Snorkeling' },
-  { id: 'water_sports', label: 'Water Sports' },
-  { id: 'family_friendly', label: 'Family Friendly' },
-  { id: 'parking', label: 'Parking' },
-  { id: 'boat_trips', label: 'Boat Trips' },
-  { id: 'fishing', label: 'Fishing' },
-  { id: 'photography', label: 'Photography' },
-  { id: 'hiking', label: 'Hiking' },
-  { id: 'birdwatching', label: 'Birdwatching' },
-  { id: 'music', label: 'Music' },
-];
+// Get all amenities from centralized map
+const allAmenities = getAllAmenities();
 
 const parkingOptions = [
   { value: 'any', label: 'Any' },
@@ -178,7 +164,7 @@ export default function AllFiltersDrawer({
                 placeholder="Search beaches or places…"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
-                className="pl-10 h-10 bg-white border-border focus:ring-primary"
+                className="pl-10 h-11 bg-white border-border focus:ring-primary"
                 aria-label="Search beaches by name or location"
               />
             </div>
@@ -342,7 +328,7 @@ export default function AllFiltersDrawer({
         </div>
 
         {/* Sticky Footer */}
-        <SheetFooter className="p-6 pt-4 border-t sticky bottom-0 bg-background pb-safe">
+        <SheetFooter className="p-6 pt-4 border-t sticky bottom-0 bg-background pb-[env(safe-area-inset-bottom)]">
           <div className="flex gap-3 w-full">
             <Button
               variant="outline"

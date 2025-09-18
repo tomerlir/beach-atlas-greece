@@ -9,18 +9,6 @@ import {
   Flag, 
   Car, 
   Sun, 
-  Umbrella, 
-  Utensils, 
-  Waves, 
-  Eye, 
-  Camera, 
-  Wine, 
-  Music, 
-  Mountain, 
-  Binoculars, 
-  Ship, 
-  Heart, 
-  Fish,
   AlertCircle
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -29,6 +17,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { getAllAmenities } from "@/lib/amenities";
 
 interface Filters {
   search: string;
@@ -46,21 +35,8 @@ interface SearchFiltersProps {
   isLoadingLocation: boolean;
 }
 
-const amenityOptions = [
-  { id: "sunbeds", label: "Sunbeds", icon: Sun, color: "text-yellow-600" },
-  { id: "umbrellas", label: "Umbrellas", icon: Umbrella, color: "text-blue-600" },
-  { id: "taverna", label: "Taverna", icon: Utensils, color: "text-orange-600" },
-  { id: "water_sports", label: "Water Sports", icon: Waves, color: "text-cyan-600" },
-  { id: "beach_bar", label: "Beach Bar", icon: Wine, color: "text-red-600" },
-  { id: "family_friendly", label: "Family Friendly", icon: Heart, color: "text-rose-600" },
-  { id: "snorkeling", label: "Snorkeling", icon: Eye, color: "text-teal-600" },
-  { id: "photography", label: "Photography", icon: Camera, color: "text-purple-600" },
-  { id: "music", label: "Music", icon: Music, color: "text-pink-600" },
-  { id: "hiking", label: "Hiking", icon: Mountain, color: "text-green-600" },
-  { id: "birdwatching", label: "Birdwatching", icon: Binoculars, color: "text-indigo-600" },
-  { id: "boat_trips", label: "Boat Trips", icon: Ship, color: "text-blue-700" },
-  { id: "fishing", label: "Fishing", icon: Fish, color: "text-emerald-600" },
-];
+// Get all amenities from centralized map
+const amenityOptions = getAllAmenities();
 
 const SearchFilters = ({ 
   filters, 

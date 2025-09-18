@@ -26,6 +26,7 @@ import { useDebouncedSearch } from '@/hooks/useDebouncedSearch';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FilterState } from '@/hooks/useUrlState';
 import AmenitiesDropdown from '@/components/AmenitiesDropdown';
+import { getAmenityLabel } from '@/lib/amenities';
 
 interface FilterBarProps {
   filters: FilterState;
@@ -66,22 +67,6 @@ const formatSortState = (key: string | null, dir: string | null) => {
   return `${key}.${dir}`;
 };
 
-const amenityLabels: Record<string, string> = {
-  'sunbeds': 'Sunbeds',
-  'umbrellas': 'Umbrellas',
-  'beach_bar': 'Beach Bar',
-  'taverna': 'Taverna',
-  'snorkeling': 'Snorkeling',
-  'water_sports': 'Water Sports',
-  'family_friendly': 'Family Friendly',
-  'parking': 'Parking',
-  'boat_trips': 'Boat Trips',
-  'fishing': 'Fishing',
-  'photography': 'Photography',
-  'hiking': 'Hiking',
-  'birdwatching': 'Birdwatching',
-  'music': 'Music',
-};
 
 const parkingLabels: Record<string, string> = {
   'any': 'Any',
@@ -271,7 +256,7 @@ export default function FilterBar({
     filters.amenities.forEach((amenity) => {
       pills.push({
         id: `amenity-${amenity}`,
-        label: amenityLabels[amenity] || amenity,
+        label: getAmenityLabel(amenity),
         onRemove: () => handleRemoveFilter('amenities', amenity),
       });
     });
@@ -334,7 +319,7 @@ export default function FilterBar({
                   placeholder="Search beaches or places…"
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
-                  className="pl-10 h-10 bg-white border-border focus:ring-primary"
+                  className="pl-10 h-11 bg-white border-border focus:ring-primary"
                   aria-label="Search beaches by name or location"
                 />
               </div>
@@ -733,7 +718,7 @@ export default function FilterBar({
                     variant="ghost"
                     size="sm"
                     onClick={pill.onRemove}
-                    className="h-4 w-4 p-0 hover:bg-primary/20 rounded-full"
+                    className="h-8 w-8 p-0 hover:bg-primary/20 rounded-full flex items-center justify-center"
                     aria-label={`Remove filter: ${pill.label}`}
                   >
                     <X className="h-3 w-3" />
@@ -745,7 +730,7 @@ export default function FilterBar({
                 variant="ghost"
                 size="sm"
                 onClick={handleClearAllFilters}
-                className="text-muted-foreground hover:text-foreground h-8 px-2"
+                className="text-muted-foreground hover:text-foreground min-h-[44px] px-2"
               >
                 Clear all
               </Button>

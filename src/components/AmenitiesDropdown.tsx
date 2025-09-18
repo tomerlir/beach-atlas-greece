@@ -6,6 +6,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { useDraftState } from '@/hooks/useDraftState';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FilterState } from '@/hooks/useUrlState';
+import { getAllAmenities } from '@/lib/amenities';
 
 interface AmenitiesDropdownProps {
   filters: FilterState;
@@ -14,23 +15,8 @@ interface AmenitiesDropdownProps {
   showCountBadge?: boolean;
 }
 
-// All amenities ordered by popularity - matching existing system
-const allAmenities = [
-  { id: 'sunbeds', label: 'Sunbeds' },
-  { id: 'umbrellas', label: 'Umbrellas' },
-  { id: 'beach_bar', label: 'Beach Bar' },
-  { id: 'taverna', label: 'Taverna' },
-  { id: 'snorkeling', label: 'Snorkeling' },
-  { id: 'water_sports', label: 'Water Sports' },
-  { id: 'family_friendly', label: 'Family Friendly' },
-  { id: 'parking', label: 'Parking' },
-  { id: 'boat_trips', label: 'Boat Trips' },
-  { id: 'fishing', label: 'Fishing' },
-  { id: 'photography', label: 'Photography' },
-  { id: 'hiking', label: 'Hiking' },
-  { id: 'birdwatching', label: 'Birdwatching' },
-  { id: 'music', label: 'Music' },
-];
+// Get all amenities from centralized map
+const allAmenities = getAllAmenities();
 
 export default function AmenitiesDropdown({
   filters,
@@ -230,7 +216,7 @@ export default function AmenitiesDropdown({
         </div>
 
         {/* Sticky Footer */}
-        <div className="p-4 border-t bg-background sticky bottom-0">
+        <div className="p-4 border-t bg-background sticky bottom-0 pb-[env(safe-area-inset-bottom)]">
           <div className="flex gap-2">
             <Button
               variant="outline"

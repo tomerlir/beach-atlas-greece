@@ -34,31 +34,10 @@ import Header from "@/components/Header";
 import { Tables } from "@/integrations/supabase/types";
 import { MapsSelectionDialog } from "@/components/MapsSelectionDialog";
 import { DataFreshnessMeta } from "@/components/DataFreshnessMeta";
+import { getAmenityConfig, getAmenitiesByCategory } from "@/lib/amenities";
 
 type Beach = Tables<'beaches'>;
 
-// Map amenities to readable labels with icons and categories
-const amenityConfig: Record<string, { label: string; icon: any; category: 'facilities' | 'safety' | 'services' | 'activities' }> = {
-  umbrellas: { label: "Umbrellas", icon: Palmtree, category: 'facilities' },
-  sunbeds: { label: "Sunbeds", icon: Clock, category: 'facilities' },
-  showers: { label: "Showers", icon: Droplets, category: 'facilities' },
-  toilets: { label: "Toilets", icon: Shield, category: 'facilities' },
-  parking: { label: "Parking", icon: Car, category: 'facilities' },
-  lifeguard: { label: "Lifeguard", icon: LifeBuoy, category: 'safety' },
-  taverna: { label: "Taverna", icon: Utensils, category: 'services' },
-  beach_bar: { label: "Beach Bar", icon: Utensils, category: 'services' },
-  food: { label: "Food", icon: Utensils, category: 'services' },
-  water_sports: { label: "Water Sports", icon: Waves, category: 'activities' },
-  snorkeling: { label: "Snorkeling", icon: Eye, category: 'activities' },
-  photography: { label: "Photography", icon: Camera, category: 'activities' },
-  hiking: { label: "Hiking", icon: Mountain, category: 'activities' },
-  birdwatching: { label: "Birdwatching", icon: Eye, category: 'activities' },
-  boat_trips: { label: "Boat Trips", icon: Anchor, category: 'activities' },
-  cliff_jumping: { label: "Cliff Jumping", icon: Mountain, category: 'activities' },
-  family_friendly: { label: "Family Friendly", icon: Users, category: 'activities' },
-  fishing: { label: "Fishing", icon: Anchor, category: 'activities' },
-  music: { label: "Music", icon: Heart, category: 'services' },
-};
 
 // Map beach types to readable labels
 const typeLabels: Record<string, string> = {
@@ -166,9 +145,10 @@ const BeachDetail = () => {
     if (!beach?.amenities) return {};
     
     return beach.amenities.reduce((acc, amenity) => {
-      const config = amenityConfig[amenity] || { 
+      const config = getAmenityConfig(amenity) || { 
         label: amenity, 
         icon: Users, 
+        color: "text-gray-600",
         category: 'activities' as const 
       };
       
@@ -418,6 +398,29 @@ const BeachDetail = () => {
           beachName={beach.name}
         />
       )}
+
+      {/* Footer */}
+      <footer className="bg-muted py-8 mt-16">
+        <div className="container mx-auto px-4 text-center">
+          <div className="flex items-center justify-center gap-6 mb-4">
+            <a 
+              href="/about" 
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
+              About
+            </a>
+            <a 
+              href="mailto:info@greekbeaches.com" 
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
+              Feedback
+            </a>
+          </div>
+          <p className="text-muted-foreground text-sm">
+            © 2025 Beaches of Greece . Discover the beauty of Greece.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };

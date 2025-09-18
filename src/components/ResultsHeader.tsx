@@ -2,6 +2,7 @@ import { MapPin, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { FilterState } from '@/hooks/useUrlState';
+import { getAmenityLabel } from '@/lib/amenities';
 
 interface ResultsHeaderProps {
   resultCount: number;
@@ -19,21 +20,6 @@ const parkingLabels: Record<string, string> = {
   'LARGE_LOT': 'Large lot',
 };
 
-const amenityLabels: Record<string, string> = {
-  'sunbeds': 'Sunbeds',
-  'umbrellas': 'Umbrellas',
-  'taverna': 'Taverna',
-  'water_sports': 'Water Sports',
-  'beach_bar': 'Beach Bar',
-  'family_friendly': 'Family Friendly',
-  'snorkeling': 'Snorkeling',
-  'photography': 'Photography',
-  'music': 'Music',
-  'hiking': 'Hiking',
-  'birdwatching': 'Birdwatching',
-  'boat_trips': 'Boat Trips',
-  'fishing': 'Fishing',
-};
 
 export default function ResultsHeader({
   resultCount,
@@ -91,7 +77,7 @@ export default function ResultsHeader({
     filters.amenities.forEach((amenity) => {
       pills.push({
         id: `amenity-${amenity}`,
-        label: amenityLabels[amenity] || amenity,
+        label: getAmenityLabel(amenity),
         onRemove: () => onRemoveFilter('amenities', amenity),
       });
     });
@@ -135,7 +121,7 @@ export default function ResultsHeader({
                       variant="ghost"
                       size="sm"
                       onClick={pill.onRemove}
-                      className="h-4 w-4 p-0 hover:bg-primary/20 rounded-full"
+                      className="h-8 w-8 p-0 hover:bg-primary/20 rounded-full flex items-center justify-center"
                       aria-label={`Remove ${pill.label} filter`}
                     >
                       <X className="h-3 w-3" />

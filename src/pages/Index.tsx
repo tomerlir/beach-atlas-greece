@@ -43,7 +43,7 @@ const Index = () => {
   const beachesWithDistance = useDistanceCalculation(
     beaches,
     location,
-    filters.nearMe && filters.sort?.startsWith('distance')
+    filters.nearMe
   );
 
   // Filter and sort beaches
@@ -179,7 +179,7 @@ const Index = () => {
                   key={beach.id} 
                   beach={beach} 
                   distance={beach.distance}
-                  showDistance={!(filters.nearMe && locationError && !location)}
+                  showDistance={filters.nearMe && !locationError && !!location}
                 />
               ))}
             </div>

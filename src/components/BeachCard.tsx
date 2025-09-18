@@ -4,19 +4,6 @@ import {
   Waves, 
   Car, 
   Flag, 
-  Umbrella, 
-  Sun, 
-  Utensils, 
-  Eye, 
-  Camera, 
-  Wine, 
-  Music, 
-  Mountain, 
-  Binoculars, 
-  Ship, 
-  Heart, 
-  Fish,
-  ParkingCircle,
   CheckCircle,
   XCircle,
   AlertCircle
@@ -24,6 +11,8 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
+import { getAmenityConfig } from "@/lib/amenities";
+import { usePrefetch } from "@/hooks/usePrefetch";
 
 interface Beach {
   id: string;
@@ -44,23 +33,6 @@ interface BeachCardProps {
   showDistance?: boolean;
 }
 
-// Map amenities to readable labels and icons
-const amenityConfig: Record<string, { label: string; icon: any; color: string }> = {
-  sunbeds: { label: "Sunbeds", icon: Sun, color: "text-yellow-600" },
-  umbrellas: { label: "Umbrellas", icon: Umbrella, color: "text-blue-600" }, 
-  taverna: { label: "Taverna", icon: Utensils, color: "text-orange-600" },
-  water_sports: { label: "Water Sports", icon: Waves, color: "text-cyan-600" },
-  snorkeling: { label: "Snorkeling", icon: Eye, color: "text-teal-600" },
-  photography: { label: "Photography", icon: Camera, color: "text-purple-600" },
-  beach_bar: { label: "Beach Bar", icon: Wine, color: "text-red-600" },
-  music: { label: "Music", icon: Music, color: "text-pink-600" },
-  hiking: { label: "Hiking", icon: Mountain, color: "text-green-600" },
-  birdwatching: { label: "Birdwatching", icon: Binoculars, color: "text-indigo-600" },
-  boat_trips: { label: "Boat Trips", icon: Ship, color: "text-blue-700" },
-  cliff_jumping: { label: "Cliff Jumping", icon: Mountain, color: "text-gray-600" },
-  family_friendly: { label: "Family Friendly", icon: Heart, color: "text-rose-600" },
-  fishing: { label: "Fishing", icon: Fish, color: "text-emerald-600" }
-};
 
 // Map parking types to icons and colors
 const parkingConfig: Record<string, { label: string; icon: any; color: string }> = {
@@ -74,6 +46,7 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
+  const { prefetch, cancelPrefetch } = usePrefetch({ delay: 100 });
 
   const parkingInfo = parkingConfig[beach.parking] || { 
     label: "Parking Unknown", 
@@ -105,11 +78,35 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
     return () => observer.disconnect();
   }, [beach.photo_url]);
 
+  // Prefetch beach detail page on visibility
+  useEffect(() => {
+    const prefetchObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            prefetch(`/beach/${beach.slug}`);
+          }
+        });
+      },
+      { rootMargin: '200px' }
+    );
+
+    const cardElement = document.querySelector(`[data-beach-id="${beach.id}"]`);
+    if (cardElement) {
+      prefetchObserver.observe(cardElement);
+    }
+
+    return () => prefetchObserver.disconnect();
+  }, [beach.slug, beach.id, prefetch]);
+
   return (
     <Link 
       to={`/beach/${beach.slug}`} 
       className="block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-xl min-h-[44px] min-w-[44px]"
       aria-label={`View details for ${beach.name} beach`}
+      data-beach-id={beach.id}
+      onMouseEnter={() => prefetch(`/beach/${beach.slug}`)}
+      onMouseLeave={cancelPrefetch}
     >
       <Card className="group hover:shadow-strong transition-all duration-300 overflow-hidden border-0 bg-white shadow-soft hover:shadow-medium h-full">
         {/* Beach Image */}
@@ -126,6 +123,8 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
                 alt={`${beach.name} beach`}
                 className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
                 loading="lazy"
+                width={400}
+                height={225}
               />
             </>
           ) : (
@@ -158,7 +157,7 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
             <div className="absolute top-3 right-3">
               <Badge variant="outline" className="bg-white/95 text-foreground border-white/50 shadow-sm backdrop-blur-sm">
                 <MapPin className="h-3 w-3 mr-1" />
-                {distance.toFixed(1)} km
+                {Math.round(distance)} km
               </Badge>
             </div>
           )}
@@ -195,7 +194,7 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
               <h4 className="text-sm font-semibold text-foreground">Amenities</h4>
               <div className="flex flex-wrap gap-2">
                 {beach.amenities.slice(0, 4).map((amenity) => {
-                  const config = amenityConfig[amenity];
+                  const config = getAmenityConfig(amenity);
                   if (!config) return null;
                   
                   const IconComponent = config.icon;
