@@ -39,6 +39,7 @@ import OptimizedImage from "@/components/OptimizedImage";
 import PhotoAttribution from "@/components/PhotoAttribution";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
 import { useProgressiveLoading } from "@/hooks/useProgressiveLoading";
+import { generateBeachImageAltText } from "@/lib/accessibility";
 import { useScrollToTopOnMount } from "@/hooks/useScrollToTop";
 
 type Beach = Tables<'beaches'>;
@@ -269,7 +270,7 @@ const BeachDetail = () => {
             <>
               <OptimizedImage
                 src={beach.photo_url}
-                alt={`${beach.name} beach`}
+                alt={generateBeachImageAltText(beach)}
                 width={800}
                 height={450}
                 className="w-full aspect-[16/9] rounded-xl shadow-lg"
@@ -481,6 +482,9 @@ const BeachDetail = () => {
           </div>
           <p className="text-muted-foreground text-sm">
             © 2025 Beaches of Greece . Discover the beauty of Greece.
+          </p>
+          <p className="text-muted-foreground text-xs mt-2">
+            Information is for guidance only, please verify locally.
           </p>
         </div>
       </footer>

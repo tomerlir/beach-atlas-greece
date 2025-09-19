@@ -15,6 +15,7 @@ import { getAmenityConfig } from "@/lib/amenities";
 import { useAdvancedPrefetch } from "@/hooks/useAdvancedPrefetch";
 import OptimizedImage from "@/components/OptimizedImage";
 import PhotoAttribution from "@/components/PhotoAttribution";
+import { generateBeachImageAltText } from "@/lib/accessibility";
 
 interface Beach {
   id: string;
@@ -101,7 +102,7 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
           {beach.photo_url ? (
             <OptimizedImage
               src={beach.photo_url}
-              alt={`${beach.name} beach`}
+              alt={generateBeachImageAltText(beach)}
               width={400}
               height={225}
               className="group-hover:scale-105 transition-transform duration-500"

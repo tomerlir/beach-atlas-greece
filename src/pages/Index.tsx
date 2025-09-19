@@ -247,7 +247,10 @@ const Index = () => {
             </a>
           </div>
           <p className="text-muted-foreground text-sm">
-            © 2025 Beaches of Greece . Discover the beauty of Greece.å
+            © 2025 Beaches of Greece . Discover the beauty of Greece.
+          </p>
+          <p className="text-muted-foreground text-xs mt-2">
+            Information is for guidance only, please verify locally.
           </p>
         </div>
       </footer>
