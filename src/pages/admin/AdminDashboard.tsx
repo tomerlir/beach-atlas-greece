@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Plus } from 'lucide-react';
+import { MapPin, Plus, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { supabase } from '@/integrations/supabase/client';
 import type { Tables } from '@/integrations/supabase/types';
 import { formatRelativeUpdatedAt } from '@/lib/utils';
+import { AdminUserManagement } from '@/components/admin/AdminUserManagement';
 
 type Beach = Tables<'beaches'>;
 
@@ -66,9 +68,9 @@ const AdminDashboard = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Beach Management</h1>
+          <h1 className="text-3xl font-bold text-foreground">Admin Dashboard</h1>
           <p className="text-muted-foreground mt-1">
-            Manage the Greek beaches directory
+            Manage the Greek beaches directory and user accounts
           </p>
         </div>
         <Link to="/admin/beaches/new">
@@ -78,6 +80,20 @@ const AdminDashboard = () => {
           </Button>
         </Link>
       </div>
+
+      <Tabs defaultValue="beaches" className="space-y-6">
+        <TabsList>
+          <TabsTrigger value="beaches" className="flex items-center gap-2">
+            <MapPin className="h-4 w-4" />
+            Beaches
+          </TabsTrigger>
+          <TabsTrigger value="users" className="flex items-center gap-2">
+            <Users className="h-4 w-4" />
+            User Management
+          </TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="beaches" className="space-y-6">
 
       {/* Stats Cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -174,6 +190,12 @@ const AdminDashboard = () => {
           )}
         </CardContent>
       </Card>
+        </TabsContent>
+
+        <TabsContent value="users">
+          <AdminUserManagement />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };

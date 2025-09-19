@@ -52,21 +52,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (data) {
         setProfile(data);
       } else {
-        // Bootstrap admin profile for tomerlir95@gmail.com
+        // Create a default user profile for new users
         const userEmail = session?.user?.email;
-        if (userEmail === 'tomerlir95@gmail.com') {
+        if (userEmail) {
           const { data: newProfile, error: insertError } = await supabase
             .from('profiles')
             .insert({
               user_id: userId,
               email: userEmail,
-              role: 'admin'
+              role: 'user' // Default role is 'user', admin role must be assigned manually
             })
             .select()
             .single();
 
           if (insertError) {
-            console.error('Error creating admin profile:', insertError);
+            console.error('Error creating user profile:', insertError);
           } else {
             setProfile(newProfile);
           }
