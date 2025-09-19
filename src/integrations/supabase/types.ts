@@ -27,6 +27,7 @@ export type Database = {
           organized: boolean
           parking: string
           photo_url: string | null
+          photo_source: string | null
           place_text: string
           slug: string
           source: string | null
@@ -48,6 +49,7 @@ export type Database = {
           organized?: boolean
           parking: 'NONE' | 'ROADSIDE' | 'SMALL_LOT' | 'LARGE_LOT'
           photo_url?: string | null
+          photo_source?: string | null
           place_text: string
           slug: string
           source?: string | null
@@ -69,6 +71,7 @@ export type Database = {
           organized?: boolean
           parking?: 'NONE' | 'ROADSIDE' | 'SMALL_LOT' | 'LARGE_LOT'
           photo_url?: string | null
+          photo_source?: string | null
           place_text?: string
           slug?: string
           source?: string | null

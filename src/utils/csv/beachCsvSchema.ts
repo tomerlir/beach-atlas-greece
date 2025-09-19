@@ -15,6 +15,7 @@ export const CSV_HEADER_ORDER = [
   'blue_flag',
   'amenities',
   'photo_url',
+  'photo_source',
   'description',
   'source',
   'verified_at',
@@ -46,6 +47,7 @@ export const BeachCsvRowSchema = z.object({
     message: `Must be one of: ${ALLOWED_AMENITIES.join(', ')}`
   })),
   photo_url: z.string().optional(),
+  photo_source: z.string().optional(),
   description: z.string().optional(),
   source: z.string().optional(),
   verified_at: z.string().datetime().optional(),
@@ -334,6 +336,7 @@ export function dbRowToCsvRow(dbRow: any): Record<string, string> {
     blue_flag: dbRow.blue_flag ? 'true' : 'false',
     amenities: dbRow.amenities?.join(',') || '',
     photo_url: dbRow.photo_url || '',
+    photo_source: dbRow.photo_source || '',
     description: dbRow.description || '',
     source: dbRow.source || '',
     verified_at: dbRow.verified_at || '',
@@ -360,6 +363,7 @@ export function csvRowToDbInsert(csvRow: BeachCsvRow): any {
   // Only include optional fields if they have values
   if (csvRow.wave_conditions) dbRow.wave_conditions = csvRow.wave_conditions;
   if (csvRow.photo_url) dbRow.photo_url = csvRow.photo_url;
+  if (csvRow.photo_source) dbRow.photo_source = csvRow.photo_source;
   if (csvRow.description) dbRow.description = csvRow.description;
   if (csvRow.source) dbRow.source = csvRow.source;
   if (csvRow.verified_at) dbRow.verified_at = csvRow.verified_at;
@@ -386,6 +390,7 @@ export function csvRowToDbUpdate(csvRow: BeachCsvRow): any {
   // Optional fields
   if (csvRow.wave_conditions !== undefined) dbRow.wave_conditions = csvRow.wave_conditions;
   if (csvRow.photo_url !== undefined) dbRow.photo_url = csvRow.photo_url;
+  if (csvRow.photo_source !== undefined) dbRow.photo_source = csvRow.photo_source;
   if (csvRow.description !== undefined) dbRow.description = csvRow.description;
   if (csvRow.source !== undefined) dbRow.source = csvRow.source;
   if (csvRow.verified_at !== undefined) dbRow.verified_at = csvRow.verified_at;

@@ -8,6 +8,8 @@ import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import type { Tables, TablesInsert, TablesUpdate } from '@/integrations/supabase/types';
 import { AMENITY_OPTIONS, PARKING_OPTIONS, STATUS_OPTIONS, TYPE_OPTIONS, WAVE_OPTIONS, slugify } from '@/lib/utils';
+import AmenitiesMultiselect from '@/components/admin/AmenitiesMultiselect';
+import { useFormDraftState } from '@/hooks/useFormDraftState';
 
 type Beach = Tables<'beaches'>;
 type BeachInsert = TablesInsert<'beaches'>;
@@ -26,8 +28,10 @@ const schema = z.object({
   blue_flag: z.boolean().default(false),
   amenities: z.array(z.string()).default([]),
   photo_url: z.union([z.string().url(), z.literal('')]).optional(),
+  photo_source: z.string().max(500).optional().or(z.literal('')),
   status: z.enum(['DRAFT','HIDDEN','ACTIVE']).default('DRAFT'),
   slug: z.string().min(3).max(120),
+  source: z.string().max(500).optional().or(z.literal('')),
 });
 
 interface Props { mode: 'create' | 'edit' }
@@ -47,9 +51,14 @@ const BeachForm: React.FC<Props> = ({ mode }) => {
   const slugInputRef = useRef<HTMLInputElement | null>(null);
   const [slugTouched, setSlugTouched] = useState(false);
   const lastGeneratedSlugRef = useRef<string>('');
-  const [markVerified, setMarkVerified] = useState(false);
 
   const id = params.id as string | undefined;
+  
+  // Create a unique key for this form (edit mode uses beach ID, create mode uses 'new')
+  const formKey = mode === 'edit' && id ? `edit-${id}` : 'create';
+  
+  // Initialize draft state - don't pass initial data here to avoid overwriting existing drafts
+  const { draft, updateDraft, clearDraft, hasUnsavedChanges, hasStoredDraftData } = useFormDraftState(formKey);
 
   useEffect(() => {
     const load = async () => {
@@ -59,6 +68,30 @@ const BeachForm: React.FC<Props> = ({ mode }) => {
           setServerError(error.message);
         } else {
           setInitial(data as Beach);
+          // Only update draft state with loaded data if there's no existing stored draft
+          // This preserves any user changes that were already in the draft
+          console.log('Loading beach data, hasStoredDraft:', hasStoredDraftData());
+          if (!hasStoredDraftData()) {
+            updateDraft({
+              name: data.name || '',
+              place_text: data.place_text || '',
+              latitude: data.latitude?.toString() || '',
+              longitude: data.longitude?.toString() || '',
+              description: data.description || '',
+              type: data.type || 'OTHER',
+              wave_conditions: data.wave_conditions || 'CALM',
+              organized: data.organized || false,
+              parking: data.parking || 'NONE',
+              blue_flag: data.blue_flag || false,
+              amenities: data.amenities || [],
+              photo_url: data.photo_url || '',
+              photo_source: data.photo_source || '',
+              status: data.status || 'DRAFT',
+              slug: data.slug || '',
+              source: data.source || '',
+              markVerified: false,
+            });
+          }
         }
       } else {
         setInitial(null);
@@ -91,14 +124,14 @@ const BeachForm: React.FC<Props> = ({ mode }) => {
 
   useEffect(() => {
     const onBeforeUnload = (e: BeforeUnloadEvent) => {
-      if (dirty) {
+      if (dirty || hasUnsavedChanges()) {
         e.preventDefault();
         e.returnValue = '';
       }
     };
     window.addEventListener('beforeunload', onBeforeUnload);
     return () => window.removeEventListener('beforeunload', onBeforeUnload);
-  }, [dirty]);
+  }, [dirty, hasUnsavedChanges]);
 
   const ensureUniqueSlug = async (base: string, excludeId?: string): Promise<string> => {
     const candidateBase = base || 'item';
@@ -120,17 +153,15 @@ const BeachForm: React.FC<Props> = ({ mode }) => {
     setServerError(null);
     setErrors({});
     setSubmitting(true);
-    const form = new FormData(e.currentTarget);
-    const values = Object.fromEntries(form.entries());
-    const amenities = (values.amenities as string | undefined)?.split(',').map(s=>s.trim()).filter(Boolean) || [];
-    const photo_url = String(values.photo_url || '').trim();
+    // Use draft state instead of form data
+    const photo_url = draft.photo_url.trim();
     // Compute slug: prefer provided, otherwise from name
-    const currentSlugInput = (values.slug as string | undefined)?.trim() || '';
-    const generatedFromName = slugify(String(values.name || ''));
+    const currentSlugInput = draft.slug.trim();
+    const generatedFromName = slugify(draft.name);
     let slugValue = currentSlugInput || generatedFromName;
 
     // Normalize legacy parking values (e.g., 'ample','limited','none') to new enum
-    const parkingRaw = String(values.parking || '');
+    const parkingRaw = draft.parking;
     const parkingNorm = (() => {
       const v = parkingRaw.toUpperCase();
       if (v === 'AMPLE') return 'LARGE_LOT';
@@ -141,24 +172,26 @@ const BeachForm: React.FC<Props> = ({ mode }) => {
     })();
 
     // Normalize legacy status (e.g., 'INACTIVE') to new enum
-    const statusRaw = String(values.status || 'DRAFT').toUpperCase();
+    const statusRaw = draft.status.toUpperCase();
     const statusNorm = statusRaw === 'INACTIVE' ? 'HIDDEN' : statusRaw;
 
     const candidate = {
-      name: String(values.name || ''),
-      place_text: String(values.place_text || ''),
-      latitude: values.latitude,
-      longitude: values.longitude,
-      description: String(values.description || ''),
-      type: values.type,
-      wave_conditions: values.wave_conditions,
-      organized: values.organized === 'on',
+      name: draft.name,
+      place_text: draft.place_text,
+      latitude: parseFloat(draft.latitude),
+      longitude: parseFloat(draft.longitude),
+      description: draft.description,
+      type: draft.type,
+      wave_conditions: draft.wave_conditions,
+      organized: draft.organized,
       parking: parkingNorm,
-      blue_flag: values.blue_flag === 'on',
-      amenities,
+      blue_flag: draft.blue_flag,
+      amenities: draft.amenities,
       photo_url,
+      photo_source: draft.photo_source,
       status: statusNorm,
       slug: slugValue,
+      source: draft.source,
     } as Record<string, unknown>;
     const parsed = schema.safeParse(candidate);
     if (!parsed.success) {
@@ -199,13 +232,14 @@ const BeachForm: React.FC<Props> = ({ mode }) => {
           ...(parsed.data as BeachUpdate), 
           id,
           // Add verified_at if markVerified is true
-          ...(markVerified ? { verified_at: new Date().toISOString() } : {})
+          ...(draft.markVerified ? { verified_at: new Date().toISOString() } : {})
         };
         const { data, error } = await supabase.from('beaches').update(payload).eq('id', id).select().single();
         if (error || !data) throw error || new Error('Update matched no rows');
         toast({ title: 'Saved', description: 'Beach updated.' });
       }
       setDirty(false);
+      clearDraft(); // Clear draft state after successful save
       navigate('/admin/beaches');
     } catch (err: any) {
       const msg = err?.message || 'Server error';
@@ -226,6 +260,7 @@ const BeachForm: React.FC<Props> = ({ mode }) => {
           }
           toast({ title: 'Saved', description: 'Saved without slug (schema not ready).', variant: 'default' });
           setDirty(false);
+          clearDraft(); // Clear draft state after successful save
           navigate('/admin/beaches');
         } catch (fallbackErr: any) {
           const fbMsg = fallbackErr?.message || msg;
@@ -256,7 +291,19 @@ const BeachForm: React.FC<Props> = ({ mode }) => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4" onChange={()=>setDirty(true)}>
-      <h1 className="text-2xl font-semibold text-foreground">{mode==='create' ? 'Add Beach' : 'Edit Beach'}</h1>
+      <div className="flex items-center gap-2">
+        <h1 className="text-2xl font-semibold text-foreground">{mode==='create' ? 'Add Beach' : 'Edit Beach'}</h1>
+        {hasStoredDraftData() && (
+          <span className="text-sm text-blue-600 bg-blue-50 px-2 py-1 rounded-md border border-blue-200">
+            Draft restored
+          </span>
+        )}
+        {(dirty || hasUnsavedChanges()) && (
+          <span className="text-sm text-amber-600 bg-amber-50 px-2 py-1 rounded-md border border-amber-200">
+            Unsaved changes
+          </span>
+        )}
+      </div>
       {(serverError || errorSummary) && (
         <div role="alert" className="border border-destructive text-destructive rounded p-3">
           {serverError || errorSummary}
@@ -265,60 +312,119 @@ const BeachForm: React.FC<Props> = ({ mode }) => {
       <div className="grid md:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium">Name</label>
-          <Input name="name" defaultValue={d?.name} aria-invalid={!!errors.name} aria-describedby={errors.name ? 'name-err' : undefined} ref={(el)=>{ if (errors.name) firstInvalidRef.current = el; nameInputRef.current = el; }} onChange={(e)=>{
-            if (!slugTouched && slugInputRef.current) {
-              const gen = slugify(e.target.value);
-              slugInputRef.current.value = gen;
-              lastGeneratedSlugRef.current = gen;
-            }
-          }} />
+          <Input 
+            name="name" 
+            value={draft.name} 
+            onChange={(e) => {
+              updateDraft({ name: e.target.value });
+              if (!slugTouched && slugInputRef.current) {
+                const gen = slugify(e.target.value);
+                slugInputRef.current.value = gen;
+                lastGeneratedSlugRef.current = gen;
+              }
+            }}
+            aria-invalid={!!errors.name} 
+            aria-describedby={errors.name ? 'name-err' : undefined} 
+            ref={(el)=>{ if (errors.name) firstInvalidRef.current = el; nameInputRef.current = el; }} 
+          />
           {errors.name && <p id="name-err" className="text-sm text-destructive">{errors.name}</p>}
         </div>
         <div>
           <label className="block text-sm font-medium">Place</label>
-          <Input name="place_text" defaultValue={d?.place_text} aria-invalid={!!errors.place_text} aria-describedby={errors.place_text ? 'place-err' : undefined} />
+          <Input 
+            name="place_text" 
+            value={draft.place_text} 
+            onChange={(e) => updateDraft({ place_text: e.target.value })}
+            aria-invalid={!!errors.place_text} 
+            aria-describedby={errors.place_text ? 'place-err' : undefined} 
+          />
           {errors.place_text && <p id="place-err" className="text-sm text-destructive">{errors.place_text}</p>}
         </div>
         <div>
           <label className="block text-sm font-medium">Latitude</label>
-          <Input name="latitude" defaultValue={d?.latitude} aria-invalid={!!errors.latitude} aria-describedby={errors.latitude ? 'lat-err' : undefined} inputMode="decimal" />
+          <Input 
+            name="latitude" 
+            value={draft.latitude} 
+            onChange={(e) => updateDraft({ latitude: e.target.value })}
+            aria-invalid={!!errors.latitude} 
+            aria-describedby={errors.latitude ? 'lat-err' : undefined} 
+            inputMode="decimal" 
+          />
           {errors.latitude && <p id="lat-err" className="text-sm text-destructive">{errors.latitude}</p>}
         </div>
         <div>
           <label className="block text-sm font-medium">Longitude</label>
-          <Input name="longitude" defaultValue={d?.longitude} aria-invalid={!!errors.longitude} aria-describedby={errors.longitude ? 'lng-err' : undefined} inputMode="decimal" />
+          <Input 
+            name="longitude" 
+            value={draft.longitude} 
+            onChange={(e) => updateDraft({ longitude: e.target.value })}
+            aria-invalid={!!errors.longitude} 
+            aria-describedby={errors.longitude ? 'lng-err' : undefined} 
+            inputMode="decimal" 
+          />
           {errors.longitude && <p id="lng-err" className="text-sm text-destructive">{errors.longitude}</p>}
         </div>
         <div className="md:col-span-2">
           <label className="block text-sm font-medium">Description</label>
-          <Textarea name="description" defaultValue={d?.description ?? ''} aria-invalid={!!errors.description} aria-describedby={errors.description ? 'desc-err' : undefined} />
+          <Textarea 
+            name="description" 
+            value={draft.description} 
+            onChange={(e) => updateDraft({ description: e.target.value })}
+            aria-invalid={!!errors.description} 
+            aria-describedby={errors.description ? 'desc-err' : undefined} 
+          />
           {errors.description && <p id="desc-err" className="text-sm text-destructive">{errors.description}</p>}
         </div>
         <div>
           <label className="block text-sm font-medium">Type</label>
-          <select name="type" defaultValue={d?.type ?? 'OTHER'} className="border rounded px-2 py-1 w-full">
+          <select 
+            name="type" 
+            value={draft.type} 
+            onChange={(e) => updateDraft({ type: e.target.value })}
+            className="border rounded px-2 py-1 w-full"
+          >
             {TYPE_OPTIONS.map(o=> <option key={o} value={o}>{o}</option>)}
           </select>
         </div>
         <div>
           <label className="block text-sm font-medium">Wave conditions</label>
-          <select name="wave_conditions" defaultValue={d?.wave_conditions ?? 'CALM'} className="border rounded px-2 py-1 w-full">
+          <select 
+            name="wave_conditions" 
+            value={draft.wave_conditions} 
+            onChange={(e) => updateDraft({ wave_conditions: e.target.value })}
+            className="border rounded px-2 py-1 w-full"
+          >
             {WAVE_OPTIONS.map(o=> <option key={o} value={o}>{o}</option>)}
           </select>
         </div>
         <div>
           <label className="block text-sm font-medium">Organized</label>
-          <input type="checkbox" name="organized" defaultChecked={d?.organized} />
+          <input 
+            type="checkbox" 
+            name="organized" 
+            checked={draft.organized} 
+            onChange={(e) => updateDraft({ organized: e.target.checked })}
+          />
         </div>
         <div>
           <label className="block text-sm font-medium">Parking</label>
-          <select name="parking" defaultValue={(d?.parking ? d.parking.toUpperCase() : 'NONE').replace('AMPLE','LARGE_LOT').replace('LIMITED','SMALL_LOT')} className="border rounded px-2 py-1 w-full">
+          <select 
+            name="parking" 
+            value={draft.parking} 
+            onChange={(e) => updateDraft({ parking: e.target.value })}
+            className="border rounded px-2 py-1 w-full"
+          >
             {PARKING_OPTIONS.map(o=> <option key={o} value={o}>{o}</option>)}
           </select>
         </div>
         <div>
           <label className="block text-sm font-medium">Blue flag</label>
-          <input type="checkbox" name="blue_flag" defaultChecked={d?.blue_flag} />
+          <input 
+            type="checkbox" 
+            name="blue_flag" 
+            checked={draft.blue_flag} 
+            onChange={(e) => updateDraft({ blue_flag: e.target.checked })}
+          />
         </div>
         {mode === 'edit' && (
           <div>
@@ -337,8 +443,8 @@ const BeachForm: React.FC<Props> = ({ mode }) => {
                 <input 
                   type="checkbox" 
                   id="mark-verified"
-                  checked={markVerified}
-                  onChange={(e) => setMarkVerified(e.target.checked)}
+                  checked={draft.markVerified}
+                  onChange={(e) => updateDraft({ markVerified: e.target.checked })}
                   className="rounded"
                 />
                 <label htmlFor="mark-verified" className="text-sm">
@@ -349,20 +455,59 @@ const BeachForm: React.FC<Props> = ({ mode }) => {
           </div>
         )}
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium">Amenities (comma separated)</label>
-          <Input name="amenities" defaultValue={d?.amenities?.join(', ') ?? ''} />
+          <label className="block text-sm font-medium mb-2">Amenities</label>
+          <AmenitiesMultiselect
+            value={draft.amenities}
+            onChange={(amenities) => updateDraft({ amenities })}
+          />
         </div>
         <div className="md:col-span-2">
           <label className="block text-sm font-medium">Photo URL</label>
-          <Input name="photo_url" defaultValue={d?.photo_url ?? ''} placeholder="https://..." />
+          <Input 
+            name="photo_url" 
+            value={draft.photo_url} 
+            onChange={(e) => updateDraft({ photo_url: e.target.value })}
+            placeholder="https://..." 
+          />
+        </div>
+        <div className="md:col-span-2">
+          <label className="block text-sm font-medium">Photo Attribution</label>
+          <div className="space-y-2">
+            <Input 
+              name="photo_source" 
+              value={draft.photo_source} 
+              onChange={(e) => updateDraft({ photo_source: e.target.value })}
+              placeholder="e.g., dronepicr, CC BY 2.0 <https://creativecommons.org/licenses/by/2.0>, via Wikimedia Commons" 
+            />
+            <div className="flex flex-wrap gap-2">
+              <span className="text-xs text-muted-foreground">Quick options:</span>
+              {['Unsplash', 'Pexels', 'Wikimedia Commons', 'Creative Commons', 'Public Domain', 'User submitted'].map((option) => (
+                <button
+                  key={option}
+                  type="button"
+                  onClick={() => updateDraft({ photo_source: option })}
+                  className="text-xs px-2 py-1 bg-gray-100 hover:bg-gray-200 rounded border"
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+            <p className="text-xs text-muted-foreground">
+              Add proper attribution for the photo. Include license information and source when available.
+            </p>
+          </div>
         </div>
         <div>
           <label className="block text-sm font-medium">Status</label>
-          <select name="status" defaultValue={d?.status ?? 'DRAFT'} className="border rounded px-2 py-1 w-full">
+          <select 
+            name="status" 
+            value={draft.status} 
+            onChange={(e) => updateDraft({ status: e.target.value })}
+            className="border rounded px-2 py-1 w-full"
+          >
             {STATUS_OPTIONS.map(o=> <option key={o} value={o}>{o}</option>)}
           </select>
         </div>
-        {/* Source removed for MVP */}
         <div className="md:col-span-2">
           <details>
             <summary className="cursor-pointer select-none text-sm font-medium">Advanced</summary>
@@ -370,11 +515,14 @@ const BeachForm: React.FC<Props> = ({ mode }) => {
               <label className="block text-sm font-medium">Slug</label>
               <Input 
                 name="slug" 
-                defaultValue={d?.slug ?? ''} 
+                value={draft.slug} 
+                onChange={(e) => {
+                  updateDraft({ slug: e.target.value });
+                  setSlugTouched(true);
+                }}
                 aria-invalid={!!errors.slug} 
                 aria-describedby={errors.slug ? 'slug-err' : undefined}
                 ref={slugInputRef}
-                onChange={()=> setSlugTouched(true)}
               />
               {errors.slug && <p id="slug-err" className="text-sm text-destructive">{errors.slug}</p>}
               <p className="text-xs text-muted-foreground mt-1">Leave empty to auto-generate from name. Must be unique.</p>
@@ -386,12 +534,19 @@ const BeachForm: React.FC<Props> = ({ mode }) => {
       <div className="flex items-center gap-2">
         <Button type="submit" disabled={submitting}>{submitting ? 'Saving…' : 'Save'}</Button>
         <Button type="button" variant="outline" onClick={()=>navigate('/admin/beaches')} disabled={submitting}>Cancel</Button>
+        {hasStoredDraftData() && (
+          <Button type="button" variant="outline" onClick={clearDraft} disabled={submitting} className="text-red-600 border-red-200 hover:bg-red-50">
+            Clear Draft
+          </Button>
+        )}
         {mode==='create' && (
           <Button type="button" variant="secondary" disabled={submitting} onClick={async()=>{
-            const form = document.querySelector('form') as HTMLFormElement;
-            const statusInput = form.querySelector('select[name="status"]') as HTMLSelectElement | null;
-            if (statusInput) statusInput.value = 'ACTIVE';
-            form.requestSubmit();
+            updateDraft({ status: 'ACTIVE' });
+            // Trigger form submission after updating draft
+            setTimeout(() => {
+              const form = document.querySelector('form') as HTMLFormElement;
+              form.requestSubmit();
+            }, 0);
           }}>Save & set ACTIVE</Button>
         )}
       </div>

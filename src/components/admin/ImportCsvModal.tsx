@@ -45,6 +45,7 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
   const [existingSlugs, setExistingSlugs] = useState<Set<string>>(new Set());
   const [importProgress, setImportProgress] = useState(0);
   const [importResults, setImportResults] = useState<{ created: number; updated: number; errors: number }>({ created: 0, updated: 0, errors: 0 });
+  const [isDragOver, setIsDragOver] = useState(false);
   
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
@@ -90,6 +91,46 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
 
     setFile(selectedFile);
     parseCsvFile(selectedFile);
+  };
+
+  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setIsDragOver(true);
+  };
+
+  const handleDragEnter = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setIsDragOver(false);
+  };
+
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setIsDragOver(false);
+
+    const files = event.dataTransfer.files;
+    if (files.length === 0) return;
+
+    const droppedFile = files[0];
+    if (!droppedFile.name.toLowerCase().endsWith('.csv')) {
+      toast({
+        title: 'Invalid File',
+        description: 'Please drop a CSV file.',
+        variant: 'destructive'
+      });
+      return;
+    }
+
+    setFile(droppedFile);
+    parseCsvFile(droppedFile);
   };
 
   const parseCsvFile = async (file: File) => {
@@ -317,12 +358,30 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
 
   const renderUploadStep = () => (
     <div className="space-y-4">
-      <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-8 text-center">
-        <Upload className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
+      <div 
+        className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors cursor-pointer ${
+          isDragOver 
+            ? 'border-primary bg-primary/5' 
+            : 'border-muted-foreground/25 hover:border-muted-foreground/50'
+        }`}
+        onDragOver={handleDragOver}
+        onDragEnter={handleDragEnter}
+        onDragLeave={handleDragLeave}
+        onDrop={handleDrop}
+        onClick={() => fileInputRef.current?.click()}
+      >
+        <Upload className={`mx-auto h-12 w-12 mb-4 transition-colors ${
+          isDragOver ? 'text-primary' : 'text-muted-foreground'
+        }`} />
         <div className="space-y-2">
-          <h3 className="text-lg font-medium">Upload CSV File</h3>
+          <h3 className="text-lg font-medium">
+            {isDragOver ? 'Drop CSV file here' : 'Upload CSV File'}
+          </h3>
           <p className="text-sm text-muted-foreground">
-            Select a CSV file with beach data to import
+            {isDragOver 
+              ? 'Release to upload the file' 
+              : 'Drag and drop a CSV file or click to select'
+            }
           </p>
         </div>
         <input
@@ -333,7 +392,10 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
           className="hidden"
         />
         <Button 
-          onClick={() => fileInputRef.current?.click()}
+          onClick={(e) => {
+            e.stopPropagation();
+            fileInputRef.current?.click();
+          }}
           className="mt-4"
         >
           <FileText className="mr-2 h-4 w-4" />
@@ -515,7 +577,7 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
         </div>
       </div>
       <div className="flex justify-center gap-2">
-        <Button onClick={() => window.location.href = '/admin/beaches?sort=updated_desc'}>
+        <Button onClick={() => window.location.href = '/admin/beaches?sort=updated_at&dir=desc'}>
           View Beaches
         </Button>
         <Button variant="outline" onClick={handleClose}>
