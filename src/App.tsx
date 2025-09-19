@@ -14,7 +14,7 @@ import AdminBeachesList from "./pages/admin/beaches/AdminBeachesList";
 import AdminBeachCreate from "./pages/admin/beaches/AdminBeachCreate";
 import AdminBeachEdit from "./pages/admin/beaches/AdminBeachEdit";
 import ImportExport from "./pages/admin/ImportExport";
-import AdminSettings from "./pages/admin/AdminSettings";
+import AdminSettings from "./components/admin/AdminSettingsTest";
 import BeachDetail from "./pages/BeachDetail";
 import NotFound from "./pages/NotFound";
 import { useServiceWorker } from "@/hooks/useServiceWorker";
