@@ -38,7 +38,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
   }
 
   // Authenticated but profile not loaded yet (e.g., bootstrapping)
-  if (user && !profile) {
+  if (user && !profile && loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="text-center space-y-4">
@@ -49,6 +49,11 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
         </div>
       </div>
     );
+  }
+
+  // If user exists but no profile and not loading, redirect to login
+  if (user && !profile && !loading) {
+    return <Navigate to="/admin/login" replace />;
   }
 
   if (requiredRole && profile.role !== requiredRole) {

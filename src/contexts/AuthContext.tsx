@@ -127,7 +127,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const signOut = async () => {
     await supabase.auth.signOut();
+    // Clear all auth state immediately
+    setUser(null);
+    setSession(null);
     setProfile(null);
+    setLoading(false);
   };
 
   const value = {

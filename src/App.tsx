@@ -14,6 +14,7 @@ import AdminBeachesList from "./pages/admin/beaches/AdminBeachesList";
 import AdminBeachCreate from "./pages/admin/beaches/AdminBeachCreate";
 import AdminBeachEdit from "./pages/admin/beaches/AdminBeachEdit";
 import ImportExport from "./pages/admin/ImportExport";
+import AdminSettings from "./pages/admin/AdminSettings";
 import BeachDetail from "./pages/BeachDetail";
 import NotFound from "./pages/NotFound";
 import { useServiceWorker } from "@/hooks/useServiceWorker";
@@ -46,6 +47,7 @@ const AppContent = () => {
           <Route path="beaches/new" element={<AdminBeachCreate />} />
           <Route path="beaches/:id" element={<AdminBeachEdit />} />
           <Route path="import-export" element={<ImportExport />} />
+          <Route path="settings" element={<AdminSettings />} />
         </Route>
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />

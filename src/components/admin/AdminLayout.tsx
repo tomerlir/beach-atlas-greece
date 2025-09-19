@@ -6,12 +6,23 @@ import { useAuth } from '@/contexts/AuthContext';
 
 const AdminLayout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isSigningOut, setIsSigningOut] = useState(false);
   const { signOut, profile } = useAuth();
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
-    await signOut();
-    navigate('/');
+    try {
+      setIsSigningOut(true);
+      await signOut();
+      // Navigate to home page after successful sign out
+      navigate('/', { replace: true });
+    } catch (error) {
+      console.error('Error signing out:', error);
+      // Still navigate even if there's an error
+      navigate('/', { replace: true });
+    } finally {
+      setIsSigningOut(false);
+    }
   };
 
   const navigationItems = [
@@ -87,9 +98,10 @@ const AdminLayout: React.FC = () => {
               size="sm"
               className="w-full justify-start"
               onClick={handleSignOut}
+              disabled={isSigningOut}
             >
               <LogOut className="mr-2 h-4 w-4" />
-              Sign Out
+              {isSigningOut ? 'Signing Out...' : 'Sign Out'}
             </Button>
           </div>
         </div>
