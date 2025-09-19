@@ -35,6 +35,10 @@ import { Tables } from "@/integrations/supabase/types";
 import { MapsSelectionDialog } from "@/components/MapsSelectionDialog";
 import { DataFreshnessMeta } from "@/components/DataFreshnessMeta";
 import { getAmenityConfig, getAmenitiesByCategory } from "@/lib/amenities";
+import OptimizedImage from "@/components/OptimizedImage";
+import { useImagePreloader } from "@/hooks/useImagePreloader";
+import { useProgressiveLoading } from "@/hooks/useProgressiveLoading";
+import { useScrollToTopOnMount } from "@/hooks/useScrollToTop";
 
 type Beach = Tables<'beaches'>;
 
@@ -68,6 +72,7 @@ const BeachDetail = () => {
   const location = useLocation();
   const { toast } = useToast();
   const isMobile = useIsMobile();
+  const { isPreloaded, getPreloadResult } = useImagePreloader();
   
   // State management
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
@@ -76,7 +81,7 @@ const BeachDetail = () => {
 
   // Note: Geolocation removed to prevent unwanted permission prompts
 
-  // Fetch beach data
+  // Fetch beach data with optimized caching
   const { data: beach, isLoading, error } = useQuery({
     queryKey: ["beach", slug],
     queryFn: async () => {
@@ -97,7 +102,37 @@ const BeachDetail = () => {
       return data;
     },
     enabled: !!slug,
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    gcTime: 10 * 60 * 1000, // 10 minutes (renamed from cacheTime in newer versions)
   });
+
+  // Progressive loading state - now that beach data is available
+  const {
+    shouldShowContent,
+    shouldShowImage,
+    shouldShowImageSkeleton,
+    handleImageLoad,
+    handleImageError,
+  } = useProgressiveLoading(isLoading, !!beach?.photo_url, {
+    contentDelay: 0,    // Show content immediately
+    imageDelay: 0,      // Start image loading immediately to prevent layout shift
+    enableProgressiveMode: false, // Disable progressive mode to always show image container
+  });
+
+  // Ensure page scrolls to top when component mounts
+  useEffect(() => {
+    const scrollToTop = () => {
+      // Scroll to top with multiple methods for compatibility
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    };
+
+    // Use requestAnimationFrame to ensure DOM is ready, then scroll once
+    requestAnimationFrame(() => {
+      scrollToTop();
+    });
+  }, []); // Only run once on mount
 
   // Note: Distance calculation removed since geolocation is not used on detail page
 
@@ -155,13 +190,13 @@ const BeachDetail = () => {
       if (!acc[config.category]) {
         acc[config.category] = [];
       }
-      acc[config.category].push({ key: amenity, ...config });
+      acc[config.category].push({ key: amenity, ...config, category: config.category });
       
       return acc;
     }, {} as Record<string, Array<{ key: string; label: string; icon: any; category: string }>>);
   }, [beach?.amenities]);
 
-  // Loading state
+  // Progressive loading - show content immediately, image loads separately
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background">
@@ -227,165 +262,185 @@ const BeachDetail = () => {
           </Link>
         </Button>
 
-        {/* Image Card */}
-        <figure className="mb-6">
+        {/* Image Card - Always render to prevent layout shift */}
+        <figure className="mb-6 w-full max-w-full overflow-hidden">
           {beach.photo_url ? (
-            <img 
-              src={beach.photo_url} 
+            <OptimizedImage
+              src={beach.photo_url}
               alt={`${beach.name} beach`}
-              className="w-full aspect-[16/9] object-cover rounded-xl shadow-lg"
-              loading="eager"
-              fetchPriority="high"
+              width={800}
+              height={450}
+              className="w-full aspect-[16/9] rounded-xl shadow-lg"
+              priority={false} // Changed to false for progressive loading
+              loading="lazy" // Changed to lazy for progressive loading
+              placeholder="blur" // Use blur placeholder to prevent layout shift
+              placeholderPalette="default" // Use default beach-themed placeholder
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
+              quality={90}
+              useDetailSkeleton={false} // Use blur placeholder instead of skeleton
+              onLoad={handleImageLoad}
+              onError={handleImageError}
+              fallbackComponent={
+                <div className="w-full aspect-[16/9] bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl shadow-lg flex items-center justify-center">
+                  <Waves className="h-16 w-16 md:h-24 md:w-24 text-white opacity-50" />
+                </div>
+              }
             />
           ) : (
             <div className="w-full aspect-[16/9] bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl shadow-lg flex items-center justify-center">
-              <Waves className="h-24 w-24 text-white opacity-50" />
+              <Waves className="h-16 w-16 md:h-24 md:w-24 text-white opacity-50" />
             </div>
           )}
         </figure>
 
-        {/* Title & Chips */}
-        <div className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-3">
-            {beach.name}
-          </h1>
-          <div className="flex items-center text-muted-foreground text-lg mb-2">
-            <MapPin className="h-5 w-5 mr-2" aria-hidden="true" />
-            {beach.place_text}
-          </div>
-          <DataFreshnessMeta beach={beach} />
-          <div className="flex flex-wrap gap-2 mt-4">
-            {beach.blue_flag && (
-              <Badge className="bg-blue-600 text-white">
-                <Flag className="h-3 w-3 mr-1" aria-hidden="true" />
-                Blue Flag
-              </Badge>
-            )}
-          </div>
-        </div>
-
-        {/* Actions */}
-        <div className="flex flex-col sm:flex-row gap-3 mb-8">
-          <Button 
-            onClick={handleOpenInMaps} 
-            className="bg-primary text-primary-foreground hover:bg-primary/90 flex-1 sm:flex-none"
-          >
-            <MapPin className="h-4 w-4 mr-2" aria-hidden="true" />
-            Open in Maps
-          </Button>
-          <Button 
-            variant="outline"
-            onClick={handleShare}
-            className="flex-1 sm:flex-none"
-          >
-            <Share2 className="h-4 w-4 mr-2" aria-hidden="true" />
-            Share
-          </Button>
-          <Button 
-            variant="outline"
-            onClick={handleFeedback}
-            className="flex-1 sm:flex-none"
-          >
-            <MessageSquare className="h-4 w-4 mr-2" aria-hidden="true" />
-            Feedback
-          </Button>
-        </div>
-
-        {/* Overview */}
-        <div className="space-y-8">
-          {/* At a Glance */}
-          <section>
-            <h2 className="text-2xl font-semibold mb-6">At a Glance</h2>
-            <dl className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="flex items-center gap-3">
-                <Palmtree className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
-                <div>
-                  <dt className="text-sm font-medium text-muted-foreground">Beach Type</dt>
-                  <dd className="text-sm">{typeLabels[beach.type] || beach.type}</dd>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <Waves className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
-                <div>
-                  <dt className="text-sm font-medium text-muted-foreground">Wave Conditions</dt>
-                  <dd className="text-sm">{waveLabels[beach.wave_conditions] || beach.wave_conditions}</dd>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <Shield className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
-                <div>
-                  <dt className="text-sm font-medium text-muted-foreground">Organization</dt>
-                  <dd className="text-sm">{beach.organized ? "Organized" : "Unorganized"}</dd>
-                </div>
-              </div>
-              <div className="flex items-center gap-3">
-                <Car className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
-                <div>
-                  <dt className="text-sm font-medium text-muted-foreground">Parking</dt>
-                  <dd className="text-sm">{parkingLabels[beach.parking] || beach.parking}</dd>
-                </div>
-              </div>
+        {/* Title & Chips - Show immediately when content is ready */}
+        {shouldShowContent && (
+          <div className="mb-8">
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-3">
+              {beach.name}
+            </h1>
+            <div className="flex items-center text-muted-foreground text-lg mb-2">
+              <MapPin className="h-5 w-5 mr-2" aria-hidden="true" />
+              {beach.place_text}
+            </div>
+            <DataFreshnessMeta beach={beach} />
+            <div className="flex flex-wrap gap-2 mt-4">
               {beach.blue_flag && (
+                <Badge className="bg-blue-600 text-white">
+                  <Flag className="h-3 w-3 mr-1" aria-hidden="true" />
+                  Blue Flag
+                </Badge>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Actions - Show immediately when content is ready */}
+        {shouldShowContent && (
+          <div className="flex flex-col sm:flex-row gap-3 mb-8">
+            <Button 
+              onClick={handleOpenInMaps} 
+              className="bg-primary text-primary-foreground hover:bg-primary/90 flex-1 sm:flex-none"
+            >
+              <MapPin className="h-4 w-4 mr-2" aria-hidden="true" />
+              Open in Maps
+            </Button>
+            <Button 
+              variant="outline"
+              onClick={handleShare}
+              className="flex-1 sm:flex-none"
+            >
+              <Share2 className="h-4 w-4 mr-2" aria-hidden="true" />
+              Share
+            </Button>
+            <Button 
+              variant="outline"
+              onClick={handleFeedback}
+              className="flex-1 sm:flex-none"
+            >
+              <MessageSquare className="h-4 w-4 mr-2" aria-hidden="true" />
+              Feedback
+            </Button>
+          </div>
+        )}
+
+        {/* Overview - Show when content is ready */}
+        {shouldShowContent && (
+          <div className="space-y-8">
+            {/* At a Glance */}
+            <section>
+              <h2 className="text-2xl font-semibold mb-6">At a Glance</h2>
+              <dl className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex items-center gap-3">
-                  <Flag className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+                  <Palmtree className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
                   <div>
-                    <dt className="text-sm font-medium text-muted-foreground">Certification</dt>
-                    <dd className="text-sm">Blue Flag Certified</dd>
+                    <dt className="text-sm font-medium text-muted-foreground">Beach Type</dt>
+                    <dd className="text-sm">{typeLabels[beach.type] || beach.type}</dd>
                   </div>
                 </div>
-              )}
-            </dl>
-          </section>
-
-          {/* About Section */}
-          {beach.description && (
-            <section className="divide-y divide-neutral-200/30">
-              <h2 className="text-2xl font-semibold mb-4">About This Beach</h2>
-              <div className="pt-6">
-                <p className="text-muted-foreground whitespace-pre-line leading-relaxed">
-                  {displayDescription}
-                </p>
-                {shouldShowReadMore && (
-                  <Button 
-                    variant="link" 
-                    onClick={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
-                    className="p-0 h-auto mt-2"
-                  >
-                    {isDescriptionExpanded ? "Read less" : "Read more"}
-                  </Button>
-                )}
-              </div>
-            </section>
-          )}
-
-          {/* Amenities */}
-          {beach.amenities && beach.amenities.length > 0 && (
-            <section className="divide-y divide-neutral-200/30">
-              <h2 className="text-2xl font-semibold mb-6">Amenities</h2>
-              <div className="pt-6 space-y-6">
-                {Object.entries(amenitiesByCategory).map(([category, amenities]) => (
-                  <div key={category}>
-                    <h3 className="text-lg font-medium mb-3 capitalize">{category}</h3>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                      {amenities.map(({ key, label, icon: IconComponent }) => (
-                        <div 
-                          key={key} 
-                          className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2"
-                          tabIndex={0}
-                          role="button"
-                          aria-label={`${label} available`}
-                        >
-                          <IconComponent className="h-4 w-4 text-primary" aria-hidden="true" />
-                          <span className="text-sm font-medium">{label}</span>
-                        </div>
-                      ))}
+                <div className="flex items-center gap-3">
+                  <Waves className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+                  <div>
+                    <dt className="text-sm font-medium text-muted-foreground">Wave Conditions</dt>
+                    <dd className="text-sm">{waveLabels[beach.wave_conditions] || beach.wave_conditions}</dd>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Shield className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+                  <div>
+                    <dt className="text-sm font-medium text-muted-foreground">Organization</dt>
+                    <dd className="text-sm">{beach.organized ? "Organized" : "Unorganized"}</dd>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Car className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+                  <div>
+                    <dt className="text-sm font-medium text-muted-foreground">Parking</dt>
+                    <dd className="text-sm">{parkingLabels[beach.parking] || beach.parking}</dd>
+                  </div>
+                </div>
+                {beach.blue_flag && (
+                  <div className="flex items-center gap-3">
+                    <Flag className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+                    <div>
+                      <dt className="text-sm font-medium text-muted-foreground">Certification</dt>
+                      <dd className="text-sm">Blue Flag Certified</dd>
                     </div>
                   </div>
-                ))}
-              </div>
+                )}
+              </dl>
             </section>
-          )}
-        </div>
+
+            {/* About Section */}
+            {beach.description && (
+              <section className="divide-y divide-neutral-200/30">
+                <h2 className="text-2xl font-semibold mb-4">About This Beach</h2>
+                <div className="pt-6">
+                  <p className="text-muted-foreground whitespace-pre-line leading-relaxed">
+                    {displayDescription}
+                  </p>
+                  {shouldShowReadMore && (
+                    <Button 
+                      variant="link" 
+                      onClick={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
+                      className="p-0 h-auto mt-2"
+                    >
+                      {isDescriptionExpanded ? "Read less" : "Read more"}
+                    </Button>
+                  )}
+                </div>
+              </section>
+            )}
+
+            {/* Amenities */}
+            {beach.amenities && beach.amenities.length > 0 && (
+              <section className="divide-y divide-neutral-200/30">
+                <h2 className="text-2xl font-semibold mb-6">Amenities</h2>
+                <div className="pt-6 space-y-6">
+                  {Object.entries(amenitiesByCategory).map(([category, amenities]) => (
+                    <div key={category}>
+                      <h3 className="text-lg font-medium mb-3 capitalize">{category}</h3>
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                        {amenities.map(({ key, label, icon: IconComponent }) => (
+                          <div 
+                            key={key} 
+                            className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2"
+                            tabIndex={0}
+                            role="button"
+                            aria-label={`${label} available`}
+                          >
+                            <IconComponent className="h-4 w-4 text-primary" aria-hidden="true" />
+                            <span className="text-sm font-medium">{label}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
+          </div>
+        )}
       </main>
       
       {/* Maps Selection Dialog */}

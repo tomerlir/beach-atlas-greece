@@ -16,8 +16,43 @@ import AdminBeachEdit from "./pages/admin/beaches/AdminBeachEdit";
 import ImportExport from "./pages/admin/ImportExport";
 import BeachDetail from "./pages/BeachDetail";
 import NotFound from "./pages/NotFound";
+import { useServiceWorker } from "@/hooks/useServiceWorker";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const queryClient = new QueryClient();
+
+const AppContent = () => {
+  // Register service worker for caching and offline support
+  useServiceWorker();
+
+  return (
+    <BrowserRouter>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/beach/:slug" element={<BeachDetail />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route 
+          path="/admin" 
+          element={
+            <ProtectedRoute requiredRole="admin">
+              <AdminLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<AdminDashboard />} />
+          <Route path="beaches" element={<AdminBeachesList />} />
+          <Route path="beaches/new" element={<AdminBeachCreate />} />
+          <Route path="beaches/:id" element={<AdminBeachEdit />} />
+          <Route path="import-export" element={<ImportExport />} />
+        </Route>
+        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -25,30 +60,7 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/beach/:slug" element={<BeachDetail />} />
-            <Route path="/admin/login" element={<AdminLogin />} />
-            <Route 
-              path="/admin" 
-              element={
-                <ProtectedRoute requiredRole="admin">
-                  <AdminLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route index element={<AdminDashboard />} />
-              <Route path="beaches" element={<AdminBeachesList />} />
-              <Route path="beaches/new" element={<AdminBeachCreate />} />
-              <Route path="beaches/:id" element={<AdminBeachEdit />} />
-              <Route path="import-export" element={<ImportExport />} />
-            </Route>
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+        <AppContent />
       </TooltipProvider>
     </AuthProvider>
   </QueryClientProvider>

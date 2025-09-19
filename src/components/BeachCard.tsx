@@ -12,7 +12,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { getAmenityConfig } from "@/lib/amenities";
-import { usePrefetch } from "@/hooks/usePrefetch";
+import { useAdvancedPrefetch } from "@/hooks/useAdvancedPrefetch";
+import OptimizedImage from "@/components/OptimizedImage";
 
 interface Beach {
   id: string;
@@ -43,10 +44,11 @@ const parkingConfig: Record<string, { label: string; icon: any; color: string }>
 };
 
 const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => {
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const [imageError, setImageError] = useState(false);
-  const imgRef = useRef<HTMLImageElement>(null);
-  const { prefetch, cancelPrefetch } = usePrefetch({ delay: 100 });
+  const { prefetchWithImage, cancelPrefetch } = useAdvancedPrefetch({ 
+    delay: 50, 
+    preloadImages: true, 
+    preloadData: true 
+  });
 
   const parkingInfo = parkingConfig[beach.parking] || { 
     label: "Parking Unknown", 
@@ -54,41 +56,24 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
     color: "text-gray-500" 
   };
 
-  // Lazy loading with Intersection Observer
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && imgRef.current && beach.photo_url) {
-            const img = imgRef.current;
-            img.src = beach.photo_url;
-            img.onload = () => setImageLoaded(true);
-            img.onerror = () => setImageError(true);
-            observer.unobserve(img);
-          }
-        });
-      },
-      { rootMargin: '50px' }
-    );
+  // Fallback component for when image fails to load
+  const fallbackComponent = (
+    <div className="w-full h-full bg-gradient-ocean flex items-center justify-center">
+      <Waves className="h-16 w-16 text-white opacity-60" />
+    </div>
+  );
 
-    if (imgRef.current) {
-      observer.observe(imgRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [beach.photo_url]);
-
-  // Prefetch beach detail page on visibility
+  // Prefetch beach detail page and image on visibility
   useEffect(() => {
     const prefetchObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            prefetch(`/beach/${beach.slug}`);
+            prefetchWithImage(`/beach/${beach.slug}`, beach.photo_url);
           }
         });
       },
-      { rootMargin: '200px' }
+      { rootMargin: '300px' } // Increased margin for earlier prefetching
     );
 
     const cardElement = document.querySelector(`[data-beach-id="${beach.id}"]`);
@@ -97,7 +82,7 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
     }
 
     return () => prefetchObserver.disconnect();
-  }, [beach.slug, beach.id, prefetch]);
+  }, [beach.slug, beach.id, beach.photo_url, prefetchWithImage]);
 
   return (
     <Link 
@@ -105,32 +90,26 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
       className="block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-xl min-h-[44px] min-w-[44px]"
       aria-label={`View details for ${beach.name} beach`}
       data-beach-id={beach.id}
-      onMouseEnter={() => prefetch(`/beach/${beach.slug}`)}
+      onMouseEnter={() => prefetchWithImage(`/beach/${beach.slug}`, beach.photo_url)}
       onMouseLeave={cancelPrefetch}
     >
       <Card className="group hover:shadow-strong transition-all duration-300 overflow-hidden border-0 bg-white shadow-soft hover:shadow-medium h-full">
         {/* Beach Image */}
         <div className="aspect-video bg-gradient-ocean relative overflow-hidden">
-          {beach.photo_url && !imageError ? (
-            <>
-              {!imageLoaded && (
-                <div className="absolute inset-0 bg-gradient-ocean flex items-center justify-center">
-                  <Waves className="h-16 w-16 text-white opacity-60 animate-pulse" />
-                </div>
-              )}
-              <img 
-                ref={imgRef}
-                alt={`${beach.name} beach`}
-                className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-                loading="lazy"
-                width={400}
-                height={225}
-              />
-            </>
+          {beach.photo_url ? (
+            <OptimizedImage
+              src={beach.photo_url}
+              alt={`${beach.name} beach`}
+              width={400}
+              height={225}
+              className="group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              quality={85}
+              fallbackComponent={fallbackComponent}
+            />
           ) : (
-            <div className="w-full h-full bg-gradient-ocean flex items-center justify-center">
-              <Waves className="h-16 w-16 text-white opacity-60" />
-            </div>
+            fallbackComponent
           )}
           
           {/* Gradient Overlay */}

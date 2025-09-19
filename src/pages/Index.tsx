@@ -6,12 +6,14 @@ import FilterBar from "@/components/FilterBar";
 import AllFiltersDrawer from "@/components/AllFiltersDrawer";
 import ResultsHeader from "@/components/ResultsHeader";
 import BeachCard from "@/components/BeachCard";
+import BeachCardSkeleton from "@/components/BeachCardSkeleton";
 import Pagination from "@/components/Pagination";
 import { GeolocationErrorBanner } from "@/components/GeolocationErrorBanner";
 import { useGeolocation } from "@/hooks/useGeolocation";
 import { useUrlState } from "@/hooks/useUrlState";
 import { useBeachFiltering } from "@/hooks/useBeachFiltering";
 import { useDistanceCalculation } from "@/hooks/useDistanceCalculation";
+import { useImagePreloader } from "@/hooks/useImagePreloader";
 import { Beach } from "@/types/beach";
 import heroImage from "@/assets/hero-beach.jpg";
 import EmptyState from "@/components/EmptyState";
@@ -23,6 +25,7 @@ const Index = () => {
   const { location, isLoading: isLoadingLocation, getCurrentLocation, permission: locationPermission, error: locationError } = useGeolocation();
   const [isAllFiltersOpen, setIsAllFiltersOpen] = useState(false);
   const [showGeolocationError, setShowGeolocationError] = useState(false);
+  const { preloadVisibleBeachImages } = useImagePreloader();
 
   // Fetch beaches from Supabase
   const { data: beaches = [], isLoading, error } = useQuery({
@@ -53,6 +56,13 @@ const Index = () => {
   const totalPages = Math.ceil(filteredBeaches.length / BEACHES_PER_PAGE);
   const startIndex = (filters.page - 1) * BEACHES_PER_PAGE;
   const paginatedBeaches = filteredBeaches.slice(startIndex, startIndex + BEACHES_PER_PAGE);
+
+  // Preload images for visible beaches
+  useEffect(() => {
+    if (paginatedBeaches.length > 0) {
+      preloadVisibleBeachImages(paginatedBeaches);
+    }
+  }, [paginatedBeaches, preloadVisibleBeachImages]);
 
 
   const handleApplyFilters = (newFilters: typeof filters) => {
@@ -153,9 +163,7 @@ const Index = () => {
         {isLoading && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="animate-pulse">
-                <div className="bg-muted rounded-xl h-80 shadow-soft"></div>
-              </div>
+              <BeachCardSkeleton key={i} />
             ))}
           </div>
         )}
