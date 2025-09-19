@@ -143,10 +143,11 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
             </div>
           )}
 
-          {/* Photo Attribution - positioned at bottom-right */}
+          {/* Photo Attribution - compact mode for homepage cards */}
           <PhotoAttribution 
             photoSource={beach.photo_source}
             className="z-10"
+            compact={true}
           />
         </div>
 

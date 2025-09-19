@@ -4,6 +4,7 @@ import { ExternalLink } from 'lucide-react';
 interface PhotoAttributionProps {
   photoSource?: string;
   className?: string;
+  compact?: boolean; // New prop for compact mode
 }
 
 /**
@@ -17,7 +18,8 @@ interface PhotoAttributionProps {
  */
 const PhotoAttribution: React.FC<PhotoAttributionProps> = ({ 
   photoSource, 
-  className = "" 
+  className = "",
+  compact = false
 }) => {
   if (!photoSource) return null;
 
@@ -66,9 +68,21 @@ const PhotoAttribution: React.FC<PhotoAttributionProps> = ({
 
   const attribution = parseAttribution(photoSource);
 
+  // Compact mode for homepage cards - shows only author name with minimal styling
+  if (compact) {
+    return (
+      <div className={`absolute bottom-1 right-1 bg-black/60 backdrop-blur-sm text-white text-[10px] px-1.5 py-0.5 rounded text-nowrap ${className}`}>
+        <span className="text-white/90 truncate max-w-[80px] block">
+          {attribution.author}
+        </span>
+      </div>
+    );
+  }
+
+  // Full mode for detail pages - shows complete attribution
   return (
-    <div className={`absolute bottom-2 right-2 bg-black/70 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-md max-w-[calc(100%-1rem)] ${className}`}>
-      <div className="flex items-center gap-1 flex-wrap">
+    <div className={`absolute bottom-2 right-2 bg-black/70 backdrop-blur-sm text-white text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-sm sm:rounded-md max-w-[calc(100%-1rem)] ${className}`}>
+      <div className="flex items-center gap-0.5 sm:gap-1 flex-wrap">
         <span className="text-white/90">
           {attribution.author}
         </span>
@@ -85,7 +99,7 @@ const PhotoAttribution: React.FC<PhotoAttributionProps> = ({
                 title={`View ${attribution.license} license`}
               >
                 {attribution.license}
-                <ExternalLink className="inline w-3 h-3 ml-1" />
+                <ExternalLink className="inline w-2.5 h-2.5 sm:w-3 sm:h-3 ml-0.5 sm:ml-1" />
               </a>
             ) : (
               <span className="text-white/70">{attribution.license}</span>
