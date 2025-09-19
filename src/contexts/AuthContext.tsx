@@ -35,6 +35,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
+  const [hasExplicitlySignedOut, setHasExplicitlySignedOut] = useState(false);
 
   const fetchProfile = async (userId: string) => {
     try {
@@ -99,29 +100,40 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     );
 
-    // Check for existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      
-      if (session?.user) {
-        setLoading(true);
-        setTimeout(() => {
-          fetchProfile(session.user.id);
-        }, 0);
-      } else {
-        setLoading(false);
-      }
-    });
+    // Check for existing session only if we haven't explicitly signed out
+    if (!hasExplicitlySignedOut) {
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        setSession(session);
+        setUser(session?.user ?? null);
+        
+        if (session?.user) {
+          setLoading(true);
+          setTimeout(() => {
+            fetchProfile(session.user.id);
+          }, 0);
+        } else {
+          setLoading(false);
+        }
+      });
+    } else {
+      // If we explicitly signed out, don't restore session
+      setLoading(false);
+    }
 
     return () => subscription.unsubscribe();
-  }, []);
+  }, [hasExplicitlySignedOut]);
 
   const signIn = async (email: string, password: string) => {
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password
     });
+    
+    // Reset the explicit sign out flag on successful sign in
+    if (!error) {
+      setHasExplicitlySignedOut(false);
+    }
+    
     return { error };
   };
 
@@ -132,6 +144,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setSession(null);
     setProfile(null);
     setLoading(false);
+    setHasExplicitlySignedOut(true);
+    
+    // Clear any remaining session data from localStorage
+    const keysToRemove = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && key.startsWith('sb-xnkyfxvncpawqpqccdby-')) {
+        keysToRemove.push(key);
+      }
+    }
+    keysToRemove.forEach(key => localStorage.removeItem(key));
   };
 
   const value = {
