@@ -11,6 +11,7 @@ export interface Beach {
   parking: string;
   amenities: string[];
   photo_url?: string;
+  photo_source?: string;
 }
 
 export interface BeachWithDistance extends Beach {

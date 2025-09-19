@@ -310,24 +310,24 @@ export default function FilterBar({
       <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border">
         {/* Main Filter Bar */}
         <div className="container mx-auto px-4 py-4">
-          <div className="flex flex-col lg:flex-row lg:items-center gap-4">
-            {/* Search Input */}
-            <div className="flex-1 min-w-[220px]">
+          <div className="flex flex-col gap-4">
+            {/* Search Input - Full Row */}
+            <div className="w-full">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4 md:h-5 md:w-5" />
                 <Input
                   placeholder="Search beaches or places…"
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
-                  className="pl-10 h-11 bg-white border-border focus:ring-primary"
+                  className="pl-10 h-11 bg-white border-border focus:ring-primary w-full"
                   aria-label="Search beaches by name or location"
                 />
               </div>
             </div>
 
-            {/* Facets Group */}
+            {/* Facets Group - Second Row */}
             {!isMobile ? (
-              <div className="flex flex-wrap gap-2 md:gap-3 items-center">
+              <div className="flex flex-wrap gap-2 md:gap-3 items-center justify-center">
 
 
                 {/* Near Me Toggle */}
@@ -514,7 +514,7 @@ export default function FilterBar({
               </div>
             ) : (
               /* Mobile: Scrollable facet chips */
-              <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide">
+              <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide justify-center">
 
 
                 {/* Near Me Toggle */}

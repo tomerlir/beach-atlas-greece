@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import { getAmenityConfig } from "@/lib/amenities";
 import { useAdvancedPrefetch } from "@/hooks/useAdvancedPrefetch";
 import OptimizedImage from "@/components/OptimizedImage";
+import PhotoAttribution from "@/components/PhotoAttribution";
 
 interface Beach {
   id: string;
@@ -26,6 +27,7 @@ interface Beach {
   parking: string;
   amenities: string[];
   photo_url?: string;
+  photo_source?: string;
 }
 
 interface BeachCardProps {
@@ -140,6 +142,12 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
               </Badge>
             </div>
           )}
+
+          {/* Photo Attribution - positioned at bottom-right */}
+          <PhotoAttribution 
+            photoSource={beach.photo_source}
+            className="z-10"
+          />
         </div>
 
         <CardContent className="p-5">

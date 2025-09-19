@@ -36,6 +36,7 @@ import { MapsSelectionDialog } from "@/components/MapsSelectionDialog";
 import { DataFreshnessMeta } from "@/components/DataFreshnessMeta";
 import { getAmenityConfig, getAmenitiesByCategory } from "@/lib/amenities";
 import OptimizedImage from "@/components/OptimizedImage";
+import PhotoAttribution from "@/components/PhotoAttribution";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
 import { useProgressiveLoading } from "@/hooks/useProgressiveLoading";
 import { useScrollToTopOnMount } from "@/hooks/useScrollToTop";
@@ -263,29 +264,36 @@ const BeachDetail = () => {
         </Button>
 
         {/* Image Card - Always render to prevent layout shift */}
-        <figure className="mb-6 w-full max-w-full overflow-hidden">
+        <figure className="mb-6 w-full max-w-full overflow-hidden relative">
           {beach.photo_url ? (
-            <OptimizedImage
-              src={beach.photo_url}
-              alt={`${beach.name} beach`}
-              width={800}
-              height={450}
-              className="w-full aspect-[16/9] rounded-xl shadow-lg"
-              priority={false} // Changed to false for progressive loading
-              loading="lazy" // Changed to lazy for progressive loading
-              placeholder="blur" // Use blur placeholder to prevent layout shift
-              placeholderPalette="default" // Use default beach-themed placeholder
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
-              quality={90}
-              useDetailSkeleton={false} // Use blur placeholder instead of skeleton
-              onLoad={handleImageLoad}
-              onError={handleImageError}
-              fallbackComponent={
-                <div className="w-full aspect-[16/9] bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl shadow-lg flex items-center justify-center">
-                  <Waves className="h-16 w-16 md:h-24 md:w-24 text-white opacity-50" />
-                </div>
-              }
-            />
+            <>
+              <OptimizedImage
+                src={beach.photo_url}
+                alt={`${beach.name} beach`}
+                width={800}
+                height={450}
+                className="w-full aspect-[16/9] rounded-xl shadow-lg"
+                priority={false} // Changed to false for progressive loading
+                loading="lazy" // Changed to lazy for progressive loading
+                placeholder="blur" // Use blur placeholder to prevent layout shift
+                placeholderPalette="default" // Use default beach-themed placeholder
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
+                quality={90}
+                useDetailSkeleton={false} // Use blur placeholder instead of skeleton
+                onLoad={handleImageLoad}
+                onError={handleImageError}
+                fallbackComponent={
+                  <div className="w-full aspect-[16/9] bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl shadow-lg flex items-center justify-center">
+                    <Waves className="h-16 w-16 md:h-24 md:w-24 text-white opacity-50" />
+                  </div>
+                }
+              />
+              {/* Photo Attribution - positioned just outside the image */}
+              <PhotoAttribution 
+                photoSource={beach.photo_source}
+                className="z-10"
+              />
+            </>
           ) : (
             <div className="w-full aspect-[16/9] bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl shadow-lg flex items-center justify-center">
               <Waves className="h-16 w-16 md:h-24 md:w-24 text-white opacity-50" />
