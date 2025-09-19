@@ -44,7 +44,7 @@ export const DataFreshnessMeta = ({ beach }: DataFreshnessMetaProps) => {
         >
           {relativeTime}
         </time>
-        {beach.source && (
+        {beach.photo_source && (
           <>
             {" · "}
             <Link

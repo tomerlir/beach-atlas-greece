@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Plus, Users } from 'lucide-react';
+import { MapPin, Plus, Users, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -8,6 +8,7 @@ import { supabase } from '@/integrations/supabase/client';
 import type { Tables } from '@/integrations/supabase/types';
 import { formatRelativeUpdatedAt } from '@/lib/utils';
 import { AdminUserManagement } from '@/components/admin/AdminUserManagement';
+import { AdminFlowAudit } from '@/components/admin/AdminFlowAudit';
 
 type Beach = Tables<'beaches'>;
 
@@ -90,6 +91,10 @@ const AdminDashboard = () => {
           <TabsTrigger value="users" className="flex items-center gap-2">
             <Users className="h-4 w-4" />
             User Management
+          </TabsTrigger>
+          <TabsTrigger value="audit" className="flex items-center gap-2">
+            <Shield className="h-4 w-4" />
+            Security Audit
           </TabsTrigger>
         </TabsList>
 
@@ -194,6 +199,10 @@ const AdminDashboard = () => {
 
         <TabsContent value="users">
           <AdminUserManagement />
+        </TabsContent>
+
+        <TabsContent value="audit">
+          <AdminFlowAudit />
         </TabsContent>
       </Tabs>
     </div>

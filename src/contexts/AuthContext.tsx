@@ -37,7 +37,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
   const [hasExplicitlySignedOut, setHasExplicitlySignedOut] = useState(false);
 
-  const fetchProfile = async (userId: string) => {
+  const fetchProfile = async (userId: string, userEmail?: string) => {
     try {
       const { data, error } = await supabase
         .from('profiles')
@@ -47,6 +47,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       if (error) {
         console.error('Error fetching profile:', error);
+        setLoading(false);
         return;
       }
 
@@ -54,13 +55,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setProfile(data);
       } else {
         // Create a default user profile for new users
-        const userEmail = session?.user?.email;
-        if (userEmail) {
+        const email = userEmail || session?.user?.email;
+        if (email) {
           const { data: newProfile, error: insertError } = await supabase
             .from('profiles')
             .insert({
               user_id: userId,
-              email: userEmail,
+              email: email,
               role: 'user' // Default role is 'user', admin role must be assigned manually
             })
             .select()
@@ -68,9 +69,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
           if (insertError) {
             console.error('Error creating user profile:', insertError);
+            // Don't set profile if creation failed
           } else {
             setProfile(newProfile);
           }
+        } else {
+          console.error('No email available for profile creation');
         }
       }
     } catch (error) {
@@ -89,9 +93,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         
         if (session?.user) {
           setLoading(true);
-          // Defer profile fetching
+          // Defer profile fetching with email parameter
           setTimeout(() => {
-            fetchProfile(session.user.id);
+            fetchProfile(session.user.id, session.user.email);
           }, 0);
         } else {
           setProfile(null);
@@ -109,7 +113,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         if (session?.user) {
           setLoading(true);
           setTimeout(() => {
-            fetchProfile(session.user.id);
+            fetchProfile(session.user.id, session.user.email);
           }, 0);
         } else {
           setLoading(false);
@@ -121,6 +125,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
 
     return () => subscription.unsubscribe();
+  }, []); // Remove hasExplicitlySignedOut dependency to prevent infinite loops
+
+  // Separate effect to handle explicit sign out flag
+  useEffect(() => {
+    if (hasExplicitlySignedOut) {
+      // Don't restore session if user explicitly signed out
+      setLoading(false);
+    }
   }, [hasExplicitlySignedOut]);
 
   const signIn = async (email: string, password: string) => {
