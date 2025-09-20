@@ -9,7 +9,7 @@ import { CSV_HEADER_ORDER } from './beachCsvSchema';
 export function downloadCsv(
   filename: string, 
   rows: Record<string, any>[], 
-  headers: string[] = CSV_HEADER_ORDER
+  headers: readonly string[] = CSV_HEADER_ORDER
 ): void {
   try {
     // Create CSV content
@@ -49,7 +49,7 @@ export function downloadCsv(
  * @param headers - Array of header names
  * @returns CSV string
  */
-function createCsvContent(rows: Record<string, any>[], headers: string[]): string {
+function createCsvContent(rows: Record<string, any>[], headers: readonly string[]): string {
   // Escape CSV field value
   function escapeCsvField(field: any): string {
     if (field === null || field === undefined) {
