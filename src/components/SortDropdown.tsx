@@ -153,6 +153,8 @@ export default function SortDropdown({
                 size="sm"
                 onClick={() => {
                   onLocationRequest();
+                  // Also enable Near me filter to make distance sorting available
+                  onFiltersChange({ nearMe: true, page: 1 });
                   setIsOpen(false);
                 }}
                 disabled={isLoadingLocation}
