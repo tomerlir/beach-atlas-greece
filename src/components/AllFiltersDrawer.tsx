@@ -328,7 +328,7 @@ export default function AllFiltersDrawer({
         </div>
 
         {/* Sticky Footer */}
-        <SheetFooter className="p-6 pt-4 border-t sticky bottom-0 bg-background pb-[env(safe-area-inset-bottom)]">
+        <SheetFooter className="p-6 pt-4 pb-8 border-t sticky bottom-0 bg-background pb-[calc(env(safe-area-inset-bottom)+2rem)]">
           <div className="flex gap-3 w-full">
             <Button
               variant="outline"

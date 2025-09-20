@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { useDebouncedSearch } from '@/hooks/useDebouncedSearch';
 import { FilterState } from '@/hooks/useUrlState';
 
@@ -87,8 +87,7 @@ export default function SearchHeader({
   const isLocationDenied = locationPermission === 'denied';
 
   return (
-    <TooltipProvider>
-      <div className="bg-white border-b border-border sticky top-0 z-40">
+    <div className="bg-white border-b border-border sticky top-0 z-40">
         <div className="container mx-auto px-4 py-6">
           {/* Large Search Input */}
           <div className="relative mb-6">
@@ -177,6 +176,5 @@ export default function SearchHeader({
           </div>
         </div>
       </div>
-    </TooltipProvider>
   );
 }

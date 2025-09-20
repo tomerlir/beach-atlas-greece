@@ -19,7 +19,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { useDebouncedSearch } from '@/hooks/useDebouncedSearch';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FilterState } from '@/hooks/useUrlState';
@@ -241,8 +241,7 @@ export default function FilterBar({
   }, [organizedOpen, parkingOpen]);
 
   return (
-    <TooltipProvider>
-      <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border">
+    <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border">
         {/* Main Filter Bar */}
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col gap-4">
@@ -599,6 +598,5 @@ export default function FilterBar({
           {resultCount} beaches found
         </div>
       </div>
-    </TooltipProvider>
   );
 }
