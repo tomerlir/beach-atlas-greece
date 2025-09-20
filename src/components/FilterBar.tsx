@@ -279,7 +279,7 @@ export default function FilterBar({
                       aria-label={`Near me (${filters.nearMe ? 'on' : 'off'})`}
                     >
                       <MapPin className="h-4 w-4 md:h-5 md:w-5" />
-                      <span className="ml-2 text-sm">Near Me</span>
+                      <span className="ml-2 text-sm">Near me</span>
                     </Button>
                   </TooltipTrigger>
                   {locationPermission === 'denied' && (
@@ -327,7 +327,7 @@ export default function FilterBar({
                       aria-label="Organized"
                     >
                       <Waves className="h-4 w-4 mr-2 flex-shrink-0" />
-                      <span className="truncate">Beach Setup</span>
+                      <span className="truncate">Beach setup</span>
                       <ChevronDown className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>
                   </PopoverTrigger>
@@ -430,7 +430,7 @@ export default function FilterBar({
                       aria-label={`Near me (${filters.nearMe ? 'on' : 'off'})`}
                     >
                       <MapPin className="h-4 w-4 md:h-5 md:w-5" />
-                      <span className="ml-2 text-sm">near me</span>
+                      <span className="ml-2 text-sm">Near me</span>
                     </Button>
                   </TooltipTrigger>
                   {locationPermission === 'denied' && (
