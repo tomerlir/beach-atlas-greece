@@ -212,6 +212,7 @@ const BeachForm: React.FC<Props> = ({ mode }) => {
       } else {
         setTimeout(()=> firstInvalidRef.current?.focus(), 0);
       }
+      setSubmitting(false); // Reset submitting state on validation errors
       return;
     }
 
@@ -507,6 +508,16 @@ const BeachForm: React.FC<Props> = ({ mode }) => {
           >
             {STATUS_OPTIONS.map(o=> <option key={o} value={o}>{o}</option>)}
           </select>
+        </div>
+        <div className="md:col-span-2">
+          <label className="block text-sm font-medium">Source</label>
+          <Input 
+            name="source" 
+            value={draft.source} 
+            onChange={(e) => updateDraft({ source: e.target.value })}
+            placeholder="e.g., OpenStreetMap, Google Maps, User submission" 
+          />
+          <p className="text-xs text-muted-foreground mt-1">Optional: Where this beach data came from.</p>
         </div>
         <div className="md:col-span-2">
           <details>
