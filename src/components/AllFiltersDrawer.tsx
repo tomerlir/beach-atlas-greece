@@ -207,6 +207,26 @@ export default function AllFiltersDrawer({
             </div>
           </div>
 
+          {/* Blue Flag Section */}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-base flex items-center gap-2">
+              <Flag className="h-4 w-4 text-primary" />
+              Blue Flag
+            </h3>
+            
+            <div className="flex items-center space-x-3 min-h-[44px]">
+              <Checkbox
+                id="blue-flag"
+                checked={draftFilters.blueFlag}
+                onCheckedChange={(checked) => updateDraft({ blueFlag: !!checked })}
+                className="w-4 h-4"
+              />
+              <Label htmlFor="blue-flag" className="text-sm cursor-pointer">
+                Blue Flag certified beaches only
+              </Label>
+            </div>
+          </div>
+
           {/* Beach Setup Section */}
           <div className="space-y-4">
             <h3 className="font-semibold text-base flex items-center gap-2">
@@ -265,26 +285,6 @@ export default function AllFiltersDrawer({
                   {option.label}
                 </Button>
               ))}
-            </div>
-          </div>
-
-          {/* Blue Flag Section */}
-          <div className="space-y-4">
-            <h3 className="font-semibold text-base flex items-center gap-2">
-              <Flag className="h-4 w-4 text-primary" />
-              Blue Flag
-            </h3>
-            
-            <div className="flex items-center space-x-3 min-h-[44px]">
-              <Checkbox
-                id="blue-flag"
-                checked={draftFilters.blueFlag}
-                onCheckedChange={(checked) => updateDraft({ blueFlag: !!checked })}
-                className="w-4 h-4"
-              />
-              <Label htmlFor="blue-flag" className="text-sm cursor-pointer">
-                Blue Flag certified beaches only
-              </Label>
             </div>
           </div>
 

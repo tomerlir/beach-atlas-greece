@@ -9,12 +9,10 @@ import {
   Car,
   Flag,
   Sun,
+  Umbrella,
+  Waves,
   X,
   Plus,
-  ArrowUpAZ,
-  ArrowDownAZ,
-  ArrowUp01,
-  ArrowDown01
 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -26,6 +24,7 @@ import { useDebouncedSearch } from '@/hooks/useDebouncedSearch';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FilterState } from '@/hooks/useUrlState';
 import AmenitiesDropdown from '@/components/AmenitiesDropdown';
+import SortDropdown from '@/components/SortDropdown';
 import { getAmenityLabel } from '@/lib/amenities';
 
 interface FilterBarProps {
@@ -55,17 +54,6 @@ const parkingOptions = [
   { value: 'LARGE_LOT', label: 'Large lot' },
 ];
 
-// Sort state helpers
-const parseSortState = (sort: string | null) => {
-  if (!sort) return { key: null, dir: null };
-  const [key, dir] = sort.split('.');
-  return { key, dir };
-};
-
-const formatSortState = (key: string | null, dir: string | null) => {
-  if (!key || !dir) return null;
-  return `${key}.${dir}`;
-};
 
 
 const parkingLabels: Record<string, string> = {
@@ -137,35 +125,6 @@ export default function FilterBar({
     onFiltersChange(updates);
   }, [onFiltersChange, userLocation, onLocationRequest]);
 
-  const handleSortChipClick = useCallback((clickedKey: string) => {
-    const currentSort = parseSortState(filters.sort);
-
-    if (clickedKey === 'distance' && !filters.nearMe) {
-      // Request location for distance sorting
-      onLocationRequest();
-      return;
-    }
-
-    let newKey: string | null = null;
-    let newDir: string | null = null;
-
-    if (currentSort.key !== clickedKey) {
-      // Different key clicked - set to asc
-      newKey = clickedKey;
-      newDir = 'asc';
-    } else if (currentSort.dir === 'asc') {
-      // Same key, currently asc - set to desc
-      newKey = clickedKey;
-      newDir = 'desc';
-    } else if (currentSort.dir === 'desc') {
-      // Same key, currently desc - turn off
-      newKey = null;
-      newDir = null;
-    }
-
-    const newSort = formatSortState(newKey, newDir);
-    onFiltersChange({ sort: newSort as FilterState['sort'], page: 1 });
-  }, [onFiltersChange, filters.sort, filters.nearMe, onLocationRequest]);
 
   // Remove individual filters
   const handleRemoveFilter = useCallback((filterType: keyof FilterState, value?: any) => {
@@ -265,30 +224,6 @@ export default function FilterBar({
   }, [filters, handleRemoveFilter]);
 
 
-  // Get sort chip states
-  const currentSort = parseSortState(filters.sort);
-  const isDistanceEnabled = filters.nearMe && userLocation;
-
-  const getSortChipState = (key: string) => {
-    if (currentSort.key === key) {
-      return currentSort.dir;
-    }
-    return null;
-  };
-
-  const getSortChipAriaLabel = (key: string) => {
-    const state = getSortChipState(key);
-    if (key === 'name') {
-      if (state === 'asc') return 'Sort by name A to Z';
-      if (state === 'desc') return 'Sort by name Z to A';
-      return 'Turn off name sorting';
-    } else if (key === 'distance') {
-      if (state === 'asc') return 'Sort by distance near to far';
-      if (state === 'desc') return 'Sort by distance far to near';
-      return 'Turn off distance sorting';
-    }
-    return '';
-  };
 
 
   // Focus management
@@ -344,6 +279,7 @@ export default function FilterBar({
                       aria-label={`Near me (${filters.nearMe ? 'on' : 'off'})`}
                     >
                       <MapPin className="h-4 w-4 md:h-5 md:w-5" />
+                      <span className="ml-2 text-sm">Near Me</span>
                     </Button>
                   </TooltipTrigger>
                   {locationPermission === 'denied' && (
@@ -368,6 +304,7 @@ export default function FilterBar({
                   aria-label={`Blue Flag (${filters.blueFlag ? 'on' : 'off'})`}
                 >
                   <Flag className="h-4 w-4 md:h-5 md:w-5" />
+                  <span className="ml-2 text-sm">Blue Flag</span>
                 </Button>
 
                 {/* Amenities Dropdown */}
@@ -389,6 +326,7 @@ export default function FilterBar({
                       aria-expanded={organizedOpen}
                       aria-label="Organized"
                     >
+                      <Waves className="h-4 w-4 mr-2 flex-shrink-0" />
                       <span className="truncate">Beach Setup</span>
                       <ChevronDown className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>
@@ -421,6 +359,7 @@ export default function FilterBar({
                       aria-expanded={parkingOpen}
                       aria-label="Parking"
                     >
+                      <Car className="h-4 w-4 mr-2 flex-shrink-0" />
                       <span className="truncate">Parking</span>
                       <ChevronDown className="h-4 w-4 ml-2 flex-shrink-0" />
                     </Button>
@@ -462,55 +401,15 @@ export default function FilterBar({
                 {/* Vertical Separator */}
                 <div className="h-6 w-px bg-border mx-1" />
 
-                {/* Sort Chips */}
-                <div className="flex items-center gap-2">
-                  {/* Name Sort Chip */}
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button
-                        variant={getSortChipState('name') ? "default" : "outline"}
-                        size="sm"
-                        onClick={() => handleSortChipClick('name')}
-                        className="px-3 py-2 rounded-xl border h-auto"
-                        aria-pressed={!!getSortChipState('name')}
-                        aria-label={getSortChipAriaLabel('name')}
-                      >
-                        <span className="mr-2">Name</span>
-                        {getSortChipState('name') === 'asc' && <ArrowDownAZ className="h-4 w-4" />}
-                        {getSortChipState('name') === 'desc' && <ArrowUpAZ className="h-4 w-4" />}
-                      </Button>
-                    </TooltipTrigger>
-                  </Tooltip>
-
-                  {/* Distance Sort Chip */}
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button
-                        variant={getSortChipState('distance') ? "default" : "outline"}
-                        size="sm"
-                        onClick={() => handleSortChipClick('distance')}
-                        disabled={!isDistanceEnabled}
-                        className="px-3 py-2 rounded-xl border h-auto"
-                        aria-pressed={!!getSortChipState('distance')}
-                        aria-label={isDistanceEnabled ? getSortChipAriaLabel('distance') : 'Turn on Near me to sort by distance'}
-                        aria-disabled={!isDistanceEnabled}
-                      >
-                        <span className="mr-2">Distance</span>
-                        {getSortChipState('distance') === 'asc' && <ArrowDown01 className="h-4 w-4" />}
-                        {getSortChipState('distance') === 'desc' && <ArrowUp01 className="h-4 w-4" />}
-                      </Button>
-                    </TooltipTrigger>
-                    {!isDistanceEnabled && (
-                      <TooltipContent>
-                        <div className="flex items-center gap-2">
-                          <AlertCircle className="h-4 w-4" />
-                          <span>Turn on Near me to sort by distance</span>
-                        </div>
-                      </TooltipContent>
-                    )}
-                  </Tooltip>
-
-                </div>
+                {/* Sort Dropdown */}
+                <SortDropdown
+                  filters={filters}
+                  onFiltersChange={onFiltersChange}
+                  userLocation={userLocation}
+                  locationPermission={locationPermission}
+                  onLocationRequest={onLocationRequest}
+                  isLoadingLocation={isLoadingLocation}
+                />
               </div>
             ) : (
               /* Mobile: Scrollable facet chips */
@@ -531,6 +430,7 @@ export default function FilterBar({
                       aria-label={`Near me (${filters.nearMe ? 'on' : 'off'})`}
                     >
                       <MapPin className="h-4 w-4 md:h-5 md:w-5" />
+                      <span className="ml-2 text-sm">near me</span>
                     </Button>
                   </TooltipTrigger>
                   {locationPermission === 'denied' && (
@@ -555,6 +455,7 @@ export default function FilterBar({
                   aria-label={`Blue Flag (${filters.blueFlag ? 'on' : 'off'})`}
                 >
                   <Flag className="h-4 w-4 md:h-5 md:w-5" />
+                  <span className="ml-2 text-sm">blue flag</span>
                 </Button>
 
                 {/* Amenities Dropdown */}
@@ -575,7 +476,7 @@ export default function FilterBar({
                       aria-expanded={organizedOpen}
                       aria-label="Organized"
                     >
-                      <CheckCircle className="h-4 w-4 mr-2" />
+                      <Umbrella className="h-4 w-4 mr-2" />
                       Setup
                     </Button>
                   </PopoverTrigger>
@@ -627,30 +528,6 @@ export default function FilterBar({
                   </PopoverContent>
                 </Popover>
 
-                <Button
-                  variant={filters.blueFlag ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => handleBlueFlagToggle(!filters.blueFlag)}
-                  className="px-3 py-2 rounded-xl border h-auto"
-                  role="switch"
-                  aria-checked={filters.blueFlag}
-                  aria-label={`Blue Flag (${filters.blueFlag ? 'on' : 'off'})`}
-                >
-                  <Flag className="h-4 w-4" />
-                </Button>
-
-                <Button
-                  variant={filters.nearMe ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => handleNearMeToggle(!filters.nearMe)}
-                  disabled={isLoadingLocation}
-                  className="px-3 py-2 rounded-xl border h-auto"
-                  role="switch"
-                  aria-checked={filters.nearMe}
-                  aria-label={`Near me (${filters.nearMe ? 'on' : 'off'})`}
-                >
-                  <MapPin className="h-4 w-4" />
-                </Button>
 
                 <Button
                   variant="outline"
@@ -666,37 +543,16 @@ export default function FilterBar({
                 {/* Vertical Separator */}
                 <div className="h-6 w-px bg-border mx-1 flex-shrink-0" />
 
-                {/* Sort Chips for Mobile */}
-                <div className="flex items-center gap-2 flex-shrink-0">
-                  {/* Name Sort Chip */}
-                  <Button
-                    variant={getSortChipState('name') ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => handleSortChipClick('name')}
-                    className="px-3 py-2 rounded-xl border h-auto"
-                    aria-pressed={!!getSortChipState('name')}
-                    aria-label={getSortChipAriaLabel('name')}
-                  >
-                    <span className="mr-2">Name</span>
-                    {getSortChipState('name') === 'asc' && <ArrowDownAZ className="h-4 w-4" />}
-                    {getSortChipState('name') === 'desc' && <ArrowUpAZ className="h-4 w-4" />}
-                  </Button>
-
-                  {/* Distance Sort Chip */}
-                  <Button
-                    variant={getSortChipState('distance') ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => handleSortChipClick('distance')}
-                    disabled={!isDistanceEnabled}
-                    className="px-3 py-2 rounded-xl border h-auto"
-                    aria-pressed={!!getSortChipState('distance')}
-                    aria-label={isDistanceEnabled ? getSortChipAriaLabel('distance') : 'Turn on Near me to sort by distance'}
-                    aria-disabled={!isDistanceEnabled}
-                  >
-                    <span className="mr-2">Distance</span>
-                    {getSortChipState('distance') === 'asc' && <ArrowDown01 className="h-4 w-4" />}
-                    {getSortChipState('distance') === 'desc' && <ArrowUp01 className="h-4 w-4" />}
-                  </Button>
+                {/* Sort Dropdown for Mobile */}
+                <div className="flex-shrink-0">
+                  <SortDropdown
+                    filters={filters}
+                    onFiltersChange={onFiltersChange}
+                    userLocation={userLocation}
+                    locationPermission={locationPermission}
+                    onLocationRequest={onLocationRequest}
+                    isLoadingLocation={isLoadingLocation}
+                  />
                 </div>
               </div>
             )}

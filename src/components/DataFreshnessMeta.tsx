@@ -44,17 +44,6 @@ export const DataFreshnessMeta = ({ beach }: DataFreshnessMetaProps) => {
         >
           {relativeTime}
         </time>
-        {beach.photo_source && (
-          <>
-            {" · "}
-            <Link
-              to="/about#credits"
-              className="hover:text-foreground transition-colors"
-            >
-              Source
-            </Link>
-          </>
-        )}
       </span>
     </div>
   );

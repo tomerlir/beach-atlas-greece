@@ -134,6 +134,7 @@ export default function AmenitiesDropdown({
             {appliedCount}
           </Badge>
         )}
+        <ChevronDown className="h-4 w-4 ml-2 flex-shrink-0" />
       </Button>
     );
   }
@@ -161,6 +162,7 @@ export default function AmenitiesDropdown({
               {appliedCount}
             </Badge>
           )}
+          <ChevronDown className="h-4 w-4 ml-2 flex-shrink-0" />
         </Button>
       </PopoverTrigger>
       <PopoverContent
@@ -173,10 +175,9 @@ export default function AmenitiesDropdown({
         {/* Header */}
         <div className="p-4 border-b">
           <h3 className="font-semibold text-sm flex items-center justify-between">
-            Amenities
             {selectedCount > 0 && (
               <span className="text-muted-foreground text-xs font-normal">
-                • {selectedCount} selected
+                {selectedCount} selected
               </span>
             )}
           </h3>
@@ -216,7 +217,7 @@ export default function AmenitiesDropdown({
         </div>
 
         {/* Sticky Footer */}
-        <div className="p-4 border-t bg-background sticky bottom-0 pb-[env(safe-area-inset-bottom)]">
+        <div className="p-4 pb-6 border-t bg-background sticky bottom-0 rounded-b-md pb-[env(safe-area-inset-bottom)]">
           <div className="flex gap-2">
             <Button
               variant="outline"
