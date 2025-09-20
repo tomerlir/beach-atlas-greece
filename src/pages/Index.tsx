@@ -85,7 +85,7 @@ const Index = () => {
   // Show geolocation error banner when Near me is on but geolocation fails
   // Also revert to Name sort when geolocation fails
   useEffect(() => {
-    if (filters.nearMe && locationError && !location) {
+    if (filters.nearMe && locationError && !location && !isLoadingLocation) {
       setShowGeolocationError(true);
       // Revert to Name sort when geolocation fails but Near me is still on
       if (filters.sort?.startsWith('distance')) {
@@ -94,7 +94,14 @@ const Index = () => {
     } else if (location || !filters.nearMe) {
       setShowGeolocationError(false);
     }
-  }, [filters.nearMe, locationError, location, filters.sort, updateFilters]);
+  }, [filters.nearMe, locationError, location, filters.sort, updateFilters, isLoadingLocation]);
+
+  // Auto-enable distance sorting when location becomes available and near me is enabled
+  useEffect(() => {
+    if (location && filters.nearMe && !filters.sort?.startsWith('distance')) {
+      updateFilters({ sort: 'distance.asc', page: 1 });
+    }
+  }, [location, filters.nearMe, filters.sort, updateFilters]);
 
   // Handle geolocation retry
   const handleGeolocationRetry = () => {

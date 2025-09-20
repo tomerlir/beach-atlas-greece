@@ -2,7 +2,7 @@ import React from 'react';
 import BeachForm from './BeachForm';
 
 const AdminBeachCreate: React.FC = () => {
-  return <BeachForm mode="create" />;
+  return <BeachForm />;
 };
 
 export default AdminBeachCreate;

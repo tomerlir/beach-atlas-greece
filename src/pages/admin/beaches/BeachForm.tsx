@@ -34,9 +34,7 @@ const schema = z.object({
   source: z.string().max(500).optional().or(z.literal('')),
 });
 
-interface Props { mode: 'create' | 'edit' }
-
-const BeachForm: React.FC<Props> = ({ mode }) => {
+const BeachForm: React.FC = () => {
   const navigate = useNavigate();
   const params = useParams();
   const { toast } = useToast();
@@ -53,6 +51,9 @@ const BeachForm: React.FC<Props> = ({ mode }) => {
   const lastGeneratedSlugRef = useRef<string>('');
 
   const id = params.id as string | undefined;
+  
+  // Determine mode based on whether we have an ID
+  const mode = id ? 'edit' : 'create';
   
   // Create a unique key for this form (edit mode uses beach ID, create mode uses 'new')
   const formKey = mode === 'edit' && id ? `edit-${id}` : 'create';

@@ -6,23 +6,12 @@ import {
   Waves, 
   Car, 
   Flag, 
-  Mail, 
   ArrowLeft, 
   Shield, 
   Palmtree, 
   Users, 
-  Clock,
-  Navigation,
   Share2,
   MessageSquare,
-  Droplets,
-  Camera,
-  Utensils,
-  LifeBuoy,
-  Mountain,
-  Eye,
-  Anchor,
-  Heart
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Badge } from "@/components/ui/badge";
@@ -40,7 +29,6 @@ import PhotoAttribution from "@/components/PhotoAttribution";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
 import { useProgressiveLoading } from "@/hooks/useProgressiveLoading";
 import { generateBeachImageAltText } from "@/lib/accessibility";
-import { useScrollToTopOnMount } from "@/hooks/useScrollToTop";
 
 type Beach = Tables<'beaches'>;
 
