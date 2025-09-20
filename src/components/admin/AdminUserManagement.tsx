@@ -43,14 +43,14 @@ export const AdminUserManagement: React.FC = () => {
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const { data, error } = await supabase.rpc('get_all_users');
+      const { data, error } = await supabase.rpc('get_users_for_admin' as any);
       
       if (error) {
         setError(`Failed to fetch users: ${error.message}`);
         return;
       }
       
-      setUsers(data || []);
+      setUsers((data as User[]) || []);
     } catch (err) {
       setError(`Error fetching users: ${err}`);
     } finally {
@@ -63,7 +63,7 @@ export const AdminUserManagement: React.FC = () => {
       setPromoting(userId);
       setError(null);
       
-      const { error } = await supabase.rpc('promote_to_admin', {
+      const { error } = await supabase.rpc('promote_to_admin' as any, {
         target_user_id: userId
       });
       
@@ -71,6 +71,13 @@ export const AdminUserManagement: React.FC = () => {
         setError(`Failed to promote user: ${error.message}`);
         return;
       }
+      
+      // Log the admin action
+      await supabase.rpc('log_admin_action' as any, {
+        action_type: 'promote_to_admin',
+        target_user_id: userId,
+        action_details: { timestamp: new Date().toISOString() }
+      });
       
       setSuccess('User promoted to admin successfully');
       await fetchUsers();
@@ -86,7 +93,7 @@ export const AdminUserManagement: React.FC = () => {
       setDemoting(userId);
       setError(null);
       
-      const { error } = await supabase.rpc('demote_from_admin', {
+      const { error } = await supabase.rpc('demote_from_admin' as any, {
         target_user_id: userId
       });
       
@@ -94,6 +101,13 @@ export const AdminUserManagement: React.FC = () => {
         setError(`Failed to demote user: ${error.message}`);
         return;
       }
+      
+      // Log the admin action
+      await supabase.rpc('log_admin_action' as any, {
+        action_type: 'demote_from_admin',
+        target_user_id: userId,
+        action_details: { timestamp: new Date().toISOString() }
+      });
       
       setSuccess('User demoted from admin successfully');
       await fetchUsers();
@@ -114,7 +128,7 @@ export const AdminUserManagement: React.FC = () => {
       setBootstrapLoading(true);
       setError(null);
       
-      const { error } = await supabase.rpc('bootstrap_first_admin', {
+      const { error } = await supabase.rpc('bootstrap_first_admin' as any, {
         admin_email: bootstrapEmail.trim()
       });
       

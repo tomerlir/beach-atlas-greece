@@ -110,6 +110,33 @@ export type Database = {
         }
         Relationships: []
       }
+      admin_audit_log: {
+        Row: {
+          id: string
+          admin_user_id: string
+          action: string
+          target_user_id: string | null
+          details: any | null
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          admin_user_id: string
+          action: string
+          target_user_id?: string | null
+          details?: any | null
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          admin_user_id?: string
+          action?: string
+          target_user_id?: string | null
+          details?: any | null
+          created_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -118,6 +145,60 @@ export type Database = {
       is_admin: {
         Args: Record<PropertyKey, never>
         Returns: boolean
+      }
+      get_users_for_admin: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          user_id: string
+          email: string
+          role: string
+          created_at: string
+          last_sign_in: string | null
+        }[]
+      }
+      get_user_management_data: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          user_id: string
+          role: string
+          created_at: string
+          last_sign_in: string | null
+          is_verified: boolean
+        }[]
+      }
+      get_current_user_email: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
+      can_access_admin_functions: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
+      promote_to_admin: {
+        Args: {
+          target_user_id: string
+        }
+        Returns: boolean
+      }
+      demote_from_admin: {
+        Args: {
+          target_user_id: string
+        }
+        Returns: boolean
+      }
+      bootstrap_first_admin: {
+        Args: {
+          admin_email: string
+        }
+        Returns: boolean
+      }
+      log_admin_action: {
+        Args: {
+          action_type: string
+          target_user_id?: string
+          action_details?: any
+        }
+        Returns: void
       }
     }
     Enums: {
