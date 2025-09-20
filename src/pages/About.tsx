@@ -42,8 +42,8 @@ const About = () => {
             <h2 className="text-2xl font-semibold text-foreground mb-4">Blue Flag Certification</h2>
             
             <p className="text-muted-foreground mb-6">
-              Many beaches in our directory are Blue Flag certified, meaning they meet strict 
-              international standards for water quality, environmental management, safety, and services. 
+              Blue Flag is an international certification awarded annually by the Foundation for Environmental Education (FEE). 
+              Badge shown on this site indicates beaches certified as of the listed season/year.
               Look for the Blue Flag badge on beach cards to find these premium destinations.
             </p>
             
