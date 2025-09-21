@@ -87,6 +87,20 @@ export default function EnhancedSearchBar({
         )}
 
       </div>
+
+      {/* Search Tips */}
+      {searchFocused && searchInput.length < 2 && (
+        <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-border rounded-2xl shadow-lg p-4 z-40">
+          <div className="text-sm text-muted-foreground">
+            <p className="font-medium mb-2 text-foreground">Search tips:</p>
+            <ul className="space-y-1 text-xs">
+              <li>• Try beach names like "Sarakiniko" or "Porto Katsiki"</li>
+              <li>• Search by island or region like "Milos" or "Corfu"</li>
+              <li>• Filter by specific amenities and more</li>
+            </ul>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
