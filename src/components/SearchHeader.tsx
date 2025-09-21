@@ -78,9 +78,10 @@ export default function SearchHeader({
   // Calculate active filter counts (excluding nearMe as it's not a filter)
   const activeFiltersCount = [
     filters.blueFlag,
-    filters.organized !== null,
-    filters.parking !== 'any',
+    filters.organized.length > 0,
+    filters.parking.length > 0,
     filters.amenities.length > 0,
+    filters.waveConditions.length > 0,
   ].filter(Boolean).length;
 
   const isNearMeActive = filters.nearMe && userLocation;

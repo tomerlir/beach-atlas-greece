@@ -16,20 +16,26 @@ export const useBeachCount = (filters: FilterState, enabled: boolean = true) => 
         query = query.or(`name.ilike.%${filters.search}%,place_text.ilike.%${filters.search}%`);
       }
 
-      if (filters.organized !== null) {
-        query = query.eq('organized', filters.organized);
+      if (filters.organized.length > 0) {
+        // Convert organized array to boolean array for database query
+        const organizedBooleans = filters.organized.map(type => type === 'organized');
+        query = query.in('organized', organizedBooleans);
       }
 
       if (filters.blueFlag) {
         query = query.eq('blue_flag', true);
       }
 
-      if (filters.parking !== 'any') {
-        query = query.eq('parking', filters.parking);
+      if (filters.parking.length > 0) {
+        query = query.in('parking', filters.parking);
       }
 
       if (filters.amenities.length > 0) {
         query = query.contains('amenities', filters.amenities);
+      }
+
+      if (filters.waveConditions.length > 0) {
+        query = query.in('wave_conditions', filters.waveConditions);
       }
 
       const { count, error } = await query;

@@ -93,10 +93,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         
         if (session?.user) {
           setLoading(true);
-          // Defer profile fetching with email parameter
-          setTimeout(() => {
-            fetchProfile(session.user.id, session.user.email);
-          }, 0);
+          // Call fetchProfile directly without setTimeout to avoid race conditions
+          fetchProfile(session.user.id, session.user.email);
         } else {
           setProfile(null);
           setLoading(false);
@@ -112,9 +110,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         
         if (session?.user) {
           setLoading(true);
-          setTimeout(() => {
-            fetchProfile(session.user.id, session.user.email);
-          }, 0);
+          // Call fetchProfile directly without setTimeout to avoid race conditions
+          fetchProfile(session.user.id, session.user.email);
         } else {
           setLoading(false);
         }

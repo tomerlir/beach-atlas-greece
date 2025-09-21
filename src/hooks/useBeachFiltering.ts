@@ -18,8 +18,11 @@ export const useBeachFiltering = (
       }
 
       // Organized filter
-      if (filters.organized !== null && beach.organized !== filters.organized) {
-        return false;
+      if (filters.organized.length > 0) {
+        const beachOrganizedType = beach.organized ? 'organized' : 'unorganized';
+        if (!filters.organized.includes(beachOrganizedType)) {
+          return false;
+        }
       }
 
       // Blue Flag filter
@@ -28,7 +31,7 @@ export const useBeachFiltering = (
       }
 
       // Parking filter
-      if (filters.parking && filters.parking !== "any" && beach.parking !== filters.parking) {
+      if (filters.parking.length > 0 && !filters.parking.includes(beach.parking)) {
         return false;
       }
 
@@ -38,6 +41,11 @@ export const useBeachFiltering = (
           beach.amenities.includes(amenity)
         );
         if (!hasAllAmenities) return false;
+      }
+
+      // Wave conditions filter
+      if (filters.waveConditions.length > 0 && !filters.waveConditions.includes(beach.wave_conditions)) {
+        return false;
       }
 
       return true;

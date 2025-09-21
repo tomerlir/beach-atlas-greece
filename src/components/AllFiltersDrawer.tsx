@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { MapPin, Sun, CheckCircle, Car, Flag, X, Search, Check } from 'lucide-react';
+import { MapPin, Sun, CheckCircle, Car, Flag, X, Search, Check, Waves } from 'lucide-react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -33,6 +33,13 @@ const parkingOptions = [
   { value: 'ROADSIDE', label: 'Roadside' },
   { value: 'SMALL_LOT', label: 'Small lot' },
   { value: 'LARGE_LOT', label: 'Large lot' },
+];
+
+const waveConditionsOptions = [
+  { value: 'CALM', label: 'Calm' },
+  { value: 'MODERATE', label: 'Moderate' },
+  { value: 'WAVY', label: 'Wavy' },
+  { value: 'SURFABLE', label: 'Surfable' },
 ];
 
 export default function AllFiltersDrawer({
@@ -91,9 +98,9 @@ export default function AllFiltersDrawer({
     // Clear all filters including search
     updateDraft({
       search: '',
-      organized: null,
+      organized: [],
       blueFlag: false,
-      parking: 'any',
+      parking: [],
       amenities: [],
       sort: 'name.asc',
       page: 1,
@@ -229,62 +236,133 @@ export default function AllFiltersDrawer({
 
           {/* Beach Setup Section */}
           <div className="space-y-4">
-            <h3 className="font-semibold text-base flex items-center gap-2">
-              <CheckCircle className="h-4 w-4 text-primary" />
-             Beach setup
+            <h3 className="font-semibold text-base flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-4 w-4 text-primary" />
+                Beach setup
+              </div>
+              {draftFilters.organized.length > 0 && (
+                <span className="text-muted-foreground text-xs font-normal">
+                  • {draftFilters.organized.length} selected
+                </span>
+              )}
             </h3>
             
-            <div className="grid grid-cols-3 gap-2">
-              <Button
-                variant={draftFilters.organized === null ? "default" : "outline"}
-                size="sm"
-                onClick={() => updateDraft({ organized: null })}
-                className="text-xs min-h-[44px]"
-                aria-pressed={draftFilters.organized === null}
-              >
-                Both
-              </Button>
-              <Button
-                variant={draftFilters.organized === true ? "default" : "outline"}
-                size="sm"
-                onClick={() => updateDraft({ organized: true })}
-                className="text-xs min-h-[44px]"
-                aria-pressed={draftFilters.organized === true}
-              >
-                Organized
-              </Button>
-              <Button
-                variant={draftFilters.organized === false ? "default" : "outline"}
-                size="sm"
-                onClick={() => updateDraft({ organized: false })}
-                className="text-xs min-h-[44px]"
-                aria-pressed={draftFilters.organized === false}
-              >
-                Unorganized
-              </Button>
+            <div className="space-y-1">
+              {[
+                { value: 'organized', label: 'Organized' },
+                { value: 'unorganized', label: 'Unorganized' },
+              ].map((option) => {
+                const isSelected = draftFilters.organized.includes(option.value);
+                
+                return (
+                  <button
+                    key={option.value}
+                    onClick={() => {
+                      const newOrganized = isSelected
+                        ? draftFilters.organized.filter(org => org !== option.value)
+                        : [...draftFilters.organized, option.value];
+                      updateDraft({ organized: newOrganized });
+                    }}
+                    className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors min-h-[44px] rounded-md ${
+                      isSelected ? 'bg-muted/30' : ''
+                    }`}
+                    role="option"
+                    aria-selected={isSelected}
+                  >
+                    <span className="text-sm font-medium">{option.label}</span>
+                    {isSelected && (
+                      <Check className="h-4 w-4 text-primary" />
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
           {/* Parking Section */}
           <div className="space-y-4">
-            <h3 className="font-semibold text-base flex items-center gap-2">
-              <Car className="h-4 w-4 text-primary" />
-              Parking
+            <h3 className="font-semibold text-base flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Car className="h-4 w-4 text-primary" />
+                Parking
+              </div>
+              {draftFilters.parking.length > 0 && (
+                <span className="text-muted-foreground text-xs font-normal">
+                  • {draftFilters.parking.length} selected
+                </span>
+              )}
             </h3>
             
-            <div className="space-y-2">
-              {parkingOptions.map((option) => (
-                <Button
-                  key={option.value}
-                  variant={draftFilters.parking === option.value ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => updateDraft({ parking: option.value })}
-                  className="w-full justify-start min-h-[44px]"
-                  aria-pressed={draftFilters.parking === option.value}
-                >
-                  {option.label}
-                </Button>
-              ))}
+            <div className="space-y-1">
+              {parkingOptions.filter(option => option.value !== 'any').map((option) => {
+                const isSelected = draftFilters.parking.includes(option.value);
+                
+                return (
+                  <button
+                    key={option.value}
+                    onClick={() => {
+                      const newParking = isSelected
+                        ? draftFilters.parking.filter(p => p !== option.value)
+                        : [...draftFilters.parking, option.value];
+                      updateDraft({ parking: newParking });
+                    }}
+                    className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors min-h-[44px] rounded-md ${
+                      isSelected ? 'bg-muted/30' : ''
+                    }`}
+                    role="option"
+                    aria-selected={isSelected}
+                  >
+                    <span className="text-sm font-medium">{option.label}</span>
+                    {isSelected && (
+                      <Check className="h-4 w-4 text-primary" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Wave Conditions Section */}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-base flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Waves className="h-4 w-4 text-primary" />
+                Wave Conditions
+              </div>
+              {draftFilters.waveConditions.length > 0 && (
+                <span className="text-muted-foreground text-xs font-normal">
+                  • {draftFilters.waveConditions.length} selected
+                </span>
+              )}
+            </h3>
+            
+            <div className="space-y-1">
+              {waveConditionsOptions.map((option) => {
+                const isSelected = draftFilters.waveConditions.includes(option.value);
+                
+                return (
+                  <button
+                    key={option.value}
+                    onClick={() => {
+                      const newWaveConditions = isSelected
+                        ? draftFilters.waveConditions.filter(wc => wc !== option.value)
+                        : [...draftFilters.waveConditions, option.value];
+                      updateDraft({ waveConditions: newWaveConditions });
+                    }}
+                    className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors min-h-[44px] rounded-md ${
+                      isSelected ? 'bg-muted/30' : ''
+                    }`}
+                    role="option"
+                    aria-selected={isSelected}
+                  >
+                    <span className="text-sm font-medium">{option.label}</span>
+                    {isSelected && (
+                      <Check className="h-4 w-4 text-primary" />
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </div>
 

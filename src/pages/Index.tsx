@@ -79,7 +79,7 @@ const Index = () => {
   };
 
   const handleResetParking = () => {
-    updateFilters({ parking: 'any', page: 1 });
+    updateFilters({ parking: [], page: 1 });
   };
 
   // Show geolocation error banner when Near me is on but geolocation fails

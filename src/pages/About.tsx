@@ -59,7 +59,12 @@ const About = () => {
             
             <p className="text-muted-foreground">
               Have suggestions for beaches we should add? Found incorrect information? We'd love to 
-              hear from you! Send us your feedback using the Feedback link in our navigation.
+              hear from you! Send us your <a 
+                href="mailto:info@greekbeaches.com" 
+                className="text-primary hover:text-primary/80 underline transition-colors"
+              >
+                feedback
+              </a>.
             </p>
           </div>
         </div>

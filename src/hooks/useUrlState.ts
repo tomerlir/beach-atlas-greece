@@ -3,10 +3,11 @@ import { useSearchParams } from 'react-router-dom';
 
 export interface FilterState {
   search: string;
-  organized: boolean | null;
+  organized: string[];
   blueFlag: boolean;
-  parking: string;
+  parking: string[];
   amenities: string[];
+  waveConditions: string[];
   sort: string | null;
   page: number;
   nearMe: boolean; // New field to track if "Near me" is enabled
@@ -14,10 +15,11 @@ export interface FilterState {
 
 const defaultFilters: FilterState = {
   search: '',
-  organized: null,
+  organized: [],
   blueFlag: false,
-  parking: 'any',
+  parking: [],
   amenities: [],
+  waveConditions: [],
   sort: 'name.asc',
   page: 1,
   nearMe: false,
@@ -35,8 +37,9 @@ export function useUrlState() {
     
     // Parse organized
     const organized = searchParams.get('organized');
-    if (organized === 'true') state.organized = true;
-    else if (organized === 'false') state.organized = false;
+    if (organized) {
+      state.organized = organized.split(',').filter(Boolean);
+    }
     
     // Parse blueFlag
     const blueFlag = searchParams.get('blueFlag');
@@ -44,7 +47,9 @@ export function useUrlState() {
     
     // Parse parking
     const parking = searchParams.get('parking');
-    if (parking && parking !== 'any') state.parking = parking;
+    if (parking) {
+      state.parking = parking.split(',').filter(Boolean);
+    }
     
     // Parse amenities
     const amenities = searchParams.get('amenities');
@@ -52,6 +57,11 @@ export function useUrlState() {
       state.amenities = amenities.split(',').filter(Boolean);
     }
     
+    // Parse wave conditions
+    const waveConditions = searchParams.get('waveConditions');
+    if (waveConditions) {
+      state.waveConditions = waveConditions.split(',').filter(Boolean);
+    }
     
     // Parse sort
     const sort = searchParams.get('sort');
@@ -88,10 +98,10 @@ export function useUrlState() {
       
       // Update organized
       if (updates.organized !== undefined) {
-        if (updates.organized === null) {
-          newParams.delete('organized');
+        if (updates.organized.length > 0) {
+          newParams.set('organized', updates.organized.join(','));
         } else {
-          newParams.set('organized', updates.organized.toString());
+          newParams.delete('organized');
         }
       }
       
@@ -106,10 +116,10 @@ export function useUrlState() {
       
       // Update parking
       if (updates.parking !== undefined) {
-        if (updates.parking === 'any') {
-          newParams.delete('parking');
+        if (updates.parking.length > 0) {
+          newParams.set('parking', updates.parking.join(','));
         } else {
-          newParams.set('parking', updates.parking);
+          newParams.delete('parking');
         }
       }
       
@@ -122,6 +132,14 @@ export function useUrlState() {
         }
       }
       
+      // Update wave conditions
+      if (updates.waveConditions !== undefined) {
+        if (updates.waveConditions.length > 0) {
+          newParams.set('waveConditions', updates.waveConditions.join(','));
+        } else {
+          newParams.delete('waveConditions');
+        }
+      }
       
       // Update sort
       if (updates.sort !== undefined) {

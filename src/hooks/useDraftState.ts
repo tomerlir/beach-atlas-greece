@@ -20,7 +20,7 @@ export const useDraftState = (initialFilters: FilterState) => {
   const clearDraft = useCallback(() => {
     setDraftFilters({
       search: initialFilters.search, // Keep search term
-      organized: null,
+      organized: [],
       blueFlag: false,
       parking: 'any',
       amenities: [],

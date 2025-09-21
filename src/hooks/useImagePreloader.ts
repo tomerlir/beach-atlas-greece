@@ -18,6 +18,8 @@ export const useImagePreloader = () => {
   const loadingImages = useRef<Set<string>>(new Set());
   const preloadQueue = useRef<string[]>([]);
   const isProcessing = useRef(false);
+  const activeIntervals = useRef<Set<NodeJS.Timeout>>(new Set());
+  const activeTimeouts = useRef<Set<NodeJS.Timeout>>(new Set());
 
   // Generate optimized image URL (same logic as OptimizedImage)
   const getOptimizedImageUrl = useCallback((
@@ -65,14 +67,28 @@ export const useImagePreloader = () => {
 
       // Check if currently loading
       if (loadingImages.current.has(src)) {
-        // Wait for the existing load to complete
+        // Wait for the existing load to complete with proper cleanup
         const checkInterval = setInterval(() => {
           if (preloadedImages.current.has(src)) {
             clearInterval(checkInterval);
+            activeIntervals.current.delete(checkInterval);
             resolve(preloadedImages.current.get(src)!);
           }
         }, 50);
-        return;
+        activeIntervals.current.add(checkInterval);
+        
+        // Set a timeout to prevent infinite waiting
+        const timeout = setTimeout(() => {
+          clearInterval(checkInterval);
+          activeIntervals.current.delete(checkInterval);
+          activeTimeouts.current.delete(timeout);
+          resolve({
+            success: false,
+            url: src,
+            loadTime: 0
+          });
+        }, 10000); // 10 second timeout
+        activeTimeouts.current.add(timeout);
       }
 
       const startTime = Date.now();
@@ -203,6 +219,13 @@ export const useImagePreloader = () => {
 
   // Clear preloaded images (for memory management)
   const clearPreloadedImages = useCallback(() => {
+    // Clear all active intervals and timeouts
+    activeIntervals.current.forEach(interval => clearInterval(interval));
+    activeTimeouts.current.forEach(timeout => clearTimeout(timeout));
+    activeIntervals.current.clear();
+    activeTimeouts.current.clear();
+    
+    // Clear image data
     preloadedImages.current.clear();
     loadingImages.current.clear();
     preloadQueue.current = [];

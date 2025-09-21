@@ -24,6 +24,9 @@ import { useDebouncedSearch } from '@/hooks/useDebouncedSearch';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FilterState } from '@/hooks/useUrlState';
 import AmenitiesDropdown from '@/components/AmenitiesDropdown';
+import ParkingDropdown from '@/components/ParkingDropdown';
+import WaveConditionsDropdown from '@/components/WaveConditionsDropdown';
+import OrganizedDropdown from '@/components/OrganizedDropdown';
 import SortDropdown from '@/components/SortDropdown';
 import { getAmenityLabel } from '@/lib/amenities';
 
@@ -40,29 +43,7 @@ interface FilterBarProps {
 }
 
 
-const organizedOptions = [
-  { value: 'both', label: 'Both' },
-  { value: 'organized', label: 'Organized' },
-  { value: 'unorganized', label: 'Unorganized' },
-];
 
-const parkingOptions = [
-  { value: 'any', label: 'Any' },
-  { value: 'NONE', label: 'None' },
-  { value: 'ROADSIDE', label: 'Roadside' },
-  { value: 'SMALL_LOT', label: 'Small lot' },
-  { value: 'LARGE_LOT', label: 'Large lot' },
-];
-
-
-
-const parkingLabels: Record<string, string> = {
-  'any': 'Any',
-  'NONE': 'None',
-  'ROADSIDE': 'Roadside',
-  'SMALL_LOT': 'Small lot',
-  'LARGE_LOT': 'Large lot',
-};
 
 export default function FilterBar({
   filters,
@@ -76,11 +57,6 @@ export default function FilterBar({
   showCountBadge = false,
 }: FilterBarProps) {
   const isMobile = useIsMobile();
-  const [organizedOpen, setOrganizedOpen] = useState(false);
-  const [parkingOpen, setParkingOpen] = useState(false);
-
-  const organizedTriggerRef = useRef<HTMLButtonElement>(null);
-  const parkingTriggerRef = useRef<HTMLButtonElement>(null);
 
   // Debounced search with 250ms delay
   const { searchInput, setSearchInput, clearSearchInput } = useDebouncedSearch(
@@ -92,16 +68,6 @@ export default function FilterBar({
 
   // Handle filter changes
 
-  const handleOrganizedChange = useCallback((value: string) => {
-    const organized = value === 'both' ? null : value === 'organized';
-    onFiltersChange({ organized, page: 1 });
-    setOrganizedOpen(false);
-  }, [onFiltersChange]);
-
-  const handleParkingChange = useCallback((value: string) => {
-    onFiltersChange({ parking: value, page: 1 });
-    setParkingOpen(false);
-  }, [onFiltersChange]);
 
   const handleBlueFlagToggle = useCallback((checked: boolean) => {
     onFiltersChange({ blueFlag: checked, page: 1 });
@@ -133,29 +99,47 @@ export default function FilterBar({
         onFiltersChange({ search: '', page: 1 });
         break;
       case 'organized':
-        onFiltersChange({ organized: null, page: 1 });
+        onFiltersChange({ organized: [], page: 1 });
         break;
       case 'blueFlag':
         onFiltersChange({ blueFlag: false, page: 1 });
         break;
       case 'parking':
-        onFiltersChange({ parking: 'any', page: 1 });
+        if (value !== undefined) {
+          // Remove specific parking type
+          const newParking = filters.parking.filter(p => p !== value);
+          onFiltersChange({ parking: newParking, page: 1 });
+        } else {
+          // Clear all parking
+          onFiltersChange({ parking: [], page: 1 });
+        }
         break;
       case 'amenities':
         const newAmenities = filters.amenities.filter(amenity => amenity !== value);
         onFiltersChange({ amenities: newAmenities, page: 1 });
         break;
+      case 'waveConditions':
+        if (value !== undefined) {
+          // Remove specific wave condition
+          const newWaveConditions = filters.waveConditions.filter(wc => wc !== value);
+          onFiltersChange({ waveConditions: newWaveConditions, page: 1 });
+        } else {
+          // Clear all wave conditions
+          onFiltersChange({ waveConditions: [], page: 1 });
+        }
+        break;
     }
-  }, [onFiltersChange, filters.amenities]);
+  }, [onFiltersChange, filters.amenities, filters.waveConditions]);
 
   const handleClearAllFilters = useCallback(() => {
     clearSearchInput(); // Clear search input immediately
     onFiltersChange({
       search: '', // Clear search term
-      organized: null,
+      organized: [],
       blueFlag: false,
-      parking: 'any',
+      parking: [],
       amenities: [],
+      waveConditions: [],
       sort: 'name.asc', // Reset to default sort
       page: 1,
       nearMe: false,
@@ -165,16 +149,18 @@ export default function FilterBar({
   // Calculate active filter counts
   const activeFiltersCount = [
     filters.blueFlag,
-    filters.organized !== null,
-    filters.parking !== 'any',
+    filters.organized.length > 0,
+    filters.parking.length > 0,
     filters.amenities.length > 0,
+    filters.waveConditions.length > 0,
   ].filter(Boolean).length;
 
   const hasActiveFilters = filters.search ||
-    filters.organized !== null ||
+    filters.organized.length > 0 ||
     filters.blueFlag ||
-    filters.parking !== 'any' ||
-    filters.amenities.length > 0;
+    filters.parking.length > 0 ||
+    filters.amenities.length > 0 ||
+    filters.waveConditions.length > 0;
 
   // Get filter pills for display
   const getFilterPills = useMemo(() => {
@@ -188,11 +174,16 @@ export default function FilterBar({
       });
     }
 
-    if (filters.organized !== null) {
-      pills.push({
-        id: 'organized',
-        label: filters.organized ? 'Organized' : 'Unorganized',
-        onRemove: () => handleRemoveFilter('organized'),
+    if (filters.organized.length > 0) {
+      filters.organized.forEach(organizedType => {
+        pills.push({
+          id: `organized-${organizedType}`,
+          label: organizedType === 'organized' ? 'Organized' : 'Unorganized',
+          onRemove: () => {
+            const newOrganized = filters.organized.filter(type => type !== organizedType);
+            onFiltersChange({ organized: newOrganized, page: 1 });
+          },
+        });
       });
     }
 
@@ -204,13 +195,20 @@ export default function FilterBar({
       });
     }
 
-    if (filters.parking !== 'any') {
+    // Individual parking pills
+    filters.parking.forEach((parkingType) => {
+      const parkingLabels: Record<string, string> = {
+        'NONE': 'None',
+        'ROADSIDE': 'Roadside',
+        'SMALL_LOT': 'Small lot',
+        'LARGE_LOT': 'Large lot',
+      };
       pills.push({
-        id: 'parking',
-        label: `Parking: ${parkingLabels[filters.parking] || filters.parking}`,
-        onRemove: () => handleRemoveFilter('parking'),
+        id: `parking-${parkingType}`,
+        label: parkingLabels[parkingType] || parkingType,
+        onRemove: () => handleRemoveFilter('parking', parkingType),
       });
-    }
+    });
 
     filters.amenities.forEach((amenity) => {
       pills.push({
@@ -220,25 +218,27 @@ export default function FilterBar({
       });
     });
 
+    // Individual wave conditions pills
+    filters.waveConditions.forEach((waveCondition) => {
+      const waveConditionLabels: Record<string, string> = {
+        'CALM': 'Calm',
+        'MODERATE': 'Moderate',
+        'WAVY': 'Wavy',
+        'SURFABLE': 'Surfable',
+      };
+      pills.push({
+        id: `wave-${waveCondition}`,
+        label: waveConditionLabels[waveCondition] || waveCondition,
+        onRemove: () => handleRemoveFilter('waveConditions', waveCondition),
+      });
+    });
+
     return pills;
   }, [filters, handleRemoveFilter]);
 
 
 
 
-  // Focus management
-  useEffect(() => {
-    if (!organizedOpen && !parkingOpen) {
-      return;
-    }
-
-    // Focus first focusable element in open dropdown
-    const openDropdown = document.querySelector('[role="listbox"]:not([hidden])');
-    if (openDropdown) {
-      const firstFocusable = openDropdown.querySelector('button, [tabindex="0"]') as HTMLElement;
-      firstFocusable?.focus();
-    }
-  }, [organizedOpen, parkingOpen]);
 
   return (
     <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border">
@@ -315,70 +315,28 @@ export default function FilterBar({
                 />
 
                 {/* Organized Dropdown */}
-                <Popover open={organizedOpen} onOpenChange={setOrganizedOpen}>
-                  <PopoverTrigger asChild>
-                    <Button
-                      ref={organizedTriggerRef}
-                      variant="outline"
-                      size="sm"
-                      className="px-3 py-2 rounded-xl border h-auto max-w-[180px]"
-                      aria-expanded={organizedOpen}
-                      aria-label="Organized"
-                    >
-                      <Waves className="h-4 w-4 mr-2 flex-shrink-0" />
-                      <span className="truncate">Beach setup</span>
-                      <ChevronDown className="h-4 w-4 ml-2 flex-shrink-0" />
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-48 p-0" align="start">
-                    <div className="p-2">
-                      {organizedOptions.map((option) => (
-                        <Button
-                          key={option.value}
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => handleOrganizedChange(option.value)}
-                          className="w-full justify-start h-10"
-                        >
-                          {option.label}
-                        </Button>
-                      ))}
-                    </div>
-                  </PopoverContent>
-                </Popover>
+                <OrganizedDropdown
+                  filters={filters}
+                  onFiltersChange={onFiltersChange}
+                  onOpenAllFilters={onOpenAllFilters}
+                  showCountBadge={showCountBadge}
+                />
 
                 {/* Parking Dropdown */}
-                <Popover open={parkingOpen} onOpenChange={setParkingOpen}>
-                  <PopoverTrigger asChild>
-                    <Button
-                      ref={parkingTriggerRef}
-                      variant="outline"
-                      size="sm"
-                      className="px-3 py-2 rounded-xl border h-auto max-w-[180px]"
-                      aria-expanded={parkingOpen}
-                      aria-label="Parking"
-                    >
-                      <Car className="h-4 w-4 mr-2 flex-shrink-0" />
-                      <span className="truncate">Parking</span>
-                      <ChevronDown className="h-4 w-4 ml-2 flex-shrink-0" />
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-48 p-0" align="start">
-                    <div className="p-2">
-                      {parkingOptions.map((option) => (
-                        <Button
-                          key={option.value}
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => handleParkingChange(option.value)}
-                          className="w-full justify-start h-10"
-                        >
-                          {option.label}
-                        </Button>
-                      ))}
-                    </div>
-                  </PopoverContent>
-                </Popover>
+                <ParkingDropdown
+                  filters={filters}
+                  onFiltersChange={onFiltersChange}
+                  onOpenAllFilters={onOpenAllFilters}
+                  showCountBadge={showCountBadge}
+                />
+
+                {/* Wave Conditions Dropdown */}
+                <WaveConditionsDropdown
+                  filters={filters}
+                  onFiltersChange={onFiltersChange}
+                  onOpenAllFilters={onOpenAllFilters}
+                  showCountBadge={showCountBadge}
+                />
 
                 {/* All Filters Button */}
                 <Button
@@ -454,7 +412,7 @@ export default function FilterBar({
                   aria-label={`Blue Flag (${filters.blueFlag ? 'on' : 'off'})`}
                 >
                   <Flag className="h-4 w-4 md:h-5 md:w-5" />
-                  <span className="ml-2 text-sm">blue flag</span>
+                  <span className="ml-2 text-sm">Blue Flag</span>
                 </Button>
 
                 {/* Amenities Dropdown */}
@@ -466,67 +424,28 @@ export default function FilterBar({
                 />
 
                 {/* Organized Dropdown */}
-                <Popover open={organizedOpen} onOpenChange={setOrganizedOpen}>
-                  <PopoverTrigger asChild>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="px-3 py-2 rounded-xl border h-auto whitespace-nowrap flex-shrink-0"
-                      aria-expanded={organizedOpen}
-                      aria-label="Organized"
-                    >
-                      <Umbrella className="h-4 w-4 mr-2" />
-                      Setup
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-48 p-0" align="start">
-                    <div className="p-2">
-                      {organizedOptions.map((option) => (
-                        <Button
-                          key={option.value}
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => handleOrganizedChange(option.value)}
-                          className="w-full justify-start h-10"
-                        >
-                          {option.label}
-                        </Button>
-                      ))}
-                    </div>
-                  </PopoverContent>
-                </Popover>
+                <OrganizedDropdown
+                  filters={filters}
+                  onFiltersChange={onFiltersChange}
+                  onOpenAllFilters={onOpenAllFilters}
+                  showCountBadge={showCountBadge}
+                />
 
                 {/* Parking Dropdown */}
-                <Popover open={parkingOpen} onOpenChange={setParkingOpen}>
-                  <PopoverTrigger asChild>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="px-3 py-2 rounded-xl border h-auto whitespace-nowrap flex-shrink-0"
-                      aria-expanded={parkingOpen}
-                      aria-label="Parking"
-                    >
-                      <Car className="h-4 w-4 mr-2" />
-                      Parking
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-48 p-0" align="start">
-                    <div className="p-2">
-                      {parkingOptions.map((option) => (
-                        <Button
-                          key={option.value}
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => handleParkingChange(option.value)}
-                          className="w-full justify-start h-10"
-                        >
-                          {option.label}
-                        </Button>
-                      ))}
-                    </div>
-                  </PopoverContent>
-                </Popover>
+                <ParkingDropdown
+                  filters={filters}
+                  onFiltersChange={onFiltersChange}
+                  onOpenAllFilters={onOpenAllFilters}
+                  showCountBadge={showCountBadge}
+                />
 
+                {/* Wave Conditions Dropdown */}
+                <WaveConditionsDropdown
+                  filters={filters}
+                  onFiltersChange={onFiltersChange}
+                  onOpenAllFilters={onOpenAllFilters}
+                  showCountBadge={showCountBadge}
+                />
 
                 <Button
                   variant="outline"

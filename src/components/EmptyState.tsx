@@ -23,16 +23,17 @@ export default function EmptyState({
   // Check if any filters are active (excluding nearMe as it's not a traditional filter)
   const hasActiveFilters = 
     filters.search ||
-    filters.organized !== null ||
+    filters.organized.length > 0 ||
     filters.blueFlag ||
-    filters.parking !== 'any' ||
-    filters.amenities.length > 0;
+    filters.parking.length > 0 ||
+    filters.amenities.length > 0 ||
+    filters.waveConditions.length > 0;
 
   // Check if near me is enabled
   const isNearMeEnabled = filters.nearMe;
 
-  // Check if parking is filtered (not 'any')
-  const isParkingFiltered = filters.parking !== 'any';
+  // Check if parking is filtered
+  const isParkingFiltered = filters.parking.length > 0;
 
   // Get suggestions
   const { suggestions, isLoading: isLoadingSuggestions, hasSuggestions } = useBeachSuggestions({
@@ -93,7 +94,7 @@ export default function EmptyState({
                 className="flex items-center gap-2"
               >
                 <Car className="h-4 w-4" />
-                Reset Parking to Any
+                Reset Parking
               </Button>
             )}
           </div>

@@ -1,29 +1,30 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
-import { Sun, Check, ChevronDown } from 'lucide-react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Check, ChevronDown, Waves } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { useDraftState } from '@/hooks/useDraftState';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useDraftState } from '@/hooks/useDraftState';
 import { FilterState } from '@/hooks/useUrlState';
-import { getAllAmenities } from '@/lib/amenities';
 
-interface AmenitiesDropdownProps {
+interface OrganizedDropdownProps {
   filters: FilterState;
-  onFiltersChange: (updates: Partial<FilterState>) => void;
+  onFiltersChange: (filters: FilterState) => void;
   onOpenAllFilters: () => void;
   showCountBadge?: boolean;
 }
 
-// Get all amenities from centralized map
-const allAmenities = getAllAmenities();
+const organizedOptions = [
+  { value: 'organized', label: 'Organized' },
+  { value: 'unorganized', label: 'Unorganized' },
+];
 
-export default function AmenitiesDropdown({
+export default function OrganizedDropdown({
   filters,
   onFiltersChange,
   onOpenAllFilters,
   showCountBadge = false,
-}: AmenitiesDropdownProps) {
+}: OrganizedDropdownProps) {
   const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -38,13 +39,13 @@ export default function AmenitiesDropdown({
     setIsOpen(true);
   }, []);
 
-  // Toggle amenity in draft state
-  const toggleAmenityDraft = useCallback((amenityId: string) => {
-    const newAmenities = draftFilters.amenities.includes(amenityId)
-      ? draftFilters.amenities.filter(id => id !== amenityId)
-      : [...draftFilters.amenities, amenityId];
-    updateDraft({ amenities: newAmenities });
-  }, [draftFilters.amenities, updateDraft]);
+  // Toggle organized option in draft state
+  const toggleOrganizedDraft = useCallback((organizedValue: string) => {
+    const newOrganized = draftFilters.organized.includes(organizedValue)
+      ? draftFilters.organized.filter(value => value !== organizedValue)
+      : [...draftFilters.organized, organizedValue];
+    updateDraft({ organized: newOrganized });
+  }, [draftFilters.organized, updateDraft]);
 
   // Apply draft changes and close
   const handleApply = useCallback(() => {
@@ -53,15 +54,13 @@ export default function AmenitiesDropdown({
     triggerRef.current?.focus();
   }, [draftFilters, onFiltersChange]);
 
-  // Reset amenities draft
+  // Reset organized draft
   const handleReset = useCallback(() => {
-    updateDraft({ amenities: [] });
+    updateDraft({ organized: [] });
   }, [updateDraft]);
 
   // Keyboard navigation
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    if (!isOpen) return;
-
     switch (e.key) {
       case 'Escape':
         setIsOpen(false);
@@ -69,25 +68,21 @@ export default function AmenitiesDropdown({
         break;
       case 'ArrowDown':
         e.preventDefault();
-        setFocusedIndex(prev => 
-          prev < allAmenities.length - 1 ? prev + 1 : 0
-        );
+        setFocusedIndex(prev => Math.min(prev + 1, organizedOptions.length - 1));
         break;
       case 'ArrowUp':
         e.preventDefault();
-        setFocusedIndex(prev => 
-          prev > 0 ? prev - 1 : allAmenities.length - 1
-        );
+        setFocusedIndex(prev => Math.max(prev - 1, -1));
         break;
       case 'Enter':
       case ' ':
         e.preventDefault();
-        if (focusedIndex >= 0 && focusedIndex < allAmenities.length) {
-          toggleAmenityDraft(allAmenities[focusedIndex].id);
+        if (focusedIndex >= 0 && focusedIndex < organizedOptions.length) {
+          toggleOrganizedDraft(organizedOptions[focusedIndex].value);
         }
         break;
     }
-  }, [isOpen, focusedIndex, toggleAmenityDraft]);
+  }, [isOpen, focusedIndex, toggleOrganizedDraft]);
 
   // Focus management
   useEffect(() => {
@@ -105,9 +100,8 @@ export default function AmenitiesDropdown({
   }, [isOpen]);
 
   // Calculate counts
-  const selectedCount = draftFilters.amenities.length;
-  const appliedCount = filters.amenities.length;
-
+  const selectedCount = draftFilters.organized.length;
+  const appliedCount = filters.organized.length;
 
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
@@ -120,13 +114,13 @@ export default function AmenitiesDropdown({
           className="px-3 py-2 rounded-xl border h-auto whitespace-nowrap flex-shrink-0"
           aria-expanded={isOpen}
           aria-haspopup="listbox"
-          aria-controls="amenities-listbox"
-          aria-label={appliedCount > 0 ? `Amenities, ${appliedCount} selected` : 'Amenities'}
-          data-testid="amenities-trigger"
-          id="amenities-trigger"
+          aria-controls="organized-listbox"
+          aria-label={appliedCount > 0 ? `${isMobile ? 'Setup' : 'Beach setup'}, ${appliedCount} selected` : (isMobile ? 'Setup' : 'Beach setup')}
+          data-testid="organized-trigger"
+          id="organized-trigger"
         >
-          <Sun className="h-4 w-4 mr-2" />
-          Amenities
+          <Waves className="h-4 w-4 mr-2" />
+          {isMobile ? 'Setup' : 'Beach setup'}
           {showCountBadge && appliedCount > 0 && (
             <Badge variant="secondary" className="ml-2 h-4 w-4 p-0 flex items-center justify-center text-xs">
               {appliedCount}
@@ -139,8 +133,8 @@ export default function AmenitiesDropdown({
         className="w-80 max-w-[calc(100vw-2rem)] p-0"
         align="start"
         onKeyDown={handleKeyDown}
-        data-testid="amenities-panel"
-        id="amenities-panel"
+        data-testid="organized-panel"
+        id="organized-panel"
       >
         {/* Header */}
         <div className="p-4 border-b">
@@ -158,18 +152,18 @@ export default function AmenitiesDropdown({
           ref={listRef}
           className="max-h-80 overflow-y-auto"
           role="listbox"
-          aria-label="Amenities"
-          id="amenities-listbox"
+          aria-label="Beach setup options"
+          id="organized-listbox"
         >
-          {allAmenities.map((amenity, index) => {
-            const isSelected = draftFilters.amenities.includes(amenity.id);
+          {organizedOptions.map((option, index) => {
+            const isSelected = draftFilters.organized.includes(option.value);
             const isFocused = focusedIndex === index;
             
             return (
               <button
-                key={amenity.id}
+                key={option.value}
                 data-index={index}
-                onClick={() => toggleAmenityDraft(amenity.id)}
+                onClick={() => toggleOrganizedDraft(option.value)}
                 className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors min-h-[44px] ${
                   isSelected ? 'bg-muted/30' : ''
                 } ${isFocused ? 'ring-2 ring-ring ring-offset-1' : ''}`}
@@ -177,7 +171,7 @@ export default function AmenitiesDropdown({
                 aria-selected={isSelected}
                 tabIndex={-1}
               >
-                <span className="text-sm font-medium">{amenity.label}</span>
+                <span className="text-sm font-medium">{option.label}</span>
                 {isSelected && (
                   <Check className="h-4 w-4 text-primary" />
                 )}
@@ -195,7 +189,7 @@ export default function AmenitiesDropdown({
               onClick={handleReset}
               className="flex-1 min-h-[44px]"
             >
-              Reset
+              Clear
             </Button>
             <Button
               size="sm"

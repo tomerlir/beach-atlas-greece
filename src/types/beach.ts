@@ -10,6 +10,7 @@ export interface Beach {
   blue_flag: boolean;
   parking: string;
   amenities: string[];
+  wave_conditions: string;
   photo_url?: string;
   photo_source?: string;
 }

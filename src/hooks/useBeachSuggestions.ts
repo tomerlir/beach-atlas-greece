@@ -124,8 +124,9 @@ export const useBeachSuggestions = ({
           let score = 0;
           
           // Organized match
-          if (filters.organized !== null) {
-            score += b.organized === filters.organized ? 2 : 0;
+          if (filters.organized.length > 0) {
+            const beachOrganizedType = b.organized ? 'organized' : 'unorganized';
+            score += filters.organized.includes(beachOrganizedType) ? 2 : 0;
           } else {
             score += 1; // Neutral score when no preference
           }
@@ -155,8 +156,11 @@ export const useBeachSuggestions = ({
             // Prioritize reasons that don't duplicate existing badges
             if (filters.amenities.length > 0 && intersectCount(filters.amenities, b.amenities) >= 1) {
               reason = 'Similar amenities';
-            } else if (filters.organized !== null && b.organized === filters.organized) {
-              reason = 'Similar setup';
+            } else if (filters.organized.length > 0) {
+              const beachOrganizedType = b.organized ? 'organized' : 'unorganized';
+              if (filters.organized.includes(beachOrganizedType)) {
+                reason = 'Similar setup';
+              }
             } else if (b.blue_flag) {
               reason = 'Blue Flag';
             } else if (b.organized) {

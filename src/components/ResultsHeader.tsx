@@ -13,7 +13,6 @@ interface ResultsHeaderProps {
 }
 
 const parkingLabels: Record<string, string> = {
-  'any': 'Any parking',
   'NONE': 'No parking',
   'ROADSIDE': 'Roadside parking',
   'SMALL_LOT': 'Small lot',
@@ -29,10 +28,11 @@ export default function ResultsHeader({
   userLocation,
 }: ResultsHeaderProps) {
   const hasActiveFilters = filters.search || 
-                          filters.organized !== null || 
+                          filters.organized.length > 0 || 
                           filters.blueFlag || 
-                          filters.parking !== 'any' || 
-                          filters.amenities.length > 0;
+                          filters.parking.length > 0 || 
+                          filters.amenities.length > 0 ||
+                          filters.waveConditions.length > 0;
 
   const getFilterPills = () => {
     const pills = [];
@@ -46,12 +46,14 @@ export default function ResultsHeader({
       });
     }
 
-    // Organized pill
-    if (filters.organized !== null) {
-      pills.push({
-        id: 'organized',
-        label: filters.organized ? 'Organized' : 'Unorganized',
-        onRemove: () => onRemoveFilter('organized'),
+    // Organized pills
+    if (filters.organized.length > 0) {
+      filters.organized.forEach(organizedType => {
+        pills.push({
+          id: `organized-${organizedType}`,
+          label: organizedType === 'organized' ? 'Organized' : 'Unorganized',
+          onRemove: () => onRemoveFilter('organized', organizedType),
+        });
       });
     }
 
@@ -64,14 +66,14 @@ export default function ResultsHeader({
       });
     }
 
-    // Parking pill
-    if (filters.parking !== 'any') {
+    // Parking pills
+    filters.parking.forEach((parkingType) => {
       pills.push({
-        id: 'parking',
-        label: parkingLabels[filters.parking] || filters.parking,
-        onRemove: () => onRemoveFilter('parking'),
+        id: `parking-${parkingType}`,
+        label: parkingLabels[parkingType] || parkingType,
+        onRemove: () => onRemoveFilter('parking', parkingType),
       });
-    }
+    });
 
     // Amenities pills
     filters.amenities.forEach((amenity) => {
@@ -79,6 +81,21 @@ export default function ResultsHeader({
         id: `amenity-${amenity}`,
         label: getAmenityLabel(amenity),
         onRemove: () => onRemoveFilter('amenities', amenity),
+      });
+    });
+
+    // Wave conditions pills
+    filters.waveConditions.forEach((waveCondition) => {
+      const waveConditionLabels: Record<string, string> = {
+        'CALM': 'Calm',
+        'MODERATE': 'Moderate',
+        'WAVY': 'Wavy',
+        'SURFABLE': 'Surfable',
+      };
+      pills.push({
+        id: `wave-${waveCondition}`,
+        label: waveConditionLabels[waveCondition] || waveCondition,
+        onRemove: () => onRemoveFilter('waveConditions', waveCondition),
       });
     });
 
