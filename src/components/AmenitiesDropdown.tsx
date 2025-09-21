@@ -142,17 +142,6 @@ export default function AmenitiesDropdown({
         data-testid="amenities-panel"
         id="amenities-panel"
       >
-        {/* Header */}
-        <div className="p-4 border-b">
-          <h3 className="font-semibold text-sm flex items-center justify-between">
-            {selectedCount > 0 && (
-              <span className="text-muted-foreground text-xs font-normal">
-                {selectedCount} selected
-              </span>
-            )}
-          </h3>
-        </div>
-
         {/* List */}
         <div 
           ref={listRef}
