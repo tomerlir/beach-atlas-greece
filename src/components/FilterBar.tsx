@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import {
-  Search,
   MapPin,
   Filter,
   ChevronDown,
@@ -14,13 +13,11 @@ import {
   X,
   Plus,
 } from 'lucide-react';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { useDebouncedSearch } from '@/hooks/useDebouncedSearch';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FilterState } from '@/hooks/useUrlState';
 import AmenitiesDropdown from '@/components/AmenitiesDropdown';
@@ -57,13 +54,6 @@ export default function FilterBar({
   showCountBadge = false,
 }: FilterBarProps) {
   const isMobile = useIsMobile();
-
-  // Debounced search with 250ms delay
-  const { searchInput, setSearchInput, clearSearchInput } = useDebouncedSearch(
-    filters.search,
-    (value: string) => onFiltersChange({ search: value, page: 1 }),
-    250
-  );
 
 
   // Handle filter changes
@@ -132,7 +122,6 @@ export default function FilterBar({
   }, [onFiltersChange, filters.amenities, filters.waveConditions]);
 
   const handleClearAllFilters = useCallback(() => {
-    clearSearchInput(); // Clear search input immediately
     onFiltersChange({
       search: '', // Clear search term
       organized: [],
@@ -144,7 +133,7 @@ export default function FilterBar({
       page: 1,
       nearMe: false,
     });
-  }, [onFiltersChange, clearSearchInput]);
+  }, [onFiltersChange]);
 
   // Calculate active filter counts
   const activeFiltersCount = [
@@ -169,7 +158,7 @@ export default function FilterBar({
     if (filters.search) {
       pills.push({
         id: 'search',
-        label: `"${filters.search}"`,
+        label: filters.search,
         onRemove: () => handleRemoveFilter('search'),
       });
     }
@@ -245,21 +234,7 @@ export default function FilterBar({
         {/* Main Filter Bar */}
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col gap-4">
-            {/* Search Input - Full Row */}
-            <div className="w-full">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4 md:h-5 md:w-5" />
-                <Input
-                  placeholder="Search beaches or places…"
-                  value={searchInput}
-                  onChange={(e) => setSearchInput(e.target.value)}
-                  className="pl-10 h-11 bg-white border-border focus:ring-primary w-full"
-                  aria-label="Search beaches by name or location"
-                />
-              </div>
-            </div>
-
-            {/* Facets Group - Second Row */}
+            {/* Facets Group - First Row */}
             {!isMobile ? (
               <div className="flex flex-wrap gap-2 md:gap-3 items-center justify-center">
 

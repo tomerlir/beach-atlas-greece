@@ -41,7 +41,7 @@ export default function ResultsHeader({
     if (filters.search) {
       pills.push({
         id: 'search',
-        label: `"${filters.search}"`,
+        label: filters.search,
         onRemove: () => onRemoveFilter('search'),
       });
     }

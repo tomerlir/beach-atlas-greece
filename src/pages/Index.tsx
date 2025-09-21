@@ -9,6 +9,7 @@ import BeachCard from "@/components/BeachCard";
 import BeachCardSkeleton from "@/components/BeachCardSkeleton";
 import Pagination from "@/components/Pagination";
 import { GeolocationErrorBanner } from "@/components/GeolocationErrorBanner";
+import EnhancedSearchBar from "@/components/EnhancedSearchBar";
 import { useGeolocation } from "@/hooks/useGeolocation";
 import { useUrlState } from "@/hooks/useUrlState";
 import { useBeachFiltering } from "@/hooks/useBeachFiltering";
@@ -125,14 +126,25 @@ const Index = () => {
         />
         <div className="absolute inset-0 bg-black/30" />
         
-        <div className="relative z-10 text-center text-white px-4">
+        <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-bold mb-4">
             Find Your Perfect Greek Beach
           </h1>
-          <p className="text-lg md:text-xl max-w-2xl mx-auto opacity-90">
+          <p className="text-lg md:text-xl max-w-2xl mx-auto opacity-90 mb-8">
             Discover stunning beaches across the Greek islands and mainland, 
             from organized resorts to hidden gems waiting to be explored.
           </p>
+          
+          {/* Hero Search Bar */}
+          <div className="max-w-2xl mx-auto">
+            <EnhancedSearchBar
+              filters={filters}
+              onFiltersChange={updateFilters}
+              userLocation={location}
+              hasResults={filteredBeaches.length > 0}
+              className="w-full"
+            />
+          </div>
         </div>
       </section>
 
