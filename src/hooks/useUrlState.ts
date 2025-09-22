@@ -7,7 +7,7 @@ export interface FilterState {
   blueFlag: boolean;
   parking: string[];
   amenities: string[];
-  waveConditions: string[];
+  waveConditions: ('CALM' | 'MODERATE' | 'WAVY' | 'SURFABLE')[];
   sort: string | null;
   page: number;
   nearMe: boolean; // New field to track if "Near me" is enabled
@@ -60,7 +60,10 @@ export function useUrlState() {
     // Parse wave conditions
     const waveConditions = searchParams.get('waveConditions');
     if (waveConditions) {
-      state.waveConditions = waveConditions.split(',').filter(Boolean);
+      const validWaveConditions = ['CALM', 'MODERATE', 'WAVY', 'SURFABLE'] as const;
+      state.waveConditions = waveConditions.split(',').filter((condition): condition is 'CALM' | 'MODERATE' | 'WAVY' | 'SURFABLE' => 
+        Boolean(condition) && validWaveConditions.includes(condition as any)
+      );
     }
     
     // Parse sort

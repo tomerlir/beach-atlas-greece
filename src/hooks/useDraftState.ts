@@ -22,8 +22,9 @@ export const useDraftState = (initialFilters: FilterState) => {
       search: initialFilters.search, // Keep search term
       organized: [],
       blueFlag: false,
-      parking: 'any',
+      parking: [],
       amenities: [],
+      waveConditions: [],
       sort: initialFilters.sort,
       page: 1,
       nearMe: false,
