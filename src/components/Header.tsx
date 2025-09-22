@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
+import { CONTACT_EMAIL } from "@/lib/constants";
 
 const Header = () => {
   return (
@@ -20,7 +21,7 @@ const Header = () => {
               About
             </Link>
             <a 
-              href="mailto:info@greekbeaches.com" 
+              href={`mailto:${CONTACT_EMAIL}`} 
               className="text-foreground hover:text-primary transition-colors font-medium inline-block"
             >
               Feedback

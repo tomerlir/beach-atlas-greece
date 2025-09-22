@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import { CONTACT_EMAIL } from "@/lib/constants";
 
 const About = () => {
   return (
@@ -59,8 +60,8 @@ const About = () => {
             
             <p className="text-muted-foreground">
               Have suggestions for beaches we should add? Found incorrect information? We'd love to 
-              hear from you! Send us your <a 
-                href="mailto:info@greekbeaches.com" 
+              hear from you! Send us your               <a 
+                href={`mailto:${CONTACT_EMAIL}`} 
                 className="text-primary hover:text-primary/80 underline transition-colors"
               >
                 feedback

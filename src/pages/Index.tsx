@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { CONTACT_EMAIL } from "@/lib/constants";
 import Header from "@/components/Header";
 import FilterBar from "@/components/FilterBar";
 import AllFiltersDrawer from "@/components/AllFiltersDrawer";
@@ -259,7 +260,7 @@ const Index = () => {
               About
             </a>
             <a 
-              href="mailto:info@greekbeaches.com" 
+              href={`mailto:${CONTACT_EMAIL}`} 
               className="text-muted-foreground hover:text-primary transition-colors"
             >
               Feedback

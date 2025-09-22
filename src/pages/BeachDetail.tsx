@@ -1,6 +1,7 @@
 import { useParams, Link, useLocation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
+import { CONTACT_EMAIL } from "@/lib/constants";
 import { 
   MapPin, 
   Waves, 
@@ -162,7 +163,7 @@ const BeachDetail = () => {
     
     const subject = `Feedback: ${beach.name} (${beach.slug})`;
     const body = `Hi,\n\nI'd like to provide feedback for the beach "${beach.name}" at ${beach.place_text}.\n\nFeedback:\n\n\nThank you!`;
-    window.location.href = `mailto:feedback@beachesofgreece.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }, [beach]);
 
   // Group amenities by category
@@ -462,7 +463,7 @@ const BeachDetail = () => {
               About
             </a>
             <a 
-              href="mailto:info@greekbeaches.com" 
+              href={`mailto:${CONTACT_EMAIL}`} 
               className="text-muted-foreground hover:text-primary transition-colors"
             >
               Feedback
