@@ -141,7 +141,7 @@ const BeachDetail = () => {
       if (navigator.share) {
         await navigator.share({
           title: beach.name,
-          text: `Check out ${beach.name} in ${beach.place_text}`,
+          text: `Check out ${beach.name} in ${beach.area}`,
           url: url,
         });
       } else {
@@ -162,7 +162,7 @@ const BeachDetail = () => {
     if (!beach) return;
     
     const subject = `Feedback: ${beach.name} (${beach.slug})`;
-    const body = `Hi,\n\nI'd like to provide feedback for the beach "${beach.name}" at ${beach.place_text}.\n\nFeedback:\n\n\nThank you!`;
+    const body = `Hi,\n\nI'd like to provide feedback for the beach "${beach.name}" at ${beach.area}.\n\nFeedback:\n\n\nThank you!`;
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }, [beach]);
 
@@ -299,7 +299,7 @@ const BeachDetail = () => {
             </h1>
             <div className="flex items-center text-muted-foreground text-lg mb-2">
               <MapPin className="h-5 w-5 mr-2" aria-hidden="true" />
-              {beach.place_text}
+              {beach.area}
             </div>
             <DataFreshnessMeta beach={beach} />
             <div className="flex flex-wrap gap-2 mt-4">

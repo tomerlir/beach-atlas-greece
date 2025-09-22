@@ -1,14 +1,82 @@
+# Robots.txt for Greek Beaches Directory
+# https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc
+
+# Allow all search engines to crawl the public content
+User-agent: *
+Allow: /
+Allow: /about
+Allow: /beach/
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /admin/login
+Disallow: /admin/beaches/
+Disallow: /admin/import-export
+Disallow: /admin/settings
+
+# Disallow API endpoints and internal files
+Disallow: /api/
+Disallow: /_next/
+Disallow: /node_modules/
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /sw.js
+
+# Allow specific bots for social media and search
 User-agent: Googlebot
 Allow: /
+Allow: /about
+Allow: /beach/
+Crawl-delay: 1
 
 User-agent: Bingbot
 Allow: /
+Allow: /about
+Allow: /beach/
+Crawl-delay: 1
 
+User-agent: Slurp
+Allow: /
+Allow: /about
+Allow: /beach/
+Crawl-delay: 1
+
+# Social media bots
 User-agent: Twitterbot
 Allow: /
+Allow: /about
+Allow: /beach/
 
 User-agent: facebookexternalhit
 Allow: /
+Allow: /about
+Allow: /beach/
 
-User-agent: *
+User-agent: LinkedInBot
 Allow: /
+Allow: /about
+Allow: /beach/
+
+User-agent: WhatsApp
+Allow: /
+Allow: /about
+Allow: /beach/
+
+# Block aggressive crawlers
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Sitemap location
+Sitemap: https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/sitemap.xml
+
+# Host declaration (helps with canonical URLs)
+Host: https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc

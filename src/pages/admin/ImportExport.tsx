@@ -12,7 +12,7 @@ const ImportExport: React.FC = () => {
   const [copiedColumnOrder, setCopiedColumnOrder] = useState(false);
   const { toast } = useToast();
 
-  const columnOrder = 'slug,name,place_text,latitude,longitude,type,wave_conditions,organized,parking,blue_flag,amenities,photo_url,description,source,verified_at,status';
+  const columnOrder = 'slug,name,area,latitude,longitude,type,wave_conditions,organized,parking,blue_flag,amenities,photo_url,description,source,verified_at,status';
 
   const handleCopyColumnOrder = async () => {
     try {

@@ -306,7 +306,7 @@ type OsmEl = {
 
   // Map OSM → our schema rows
   type Row = {
-    slug:string; name:string; place_text:string; latitude:number; longitude:number;
+    slug:string; name:string; area:string; latitude:number; longitude:number;
     type:'SANDY'|'PEBBLY'|'MIXED'|'OTHER';
     wave_conditions:'CALM'|'MODERATE'|'WAVY'|'SURFABLE';
     organized:boolean;
@@ -351,7 +351,7 @@ type OsmEl = {
     const row: Row = {
       slug: slugify(`${name}`),
       name,
-      place_text: placeText,
+      area: placeText,
       latitude: Number(lat.toFixed(6)),
       longitude: Number(lon.toFixed(6)),
       type,
@@ -392,7 +392,7 @@ type OsmEl = {
 
   // CSV serialize with your exact header order
   const header = [
-    'slug','name','place_text','latitude','longitude','type','wave_conditions',
+    'slug','name','area','latitude','longitude','type','wave_conditions',
     'organized','parking','blue_flag','amenities','photo_url','description',
     'source','verified_at','status'
   ] as const;
@@ -402,7 +402,7 @@ type OsmEl = {
     const vals = [
       r.slug,
       r.name.replaceAll('"','""'),
-      r.place_text.replaceAll('"','""'),
+      r.area.replaceAll('"','""'),
       String(r.latitude),
       String(r.longitude),
       r.type,

@@ -8,15 +8,15 @@
  */
 export function generateBeachImageAltText(beach: {
   name: string;
-  place_text: string;
+  area: string;
   type?: string;
   wave_conditions?: string;
   blue_flag?: boolean;
 }): string {
-  const { name, place_text, type, wave_conditions, blue_flag } = beach;
+  const { name, area, type, wave_conditions, blue_flag } = beach;
   
   // Base description with beach name and location
-  let altText = `${name} beach in ${place_text}`;
+  let altText = `${name} beach in ${area}`;
   
   // Add beach type if available
   if (type && type !== 'OTHER') {

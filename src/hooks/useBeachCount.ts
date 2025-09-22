@@ -13,7 +13,7 @@ export const useBeachCount = (filters: FilterState, enabled: boolean = true) => 
 
       // Apply filters
       if (filters.search) {
-        query = query.or(`name.ilike.%${filters.search}%,place_text.ilike.%${filters.search}%`);
+        query = query.or(`name.ilike.%${filters.search}%,area.ilike.%${filters.search}%`);
       }
 
       if (filters.organized.length > 0) {

@@ -46,7 +46,7 @@ const AdminDashboard = () => {
         const total = allBeaches?.length || 0;
         const organized = allBeaches?.filter(b => b.organized).length || 0;
         const blueFlag = allBeaches?.filter(b => b.blue_flag).length || 0;
-        const uniqueLocations = new Set(allBeaches?.map(b => b.place_text)).size;
+        const uniqueLocations = new Set(allBeaches?.map(b => b.area)).size;
         
         setStats({
           total,

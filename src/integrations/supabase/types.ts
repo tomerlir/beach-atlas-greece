@@ -28,7 +28,7 @@ export type Database = {
           parking: string
           photo_url: string | null
           photo_source: string | null
-          place_text: string
+          area: string
           slug: string
           source: string | null
           status: 'ACTIVE' | 'HIDDEN' | 'DRAFT'
@@ -50,7 +50,7 @@ export type Database = {
           parking: 'NONE' | 'ROADSIDE' | 'SMALL_LOT' | 'LARGE_LOT'
           photo_url?: string | null
           photo_source?: string | null
-          place_text: string
+          area: string
           slug: string
           source?: string | null
           status?: 'ACTIVE' | 'HIDDEN' | 'DRAFT'
@@ -72,7 +72,7 @@ export type Database = {
           parking?: 'NONE' | 'ROADSIDE' | 'SMALL_LOT' | 'LARGE_LOT'
           photo_url?: string | null
           photo_source?: string | null
-          place_text?: string
+          area?: string
           slug?: string
           source?: string | null
           status?: 'ACTIVE' | 'HIDDEN' | 'DRAFT'

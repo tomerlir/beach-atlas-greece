@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 
 export interface BeachFormDraft {
   name: string;
-  place_text: string;
+  area: string;
   latitude: string;
   longitude: string;
   description: string;
@@ -22,7 +22,7 @@ export interface BeachFormDraft {
 
 const DEFAULT_DRAFT: BeachFormDraft = {
   name: '',
-  place_text: '',
+  area: '',
   latitude: '',
   longitude: '',
   description: '',

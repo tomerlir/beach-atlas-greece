@@ -73,7 +73,7 @@ const ExportCsvCard: React.FC = () => {
         <div className="text-sm text-muted-foreground">
           <p>• All beaches, all statuses</p>
           <p>• Column order fixed</p>
-          <p>• Includes: slug, name, place_text, coordinates, type, amenities, etc.</p>
+          <p>• Includes: slug, name, area, coordinates, type, amenities, etc.</p>
         </div>
         
         <Button 

@@ -198,7 +198,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
           height={height}
           sizes={sizes}
           loading={priority ? "eager" : loading}
-          fetchPriority={priority ? "high" : "auto"}
+          {...({ fetchpriority: priority ? "high" : "auto" } as any)}
           onLoad={handleLoad}
           onError={handleError}
           onLoadStart={() => { loadStartTime.current = Date.now(); }}

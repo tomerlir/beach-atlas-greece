@@ -17,7 +17,7 @@ type BeachUpdate = TablesUpdate<'beaches'> & { id: string };
 
 const schema = z.object({
   name: z.string().min(3).max(80),
-  place_text: z.string().min(3).max(80),
+  area: z.string().min(3).max(80),
   latitude: z.coerce.number().gte(-90).lte(90),
   longitude: z.coerce.number().gte(-180).lte(180),
   description: z.string().max(1500).optional().or(z.literal('')),
@@ -75,7 +75,7 @@ const BeachForm: React.FC = () => {
           if (!hasStoredDraftData()) {
             updateDraft({
               name: data.name || '',
-              place_text: data.place_text || '',
+              area: data.area || '',
               latitude: data.latitude?.toString() || '',
               longitude: data.longitude?.toString() || '',
               description: data.description || '',
@@ -178,7 +178,7 @@ const BeachForm: React.FC = () => {
 
     const candidate = {
       name: draft.name,
-      place_text: draft.place_text,
+      area: draft.area,
       latitude: parseFloat(draft.latitude),
       longitude: parseFloat(draft.longitude),
       description: draft.description,
@@ -332,15 +332,15 @@ const BeachForm: React.FC = () => {
           {errors.name && <p id="name-err" className="text-sm text-destructive">{errors.name}</p>}
         </div>
         <div>
-          <label className="block text-sm font-medium">Place</label>
+          <label className="block text-sm font-medium">Area</label>
           <Input 
-            name="place_text" 
-            value={draft.place_text} 
-            onChange={(e) => updateDraft({ place_text: e.target.value })}
-            aria-invalid={!!errors.place_text} 
-            aria-describedby={errors.place_text ? 'place-err' : undefined} 
+            name="area" 
+            value={draft.area} 
+            onChange={(e) => updateDraft({ area: e.target.value })}
+            aria-invalid={!!errors.area} 
+            aria-describedby={errors.area ? 'area-err' : undefined} 
           />
-          {errors.place_text && <p id="place-err" className="text-sm text-destructive">{errors.place_text}</p>}
+          {errors.area && <p id="area-err" className="text-sm text-destructive">{errors.area}</p>}
         </div>
         <div>
           <label className="block text-sm font-medium">Latitude</label>

@@ -20,7 +20,7 @@ import { generateBeachImageAltText } from "@/lib/accessibility";
 interface Beach {
   id: string;
   name: string;
-  place_text: string;
+  area: string;
   description?: string;
   slug: string;
   organized: boolean;
@@ -160,7 +160,7 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
             </h3>
             <div className="flex items-center text-muted-foreground text-sm">
               <MapPin className="h-4 w-4 mr-2 text-primary" />
-              <span className="font-medium">{beach.place_text}</span>
+              <span className="font-medium">{beach.area}</span>
             </div>
           </div>
 

@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+  
+  <!-- Main Pages -->
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc</loc>
+    <lastmod>2025-09-22</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/about</loc>
+    <lastmod>2025-09-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- Region Pages -->
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/cyclades/beaches</loc>
+    <lastmod>2025-09-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/ionian-islands/beaches</loc>
+    <lastmod>2025-09-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Beach Detail Pages -->
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/agia-anna-mykonos</loc>
+    <lastmod>2025-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Mykonos_Agia_Anna_01.jpg/2048px-Mykonos_Agia_Anna_01.jpg?20140827220912</image:loc>
+      <image:title>Agia Anna - Greek Beach</image:title>
+      <image:caption>Agia Anna is a beautiful, well-organized beach located in the Kalafatis area of Mykonos. It offers golden sandy shores, crystal-clear waters, and a relaxed yet vibrant beach-club vibe. The setting is scenic with rocky features at the edges, and nearby hills giving views over the Aegean. It’s ideal for sunbathers, swimmers, and those who enjoy a mix of chill and social ambience. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/agiofili-beach-lefkada</loc>
+    <lastmod>2025-09-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Agiofili_Beach_%2825419587704%29.jpg/1024px-Agiofili_Beach_%2825419587704%29.jpg?20161014012319</image:loc>
+      <image:title>Agiofili beach - Greek Beach</image:title>
+      <image:caption>Agiofili is a picturesque cove on the southern side of Lefkada, near the village/port of Vasiliki. The beach is tucked into cliffs, with white pebbles underfoot and crystal-clear turquoise water. The setting is scenic, peaceful, and ideal for swimming and snorkeling. The approach involves a short walk down stairs from a cliff or hilltop, making arrival feel a bit more adventurous.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/agios-gordios-beach-corfu</loc>
+    <lastmod>2025-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Strand_von_Agios_Gordios_01.jpg/1024px-Strand_von_Agios_Gordios_01.jpg?20170509055759</image:loc>
+      <image:title>Agios Gordios beach - Greek Beach</image:title>
+      <image:caption>Agios Gordios is a long, picturesque beach on the west coast of Corfu, framed by lush green hills and cliffs. It offers a beautiful stretch of soft golden sand (especially at the southern end) that slopes gently into the clear Ionian sea. The views are enhanced by dramatic rock outcrops (including the “Ortholithos”), lovely sunsets, and a relaxed resort-village atmosphere. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/agios-ioannis-beach-lefkada</loc>
+    <lastmod>2025-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/1/19/The_beach_of_agios_ioannis.jpg?20121201204704</image:loc>
+      <image:title>Agios Ioannis beach - Greek Beach</image:title>
+      <image:caption>Agios Ioannis (also “Ai Giannis”) is a lovely, relatively close beach to Lefkada Town (≈ 2-3 km), known for its calm mornings and becoming livelier in the afternoons when winds pick up. The beach lies beside a small village, with olive groves and low hills behind it. It offers a relaxing seaside environment, especially good for swimming, sunbathing, and water-sports (kite-surfing, windsurfing) when conditions are favorable.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/agios-prokopios-naxos</loc>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/3/31/Agios_Prokopios_Beach_at_sunset%2C_Naxos%2C_Greece_julesvernex2.jpg</image:loc>
+      <image:title>Agios Prokopios - Greek Beach</image:title>
+      <image:caption>Just 5-6 km southwest of Naxos Town, Agios Prokopios is one of the island’s top beaches, famed for a long stretch of golden-thick sand and crystal-clear turquoise waters. Its sheltered position gives relatively calm seas, especially near the northern end, making it excellent for swimming. The beach combines a lively section with beach bars, cafés, restaurants and amenities, and more relaxed ends where you can enjoy quieter stretches of sand. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/agios-stefanos-mykonos</loc>
+    <lastmod>2025-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Agios_Stefanos_Mykonos.jpg/2048px-Agios_Stefanos_Mykonos.jpg?20190608171654</image:loc>
+      <image:title>Agios Stefanos - Greek Beach</image:title>
+      <image:caption>Agios Stefanos is a sandy beach on the northwestern coast of Mykonos, just a few km from Mykonos Town and very close to the new Tourlos-port. Its golden sand shore, combined with shallow, clear waters, makes it particularly appealing for swimmers, couples, and families. The beach is backed by cafés, restaurants and accommodations, giving it a nice mix of relaxation and convenience. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/aliki-beach-paros</loc>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/4/48/Paros_Alyki2_tango7174.jpg</image:loc>
+      <image:title>Aliki Beach - Greek Beach</image:title>
+      <image:caption>Aliki is a charming, family-friendly beach on the southwestern coast of Paros. The shore is a mix of sand and pebbles, with calm, shallow waters sheltered by natural features, making it safe for children and easy for swimming. Along its coast lie traditional tavernas, a small fishing harbour, and scenic spots for sunset photo opportunities. It offers a relaxing balance between natural beauty and comfort. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/alogomandra-beach-milos</loc>
+    <lastmod>2025-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Alogomandra_beach%2C_Milos%2C_15M6140.jpg/1024px-Alogomandra_beach%2C_Milos%2C_15M6140.jpg?20151106121902</image:loc>
+      <image:title>Alogomandra beach - Greek Beach</image:title>
+      <image:caption>Alogomandra is a beautiful, relatively secluded sandy beach on the northeastern coast of Milos, near Agios Konstantinos / between Sarakiniko and Papafragas. It features fine white/golden sand, crystal-clear emerald water, and a semi-cave carved into the cliff at one end that offers some shade and dramatic views. The beach is calm and ideal for swimming, snorkeling, relaxing, and enjoying nature without large crowds.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/apollonas-beach-naxos</loc>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/9/99/Apollonas_Naxos_Greece_2003082013280NP1549.jpg</image:loc>
+      <image:title>Apollonas Beach - Greek Beach</image:title>
+      <image:caption>Apollonas is a charming northern-coast beach located in the village of Apollon, about 30 km from Naxos Town. The shore is a mix of sand and pebbles, with crystal-clear turquoise waters ideal for swimming and casual snorkeling. The beach lies beside a small port and is overlooked by rugged hills, offering both scenic beauty and a relaxed village vibe. The famous ancient Kouros statue nearby adds cultural interest to swimming or beach-wandering.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/black-beach-santorini</loc>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/7/7f/Black_beach_in_Kamari_Santorini.jpg</image:loc>
+      <image:title>Black Beach - Greek Beach</image:title>
+      <image:caption>One of Santorini’s iconic black sand beaches — formed from volcanic lava and minerals — Black Beach lies near Perissa / Akrotiri. With its striking dark shore, clear Aegean waters, and cliff-backdrop, it’s ideal for both relaxation and more active beach-days. The beach is a mix of sand and pebbles, with shallow areas that deepen more quickly. It’s well-suited for sunbathing, swimming, and enjoying seaside tavernas.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/dassia-beach-corfu</loc>
+    <lastmod>2025-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Dassia_Kerkyra.jpg/1024px-Dassia_Kerkyra.jpg?20180422111112</image:loc>
+      <image:title>Dassia beach - Greek Beach</image:title>
+      <image:caption>Dassia is a popular beach on the east coast of Corfu, located about 10-12 km from Corfu Town. The beach is a mix of sand and fine pebbles, with a gently sloping seabed that gives shallow waters for a good distance — making it pleasant for swimmers, families, and those wanting both comfort and natural scenery. The bay is large, lined with hotels, tavernas, cafés, and lush green hills in the background. The water is generally clear and inviting, though it can get busy in summer.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/divounia-beach-mykonos</loc>
+    <lastmod>2025-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Divounia_Beach%2C_Mykonos%2C_Greece.jpg/1024px-Divounia_Beach%2C_Mykonos%2C_Greece.jpg?20240206221043</image:loc>
+      <image:title>Divounia beach - Greek Beach</image:title>
+      <image:caption>Divounia is a serene, small beach next to a picturesque fishing hamlet called Divounia, on the south-eastern coast of Mykonos, between Agia Anna and Kalafatis. It’s relatively secluded, offering a quieter retreat compared to more crowded beaches. The setting is charming: clear waters, simple scenery, and good views of the nearby village and coastline.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/egremni-beach-lefkada</loc>
+    <lastmod>2025-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Egremni%2C_Lefkada_5_-_panoramio.jpg/1024px-Egremni%2C_Lefkada_5_-_panoramio.jpg?20161029161148</image:loc>
+      <image:title>Egremni beach - Greek Beach</image:title>
+      <image:caption>Egremni is a dramatic, remote beach on Lefkada’s southwestern coast. It sits beneath white cliffs, with golden sand and extraordinarily clear turquoise water. The approach involves a steep descent via a long staircase (≈ 400 steps) from above, which adds to its wild, less-commercialised charm. Ideal for nature lovers and those willing to make the effort for reward. 
+</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/elia-beach-mykonos</loc>
+    <lastmod>2025-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Elias_Beach_on_Mykonos.JPG/1024px-Elias_Beach_on_Mykonos.JPG?20090430002643</image:loc>
+      <image:title>Elia beach - Greek Beach</image:title>
+      <image:caption>Elia is a large, sophisticated sandy beach on the southern coast of Mykonos, about 10 km from Mykonos Town. With long stretches of golden/white sand, clear waters and a spacious shore, Elia offers both luxury and relaxed beach vibes. It’s well-organized with quality beach clubs, restaurants and a calm, upscale atmosphere.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/faragas-beach</loc>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://live.staticflickr.com/5577/14778445295_7f49ce9744_h.jpg</image:loc>
+      <image:title>Faragas Beach - Greek Beach</image:title>
+      <image:caption>Faragas is a picturesque sandy-bay beach on the southern coast of Paros, notable for its clear turquoise waters and gentle waves. It combines public, free sections with more upscale private parts (beach club style), making it appealing both for laid-back beach goers and those looking for more comfort & service. The scenery is lovely, especially later in the day, with calm vibes and a mix of locals and tourists.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/gialos-beach-santorini</loc>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/6/64/Cyclades_Santorin_Akrotiri_Red_Beach_-_panoramio.jpg</image:loc>
+      <image:title>Gialos Beach - Greek Beach</image:title>
+      <image:caption>Paralia Gialos is a peaceful pebbly beach on the southwest coast of Santorini, in the Akrotiri area. Sheltered within a bay near the inactive Kokkinopetra volcano, the beach offers dramatic views of cliffs, natural vegetation, and wild scenery. The sea bed is a mix of sand, small pebbles and gravel. It’s quieter than many of the more famous beaches, making it ideal for visitors who want relaxation, sun, sea and nature rather than large crowds. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/glyfa-beach-paros</loc>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/4/4e/Paros_Glyfa_01.jpg</image:loc>
+      <image:title>Glyfa Beach - Greek Beach</image:title>
+      <image:caption>Glyfa is a small, serene beach on the eastern coast of Paros, located near the villages of Drios and Aspro Chorio. The shore is a mix of golden sand and pebbles, with clear, calm aquamarine water — great for swimming, snorkeling, paddleboarding, or simply relaxing. Natural shade is provided by trees along the shore, which makes it pleasant even under strong sun. Because it’s somewhat off the main tourist routes, it attracts a more local crowd and feels peaceful. 
+</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/glyfada-beach-corfu</loc>
+    <lastmod>2025-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Glyfada_Beach_on_the_island_of_Corfu%2C_Greece_%2847818444242%29.jpg/1024px-Glyfada_Beach_on_the_island_of_Corfu%2C_Greece_%2847818444242%29.jpg?20190519140547</image:loc>
+      <image:title>Glyfada beach - Greek Beach</image:title>
+      <image:caption>Glyfada is one of the island’s most popular west-coast beaches, about 15–16 km from Corfu Town. It features wide stretches of golden sand and crystal-clear turquoise waters. The bay is backed by green hills and cliffs, giving scenic sea views and occasional shade from trees or terrain. Ideal for families, couples or anyone wanting both beauty and beach-comfort.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/issos-beach-corfu</loc>
+    <lastmod>2025-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Issos_kerkyra.jpg/512px-Issos_kerkyra.jpg?20180211095816</image:loc>
+      <image:title>Issos beach - Greek Beach</image:title>
+      <image:caption>Issos is a long, sandy stretch on Corfu’s southwestern coast, backed by impressive sand dunes and just north of the village of Agios Georgios Argyrades. The beach lies beside the protected Korission Lagoon creating a striking natural landscape. It’s ideal for swimming, wind- and kite-surfing (when winds are favorable), relaxing in the sand, and enjoying nature walks in and around the dunes.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/kalantos-beach-naxos</loc>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/8/89/Kalantos_Naxos_Greece_2005082216150N00410_01.jpg</image:loc>
+      <image:title>Kalantos Beach - Greek Beach</image:title>
+      <image:caption>Kalantos is one of Naxos’s more remote southern beaches. Golden sandy shore, shallow crystal-clear water, and an undeveloped, tranquil atmosphere make it ideal for people seeking peace and nature over crowds. The beach lies in a natural bay sheltered from the northern winds. The scenery around is wild: wetlands, hills, and simple natural beauty dominate</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/kalo-livadi-mykonos</loc>
+    <lastmod>2025-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/6/69/Mykonos_Kalo_Livadi_01.jpg</image:loc>
+      <image:title>Kalo Livadi - Greek Beach</image:title>
+      <image:caption>Kalo Livadi is a long, elegant sandy beach on Mykonos’s southeastern coast, about 9-10 km from Mykonos Town. The shore is mostly white fine sand, surrounded by gently sloping terrain and low hills. The sea starts shallow, with crystal-clear waters ideal for swimming, families, and relaxed days by the sea. The beach has both lively beach clubs and quieter spots, so you can enjoy either social beach-bar vibes or more tranquil relaxation. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/kathisma-beach-lefkada</loc>
+    <lastmod>2025-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Kathisma_beach%2C_lefkada_pic2.JPG/1024px-Kathisma_beach%2C_lefkada_pic2.JPG?20140611210905</image:loc>
+      <image:title>Kathisma beach - Greek Beach</image:title>
+      <image:caption>Kathisma is one of Lefkada’s best-known and most popular beaches. Stretching for over 1 km along the west coast, it’s framed by hills and offers wide views of the deep turquoise Ionian Sea. The beach combines lively beach bars, organised sunbeds/umbrellas, and quieter ends where you can escape crowds. It has a cosmopolitan feel, especially in high season, but you can still find more relaxed spots toward the edges.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/korakonisi-zakynthos</loc>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/e/e0/%CE%9A%CE%BF%CF%81%CE%B1%CE%BA%CE%BF%CE%BD%CE%B7%CF%83%CE%B9.jpg</image:loc>
+      <image:title>Korakonisi - Greek Beach</image:title>
+      <image:caption>Korakonisi is one of the island’s most striking natural landmarks — a rocky islet connected to the coast by a narrow strip of land on Zakynthos’ rugged west side. Known for its dramatic cliffs, a natural sea arch, and deep blue waters, it’s a favorite for adventurous visitors. The rocky terrain requires some climbing and sturdy shoes, but rewards with spectacular swimming, snorkeling, and cliff-diving opportunities. This is not a sandy beach but a wild coastal experience.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/makris-gialos-zakynthos</loc>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://live.staticflickr.com/3427/3853936362_b1a47a3a4b_h.jpg</image:loc>
+      <image:title>Makris Gialos - Greek Beach</image:title>
+      <image:caption>Makris Gialos is a secluded yet accessible beach on the northeast coast of Zakynthos, roughly 30 km from Zakynthos Town. It features a pebbly-shingle shoreline, crystal-clear water, and impressive rock caves that are excellent for snorkeling and diving. The water gets deep quickly, so it’s better suited to confident swimmers. The scenery is wild and beautiful, making this a peaceful spot for couples or adventurers seeking some solitude.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/mikri-vigla-naxos</loc>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/b/bb/Naxos_Mikri_Vigla_2025-06-19_0857.jpg</image:loc>
+      <image:title>Mikri Vigla - Greek Beach</image:title>
+      <image:caption>Mikri Vigla lies on the western coast of Naxos, about 11-18 km from Naxos Town depending on route. It offers fine white sand (combined with some dunes & headlands) and crystal-clear waters. The beach is especially popular with windsurfers and kitesurfers because of the steady winds, but also works well for families wanting a relaxed day by the sea. There are several accommodation units and tavernas nearby, so you can combine swimming with meals and longer stays. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/mizithres-beach-zakynthos</loc>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Mizithres_Rocks%2C_Keri%2C_Zakynthos%2C_Greece_02.jpg/2048px-Mizithres_Rocks%2C_Keri%2C_Zakynthos%2C_Greece_02.jpg?20121225150514</image:loc>
+      <image:title>Mizithres Beach - Greek Beach</image:title>
+      <image:caption>A breathtaking double-peaked rock formation rising from turquoise waters at the southern tip of Zakynthos, Mizithres is one of the island’s most photogenic spots. Accessible by boat from Keri or nearby beaches, it’s perfect for swimming, snorkeling, and soaking in dramatic views of cliffs and crystal-clear seas.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/mytakas-beach-milos</loc>
+    <lastmod>2025-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Mytakas_beach%2C_Milos%2C_152894q.jpg/1024px-Mytakas_beach%2C_Milos%2C_152894q.jpg?20151029191406</image:loc>
+      <image:title>Mytakas beach - Greek Beach</image:title>
+      <image:caption>Mytakas (sometimes spelled “Mitakas”) is a tranquil beach on the northern coast of Milos, located within a small settlement of the same name. It’s made of two sandy bays, surrounded by gentle rocky hills, offering clear turquoise water and a relaxed atmosphere. While it has enough amenities for comfort, it remains much quieter than the big tourist beaches — a good choice for those wanting peace, sun, and sea without massive crowds. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/ornos-mykonos</loc>
+    <lastmod>2025-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Mikonos_Spiaggia_di_Ornos_-_panoramio.jpg/2048px-Mikonos_Spiaggia_di_Ornos_-_panoramio.jpg?20170508184142</image:loc>
+      <image:title>Ornos - Greek Beach</image:title>
+      <image:caption>Nestled in the sheltered Ornos Bay just south of Mykonos Town, Ornos is an elegant, well-developed beach with a resort feel. The shore is gently sloping, ideal for swimming and family beach days. Ornos combines natural charm with a high level of comfort: plenty of sand, calm water, and easy proximity to restaurants, cafés, shops and accommodations. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/panormos-beach-mykonos</loc>
+    <lastmod>2025-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Mykonos_Panormos_01.jpg/1024px-Mykonos_Panormos_01.jpg?20140820183246</image:loc>
+      <image:title>Panormos beach - Greek Beach</image:title>
+      <image:caption>Panormos is a relaxed, elegant sandy beach on the northern side of Mykonos, about 7 km from Mykonos Town. Located in a protected bay, it features soft pale sand, shallow and clear water, and fewer crowds than many of the southern beaches. The setting combines natural beauty with upscale touches — stylish beach bars/restaurants and boutique-style accommodations mix with tranquil spots. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/plaka-beach-naxos</loc>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/2/2b/The_nudists%27_part_of_Plaka_beach%2C_Naxos_island%2C_Greece_-_panoramio.jpg</image:loc>
+      <image:title>Plaka Beach - Greek Beach</image:title>
+      <image:caption>Plaka is one of Naxos’s longest and most beautiful sandy beaches, stretching for around 4 km along the southwestern coast. With soft white/golden sand, turquoise clear water, and wide open stretches, it’s ideal for sunbathing, long walks, swimming, and relaxing. Parts of the south end feel more untouched and natural, while the more developed north end (near Maragas etc.) has beach bars and restaurants, giving visitors options between tranquility or more service. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/platis-gialos-mykonos</loc>
+    <lastmod>2025-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Platis_Gialos_-_panoramio.jpg/1024px-Platis_Gialos_-_panoramio.jpg?20160226145235</image:loc>
+      <image:title>Platis Gialos - Greek Beach</image:title>
+      <image:caption>Platis Gialos (Platys Gialós) is a bustling, well-developed beach on the southern side of Mykonos, about 6 km south of Mykonos Town. It features long stretches of fine golden sand and crystal-clear shallow waters, making it a very popular spot for families and tourists. The bay is semi-sheltered, so conditions are comfortable for swimming, and an inviting mix of beach clubs, restaurants, and hotels line the shore.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/porto-katsiki-lefkada</loc>
+    <lastmod>2025-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Lefkada_kosta.jpg/1024px-Lefkada_kosta.jpg?20080308000529</image:loc>
+      <image:title>Porto Katsiki - Greek Beach</image:title>
+      <image:caption>Porto Katsiki is one of the most iconic beaches on Lefkada’s western coast: dramatic white cliffs above, turquoise water below, and a wide view of the Ionian Sea. You reach it via a steep road and then descend around 80-100 steps from the cliff-top parking area. The setting is very scenic, especially early morning or late afternoon when the light is softer and crowds are lighter. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/porto-limnionas-zakynthos</loc>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Porto_Limnionas_%2846425770262%29.jpg/2048px-Porto_Limnionas_%2846425770262%29.jpg?20190519134132</image:loc>
+      <image:title>Porto Limnionas - Greek Beach</image:title>
+      <image:caption>A dramatic rocky cove on the west coast of Zakynthos, Porto Limnionas is surrounded by towering limestone cliffs and crystal-clear waters. There’s no sandy beach — instead, natural rock platforms and carved steps give access to the sea, with spots for swimming, snorkeling, cliff-jumping, and enjoying striking views.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/porto-roma-zakynthos</loc>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://live.staticflickr.com/2680/4300884638_43bb985287_h.jpg</image:loc>
+      <image:title>Porto Roma - Greek Beach</image:title>
+      <image:caption>Porto Roma is a charming sand-and-pebble beach on the west side of Vasilikos peninsula, known for its clear, shallow waters and relaxing atmosphere. The shore slopes gently into the water, making it a great choice for families and anyone who prefers easier beach access. The surrounding area remains relatively uncommercialised, which adds to the peaceful, traditional Greek feel. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/porto-roxa-zakynthos</loc>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/4/43/Zakynthos_May_2009_Porto_Roxa_3_-_panoramio.jpg</image:loc>
+      <image:title>Porto Roxa - Greek Beach</image:title>
+      <image:caption>A quiet rocky cove on the island’s west coast, Porto Roxa is known for its deep blue waters and laid-back tavernas perched above the sea. Sunbeds and diving platforms are set on the rocks, making it a great spot for swimming and cliff-jumping, though it has no sandy shore. It’s ideal for those seeking a relaxed, authentic atmosphere away from the crowds.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/red-beach-santorini</loc>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/d/d2/Red_Beach_-_Panorama_-_Santorini_-_Grecia_-_agosto_2018.jpg</image:loc>
+      <image:title>Red Beach - Greek Beach</image:title>
+      <image:caption>Below towering red volcanic cliffs, Red Beach is a dramatic, photogenic stretch of sand and pebbles on Santorini’s southern coast. The high red rocks create a striking contrast with the deep blue of the Aegean. The sea entry is somewhat rocky and steep in places, so it’s more suitable for those who are okay with uneven terrain. Swimming is generally calm.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/sarakiniko-beach-milos</loc>
+    <lastmod>2025-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Sarakiniko_Beach_on_Milos_Island%2C_Greece_with_a_view_of_the_Aegean_Sea.jpg/1024px-Sarakiniko_Beach_on_Milos_Island%2C_Greece_with_a_view_of_the_Aegean_Sea.jpg?20210317192745</image:loc>
+      <image:title>Sarakiniko beach - Greek Beach</image:title>
+      <image:caption>Sarakiniko is Milos’s iconic “moon-landscape” beach — smooth, bright white volcanic rock formations sculpted by wind and sea, surrounding a small inlet of striking turquoise water. There’s only a tiny sandy patch, most of the area is rock and cliff-edge, making it ideal for swimming in the shallow waters, exploring caves & cliffs, and doing some cliff jumping. The scenery is surreal and photogenic, especially around sunrise or late afternoon.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/tsigrado-beach-milos</loc>
+    <lastmod>2025-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Cliffs_surrounding_Tsigrado_Beach_on_Milos_Island%2C_Greece.jpg/1024px-Cliffs_surrounding_Tsigrado_Beach_on_Milos_Island%2C_Greece.jpg?20210317193303</image:loc>
+      <image:title>Tsigrado beach - Greek Beach</image:title>
+      <image:caption>Tsigrado is a strikingly beautiful, small cove on the southern coast of Milos, near Firiplaka. The beach is tucked between steep volcanic cliffs, with turquoise waters, natural caves, and dramatic rock formations. The final approach involves climbing down from a cliff via ladders and ropes, which makes it adventurous and photogenic — not always the easiest of access, but many say worth the effort.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/vlychada-beach-santorini</loc>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/6/67/Vlychada_Strand_05.jpg</image:loc>
+      <image:title>Vlychada Beach - Greek Beach</image:title>
+      <image:caption>Vlychada Beach lies on the southern coast of Santorini, about 13-14 km from Fira. The beach is known for its dramatic volcanic geology: towering white cliffs sculpted by wind and sea, a long shoreline of gray sand mixed with pebbles, and deep, clear waters. Its lunar-like landscape gives it a peaceful, almost surreal vibe, making it ideal for those seeking something scenic and less crowded than the more tourist-heavy beaches. The water close to shore is relatively shallow to begin with, but deepens quickly. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/voutakos-beach</loc>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/2/2a/Cyclades_Paros_Voutakos_Beach_-_panoramio_%281%29.jpg</image:loc>
+      <image:title>Voutakos Beach - Greek Beach</image:title>
+      <image:caption>Voutakos is a peaceful, semi-secluded beach on the southwestern side of Paros, located between Aliki and Pounda. The shore is a mix of soft golden sand and small pebbles, and the sea is generally calm — often calmer than many more exposed beaches on the island, especially when the northern winds pick up. Ideal for those wanting a relaxing beach day in a more natural, low-crowd setting. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/white-beach-santorini</loc>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/4/46/AspriParalia.jpg</image:loc>
+      <image:title>White Beach - Greek Beach</image:title>
+      <image:caption>A small secluded cove on the southwestern coast near Akrotiri, White Beach is framed by tall, dramatic white cliffs that give the place its name. Though the cliffs are pale, the shore consists of pebbles and grey/black volcanic sand, creating a striking contrast with the turquoise sea. The waters are clear and shallow close to shore, perfect for swimming and snorkeling. Because it’s secluded, it's more peaceful than many of the more popular Santorini beaches. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/beach/xigia-zakynthos</loc>
+    <lastmod>2025-09-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/1/1a/Xigia_Beach_Zakynthos_%2845561234755%29.jpg</image:loc>
+      <image:title>Xigia - Greek Beach</image:title>
+      <image:caption>Xigia Beach, also known as Xigia Sulphur Beach, is a striking natural destination on the northeastern coast of Zakynthos. Towering white cliffs cradle small coves where sulfur springs flow directly into the sea, giving the water a milky-turquoise hue. It’s known for its therapeutic waters thought to benefit skin, muscles, and overall wellbeing. The shore is composed of fine white pebbles, with steep staircases leading down to the water. Because of the cliffs, parts of the beach are shaded in certain times of day — especially early morning and late afternoon.</image:caption>
+    </image:image>
+  </url>
+  
+</urlset>

@@ -47,8 +47,8 @@ const AdminBeachesList: React.FC = () => {
     try {
       let query = supabase.from('beaches').select('*', { count: 'exact' });
       if (q) {
-        // OR across name/place_text
-        query = query.or(`name.ilike.%${q}%,place_text.ilike.%${q}%`);
+        // OR across name/area
+        query = query.or(`name.ilike.%${q}%,area.ilike.%${q}%`);
       }
       if (status && status !== 'ALL') {
         query = query.eq('status', status as 'ACTIVE' | 'HIDDEN' | 'DRAFT');
@@ -171,7 +171,7 @@ const AdminBeachesList: React.FC = () => {
                 <td className="py-2 pr-2 font-medium text-foreground">
                   <Link to={`/admin/beaches/${b.id}`} className="underline underline-offset-2">{b.name}</Link>
                 </td>
-                <td className="py-2 pr-2">{b.place_text}</td>
+                <td className="py-2 pr-2">{b.area}</td>
                 <td className="py-2 pr-2">{b.organized ? 'Yes' : 'No'}</td>
                 <td className="py-2 pr-2">{b.parking}</td>
                 <td className="py-2 pr-2">{b.blue_flag ? <Badge>Blue Flag</Badge> : '-'}</td>
@@ -235,7 +235,7 @@ const AdminBeachesList: React.FC = () => {
             <div className="flex items-start justify-between">
               <div>
                 <h3 className="font-semibold"><Link to={`/admin/beaches/${b.id}`} className="underline underline-offset-2">{b.name}</Link></h3>
-                <p className="text-sm text-muted-foreground">{b.place_text}</p>
+                <p className="text-sm text-muted-foreground">{b.area}</p>
               </div>
               {renderStatus(b.status)}
             </div>

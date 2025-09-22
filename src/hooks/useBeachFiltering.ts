@@ -13,7 +13,7 @@ export const useBeachFiltering = (
       if (filters.search) {
         const searchTerm = filters.search.toLowerCase();
         const matchesName = beach.name.toLowerCase().includes(searchTerm);
-        const matchesPlace = beach.place_text.toLowerCase().includes(searchTerm);
+        const matchesPlace = beach.area.toLowerCase().includes(searchTerm);
         if (!matchesName && !matchesPlace) return false;
       }
 

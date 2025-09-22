@@ -1,7 +1,7 @@
 export interface Beach {
   id: string;
   name: string;
-  place_text: string;
+  area: string;
   description?: string;
   slug: string;
   latitude: number;

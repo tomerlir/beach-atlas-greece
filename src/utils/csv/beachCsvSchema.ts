@@ -5,7 +5,7 @@ import { AMENITY_MAP } from '@/lib/amenities';
 export const CSV_HEADER_ORDER = [
   'slug',
   'name', 
-  'place_text',
+  'area',
   'latitude',
   'longitude',
   'type',
@@ -35,7 +35,7 @@ export const STATUS_TYPES = ['ACTIVE', 'HIDDEN', 'DRAFT'] as const;
 export const BeachCsvRowSchema = z.object({
   slug: z.string().min(1).max(80),
   name: z.string().min(1),
-  place_text: z.string().min(1),
+  area: z.string().min(1),
   latitude: z.number().min(-90).max(90),
   longitude: z.number().min(-180).max(180),
   type: z.enum(BEACH_TYPES),
@@ -251,7 +251,7 @@ export function normalizeRow(raw: Record<string, string>, rowIndex: number): Cla
     const normalizedRow: BeachCsvRow = {
       slug: slug!,
       name: trimmed.name,
-      place_text: trimmed.place_text,
+      area: trimmed.area,
       latitude: latitude!,
       longitude: longitude!,
       type: type,
@@ -326,7 +326,7 @@ export function dbRowToCsvRow(dbRow: any): Record<string, string> {
   return {
     slug: dbRow.slug || '',
     name: dbRow.name || '',
-    place_text: dbRow.place_text || '',
+    area: dbRow.area || '',
     latitude: dbRow.latitude?.toString() || '',
     longitude: dbRow.longitude?.toString() || '',
     type: dbRow.type || '',
@@ -349,7 +349,7 @@ export function csvRowToDbInsert(csvRow: BeachCsvRow): any {
   const dbRow: any = {
     slug: csvRow.slug,
     name: csvRow.name,
-    place_text: csvRow.place_text,
+    area: csvRow.area,
     latitude: csvRow.latitude,
     longitude: csvRow.longitude,
     type: csvRow.type,
@@ -377,7 +377,7 @@ export function csvRowToDbUpdate(csvRow: BeachCsvRow): any {
 
   // Always include these fields for updates
   if (csvRow.name !== undefined) dbRow.name = csvRow.name;
-  if (csvRow.place_text !== undefined) dbRow.place_text = csvRow.place_text;
+  if (csvRow.area !== undefined) dbRow.area = csvRow.area;
   if (csvRow.latitude !== undefined) dbRow.latitude = csvRow.latitude;
   if (csvRow.longitude !== undefined) dbRow.longitude = csvRow.longitude;
   if (csvRow.type !== undefined) dbRow.type = csvRow.type;
