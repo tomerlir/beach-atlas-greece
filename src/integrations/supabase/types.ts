@@ -14,45 +14,74 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_audit_log: {
+        Row: {
+          action: string
+          admin_user_id: string
+          created_at: string
+          details: Json | null
+          id: string
+          target_user_id: string | null
+        }
+        Insert: {
+          action: string
+          admin_user_id: string
+          created_at?: string
+          details?: Json | null
+          id?: string
+          target_user_id?: string | null
+        }
+        Update: {
+          action?: string
+          admin_user_id?: string
+          created_at?: string
+          details?: Json | null
+          id?: string
+          target_user_id?: string | null
+        }
+        Relationships: []
+      }
       areas: {
         Row: {
+          created_at: string | null
+          description: string | null
+          hero_photo_source: string | null
+          hero_photo_url: string | null
           id: string
           name: string
           slug: string
-          description: string | null
-          hero_photo_url: string | null
-          hero_photo_source: string | null
-          created_at: string
-          updated_at: string
-          status: 'DRAFT' | 'HIDDEN' | 'ACTIVE'
+          status: string | null
+          updated_at: string | null
         }
         Insert: {
+          created_at?: string | null
+          description?: string | null
+          hero_photo_source?: string | null
+          hero_photo_url?: string | null
           id?: string
           name: string
           slug: string
-          description?: string | null
-          hero_photo_url?: string | null
-          hero_photo_source?: string | null
-          created_at?: string
-          updated_at?: string
-          status?: 'DRAFT' | 'HIDDEN' | 'ACTIVE'
+          status?: string | null
+          updated_at?: string | null
         }
         Update: {
+          created_at?: string | null
+          description?: string | null
+          hero_photo_source?: string | null
+          hero_photo_url?: string | null
           id?: string
           name?: string
           slug?: string
-          description?: string | null
-          hero_photo_url?: string | null
-          hero_photo_source?: string | null
-          created_at?: string
-          updated_at?: string
-          status?: 'DRAFT' | 'HIDDEN' | 'ACTIVE'
+          status?: string | null
+          updated_at?: string | null
         }
         Relationships: []
       }
       beaches: {
         Row: {
           amenities: string[]
+          area: string
+          area_id: string | null
           blue_flag: boolean
           created_at: string
           description: string | null
@@ -62,20 +91,20 @@ export type Database = {
           name: string
           organized: boolean
           parking: string
-          photo_url: string | null
           photo_source: string | null
-          area: string
-          area_id: string | null
+          photo_url: string | null
           slug: string
           source: string | null
-          status: 'ACTIVE' | 'HIDDEN' | 'DRAFT'
-          type: 'SANDY' | 'PEBBLY' | 'MIXED' | 'OTHER'
-          wave_conditions: 'CALM' | 'MODERATE' | 'WAVY' | 'SURFABLE'
-          verified_at: string | null
+          status: string
+          type: string
           updated_at: string
+          verified_at: string | null
+          wave_conditions: string
         }
         Insert: {
           amenities?: string[]
+          area: string
+          area_id?: string | null
           blue_flag?: boolean
           created_at?: string
           description?: string | null
@@ -84,21 +113,21 @@ export type Database = {
           longitude: number
           name: string
           organized?: boolean
-          parking: 'NONE' | 'ROADSIDE' | 'SMALL_LOT' | 'LARGE_LOT'
-          photo_url?: string | null
+          parking: string
           photo_source?: string | null
-          area: string
-          area_id?: string | null
+          photo_url?: string | null
           slug: string
           source?: string | null
-          status?: 'ACTIVE' | 'HIDDEN' | 'DRAFT'
-          type: 'SANDY' | 'PEBBLY' | 'MIXED' | 'OTHER'
-          wave_conditions: 'CALM' | 'MODERATE' | 'WAVY' | 'SURFABLE'
-          verified_at?: string | null
+          status?: string
+          type: string
           updated_at?: string
+          verified_at?: string | null
+          wave_conditions: string
         }
         Update: {
           amenities?: string[]
+          area?: string
+          area_id?: string | null
           blue_flag?: boolean
           created_at?: string
           description?: string | null
@@ -107,20 +136,26 @@ export type Database = {
           longitude?: number
           name?: string
           organized?: boolean
-          parking?: 'NONE' | 'ROADSIDE' | 'SMALL_LOT' | 'LARGE_LOT'
-          photo_url?: string | null
+          parking?: string
           photo_source?: string | null
-          area?: string
-          area_id?: string | null
+          photo_url?: string | null
           slug?: string
           source?: string | null
-          status?: 'ACTIVE' | 'HIDDEN' | 'DRAFT'
-          type?: 'SANDY' | 'PEBBLY' | 'MIXED' | 'OTHER'
-          wave_conditions?: 'CALM' | 'MODERATE' | 'WAVY' | 'SURFABLE'
-          verified_at?: string | null
+          status?: string
+          type?: string
           updated_at?: string
+          verified_at?: string | null
+          wave_conditions?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "beaches_area_id_fkey"
+            columns: ["area_id"]
+            isOneToOne: false
+            referencedRelation: "areas"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       profiles: {
         Row: {
@@ -149,95 +184,110 @@ export type Database = {
         }
         Relationships: []
       }
-      admin_audit_log: {
-        Row: {
-          id: string
-          admin_user_id: string
-          action: string
-          target_user_id: string | null
-          details: any | null
-          created_at: string
-        }
-        Insert: {
-          id?: string
-          admin_user_id: string
-          action: string
-          target_user_id?: string | null
-          details?: any | null
-          created_at?: string
-        }
-        Update: {
-          id?: string
-          admin_user_id?: string
-          action?: string
-          target_user_id?: string | null
-          details?: any | null
-          created_at?: string
-        }
-        Relationships: []
-      }
     }
     Views: {
-      [_ in never]: never
+      beaches_with_areas: {
+        Row: {
+          amenities: string[] | null
+          area: string | null
+          area_description: string | null
+          area_hero_photo_source: string | null
+          area_hero_photo_url: string | null
+          area_id: string | null
+          area_name: string | null
+          area_slug: string | null
+          blue_flag: boolean | null
+          created_at: string | null
+          description: string | null
+          id: string | null
+          latitude: number | null
+          longitude: number | null
+          name: string | null
+          organized: boolean | null
+          parking: string | null
+          photo_source: string | null
+          photo_url: string | null
+          slug: string | null
+          source: string | null
+          status: string | null
+          type: string | null
+          updated_at: string | null
+          verified_at: string | null
+          wave_conditions: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "beaches_area_id_fkey"
+            columns: ["area_id"]
+            isOneToOne: false
+            referencedRelation: "areas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
-      is_admin: {
+      bootstrap_first_admin: {
+        Args: { admin_email: string }
+        Returns: boolean
+      }
+      can_access_admin_functions: {
         Args: Record<PropertyKey, never>
         Returns: boolean
       }
-      get_users_for_admin: {
-        Args: Record<PropertyKey, never>
-        Returns: {
-          user_id: string
-          email: string
-          role: string
-          created_at: string
-          last_sign_in: string | null
-        }[]
+      demote_from_admin: {
+        Args: { target_user_id: string }
+        Returns: boolean
       }
-      get_user_management_data: {
+      get_all_users: {
         Args: Record<PropertyKey, never>
         Returns: {
-          user_id: string
-          role: string
           created_at: string
-          last_sign_in: string | null
-          is_verified: boolean
+          email: string
+          last_sign_in: string
+          role: string
+          user_id: string
         }[]
       }
       get_current_user_email: {
         Args: Record<PropertyKey, never>
         Returns: string
       }
-      can_access_admin_functions: {
+      get_user_management_data: {
         Args: Record<PropertyKey, never>
-        Returns: boolean
+        Returns: {
+          created_at: string
+          is_verified: boolean
+          last_sign_in: string
+          role: string
+          user_id: string
+        }[]
       }
-      promote_to_admin: {
-        Args: {
-          target_user_id: string
-        }
-        Returns: boolean
+      get_users_for_admin: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          created_at: string
+          email: string
+          last_sign_in: string
+          role: string
+          user_id: string
+        }[]
       }
-      demote_from_admin: {
-        Args: {
-          target_user_id: string
-        }
-        Returns: boolean
-      }
-      bootstrap_first_admin: {
-        Args: {
-          admin_email: string
-        }
+      is_admin: {
+        Args: Record<PropertyKey, never>
         Returns: boolean
       }
       log_admin_action: {
         Args: {
+          action_details?: Json
           action_type: string
           target_user_id?: string
-          action_details?: any
         }
-        Returns: void
+        Returns: undefined
+      }
+      promote_to_admin: {
+        Args: { target_user_id: string }
+        Returns: boolean
       }
     }
     Enums: {

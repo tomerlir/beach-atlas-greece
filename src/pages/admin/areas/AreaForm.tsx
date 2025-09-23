@@ -164,7 +164,7 @@ const AreaForm: React.FC = () => {
         const uniqueSlug = await ensureUniqueSlug(parsed.data.slug as string);
         (parsed.data as any).slug = uniqueSlug;
         const payload: AreaInsert = parsed.data as AreaInsert;
-        const { data, error } = await supabase.from('areas').insert(payload).select().single();
+        const { data, error } = await supabase.from('areas').insert(payload).select().maybeSingle();
         if (error || !data) throw error || new Error('Insert returned no row');
         toast({ title: 'Saved', description: 'Area created.' });
       } else if (mode === 'edit' && id) {
@@ -174,7 +174,7 @@ const AreaForm: React.FC = () => {
           ...(parsed.data as AreaUpdate), 
           id,
         };
-        const { data, error } = await supabase.from('areas').update(payload).eq('id', id).select().single();
+        const { data, error } = await supabase.from('areas').update(payload).eq('id', id).select().maybeSingle();
         if (error || !data) throw error || new Error('Update matched no rows');
         toast({ title: 'Saved', description: 'Area updated.' });
       }

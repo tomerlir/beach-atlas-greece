@@ -44,7 +44,7 @@ export const useBeachFiltering = (
       }
 
       // Wave conditions filter
-      if (filters.waveConditions.length > 0 && !filters.waveConditions.includes(beach.wave_conditions)) {
+      if (filters.waveConditions.length > 0 && !filters.waveConditions.includes(beach.wave_conditions as any)) {
         return false;
       }
 
