@@ -1,20 +1,12 @@
-export interface Beach {
-  id: string;
-  name: string;
-  area: string;
-  description?: string;
-  slug: string;
-  latitude: number;
-  longitude: number;
-  organized: boolean;
-  blue_flag: boolean;
-  parking: string;
-  amenities: string[];
-  wave_conditions: string;
-  photo_url?: string;
-  photo_source?: string;
-}
+import { Tables } from '@/integrations/supabase/types';
+import { Area } from './area';
+
+export type Beach = Tables<'beaches'>;
 
 export interface BeachWithDistance extends Beach {
   distance?: number;
+}
+
+export interface BeachWithArea extends Beach {
+  area_data?: Area;
 }

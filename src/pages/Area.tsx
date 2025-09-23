@@ -19,7 +19,9 @@ import { useAreaUrlState } from "@/hooks/useAreaUrlState";
 import { useAreaBeachFiltering } from "@/hooks/useAreaBeachFiltering";
 import { useDistanceCalculation } from "@/hooks/useDistanceCalculation";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
+import { useAreaBySlug } from "@/hooks/useAreas";
 import { Beach } from "@/types/beach";
+import type { Area } from "@/types/area";
 import heroImage from "@/assets/hero-beach.jpg";
 import EmptyState from "@/components/EmptyState";
 import NotFound from "@/pages/NotFound";
@@ -33,29 +35,31 @@ const Area = () => {
   const [showGeolocationError, setShowGeolocationError] = useState(false);
   const { preloadVisibleBeachImages } = useImagePreloader();
 
-  // Fetch beaches from Supabase
-  const { data: beaches = [], isLoading, error } = useQuery({
-    queryKey: ['beaches'],
+  // Fetch area data by slug
+  const { data: area, isLoading: isLoadingArea, error: areaError } = useAreaBySlug(areaSlug || '');
+
+  // Fetch beaches from Supabase filtered by area
+  const { data: beaches = [], isLoading: isLoadingBeaches, error: beachesError } = useQuery({
+    queryKey: ['beaches', area?.id],
     queryFn: async () => {
+      if (!area) return [];
+      
       const { data, error } = await supabase
         .from('beaches')
         .select('*')
         .eq('status', 'ACTIVE')
+        .eq('area_id', area.id)
         .order('name');
       
       if (error) throw error;
       return data as Beach[];
-    }
+    },
+    enabled: !!area
   });
 
-  // Find the area name from the slug
-  const areaName = useMemo(() => {
-    if (!areaSlug || !beaches.length) return null;
-    
-    // Find unique areas and match by slug
-    const uniqueAreas = [...new Set(beaches.map(beach => beach.area))];
-    return uniqueAreas.find(area => generateAreaSlug(area) === areaSlug) || null;
-  }, [areaSlug, beaches]);
+  const isLoading = isLoadingArea || isLoadingBeaches;
+  const error = areaError || beachesError;
+  const areaName = area?.name;
 
   // Use area-specific URL state
   const { filters, updateFilters, resetFilters } = useAreaUrlState(areaName || '');
@@ -164,7 +168,7 @@ const Area = () => {
       {
         "@type": "ItemList",
         "name": `Beaches in ${areaName}`,
-        "description": `A curated list of beaches in ${areaName}, Greece`,
+        "description": area?.description || `A curated list of beaches in ${areaName}, Greece`,
         "numberOfItems": filteredBeaches.length,
         "itemListElement": paginatedBeaches.slice(0, 10).map((beach, index) => ({
           "@type": "ListItem",
@@ -226,7 +230,7 @@ const Area = () => {
         <section className="relative h-[70vh] flex items-center justify-center bg-gradient-ocean overflow-hidden">
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${heroImage})` }}
+            style={{ backgroundImage: `url(${area?.hero_photo_url || heroImage})` }}
           />
           <div className="absolute inset-0 bg-black/30" />
           
@@ -236,7 +240,7 @@ const Area = () => {
             </h1>
             <p className="text-lg md:text-xl max-w-2xl mx-auto opacity-90 mb-8">
               {areaName 
-                ? `Discover stunning beaches in ${areaName}, Greece. From organized resorts to hidden gems waiting to be explored.`
+                ? (area?.description || `Discover stunning beaches in ${areaName}, Greece. From organized resorts to hidden gems waiting to be explored.`)
                 : 'The requested area could not be found. Please check the URL or return to the main directory.'
               }
             </p>

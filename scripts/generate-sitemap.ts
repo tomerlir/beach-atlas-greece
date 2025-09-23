@@ -58,9 +58,21 @@ interface Beach {
   updated_at: string;
   status: string;
   area: string;
+  area_id: string;
 }
 
-function generateSitemap(beaches: Beach[]): string {
+interface Area {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string;
+  hero_photo_url?: string;
+  hero_photo_source?: string;
+  status: 'DRAFT' | 'HIDDEN' | 'ACTIVE';
+  updated_at: string;
+}
+
+function generateSitemap(beaches: Beach[], areas: Area[]): string {
   const currentDate = new Date().toISOString().split('T')[0];
   
   let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
@@ -86,13 +98,12 @@ function generateSitemap(beaches: Beach[]): string {
   <!-- Area Pages -->`;
 
   // Add area pages
-  const uniqueAreas = [...new Set(beaches.map(beach => beach.area))];
-  uniqueAreas.forEach(area => {
-    const areaSlug = generateAreaSlug(area);
+  areas.forEach(area => {
+    const lastmod = new Date(area.updated_at).toISOString().split('T')[0];
     sitemap += `
   <url>
-    <loc>${SITE_URL}/${areaSlug}</loc>
-    <lastmod>${currentDate}</lastmod>
+    <loc>${SITE_URL}/${area.slug}</loc>
+    <lastmod>${lastmod}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>`;
@@ -105,7 +116,8 @@ function generateSitemap(beaches: Beach[]): string {
   // Add beach pages
   beaches.forEach(beach => {
     const lastmod = new Date(beach.updated_at).toISOString().split('T')[0];
-    const areaSlug = generateAreaSlug(beach.area);
+    const area = areas.find(a => a.id === beach.area_id);
+    const areaSlug = area?.slug || generateAreaSlug(beach.area);
     
     sitemap += `
   <url>
@@ -139,15 +151,31 @@ async function main() {
   try {
     console.log('🚀 Generating sitemap for Greek Beaches Directory...');
     
-    // Fetch all active beaches from Supabase
-    const { data: beaches, error } = await supabase
-      .from('beaches')
-      .select('id, name, slug, description, photo_url, updated_at, status, area')
+    // Fetch all active areas from Supabase
+    const { data: areas, error: areasError } = await supabase
+      .from('areas')
+      .select('id, name, slug, description, hero_photo_url, hero_photo_source, status, updated_at')
       .eq('status', 'ACTIVE')
       .order('name');
 
-    if (error) {
-      throw new Error(`Failed to fetch beaches: ${error.message}`);
+    if (areasError) {
+      throw new Error(`Failed to fetch areas: ${areasError.message}`);
+    }
+
+    // Fetch all active beaches from Supabase
+    const { data: beaches, error: beachesError } = await supabase
+      .from('beaches')
+      .select('id, name, slug, description, photo_url, updated_at, status, area, area_id')
+      .eq('status', 'ACTIVE')
+      .order('name');
+
+    if (beachesError) {
+      throw new Error(`Failed to fetch beaches: ${beachesError.message}`);
+    }
+
+    if (!areas || areas.length === 0) {
+      console.warn('⚠️  No areas found in database');
+      return;
     }
 
     if (!beaches || beaches.length === 0) {
@@ -155,13 +183,10 @@ async function main() {
       return;
     }
 
-    console.log(`📊 Found ${beaches.length} active beaches`);
-
-    // Get unique areas for logging
-    const uniqueAreas = [...new Set(beaches.map(beach => beach.area))];
+    console.log(`📊 Found ${areas.length} areas and ${beaches.length} active beaches`);
 
     // Generate sitemap XML
-    const sitemapXml = generateSitemap(beaches);
+    const sitemapXml = generateSitemap(beaches, areas);
 
     // Write sitemap to public directory
     const sitemapPath = join(process.cwd(), 'public', 'sitemap.xml');
@@ -170,7 +195,7 @@ async function main() {
     console.log(`✅ Sitemap generated successfully!`);
     console.log(`📁 Location: ${sitemapPath}`);
     console.log(`🔗 URL: ${SITE_URL}/sitemap.xml`);
-    console.log(`📄 Contains ${beaches.length + uniqueAreas.length + 2} URLs (${beaches.length} beaches + ${uniqueAreas.length} areas + 2 main pages)`);
+    console.log(`📄 Contains ${beaches.length + areas.length + 2} URLs (${beaches.length} beaches + ${areas.length} areas + 2 main pages)`);
 
     // Validate XML structure
     const urlCount = (sitemapXml.match(/<url>/g) || []).length;

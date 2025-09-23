@@ -20,7 +20,7 @@
   
   <!-- Area Pages -->
   <url>
-    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/mykonos</loc>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/corfu</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -32,7 +32,13 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/corfu</loc>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/milos</loc>
+    <lastmod>2025-09-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/mykonos</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -45,12 +51,6 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/paros</loc>
-    <lastmod>2025-09-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/milos</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -71,7 +71,7 @@
   <!-- Beach Detail Pages -->
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/mykonos/agia-anna-mykonos</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -82,7 +82,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/lefkada/agiofili-beach-lefkada</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -93,7 +93,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/corfu/agios-gordios-beach-corfu</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -104,7 +104,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/lefkada/agios-ioannis-beach-lefkada</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -115,7 +115,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/naxos/agios-prokopios-naxos</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -126,7 +126,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/mykonos/agios-stefanos-mykonos</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -137,7 +137,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/paros/aliki-beach-paros</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -148,7 +148,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/milos/alogomandra-beach-milos</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -159,7 +159,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/naxos/apollonas-beach-naxos</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -170,7 +170,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/santorini/black-beach-santorini</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -181,7 +181,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/corfu/dassia-beach-corfu</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -192,7 +192,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/mykonos/divounia-beach-mykonos</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -203,7 +203,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/lefkada/egremni-beach-lefkada</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -215,7 +215,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/mykonos/elia-beach-mykonos</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -226,7 +226,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/paros/faragas-beach</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -237,7 +237,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/santorini/gialos-beach-santorini</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -248,7 +248,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/paros/glyfa-beach-paros</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -260,7 +260,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/corfu/glyfada-beach-corfu</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -271,7 +271,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/corfu/issos-beach-corfu</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -282,7 +282,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/naxos/kalantos-beach-naxos</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -293,7 +293,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/mykonos/kalo-livadi-mykonos</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -304,7 +304,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/lefkada/kathisma-beach-lefkada</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -315,7 +315,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/zakynthos/korakonisi-zakynthos</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -326,7 +326,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/zakynthos/makris-gialos-zakynthos</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -337,7 +337,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/naxos/mikri-vigla-naxos</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -348,7 +348,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/zakynthos/mizithres-beach-zakynthos</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -359,7 +359,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/milos/mytakas-beach-milos</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -370,7 +370,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/mykonos/ornos-mykonos</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -381,7 +381,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/mykonos/panormos-beach-mykonos</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -392,7 +392,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/naxos/plaka-beach-naxos</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -403,7 +403,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/mykonos/platis-gialos-mykonos</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -414,7 +414,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/lefkada/porto-katsiki-lefkada</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -425,7 +425,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/zakynthos/porto-limnionas-zakynthos</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -436,7 +436,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/zakynthos/porto-roma-zakynthos</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -447,7 +447,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/zakynthos/porto-roxa-zakynthos</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -458,7 +458,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/santorini/red-beach-santorini</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -469,7 +469,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/milos/sarakiniko-beach-milos</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -480,7 +480,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/milos/tsigrado-beach-milos</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -491,7 +491,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/santorini/vlychada-beach-santorini</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -502,7 +502,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/paros/voutakos-beach</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -513,7 +513,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/santorini/white-beach-santorini</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -524,7 +524,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/zakynthos/xigia-zakynthos</loc>
-    <lastmod>2025-09-22</lastmod>
+    <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>

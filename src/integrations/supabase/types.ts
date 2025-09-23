@@ -14,6 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
+      areas: {
+        Row: {
+          id: string
+          name: string
+          slug: string
+          description: string | null
+          hero_photo_url: string | null
+          hero_photo_source: string | null
+          created_at: string
+          updated_at: string
+          status: 'DRAFT' | 'HIDDEN' | 'ACTIVE'
+        }
+        Insert: {
+          id?: string
+          name: string
+          slug: string
+          description?: string | null
+          hero_photo_url?: string | null
+          hero_photo_source?: string | null
+          created_at?: string
+          updated_at?: string
+          status?: 'DRAFT' | 'HIDDEN' | 'ACTIVE'
+        }
+        Update: {
+          id?: string
+          name?: string
+          slug?: string
+          description?: string | null
+          hero_photo_url?: string | null
+          hero_photo_source?: string | null
+          created_at?: string
+          updated_at?: string
+          status?: 'DRAFT' | 'HIDDEN' | 'ACTIVE'
+        }
+        Relationships: []
+      }
       beaches: {
         Row: {
           amenities: string[]
@@ -29,6 +65,7 @@ export type Database = {
           photo_url: string | null
           photo_source: string | null
           area: string
+          area_id: string | null
           slug: string
           source: string | null
           status: 'ACTIVE' | 'HIDDEN' | 'DRAFT'
@@ -51,6 +88,7 @@ export type Database = {
           photo_url?: string | null
           photo_source?: string | null
           area: string
+          area_id?: string | null
           slug: string
           source?: string | null
           status?: 'ACTIVE' | 'HIDDEN' | 'DRAFT'
@@ -73,6 +111,7 @@ export type Database = {
           photo_url?: string | null
           photo_source?: string | null
           area?: string
+          area_id?: string | null
           slug?: string
           source?: string | null
           status?: 'ACTIVE' | 'HIDDEN' | 'DRAFT'
