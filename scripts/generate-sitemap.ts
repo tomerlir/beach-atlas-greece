@@ -14,6 +14,30 @@
  */
 
 import { createClient } from '@supabase/supabase-js';
+
+// Utility function to generate area slug (same as in utils.ts)
+const slugify = (input: string | undefined | null): string => {
+  if (!input) return 'unknown';
+  
+  const base = input
+    .normalize('NFKD')
+    // remove diacritic marks
+    .replace(/[\u0300-\u036f]/g, '')
+    // keep only ascii letters, numbers, spaces, hyphens, underscores
+    .replace(/[^A-Za-z0-9\s_-]/g, ' ')
+    .trim()
+    .toLowerCase()
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+  if (base) return base;
+  // Fallback for non-latin names (e.g., Greek-only) → deterministic short id
+  const rand = Math.random().toString(36).slice(2, 8);
+  return `beach-${rand}`;
+};
+
+const generateAreaSlug = (area: string): string => {
+  return slugify(area);
+};
 import { writeFileSync } from 'fs';
 import { join } from 'path';
 
@@ -30,9 +54,10 @@ interface Beach {
   name: string;
   slug: string;
   description?: string;
-  image_url?: string;
+  photo_url?: string;
   updated_at: string;
   status: string;
+  area: string;
 }
 
 function generateSitemap(beaches: Beach[]): string {
@@ -58,24 +83,42 @@ function generateSitemap(beaches: Beach[]): string {
     <priority>0.8</priority>
   </url>
   
+  <!-- Area Pages -->`;
+
+  // Add area pages
+  const uniqueAreas = [...new Set(beaches.map(beach => beach.area))];
+  uniqueAreas.forEach(area => {
+    const areaSlug = generateAreaSlug(area);
+    sitemap += `
+  <url>
+    <loc>${SITE_URL}/${areaSlug}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>`;
+  });
+
+  sitemap += `
+  
   <!-- Beach Detail Pages -->`;
 
   // Add beach pages
   beaches.forEach(beach => {
     const lastmod = new Date(beach.updated_at).toISOString().split('T')[0];
+    const areaSlug = generateAreaSlug(beach.area);
     
     sitemap += `
   <url>
-    <loc>${SITE_URL}/beach/${beach.slug}</loc>
+    <loc>${SITE_URL}/${areaSlug}/${beach.slug}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>`;
     
     // Add image if available
-    if (beach.image_url) {
+    if (beach.photo_url) {
       sitemap += `
     <image:image>
-      <image:loc>${beach.image_url}</image:loc>
+      <image:loc>${beach.photo_url}</image:loc>
       <image:title>${beach.name} - Greek Beach</image:title>
       <image:caption>${beach.description || `Beautiful beach in Greece: ${beach.name}`}</image:caption>
     </image:image>`;
@@ -99,7 +142,7 @@ async function main() {
     // Fetch all active beaches from Supabase
     const { data: beaches, error } = await supabase
       .from('beaches')
-      .select('id, name, slug, description, image_url, updated_at, status')
+      .select('id, name, slug, description, photo_url, updated_at, status, area')
       .eq('status', 'ACTIVE')
       .order('name');
 
@@ -114,6 +157,9 @@ async function main() {
 
     console.log(`📊 Found ${beaches.length} active beaches`);
 
+    // Get unique areas for logging
+    const uniqueAreas = [...new Set(beaches.map(beach => beach.area))];
+
     // Generate sitemap XML
     const sitemapXml = generateSitemap(beaches);
 
@@ -124,7 +170,7 @@ async function main() {
     console.log(`✅ Sitemap generated successfully!`);
     console.log(`📁 Location: ${sitemapPath}`);
     console.log(`🔗 URL: ${SITE_URL}/sitemap.xml`);
-    console.log(`📄 Contains ${beaches.length + 2} URLs (${beaches.length} beaches + 2 main pages)`);
+    console.log(`📄 Contains ${beaches.length + uniqueAreas.length + 2} URLs (${beaches.length} beaches + ${uniqueAreas.length} areas + 2 main pages)`);
 
     // Validate XML structure
     const urlCount = (sitemapXml.match(/<url>/g) || []).length;
@@ -137,8 +183,6 @@ async function main() {
 }
 
 // Run the script
-if (require.main === module) {
-  main();
-}
+main();
 
 export { generateSitemap, main };

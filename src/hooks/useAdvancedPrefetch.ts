@@ -76,12 +76,15 @@ export const useAdvancedPrefetch = (options: PrefetchOptions = {}) => {
     // Set a new timeout for prefetching
     prefetchTimeoutRef.current = setTimeout(async () => {
       try {
-        // Extract slug from URL
-        const slug = url.split('/beach/')[1];
-        if (!slug) return;
+        // Extract beach name from URL (format: /area/beach-name)
+        const urlParts = url.split('/').filter(Boolean);
+        if (urlParts.length < 2) return;
+        
+        const beachName = urlParts[urlParts.length - 1]; // Last part is the beach name
+        if (!beachName) return;
 
         // Prefetch beach data
-        await prefetchBeachData(slug);
+        await prefetchBeachData(beachName);
 
         // Prefetch the page using link prefetch
         const link = document.createElement('link');

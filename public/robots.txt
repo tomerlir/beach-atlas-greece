@@ -5,7 +5,7 @@
 User-agent: *
 Allow: /
 Allow: /about
-Allow: /beach/
+Allow: /*/
 
 # Disallow admin and private areas
 Disallow: /admin/
@@ -26,41 +26,41 @@ Disallow: /sw.js
 User-agent: Googlebot
 Allow: /
 Allow: /about
-Allow: /beach/
+Allow: /*/
 Crawl-delay: 1
 
 User-agent: Bingbot
 Allow: /
 Allow: /about
-Allow: /beach/
+Allow: /*/
 Crawl-delay: 1
 
 User-agent: Slurp
 Allow: /
 Allow: /about
-Allow: /beach/
+Allow: /*/
 Crawl-delay: 1
 
 # Social media bots
 User-agent: Twitterbot
 Allow: /
 Allow: /about
-Allow: /beach/
+Allow: /*/
 
 User-agent: facebookexternalhit
 Allow: /
 Allow: /about
-Allow: /beach/
+Allow: /*/
 
 User-agent: LinkedInBot
 Allow: /
 Allow: /about
-Allow: /beach/
+Allow: /*/
 
 User-agent: WhatsApp
 Allow: /
 Allow: /about
-Allow: /beach/
+Allow: /*/
 
 # Block aggressive crawlers
 User-agent: AhrefsBot

@@ -16,6 +16,7 @@ import { useAdvancedPrefetch } from "@/hooks/useAdvancedPrefetch";
 import OptimizedImage from "@/components/OptimizedImage";
 import PhotoAttribution from "@/components/PhotoAttribution";
 import { generateBeachImageAltText } from "@/lib/accessibility";
+import { generateBeachUrl } from "@/lib/utils";
 
 interface Beach {
   id: string;
@@ -72,7 +73,7 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            prefetchWithImage(`/beach/${beach.slug}`, beach.photo_url);
+            prefetchWithImage(beachUrl, beach.photo_url);
           }
         });
       },
@@ -87,13 +88,15 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
     return () => prefetchObserver.disconnect();
   }, [beach.slug, beach.id, beach.photo_url, prefetchWithImage]);
 
+  const beachUrl = generateBeachUrl(beach.area, beach.slug);
+
   return (
     <Link 
-      to={`/beach/${beach.slug}`} 
+      to={beachUrl} 
       className="block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-xl min-h-[44px] min-w-[44px]"
       aria-label={`View details for ${beach.name} beach`}
       data-beach-id={beach.id}
-      onMouseEnter={() => prefetchWithImage(`/beach/${beach.slug}`, beach.photo_url)}
+      onMouseEnter={() => prefetchWithImage(beachUrl, beach.photo_url)}
       onMouseLeave={cancelPrefetch}
     >
       <Card className="group hover:shadow-strong transition-all duration-300 overflow-hidden border-0 bg-white shadow-soft hover:shadow-medium h-full">

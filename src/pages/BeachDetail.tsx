@@ -1,4 +1,5 @@
 import { useParams, Link, useLocation } from "react-router-dom";
+import { generateAreaSlug } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { CONTACT_EMAIL } from "@/lib/constants";
@@ -59,7 +60,7 @@ const parkingLabels: Record<string, string> = {
 };
 
 const BeachDetail = () => {
-  const { slug } = useParams<{ slug: string }>();
+  const { area, "beach-name": beachName } = useParams<{ area: string; "beach-name": string }>();
   const location = useLocation();
   const { toast } = useToast();
   const isMobile = useIsMobile();
@@ -74,14 +75,14 @@ const BeachDetail = () => {
 
   // Fetch beach data with optimized caching
   const { data: beach, isLoading, error } = useQuery({
-    queryKey: ["beach", slug],
+    queryKey: ["beach", beachName],
     queryFn: async () => {
-      if (!slug) throw new Error("No slug provided");
+      if (!beachName) throw new Error("No beach name provided");
       
       const { data, error } = await supabase
         .from("beaches")
         .select("*")
-        .eq("slug", slug)
+        .eq("slug", beachName)
         .eq("status", "ACTIVE")
         .single();
 
@@ -90,9 +91,14 @@ const BeachDetail = () => {
         throw error;
       }
       
+      // Validate that the area matches the URL parameter
+      if (area && generateAreaSlug(data.area) !== area) {
+        throw new Error("Area mismatch");
+      }
+      
       return data;
     },
-    enabled: !!slug,
+    enabled: !!beachName,
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes (renamed from cacheTime in newer versions)
   });
@@ -223,7 +229,7 @@ const BeachDetail = () => {
                 The beach you're looking for doesn't exist or isn't currently available.
               </p>
               <Button asChild>
-                <Link to="/">
+                <Link to={area ? `/${generateAreaSlug(area)}` : "/"}>
                   <ArrowLeft className="h-4 w-4 mr-2" />
                   Back to Directory
                 </Link>
@@ -247,7 +253,7 @@ const BeachDetail = () => {
       <main className="max-w-4xl md:max-w-5xl mx-auto px-4 py-8">
         {/* Back to results link */}
         <Button variant="ghost" asChild className="mb-6">
-          <Link to="/" state={{ preserveSearch: true }}>
+          <Link to={area ? `/${generateAreaSlug(area)}` : "/"} state={{ preserveSearch: true }}>
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to results
           </Link>

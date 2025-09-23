@@ -22,6 +22,15 @@ export const slugify = (input: string): string => {
   return `beach-${rand}`;
 };
 
+export const generateAreaSlug = (area: string): string => {
+  return slugify(area);
+};
+
+export const generateBeachUrl = (area: string, beachSlug: string): string => {
+  const areaSlug = generateAreaSlug(area);
+  return `/${areaSlug}/${beachSlug}`;
+};
+
 export const formatRelativeTime = (isoDate: string | Date): string => {
   const date = typeof isoDate === 'string' ? new Date(isoDate) : isoDate;
   const now = new Date();

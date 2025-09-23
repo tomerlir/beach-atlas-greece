@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import AdminLayout from "@/components/admin/AdminLayout";
@@ -16,6 +17,7 @@ import AdminBeachEdit from "./pages/admin/beaches/AdminBeachEdit";
 import ImportExport from "./pages/admin/ImportExport";
 import AdminSettings from "./pages/admin/AdminSettings";
 import BeachDetail from "./pages/BeachDetail";
+import Area from "./pages/Area";
 import NotFound from "./pages/NotFound";
 import { useServiceWorker } from "@/hooks/useServiceWorker";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -32,7 +34,8 @@ const AppContent = () => {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/about" element={<About />} />
-        <Route path="/beach/:slug" element={<BeachDetail />} />
+        <Route path="/:areaSlug" element={<Area />} />
+        <Route path="/:area/:beach-name" element={<BeachDetail />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route 
           path="/admin" 
@@ -58,13 +61,15 @@ const AppContent = () => {
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <AppContent />
-      </TooltipProvider>
-    </AuthProvider>
+    <HelmetProvider>
+      <AuthProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <AppContent />
+        </TooltipProvider>
+      </AuthProvider>
+    </HelmetProvider>
   </QueryClientProvider>
 );
 

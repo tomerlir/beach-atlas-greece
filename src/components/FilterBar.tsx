@@ -12,6 +12,7 @@ import {
   Waves,
   X,
   Plus,
+  Lock,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -37,6 +38,7 @@ interface FilterBarProps {
   locationPermission: 'granted' | 'denied' | 'prompt' | null;
   resultCount: number;
   showCountBadge?: boolean;
+  areaName?: string; // Optional area name for area-specific pages
 }
 
 
@@ -52,6 +54,7 @@ export default function FilterBar({
   locationPermission,
   resultCount,
   showCountBadge = false,
+  areaName,
 }: FilterBarProps) {
   const isMobile = useIsMobile();
 
@@ -155,11 +158,22 @@ export default function FilterBar({
   const getFilterPills = useMemo(() => {
     const pills = [];
 
+    // Area filter (locked when areaName is provided)
+    if (areaName) {
+      pills.push({
+        id: 'area',
+        label: areaName,
+        onRemove: null, // Cannot be removed
+        locked: true,
+      });
+    }
+
     if (filters.search) {
       pills.push({
         id: 'search',
         label: filters.search,
         onRemove: () => handleRemoveFilter('search'),
+        locked: false,
       });
     }
 
@@ -172,6 +186,7 @@ export default function FilterBar({
             const newOrganized = filters.organized.filter(type => type !== organizedType);
             onFiltersChange({ organized: newOrganized, page: 1 });
           },
+          locked: false,
         });
       });
     }
@@ -181,6 +196,7 @@ export default function FilterBar({
         id: 'blueFlag',
         label: 'Blue Flag',
         onRemove: () => handleRemoveFilter('blueFlag'),
+        locked: false,
       });
     }
 
@@ -196,6 +212,7 @@ export default function FilterBar({
         id: `parking-${parkingType}`,
         label: parkingLabels[parkingType] || parkingType,
         onRemove: () => handleRemoveFilter('parking', parkingType),
+        locked: false,
       });
     });
 
@@ -204,6 +221,7 @@ export default function FilterBar({
         id: `amenity-${amenity}`,
         label: getAmenityLabel(amenity),
         onRemove: () => handleRemoveFilter('amenities', amenity),
+        locked: false,
       });
     });
 
@@ -219,11 +237,12 @@ export default function FilterBar({
         id: `wave-${waveCondition}`,
         label: waveConditionLabels[waveCondition] || waveCondition,
         onRemove: () => handleRemoveFilter('waveConditions', waveCondition),
+        locked: false,
       });
     });
 
     return pills;
-  }, [filters, handleRemoveFilter]);
+  }, [filters, handleRemoveFilter, areaName, onFiltersChange]);
 
 
 
@@ -231,109 +250,213 @@ export default function FilterBar({
 
   return (
     <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border">
-        {/* Main Filter Bar */}
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex flex-col gap-4">
-            {/* Facets Group - First Row */}
-            {!isMobile ? (
-              <div className="flex flex-wrap gap-2 md:gap-3 items-center justify-center">
+      {/* Main Filter Bar */}
+      <div className="container mx-auto px-4 py-4">
+        <div className="flex flex-col gap-4">
+          {/* Facets Group - First Row */}
+          {!isMobile ? (
+            <div className="flex flex-wrap gap-2 md:gap-3 items-center justify-center">
 
 
-                {/* Near Me Toggle */}
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant={filters.nearMe ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => handleNearMeToggle(!filters.nearMe)}
-                      disabled={isLoadingLocation}
-                      className="px-3 py-2 rounded-xl border h-auto"
-                      role="switch"
-                      aria-checked={filters.nearMe}
-                      aria-label={`Near me (${filters.nearMe ? 'on' : 'off'})`}
-                    >
-                      <MapPin className="h-4 w-4 md:h-5 md:w-5" />
-                      <span className="ml-2 text-sm">Near me</span>
-                    </Button>
-                  </TooltipTrigger>
-                  {locationPermission === 'denied' && (
-                    <TooltipContent>
-                      <div className="flex items-center gap-2">
-                        <AlertCircle className="h-4 w-4" />
-                        <span>Location blocked in browser settings.</span>
-                      </div>
-                    </TooltipContent>
-                  )}
-                </Tooltip>
+              {/* Near Me Toggle */}
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant={filters.nearMe ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => handleNearMeToggle(!filters.nearMe)}
+                    disabled={isLoadingLocation}
+                    className="px-3 py-2 rounded-xl border h-auto"
+                    role="switch"
+                    aria-checked={filters.nearMe}
+                    aria-label={`Near me (${filters.nearMe ? 'on' : 'off'})`}
+                  >
+                    <MapPin className="h-4 w-4 md:h-5 md:w-5" />
+                    <span className="ml-2 text-sm">Near me</span>
+                  </Button>
+                </TooltipTrigger>
+                {locationPermission === 'denied' && (
+                  <TooltipContent>
+                    <div className="flex items-center gap-2">
+                      <AlertCircle className="h-4 w-4" />
+                      <span>Location blocked in browser settings.</span>
+                    </div>
+                  </TooltipContent>
+                )}
+              </Tooltip>
 
 
-                {/* Blue Flag Toggle */}
-                <Button
-                  variant={filters.blueFlag ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => handleBlueFlagToggle(!filters.blueFlag)}
-                  className="px-3 py-2 rounded-xl border h-auto"
-                  role="switch"
-                  aria-checked={filters.blueFlag}
-                  aria-label={`Blue Flag (${filters.blueFlag ? 'on' : 'off'})`}
-                >
-                  <Flag className="h-4 w-4 md:h-5 md:w-5" />
-                  <span className="ml-2 text-sm">Blue Flag</span>
-                </Button>
+              {/* Blue Flag Toggle */}
+              <Button
+                variant={filters.blueFlag ? "default" : "outline"}
+                size="sm"
+                onClick={() => handleBlueFlagToggle(!filters.blueFlag)}
+                className="px-3 py-2 rounded-xl border h-auto"
+                role="switch"
+                aria-checked={filters.blueFlag}
+                aria-label={`Blue Flag (${filters.blueFlag ? 'on' : 'off'})`}
+              >
+                <Flag className="h-4 w-4 md:h-5 md:w-5" />
+                <span className="ml-2 text-sm">Blue Flag</span>
+              </Button>
 
-                {/* Amenities Dropdown */}
-                <AmenitiesDropdown
-                  filters={filters}
-                  onFiltersChange={onFiltersChange}
-                  onOpenAllFilters={onOpenAllFilters}
-                  showCountBadge={showCountBadge}
-                />
+              {/* Amenities Dropdown */}
+              <AmenitiesDropdown
+                filters={filters}
+                onFiltersChange={onFiltersChange}
+                onOpenAllFilters={onOpenAllFilters}
+                showCountBadge={showCountBadge}
+              />
 
-                {/* Organized Dropdown */}
-                <OrganizedDropdown
-                  filters={filters}
-                  onFiltersChange={onFiltersChange}
-                  onOpenAllFilters={onOpenAllFilters}
-                  showCountBadge={showCountBadge}
-                />
+              {/* Organized Dropdown */}
+              <OrganizedDropdown
+                filters={filters}
+                onFiltersChange={onFiltersChange}
+                onOpenAllFilters={onOpenAllFilters}
+                showCountBadge={showCountBadge}
+              />
 
-                {/* Parking Dropdown */}
-                <ParkingDropdown
-                  filters={filters}
-                  onFiltersChange={onFiltersChange}
-                  onOpenAllFilters={onOpenAllFilters}
-                  showCountBadge={showCountBadge}
-                />
+              {/* Parking Dropdown */}
+              <ParkingDropdown
+                filters={filters}
+                onFiltersChange={onFiltersChange}
+                onOpenAllFilters={onOpenAllFilters}
+                showCountBadge={showCountBadge}
+              />
 
-                {/* Wave Conditions Dropdown */}
-                <WaveConditionsDropdown
-                  filters={filters}
-                  onFiltersChange={onFiltersChange}
-                  onOpenAllFilters={onOpenAllFilters}
-                  showCountBadge={showCountBadge}
-                />
+              {/* Wave Conditions Dropdown */}
+              <WaveConditionsDropdown
+                filters={filters}
+                onFiltersChange={onFiltersChange}
+                onOpenAllFilters={onOpenAllFilters}
+                showCountBadge={showCountBadge}
+              />
 
-                {/* All Filters Button */}
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={onOpenAllFilters}
-                  className="px-3 py-2 rounded-xl border h-auto"
-                  aria-label="Open all filters"
-                >
-                  <Filter className="h-4 w-4 md:h-5 md:w-5 mr-2" />
-                  All Filters
-                  {activeFiltersCount > 0 && (
-                    <Badge variant="secondary" className="ml-2 h-4 w-4 p-0 flex items-center justify-center text-xs">
-                      {activeFiltersCount}
-                    </Badge>
-                  )}
-                </Button>
+              {/* All Filters Button */}
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={onOpenAllFilters}
+                className="px-3 py-2 rounded-xl border h-auto"
+                aria-label="Open all filters"
+              >
+                <Filter className="h-4 w-4 md:h-5 md:w-5 mr-2" />
+                All Filters
+                {activeFiltersCount > 0 && (
+                  <Badge variant="secondary" className="ml-2 h-4 w-4 p-0 flex items-center justify-center text-xs">
+                    {activeFiltersCount}
+                  </Badge>
+                )}
+              </Button>
 
-                {/* Vertical Separator */}
-                <div className="h-6 w-px bg-border mx-1" />
+              {/* Vertical Separator */}
+              <div className="h-6 w-px bg-border mx-1" />
 
-                {/* Sort Dropdown */}
+              {/* Sort Dropdown */}
+              <SortDropdown
+                filters={filters}
+                onFiltersChange={onFiltersChange}
+                userLocation={userLocation}
+                locationPermission={locationPermission}
+                onLocationRequest={onLocationRequest}
+                isLoadingLocation={isLoadingLocation}
+              />
+            </div>
+          ) : (
+            /* Mobile: Scrollable facet chips */
+            <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide justify-center">
+
+
+              {/* Near Me Toggle */}
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant={filters.nearMe ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => handleNearMeToggle(!filters.nearMe)}
+                    disabled={isLoadingLocation}
+                    className="px-3 py-2 rounded-xl border h-auto"
+                    role="switch"
+                    aria-checked={filters.nearMe}
+                    aria-label={`Near me (${filters.nearMe ? 'on' : 'off'})`}
+                  >
+                    <MapPin className="h-4 w-4 md:h-5 md:w-5" />
+                    <span className="ml-2 text-sm">Near me</span>
+                  </Button>
+                </TooltipTrigger>
+                {locationPermission === 'denied' && (
+                  <TooltipContent>
+                    <div className="flex items-center gap-2">
+                      <AlertCircle className="h-4 w-4" />
+                      <span>Location blocked in browser settings.</span>
+                    </div>
+                  </TooltipContent>
+                )}
+              </Tooltip>
+
+
+              {/* Blue Flag Toggle */}
+              <Button
+                variant={filters.blueFlag ? "default" : "outline"}
+                size="sm"
+                onClick={() => handleBlueFlagToggle(!filters.blueFlag)}
+                className="px-3 py-2 rounded-xl border h-auto"
+                role="switch"
+                aria-checked={filters.blueFlag}
+                aria-label={`Blue Flag (${filters.blueFlag ? 'on' : 'off'})`}
+              >
+                <Flag className="h-4 w-4 md:h-5 md:w-5" />
+                <span className="ml-2 text-sm">Blue Flag</span>
+              </Button>
+
+              {/* Amenities Dropdown */}
+              <AmenitiesDropdown
+                filters={filters}
+                onFiltersChange={onFiltersChange}
+                onOpenAllFilters={onOpenAllFilters}
+                showCountBadge={showCountBadge}
+              />
+
+              {/* Organized Dropdown */}
+              <OrganizedDropdown
+                filters={filters}
+                onFiltersChange={onFiltersChange}
+                onOpenAllFilters={onOpenAllFilters}
+                showCountBadge={showCountBadge}
+              />
+
+              {/* Parking Dropdown */}
+              <ParkingDropdown
+                filters={filters}
+                onFiltersChange={onFiltersChange}
+                onOpenAllFilters={onOpenAllFilters}
+                showCountBadge={showCountBadge}
+              />
+
+              {/* Wave Conditions Dropdown */}
+              <WaveConditionsDropdown
+                filters={filters}
+                onFiltersChange={onFiltersChange}
+                onOpenAllFilters={onOpenAllFilters}
+                showCountBadge={showCountBadge}
+              />
+
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={onOpenAllFilters}
+                className="px-3 py-2 rounded-xl border h-auto whitespace-nowrap flex-shrink-0"
+                aria-label="Open all filters"
+              >
+                <Filter className="h-4 w-4 mr-2" />
+                All Filters
+              </Button>
+
+              {/* Vertical Separator */}
+              <div className="h-6 w-px bg-border mx-1 flex-shrink-0" />
+
+              {/* Sort Dropdown for Mobile */}
+              <div className="flex-shrink-0">
                 <SortDropdown
                   filters={filters}
                   onFiltersChange={onFiltersChange}
@@ -343,138 +466,45 @@ export default function FilterBar({
                   isLoadingLocation={isLoadingLocation}
                 />
               </div>
-            ) : (
-              /* Mobile: Scrollable facet chips */
-              <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide justify-center">
-
-
-                {/* Near Me Toggle */}
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant={filters.nearMe ? "default" : "outline"}
-                      size="sm"
-                      onClick={() => handleNearMeToggle(!filters.nearMe)}
-                      disabled={isLoadingLocation}
-                      className="px-3 py-2 rounded-xl border h-auto"
-                      role="switch"
-                      aria-checked={filters.nearMe}
-                      aria-label={`Near me (${filters.nearMe ? 'on' : 'off'})`}
-                    >
-                      <MapPin className="h-4 w-4 md:h-5 md:w-5" />
-                      <span className="ml-2 text-sm">Near me</span>
-                    </Button>
-                  </TooltipTrigger>
-                  {locationPermission === 'denied' && (
-                    <TooltipContent>
-                      <div className="flex items-center gap-2">
-                        <AlertCircle className="h-4 w-4" />
-                        <span>Location blocked in browser settings.</span>
-                      </div>
-                    </TooltipContent>
-                  )}
-                </Tooltip>
-
-
-                {/* Blue Flag Toggle */}
-                <Button
-                  variant={filters.blueFlag ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => handleBlueFlagToggle(!filters.blueFlag)}
-                  className="px-3 py-2 rounded-xl border h-auto"
-                  role="switch"
-                  aria-checked={filters.blueFlag}
-                  aria-label={`Blue Flag (${filters.blueFlag ? 'on' : 'off'})`}
-                >
-                  <Flag className="h-4 w-4 md:h-5 md:w-5" />
-                  <span className="ml-2 text-sm">Blue Flag</span>
-                </Button>
-
-                {/* Amenities Dropdown */}
-                <AmenitiesDropdown
-                  filters={filters}
-                  onFiltersChange={onFiltersChange}
-                  onOpenAllFilters={onOpenAllFilters}
-                  showCountBadge={showCountBadge}
-                />
-
-                {/* Organized Dropdown */}
-                <OrganizedDropdown
-                  filters={filters}
-                  onFiltersChange={onFiltersChange}
-                  onOpenAllFilters={onOpenAllFilters}
-                  showCountBadge={showCountBadge}
-                />
-
-                {/* Parking Dropdown */}
-                <ParkingDropdown
-                  filters={filters}
-                  onFiltersChange={onFiltersChange}
-                  onOpenAllFilters={onOpenAllFilters}
-                  showCountBadge={showCountBadge}
-                />
-
-                {/* Wave Conditions Dropdown */}
-                <WaveConditionsDropdown
-                  filters={filters}
-                  onFiltersChange={onFiltersChange}
-                  onOpenAllFilters={onOpenAllFilters}
-                  showCountBadge={showCountBadge}
-                />
-
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={onOpenAllFilters}
-                  className="px-3 py-2 rounded-xl border h-auto whitespace-nowrap flex-shrink-0"
-                  aria-label="Open all filters"
-                >
-                  <Filter className="h-4 w-4 mr-2" />
-                  All Filters
-                </Button>
-
-                {/* Vertical Separator */}
-                <div className="h-6 w-px bg-border mx-1 flex-shrink-0" />
-
-                {/* Sort Dropdown for Mobile */}
-                <div className="flex-shrink-0">
-                  <SortDropdown
-                    filters={filters}
-                    onFiltersChange={onFiltersChange}
-                    userLocation={userLocation}
-                    locationPermission={locationPermission}
-                    onLocationRequest={onLocationRequest}
-                    isLoadingLocation={isLoadingLocation}
-                  />
-                </div>
-              </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
+      </div>
 
-        {/* Filter Pills */}
-        {hasActiveFilters && (
-          <div className="container mx-auto px-4 pb-4">
-            <div className="flex flex-wrap items-center gap-2">
-              {getFilterPills.map((pill) => (
-                <Badge
-                  key={pill.id}
-                  variant="secondary"
-                  className="flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary border-primary/20"
+      {/* Filter Pills */}
+      {getFilterPills.length > 0 && (
+        <div className="container mx-auto px-4 pb-4">
+          <div className="flex flex-wrap items-center gap-2">
+            {getFilterPills.map((pill) => (
+              <Badge
+                key={pill.id}
+                variant="secondary"
+                className={`flex items-center gap-2 px-3 py-1 ${pill.locked
+                  ? 'bg-muted text-muted-foreground border-muted-foreground/20'
+                  : 'bg-primary/10 text-primary border-primary/20'
+                  }`}
+              >
+                <span>{pill.label}</span>
+
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={pill.locked ? undefined : pill.onRemove}
+                  disabled={pill.locked}
+                  className={`h-8 w-8 p-0 rounded-full flex items-center justify-center ${
+                    pill.locked 
+                      ? 'opacity-50 cursor-not-allowed' 
+                      : 'hover:bg-primary/20'
+                  }`}
+                  aria-label={pill.locked ? `${pill.label} (locked)` : `Remove filter: ${pill.label}`}
                 >
-                  <span>{pill.label}</span>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={pill.onRemove}
-                    className="h-8 w-8 p-0 hover:bg-primary/20 rounded-full flex items-center justify-center"
-                    aria-label={`Remove filter: ${pill.label}`}
-                  >
-                    <X className="h-3 w-3" />
-                  </Button>
-                </Badge>
-              ))}
+                  <X className="h-3 w-3" />
+                </Button>
 
+              </Badge>
+            ))}
+
+            {hasActiveFilters && (
               <Button
                 variant="ghost"
                 size="sm"
@@ -483,14 +513,15 @@ export default function FilterBar({
               >
                 Clear all
               </Button>
-            </div>
+            )}
           </div>
-        )}
-
-        {/* Screen reader announcements */}
-        <div aria-live="polite" aria-atomic="true" className="sr-only">
-          {resultCount} beaches found
         </div>
+      )}
+
+      {/* Screen reader announcements */}
+      <div aria-live="polite" aria-atomic="true" className="sr-only">
+        {resultCount} beaches found{areaName ? ` in ${areaName}` : ''}
       </div>
+    </div>
   );
 }
