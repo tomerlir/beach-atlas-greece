@@ -55,26 +55,8 @@ FROM beaches b
 LEFT JOIN areas a ON b.area_id = a.id
 WHERE b.status = 'ACTIVE' AND a.status = 'ACTIVE';
 
--- Enable RLS on the view
-ALTER VIEW beaches_with_areas SET (security_invoker = true);
-
--- Add RLS policies for the view
--- Allow public read access to active beaches with active areas
-CREATE POLICY "Allow public read access to beaches_with_areas" ON beaches_with_areas
-    FOR SELECT USING (status = 'ACTIVE');
-
--- Allow admin full access to beaches_with_areas
-CREATE POLICY "Allow admin full access to beaches_with_areas" ON beaches_with_areas
-    FOR ALL USING (
-        EXISTS (
-            SELECT 1 FROM profiles 
-            WHERE profiles.id = auth.uid() 
-            AND profiles.role = 'admin'
-        )
-    );
-
 -- Grant access to the view
 GRANT SELECT ON beaches_with_areas TO anon, authenticated;
 
 -- Add comment for documentation
-COMMENT ON VIEW beaches_with_areas IS 'View that joins beaches with their area information for easy querying. Only shows active beaches with active areas.';
+COMMENT ON VIEW beaches_with_areas IS 'View that joins beaches with their area information for easy querying';
