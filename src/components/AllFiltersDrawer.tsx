@@ -339,7 +339,7 @@ export default function AllFiltersDrawer({
             
             <div className="space-y-1">
               {waveConditionsOptions.map((option) => {
-                const isSelected = draftFilters.waveConditions.includes(option.value);
+                const isSelected = draftFilters.waveConditions.includes(option.value as any);
                 
                 return (
                   <button
@@ -347,7 +347,7 @@ export default function AllFiltersDrawer({
                     onClick={() => {
                       const newWaveConditions = isSelected
                         ? draftFilters.waveConditions.filter(wc => wc !== option.value)
-                        : [...draftFilters.waveConditions, option.value];
+                        : [...draftFilters.waveConditions, option.value as any];
                       updateDraft({ waveConditions: newWaveConditions });
                     }}
                     className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors min-h-[44px] rounded-md ${

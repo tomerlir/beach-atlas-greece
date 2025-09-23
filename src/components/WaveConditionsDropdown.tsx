@@ -43,9 +43,9 @@ export default function WaveConditionsDropdown({
 
   // Toggle wave condition in draft state
   const toggleWaveConditionDraft = useCallback((waveConditionValue: string) => {
-    const newWaveConditions = draftFilters.waveConditions.includes(waveConditionValue)
+    const newWaveConditions = draftFilters.waveConditions.includes(waveConditionValue as any)
       ? draftFilters.waveConditions.filter(value => value !== waveConditionValue)
-      : [...draftFilters.waveConditions, waveConditionValue];
+      : [...draftFilters.waveConditions, waveConditionValue as any];
     updateDraft({ waveConditions: newWaveConditions });
   }, [draftFilters.waveConditions, updateDraft]);
 
@@ -154,7 +154,7 @@ export default function WaveConditionsDropdown({
           id="wave-conditions-listbox"
         >
           {waveConditionsOptions.map((option, index) => {
-            const isSelected = draftFilters.waveConditions.includes(option.value);
+            const isSelected = draftFilters.waveConditions.includes(option.value as any);
             const isFocused = focusedIndex === index;
             
             return (

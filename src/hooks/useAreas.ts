@@ -33,11 +33,11 @@ export const useAreasWithBeachCount = () => {
       
       if (error) throw error;
       
-      // Transform the data to include beach count
-      return data.map(area => ({
-        ...area,
-        beach_count: area.beaches?.[0]?.count || 0
-      })) as AreaWithBeachCount[];
+        // Transform the data to include beach count
+        return data.map(area => ({
+          ...area,
+          beach_count: Array.isArray(area.beaches) ? area.beaches.length : 0
+        })) as AreaWithBeachCount[];
     }
   });
 };

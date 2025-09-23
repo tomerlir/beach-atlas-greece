@@ -27,6 +27,7 @@ const AdminLayout: React.FC = () => {
 
   const navigationItems = [
     { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
+    { name: 'Areas', href: '/admin/areas', icon: MapPin },
     { name: 'Beaches', href: '/admin/beaches', icon: MapPin },
     { name: 'Import/Export', href: '/admin/import-export', icon: Upload },
     { name: 'Settings', href: '/admin/settings', icon: Settings },

@@ -11,6 +11,9 @@ import Index from "./pages/Index";
 import About from "./pages/About";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminAreasList from "./pages/admin/areas/AdminAreasList";
+import AdminAreaCreate from "./pages/admin/areas/AdminAreaCreate";
+import AdminAreaEdit from "./pages/admin/areas/AdminAreaEdit";
 import AdminBeachesList from "./pages/admin/beaches/AdminBeachesList";
 import AdminBeachCreate from "./pages/admin/beaches/AdminBeachCreate";
 import AdminBeachEdit from "./pages/admin/beaches/AdminBeachEdit";
@@ -46,6 +49,9 @@ const AppContent = () => {
           }
         >
           <Route index element={<AdminDashboard />} />
+          <Route path="areas" element={<AdminAreasList />} />
+          <Route path="areas/new" element={<AdminAreaCreate />} />
+          <Route path="areas/:id" element={<AdminAreaEdit />} />
           <Route path="beaches" element={<AdminBeachesList />} />
           <Route path="beaches/new" element={<AdminBeachCreate />} />
           <Route path="beaches/:id" element={<AdminBeachEdit />} />
