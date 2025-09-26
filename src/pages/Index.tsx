@@ -18,7 +18,7 @@ import { useBeachFiltering } from "@/hooks/useBeachFiltering";
 import { useDistanceCalculation } from "@/hooks/useDistanceCalculation";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
 import { Beach } from "@/types/beach";
-import heroImage from "@/assets/hero-beach.jpg";
+import heroImage from "@/assets/hero-background.png";
 import EmptyState from "@/components/EmptyState";
 
 const BEACHES_PER_PAGE = 9;
@@ -121,24 +121,19 @@ const Index = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative h-[70vh] flex items-center justify-center bg-gradient-ocean overflow-hidden">
+      <section className="relative h-[50vh] flex flex-col justify-center bg-gradient-ocean overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${heroImage})` }}
         />
-        <div className="absolute inset-0 bg-black/30" />
         
-        <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">
+        <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto w-full">
+          <h1 className="text-4xl md:text-6xl font-bold mb-8">
             Find Your Perfect Greek Beach
           </h1>
-          <p className="text-lg md:text-xl max-w-2xl mx-auto opacity-90 mb-8">
-            Discover stunning beaches across the Greek islands and mainland, 
-            from organized resorts to hidden gems waiting to be explored.
-          </p>
           
           {/* Hero Search Bar */}
-          <div className="max-w-2xl mx-auto">
+          <div className="max-w-2xl mx-auto mb-8">
             <EnhancedSearchBar
               filters={filters}
               onFiltersChange={updateFilters}
@@ -147,24 +142,31 @@ const Index = () => {
               className="w-full"
             />
           </div>
+
+          {/* Filter Bar in Hero */}
+          <div className="max-w-4xl mx-auto">
+            <FilterBar
+              filters={filters}
+              onFiltersChange={updateFilters}
+              userLocation={location}
+              onLocationRequest={getCurrentLocation}
+              isLoadingLocation={isLoadingLocation}
+              onOpenAllFilters={() => setIsAllFiltersOpen(true)}
+              locationPermission={locationPermission}
+              resultCount={filteredBeaches.length}
+              showCountBadge={false}
+            />
+          </div>
         </div>
       </section>
 
       {/* Explore by Area Section */}
       <AreasGrid maxAreas={12} />
 
-      {/* Filter Bar */}
-      <FilterBar
-        filters={filters}
-        onFiltersChange={updateFilters}
-        userLocation={location}
-        onLocationRequest={getCurrentLocation}
-        isLoadingLocation={isLoadingLocation}
-        onOpenAllFilters={() => setIsAllFiltersOpen(true)}
-        locationPermission={locationPermission}
-        resultCount={filteredBeaches.length}
-        showCountBadge={false}
-      />
+      {/* Horizontal Line */}
+      <div className="container mx-auto px-4">
+        <hr className="border-t border-border/30 my-8" />
+      </div>
 
       {/* Geolocation Error Banner */}
       {showGeolocationError && (

@@ -46,25 +46,25 @@ export default function EnhancedSearchBar({
 
   return (
     <div className={`relative w-full ${className}`}>
-      <div className="relative group">
+      <div className="relative group flex">
         {/* Search Icon */}
-        <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5 transition-colors group-focus-within:text-primary" />
+        <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5 transition-colors group-focus-within:text-primary z-10" />
         
         {/* Main Search Input */}
         <Input
           ref={inputRef}
-          placeholder="Search areas or beaches..."
+          placeholder="Search beaches, islands, or places in Greece..."
           value={searchInput}
           onChange={(e) => handleSearchChange(e.target.value)}
           onFocus={() => setSearchFocused(true)}
           onBlur={() => setSearchFocused(false)}
           style={{ color: '#1f2937' }}
           className={`
-            pl-12 pr-12 h-14 text-lg bg-white border-2 rounded-2xl
+            flex-1 pl-12 pr-4 h-14 text-lg bg-white border-2 rounded-l-2xl rounded-r-none border-r-0
             transition-all duration-200 ease-in-out
             text-gray-900 text-foreground
             ${searchFocused 
-              ? 'border-primary shadow-lg shadow-primary/10 scale-[1.02]' 
+              ? 'border-primary shadow-lg shadow-primary/10' 
               : 'border-border hover:border-primary/50 shadow-md hover:shadow-lg'
             }
             focus:ring-0 focus:border-primary focus:shadow-lg focus:shadow-primary/10
@@ -73,13 +73,22 @@ export default function EnhancedSearchBar({
           aria-label="Search beaches by name or location"
         />
 
+        {/* Search Button */}
+        <Button
+          onClick={() => {/* search logic already handled by onChange */}}
+          className="h-14 px-8 bg-accent text-accent-foreground hover:bg-accent/90 border-2 border-l-0 border-accent rounded-r-2xl rounded-l-none font-medium"
+          aria-label="Search beaches"
+        >
+          Search
+        </Button>
+
         {/* Clear Button */}
         {showClearButton && (
           <Button
             variant="ghost"
             size="sm"
             onClick={handleClearSearch}
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0 hover:bg-muted rounded-full"
+            className="absolute right-20 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0 hover:bg-muted rounded-full z-10"
             aria-label="Clear search"
           >
             <X className="h-4 w-4" />

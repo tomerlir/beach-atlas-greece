@@ -216,7 +216,7 @@ const Areas = () => {
                             {/* Photo Attribution */}
                             {area.hero_photo_source && (
                               <div className="mt-3 pt-3 border-t border-border/50">
-                                <PhotoAttribution source={area.hero_photo_source} />
+                                <PhotoAttribution photoSource={area.hero_photo_source} />
                               </div>
                             )}
                           </CardContent>
