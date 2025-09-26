@@ -4,12 +4,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import type { Tables, TablesInsert, TablesUpdate } from '@/integrations/supabase/types';
 import { AMENITY_OPTIONS, PARKING_OPTIONS, STATUS_OPTIONS, TYPE_OPTIONS, WAVE_OPTIONS, slugify } from '@/lib/utils';
 import AmenitiesMultiselect from '@/components/admin/AmenitiesMultiselect';
 import { useFormDraftState } from '@/hooks/useFormDraftState';
+import { useAreas } from '@/hooks/useAreas';
 
 type Beach = Tables<'beaches'>;
 type BeachInsert = TablesInsert<'beaches'>;
@@ -17,7 +19,8 @@ type BeachUpdate = TablesUpdate<'beaches'> & { id: string };
 
 const schema = z.object({
   name: z.string().min(3).max(80),
-  area: z.string().min(3).max(80),
+  area: z.string().min(1, 'Area name is required'), // Legacy area column
+  area_id: z.string().min(1, 'Please select an area'), // New area_id column
   latitude: z.coerce.number().gte(-90).lte(90),
   longitude: z.coerce.number().gte(-180).lte(180),
   description: z.string().max(1500).optional().or(z.literal('')),
@@ -60,6 +63,9 @@ const BeachForm: React.FC = () => {
   
   // Initialize draft state - don't pass initial data here to avoid overwriting existing drafts
   const { draft, updateDraft, clearDraft, hasUnsavedChanges, hasStoredDraftData } = useFormDraftState(formKey);
+  
+  // Fetch areas for the dropdown
+  const { data: areas = [], isLoading: areasLoading } = useAreas();
 
   useEffect(() => {
     const load = async () => {
@@ -75,7 +81,7 @@ const BeachForm: React.FC = () => {
           if (!hasStoredDraftData()) {
             updateDraft({
               name: data.name || '',
-              area: data.area || '',
+              area_id: data.area_id || '',
               latitude: data.latitude?.toString() || '',
               longitude: data.longitude?.toString() || '',
               description: data.description || '',
@@ -176,9 +182,14 @@ const BeachForm: React.FC = () => {
     const statusRaw = draft.status.toUpperCase();
     const statusNorm = statusRaw === 'INACTIVE' ? 'HIDDEN' : statusRaw;
 
+    // Get the area name from the selected area_id for the legacy 'area' column
+    const selectedArea = areas.find(area => area.id === draft.area_id);
+    const areaName = selectedArea?.name || '';
+
     const candidate = {
       name: draft.name,
-      area: draft.area,
+      area: areaName, // Legacy area column (text)
+      area_id: draft.area_id, // New area_id column (foreign key)
       latitude: parseFloat(draft.latitude),
       longitude: parseFloat(draft.longitude),
       description: draft.description,
@@ -333,14 +344,23 @@ const BeachForm: React.FC = () => {
         </div>
         <div>
           <label className="block text-sm font-medium">Area</label>
-          <Input 
-            name="area" 
-            value={draft.area} 
-            onChange={(e) => updateDraft({ area: e.target.value })}
-            aria-invalid={!!errors.area} 
-            aria-describedby={errors.area ? 'area-err' : undefined} 
-          />
-          {errors.area && <p id="area-err" className="text-sm text-destructive">{errors.area}</p>}
+          <Select 
+            value={draft.area_id} 
+            onValueChange={(value) => updateDraft({ area_id: value })}
+            disabled={areasLoading}
+          >
+            <SelectTrigger aria-invalid={!!errors.area_id} aria-describedby={errors.area_id ? 'area-err' : undefined}>
+              <SelectValue placeholder={areasLoading ? "Loading areas..." : "Select an area"} />
+            </SelectTrigger>
+            <SelectContent>
+              {areas.map((area) => (
+                <SelectItem key={area.id} value={area.id}>
+                  {area.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          {errors.area_id && <p id="area-err" className="text-sm text-destructive">{errors.area_id}</p>}
         </div>
         <div>
           <label className="block text-sm font-medium">Latitude</label>

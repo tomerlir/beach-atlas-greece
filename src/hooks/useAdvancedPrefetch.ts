@@ -127,9 +127,15 @@ export const useAdvancedPrefetch = (options: PrefetchOptions = {}) => {
   // Cleanup on unmount
   useEffect(() => {
     return () => {
+      // Clear any active prefetch timeout
       if (prefetchTimeoutRef.current) {
         clearTimeout(prefetchTimeoutRef.current);
+        prefetchTimeoutRef.current = null;
       }
+      
+      // Clear all prefetched data to prevent memory leaks
+      prefetchedUrls.current.clear();
+      prefetchedImages.current.clear();
     };
   }, []);
 

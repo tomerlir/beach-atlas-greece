@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState, useRef, useCallback } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
 
@@ -36,8 +36,25 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
   const [hasExplicitlySignedOut, setHasExplicitlySignedOut] = useState(false);
+  
+  // Add refs for request cancellation and debouncing
+  const fetchProfileAbortController = useRef<AbortController | null>(null);
+  const fetchProfileTimeout = useRef<NodeJS.Timeout | null>(null);
 
-  const fetchProfile = async (userId: string, userEmail?: string) => {
+  const fetchProfile = useCallback(async (userId: string, userEmail?: string) => {
+    // Cancel any existing request
+    if (fetchProfileAbortController.current) {
+      fetchProfileAbortController.current.abort();
+    }
+    
+    // Clear any existing timeout
+    if (fetchProfileTimeout.current) {
+      clearTimeout(fetchProfileTimeout.current);
+    }
+    
+    // Create new abort controller
+    fetchProfileAbortController.current = new AbortController();
+    
     try {
       const { data, error } = await supabase
         .from('profiles')
@@ -78,11 +95,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         }
       }
     } catch (error) {
+      // Ignore abort errors
+      if (error instanceof Error && error.name === 'AbortError') {
+        return;
+      }
       console.error('Error in fetchProfile:', error);
     } finally {
       setLoading(false);
     }
-  };
+  }, []); // Remove session?.user?.email dependency to prevent race condition
 
   useEffect(() => {
     // Set up auth state listener
@@ -93,8 +114,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         
         if (session?.user) {
           setLoading(true);
-          // Call fetchProfile directly without setTimeout to avoid race conditions
-          fetchProfile(session.user.id, session.user.email);
+          // Debounce fetchProfile calls to prevent race conditions
+          if (fetchProfileTimeout.current) {
+            clearTimeout(fetchProfileTimeout.current);
+          }
+          fetchProfileTimeout.current = setTimeout(() => {
+            fetchProfile(session.user.id, session.user.email);
+          }, 100);
         } else {
           setProfile(null);
           setLoading(false);
@@ -110,8 +136,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         
         if (session?.user) {
           setLoading(true);
-          // Call fetchProfile directly without setTimeout to avoid race conditions
-          fetchProfile(session.user.id, session.user.email);
+          // Debounce fetchProfile calls to prevent race conditions
+          if (fetchProfileTimeout.current) {
+            clearTimeout(fetchProfileTimeout.current);
+          }
+          fetchProfileTimeout.current = setTimeout(() => {
+            fetchProfile(session.user.id, session.user.email);
+          }, 100);
         } else {
           setLoading(false);
         }
@@ -121,8 +152,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setLoading(false);
     }
 
-    return () => subscription.unsubscribe();
-  }, []); // Remove hasExplicitlySignedOut dependency to prevent infinite loops
+    return () => {
+      subscription.unsubscribe();
+      // Cleanup timeouts and abort controllers
+      if (fetchProfileTimeout.current) {
+        clearTimeout(fetchProfileTimeout.current);
+      }
+      if (fetchProfileAbortController.current) {
+        fetchProfileAbortController.current.abort();
+      }
+    };
+  }, [hasExplicitlySignedOut]); // Remove fetchProfile dependency to prevent race condition
 
   // Separate effect to handle explicit sign out flag
   useEffect(() => {

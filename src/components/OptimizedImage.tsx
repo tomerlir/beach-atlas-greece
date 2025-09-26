@@ -113,7 +113,15 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       observer.observe(containerRef.current);
     }
 
-    return () => observer.disconnect();
+    return () => {
+      // Ensure observer is properly disconnected in all cases
+      try {
+        observer.disconnect();
+      } catch (error) {
+        // Observer might already be disconnected, ignore error
+        console.warn('Observer cleanup warning:', error);
+      }
+    };
   }, [priority, isInView]);
 
   // Handle image load

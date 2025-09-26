@@ -9,6 +9,7 @@ import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import AdminLayout from "@/components/admin/AdminLayout";
 import Index from "./pages/Index";
 import About from "./pages/About";
+import Areas from "./pages/Areas";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminAreasList from "./pages/admin/areas/AdminAreasList";
@@ -37,6 +38,7 @@ const AppContent = () => {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/about" element={<About />} />
+        <Route path="/areas" element={<Areas />} />
         <Route path="/:areaSlug" element={<Area />} />
         <Route path="/:area/:beach-name" element={<BeachDetail />} />
         <Route path="/admin/login" element={<AdminLogin />} />

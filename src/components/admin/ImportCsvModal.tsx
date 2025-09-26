@@ -10,6 +10,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useAreas } from '@/hooks/useAreas';
 import Papa from 'papaparse';
 import { 
   normalizeRow, 
@@ -49,6 +50,9 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
   
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
+  
+  // Fetch areas for area_id mapping
+  const { data: areas = [] } = useAreas();
 
   const resetModal = useCallback(() => {
     setStep('upload');
@@ -292,7 +296,13 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
 
         // Process creates
         if (creates.length > 0) {
-          const createData = creates.map(r => csvRowToDbInsert(r.normalizedRow!));
+          // Create area name to area_id mapping
+          const areaIdMap = areas.reduce((acc, area) => {
+            acc[area.name] = area.id;
+            return acc;
+          }, {} as Record<string, string>);
+          
+          const createData = creates.map(r => csvRowToDbInsert(r.normalizedRow!, areaIdMap));
           const { error: createError } = await supabase
             .from('beaches')
             .insert(createData);
@@ -307,7 +317,13 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
 
         // Process updates
         for (const update of updates) {
-          const updateData = csvRowToDbUpdate(update.normalizedRow!);
+          // Create area name to area_id mapping
+          const areaIdMap = areas.reduce((acc, area) => {
+            acc[area.name] = area.id;
+            return acc;
+          }, {} as Record<string, string>);
+          
+          const updateData = csvRowToDbUpdate(update.normalizedRow!, areaIdMap);
           const { error: updateError } = await supabase
             .from('beaches')
             .update(updateData)

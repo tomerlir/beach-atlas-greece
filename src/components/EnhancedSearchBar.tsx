@@ -53,7 +53,7 @@ export default function EnhancedSearchBar({
         {/* Main Search Input */}
         <Input
           ref={inputRef}
-          placeholder="Search beaches, islands, or places in Greece..."
+          placeholder="Search areas or beaches..."
           value={searchInput}
           onChange={(e) => handleSearchChange(e.target.value)}
           onFocus={() => setSearchFocused(true)}
@@ -88,8 +88,8 @@ export default function EnhancedSearchBar({
 
       </div>
 
-      {/* Search Tips */}
-      {searchFocused && searchInput.length < 2 && (
+      {/* Search Tips - Commented out */}
+      {/* {searchFocused && searchInput.length < 2 && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-border rounded-2xl shadow-lg p-4 z-40">
           <div className="text-sm text-muted-foreground">
             <p className="font-medium mb-2 text-foreground">Search tips:</p>
@@ -100,7 +100,7 @@ export default function EnhancedSearchBar({
             </ul>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 }

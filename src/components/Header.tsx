@@ -15,6 +15,12 @@ const Header = () => {
           {/* Navigation */}
           <nav className="flex items-center gap-6 min-w-[140px] justify-end">
             <Link 
+              to="/areas" 
+              className="text-foreground hover:text-primary transition-colors font-medium inline-block"
+            >
+              Areas
+            </Link>
+            <Link 
               to="/about" 
               className="text-foreground hover:text-primary transition-colors font-medium inline-block"
             >

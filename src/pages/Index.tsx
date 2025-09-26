@@ -11,6 +11,7 @@ import BeachCardSkeleton from "@/components/BeachCardSkeleton";
 import Pagination from "@/components/Pagination";
 import { GeolocationErrorBanner } from "@/components/GeolocationErrorBanner";
 import EnhancedSearchBar from "@/components/EnhancedSearchBar";
+import AreasGrid from "@/components/AreasGrid";
 import { useGeolocation } from "@/hooks/useGeolocation";
 import { useUrlState } from "@/hooks/useUrlState";
 import { useBeachFiltering } from "@/hooks/useBeachFiltering";
@@ -148,6 +149,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Explore by Area Section */}
+      <AreasGrid maxAreas={12} />
 
       {/* Filter Bar */}
       <FilterBar

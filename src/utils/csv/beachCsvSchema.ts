@@ -345,11 +345,13 @@ export function dbRowToCsvRow(dbRow: any): Record<string, string> {
 }
 
 // Convert CSV row to database insert/update object
-export function csvRowToDbInsert(csvRow: BeachCsvRow): any {
+export function csvRowToDbInsert(csvRow: BeachCsvRow, areaIdMap?: Record<string, string>): any {
   const dbRow: any = {
     slug: csvRow.slug,
     name: csvRow.name,
     area: csvRow.area,
+    // Map area name to area_id if mapping is provided
+    ...(areaIdMap && areaIdMap[csvRow.area] ? { area_id: areaIdMap[csvRow.area] } : {}),
     latitude: csvRow.latitude,
     longitude: csvRow.longitude,
     type: csvRow.type,
@@ -372,12 +374,16 @@ export function csvRowToDbInsert(csvRow: BeachCsvRow): any {
 }
 
 // Convert CSV row to database update object (only non-undefined fields)
-export function csvRowToDbUpdate(csvRow: BeachCsvRow): any {
+export function csvRowToDbUpdate(csvRow: BeachCsvRow, areaIdMap?: Record<string, string>): any {
   const dbRow: any = {};
 
   // Always include these fields for updates
   if (csvRow.name !== undefined) dbRow.name = csvRow.name;
   if (csvRow.area !== undefined) dbRow.area = csvRow.area;
+  // Map area name to area_id if mapping is provided
+  if (csvRow.area !== undefined && areaIdMap && areaIdMap[csvRow.area]) {
+    dbRow.area_id = areaIdMap[csvRow.area];
+  }
   if (csvRow.latitude !== undefined) dbRow.latitude = csvRow.latitude;
   if (csvRow.longitude !== undefined) dbRow.longitude = csvRow.longitude;
   if (csvRow.type !== undefined) dbRow.type = csvRow.type;

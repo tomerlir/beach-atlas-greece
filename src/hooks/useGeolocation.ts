@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
 interface GeolocationState {
@@ -16,6 +16,11 @@ export const useGeolocation = () => {
     permission: null,
   });
   const { toast } = useToast();
+  
+  // Add refs for request cancellation and debouncing
+  const currentWatchId = useRef<number | null>(null);
+  const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
+  const isRequestActive = useRef(false);
 
   const getCurrentLocation = useCallback(() => {
     if (!navigator.geolocation) {
@@ -29,62 +34,111 @@ export const useGeolocation = () => {
       return;
     }
 
-    setState(prev => ({ ...prev, isLoading: true, error: null }));
+    // Clear any existing debounce timeout
+    if (debounceTimeout.current) {
+      clearTimeout(debounceTimeout.current);
+    }
 
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setState({
-          location: position,
-          isLoading: false,
-          error: null,
-          permission: 'granted',
-        });
-        toast({
-          title: "Location found",
-          description: "Using your location to show nearby beaches.",
-        });
-      },
-      (error) => {
-        let errorMessage = 'Unable to retrieve your location';
-        let permission: 'granted' | 'denied' | 'prompt' | null = 'prompt';
-        
-        switch (error.code) {
-          case error.PERMISSION_DENIED:
-            errorMessage = 'Location access denied. Please enable location services.';
-            permission = 'denied';
-            break;
-          case error.POSITION_UNAVAILABLE:
-            errorMessage = 'Location information is unavailable.';
-            break;
-          case error.TIMEOUT:
-            errorMessage = 'Location request timed out.';
-            break;
-        }
-        
-        setState({
-          location: null,
-          isLoading: false,
-          error: errorMessage,
-          permission,
-        });
-        
-        toast({
-          title: "Location error",
-          description: errorMessage,
-          variant: "destructive",
-        });
-      },
-      {
-        enableHighAccuracy: true,
-        timeout: 10000,
-        maximumAge: 300000, // 5 minutes
+    // Debounce multiple rapid calls
+    debounceTimeout.current = setTimeout(() => {
+      // Check if another request is already active
+      if (isRequestActive.current) {
+        return;
       }
-    );
+
+      isRequestActive.current = true;
+      setState(prev => ({ ...prev, isLoading: true, error: null }));
+
+      // Clear any existing watch
+      if (currentWatchId.current !== null) {
+        navigator.geolocation.clearWatch(currentWatchId.current);
+        currentWatchId.current = null;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          // Check if request is still active (not cancelled)
+          if (!isRequestActive.current) {
+            return;
+          }
+
+          setState({
+            location: position,
+            isLoading: false,
+            error: null,
+            permission: 'granted',
+          });
+          toast({
+            title: "Location found",
+            description: "Using your location to show nearby beaches.",
+          });
+          isRequestActive.current = false;
+        },
+        (error) => {
+          // Check if request is still active (not cancelled)
+          if (!isRequestActive.current) {
+            return;
+          }
+
+          let errorMessage = 'Unable to retrieve your location';
+          let permission: 'granted' | 'denied' | 'prompt' | null = 'prompt';
+          
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              errorMessage = 'Location access denied. Please enable location services.';
+              permission = 'denied';
+              break;
+            case error.POSITION_UNAVAILABLE:
+              errorMessage = 'Location information is unavailable.';
+              break;
+            case error.TIMEOUT:
+              errorMessage = 'Location request timed out.';
+              break;
+          }
+          
+          setState({
+            location: null,
+            isLoading: false,
+            error: errorMessage,
+            permission,
+          });
+          
+          toast({
+            title: "Location error",
+            description: errorMessage,
+            variant: "destructive",
+          });
+          isRequestActive.current = false;
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 300000, // 5 minutes
+        }
+      );
+    }, 300); // 300ms debounce
   }, [toast]);
+
+  // Cancel any active location request
+  const cancelLocationRequest = useCallback(() => {
+    if (debounceTimeout.current) {
+      clearTimeout(debounceTimeout.current);
+      debounceTimeout.current = null;
+    }
+    
+    if (currentWatchId.current !== null) {
+      navigator.geolocation.clearWatch(currentWatchId.current);
+      currentWatchId.current = null;
+    }
+    
+    isRequestActive.current = false;
+    setState(prev => ({ ...prev, isLoading: false }));
+  }, []);
 
   return {
     ...state,
     getCurrentLocation,
+    cancelLocationRequest,
   };
 };
 

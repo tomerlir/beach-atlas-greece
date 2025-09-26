@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 
 export interface BeachFormDraft {
   name: string;
-  area: string;
+  area_id: string; // Changed from 'area' to 'area_id' to match new schema
   latitude: string;
   longitude: string;
   description: string;
@@ -22,7 +22,7 @@ export interface BeachFormDraft {
 
 const DEFAULT_DRAFT: BeachFormDraft = {
   name: '',
-  area: '',
+  area_id: '', // Changed from 'area' to 'area_id'
   latitude: '',
   longitude: '',
   description: '',

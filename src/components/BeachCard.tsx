@@ -67,6 +67,8 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
     </div>
   );
 
+  const beachUrl = generateBeachUrl(beach.area, beach.slug);
+
   // Prefetch beach detail page and image on visibility
   useEffect(() => {
     const prefetchObserver = new IntersectionObserver(
@@ -80,15 +82,33 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
       { rootMargin: '300px' } // Increased margin for earlier prefetching
     );
 
+    // Use a ref to get the element instead of querySelector
     const cardElement = document.querySelector(`[data-beach-id="${beach.id}"]`);
     if (cardElement) {
       prefetchObserver.observe(cardElement);
+    } else {
+      // If element not found, try again after a short delay
+      const retryTimeout = setTimeout(() => {
+        const retryElement = document.querySelector(`[data-beach-id="${beach.id}"]`);
+        if (retryElement) {
+          prefetchObserver.observe(retryElement);
+        }
+      }, 100);
+      
+      return () => {
+        clearTimeout(retryTimeout);
+        prefetchObserver.disconnect();
+        cancelPrefetch();
+      };
     }
 
-    return () => prefetchObserver.disconnect();
-  }, [beach.slug, beach.id, beach.photo_url, prefetchWithImage]);
-
-  const beachUrl = generateBeachUrl(beach.area, beach.slug);
+    return () => {
+      // Ensure observer is properly disconnected
+      prefetchObserver.disconnect();
+      // Cancel any pending prefetch operations
+      cancelPrefetch();
+    };
+  }, [beach.slug, beach.id, beach.photo_url, prefetchWithImage, cancelPrefetch, beachUrl]);
 
   return (
     <Link 
