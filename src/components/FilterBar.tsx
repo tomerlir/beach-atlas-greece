@@ -249,7 +249,7 @@ export default function FilterBar({
 
 
   return (
-    <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border">
+    <div className="relative z-20">
       {/* Main Filter Bar */}
       <div className="container mx-auto px-4 py-4">
         <div className="flex flex-col gap-4">
@@ -480,8 +480,8 @@ export default function FilterBar({
                 key={pill.id}
                 variant="secondary"
                 className={`flex items-center gap-2 px-3 py-1 ${pill.locked
-                  ? 'bg-muted text-muted-foreground border-muted-foreground/20'
-                  : 'bg-primary/10 text-primary border-primary/20'
+                  ? 'bg-white/90 text-foreground border-border'
+                  : 'bg-white/90 text-foreground border-border'
                   }`}
               >
                 <span>{pill.label}</span>
