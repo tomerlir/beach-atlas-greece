@@ -117,7 +117,7 @@ export default function AmenitiesDropdown({
           variant="outline"
           size="sm"
           onClick={handleTriggerClick}
-          className="px-3 py-2 rounded-xl border h-auto whitespace-nowrap flex-shrink-0"
+          className="px-3 py-2 rounded-xl border h-auto whitespace-nowrap flex-shrink-0 text-foreground"
           aria-expanded={isOpen}
           aria-haspopup="listbox"
           aria-controls="amenities-listbox"

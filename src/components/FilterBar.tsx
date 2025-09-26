@@ -266,7 +266,7 @@ export default function FilterBar({
                     size="sm"
                     onClick={() => handleNearMeToggle(!filters.nearMe)}
                     disabled={isLoadingLocation}
-                    className="px-3 py-2 rounded-xl border h-auto"
+                    className={`px-3 py-2 rounded-xl border h-auto ${!filters.nearMe ? 'text-foreground' : ''}`}
                     role="switch"
                     aria-checked={filters.nearMe}
                     aria-label={`Near me (${filters.nearMe ? 'on' : 'off'})`}
@@ -291,7 +291,7 @@ export default function FilterBar({
                 variant={filters.blueFlag ? "default" : "outline"}
                 size="sm"
                 onClick={() => handleBlueFlagToggle(!filters.blueFlag)}
-                className="px-3 py-2 rounded-xl border h-auto"
+                className={`px-3 py-2 rounded-xl border h-auto ${!filters.blueFlag ? 'text-foreground' : ''}`}
                 role="switch"
                 aria-checked={filters.blueFlag}
                 aria-label={`Blue Flag (${filters.blueFlag ? 'on' : 'off'})`}
@@ -445,7 +445,7 @@ export default function FilterBar({
                 variant="outline"
                 size="sm"
                 onClick={onOpenAllFilters}
-                className="px-3 py-2 rounded-xl border h-auto whitespace-nowrap flex-shrink-0"
+                className="px-3 py-2 rounded-xl border h-auto whitespace-nowrap flex-shrink-0 text-foreground"
                 aria-label="Open all filters"
               >
                 <Filter className="h-4 w-4 mr-2" />
@@ -478,7 +478,7 @@ export default function FilterBar({
             {getFilterPills.map((pill) => (
               <Badge
                 key={pill.id}
-                variant="secondary"
+                variant="outline"
                 className={`flex items-center gap-2 px-3 py-1 ${pill.locked
                   ? 'bg-white/90 text-foreground border-border'
                   : 'bg-white/90 text-foreground border-border'
