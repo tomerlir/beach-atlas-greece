@@ -119,7 +119,7 @@ export default function ParkingDropdown({
           variant={appliedCount > 0 ? "default" : "outline"}
           size="sm"
           onClick={handleTriggerClick}
-          className={`px-3 py-2 rounded-xl border h-auto whitespace-nowrap flex-shrink-0 ${
+          className={`px-3 py-2 rounded-xl border h-auto whitespace-nowrap flex-shrink-0 shadow-lg backdrop-blur-sm ${
             appliedCount > 0 ? '' : 'text-foreground'
           }`}
           aria-expanded={isOpen}
