@@ -32,6 +32,7 @@ import PhotoAttribution from "@/components/PhotoAttribution";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
 import { useProgressiveLoading } from "@/hooks/useProgressiveLoading";
 import { generateBeachImageAltText } from "@/lib/accessibility";
+import { useNavigationState } from "@/hooks/useNavigationState";
 
 type Beach = Tables<'beaches'>;
 
@@ -67,6 +68,7 @@ const BeachDetail = () => {
   const { toast } = useToast();
   const isMobile = useIsMobile();
   const { isPreloaded, getPreloadResult } = useImagePreloader();
+  const { navigateBack } = useNavigationState();
   
   // State management
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
@@ -176,26 +178,10 @@ const BeachDetail = () => {
 
   // Handle back navigation - go to previous page if available, otherwise fallback to area or home
   const handleBackNavigation = useCallback(() => {
-    // Check if there's a previous page in history (not the current page)
-    if (window.history.length > 1) {
-      // Check if we came from within the app by looking at the referrer
-      const referrer = document.referrer;
-      const currentOrigin = window.location.origin;
-      
-      // If referrer is from the same origin, we can safely go back
-      if (referrer && referrer.startsWith(currentOrigin)) {
-        navigate(-1);
-        return;
-      }
-    }
-    
-    // Fallback: go to area page if available, otherwise home
-    if (area) {
-      navigate(`/${generateAreaSlug(area)}`);
-    } else {
-      navigate('/');
-    }
-  }, [navigate, area]);
+    // First try to use the stored navigation source (most reliable for mobile)
+    const fallbackPath = area ? `/${generateAreaSlug(area)}` : '/';
+    navigateBack(fallbackPath);
+  }, [navigateBack, area]);
 
   // Group amenities by category
   const amenitiesByCategory = useMemo(() => {

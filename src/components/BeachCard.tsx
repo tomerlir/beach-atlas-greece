@@ -17,6 +17,7 @@ import OptimizedImage from "@/components/OptimizedImage";
 import PhotoAttribution from "@/components/PhotoAttribution";
 import { generateBeachImageAltText } from "@/lib/accessibility";
 import { generateBeachUrl } from "@/lib/utils";
+import { useNavigationState } from "@/hooks/useNavigationState";
 
 interface Beach {
   id: string;
@@ -53,6 +54,7 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
     preloadImages: true, 
     preloadData: true 
   });
+  const { storeNavigationSource } = useNavigationState();
 
   const parkingInfo = parkingConfig[beach.parking] || { 
     label: "Parking Unknown", 
@@ -110,6 +112,11 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
     };
   }, [beach.slug, beach.id, beach.photo_url, prefetchWithImage, cancelPrefetch, beachUrl]);
 
+  // Handle click to store navigation source for better back navigation
+  const handleBeachCardClick = () => {
+    storeNavigationSource();
+  };
+
   return (
     <Link 
       to={beachUrl} 
@@ -118,6 +125,7 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
       data-beach-id={beach.id}
       onMouseEnter={() => prefetchWithImage(beachUrl, beach.photo_url)}
       onMouseLeave={cancelPrefetch}
+      onClick={handleBeachCardClick}
     >
       <Card className="group hover:shadow-strong transition-all duration-300 overflow-hidden border-0 bg-white shadow-soft hover:shadow-medium h-full">
         {/* Beach Image */}
