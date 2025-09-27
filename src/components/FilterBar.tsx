@@ -101,11 +101,11 @@ export default function FilterBar({
   return (
     <div className="relative z-20">
       {/* Main Filter Bar */}
-      <div className="container mx-auto px-4 py-4">
+      <div className="w-full py-4">
         <div className="flex flex-col gap-4">
           {/* Facets Group - First Row */}
           {!isMobile ? (
-            <div className="flex flex-wrap gap-2 md:gap-3 items-center justify-center">
+            <div className="flex gap-2 md:gap-3 items-center justify-center lg:overflow-x-auto lg:scrollbar-hide">
 
 
               {/* Near Me Toggle */}
@@ -116,7 +116,7 @@ export default function FilterBar({
                     size="sm"
                     onClick={() => handleNearMeToggle(!filters.nearMe)}
                     disabled={isLoadingLocation}
-                    className={`px-3 py-2 rounded-xl border h-auto shadow-lg backdrop-blur-sm ${!filters.nearMe ? 'text-foreground' : ''}`}
+                    className={`px-3 py-2 rounded-xl border h-auto shadow-lg backdrop-blur-sm flex-shrink-0 ${!filters.nearMe ? 'text-foreground' : ''}`}
                     role="switch"
                     aria-checked={filters.nearMe}
                     aria-label={`Near me (${filters.nearMe ? 'on' : 'off'})`}
@@ -141,7 +141,7 @@ export default function FilterBar({
                 variant={filters.blueFlag ? "default" : "outline"}
                 size="sm"
                 onClick={() => handleBlueFlagToggle(!filters.blueFlag)}
-                className={`px-3 py-2 rounded-xl border h-auto shadow-lg backdrop-blur-sm ${!filters.blueFlag ? 'text-foreground' : ''}`}
+                className={`px-3 py-2 rounded-xl border h-auto shadow-lg backdrop-blur-sm flex-shrink-0 ${!filters.blueFlag ? 'text-foreground' : ''}`}
                 role="switch"
                 aria-checked={filters.blueFlag}
                 aria-label={`Blue Flag (${filters.blueFlag ? 'on' : 'off'})`}
@@ -187,7 +187,7 @@ export default function FilterBar({
                 variant="outline"
                 size="sm"
                 onClick={onOpenAllFilters}
-                className="px-3 py-2 rounded-xl border h-auto text-foreground shadow-lg backdrop-blur-sm"
+                className="px-3 py-2 rounded-xl border h-auto text-foreground shadow-lg backdrop-blur-sm flex-shrink-0"
                 aria-label="Open all filters"
               >
                 <Filter className="h-4 w-4 md:h-5 md:w-5 mr-2" />
@@ -200,21 +200,23 @@ export default function FilterBar({
               </Button>
 
               {/* Vertical Separator */}
-              <div className="h-6 w-px bg-border mx-1" />
+              <div className="h-6 w-px bg-border mx-1 flex-shrink-0" />
 
               {/* Sort Dropdown */}
-              <SortDropdown
-                filters={filters}
-                onFiltersChange={onFiltersChange}
-                userLocation={userLocation}
-                locationPermission={locationPermission}
-                onLocationRequest={onLocationRequest}
-                isLoadingLocation={isLoadingLocation}
-              />
+              <div className="flex-shrink-0">
+                <SortDropdown
+                  filters={filters}
+                  onFiltersChange={onFiltersChange}
+                  userLocation={userLocation}
+                  locationPermission={locationPermission}
+                  onLocationRequest={onLocationRequest}
+                  isLoadingLocation={isLoadingLocation}
+                />
+              </div>
             </div>
           ) : (
             /* Mobile: Scrollable facet chips */
-            <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide justify-center">
+            <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide justify-start">
 
 
               {/* Near Me Toggle */}
@@ -225,7 +227,7 @@ export default function FilterBar({
                     size="sm"
                     onClick={() => handleNearMeToggle(!filters.nearMe)}
                     disabled={isLoadingLocation}
-                    className={`px-3 py-2 rounded-xl border h-auto shadow-lg backdrop-blur-sm ${!filters.nearMe ? 'text-foreground' : ''}`}
+                    className={`px-3 py-2 rounded-xl border h-auto shadow-lg backdrop-blur-sm flex-shrink-0 ${!filters.nearMe ? 'text-foreground' : ''}`}
                     role="switch"
                     aria-checked={filters.nearMe}
                     aria-label={`Near me (${filters.nearMe ? 'on' : 'off'})`}
@@ -250,7 +252,7 @@ export default function FilterBar({
                 variant={filters.blueFlag ? "default" : "outline"}
                 size="sm"
                 onClick={() => handleBlueFlagToggle(!filters.blueFlag)}
-                className={`px-3 py-2 rounded-xl border h-auto shadow-lg backdrop-blur-sm ${!filters.blueFlag ? 'text-foreground' : ''}`}
+                className={`px-3 py-2 rounded-xl border h-auto shadow-lg backdrop-blur-sm flex-shrink-0 ${!filters.blueFlag ? 'text-foreground' : ''}`}
                 role="switch"
                 aria-checked={filters.blueFlag}
                 aria-label={`Blue Flag (${filters.blueFlag ? 'on' : 'off'})`}
@@ -295,7 +297,7 @@ export default function FilterBar({
                 variant="outline"
                 size="sm"
                 onClick={onOpenAllFilters}
-                className="px-3 py-2 rounded-xl border h-auto whitespace-nowrap flex-shrink-0 text-foreground shadow-lg backdrop-blur-sm"
+                className="px-3 py-2 rounded-xl border h-auto whitespace-nowrap flex-shrink-0 text-foreground shadow-lg backdrop-blur-sm flex-shrink-0"
                 aria-label="Open all filters"
               >
                 <Filter className="h-4 w-4 mr-2" />

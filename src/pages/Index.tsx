@@ -124,10 +124,13 @@ const Index = () => {
       <section className="relative h-[50vh] flex flex-col justify-center bg-gradient-ocean overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${heroImage})` }}
+          style={{ 
+            backgroundImage: `url(${heroImage})`,
+            backgroundPosition: 'center left'
+          }}
         />
         
-        <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto w-full">
+        <div className="relative z-10 text-center text-white px-4 w-full">
           <h1 className="text-4xl md:text-6xl font-bold mb-8 drop-shadow-lg">
             Find Your Perfect Greek Beach
           </h1>
@@ -144,7 +147,7 @@ const Index = () => {
           </div>
 
           {/* Filter Bar in Hero */}
-          <div className="max-w-4xl mx-auto">
+          <div className="w-full">
             <FilterBar
               filters={filters}
               onFiltersChange={updateFilters}
