@@ -175,7 +175,7 @@ const Area = () => {
           "@type": "ListItem",
           "position": index + 1,
           "item": {
-            "@type": "Place",
+            "@type": "TouristAttraction",
             "name": beach.name,
             "description": beach.description,
             "url": `https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/${areaSlug}/${beach.slug}`,
@@ -188,7 +188,14 @@ const Area = () => {
               "@type": "GeoCoordinates",
               "latitude": beach.latitude,
               "longitude": beach.longitude
-            }
+            },
+            "isAccessibleForFree": true,
+            "image": beach.photo_url ? [beach.photo_url] : undefined,
+            "amenityFeature": beach.amenities?.map(amenity => ({
+              "@type": "LocationFeatureSpecification",
+              "name": amenity,
+              "value": true
+            })) || []
           }
         }))
       }

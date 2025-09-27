@@ -2,6 +2,7 @@ import { useParams, Link, useLocation, useNavigate } from "react-router-dom";
 import { generateAreaSlug } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
+import { Helmet } from "react-helmet-async";
 import { CONTACT_EMAIL } from "@/lib/constants";
 import { 
   MapPin, 
@@ -268,9 +269,120 @@ const BeachDetail = () => {
     ? beach.description.slice(0, 200) + "..."
     : beach.description;
 
+  // Generate SEO data
+  const seoTitle = `${beach.name} - ${beach.area} | Beach Atlas`;
+  const seoDescription = beach.description || `Discover ${beach.name} in ${beach.area}, Greece. ${beach.organized ? 'Organized' : 'Unorganized'} beach with ${beach.type.toLowerCase()} sand and ${beach.wave_conditions.toLowerCase()} conditions.`;
+  const canonicalUrl = `https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/${generateAreaSlug(beach.area)}/${beach.slug}`;
+
+  // Generate JSON-LD structured data
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": beach.area,
+            "item": `https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/${generateAreaSlug(beach.area)}`
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": beach.name,
+            "item": canonicalUrl
+          }
+        ]
+      },
+      {
+        "@type": "TouristAttraction",
+        "name": beach.name,
+        "description": beach.description,
+        "url": canonicalUrl,
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": beach.area,
+          "addressCountry": "Greece"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": beach.latitude,
+          "longitude": beach.longitude
+        },
+        "isAccessibleForFree": true,
+        "image": beach.photo_url ? [beach.photo_url] : undefined,
+        "amenityFeature": beach.amenities?.map(amenity => ({
+          "@type": "LocationFeatureSpecification",
+          "name": amenity,
+          "value": true
+        })) || [],
+        "additionalProperty": [
+          {
+            "@type": "PropertyValue",
+            "name": "Beach Type",
+            "value": beach.type
+          },
+          {
+            "@type": "PropertyValue", 
+            "name": "Wave Conditions",
+            "value": beach.wave_conditions
+          },
+          {
+            "@type": "PropertyValue",
+            "name": "Organization",
+            "value": beach.organized ? "Organized" : "Unorganized"
+          },
+          {
+            "@type": "PropertyValue",
+            "name": "Parking",
+            "value": beach.parking
+          },
+          ...(beach.blue_flag ? [{
+            "@type": "PropertyValue",
+            "name": "Blue Flag Certified",
+            "value": "Yes"
+          }] : [])
+        ]
+      }
+    ]
+  };
+
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
+    <>
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDescription} />
+        <link rel="canonical" href={canonicalUrl} />
+        
+        {/* Open Graph tags */}
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDescription} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalUrl} />
+        {beach.photo_url && <meta property="og:image" content={beach.photo_url} />}
+        <meta property="og:site_name" content="Beach Atlas Greece" />
+        
+        {/* Twitter Card tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDescription} />
+        {beach.photo_url && <meta name="twitter:image" content={beach.photo_url} />}
+        
+        {/* JSON-LD structured data */}
+        <script type="application/ld+json">
+          {JSON.stringify(jsonLd)}
+        </script>
+      </Helmet>
+
+      <div className="min-h-screen bg-background">
+        <Header />
       
       <main className="max-w-4xl md:max-w-5xl mx-auto px-4 py-8">
         {/* Back to results link */}
@@ -503,7 +615,8 @@ const BeachDetail = () => {
           </p>
         </div>
       </footer>
-    </div>
+      </div>
+    </>
   );
 };
 
