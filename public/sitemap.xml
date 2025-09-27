@@ -6,14 +6,14 @@
   <!-- Main Pages -->
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2025-09-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/about</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -21,54 +21,71 @@
   <!-- Area Pages -->
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/corfu</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2025-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/crete</loc>
+    <lastmod>2025-09-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/lefkada</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2025-09-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/milos</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2025-09-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/mykonos</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2025-09-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/naxos</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2025-09-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/paros</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2025-09-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/santorini</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2025-09-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/zakynthos</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2025-09-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <!-- Beach Detail Pages -->
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/corfu/acharavi-beach-corfu</loc>
+    <lastmod>2025-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Acharavi.jpg/1024px-Acharavi.jpg?20080825152316</image:loc>
+      <image:title>Acharavi beach - Greek Beach</image:title>
+      <image:caption>Stretching for several kilometers along Corfu’s northern coast, Acharavi Beach borders the lively village of Acharavi. The shoreline is a mix of pebbles and sand (with sandier patches toward the north) and the sea bed slopes gently, making the shallow waters suitable for families and casual swimmers. The beach runs in a continuous line that connects (or transitions) into adjacent beaches like Almyros and Roda.</image:caption>
+    </image:image>
+  </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/mykonos/agia-anna-mykonos</loc>
     <lastmod>2025-09-23</lastmod>
@@ -81,6 +98,28 @@
     </image:image>
   </url>
   <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/crete/agia-marina-beach-crete</loc>
+    <lastmod>2025-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Agia_Marina_-_Cabana_Mare_beach.jpg/1024px-Agia_Marina_-_Cabana_Mare_beach.jpg?20210904192930</image:loc>
+      <image:title>Agia Marina Beach - Greek Beach</image:title>
+      <image:caption>Agia Marina lies about 9–10 km west of Chania along the northern coast of Crete, forming part of a continuous sandy stretch also including Stalos and Platanias. The beach is wide and long, offering golden sand, shallow entry zones, and scenic views — including the islets of Thodoroi offshore.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/crete/agiofaraggo-beach-crete</loc>
+    <lastmod>2025-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/M%C3%BCndung_der_Agiofarango-Schlucht.jpg/1024px-M%C3%BCndung_der_Agiofarango-Schlucht.jpg?20241025183651</image:loc>
+      <image:title>Agiofaraggo beach - Greek Beach</image:title>
+      <image:caption>Agiofaraggo (also Agiofarago) lies on Crete’s southern coast in Heraklion region, at the mouth of the dramatic gorge of the same name. To reach the beach, visitors hike through the gorge passing caves, a small church (Agios Antonios), and steep cliffs before arriving at a secluded cove. The setting is wild, rugged and scenic, with vertical cliffs framing the beach and a natural rock arch to swim under.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/lefkada/agiofili-beach-lefkada</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -89,6 +128,17 @@
       <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Agiofili_Beach_%2825419587704%29.jpg/1024px-Agiofili_Beach_%2825419587704%29.jpg?20161014012319</image:loc>
       <image:title>Agiofili beach - Greek Beach</image:title>
       <image:caption>Agiofili is a picturesque cove on the southern side of Lefkada, near the village/port of Vasiliki. The beach is tucked into cliffs, with white pebbles underfoot and crystal-clear turquoise water. The setting is scenic, peaceful, and ideal for swimming and snorkeling. The approach involves a short walk down stairs from a cliff or hilltop, making arrival feel a bit more adventurous.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/corfu/agios-georgios-beach-corfu</loc>
+    <lastmod>2025-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/AgiosGeorgios125.JPG/1024px-AgiosGeorgios125.JPG?20150531221436</image:loc>
+      <image:title>Agios Georgios beach - Greek Beach</image:title>
+      <image:caption>Agios Georgios Pagon (northwest Corfu) is a long, gently curving bay with soft golden sand and shallow, clear waters. The sheltered bay, lush hillsides, and the relatively gentle slope into the sea make it ideal for swimming, families, and relaxing beach days. The scenic drive to the beach (used in For Your Eyes Only Bond film) is part of the charm.</image:caption>
     </image:image>
   </url>
   <url>
@@ -125,6 +175,17 @@
     </image:image>
   </url>
   <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/corfu/agios-spyridon-beach-corfu</loc>
+    <lastmod>2025-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Corfu_Paleokastritsa_Beach_R01.jpg/1024px-Corfu_Paleokastritsa_Beach_R01.jpg?20130202214440</image:loc>
+      <image:title>Agios Spyridon beach - Greek Beach</image:title>
+      <image:caption>Agios Spyridon is a charming beach located in the Paleokastritsa region on Corfu’s northwest coast. It occupies a bay just under the road, near the Church of Agios Spyridon, and is part of the cluster of coves and beaches around Paleokastritsa. The setting is scenic, combining cliffs, greenery, and clear sea water. </image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/mykonos/agios-stefanos-mykonos</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -133,6 +194,17 @@
       <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Agios_Stefanos_Mykonos.jpg/2048px-Agios_Stefanos_Mykonos.jpg?20190608171654</image:loc>
       <image:title>Agios Stefanos - Greek Beach</image:title>
       <image:caption>Agios Stefanos is a sandy beach on the northwestern coast of Mykonos, just a few km from Mykonos Town and very close to the new Tourlos-port. Its golden sand shore, combined with shallow, clear waters, makes it particularly appealing for swimmers, couples, and families. The beach is backed by cafés, restaurants and accommodations, giving it a nice mix of relaxation and convenience. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/corfu/agios-stefanos-beach-corfu</loc>
+    <lastmod>2025-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Agios_Stefanos%2C_Korfu.jpg/1024px-Agios_Stefanos%2C_Korfu.jpg?20170422135453</image:loc>
+      <image:title>Agios Stefanos beach - Greek Beach</image:title>
+      <image:caption>Agios Stefanos (also called San Stefanos Avliotes) is a relaxed resort village on Corfu’s northwest coast, known for its long stretch of sandy beach, gentle sea, and scenic views toward the Diapontia Islands. The beach borders a shallow bay, making it especially family friendly, and the village retains a laid-back charm with local tavernas, shops, and a small harbour.</image:caption>
     </image:image>
   </url>
   <url>
@@ -158,6 +230,17 @@
     </image:image>
   </url>
   <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/crete/anidri-beach-crete</loc>
+    <lastmod>2025-09-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Beach_of_Ghialiskari_in_winter.JPG/1024px-Beach_of_Ghialiskari_in_winter.JPG?20140531173314</image:loc>
+      <image:title>Anidri Beach - Greek Beach</image:title>
+      <image:caption>Anidri is a quiet, semi-remote cove east of Paleochora on Crete’s southern coast. It lies along a stretch that includes Gialiskari and is accessed via narrow roads and sometimes by hiking through the nearby Anidri Gorge. The beach offers a peaceful escape, dramatic coastal scenery, and clear waters.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/naxos/apollonas-beach-naxos</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -169,6 +252,28 @@
     </image:image>
   </url>
   <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/crete/balos-beach-crete</loc>
+    <lastmod>2025-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Balos_9.jpg/1024px-Balos_9.jpg?20151207212642</image:loc>
+      <image:title>Balos beach - Greek Beach</image:title>
+      <image:caption>Balos is a spectacular coastal lagoon on the Gramvousa Peninsula, in northwestern Crete (Chania region). Its pale coral-white and pink sand, shallow turquoise waters, and wild surrounding landscape make it one of Crete’s iconic natural beaches. The lagoon is separated by sandy bars and islets, giving a dreamy, otherworldly feel.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/corfu/barbati-beach-corfu</loc>
+    <lastmod>2025-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/%CE%A0%CE%B1%CF%81%CE%B1%CE%BB%CE%AF%CE%B1_%CE%9C%CF%80%CE%B1%CF%81%CE%BC%CF%80%CE%AC%CF%84%CE%B9_-_panoramio.jpg/1024px-%CE%A0%CE%B1%CF%81%CE%B1%CE%BB%CE%AF%CE%B1_%CE%9C%CF%80%CE%B1%CF%81%CE%BC%CF%80%CE%AC%CF%84%CE%B9_-_panoramio.jpg?20170221140046</image:loc>
+      <image:title>Barbati beach - Greek Beach</image:title>
+      <image:caption>Barbati is a stylish resort beach on Corfu’s northeast coast, about 20 km from Corfu Town. It’s framed by the slopes of Mount Pantokrator, offering a dramatic mountain-meets-sea backdrop. The beach is backed by a verdant hillside, and the setting feels refined yet welcoming — combining natural beauty with good infrastructure. </image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/santorini/black-beach-santorini</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -177,6 +282,17 @@
       <image:loc>https://upload.wikimedia.org/wikipedia/commons/7/7f/Black_beach_in_Kamari_Santorini.jpg</image:loc>
       <image:title>Black Beach - Greek Beach</image:title>
       <image:caption>One of Santorini’s iconic black sand beaches — formed from volcanic lava and minerals — Black Beach lies near Perissa / Akrotiri. With its striking dark shore, clear Aegean waters, and cliff-backdrop, it’s ideal for both relaxation and more active beach-days. The beach is a mix of sand and pebbles, with shallow areas that deepen more quickly. It’s well-suited for sunbathing, swimming, and enjoying seaside tavernas.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/corfu/chalikounas-beach-corfu</loc>
+    <lastmod>2025-09-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Chalikounas_Beach_in_Corfu_%281%29.jpg/1024px-Chalikounas_Beach_in_Corfu_%281%29.jpg?20220309085923</image:loc>
+      <image:title>Chalikounas beach - Greek Beach</image:title>
+      <image:caption>A sweeping golden sand strip between the Ionian Sea and the protected Lake Korission lagoon, Chalikounas is one of Corfu’s wilder, more natural beaches. The dunes, the lagoon behind, the wind, and open sky give it a rugged, unspoilt character.</image:caption>
     </image:image>
   </url>
   <url>
@@ -214,6 +330,17 @@
     </image:image>
   </url>
   <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/crete/elafonissi-beach-crete</loc>
+    <lastmod>2025-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Elafonissi.jpg/1024px-Elafonissi.jpg?20110928185813</image:loc>
+      <image:title>Elafonissi beach - Greek Beach</image:title>
+      <image:caption>Elafonissi (or Elafonisi) is a spectacular coastal gem on Crete’s southwestern tip, known for its shallow turquoise lagoons, sandbars, and patches of pink sand derived from crushed shells. The beach is partly separated by a narrow sand strip from a small islet, which becomes walkable at low tide. It’s a protected natural area, combining lagoon calmness, scenic dunes, and a wild, dreamy atmosphere.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/mykonos/elia-beach-mykonos</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -222,6 +349,17 @@
       <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Elias_Beach_on_Mykonos.JPG/1024px-Elias_Beach_on_Mykonos.JPG?20090430002643</image:loc>
       <image:title>Elia beach - Greek Beach</image:title>
       <image:caption>Elia is a large, sophisticated sandy beach on the southern coast of Mykonos, about 10 km from Mykonos Town. With long stretches of golden/white sand, clear waters and a spacious shore, Elia offers both luxury and relaxed beach vibes. It’s well-organized with quality beach clubs, restaurants and a calm, upscale atmosphere.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/crete/falasarna-beach-crete</loc>
+    <lastmod>2025-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Greece_Crete_Chania_FalasarnaBeach_Aerial_Summer_ISymeonidis-4-S.jpg/1024px-Greece_Crete_Chania_FalasarnaBeach_Aerial_Summer_ISymeonidis-4-S.jpg?20241017183652</image:loc>
+      <image:title>Falasarna Beach - Greek Beach</image:title>
+      <image:caption>Falasarna is one of the most celebrated beaches on Crete’s western coast. It consists of a long bay made up of multiple contiguous sandy stretches, offering wide views, soft pale sand, turquoise water, and superb sunsets. The beach lies near Kissamos / Platanos, about 59 km west of Chania. Falasarna also carries historic interest: ruins of the ancient port city of Phalasarna lie just north of the beach</image:caption>
     </image:image>
   </url>
   <url>
@@ -281,6 +419,28 @@
     </image:image>
   </url>
   <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/crete/istro-beach-crete</loc>
+    <lastmod>2025-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Istro_Strand_Agios_Pandeleimon_10.jpg/1024px-Istro_Strand_Agios_Pandeleimon_10.jpg?20181218100457</image:loc>
+      <image:title>Istro beach - Greek Beach</image:title>
+      <image:caption>Istro Beach (also known as Istro / Istron) lies on Crete’s eastern coast, about 12 km south of Agios Nikolaos on the road toward Ierapetra. It faces a gentle bay and is backed by green hills, making for a tranquil seaside setting.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/corfu/kalami-beach-corfu</loc>
+    <lastmod>2025-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Widok-z_bia%C5%82ej_willi_kalami.jpg/1024px-Widok-z_bia%C5%82ej_willi_kalami.jpg?20220524174427</image:loc>
+      <image:title>Kalami beach - Greek Beach</image:title>
+      <image:caption>Kalami is a scenic bay on Corfu’s northeast coast, famed for its clear waters, pebbly shore, and historic charm (it’s associated with author Lawrence Durrell). The gentle coastline and lush hills behind the bay make it a pleasant spot for swimming, snorkelling, and relaxing in a less crowded setting.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/naxos/kalantos-beach-naxos</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -325,6 +485,17 @@
     </image:image>
   </url>
   <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/crete/lissos-beach-crete</loc>
+    <lastmod>2025-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/2/25/Lisos.jpg?20071125191432</image:loc>
+      <image:title>Lissos Beach - Greek Beach</image:title>
+      <image:caption>Perched at the foot of the Lissos Gorge and facing the Libyan Sea, Lissos is a secluded, tranquil beach near Sougia in southwestern Crete. It’s reached via a scenic hike from Sougia (≈ 1–1.5 hours along the E4 path) or by boat from the village. The beach is backed by cliffs, ancient ruins (including the Asclepieion and city remains), and dense bushes, giving it a wild, contemplative ambiance. </image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/zakynthos/makris-gialos-zakynthos</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -333,6 +504,17 @@
       <image:loc>https://live.staticflickr.com/3427/3853936362_b1a47a3a4b_h.jpg</image:loc>
       <image:title>Makris Gialos - Greek Beach</image:title>
       <image:caption>Makris Gialos is a secluded yet accessible beach on the northeast coast of Zakynthos, roughly 30 km from Zakynthos Town. It features a pebbly-shingle shoreline, crystal-clear water, and impressive rock caves that are excellent for snorkeling and diving. The water gets deep quickly, so it’s better suited to confident swimmers. The scenery is wild and beautiful, making this a peaceful spot for couples or adventurers seeking some solitude.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/crete/marathi-beach-crete</loc>
+    <lastmod>2025-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Kato_Marathi_-_panoramio_%289%29.jpg/1024px-Kato_Marathi_-_panoramio_%289%29.jpg?20170330003245</image:loc>
+      <image:title>Marathi beach - Greek Beach</image:title>
+      <image:caption>Marathi Beach lies on the Akrotiri peninsula, about 17 km east of Chania, Crete. It’s nestled in Souda Bay, making it sheltered and calm, with golden sand, shallow waters, and views of Drapanos Cape. A small pier splits two sandy coves, and it’s a popular family and local favorite thanks to its accessibility and amenities. </image:caption>
     </image:image>
   </url>
   <url>
@@ -348,7 +530,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/zakynthos/mizithres-beach-zakynthos</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -380,6 +562,28 @@
     </image:image>
   </url>
   <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/crete/orthi-ammos-beach-crete</loc>
+    <lastmod>2025-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Orthi_Ammos_3.jpg/1024px-Orthi_Ammos_3.jpg?20151218114709</image:loc>
+      <image:title>Orthi Ammos beach - Greek Beach</image:title>
+      <image:caption>Orthi Ammos lies east of the Frangokastello area on Crete’s southern coast. It is known for its expansive sand dunes, clear shallow waters, and more relaxed environment compared to its more touristic neighbor, Frangokastello. The eastern portion (Kritama) has dramatic cliffs meeting turquoise seas. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/crete/pahia-ammos-beach-crete</loc>
+    <lastmod>2025-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Pahia_Ammos_2012-09-13.jpg/1024px-Pahia_Ammos_2012-09-13.jpg?20121026222436</image:loc>
+      <image:title>Pahia Ammos beach - Greek Beach</image:title>
+      <image:caption>Pachia Ammos is a broad coastal beach on the north side of the narrowest section of Crete, located about 20 km east of Agios Nikolaos and some 10 km from Ierapetra. It combines stretches of sand and pebbles, with a west section that is more sheltered by a breakwater, making the waters calmer there, while the rest can face winds and waves. </image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/mykonos/panormos-beach-mykonos</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -399,6 +603,17 @@
       <image:loc>https://upload.wikimedia.org/wikipedia/commons/2/2b/The_nudists%27_part_of_Plaka_beach%2C_Naxos_island%2C_Greece_-_panoramio.jpg</image:loc>
       <image:title>Plaka Beach - Greek Beach</image:title>
       <image:caption>Plaka is one of Naxos’s longest and most beautiful sandy beaches, stretching for around 4 km along the southwestern coast. With soft white/golden sand, turquoise clear water, and wide open stretches, it’s ideal for sunbathing, long walks, swimming, and relaxing. Parts of the south end feel more untouched and natural, while the more developed north end (near Maragas etc.) has beach bars and restaurants, giving visitors options between tranquility or more service. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/crete/plakias-beach-crete</loc>
+    <lastmod>2025-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Plakias_Beach_02.JPG/1024px-Plakias_Beach_02.JPG?20140827183542</image:loc>
+      <image:title>Plakias beach - Greek Beach</image:title>
+      <image:caption>Nestled on Crete’s southern coast in the Rethymno region, Plakias is a laid-back seaside village boasting a long, gently curving bay. Its beach stretches about 1.3 km and blends soft sand and fine shell matter, offering shallow waters ideal for leisurely swimming. The surrounding scenery offers hills, cliffs, and a river valley flowing into the sea, adding character beyond the shoreline.</image:caption>
     </image:image>
   </url>
   <url>
@@ -425,7 +640,7 @@
   </url>
   <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/zakynthos/porto-limnionas-zakynthos</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -457,6 +672,17 @@
     </image:image>
   </url>
   <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/crete/preveli-beach-crete</loc>
+    <lastmod>2025-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Preveli_Palm_Beach_Panorama_02.JPG/1024px-Preveli_Palm_Beach_Panorama_02.JPG?20141209200757</image:loc>
+      <image:title>Preveli beach - Greek Beach</image:title>
+      <image:caption>Preveli sits at the mouth of the Kourtaliotiko Gorge on Crete’s southern coast, where the Megalopotamos river meets the sea and forms a lagoon before flowing into the Libyan Sea. A lush palm forest (Phoenix theophrasti) lines the banks, offering a tropical oasis feel. Behind the beach, a gorge climbs up steep terrain, giving an adventurous backdrop. The sand/pebble beach is backed by greenery and the river, making for an exotic, scenic destination. </image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/santorini/red-beach-santorini</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -468,6 +694,17 @@
     </image:image>
   </url>
   <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/corfu/rovinia-beach-corfu</loc>
+    <lastmod>2025-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Corfu_September_2009_-_little_twin_beach_near_Liapades_-_panoramio.jpg/1024px-Corfu_September_2009_-_little_twin_beach_near_Liapades_-_panoramio.jpg?20161107205002</image:loc>
+      <image:title>Rovinia beach - Greek Beach</image:title>
+      <image:caption>Hidden along Corfu’s west coast, near Liapades and about 20 km from Corfu Town, Rovinia is a wild, secluded cove with a striking natural ambiance. It’s surrounded by dense vegetation and cliffs, with clear turquoise water and a quiet atmosphere that appeals to nature lovers seeking a more off-beat beach experience.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/milos/sarakiniko-beach-milos</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -476,6 +713,17 @@
       <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Sarakiniko_Beach_on_Milos_Island%2C_Greece_with_a_view_of_the_Aegean_Sea.jpg/1024px-Sarakiniko_Beach_on_Milos_Island%2C_Greece_with_a_view_of_the_Aegean_Sea.jpg?20210317192745</image:loc>
       <image:title>Sarakiniko beach - Greek Beach</image:title>
       <image:caption>Sarakiniko is Milos’s iconic “moon-landscape” beach — smooth, bright white volcanic rock formations sculpted by wind and sea, surrounding a small inlet of striking turquoise water. There’s only a tiny sandy patch, most of the area is rock and cliff-edge, making it ideal for swimming in the shallow waters, exploring caves & cliffs, and doing some cliff jumping. The scenery is surreal and photogenic, especially around sunrise or late afternoon.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/crete/sougia-beach-crete</loc>
+    <lastmod>2025-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Sougia%2C_von_Westen_gesehen.jpg/1024px-Sougia%2C_von_Westen_gesehen.jpg?20241209150805</image:loc>
+      <image:title>Sougia Beach - Greek Beach</image:title>
+      <image:caption>Sougia’s beach stretches in front of the village, forming a long (≈ 1.2 km) and wide shoreline with crystal-clear water. The setting is relaxed and scenic, backed by hills and gorges (notably Agia Irini Gorge) and serving as a quiet base for walkers, nature lovers, and those wanting to escape mass tourism.</image:caption>
     </image:image>
   </url>
   <url>
