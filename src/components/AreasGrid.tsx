@@ -30,7 +30,7 @@ const AreasGrid = ({ maxAreas = 12, showViewAll = true, className = "" }: AreasG
   if (isLoading) {
     return (
       <section className={`py-8 ${className}`}>
-        <div className="container mx-auto px-4">
+        <div className="w-full px-4">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-foreground">Explore by Area</h2>
             {showViewAll && (
@@ -38,10 +38,10 @@ const AreasGrid = ({ maxAreas = 12, showViewAll = true, className = "" }: AreasG
             )}
           </div>
           
-          {/* Loading skeleton - horizontal scroll on mobile, grid on desktop */}
-          <div className="flex gap-4 overflow-x-auto pb-2 md:grid md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-12 md:overflow-x-visible">
+          {/* Loading skeleton - horizontal scroll for all screen sizes */}
+          <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2">
             {Array.from({ length: maxAreas }).map((_, i) => (
-              <Card key={i} className="animate-pulse overflow-hidden border-0 bg-white shadow-soft flex-shrink-0 w-32 md:w-auto">
+              <Card key={i} className="animate-pulse overflow-hidden border-0 bg-white shadow-soft flex-shrink-0 w-32">
                 <div className="aspect-[3/2] bg-gradient-ocean relative">
                   <div className="absolute inset-0 bg-gradient-to-br from-slate-200 to-slate-300 animate-pulse" />
                   <div className="absolute top-2 right-2 h-4 w-12 bg-white/50 rounded-full"></div>
@@ -60,7 +60,7 @@ const AreasGrid = ({ maxAreas = 12, showViewAll = true, className = "" }: AreasG
   if (error) {
     return (
       <section className={`py-8 ${className}`}>
-        <div className="container mx-auto px-4">
+        <div className="w-full px-4">
           <div className="text-center">
             <div className="bg-destructive/10 border border-destructive/20 rounded-xl p-8 max-w-md mx-auto">
               <p className="text-destructive font-medium text-lg">Failed to load areas</p>
@@ -78,7 +78,7 @@ const AreasGrid = ({ maxAreas = 12, showViewAll = true, className = "" }: AreasG
 
   return (
     <section className={`py-8 ${className}`}>
-      <div className="container mx-auto px-4">
+      <div className="w-full px-4">
         {/* Section Header */}
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-foreground">Explore by Area</h2>
@@ -94,8 +94,8 @@ const AreasGrid = ({ maxAreas = 12, showViewAll = true, className = "" }: AreasG
           )}
         </div>
 
-        {/* Areas Grid - horizontal scroll on mobile, grid on desktop */}
-        <div className="flex gap-4 overflow-x-auto pb-2 md:grid md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-12 md:overflow-x-visible">
+        {/* Areas Grid - horizontal scroll for all screen sizes */}
+        <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2">
           {topAreas.map((area) => {
             // Fallback component for when image fails to load
             const fallbackComponent = (
@@ -108,7 +108,7 @@ const AreasGrid = ({ maxAreas = 12, showViewAll = true, className = "" }: AreasG
               <Link 
                 key={area.id} 
                 to={`/${area.slug}`}
-                className="group block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-xl flex-shrink-0 w-32 md:w-auto"
+                className="group block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-xl flex-shrink-0 w-32"
                 aria-label={`Explore ${area.beach_count} beaches in ${area.name}`}
               >
                 <Card className="h-full transition-all duration-300 hover:shadow-strong overflow-hidden border-0 bg-white shadow-soft hover:shadow-medium">
