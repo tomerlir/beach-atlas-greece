@@ -168,7 +168,7 @@ const Index = () => {
 
       {/* Horizontal Line */}
       <div className="container mx-auto px-4">
-        <hr className="border-t border-border/30 my-8" />
+        <hr className="border-t border-border/30 my-2" />
       </div>
 
       {/* Geolocation Error Banner */}

@@ -30,7 +30,7 @@ const AreasGrid = ({ maxAreas = 12, showViewAll = true, className = "" }: AreasG
   if (isLoading) {
     return (
       <section className={`py-8 ${className}`}>
-        <div className="w-full px-4">
+        <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-foreground">Explore by Area</h2>
             {showViewAll && (
@@ -60,7 +60,7 @@ const AreasGrid = ({ maxAreas = 12, showViewAll = true, className = "" }: AreasG
   if (error) {
     return (
       <section className={`py-8 ${className}`}>
-        <div className="w-full px-4">
+        <div className="container mx-auto px-4">
           <div className="text-center">
             <div className="bg-destructive/10 border border-destructive/20 rounded-xl p-8 max-w-md mx-auto">
               <p className="text-destructive font-medium text-lg">Failed to load areas</p>
@@ -78,7 +78,7 @@ const AreasGrid = ({ maxAreas = 12, showViewAll = true, className = "" }: AreasG
 
   return (
     <section className={`py-8 ${className}`}>
-      <div className="w-full px-4">
+      <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-foreground">Explore by Area</h2>
