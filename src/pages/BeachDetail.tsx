@@ -303,6 +303,7 @@ const BeachDetail = () => {
       },
       {
         "@type": "TouristAttraction",
+        "@id": canonicalUrl,
         "name": beach.name,
         "description": beach.description,
         "url": canonicalUrl,

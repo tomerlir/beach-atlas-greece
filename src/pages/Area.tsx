@@ -176,6 +176,7 @@ const Area = () => {
           "position": index + 1,
           "item": {
             "@type": "TouristAttraction",
+            "@id": `https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/${areaSlug}/${beach.slug}`,
             "name": beach.name,
             "description": beach.description,
             "url": `https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/${areaSlug}/${beach.slug}`,
