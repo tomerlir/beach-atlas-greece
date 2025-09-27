@@ -165,7 +165,7 @@ export default function SearchHeader({
                 variant="outline"
                 size="sm"
                 onClick={onOpenAllFilters}
-                className="h-10 px-4 rounded-full border-2 hover:border-primary/50 transition-colors min-h-[44px] min-w-[44px]"
+                className="h-10 px-4 rounded-full border-2 hover:border-primary/50 transition-colors min-h-[44px] min-w-[44px] text-foreground"
                 aria-expanded="false"
                 aria-label="Open all filters"
               >

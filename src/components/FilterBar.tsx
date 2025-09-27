@@ -337,7 +337,7 @@ export default function FilterBar({
                 variant="outline"
                 size="sm"
                 onClick={onOpenAllFilters}
-                className="px-3 py-2 rounded-xl border h-auto"
+                className="px-3 py-2 rounded-xl border h-auto text-foreground"
                 aria-label="Open all filters"
               >
                 <Filter className="h-4 w-4 md:h-5 md:w-5 mr-2" />
