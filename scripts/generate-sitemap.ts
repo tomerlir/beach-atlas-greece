@@ -38,6 +38,18 @@ const slugify = (input: string | undefined | null): string => {
 const generateAreaSlug = (area: string): string => {
   return slugify(area);
 };
+
+// XML escaping function to handle special characters
+const escapeXml = (text: string | null | undefined): string => {
+  if (!text) return '';
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+};
+
 import { writeFileSync } from 'fs';
 import { join } from 'path';
 
@@ -131,8 +143,8 @@ function generateSitemap(beaches: Beach[], areas: Area[]): string {
       sitemap += `
     <image:image>
       <image:loc>${beach.photo_url}</image:loc>
-      <image:title>${beach.name} - Greek Beach</image:title>
-      <image:caption>${beach.description || `Beautiful beach in Greece: ${beach.name}`}</image:caption>
+      <image:title>${escapeXml(beach.name)} - Greek Beach</image:title>
+      <image:caption>${escapeXml(beach.description || `Beautiful beach in Greece: ${beach.name}`)}</image:caption>
     </image:image>`;
     }
     
