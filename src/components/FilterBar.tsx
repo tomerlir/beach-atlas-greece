@@ -116,7 +116,7 @@ export default function FilterBar({
                     size="sm"
                     onClick={() => handleNearMeToggle(!filters.nearMe)}
                     disabled={isLoadingLocation}
-                    className={`px-3 py-2 rounded-xl border h-auto shadow-lg backdrop-blur-sm flex-shrink-0 ${!filters.nearMe ? 'text-foreground' : ''}`}
+                    className={`px-3 py-2 rounded-xl border h-auto flex-shrink-0 ${!filters.nearMe ? 'text-foreground' : ''}`}
                     role="switch"
                     aria-checked={filters.nearMe}
                     aria-label={`Near me (${filters.nearMe ? 'on' : 'off'})`}
@@ -141,7 +141,7 @@ export default function FilterBar({
                 variant={filters.blueFlag ? "default" : "outline"}
                 size="sm"
                 onClick={() => handleBlueFlagToggle(!filters.blueFlag)}
-                className={`px-3 py-2 rounded-xl border h-auto shadow-lg backdrop-blur-sm flex-shrink-0 ${!filters.blueFlag ? 'text-foreground' : ''}`}
+                className={`px-3 py-2 rounded-xl border h-auto flex-shrink-0 ${!filters.blueFlag ? 'text-foreground' : ''}`}
                 role="switch"
                 aria-checked={filters.blueFlag}
                 aria-label={`Blue Flag (${filters.blueFlag ? 'on' : 'off'})`}
@@ -187,7 +187,7 @@ export default function FilterBar({
                 variant="outline"
                 size="sm"
                 onClick={onOpenAllFilters}
-                className="px-3 py-2 rounded-xl border h-auto text-foreground shadow-lg backdrop-blur-sm flex-shrink-0"
+                className="px-3 py-2 rounded-xl border h-auto text-foreground flex-shrink-0"
                 aria-label="Open all filters"
               >
                 <Filter className="h-4 w-4 md:h-5 md:w-5 mr-2" />
@@ -227,7 +227,7 @@ export default function FilterBar({
                     size="sm"
                     onClick={() => handleNearMeToggle(!filters.nearMe)}
                     disabled={isLoadingLocation}
-                    className={`px-3 py-2 rounded-xl border h-auto shadow-lg backdrop-blur-sm flex-shrink-0 ${!filters.nearMe ? 'text-foreground' : ''}`}
+                    className={`px-3 py-2 rounded-xl border h-auto flex-shrink-0 ${!filters.nearMe ? 'text-foreground' : ''}`}
                     role="switch"
                     aria-checked={filters.nearMe}
                     aria-label={`Near me (${filters.nearMe ? 'on' : 'off'})`}
@@ -252,7 +252,7 @@ export default function FilterBar({
                 variant={filters.blueFlag ? "default" : "outline"}
                 size="sm"
                 onClick={() => handleBlueFlagToggle(!filters.blueFlag)}
-                className={`px-3 py-2 rounded-xl border h-auto shadow-lg backdrop-blur-sm flex-shrink-0 ${!filters.blueFlag ? 'text-foreground' : ''}`}
+                className={`px-3 py-2 rounded-xl border h-auto flex-shrink-0 ${!filters.blueFlag ? 'text-foreground' : ''}`}
                 role="switch"
                 aria-checked={filters.blueFlag}
                 aria-label={`Blue Flag (${filters.blueFlag ? 'on' : 'off'})`}
@@ -297,7 +297,7 @@ export default function FilterBar({
                 variant="outline"
                 size="sm"
                 onClick={onOpenAllFilters}
-                className="px-3 py-2 rounded-xl border h-auto whitespace-nowrap flex-shrink-0 text-foreground shadow-lg backdrop-blur-sm flex-shrink-0"
+                className="px-3 py-2 rounded-xl border h-auto whitespace-nowrap flex-shrink-0 text-foreground flex-shrink-0"
                 aria-label="Open all filters"
               >
                 <Filter className="h-4 w-4 mr-2" />

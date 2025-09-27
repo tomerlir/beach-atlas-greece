@@ -62,12 +62,12 @@ export default function EnhancedSearchBar({
           className={`
             flex-1 pl-12 pr-4 h-14 text-lg bg-white/95 border-2 rounded-l-2xl rounded-r-none border-r-0
             transition-all duration-200 ease-in-out
-            text-gray-900 text-foreground shadow-lg backdrop-blur-sm
+            text-gray-900 text-foreground
             ${searchFocused 
-              ? 'border-primary shadow-xl shadow-primary/20' 
-              : 'border-border hover:border-primary/50 shadow-lg hover:shadow-xl'
+              ? 'border-primary shadow-lg shadow-primary/20' 
+              : 'border-border hover:border-primary/50 hover:shadow-md'
             }
-            focus:ring-0 focus:border-primary focus:shadow-xl focus:shadow-primary/20
+            focus:ring-0 focus:border-primary focus:shadow-lg focus:shadow-primary/20
             placeholder:text-muted-foreground/70
           `}
           aria-label="Search beaches by name or location"
@@ -76,7 +76,7 @@ export default function EnhancedSearchBar({
         {/* Search Button */}
         <Button
           onClick={() => {/* search logic already handled by onChange */}}
-          className="h-14 px-8 bg-accent text-accent-foreground hover:bg-accent/90 border-2 border-l-0 border-accent rounded-r-2xl rounded-l-none font-medium shadow-lg backdrop-blur-sm"
+          className="h-14 px-8 bg-accent text-accent-foreground hover:bg-accent/90 border-2 border-l-0 border-accent rounded-r-2xl rounded-l-none font-medium"
           aria-label="Search beaches"
         >
           Search
