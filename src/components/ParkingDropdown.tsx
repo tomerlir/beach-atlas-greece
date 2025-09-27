@@ -116,10 +116,12 @@ export default function ParkingDropdown({
       <PopoverTrigger asChild>
         <Button
           ref={triggerRef}
-          variant="outline"
+          variant={appliedCount > 0 ? "default" : "outline"}
           size="sm"
           onClick={handleTriggerClick}
-          className="px-3 py-2 rounded-xl border h-auto whitespace-nowrap flex-shrink-0 text-foreground"
+          className={`px-3 py-2 rounded-xl border h-auto whitespace-nowrap flex-shrink-0 ${
+            appliedCount > 0 ? '' : 'text-foreground'
+          }`}
           aria-expanded={isOpen}
           aria-haspopup="listbox"
           aria-controls="parking-listbox"
@@ -128,12 +130,7 @@ export default function ParkingDropdown({
           id="parking-trigger"
         >
           <Car className="h-4 w-4 mr-2" />
-          Parking
-          {showCountBadge && appliedCount > 0 && (
-            <Badge variant="secondary" className="ml-2 h-4 w-4 p-0 flex items-center justify-center text-xs">
-              {appliedCount}
-            </Badge>
-          )}
+          Parking{appliedCount > 0 ? ` ${appliedCount}` : ''}
           <ChevronDown className="h-4 w-4 ml-2 flex-shrink-0" />
         </Button>
       </PopoverTrigger>

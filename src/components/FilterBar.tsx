@@ -85,60 +85,7 @@ export default function FilterBar({
   }, [onFiltersChange, userLocation, onLocationRequest]);
 
 
-  // Remove individual filters
-  const handleRemoveFilter = useCallback((filterType: keyof FilterState, value?: any) => {
-    switch (filterType) {
-      case 'search':
-        onFiltersChange({ search: '', page: 1 });
-        break;
-      case 'organized':
-        onFiltersChange({ organized: [], page: 1 });
-        break;
-      case 'blueFlag':
-        onFiltersChange({ blueFlag: false, page: 1 });
-        break;
-      case 'parking':
-        if (value !== undefined) {
-          // Remove specific parking type
-          const newParking = filters.parking.filter(p => p !== value);
-          onFiltersChange({ parking: newParking, page: 1 });
-        } else {
-          // Clear all parking
-          onFiltersChange({ parking: [], page: 1 });
-        }
-        break;
-      case 'amenities':
-        const newAmenities = filters.amenities.filter(amenity => amenity !== value);
-        onFiltersChange({ amenities: newAmenities, page: 1 });
-        break;
-      case 'waveConditions':
-        if (value !== undefined) {
-          // Remove specific wave condition
-          const newWaveConditions = filters.waveConditions.filter(wc => wc !== value);
-          onFiltersChange({ waveConditions: newWaveConditions, page: 1 });
-        } else {
-          // Clear all wave conditions
-          onFiltersChange({ waveConditions: [], page: 1 });
-        }
-        break;
-    }
-  }, [onFiltersChange, filters.amenities, filters.waveConditions]);
-
-  const handleClearAllFilters = useCallback(() => {
-    onFiltersChange({
-      search: '', // Clear search term
-      organized: [],
-      blueFlag: false,
-      parking: [],
-      amenities: [],
-      waveConditions: [],
-      sort: 'name.asc', // Reset to default sort
-      page: 1,
-      nearMe: false,
-    });
-  }, [onFiltersChange]);
-
-  // Calculate active filter counts
+  // Calculate active filter counts for "All Filters" button
   const activeFiltersCount = [
     filters.blueFlag,
     filters.organized.length > 0,
@@ -146,103 +93,6 @@ export default function FilterBar({
     filters.amenities.length > 0,
     filters.waveConditions.length > 0,
   ].filter(Boolean).length;
-
-  const hasActiveFilters = filters.search ||
-    filters.organized.length > 0 ||
-    filters.blueFlag ||
-    filters.parking.length > 0 ||
-    filters.amenities.length > 0 ||
-    filters.waveConditions.length > 0;
-
-  // Get filter pills for display
-  const getFilterPills = useMemo(() => {
-    const pills = [];
-
-    // Area filter (locked when areaName is provided)
-    if (areaName) {
-      pills.push({
-        id: 'area',
-        label: areaName,
-        onRemove: null, // Cannot be removed
-        locked: true,
-      });
-    }
-
-    if (filters.search) {
-      pills.push({
-        id: 'search',
-        label: filters.search,
-        onRemove: () => handleRemoveFilter('search'),
-        locked: false,
-      });
-    }
-
-    if (filters.organized.length > 0) {
-      filters.organized.forEach(organizedType => {
-        pills.push({
-          id: `organized-${organizedType}`,
-          label: organizedType === 'organized' ? 'Organized' : 'Unorganized',
-          onRemove: () => {
-            const newOrganized = filters.organized.filter(type => type !== organizedType);
-            onFiltersChange({ organized: newOrganized, page: 1 });
-          },
-          locked: false,
-        });
-      });
-    }
-
-    if (filters.blueFlag) {
-      pills.push({
-        id: 'blueFlag',
-        label: 'Blue Flag',
-        onRemove: () => handleRemoveFilter('blueFlag'),
-        locked: false,
-      });
-    }
-
-    // Individual parking pills
-    filters.parking.forEach((parkingType) => {
-      const parkingLabels: Record<string, string> = {
-        'NONE': 'None',
-        'ROADSIDE': 'Roadside',
-        'SMALL_LOT': 'Small lot',
-        'LARGE_LOT': 'Large lot',
-      };
-      pills.push({
-        id: `parking-${parkingType}`,
-        label: parkingLabels[parkingType] || parkingType,
-        onRemove: () => handleRemoveFilter('parking', parkingType),
-        locked: false,
-      });
-    });
-
-    filters.amenities.forEach((amenity) => {
-      pills.push({
-        id: `amenity-${amenity}`,
-        label: getAmenityLabel(amenity),
-        onRemove: () => handleRemoveFilter('amenities', amenity),
-        locked: false,
-      });
-    });
-
-    // Individual wave conditions pills
-    filters.waveConditions.forEach((waveCondition) => {
-      const waveConditionLabels: Record<string, string> = {
-        'CALM': 'Calm',
-        'MODERATE': 'Moderate',
-        'WAVY': 'Wavy',
-        'SURFABLE': 'Surfable',
-      };
-      pills.push({
-        id: `wave-${waveCondition}`,
-        label: waveConditionLabels[waveCondition] || waveCondition,
-        onRemove: () => handleRemoveFilter('waveConditions', waveCondition),
-        locked: false,
-      });
-    });
-
-    return pills;
-  }, [filters, handleRemoveFilter, areaName, onFiltersChange]);
 
 
 
@@ -471,52 +321,6 @@ export default function FilterBar({
         </div>
       </div>
 
-      {/* Filter Pills */}
-      {getFilterPills.length > 0 && (
-        <div className="container mx-auto px-4 pb-4">
-          <div className="flex flex-wrap items-center gap-2">
-            {getFilterPills.map((pill) => (
-              <Badge
-                key={pill.id}
-                variant="outline"
-                className={`flex items-center gap-2 px-3 py-1 ${pill.locked
-                  ? 'bg-white/90 text-foreground border-border'
-                  : 'bg-white/90 text-foreground border-border'
-                  }`}
-              >
-                <span>{pill.label}</span>
-
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={pill.locked ? undefined : pill.onRemove}
-                  disabled={pill.locked}
-                  className={`h-8 w-8 p-0 rounded-full flex items-center justify-center ${
-                    pill.locked 
-                      ? 'opacity-50 cursor-not-allowed' 
-                      : 'hover:bg-primary/20'
-                  }`}
-                  aria-label={pill.locked ? `${pill.label} (locked)` : `Remove filter: ${pill.label}`}
-                >
-                  <X className="h-3 w-3" />
-                </Button>
-
-              </Badge>
-            ))}
-
-            {hasActiveFilters && (
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={handleClearAllFilters}
-                className="text-muted-foreground hover:text-foreground min-h-[44px] px-2"
-              >
-                Clear all
-              </Button>
-            )}
-          </div>
-        </div>
-      )}
 
       {/* Screen reader announcements */}
       <div aria-live="polite" aria-atomic="true" className="sr-only">
