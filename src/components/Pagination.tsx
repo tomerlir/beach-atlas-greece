@@ -1,5 +1,6 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface PaginationProps {
   currentPage: number;
@@ -9,10 +10,11 @@ interface PaginationProps {
 
 const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) => {
   if (totalPages <= 1) return null;
+  const isMobile = useIsMobile();
 
   const getPageNumbers = () => {
     const pages = [];
-    const showPages = 5; // Show 5 page numbers at most
+    const showPages = isMobile ? 3 : 5; // Show 3 pages on mobile, 5 on desktop
     
     let startPage = Math.max(1, currentPage - Math.floor(showPages / 2));
     let endPage = Math.min(totalPages, startPage + showPages - 1);
@@ -32,17 +34,18 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
   const pageNumbers = getPageNumbers();
 
   return (
-    <div className="flex items-center justify-center gap-2 mt-8">
+    <div className="flex items-center justify-center gap-1 sm:gap-2 mt-8 px-2">
       {/* Previous Button */}
       <Button
         variant="outline"
         size="sm"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="flex items-center gap-1"
+        className="flex items-center gap-1 text-xs sm:text-sm"
       >
-        <ChevronLeft className="h-4 w-4" />
-        Previous
+        <ChevronLeft className="h-3 w-3 sm:h-4 sm:w-4" />
+        <span className="hidden sm:inline">Previous</span>
+        <span className="sm:hidden">Prev</span>
       </Button>
 
       {/* Page Numbers */}
@@ -54,12 +57,12 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
               variant={1 === currentPage ? "default" : "outline"}
               size="sm"
               onClick={() => onPageChange(1)}
-              className="w-10"
+              className="w-8 sm:w-10 text-xs sm:text-sm"
             >
               1
             </Button>
             {pageNumbers[0] > 2 && (
-              <span className="px-2 text-muted-foreground">...</span>
+              <span className="px-1 sm:px-2 text-muted-foreground text-xs sm:text-sm">...</span>
             )}
           </>
         )}
@@ -71,7 +74,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
             variant={page === currentPage ? "default" : "outline"}
             size="sm"
             onClick={() => onPageChange(page)}
-            className="w-10"
+            className="w-8 sm:w-10 text-xs sm:text-sm"
           >
             {page}
           </Button>
@@ -81,13 +84,13 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
         {pageNumbers[pageNumbers.length - 1] < totalPages && (
           <>
             {pageNumbers[pageNumbers.length - 1] < totalPages - 1 && (
-              <span className="px-2 text-muted-foreground">...</span>
+              <span className="px-1 sm:px-2 text-muted-foreground text-xs sm:text-sm">...</span>
             )}
             <Button
               variant={totalPages === currentPage ? "default" : "outline"}
               size="sm"
               onClick={() => onPageChange(totalPages)}
-              className="w-10"
+              className="w-8 sm:w-10 text-xs sm:text-sm"
             >
               {totalPages}
             </Button>
@@ -101,10 +104,11 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
         size="sm"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="flex items-center gap-1"
+        className="flex items-center gap-1 text-xs sm:text-sm"
       >
-        Next
-        <ChevronRight className="h-4 w-4" />
+        <span className="hidden sm:inline">Next</span>
+        <span className="sm:hidden">Next</span>
+        <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
       </Button>
     </div>
   );

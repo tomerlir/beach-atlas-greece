@@ -120,7 +120,7 @@ export default function WaveConditionsDropdown({
           size="sm"
           onClick={handleTriggerClick}
             className={`px-3 py-2 rounded-xl border h-auto whitespace-nowrap flex-shrink-0 ${
-              appliedCount > 0 ? '' : 'text-foreground'
+              appliedCount > 0 ? '' : 'text-foreground bg-muted/65'
             }`}
           aria-expanded={isOpen}
           aria-haspopup="listbox"
@@ -129,10 +129,15 @@ export default function WaveConditionsDropdown({
           data-testid="wave-conditions-trigger"
           id="wave-conditions-trigger"
         >
-          <Waves className="h-4 w-4 mr-2" />
-          <span className="hidden sm:inline">Wave conditions{appliedCount > 0 ? ` ${appliedCount}` : ''}</span>
-          <span className="sm:hidden">Waves{appliedCount > 0 ? ` ${appliedCount}` : ''}</span>
-          <ChevronDown className="h-4 w-4 ml-2 flex-shrink-0" />
+            <Waves className="h-4 w-4 mr-2" />
+            <span className="hidden sm:inline">Wave conditions</span>
+            <span className="sm:hidden">Waves</span>
+            <div className="ml-1 h-4 w-1 flex items-center justify-center">
+              {appliedCount > 0 && (
+                <span className="text-xs">{appliedCount}</span>
+              )}
+            </div>
+            <ChevronDown className="h-4 w-4 ml-2 flex-shrink-0" />
         </Button>
       </PopoverTrigger>
       <PopoverContent

@@ -25,6 +25,7 @@ import type { Area } from "@/types/area";
 import heroImage from "@/assets/hero-beach.jpg";
 import EmptyState from "@/components/EmptyState";
 import NotFound from "@/pages/NotFound";
+import PhotoAttribution from "@/components/PhotoAttribution";
 
 const BEACHES_PER_PAGE = 9;
 
@@ -227,23 +228,26 @@ const Area = () => {
         <Header />
         
         {/* Hero Section */}
-        <section className="relative h-[70vh] flex items-center justify-center bg-gradient-ocean overflow-hidden">
+        <section className="relative h-[35vh] flex items-center justify-center bg-gradient-ocean overflow-hidden">
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: `url(${area?.hero_photo_url || heroImage})` }}
           />
           <div className="absolute inset-0 bg-black/30" />
           
+          {/* Photo Attribution for hero image */}
+          {area?.hero_photo_source && (
+            <PhotoAttribution 
+              photoSource={area.hero_photo_source}
+              className="absolute bottom-4 right-4 z-20"
+              compact={false}
+            />
+          )}
+          
           <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg">
-              {areaName ? `Beaches in ${areaName}` : "Area Not Found"}
+            <h1 className="text-4xl md:text-6xl font-bold mb-8 drop-shadow-lg">
+              {areaName ? `Find Your Perfect Beach in ${areaName}` : "Area Not Found"}
             </h1>
-            <p className="text-lg md:text-xl max-w-2xl mx-auto opacity-90 mb-8 drop-shadow-md">
-              {areaName 
-                ? (area?.description || `Discover stunning beaches in ${areaName}, Greece. From organized resorts to hidden gems waiting to be explored.`)
-                : 'The requested area could not be found. Please check the URL or return to the main directory.'
-              }
-            </p>
             
             {/* Hero Search Bar - only show if area exists */}
             {areaName && (
@@ -254,6 +258,7 @@ const Area = () => {
                   userLocation={location}
                   hasResults={filteredBeaches.length > 0}
                   className="w-full"
+                  placeholder={`Search beaches in ${areaName}...`}
                 />
               </div>
             )}
@@ -275,18 +280,22 @@ const Area = () => {
         {/* Filter Bar - only show if area exists */}
         {areaName && (
           <>
-            <FilterBar
-              filters={filters}
-              onFiltersChange={updateFilters}
-              userLocation={location}
-              onLocationRequest={getCurrentLocation}
-              isLoadingLocation={isLoadingLocation}
-              onOpenAllFilters={() => setIsAllFiltersOpen(true)}
-              locationPermission={locationPermission}
-              resultCount={filteredBeaches.length}
-              showCountBadge={false}
-              areaName={areaName}
-            />
+            <div className="bg-background border-border/20 py-2">
+              <div className="container mx-auto px-4">
+                <FilterBar
+                  filters={filters}
+                  onFiltersChange={updateFilters}
+                  userLocation={location}
+                  onLocationRequest={getCurrentLocation}
+                  isLoadingLocation={isLoadingLocation}
+                  onOpenAllFilters={() => setIsAllFiltersOpen(true)}
+                  locationPermission={locationPermission}
+                  resultCount={filteredBeaches.length}
+                  showCountBadge={false}
+                  areaName={areaName}
+                />
+              </div>
+            </div>
 
             {/* Geolocation Error Banner */}
             {showGeolocationError && (
@@ -301,7 +310,24 @@ const Area = () => {
           </>
         )}
 
-        <main className="container mx-auto px-4 py-8 pb-20 md:pb-8">
+        {/* Results Header - only show if area exists */}
+        {areaName && (
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-between">
+              {filters.search || filters.organized.length > 0 || filters.blueFlag || filters.parking.length > 0 || filters.waveConditions.length > 0 || filters.amenities.length > 0 || filters.nearMe ? (
+                <h2 className="text-sm text-muted-foreground">
+                  {filteredBeaches.length} beaches found
+                </h2>
+              ) : (
+                <h2 className="text-sm text-muted-foreground">
+                  Popular beaches in {areaName}
+                </h2>
+              )}
+            </div>
+          </div>
+        )}
+
+        <main className="container mx-auto px-4 py-4 pb-20 md:pb-8">
           {/* Screen reader announcements */}
           <div aria-live="polite" aria-atomic="true" className="sr-only">
             {!isLoading && !error && areaName && `${filteredBeaches.length} beaches found in ${areaName}`}

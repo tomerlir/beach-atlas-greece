@@ -1,4 +1,4 @@
-import { useParams, Link, useLocation } from "react-router-dom";
+import { useParams, Link, useLocation, useNavigate } from "react-router-dom";
 import { generateAreaSlug } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
@@ -62,6 +62,7 @@ const parkingLabels: Record<string, string> = {
 const BeachDetail = () => {
   const { area, "beach-name": beachName } = useParams<{ area: string; "beach-name": string }>();
   const location = useLocation();
+  const navigate = useNavigate();
   const { toast } = useToast();
   const isMobile = useIsMobile();
   const { isPreloaded, getPreloadResult } = useImagePreloader();
@@ -172,6 +173,29 @@ const BeachDetail = () => {
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }, [beach]);
 
+  // Handle back navigation - go to previous page if available, otherwise fallback to area or home
+  const handleBackNavigation = useCallback(() => {
+    // Check if there's a previous page in history (not the current page)
+    if (window.history.length > 1) {
+      // Check if we came from within the app by looking at the referrer
+      const referrer = document.referrer;
+      const currentOrigin = window.location.origin;
+      
+      // If referrer is from the same origin, we can safely go back
+      if (referrer && referrer.startsWith(currentOrigin)) {
+        navigate(-1);
+        return;
+      }
+    }
+    
+    // Fallback: go to area page if available, otherwise home
+    if (area) {
+      navigate(`/${generateAreaSlug(area)}`);
+    } else {
+      navigate('/');
+    }
+  }, [navigate, area]);
+
   // Group amenities by category
   const amenitiesByCategory = useMemo(() => {
     if (!beach?.amenities) return {};
@@ -228,11 +252,9 @@ const BeachDetail = () => {
               <p className="text-muted-foreground mb-8">
                 The beach you're looking for doesn't exist or isn't currently available.
               </p>
-              <Button asChild>
-                <Link to={area ? `/${generateAreaSlug(area)}` : "/"}>
-                  <ArrowLeft className="h-4 w-4 mr-2" />
-                  Back to Directory
-                </Link>
+              <Button onClick={handleBackNavigation}>
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back to Directory
               </Button>
             </div>
           </div>
@@ -252,11 +274,9 @@ const BeachDetail = () => {
       
       <main className="max-w-4xl md:max-w-5xl mx-auto px-4 py-8">
         {/* Back to results link */}
-        <Button variant="ghost" asChild className="mb-6">
-          <Link to={area ? `/${generateAreaSlug(area)}` : "/"} state={{ preserveSearch: true }}>
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to results
-          </Link>
+        <Button variant="ghost" onClick={handleBackNavigation} className="mb-6">
+          <ArrowLeft className="h-4 w-4 mr-2" />
+          Back to results
         </Button>
 
         {/* Image Card - Always render to prevent layout shift */}

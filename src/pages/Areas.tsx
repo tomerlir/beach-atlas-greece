@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { MapPin, Waves } from "lucide-react";
+import { Waves } from "lucide-react";
 import { useAreasWithBeachCount } from "@/hooks/useAreas";
 import Header from "@/components/Header";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import OptimizedImage from "@/components/OptimizedImage";
 import PhotoAttribution from "@/components/PhotoAttribution";
 import { CONTACT_EMAIL } from "@/lib/constants";
-import heroImage from "@/assets/hero-beach.jpg";
+import heroImage from "@/assets/area-hero.png";
 
 const Areas = () => {
   const { data: areas = [], isLoading, error } = useAreasWithBeachCount();
@@ -89,7 +89,7 @@ const Areas = () => {
         <Header />
         
         {/* Hero Section */}
-        <section className="relative h-[50vh] flex items-center justify-center bg-gradient-ocean overflow-hidden">
+        <section className="relative h-[35vh] flex items-center justify-center bg-gradient-ocean overflow-hidden">
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: `url(${heroImage})` }}
@@ -97,13 +97,9 @@ const Areas = () => {
           <div className="absolute inset-0 bg-black/30" />
           
           <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">
+            <h1 className="text-4xl md:text-6xl font-bold mb-8 drop-shadow-lg">
               Explore Greek Beach Areas
             </h1>
-            <p className="text-lg md:text-xl max-w-2xl mx-auto opacity-90 mb-8">
-              Discover beaches organized by region across Greece. 
-              From the famous islands to hidden mainland gems.
-            </p>
           </div>
         </section>
 
@@ -193,32 +189,28 @@ const Areas = () => {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
                             
                             {/* Beach Count Badge */}
-                            <div className="absolute top-3 right-3">
+                            <div className="absolute bottom-3 left-3">
                               <Badge variant="outline" className="bg-white/95 text-foreground border-white/50 shadow-sm backdrop-blur-sm">
-                                <MapPin className="h-3 w-3 mr-1" />
-                                {area.beach_count} {area.beach_count === 1 ? 'beach' : 'beaches'}
+                                {area.beach_count} beaches
                               </Badge>
                             </div>
 
-                            {/* Area Name Overlay */}
-                            <div className="absolute bottom-3 left-3 right-3">
-                              <h3 className="text-white font-bold text-lg drop-shadow-lg">
-                                {area.name}
-                              </h3>
-                            </div>
+
+                            {/* Photo Attribution - compact mode for area cards */}
+                            <PhotoAttribution 
+                              photoSource={area.hero_photo_source}
+                              className="z-10"
+                              compact={true}
+                            />
                           </div>
 
                           <CardContent className="p-4">
+                            <h3 className="text-foreground font-bold text-lg mb-2">
+                              {area.name}
+                            </h3>
                             <p className="text-muted-foreground text-sm leading-relaxed">
                               {area.description || `Discover the beautiful beaches of ${area.name}, Greece. From organized resorts to hidden gems waiting to be explored.`}
                             </p>
-                            
-                            {/* Photo Attribution */}
-                            {area.hero_photo_source && (
-                              <div className="mt-3 pt-3 border-t border-border/50">
-                                <PhotoAttribution photoSource={area.hero_photo_source} />
-                              </div>
-                            )}
                           </CardContent>
                         </Card>
                       </Link>

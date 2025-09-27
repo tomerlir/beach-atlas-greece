@@ -102,7 +102,7 @@ export default function SortDropdown({
         <Button
           variant="outline"
           size="sm"
-          className="px-3 py-2 rounded-xl border h-auto min-w-[140px] justify-between text-foreground"
+          className="px-3 py-2 rounded-xl border h-auto min-w-[140px] justify-between text-foreground bg-muted/65"
           aria-expanded={isOpen}
           aria-label="Sort by"
         >

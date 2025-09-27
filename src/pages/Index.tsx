@@ -20,6 +20,7 @@ import { useImagePreloader } from "@/hooks/useImagePreloader";
 import { Beach } from "@/types/beach";
 import heroImage from "@/assets/hero-background.png";
 import EmptyState from "@/components/EmptyState";
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const BEACHES_PER_PAGE = 9;
 
@@ -29,6 +30,7 @@ const Index = () => {
   const [isAllFiltersOpen, setIsAllFiltersOpen] = useState(false);
   const [showGeolocationError, setShowGeolocationError] = useState(false);
   const { preloadVisibleBeachImages } = useImagePreloader();
+  const isMobile = useIsMobile();
 
   // Fetch beaches from Supabase
   const { data: beaches = [], isLoading, error } = useQuery({
@@ -126,7 +128,7 @@ const Index = () => {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ 
             backgroundImage: `url(${heroImage})`,
-            backgroundPosition: 'center top'
+            backgroundPosition: isMobile ? 'center left' : 'center top'
           }}
         />
         
@@ -149,7 +151,7 @@ const Index = () => {
       </section>
 
       {/* Filter Bar outside Hero */}
-      <div className="bg-background border-b border-border/20 py-4">
+      <div className="bg-background border-border/20 py-2">
         <div className="container mx-auto px-4">
           <FilterBar
             filters={filters}
@@ -166,14 +168,14 @@ const Index = () => {
       </div>
 
       {/* Popular Beaches / Results Header */}
-      <div className="container mx-auto px-4 py-6">
-        <div className="flex items-center justify-between mb-6">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between">
           {filters.search || filters.organized.length > 0 || filters.blueFlag || filters.parking.length > 0 || filters.waveConditions.length > 0 || filters.amenities.length > 0 || filters.nearMe ? (
-            <h2 className="text-2xl font-bold text-foreground">
+            <h2 className="text-sm text-muted-foreground">
               {filteredBeaches.length} beaches found
             </h2>
           ) : (
-            <h2 className="text-2xl font-bold text-foreground">
+            <h2 className="text-sm text-muted-foreground">
               Popular beaches
             </h2>
           )}
@@ -191,7 +193,7 @@ const Index = () => {
         </div>
       )}
 
-      <main className="container mx-auto px-4 py-8 pb-20 md:pb-8">
+      <main className="container mx-auto px-4 py-4 pb-20 md:pb-8">
         {/* Screen reader announcements */}
         <div aria-live="polite" aria-atomic="true" className="sr-only">
           {!isLoading && !error && `${filteredBeaches.length} beaches found`}

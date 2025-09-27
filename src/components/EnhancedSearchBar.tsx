@@ -3,6 +3,7 @@ import { Search, X } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useDebouncedSearch } from '@/hooks/useDebouncedSearch';
+import { useIsMobile } from '@/hooks/use-mobile';
 import { FilterState } from '@/hooks/useUrlState';
 
 interface EnhancedSearchBarProps {
@@ -11,6 +12,7 @@ interface EnhancedSearchBarProps {
   userLocation: GeolocationPosition | null;
   hasResults: boolean;
   className?: string;
+  placeholder?: string;
 }
 
 export default function EnhancedSearchBar({
@@ -19,9 +21,11 @@ export default function EnhancedSearchBar({
   userLocation,
   hasResults,
   className = '',
+  placeholder = "Search beaches, islands, or places in Greece...",
 }: EnhancedSearchBarProps) {
   const [searchFocused, setSearchFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const isMobile = useIsMobile();
   
   // Debounced search with 200ms delay for better responsiveness
   const { searchInput, setSearchInput, clearSearchInput } = useDebouncedSearch(
@@ -44,6 +48,20 @@ export default function EnhancedSearchBar({
 
   const showClearButton = searchInput.length > 0;
 
+  // Create responsive placeholder text
+  const getResponsivePlaceholder = () => {
+    if (isMobile) {
+      // Short placeholder for mobile
+      if (placeholder.includes('Search beaches in')) {
+        return 'Search beaches...';
+      }
+      return 'Search beaches...';
+    }
+    return placeholder;
+  };
+
+  const responsivePlaceholder = getResponsivePlaceholder();
+
   return (
     <div className={`relative w-full ${className}`}>
       <div className="relative group flex">
@@ -51,27 +69,42 @@ export default function EnhancedSearchBar({
         <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5 transition-colors group-focus-within:text-primary z-10" />
         
         {/* Main Search Input */}
-        <Input
-          ref={inputRef}
-          placeholder="Search beaches, islands, or places in Greece..."
-          value={searchInput}
-          onChange={(e) => handleSearchChange(e.target.value)}
-          onFocus={() => setSearchFocused(true)}
-          onBlur={() => setSearchFocused(false)}
-          style={{ color: '#1f2937' }}
-          className={`
-            flex-1 pl-12 pr-4 h-14 text-lg bg-white/95 border-2 rounded-l-2xl rounded-r-none border-r-0
-            transition-all duration-200 ease-in-out
-            text-gray-900 text-foreground
-            ${searchFocused 
-              ? 'border-primary shadow-lg shadow-primary/20' 
-              : 'border-border hover:border-primary/50 hover:shadow-md'
-            }
-            focus:ring-0 focus:border-primary focus:shadow-lg focus:shadow-primary/20
-            placeholder:text-muted-foreground/70
-          `}
-          aria-label="Search beaches by name or location"
-        />
+        <div className="relative flex-1">
+          <Input
+            ref={inputRef}
+            placeholder={responsivePlaceholder}
+            value={searchInput}
+            onChange={(e) => handleSearchChange(e.target.value)}
+            onFocus={() => setSearchFocused(true)}
+            onBlur={() => setSearchFocused(false)}
+            style={{ color: '#4b5563' }}
+            className={`
+              w-full pl-12 pr-4 h-14 text-lg bg-white/95 border-2 rounded-l-2xl rounded-r-none border-r-0
+              transition-all duration-200 ease-in-out
+              text-gray-600
+              ${searchFocused 
+                ? 'border-primary shadow-lg shadow-primary/20' 
+                : 'border-border hover:border-primary/50 hover:shadow-md'
+              }
+              focus:ring-0 focus:border-primary focus:shadow-lg focus:shadow-primary/20
+              placeholder:text-muted-foreground/70
+            `}
+            aria-label="Search beaches by name or location"
+          />
+          
+          {/* Clear Button - positioned within input field */}
+          {showClearButton && (
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleClearSearch}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0 hover:bg-gray-100 rounded-full z-10 text-gray-500 hover:text-gray-700"
+              aria-label="Clear search"
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          )}
+        </div>
 
         {/* Search Button */}
         <Button
@@ -81,19 +114,6 @@ export default function EnhancedSearchBar({
         >
           Search
         </Button>
-
-        {/* Clear Button */}
-        {showClearButton && (
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={handleClearSearch}
-            className="absolute right-20 top-1/2 transform -translate-y-1/2 h-8 w-8 p-0 hover:bg-muted rounded-full z-10"
-            aria-label="Clear search"
-          >
-            <X className="h-4 w-4" />
-          </Button>
-        )}
 
       </div>
 

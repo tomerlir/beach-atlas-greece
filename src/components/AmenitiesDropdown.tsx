@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useDraftState } from '@/hooks/useDraftState';
-import { useIsMobile } from '@/hooks/use-mobile';
 import { FilterState } from '@/hooks/useUrlState';
 import { getAllAmenities } from '@/lib/amenities';
 
@@ -24,7 +23,6 @@ export default function AmenitiesDropdown({
   onOpenAllFilters,
   showCountBadge = false,
 }: AmenitiesDropdownProps) {
-  const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
@@ -118,7 +116,7 @@ export default function AmenitiesDropdown({
           size="sm"
           onClick={handleTriggerClick}
             className={`px-3 py-2 rounded-xl border h-auto whitespace-nowrap flex-shrink-0 ${
-              appliedCount > 0 ? '' : 'text-foreground'
+              appliedCount > 0 ? '' : 'text-foreground bg-muted/65'
             }`}
           aria-expanded={isOpen}
           aria-haspopup="listbox"
@@ -127,9 +125,14 @@ export default function AmenitiesDropdown({
           data-testid="amenities-trigger"
           id="amenities-trigger"
         >
-          <Sun className="h-4 w-4 mr-2" />
-          Amenities{appliedCount > 0 ? ` ${appliedCount}` : ''}
-          <ChevronDown className="h-4 w-4 ml-2 flex-shrink-0" />
+            <Sun className="h-4 w-4 mr-2" />
+            Amenities
+            <div className="ml-1 h-4 w-1 flex items-center justify-center">
+              {appliedCount > 0 && (
+                <span className="text-xs">{appliedCount}</span>
+              )}
+            </div>
+            <ChevronDown className="h-4 w-4 ml-2 flex-shrink-0" />
         </Button>
       </PopoverTrigger>
       <PopoverContent

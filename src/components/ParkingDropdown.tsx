@@ -120,7 +120,7 @@ export default function ParkingDropdown({
           size="sm"
           onClick={handleTriggerClick}
             className={`px-3 py-2 rounded-xl border h-auto whitespace-nowrap flex-shrink-0 ${
-              appliedCount > 0 ? '' : 'text-foreground'
+              appliedCount > 0 ? '' : 'text-foreground bg-muted/65'
             }`}
           aria-expanded={isOpen}
           aria-haspopup="listbox"
@@ -129,9 +129,14 @@ export default function ParkingDropdown({
           data-testid="parking-trigger"
           id="parking-trigger"
         >
-          <Car className="h-4 w-4 mr-2" />
-          Parking{appliedCount > 0 ? ` ${appliedCount}` : ''}
-          <ChevronDown className="h-4 w-4 ml-2 flex-shrink-0" />
+            <Car className="h-4 w-4 mr-2" />
+            Parking
+            <div className="ml-1 h-4 w-1 flex items-center justify-center">
+              {appliedCount > 0 && (
+                <span className="text-xs">{appliedCount}</span>
+              )}
+            </div>
+            <ChevronDown className="h-4 w-4 ml-2 flex-shrink-0" />
         </Button>
       </PopoverTrigger>
       <PopoverContent

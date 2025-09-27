@@ -142,19 +142,26 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
           
           {/* Badges Overlay */}
-          <div className="absolute top-3 left-3 flex gap-2">
+          <div className="absolute bottom-2 left-2 sm:bottom-3 sm:left-3 flex gap-1 sm:gap-2 flex-wrap max-w-[calc(100%-4rem)] sm:max-w-none">
             {beach.organized && (
               <Badge variant="secondary" className="bg-white/95 text-foreground shadow-sm backdrop-blur-sm">
                 <CheckCircle className="h-3 w-3 mr-1 text-green-600" />
-                Organized
+                <span className="hidden sm:inline">Organized</span>
+                <span className="sm:hidden">Org</span>
               </Badge>
             )}
             {beach.blue_flag && (
               <Badge className="bg-primary/95 text-primary-foreground shadow-sm backdrop-blur-sm">
                 <Flag className="h-3 w-3 mr-1" />
-                Blue Flag
+                <span className="hidden sm:inline">Blue Flag</span>
+                <span className="sm:hidden">Flag</span>
               </Badge>
             )}
+            <Badge variant="outline" className="bg-white/95 text-foreground border-white/50 shadow-sm backdrop-blur-sm">
+              <Car className={`h-3 w-3 mr-1 ${parkingInfo.color}`} />
+              <span className="hidden sm:inline">{parkingInfo.label}</span>
+              <span className="sm:hidden">{parkingInfo.label.split(' ')[0]}</span>
+            </Badge>
           </div>
 
           {/* Distance Badge */}
@@ -170,7 +177,7 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
           {/* Photo Attribution - compact mode for homepage cards */}
           <PhotoAttribution 
             photoSource={beach.photo_source}
-            className="z-10"
+            className="z-10 absolute bottom-1 right-1"
             compact={true}
           />
         </div>
@@ -194,11 +201,6 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
             </p>
           )}
 
-          {/* Parking Info with Icon */}
-          <div className="flex items-center text-sm mb-4 p-2 bg-muted/50 rounded-lg">
-            <parkingInfo.icon className={`h-4 w-4 mr-2 ${parkingInfo.color}`} />
-            <span className="font-medium text-foreground">{parkingInfo.label}</span>
-          </div>
 
           {/* Amenities with Icons */}
           {beach.amenities.length > 0 && (
