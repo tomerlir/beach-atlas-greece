@@ -235,10 +235,10 @@ const Area = () => {
           <div className="absolute inset-0 bg-black/30" />
           
           <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">
-              {areaName ? `Beaches in ${areaName}` : 'Area Not Found'}
+            <h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-lg">
+              {areaName ? `Beaches in ${areaName}` : "Area Not Found"}
             </h1>
-            <p className="text-lg md:text-xl max-w-2xl mx-auto opacity-90 mb-8">
+            <p className="text-lg md:text-xl max-w-2xl mx-auto opacity-90 mb-8 drop-shadow-md">
               {areaName 
                 ? (area?.description || `Discover stunning beaches in ${areaName}, Greece. From organized resorts to hidden gems waiting to be explored.`)
                 : 'The requested area could not be found. Please check the URL or return to the main directory.'

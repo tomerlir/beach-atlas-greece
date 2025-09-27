@@ -128,7 +128,7 @@ const Index = () => {
         />
         
         <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto w-full">
-          <h1 className="text-4xl md:text-6xl font-bold mb-8">
+          <h1 className="text-4xl md:text-6xl font-bold mb-8 drop-shadow-lg">
             Find Your Perfect Greek Beach
           </h1>
           
