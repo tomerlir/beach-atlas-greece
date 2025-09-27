@@ -42,7 +42,7 @@ import { writeFileSync } from 'fs';
 import { join } from 'path';
 
 // Configuration
-const SITE_URL = 'https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc';
+const SITE_URL = 'https://beachesofgreece.com';
 const SUPABASE_URL = process.env.VITE_SUPABASE_URL || "https://xnkyfxvncpawqpqccdby.supabase.co";
 const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_PUBLISHABLE_KEY || "sb_publishable_epB4aWmCm1xwnJgnnwvVZQ_8umvX3v2";
 

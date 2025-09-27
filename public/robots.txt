@@ -1,5 +1,5 @@
 # Robots.txt for Greek Beaches Directory
-# https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc
+# https://beachesofgreece.com
 
 # Allow all search engines to crawl the public content
 User-agent: *
@@ -76,7 +76,7 @@ User-agent: DotBot
 Disallow: /
 
 # Sitemap location
-Sitemap: https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/sitemap.xml
+Sitemap: https://beachesofgreece.com/sitemap.xml
 
 # Host declaration (helps with canonical URLs)
-Host: https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc
+Host: https://beachesofgreece.com
