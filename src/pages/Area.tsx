@@ -148,59 +148,61 @@ const Area = () => {
   // Generate JSON-LD structured data
   const jsonLd = areaName ? {
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc"
+    "@type": "WebPage",
+    "name": `Beaches in ${areaName}, Greece | Beach Atlas`,
+    "description": area?.description || `Discover the best beaches in ${areaName}, Greece. Find organized and unorganized beaches with detailed information about amenities, parking, and conditions.`,
+    "url": canonicalUrl,
+    "mainEntity": {
+      "@type": "ItemList",
+      "name": `Beaches in ${areaName}`,
+      "description": area?.description || `A curated list of beaches in ${areaName}, Greece`,
+      "numberOfItems": filteredBeaches.length,
+      "itemListElement": paginatedBeaches.slice(0, 10).map((beach, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "item": {
+          "@type": "TouristAttraction",
+          "@id": `https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/${areaSlug}/${beach.slug}`,
+          "name": beach.name,
+          "description": beach.description,
+          "url": `https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/${areaSlug}/${beach.slug}`,
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": areaName,
+            "addressCountry": "Greece"
           },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": areaName,
-            "item": `https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/${areaSlug}`
-          }
-        ]
-      },
-      {
-        "@type": "ItemList",
-        "name": `Beaches in ${areaName}`,
-        "description": area?.description || `A curated list of beaches in ${areaName}, Greece`,
-        "numberOfItems": filteredBeaches.length,
-        "itemListElement": paginatedBeaches.slice(0, 10).map((beach, index) => ({
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": beach.latitude,
+            "longitude": beach.longitude
+          },
+          "isAccessibleForFree": true,
+          "image": beach.photo_url ? [beach.photo_url] : undefined,
+          "amenityFeature": beach.amenities?.map(amenity => ({
+            "@type": "LocationFeatureSpecification",
+            "name": amenity,
+            "value": true
+          })) || []
+        }
+      }))
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
           "@type": "ListItem",
-          "position": index + 1,
-          "item": {
-            "@type": "TouristAttraction",
-            "@id": `https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/${areaSlug}/${beach.slug}`,
-            "name": beach.name,
-            "description": beach.description,
-            "url": `https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/${areaSlug}/${beach.slug}`,
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": areaName,
-              "addressCountry": "Greece"
-            },
-            "geo": {
-              "@type": "GeoCoordinates",
-              "latitude": beach.latitude,
-              "longitude": beach.longitude
-            },
-            "isAccessibleForFree": true,
-            "image": beach.photo_url ? [beach.photo_url] : undefined,
-            "amenityFeature": beach.amenities?.map(amenity => ({
-              "@type": "LocationFeatureSpecification",
-              "name": amenity,
-              "value": true
-            })) || []
-          }
-        }))
-      }
-    ]
+          "position": 1,
+          "name": "Home",
+          "item": "https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": areaName,
+          "item": `https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/${areaSlug}`
+        }
+      ]
+    }
   } : null;
 
   return (

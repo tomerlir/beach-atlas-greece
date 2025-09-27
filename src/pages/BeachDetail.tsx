@@ -277,82 +277,84 @@ const BeachDetail = () => {
   // Generate JSON-LD structured data
   const jsonLd = {
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": beach.area,
-            "item": `https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/${generateAreaSlug(beach.area)}`
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": beach.name,
-            "item": canonicalUrl
-          }
-        ]
+    "@type": "WebPage",
+    "name": `${beach.name} - ${beach.area} | Beach Atlas`,
+    "description": beach.description || `Discover ${beach.name} in ${beach.area}, Greece`,
+    "url": canonicalUrl,
+    "mainEntity": {
+      "@type": "TouristAttraction",
+      "@id": canonicalUrl,
+      "name": beach.name,
+      "description": beach.description,
+      "url": canonicalUrl,
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": beach.area,
+        "addressCountry": "Greece"
       },
-      {
-        "@type": "TouristAttraction",
-        "@id": canonicalUrl,
-        "name": beach.name,
-        "description": beach.description,
-        "url": canonicalUrl,
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": beach.area,
-          "addressCountry": "Greece"
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": beach.latitude,
+        "longitude": beach.longitude
+      },
+      "isAccessibleForFree": true,
+      "image": beach.photo_url ? [beach.photo_url] : undefined,
+      "amenityFeature": beach.amenities?.map(amenity => ({
+        "@type": "LocationFeatureSpecification",
+        "name": amenity,
+        "value": true
+      })) || [],
+      "additionalProperty": [
+        {
+          "@type": "PropertyValue",
+          "name": "Beach Type",
+          "value": beach.type
         },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": beach.latitude,
-          "longitude": beach.longitude
+        {
+          "@type": "PropertyValue", 
+          "name": "Wave Conditions",
+          "value": beach.wave_conditions
         },
-        "isAccessibleForFree": true,
-        "image": beach.photo_url ? [beach.photo_url] : undefined,
-        "amenityFeature": beach.amenities?.map(amenity => ({
-          "@type": "LocationFeatureSpecification",
-          "name": amenity,
-          "value": true
-        })) || [],
-        "additionalProperty": [
-          {
-            "@type": "PropertyValue",
-            "name": "Beach Type",
-            "value": beach.type
-          },
-          {
-            "@type": "PropertyValue", 
-            "name": "Wave Conditions",
-            "value": beach.wave_conditions
-          },
-          {
-            "@type": "PropertyValue",
-            "name": "Organization",
-            "value": beach.organized ? "Organized" : "Unorganized"
-          },
-          {
-            "@type": "PropertyValue",
-            "name": "Parking",
-            "value": beach.parking
-          },
-          ...(beach.blue_flag ? [{
-            "@type": "PropertyValue",
-            "name": "Blue Flag Certified",
-            "value": "Yes"
-          }] : [])
-        ]
-      }
-    ]
+        {
+          "@type": "PropertyValue",
+          "name": "Organization",
+          "value": beach.organized ? "Organized" : "Unorganized"
+        },
+        {
+          "@type": "PropertyValue",
+          "name": "Parking",
+          "value": beach.parking
+        },
+        ...(beach.blue_flag ? [{
+          "@type": "PropertyValue",
+          "name": "Blue Flag Certified",
+          "value": "Yes"
+        }] : [])
+      ]
+    },
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": beach.area,
+          "item": `https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/${generateAreaSlug(beach.area)}`
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": beach.name,
+          "item": canonicalUrl
+        }
+      ]
+    }
   };
 
   return (
