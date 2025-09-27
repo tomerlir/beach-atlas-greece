@@ -121,12 +121,12 @@ const Index = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="relative h-[50vh] flex flex-col justify-center bg-gradient-ocean overflow-hidden">
+      <section className="relative h-[35vh] flex flex-col justify-center bg-gradient-ocean overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ 
             backgroundImage: `url(${heroImage})`,
-            backgroundPosition: 'center left'
+            backgroundPosition: 'center top'
           }}
         />
         
@@ -136,7 +136,7 @@ const Index = () => {
           </h1>
           
           {/* Hero Search Bar */}
-          <div className="max-w-2xl mx-auto mb-8">
+          <div className="max-w-2xl mx-auto">
             <EnhancedSearchBar
               filters={filters}
               onFiltersChange={updateFilters}
@@ -145,30 +145,39 @@ const Index = () => {
               className="w-full"
             />
           </div>
-
-          {/* Filter Bar in Hero */}
-          <div className="w-full">
-            <FilterBar
-              filters={filters}
-              onFiltersChange={updateFilters}
-              userLocation={location}
-              onLocationRequest={getCurrentLocation}
-              isLoadingLocation={isLoadingLocation}
-              onOpenAllFilters={() => setIsAllFiltersOpen(true)}
-              locationPermission={locationPermission}
-              resultCount={filteredBeaches.length}
-              showCountBadge={false}
-            />
-          </div>
         </div>
       </section>
 
-      {/* Explore by Area Section */}
-      <AreasGrid maxAreas={12} />
+      {/* Filter Bar outside Hero */}
+      <div className="bg-background border-b border-border/20 py-4">
+        <div className="container mx-auto px-4">
+          <FilterBar
+            filters={filters}
+            onFiltersChange={updateFilters}
+            userLocation={location}
+            onLocationRequest={getCurrentLocation}
+            isLoadingLocation={isLoadingLocation}
+            onOpenAllFilters={() => setIsAllFiltersOpen(true)}
+            locationPermission={locationPermission}
+            resultCount={filteredBeaches.length}
+            showCountBadge={false}
+          />
+        </div>
+      </div>
 
-      {/* Horizontal Line */}
-      <div className="container mx-auto px-4">
-        <hr className="border-t border-border/30 my-2" />
+      {/* Popular Beaches / Results Header */}
+      <div className="container mx-auto px-4 py-6">
+        <div className="flex items-center justify-between mb-6">
+          {filters.search || filters.organized.length > 0 || filters.blueFlag || filters.parking.length > 0 || filters.waveConditions.length > 0 || filters.amenities.length > 0 || filters.nearMe ? (
+            <h2 className="text-2xl font-bold text-foreground">
+              {filteredBeaches.length} beaches found
+            </h2>
+          ) : (
+            <h2 className="text-2xl font-bold text-foreground">
+              Popular beaches
+            </h2>
+          )}
+        </div>
       </div>
 
       {/* Geolocation Error Banner */}
