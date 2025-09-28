@@ -22,7 +22,7 @@ import { useImagePreloader } from "@/hooks/useImagePreloader";
 import { useAreaBySlug } from "@/hooks/useAreas";
 import { Beach } from "@/types/beach";
 import type { Area } from "@/types/area";
-import heroImage from "@/assets/hero-beach.jpg";
+import heroImage from "@/assets/hero-background.png";
 import EmptyState from "@/components/EmptyState";
 import NotFound from "@/pages/NotFound";
 import PhotoAttribution from "@/components/PhotoAttribution";
