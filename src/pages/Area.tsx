@@ -201,14 +201,14 @@ const Area = () => {
         <meta property="og:description" content={seoDescription} />
         <meta property="og:type" content="website" />
         {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
-        <meta property="og:image" content="https://beachesofgreece.com/hero-beach.jpg" />
+        <meta property="og:image" content={area?.hero_photo_url || `${import.meta.env.VITE_SITE_URL || 'https://beachesofgreece.com'}/hero-background.png`} />
         <meta property="og:site_name" content="Beach Atlas Greece" />
         
         {/* Twitter Card tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDescription} />
-        <meta name="twitter:image" content="https://beachesofgreece.com/hero-beach.jpg" />
+        <meta name="twitter:image" content={area?.hero_photo_url || `${import.meta.env.VITE_SITE_URL || 'https://beachesofgreece.com'}/hero-background.png`} />
         
         {/* JSON-LD structured data */}
         {jsonLd && (
