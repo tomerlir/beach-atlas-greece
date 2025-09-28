@@ -23,12 +23,28 @@ export const slugify = (input: string): string => {
 };
 
 export const generateAreaSlug = (area: string): string => {
-  return slugify(area);
+  if (!area || typeof area !== 'string') {
+    return 'unknown-area';
+  }
+  try {
+    return slugify(area);
+  } catch (error) {
+    console.warn('Error generating area slug:', error);
+    return 'unknown-area';
+  }
 };
 
 export const generateBeachUrl = (area: string, beachSlug: string): string => {
-  const areaSlug = generateAreaSlug(area);
-  return `/${areaSlug}/${beachSlug}`;
+  if (!beachSlug || typeof beachSlug !== 'string') {
+    return '/unknown-beach';
+  }
+  try {
+    const areaSlug = generateAreaSlug(area);
+    return `/${areaSlug}/${beachSlug}`;
+  } catch (error) {
+    console.warn('Error generating beach URL:', error);
+    return '/unknown-beach';
+  }
 };
 
 export const formatRelativeTime = (isoDate: string | Date): string => {

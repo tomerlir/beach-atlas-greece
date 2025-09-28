@@ -9,6 +9,7 @@ import OptimizedImage from "@/components/OptimizedImage";
 import PhotoAttribution from "@/components/PhotoAttribution";
 import { CONTACT_EMAIL } from "@/lib/constants";
 import heroImage from "@/assets/area-hero.png";
+import { BreadcrumbsWithJsonLd } from "@/components/breadcrumbs/BreadcrumbsWithJsonLd";
 
 const Areas = () => {
   const { data: areas = [], isLoading, error } = useAreasWithBeachCount();
@@ -16,46 +17,31 @@ const Areas = () => {
   // Generate SEO data
   const seoTitle = "Greek Beach Areas | Beach Atlas";
   const seoDescription = "Explore beaches by area across Greece. Discover the best beaches in Corfu, Mykonos, Crete, and other beautiful Greek destinations.";
-  const canonicalUrl = "https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/areas";
+  const canonicalUrl = "https://beachesofgreece.com/areas";
 
   // Generate JSON-LD structured data
   const jsonLd = {
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Areas",
-            "item": "https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/areas"
-          }
-        ]
-      },
-      {
-        "@type": "ItemList",
-        "name": "Greek Beach Areas",
-        "description": "A curated list of beach areas across Greece",
-        "numberOfItems": areas.length,
-        "itemListElement": areas.slice(0, 10).map((area, index) => ({
-          "@type": "ListItem",
-          "position": index + 1,
-          "item": {
-            "@type": "Place",
-            "name": area.name,
-            "description": area.description || `Discover beaches in ${area.name}, Greece`,
-            "url": `https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/${area.slug}`
-          }
-        }))
-      }
-    ]
+    "@type": "WebPage",
+    "name": seoTitle,
+    "description": seoDescription,
+    "url": canonicalUrl,
+    "mainEntity": {
+      "@type": "ItemList",
+      "name": "Greek Beach Areas",
+      "description": "A curated list of beach areas across Greece",
+      "numberOfItems": areas.length,
+      "itemListElement": areas.slice(0, 10).map((area, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "item": {
+          "@type": "Place",
+          "name": area.name,
+          "description": area.description || `Discover beaches in ${area.name}, Greece`,
+          "url": `https://beachesofgreece.com/${area.slug}`
+        }
+      }))
+    }
   };
 
   return (
@@ -70,14 +56,14 @@ const Areas = () => {
         <meta property="og:description" content={seoDescription} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content="https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/hero-beach.jpg" />
+        <meta property="og:image" content="https://beachesofgreece.com/hero-beach.jpg" />
         <meta property="og:site_name" content="Beach Atlas Greece" />
         
         {/* Twitter Card tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDescription} />
-        <meta name="twitter:image" content="https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/hero-beach.jpg" />
+        <meta name="twitter:image" content="https://beachesofgreece.com/hero-beach.jpg" />
         
         {/* JSON-LD structured data */}
         <script type="application/ld+json">
@@ -102,6 +88,16 @@ const Areas = () => {
             </h1>
           </div>
         </section>
+
+        {/* Breadcrumb Navigation - under hero image */}
+        <div className="bg-background py-2">
+          <div className="container mx-auto px-4">
+            <BreadcrumbsWithJsonLd items={[
+              { label: "Home", href: "/" },
+              { label: "Areas" } // current
+            ]} />
+          </div>
+        </div>
 
         <main className="container mx-auto px-4 py-12">
           {/* Screen reader announcements */}

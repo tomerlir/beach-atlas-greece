@@ -33,6 +33,7 @@ import { useImagePreloader } from "@/hooks/useImagePreloader";
 import { useProgressiveLoading } from "@/hooks/useProgressiveLoading";
 import { generateBeachImageAltText } from "@/lib/accessibility";
 import { useNavigationState } from "@/hooks/useNavigationState";
+import { BreadcrumbsWithJsonLd } from "@/components/breadcrumbs/BreadcrumbsWithJsonLd";
 
 type Beach = Tables<'beaches'>;
 
@@ -258,7 +259,7 @@ const BeachDetail = () => {
   // Generate SEO data
   const seoTitle = `${beach.name} - ${beach.area} | Beach Atlas`;
   const seoDescription = beach.description || `Discover ${beach.name} in ${beach.area}, Greece. ${beach.organized ? 'Organized' : 'Unorganized'} beach with ${beach.type.toLowerCase()} sand and ${beach.wave_conditions.toLowerCase()} conditions.`;
-  const canonicalUrl = `https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/${generateAreaSlug(beach.area)}/${beach.slug}`;
+  const canonicalUrl = `https://beachesofgreece.com/${generateAreaSlug(beach.area)}/${beach.slug}`;
 
   // Generate JSON-LD structured data
   const jsonLd = {
@@ -318,29 +319,6 @@ const BeachDetail = () => {
         }] : [])
       ]
     },
-    "breadcrumb": {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": beach.area,
-          "item": `https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/${generateAreaSlug(beach.area)}`
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": beach.name,
-          "item": canonicalUrl
-        }
-      ]
-    }
   };
 
   return (
@@ -417,6 +395,18 @@ const BeachDetail = () => {
             </div>
           )}
         </figure>
+
+        {/* Breadcrumb Navigation - under main media */}
+        <div className="bg-background py-2">
+          <div className="max-w-4xl md:max-w-5xl mx-auto">
+            <BreadcrumbsWithJsonLd items={[
+              { label: "Home", href: "/" },
+              { label: "Areas", href: "/areas" },
+              { label: beach.area || 'Unknown Area', href: `/${generateAreaSlug(beach.area || 'unknown')}` },
+              { label: beach.name } // current
+            ]} />
+          </div>
+        </div>
 
         {/* Title & Chips - Show immediately when content is ready */}
         {shouldShowContent && (

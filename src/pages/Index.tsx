@@ -21,6 +21,8 @@ import { Beach } from "@/types/beach";
 import heroImage from "@/assets/hero-background.png";
 import EmptyState from "@/components/EmptyState";
 import { useIsMobile } from '@/hooks/use-mobile';
+import { Helmet } from "react-helmet-async";
+import { generateAreaSlug } from "@/lib/utils";
 
 const BEACHES_PER_PAGE = 9;
 
@@ -118,9 +120,82 @@ const Index = () => {
     setShowGeolocationError(false);
   };
 
+  // Generate SEO data
+  const seoTitle = "Greek Beaches Directory - Find Your Perfect Beach in Greece";
+  const seoDescription = "Discover the most beautiful beaches in Greece. Search by location, amenities, and Blue Flag certification. Complete directory of Greek island and mainland beaches.";
+  const canonicalUrl = "https://beachesofgreece.com";
+
+  // Generate JSON-LD structured data
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": seoTitle,
+    "description": seoDescription,
+    "url": canonicalUrl,
+    "mainEntity": {
+      "@type": "ItemList",
+      "name": "Greek Beaches",
+      "description": "A comprehensive directory of beaches across Greece",
+      "numberOfItems": filteredBeaches.length,
+      "itemListElement": paginatedBeaches.slice(0, 10).map((beach, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "item": {
+          "@type": "TouristAttraction",
+          "@id": `https://beachesofgreece.com/${generateAreaSlug(beach.area)}/${beach.slug}`,
+          "name": beach.name,
+          "description": beach.description,
+          "url": `https://beachesofgreece.com/${generateAreaSlug(beach.area)}/${beach.slug}`,
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": beach.area,
+            "addressCountry": "Greece"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": beach.latitude,
+            "longitude": beach.longitude
+          },
+          "isAccessibleForFree": true,
+          "image": beach.photo_url ? [beach.photo_url] : undefined,
+          "amenityFeature": beach.amenities?.map(amenity => ({
+            "@type": "LocationFeatureSpecification",
+            "name": amenity,
+            "value": true
+          })) || []
+        }
+      }))
+    },
+  };
+
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
+    <>
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDescription} />
+        <link rel="canonical" href={canonicalUrl} />
+        
+        {/* Open Graph tags */}
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDescription} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:site_name" content="Beach Atlas Greece" />
+        
+        {/* Twitter Card tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDescription} />
+        
+        {/* JSON-LD structured data */}
+        <script type="application/ld+json">
+          {JSON.stringify(jsonLd)}
+        </script>
+      </Helmet>
+
+      <div className="min-h-screen bg-background">
+        <Header />
+        
       
       {/* Hero Section */}
       <section className="relative h-[35vh] flex flex-col justify-center bg-gradient-ocean overflow-hidden">
@@ -294,7 +369,8 @@ const Index = () => {
           </p>
         </div>
       </footer>
-    </div>
+      </div>
+    </>
   );
 };
 

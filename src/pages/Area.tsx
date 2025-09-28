@@ -26,6 +26,7 @@ import heroImage from "@/assets/hero-beach.jpg";
 import EmptyState from "@/components/EmptyState";
 import NotFound from "@/pages/NotFound";
 import PhotoAttribution from "@/components/PhotoAttribution";
+import { BreadcrumbsWithJsonLd } from "@/components/breadcrumbs/BreadcrumbsWithJsonLd";
 
 const BEACHES_PER_PAGE = 9;
 
@@ -143,7 +144,7 @@ const Area = () => {
   const seoDescription = areaName 
     ? `Discover the best beaches in ${areaName}, Greece. Find organized and unorganized beaches with detailed information about amenities, parking, and conditions.`
     : 'The requested area could not be found.';
-  const canonicalUrl = areaName ? `https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/${areaSlug}` : undefined;
+  const canonicalUrl = areaName ? `https://beachesofgreece.com/${areaSlug}` : undefined;
 
   // Generate JSON-LD structured data
   const jsonLd = areaName ? {
@@ -162,10 +163,10 @@ const Area = () => {
         "position": index + 1,
         "item": {
           "@type": "TouristAttraction",
-          "@id": `https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/${areaSlug}/${beach.slug}`,
+          "@id": `https://beachesofgreece.com/${areaSlug}/${beach.slug}`,
           "name": beach.name,
           "description": beach.description,
-          "url": `https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/${areaSlug}/${beach.slug}`,
+          "url": `https://beachesofgreece.com/${areaSlug}/${beach.slug}`,
           "address": {
             "@type": "PostalAddress",
             "addressLocality": areaName,
@@ -186,23 +187,6 @@ const Area = () => {
         }
       }))
     },
-    "breadcrumb": {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": areaName,
-          "item": `https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/${areaSlug}`
-        }
-      ]
-    }
   } : null;
 
   return (
@@ -217,14 +201,14 @@ const Area = () => {
         <meta property="og:description" content={seoDescription} />
         <meta property="og:type" content="website" />
         {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
-        <meta property="og:image" content="https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/hero-beach.jpg" />
+        <meta property="og:image" content="https://beachesofgreece.com/hero-beach.jpg" />
         <meta property="og:site_name" content="Beach Atlas Greece" />
         
         {/* Twitter Card tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDescription} />
-        <meta name="twitter:image" content="https://lovable.dev/projects/cf4131ec-b13a-4688-95df-885e89cb06cc/hero-beach.jpg" />
+        <meta name="twitter:image" content="https://beachesofgreece.com/hero-beach.jpg" />
         
         {/* JSON-LD structured data */}
         {jsonLd && (
@@ -287,10 +271,23 @@ const Area = () => {
           </div>
         </section>
 
+        {/* Breadcrumb Navigation - under hero image */}
+        {areaName && (
+          <div className="bg-background pt-2">
+            <div className="container mx-auto px-4">
+              <BreadcrumbsWithJsonLd items={[
+                { label: "Home", href: "/" },
+                { label: "Areas", href: "/areas" },
+                { label: areaName } // no href = current
+              ]} />
+            </div>
+          </div>
+        )}
+
         {/* Filter Bar - only show if area exists */}
         {areaName && (
           <>
-            <div className="bg-background border-border/20 py-2">
+            <div className="bg-background border-border/20 pb-2">
               <div className="container mx-auto px-4">
                 <FilterBar
                   filters={filters}
