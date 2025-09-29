@@ -25,6 +25,7 @@ import Area from "./pages/Area";
 import NotFound from "./pages/NotFound";
 import { useServiceWorker } from "@/hooks/useServiceWorker";
 import ScrollToTop from "@/components/ScrollToTop";
+import AcceptInvite from "./pages/admin/AcceptInvite";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,7 @@ const AppContent = () => {
         <Route path="/areas" element={<Areas />} />
         <Route path="/:areaSlug" element={<Area />} />
         <Route path="/:area/:beach-name" element={<BeachDetail />} />
+        <Route path="/admin/accept-invite" element={<AcceptInvite />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route 
           path="/admin" 

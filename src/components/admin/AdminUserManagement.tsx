@@ -7,7 +7,8 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Loader2, Shield, User, UserCheck, UserX } from 'lucide-react';
+import { Loader2, Shield, User, UserCheck, UserX, Plus, Link as LinkIcon, RefreshCcw } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface User {
   user_id: string;
@@ -27,6 +28,11 @@ export const AdminUserManagement: React.FC = () => {
   const [bootstrapLoading, setBootstrapLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const [inviteEmail, setInviteEmail] = useState('');
+  const [inviteLoading, setInviteLoading] = useState(false);
+  const [inviteToken, setInviteToken] = useState<string | null>(null);
+  const [invites, setInvites] = useState<Array<{ id: string; email: string; invited_by: string; accepted: boolean; created_at: string; expires_at: string; }>>([]);
+  const [invitesLoading, setInvitesLoading] = useState(false);
 
   // Check if current user is admin
   if (!profile || profile.role !== 'admin') {
@@ -55,6 +61,53 @@ export const AdminUserManagement: React.FC = () => {
       setError(`Error fetching users: ${err}`);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchInvites = async () => {
+    try {
+      setInvitesLoading(true);
+      const { data, error } = await supabase.rpc('list_admin_invites' as any);
+      if (error) {
+        setError(`Failed to fetch invites: ${error.message}`);
+        return;
+      }
+      setInvites((data as any[]) || []);
+    } catch (err) {
+      setError(`Error fetching invites: ${err}`);
+    } finally {
+      setInvitesLoading(false);
+    }
+  };
+
+  const createInvite = async () => {
+    if (!inviteEmail.trim()) {
+      setError('Please enter an email to invite');
+      return;
+    }
+    try {
+      setInviteLoading(true);
+      setError(null);
+      setInviteToken(null);
+      const { data, error } = await supabase.rpc('create_admin_invite' as any, { invitee_email: inviteEmail.trim() });
+      if (error) {
+        setError(`Failed to create invite: ${error.message}`);
+        return;
+      }
+      const token = data as string;
+      setInviteToken(token);
+      setSuccess('Invite created. Share the link below with the invitee.');
+      setInviteEmail('');
+      await fetchInvites();
+      // Audit log
+      await supabase.rpc('log_admin_action' as any, {
+        action_type: 'create_admin_invite',
+        action_details: { token }
+      });
+    } catch (err) {
+      setError(`Error creating invite: ${err}`);
+    } finally {
+      setInviteLoading(false);
     }
   };
 
@@ -149,6 +202,7 @@ export const AdminUserManagement: React.FC = () => {
 
   useEffect(() => {
     fetchUsers();
+    fetchInvites();
   }, []);
 
   const formatDate = (dateString: string) => {
@@ -187,6 +241,68 @@ export const AdminUserManagement: React.FC = () => {
               <AlertDescription>{success}</AlertDescription>
             </Alert>
           )}
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg flex items-center gap-2">
+                <Plus className="h-4 w-4" /> Invite New Admin
+              </CardTitle>
+              <CardDescription>
+                Create an invite link for someone to sign up and become an admin.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div className="space-y-2">
+                <Label htmlFor="invite-email">Email</Label>
+                <Input id="invite-email" type="email" placeholder="person@example.com" value={inviteEmail} onChange={(e) => setInviteEmail(e.target.value)} />
+              </div>
+              <Button onClick={createInvite} disabled={inviteLoading} className="w-full">
+                {inviteLoading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Creating...</> : 'Create Invite'}
+              </Button>
+              {inviteToken && (
+                <div className="space-y-2">
+                  <Label>Invite Link</Label>
+                  <div className="flex items-center gap-2">
+                    <Input readOnly value={`${window.location.origin}/admin/accept-invite?token=${inviteToken}`} />
+                    <Button type="button" variant="outline" onClick={() => navigator.clipboard.writeText(`${window.location.origin}/admin/accept-invite?token=${inviteToken}`)}>
+                      <LinkIcon className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg flex items-center gap-2">
+                <RefreshCcw className="h-4 w-4" /> Pending Invites
+              </CardTitle>
+              <CardDescription>Invites waiting to be accepted.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div className="flex justify-end">
+                <Button size="sm" variant="outline" onClick={fetchInvites} disabled={invitesLoading}>
+                  {invitesLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Refresh'}
+                </Button>
+              </div>
+              {invites.length === 0 ? (
+                <div className="text-sm text-muted-foreground">No pending invites.</div>
+              ) : (
+                <div className="space-y-2">
+                  {invites.map((inv) => (
+                    <div key={inv.id} className="flex items-center justify-between text-sm">
+                      <div>
+                        <span className="font-medium">{inv.email}</span>
+                        <span className="text-muted-foreground ml-2">expires {new Date(inv.expires_at).toLocaleDateString()}</span>
+                      </div>
+                      <Link to={`/admin/accept-invite?token=${inviteToken ?? ''}`} className="text-primary hover:underline">Open link</Link>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </CardContent>
+          </Card>
 
           {!hasAdmins && (
             <Card>

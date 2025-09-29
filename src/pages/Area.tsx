@@ -4,11 +4,9 @@ import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import { CONTACT_EMAIL } from "@/lib/constants";
-import { generateAreaSlug } from "@/lib/utils";
 import Header from "@/components/Header";
 import FilterBar from "@/components/FilterBar";
 import AllFiltersDrawer from "@/components/AllFiltersDrawer";
-import ResultsHeader from "@/components/ResultsHeader";
 import BeachCard from "@/components/BeachCard";
 import BeachCardSkeleton from "@/components/BeachCardSkeleton";
 import Pagination from "@/components/Pagination";
@@ -430,7 +428,6 @@ const Area = () => {
                     Not quite the area? Search nearby areas
                   </p>
                   <div className="flex flex-wrap gap-2 items-center">
-                    <span className="text-xs text-muted-foreground">Nearby:</span>
                     {nearby.map(({ area: nearbyArea }) => (
                       <Link
                         key={nearbyArea.id}
