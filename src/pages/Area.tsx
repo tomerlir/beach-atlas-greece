@@ -19,7 +19,7 @@ import { useAreaUrlState } from "@/hooks/useAreaUrlState";
 import { useAreaBeachFiltering } from "@/hooks/useAreaBeachFiltering";
 import { useDistanceCalculation } from "@/hooks/useDistanceCalculation";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
-import { useAreaBySlug } from "@/hooks/useAreas";
+import { useAreaBySlug, useNearbyAreas } from "@/hooks/useAreas";
 import { Beach } from "@/types/beach";
 import type { Area } from "@/types/area";
 import heroImage from "@/assets/hero-background.png";
@@ -39,6 +39,7 @@ const Area = () => {
 
   // Fetch area data by slug
   const { data: area, isLoading: isLoadingArea, error: areaError } = useAreaBySlug(areaSlug || '');
+  const { nearby } = useNearbyAreas(area?.id);
 
   // Fetch beaches from Supabase filtered by area
   const { data: beaches = [], isLoading: isLoadingBeaches, error: beachesError } = useQuery({
@@ -103,6 +104,26 @@ const Area = () => {
 
   const handleResetParking = () => {
     updateFilters({ parking: [], page: 1 });
+  };
+
+  // Per-filter removal handlers for EmptyState chips
+  const handleClearSearch = () => {
+    updateFilters({ search: "", page: 1 });
+  };
+  const handleRemoveOrganized = (value: string) => {
+    updateFilters({ organized: filters.organized.filter((v) => v !== value), page: 1 });
+  };
+  const handleRemoveParking = (value: string) => {
+    updateFilters({ parking: filters.parking.filter((v) => v !== value), page: 1 });
+  };
+  const handleRemoveWaveCondition = (value: string) => {
+    updateFilters({ waveConditions: filters.waveConditions.filter((v) => v !== value), page: 1 });
+  };
+  const handleRemoveAmenity = (value: string) => {
+    updateFilters({ amenities: filters.amenities.filter((v) => v !== value), page: 1 });
+  };
+  const handleClearBlueFlag = () => {
+    updateFilters({ blueFlag: false, page: 1 });
   };
 
   // Show geolocation error banner when Near me is on but geolocation fails
@@ -233,7 +254,7 @@ const Area = () => {
           {area?.hero_photo_source && (
             <PhotoAttribution 
               photoSource={area.hero_photo_source}
-              className="absolute bottom-4 right-4 z-20"
+              className="absolute bottom-2 right-2 z-0 pointer-events-none"
               compact={false}
             />
           )}
@@ -381,6 +402,13 @@ const Area = () => {
                   onClearAllFilters={handleClearAllFilters}
                   onTurnOffNearMe={handleTurnOffNearMe}
                   onResetParking={handleResetParking}
+                  onClearSearch={handleClearSearch}
+                  onRemoveOrganized={handleRemoveOrganized}
+                  onRemoveParking={handleRemoveParking}
+                  onRemoveWaveCondition={handleRemoveWaveCondition}
+                  onRemoveAmenity={handleRemoveAmenity}
+                  onClearBlueFlag={handleClearBlueFlag}
+                  areaName={areaName}
                 />
               )}
 
@@ -392,6 +420,27 @@ const Area = () => {
                     totalPages={totalPages}
                     onPageChange={(page) => updateFilters({ page })}
                   />
+                </div>
+              )}
+
+              {/* Nearby Areas Chips */}
+              {area && nearby.length > 0 && (
+                <div className="mt-8">
+                  <p className="text-sm text-muted-foreground mb-3">
+                    Not quite the area? Search nearby areas
+                  </p>
+                  <div className="flex flex-wrap gap-2 items-center">
+                    <span className="text-xs text-muted-foreground">Nearby:</span>
+                    {nearby.map(({ area: nearbyArea }) => (
+                      <Link
+                        key={nearbyArea.id}
+                        to={`/${nearbyArea.slug}`}
+                        className="inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium hover:bg-accent hover:text-accent-foreground transition-colors"
+                      >
+                        {nearbyArea.name}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               )}
             </>

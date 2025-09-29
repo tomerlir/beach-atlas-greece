@@ -47,6 +47,14 @@ export const generateBeachUrl = (area: string, beachSlug: string): string => {
   }
 };
 
+export const generateAreaUrl = (areaSlugOrName: string): string => {
+  if (!areaSlugOrName) return '/areas';
+  // Accept either a slug or a raw name; if it contains spaces/uppercase, slugify it
+  const looksLikeSlug = /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(areaSlugOrName);
+  const slug = looksLikeSlug ? areaSlugOrName : generateAreaSlug(areaSlugOrName);
+  return `/${slug}`;
+};
+
 export const formatRelativeTime = (isoDate: string | Date): string => {
   const date = typeof isoDate === 'string' ? new Date(isoDate) : isoDate;
   const now = new Date();

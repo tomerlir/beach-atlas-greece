@@ -35,12 +35,15 @@ interface UseBeachSuggestionsProps {
   filters: FilterState;
   userLocation: GeolocationPosition | null;
   hasResults: boolean;
+  // When provided, restrict suggestions to this area name
+  areaName?: string;
 }
 
 export const useBeachSuggestions = ({ 
   filters, 
   userLocation, 
-  hasResults 
+  hasResults,
+  areaName,
 }: UseBeachSuggestionsProps) => {
   const [suggestions, setSuggestions] = useState<SuggestionWithReason[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -63,13 +66,19 @@ export const useBeachSuggestions = ({
 
   // Fetch all active beaches for suggestions
   const { data: allBeaches = [] } = useQuery({
-    queryKey: ['beaches-suggestions'],
+    queryKey: ['beaches-suggestions', areaName || null],
     queryFn: async () => {
-      const { data, error } = await supabase
+      const base = supabase
         .from('beaches')
         .select('*')
         .eq('status', 'ACTIVE')
         .order('name');
+
+      // If areaName provided, limit suggestions to that area at the source
+      // Note: `area` is a string column containing the human-readable area name
+      const { data, error } = await (areaName
+        ? base.eq('area', areaName)
+        : base);
       
       if (error) throw error;
       return data as Beach[];

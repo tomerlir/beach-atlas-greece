@@ -15,6 +15,7 @@ import {
   Users, 
   Share2,
   MessageSquare,
+  Clock,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Badge } from "@/components/ui/badge";
@@ -25,7 +26,6 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import Header from "@/components/Header";
 import { Tables } from "@/integrations/supabase/types";
 import { MapsSelectionDialog } from "@/components/MapsSelectionDialog";
-import { DataFreshnessMeta } from "@/components/DataFreshnessMeta";
 import { getAmenityConfig, getAmenitiesByCategory } from "@/lib/amenities";
 import OptimizedImage from "@/components/OptimizedImage";
 import PhotoAttribution from "@/components/PhotoAttribution";
@@ -34,6 +34,9 @@ import { useProgressiveLoading } from "@/hooks/useProgressiveLoading";
 import { generateBeachImageAltText } from "@/lib/accessibility";
 import { useNavigationState } from "@/hooks/useNavigationState";
 import { BreadcrumbsWithJsonLd } from "@/components/breadcrumbs/BreadcrumbsWithJsonLd";
+import { formatRelativeTime } from "@/lib/utils";
+import { fetchMoreInArea } from "@/lib/fetchMoreInArea";
+import MoreInArea from "@/components/MoreInArea";
 
 type Beach = Tables<'beaches'>;
 
@@ -106,6 +109,17 @@ const BeachDetail = () => {
     enabled: !!beachName,
     staleTime: 5 * 60 * 1000, // 5 minutes
     gcTime: 10 * 60 * 1000, // 10 minutes (renamed from cacheTime in newer versions)
+  });
+
+  // Fetch siblings in same area, excluding current beach
+  const { data: siblings = [] } = useQuery({
+    queryKey: ["more-in-area", area, beachName],
+    queryFn: async () => {
+      if (!area || !beachName) return [] as Beach[];
+      return fetchMoreInArea(area, beachName, 5);
+    },
+    enabled: !!area && !!beachName,
+    staleTime: 5 * 60 * 1000,
   });
 
   // Progressive loading state - now that beach data is available
@@ -410,15 +424,28 @@ const BeachDetail = () => {
 
         {/* Title & Chips - Show immediately when content is ready */}
         {shouldShowContent && (
-          <div className="mb-8">
+          <div className="mb-2">
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-3">
               {beach.name}
             </h1>
-            <div className="flex items-center text-muted-foreground text-lg mb-2">
-              <MapPin className="h-5 w-5 mr-2" aria-hidden="true" />
-              {beach.area}
+            <div className="flex items-center gap-2 mb-2">
+              <Link
+                to={`/${generateAreaSlug(beach.area)}`}
+                aria-label={`View beaches in ${beach.area}`}
+                className="inline-flex items-center gap-2 text-sm md:text-base rounded-full border border-border/50 bg-muted/40 px-3 py-1 text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-colors"
+              >
+                <MapPin className="h-4 w-4 md:h-5 md:w-5 text-primary" aria-hidden="true" />
+                <span className="font-medium">{beach.area}</span>
+              </Link>
+              <div
+                aria-label={`Information last verified ${beach.updated_at ? formatRelativeTime(beach.updated_at) : 'recently'}`}
+                className="inline-flex items-center gap-2 text-sm md:text-base rounded-full border border-border/50 bg-muted/40 px-3 py-1 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                role="status"
+              >
+                <Clock className="h-4 w-4 md:h-5 md:w-5 text-primary" aria-hidden="true" />
+                <span className="font-medium">Verified {beach.updated_at ? formatRelativeTime(beach.updated_at) : 'recently'}</span>
+              </div>
             </div>
-            <DataFreshnessMeta beach={beach} />
             <div className="flex flex-wrap gap-2 mt-4">
               {beach.blue_flag && (
                 <Badge className="bg-blue-600 text-white">
@@ -523,6 +550,12 @@ const BeachDetail = () => {
                       {isDescriptionExpanded ? "Read less" : "Read more"}
                     </Button>
                   )}
+                  <p className="mt-3 text-sm text-muted-foreground">
+                    Not what you were looking for?{" "}
+                    <Link to={`/${generateAreaSlug(beach.area)}`} className="underline underline-offset-2 hover:no-underline">
+                      See all beaches in {beach.area}
+                    </Link>.
+                  </p>
                 </div>
               </section>
             )}
@@ -567,6 +600,13 @@ const BeachDetail = () => {
           longitude={beach.longitude}
           beachName={beach.name}
         />
+      )}
+
+      {/* More in Area Section */}
+      {beach && siblings.length > 0 && (
+        <div className="max-w-4xl md:max-w-5xl mx-auto px-4">
+          <MoreInArea area={{ ...(beach as any), name: beach.area, slug: generateAreaSlug(beach.area) } as any} beaches={siblings as any} />
+        </div>
       )}
 
       {/* Footer */}

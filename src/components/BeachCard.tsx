@@ -37,6 +37,7 @@ interface BeachCardProps {
   beach: Beach;
   distance?: number;
   showDistance?: boolean;
+  compact?: boolean;
 }
 
 
@@ -48,7 +49,7 @@ const parkingConfig: Record<string, { label: string; icon: any; color: string }>
   LARGE_LOT: { label: "Large Lot", icon: CheckCircle, color: "text-green-500" }
 };
 
-const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => {
+const BeachCard = ({ beach, distance, showDistance = true, compact = false }: BeachCardProps) => {
   const { prefetchWithImage, cancelPrefetch } = useAdvancedPrefetch({ 
     delay: 50, 
     preloadImages: true, 
@@ -127,18 +128,18 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
       onMouseLeave={cancelPrefetch}
       onClick={handleBeachCardClick}
     >
-      <Card className="group hover:shadow-strong transition-all duration-300 overflow-hidden border-0 bg-white shadow-soft hover:shadow-medium h-full">
+      <Card className={`group hover:shadow-strong transition-all duration-300 overflow-hidden border-0 bg-white shadow-soft hover:shadow-medium h-full ${compact ? 'rounded-lg' : ''}`}>
         {/* Beach Image */}
-        <div className="aspect-video bg-gradient-ocean relative overflow-hidden">
+        <div className={`${compact ? 'aspect-[4/3]' : 'aspect-video'} bg-gradient-ocean relative overflow-hidden`}>
           {beach.photo_url ? (
             <OptimizedImage
               src={beach.photo_url}
               alt={generateBeachImageAltText(beach)}
-              width={400}
-              height={225}
+              width={compact ? 320 : 400}
+              height={compact ? 240 : 225}
               className="group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              sizes={compact ? "(max-width: 768px) 75vw, (max-width: 1200px) 33vw, 320px" : "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"}
               quality={85}
               fallbackComponent={fallbackComponent}
             />
@@ -150,25 +151,25 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
           
           {/* Badges Overlay */}
-          <div className="absolute bottom-2 left-2 sm:bottom-3 sm:left-3 flex gap-1 sm:gap-2 flex-wrap max-w-[calc(100%-4rem)] sm:max-w-none">
+          <div className={`absolute bottom-2 left-2 sm:bottom-3 sm:left-3 flex gap-1 sm:gap-2 flex-wrap max-w-[calc(100%-4rem)] sm:max-w-none`}>
             {beach.organized && (
               <Badge variant="secondary" className="bg-white/95 text-foreground shadow-sm backdrop-blur-sm">
                 <CheckCircle className="h-3 w-3 mr-1 text-green-600" />
-                <span className="hidden sm:inline">Organized</span>
-                <span className="sm:hidden">Org</span>
+                <span className={`${compact ? 'hidden' : 'hidden sm:inline'}`}>Organized</span>
+                <span className={`${compact ? '' : 'sm:hidden'}`}>Org</span>
               </Badge>
             )}
             {beach.blue_flag && (
               <Badge className="bg-primary/95 text-primary-foreground shadow-sm backdrop-blur-sm">
                 <Flag className="h-3 w-3 mr-1" />
-                <span className="hidden sm:inline">Blue Flag</span>
-                <span className="sm:hidden">Flag</span>
+                <span className={`${compact ? 'hidden' : 'hidden sm:inline'}`}>Blue Flag</span>
+                <span className={`${compact ? '' : 'sm:hidden'}`}>Flag</span>
               </Badge>
             )}
             <Badge variant="outline" className="bg-white/95 text-foreground border-white/50 shadow-sm backdrop-blur-sm">
               <Car className={`h-3 w-3 mr-1 ${parkingInfo.color}`} />
-              <span className="hidden sm:inline">{parkingInfo.label}</span>
-              <span className="sm:hidden">{parkingInfo.label.split(' ')[0]}</span>
+              <span className={`${compact ? 'hidden' : 'hidden sm:inline'}`}>{parkingInfo.label}</span>
+              <span className={`${compact ? '' : 'sm:hidden'}`}>{parkingInfo.label.split(' ')[0]}</span>
             </Badge>
           </div>
 
@@ -190,10 +191,10 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
           />
         </div>
 
-        <CardContent className="p-5">
+        <CardContent className={`${compact ? 'p-3' : 'p-5'}`}>
           {/* Beach Name & Location */}
-          <div className="mb-4">
-            <h3 className="font-bold text-xl text-foreground mb-2 group-hover:text-primary transition-colors">
+          <div className={`${compact ? 'mb-2' : 'mb-4'}`}>
+            <h3 className={`font-bold ${compact ? 'text-base' : 'text-xl'} text-foreground mb-1 group-hover:text-primary transition-colors`}>
               {beach.name}
             </h3>
             <div className="flex items-center text-muted-foreground text-sm">
@@ -203,7 +204,7 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
           </div>
 
           {/* Description */}
-          {beach.description && (
+          {!compact && beach.description && (
             <p className="text-sm text-muted-foreground mb-4 line-clamp-2 leading-relaxed">
               {beach.description}
             </p>
@@ -211,7 +212,7 @@ const BeachCard = ({ beach, distance, showDistance = true }: BeachCardProps) => 
 
 
           {/* Amenities with Icons */}
-          {beach.amenities.length > 0 && (
+          {!compact && beach.amenities.length > 0 && (
             <div className="space-y-3">
               <h4 className="text-sm font-semibold text-foreground">Amenities</h4>
               <div className="flex flex-wrap gap-2">

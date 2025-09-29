@@ -89,6 +89,26 @@ const Index = () => {
     updateFilters({ parking: [], page: 1 });
   };
 
+  // Per-filter removal handlers for EmptyState chips
+  const handleClearSearch = () => {
+    updateFilters({ search: "", page: 1 });
+  };
+  const handleRemoveOrganized = (value: string) => {
+    updateFilters({ organized: filters.organized.filter((v) => v !== value), page: 1 });
+  };
+  const handleRemoveParking = (value: string) => {
+    updateFilters({ parking: filters.parking.filter((v) => v !== value), page: 1 });
+  };
+  const handleRemoveWaveCondition = (value: string) => {
+    updateFilters({ waveConditions: filters.waveConditions.filter((v) => v !== value), page: 1 });
+  };
+  const handleRemoveAmenity = (value: string) => {
+    updateFilters({ amenities: filters.amenities.filter((v) => v !== value), page: 1 });
+  };
+  const handleClearBlueFlag = () => {
+    updateFilters({ blueFlag: false, page: 1 });
+  };
+
   // Show geolocation error banner when Near me is on but geolocation fails
   // Also revert to Name sort when geolocation fails
   useEffect(() => {
@@ -315,6 +335,12 @@ const Index = () => {
                 onClearAllFilters={handleClearAllFilters}
                 onTurnOffNearMe={handleTurnOffNearMe}
                 onResetParking={handleResetParking}
+                onClearSearch={handleClearSearch}
+                onRemoveOrganized={handleRemoveOrganized}
+                onRemoveParking={handleRemoveParking}
+                onRemoveWaveCondition={handleRemoveWaveCondition}
+                onRemoveAmenity={handleRemoveAmenity}
+                onClearBlueFlag={handleClearBlueFlag}
               />
             )}
 
