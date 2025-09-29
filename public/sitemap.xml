@@ -6,19 +6,25 @@
   <!-- Main Pages -->
   <url>
     <loc>https://beachesofgreece.com</loc>
-    <lastmod>2025-09-27</lastmod>
+    <lastmod>2025-09-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
     <loc>https://beachesofgreece.com/about</loc>
-    <lastmod>2025-09-27</lastmod>
+    <lastmod>2025-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <!-- Area Pages -->
+  <url>
+    <loc>https://beachesofgreece.com/chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
   <url>
     <loc>https://beachesofgreece.com/corfu</loc>
     <lastmod>2025-09-25</lastmod>
@@ -76,6 +82,19 @@
   
   <!-- Beach Detail Pages -->
   <url>
+    <loc>https://beachesofgreece.com/chalkidiki/polychrono-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Polychrono_4788.jpg/1024px-Polychrono_4788.jpg?20191006163446</image:loc>
+      <image:title> Polychrono beach - Greek Beach</image:title>
+      <image:caption>Polychrono is a coastal village between Kriopigi and Hanioti on the Kassandra peninsula. Its beach is one of the longest in Halkidiki (about 7 km) and is well organized, backed by pine forest, village amenities and a lively village strip.  The sea is described as crystal clear and shallow near the shore, making it family-friendly. 
+
+The village also has a full complement of tourism services (taverns, shops, cafés) along the main coastal road.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/corfu/acharavi-beach-corfu</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -131,6 +150,17 @@
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/chalkidiki/agios-georgios-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Ammouliani_%283%29.jpg/1024px-Ammouliani_%283%29.jpg?20120531203125</image:loc>
+      <image:title>Agios Georgios beach - Greek Beach</image:title>
+      <image:caption>Agios Georgios lies on the eastern / northeastern coast of Ammouliani island (just off Sithonia, Chalkidiki). The beach is considered one of the more beautiful on the southern side of Ammouliani. It is named after a small church (chapel) located on the coast. The setting is peaceful and attractive, especially for those seeking a quieter beach experience rather than a full resort beach.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/corfu/agios-georgios-beach-corfu</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
@@ -161,6 +191,32 @@
       <image:loc>https://upload.wikimedia.org/wikipedia/commons/1/19/The_beach_of_agios_ioannis.jpg?20121201204704</image:loc>
       <image:title>Agios Ioannis beach - Greek Beach</image:title>
       <image:caption>Agios Ioannis (also “Ai Giannis”) is a lovely, relatively close beach to Lefkada Town (≈ 2-3 km), known for its calm mornings and becoming livelier in the afternoons when winds pick up. The beach lies beside a small village, with olive groves and low hills behind it. It offers a relaxing seaside environment, especially good for swimming, sunbathing, and water-sports (kite-surfing, windsurfing) when conditions are favorable.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/chalkidiki/agios-ioannis-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Chalkidiki_-_Nikiti%2C_Agios_Ioannis_-_panoramio.jpg/1024px-Chalkidiki_-_Nikiti%2C_Agios_Ioannis_-_panoramio.jpg?20160224040634</image:loc>
+      <image:title>Agios Ioannis beach - Greek Beach</image:title>
+      <image:caption>Agios Ioannis is a sandy beach about 700 m long located along the road from Nikiti toward Neos Marmaras, in Sithonia. The water is described as clear and turquoise, with a gently sloping sandy bottom that makes it suitable for children. The beach is partly organized (particularly near the hotel part) and partly wild in its free stretches.
+
+Because of its orientation, the beach offers panoramic views from the main road, and there is a free zone (non-serviced) along part of it.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/chalkidiki/agios-mamas-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Agios_Mamas_Beach_Halkidiki_Greece.jpg/1024px-Agios_Mamas_Beach_Halkidiki_Greece.jpg?20210815182243</image:loc>
+      <image:title>Agios Mamas beach - Greek Beach</image:title>
+      <image:caption>Agios Mamas is a village on the Kassandra peninsula, near Nea Moudania, with a long sandy coastline stretching from the delta of the Olynthios river and connecting with the beaches of Kalyves Polygyrou. The beach here is broad and sandy, with clear shallow waters, making it appealing for both locals and tourists. The area behind the beach is developed with village amenities, and the beach has both organized and more natural stretches.
+
+It’s also ecologically notable: the area between Agios Mamas and Potidea includes lagoon-style water areas and is part of a Natura 2000 protected zone, hosting aquatic birds.</image:caption>
     </image:image>
   </url>
   <url>
@@ -274,6 +330,19 @@
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/santorini/baxedes-beach-santorini</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Cyclades_Santorin_Baxedes_Plage_15062013_-_panoramio.jpg/1024px-Cyclades_Santorin_Baxedes_Plage_15062013_-_panoramio.jpg?20170303161307</image:loc>
+      <image:title>Baxedes beach - Greek Beach</image:title>
+      <image:caption>Baxedes (also spelled “Baxédes”, sometimes extended as “Baxedes &amp; Paradisos”) is a more secluded northern-coast beach of Santorini, located east of Cape Mavropetra and near Oia / Finikia. It is over 1 km long, with black volcanic sand + small pebbles, and backed by cliffs / escarpments that offer natural shade in some parts.
+
+Because it is less developed, it retains a more natural, quiet character compared to Santorini’s busy beach zones.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/santorini/black-beach-santorini</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -297,7 +366,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/dassia-beach-corfu</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2025-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -341,6 +410,21 @@
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/chalkidiki/elia-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/EliaBeach.jpg/512px-EliaBeach.jpg?20100406225518</image:loc>
+      <image:title>Elia beach - Greek Beach</image:title>
+      <image:caption>Elia is a small coastal zone / settlement linked with Nikiti on Sithonia. The beach of Elia stretches roughly 2 km and begins approximately 8 km south of Nikiti, continuing from the Spathies area.
+
+The landscape is quite forested (pine trees / wooded background), and the beach is described as “narrow” in many stretches. Sea access is mixed: parts are pebbly / rocky at the waterline, while other parts are sandier.
+
+Because parts of the beach are less developed and backed by nature, Elia is often favored by those seeking a quieter, more natural experience.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/mykonos/elia-beach-mykonos</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -349,6 +433,17 @@
       <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Elias_Beach_on_Mykonos.JPG/1024px-Elias_Beach_on_Mykonos.JPG?20090430002643</image:loc>
       <image:title>Elia beach - Greek Beach</image:title>
       <image:caption>Elia is a large, sophisticated sandy beach on the southern coast of Mykonos, about 10 km from Mykonos Town. With long stretches of golden/white sand, clear waters and a spacious shore, Elia offers both luxury and relaxed beach vibes. It’s well-organized with quality beach clubs, restaurants and a calm, upscale atmosphere.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/santorini/exomitis-beach-santorini</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Santorin_%28GR%29%2C_Exomytis%2C_Vlychada_Beach_--_2017_--_2802.jpg/1024px-Santorin_%28GR%29%2C_Exomytis%2C_Vlychada_Beach_--_2017_--_2802.jpg?20171007055615</image:loc>
+      <image:title>Exomitis beach - Greek Beach</image:title>
+      <image:caption>Exomitis lies on the southern coast / tip of Santorini (on the southeastern stretch), forming part of the long continuous black-sand coastline from Perissa toward the cape. The beach is relatively quiet / secluded / less visited compared to more touristy beaches. The stretch is part of an extended beach that includes more organized zones nearer other beaches, but Exomitis itself is more rustic / low infrastructure.</image:caption>
     </image:image>
   </url>
   <url>
@@ -371,6 +466,45 @@
       <image:loc>https://live.staticflickr.com/5577/14778445295_7f49ce9744_h.jpg</image:loc>
       <image:title>Faragas Beach - Greek Beach</image:title>
       <image:caption>Faragas is a picturesque sandy-bay beach on the southern coast of Paros, notable for its clear turquoise waters and gentle waves. It combines public, free sections with more upscale private parts (beach club style), making it appealing both for laid-back beach goers and those looking for more comfort &amp; service. The scenery is lovely, especially later in the day, with calm vibes and a mix of locals and tourists.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/chalkidiki/fava-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Blue_ocean_by_the_sand_beach_%28Unsplash%29.jpg/1024px-Blue_ocean_by_the_sand_beach_%28Unsplash%29.jpg?20170901022055</image:loc>
+      <image:title>Fava beach - Greek Beach</image:title>
+      <image:caption>Fava Beach is a relatively secluded cove beach located just south of Karidi Beach in the Sithonia region of Chalkidiki. The shoreline comprises a series of small bays tucked among rock formations and pine forest. The sea is clear and offers a more tranquil alternative to busier neighboring beaches. Because Fava is less developed, it retains a “hidden gem” vibe — fewer crowds, fewer built facilities, more nature.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/chalkidiki/flogita-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Promenade%2C_Nea_Flogita%2C_Halkidiki%2C_Greece_%282741742658%29.jpg/1024px-Promenade%2C_Nea_Flogita%2C_Halkidiki%2C_Greece_%282741742658%29.jpg?20190907151048</image:loc>
+      <image:title>Flogita beach - Greek Beach</image:title>
+      <image:caption>Flogita is a coastal resort village on the western side of Chalkidiki, overlooking the Thermaic Gulf. Its beach is about 1 km long, sandy, with clear water and a gently sloping seabed. The beach is described as a “fully organized beach” in multiple sources. The setting is lively, with tavernas, beach bars, cafés and nightlife along the promenade behind the beach. 
+
+On some days, visitors report moderate occurrences of seaweed, jellyfish, or mosquitoes, though these are not always present and depend on conditions.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/chalkidiki/gerakini-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Yerakini_seaside_pedestrian_walk%2C_Jun_2014.jpg/1024px-Yerakini_seaside_pedestrian_walk%2C_Jun_2014.jpg?20140730140912</image:loc>
+      <image:title>Gerakini beach - Greek Beach</image:title>
+      <image:caption>Gerakini (Yerakini) is a coastal village on the Chalkidiki peninsula, acting as the port for nearby Polygyros. Its beach (Paralia Gerakini) lies on the Toroneos gulf, along the road to Nikiti. 
+
+The beach is described as vast and well organized, catering to tourists and local visitors. It combines stretches of sand (with some pebbles or stones in parts) and shallow waters, making it appealing especially for families. 
+
+In many places, the beach area is organized by hotels and beach bars (sunbeds, umbrellas) in certain zones.</image:caption>
     </image:image>
   </url>
   <url>
@@ -408,6 +542,19 @@
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/chalkidiki/hanioti-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Plaja_Hanioti%2C_Kassandra%2C_Halkidiki_-_panoramio_%281%29.jpg/1024px-Plaja_Hanioti%2C_Kassandra%2C_Halkidiki_-_panoramio_%281%29.jpg?20170304000815</image:loc>
+      <image:title>Hanioti beach - Greek Beach</image:title>
+      <image:caption>Hanioti (also Chaniotis) is a lively resort village whose beach stretches along the town’s seafront. The shore is a mix of sand and fine pebbles, and the sea entrance is gentle, making it suitable for families. The beach is very well integrated into the village environment, with cafés, tavernas, shops and promenades immediately behind it.
+
+Due to its popularity, it tends to be busy in summer, especially midday.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/corfu/issos-beach-corfu</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -441,6 +588,19 @@
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/chalkidiki/kalamitsi-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Eastern_beach_of_Kalamitsi%2C_Sithonia_%28%CE%9A%CE%B1%CE%BB%CE%B1%CE%BC%CE%AF%CF%84%CF%83%CE%B9_630_72%2C_Greece%29.jpg/1024px-Eastern_beach_of_Kalamitsi%2C_Sithonia_%28%CE%9A%CE%B1%CE%BB%CE%B1%CE%BC%CE%AF%CF%84%CF%83%CE%B9_630_72%2C_Greece%29.jpg?20240909194535</image:loc>
+      <image:title>Kalamitsi beach - Greek Beach</image:title>
+      <image:caption>Kalamitsi is a tranquil, semi-circular bay beach at the southern tip of Sithonia. It features a broad, gently sloping golden sand shore and clear, calm waters, making it quite family-friendly. The beach is backed by a small village with tavernas, cafés, and guesthouses. Because of its natural protection from prevailing winds, it often offers peaceful swimming conditions. 
+
+It’s also composed of three adjoining stretches — the main central organized section, a more isolated eastern/nudist stretch, and a section in front of a campsite.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/naxos/kalantos-beach-naxos</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -449,6 +609,19 @@
       <image:loc>https://upload.wikimedia.org/wikipedia/commons/8/89/Kalantos_Naxos_Greece_2005082216150N00410_01.jpg</image:loc>
       <image:title>Kalantos Beach - Greek Beach</image:title>
       <image:caption>Kalantos is one of Naxos’s more remote southern beaches. Golden sandy shore, shallow crystal-clear water, and an undeveloped, tranquil atmosphere make it ideal for people seeking peace and nature over crowds. The beach lies in a natural bay sheltered from the northern winds. The scenery around is wild: wetlands, hills, and simple natural beauty dominate</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/chalkidiki/kalithea-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Kalithea_Xalkidiki_GREECE_-_panoramio.jpg/1024px-Kalithea_Xalkidiki_GREECE_-_panoramio.jpg?20170108091746</image:loc>
+      <image:title>Kalithea beach - Greek Beach</image:title>
+      <image:caption>Kalithea Beach is a well-known, lively beach fronting the village of Kallithea on the Kassandra peninsula. It features long stretches of pale sand (or soft mixed sand/pebble in parts) and is backed by hotels, shops, restaurants, cafés, and local infrastructure. It tends to be very organized and is well frequented by tourists.
+
+Its central location makes it convenient: the beach is just a short walk from the village center, making it easy to combine beach time with local amenities.</image:caption>
     </image:image>
   </url>
   <url>
@@ -463,6 +636,32 @@
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/santorini/kamari-beach-santorini</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Kamari_Santorini.jpg/1024px-Kamari_Santorini.jpg?20130320001452</image:loc>
+      <image:title>Kamari beach - Greek Beach</image:title>
+      <image:caption>Kamari is a well-known resort village on the southeastern coast of Santorini. Its beach is a long black volcanic beach / pebbly sand beach, formed by Santorini’s volcanic geology.
+
+The shore lies under the foot of the Mesa Vouno mountain, adding dramatic backdrop. A paved promenade runs along the beach, lined with cafés, restaurants, shops, and bars.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/chalkidiki/karydi-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Vourvourou_beach_sithonia_01.jpg/1024px-Vourvourou_beach_sithonia_01.jpg?20060328121328</image:loc>
+      <image:title>Karydi beach - Greek Beach</image:title>
+      <image:caption>Karydi (Karidi) is a cove-style beach situated at the southern end of Vourvourou Bay. It features fine white sand and very shallow, turquoise waters, often described as resembling a calm, aquamarine pool. The beach is partially wild / natural: much of it is not organized, so you’ll find natural shade under pine trees and fewer built facilities. Because it is protected from prevailing winds, the sea is usually calm. 
+
+It’s popular, especially from mid-morning onwards, so arriving early is recommended to secure good spots.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/lefkada/kathisma-beach-lefkada</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -474,6 +673,17 @@
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/chalkidiki/kavourotrypes-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Halkidiki_Kavourotrypes_beach_4.jpg/1024px-Halkidiki_Kavourotrypes_beach_4.jpg?20231018174506</image:loc>
+      <image:title>Kavourotrypes beach - Greek Beach</image:title>
+      <image:caption>Kavourotrypes is a striking cove-style beach on the Sithonia peninsula (Chalkidiki), tucked between pine woods and white rock formations. The name means “crab holes,” reflecting its rocky, sculpted coastline. The water is crystal clear, and parts of the beach are sandy or softly pebbly, blending with dramatic rocks and small coves. It’s become quite popular (so expect crowds in summer), but still retains a wild, scenic feel thanks to its natural features.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/zakynthos/korakonisi-zakynthos</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -482,6 +692,30 @@
       <image:loc>https://upload.wikimedia.org/wikipedia/commons/e/e0/%CE%9A%CE%BF%CF%81%CE%B1%CE%BA%CE%BF%CE%BD%CE%B7%CF%83%CE%B9.jpg</image:loc>
       <image:title>Korakonisi - Greek Beach</image:title>
       <image:caption>Korakonisi is one of the island’s most striking natural landmarks — a rocky islet connected to the coast by a narrow strip of land on Zakynthos’ rugged west side. Known for its dramatic cliffs, a natural sea arch, and deep blue waters, it’s a favorite for adventurous visitors. The rocky terrain requires some climbing and sturdy shoes, but rewards with spectacular swimming, snorkeling, and cliff-diving opportunities. This is not a sandy beach but a wild coastal experience.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/chalkidiki/kryopigi-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Kriopigi-Beach_-_panoramio.jpg/1024px-Kriopigi-Beach_-_panoramio.jpg?20160110093448</image:loc>
+      <image:title>Kryopigi beach - Greek Beach</image:title>
+      <image:caption>Kriopigi is a coastal village on the the Kassandra peninsula. Its beach is often described as a “long” beach with clear water, golden sand (or sand/pebble mix), and relatively well maintained. Kriopigi’s setting is partly backed by pine forest and greenery which gives natural shade.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/chalkidiki/lagomandra-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Lagomandra%2C_Sitonia%2C_Gr%C4%8Dka_-_panoramio_%285%29.jpg/1024px-Lagomandra%2C_Sitonia%2C_Gr%C4%8Dka_-_panoramio_%285%29.jpg?20170505165315</image:loc>
+      <image:title>Lagomandra beach - Greek Beach</image:title>
+      <image:caption>Lagomandra Beach lies on the eastern coast of Sithonia, not far from Neos Marmaras (about 6 km).  The beach is known for its natural beauty: pine tree shade at the back, sand / soft shoreline, and generally calm, inviting waters. It is also officially recognized as a Blue Flag beach, due to its organization, cleanliness, and service standards. 
+
+Because part of the beach is operated by Lagomandra Beach Hotel &amp; Suites, many of the facilities reflect resort-level services. </image:caption>
     </image:image>
   </url>
   <url>
@@ -518,6 +752,34 @@
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/santorini/mesa-pigadia-beach-santorini</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Mesa_Pigadia_01.jpg/1024px-Mesa_Pigadia_01.jpg?20140126152114</image:loc>
+      <image:title>Mesa Pigadia beach - Greek Beach</image:title>
+      <image:caption>Mesa Pigadia is a quieter, lesser-known black-sand / volcanic pebble beach located on the southwest coast of Santorini near Akrotiri.
+
+The beach lies in a small cove backed by cliffs, giving it a sheltered and intimate feel. It is often described as a “hidden gem” for people seeking a more peaceful beach experience away from the busy beaches of Santorini.
+
+Mesa Pigadia is accessible via a rough / dirt road from the main road; public buses don’t come all the way — walking from nearby stops or driving is typical.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/chalkidiki/metamorfosi-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Metamorfosi._Beach._-_panoramio.jpg/1024px-Metamorfosi._Beach._-_panoramio.jpg?20161203191234</image:loc>
+      <image:title>Metamorfosi beach - Greek Beach</image:title>
+      <image:caption>Metamorfosi is a village on the Sithonia peninsula, surrounded by forest and coastline. Its beach (Metamorfosi Beach) is known for being Blue Flag and decently organized, with golden sand, clear waters, and a calm atmosphere.
+
+The coastline here is not extremely dramatic — it’s more gentle and pleasant — making it good for relaxing, doing light activities, and staying in a village atmosphere rather than a heavy resort zone.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/naxos/mikri-vigla-naxos</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -548,6 +810,32 @@
       <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Mytakas_beach%2C_Milos%2C_152894q.jpg/1024px-Mytakas_beach%2C_Milos%2C_152894q.jpg?20151029191406</image:loc>
       <image:title>Mytakas beach - Greek Beach</image:title>
       <image:caption>Mytakas (sometimes spelled “Mitakas”) is a tranquil beach on the northern coast of Milos, located within a small settlement of the same name. It’s made of two sandy bays, surrounded by gentle rocky hills, offering clear turquoise water and a relaxed atmosphere. While it has enough amenities for comfort, it remains much quieter than the big tourist beaches — a good choice for those wanting peace, sun, and sea without massive crowds. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/chalkidiki/nea-fokea-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Nea_Fokea_Strand.jpg/1024px-Nea_Fokea_Strand.jpg?20121115103400</image:loc>
+      <image:title>Nea Fokea beach - Greek Beach</image:title>
+      <image:caption>Nea Fokea is a coastal village on the eastern side of the Kassandra peninsula. Its beach is described as having fine sand and clear turquoise waters. It’s considered “organized” and family-friendly, with a scenic backdrop including a Byzantine tower overlooking the sea. The beach also acts as a gateway into Kassandra’s eastern coastline.
+
+Because of its charm and moderate development, its facilities are more modest than at full resort beaches, but still comfortable for beachgoers.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/chalkidiki/nea-moudania-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Nea_Moudania-001.JPG/1024px-Nea_Moudania-001.JPG?20120501170312</image:loc>
+      <image:title>Nea Moudania beach - Greek Beach</image:title>
+      <image:caption>Nea Moudania’s beach stretches for about 2 km along the town and continues toward the beach of Dionysiou. It is mostly sandy, has shallow waters (gently sloping seabed), and is considered one of the more organized beaches in the region.
+
+The shoreline is backed by the town’s promenade, cafés, tavernas, and services, offering a comfortable mix of beach + town amenities.</image:caption>
     </image:image>
   </url>
   <url>
@@ -595,6 +883,30 @@
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/chalkidiki/perigiali-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Perigialli_Beach.jpg/1024px-Perigialli_Beach.jpg?20110505195536</image:loc>
+      <image:title>Perigiali beach - Greek Beach</image:title>
+      <image:caption>It is described as one of the more untouched / natural beaches (i.e. low development) in social media / informal sources. It is a relatively quiet, natural, pebbly or mixed shore, with fishing boat activity and modest local use. It is described as one of the more untouched / natural beaches (i.e. low development) in social media / informal sources.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/santorini/perivolos-beach-santorini</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/By_the_Seaside_%284355217836%29.jpg/1024px-By_the_Seaside_%284355217836%29.jpg?20130327160246</image:loc>
+      <image:title>Perivolos beach - Greek Beach</image:title>
+      <image:caption>Perivolos Beach (Παραλία Περβολός) lies on the southeastern coast of Santorini, extending between Perissa and Agios Georgios. It’s known for its black volcanic sand / pebbly-volcanic shore and stylish, lively beach club scene.
+
+Because it is long and well organized, Perivolos offers both social, activity-rich zones (with bars, music, water sports) and more relaxed stretches away from the busiest parts.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/naxos/plaka-beach-naxos</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -639,6 +951,19 @@
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/chalkidiki/porto-koufo-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Strand_von_Porto_Koufo.jpg/1024px-Strand_von_Porto_Koufo.jpg?20181001183951</image:loc>
+      <image:title>Porto Koufo beach - Greek Beach</image:title>
+      <image:caption>Porto Koufo is a picturesque small fishing village whose namesake beach lies in one of Greece’s deepest natural harbors. The bay is sheltered by rocky hills and cliffs, giving the sea a calm, dramatic look. The beach itself is relatively narrow and sandy, though the water becomes deep not far from the shore. It’s less “resortified” than many other Chalkidiki beaches, which helps retain a more relaxed, local feel.
+
+Because of the narrow coastline and deeper water, it is less ideal for very young children or those who prefer wide, shallow beaches.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/zakynthos/porto-limnionas-zakynthos</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
@@ -672,6 +997,21 @@
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/chalkidiki/possidi-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/%D0%9F%D0%BE%D1%81%D0%B8%D0%B4%D0%B8_-_%D0%A5%D0%B0%D0%BB%D0%BA%D0%B8%D0%B4%D0%B8%D0%BA%D0%B8.jpg/1024px-%D0%9F%D0%BE%D1%81%D0%B8%D0%B4%D0%B8_-_%D0%A5%D0%B0%D0%BB%D0%BA%D0%B8%D0%B4%D0%B8%D0%BA%D0%B8.jpg?20231103161601</image:loc>
+      <image:title>Possidi beach - Greek Beach</image:title>
+      <image:caption>Possidi is a striking beach on the western tip of the Kassandra peninsula, known for its long sandy spit (cape) that extends into the sea. The beach often changes shape with tides and currents, giving it a dynamic character.
+
+The cape (often called Possidi Cape or “Miti”) is a key attraction — you can walk out along the sandbar to have water on both sides.
+
+Possidi is partly organized with facilities nearer the village, while farther stretches are more natural.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/crete/preveli-beach-crete</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
@@ -680,6 +1020,19 @@
       <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Preveli_Palm_Beach_Panorama_02.JPG/1024px-Preveli_Palm_Beach_Panorama_02.JPG?20141209200757</image:loc>
       <image:title>Preveli beach - Greek Beach</image:title>
       <image:caption>Preveli sits at the mouth of the Kourtaliotiko Gorge on Crete’s southern coast, where the Megalopotamos river meets the sea and forms a lagoon before flowing into the Libyan Sea. A lush palm forest (Phoenix theophrasti) lines the banks, offering a tropical oasis feel. Behind the beach, a gorge climbs up steep terrain, giving an adventurous backdrop. The sand/pebble beach is backed by greenery and the river, making for an exotic, scenic destination. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/chalkidiki/psakoudia-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/%CE%A0%CE%B1%CF%81%CE%B1%CE%BB%CE%AF%CE%B1_%CE%A8%CE%B1%CE%BA%CE%BF%CF%85%CE%B4%CE%B9%CF%8E%CE%BD_-_panoramio.jpg/1024px-%CE%A0%CE%B1%CF%81%CE%B1%CE%BB%CE%AF%CE%B1_%CE%A8%CE%B1%CE%BA%CE%BF%CF%85%CE%B4%CE%B9%CF%8E%CE%BD_-_panoramio.jpg?20161209120335</image:loc>
+      <image:title>Psakoudia beach - Greek Beach</image:title>
+      <image:caption>Psakoudia is a sandy, relatively long and wide beach on the isthmus between the Kassandra and Sithonia peninsulas (the “middle leg” connection). The beach is generally calm, gently sloping, and has been awarded Blue Flag status in many years for its cleanliness and services. It is backed by pine forest and nature, blending natural beauty and infrastructure.
+
+Because of its location between two major peninsulas, it is sometimes chosen as a “gateway” base for exploring both sides of Halkidiki.</image:caption>
     </image:image>
   </url>
   <url>
@@ -705,6 +1058,19 @@
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/chalkidiki/sani-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Sani_3-Sani_Club_02.jpg/1024px-Sani_3-Sani_Club_02.jpg?20230516152104</image:loc>
+      <image:title>Sani beach - Greek Beach</image:title>
+      <image:caption>Sani Beach is part of the upscale Sani Resort complex on the Kassandra peninsula. It features a long stretch of white sand (the resort claims ~7 km of beach) with a backdrop of pine forest, luxury hotels, and a marina. The resort is built within a large private ecological reserve, giving it a mix of natural and high-end amenities. 
+
+Because it’s a managed, resort beach, many of the services are well maintained, though availability may depend on which sub-beach (Ammos, Sani Hill, Bousoulas, etc.) or hotel area you&apos;re using</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/milos/sarakiniko-beach-milos</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -716,6 +1082,21 @@
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/chalkidiki/sarti-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Sarti_630_72%2C_Greece_-_panoramio_%281%29.jpg/1024px-Sarti_630_72%2C_Greece_-_panoramio_%281%29.jpg?20170508165722</image:loc>
+      <image:title>Sarti beach - Greek Beach</image:title>
+      <image:caption>Sarti Beach is one of the longest and most famous beaches in Sithonia, stretching about 3 km along the village front. It faces the Gulf with views across to Mount Athos, which is often a visual highlight. 
+
+The beach is partially organized (sunbeds, umbrellas, beach bars) but because it is quite long, there are quieter stretches away from the main zones. It is awarded the Blue Flag in many years, reflecting water quality and services. 
+
+The shoreline is sandy (soft sand) and the water depth increases gradually, making it suitable for swimmers of different levels.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/crete/sougia-beach-crete</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
@@ -724,6 +1105,30 @@
       <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Sougia%2C_von_Westen_gesehen.jpg/1024px-Sougia%2C_von_Westen_gesehen.jpg?20241209150805</image:loc>
       <image:title>Sougia Beach - Greek Beach</image:title>
       <image:caption>Sougia’s beach stretches in front of the village, forming a long (≈ 1.2 km) and wide shoreline with crystal-clear water. The setting is relaxed and scenic, backed by hills and gorges (notably Agia Irini Gorge) and serving as a quiet base for walkers, nature lovers, and those wanting to escape mass tourism.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/chalkidiki/spathies-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/1/13/Spathies_beach_in_Nikiti.jpg?20120531233401</image:loc>
+      <image:title>Spathies beach - Greek Beach</image:title>
+      <image:caption>Spathies is actually two small coves (a “small” and a “large” bay) located on the western coastline of Sithonia, south of Nikiti. Spathies is actually two small coves (a “small” and a “large” bay) located on the western coastline of Sithonia, south of Nikiti. The smaller cove is nearer the road (about 50 m), often more crowded. The larger cove (≈200 m) lies just beyond that, reached via a short walk; it is quieter and more peaceful. The beaches are unorganized / natural in character.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/chalkidiki/toroni-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Toroni%2C_Sitonia%2C_Gr%C4%8Dka_-_panoramio_%286%29.jpg/1024px-Toroni%2C_Sitonia%2C_Gr%C4%8Dka_-_panoramio_%286%29.jpg?20170505165345</image:loc>
+      <image:title>Toroni beach - Greek Beach</image:title>
+      <image:caption>Toroni is a long sandy beach (over 2 km) in front of the village of Toroni, located along the western side of the Toroneos Gulf, between Tristinika and Porto Koufo. The beach blends organized and “free” zones, allowing both serviced and more natural stretches. There are ruins of a Byzantine / ancient castle (Likithos) at one end, adding historical interest.
+
+Toroni is considered appealing to families, and the organized parts are fully serviced, while large parts of the wide beach are less restricted.</image:caption>
     </image:image>
   </url>
   <url>
@@ -746,6 +1151,21 @@
       <image:loc>https://upload.wikimedia.org/wikipedia/commons/6/67/Vlychada_Strand_05.jpg</image:loc>
       <image:title>Vlychada Beach - Greek Beach</image:title>
       <image:caption>Vlychada Beach lies on the southern coast of Santorini, about 13-14 km from Fira. The beach is known for its dramatic volcanic geology: towering white cliffs sculpted by wind and sea, a long shoreline of gray sand mixed with pebbles, and deep, clear waters. Its lunar-like landscape gives it a peaceful, almost surreal vibe, making it ideal for those seeking something scenic and less crowded than the more tourist-heavy beaches. The water close to shore is relatively shallow to begin with, but deepens quickly. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/chalkidiki/vourvourou-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Vourvourou_beach_sithonia_01.jpg/1024px-Vourvourou_beach_sithonia_01.jpg?20060328121328</image:loc>
+      <image:title>Vourvourou beach - Greek Beach</image:title>
+      <image:caption>Vourvourou is a cluster of beaches and coastal stretches around the small village of the same name on the eastern side of Sithonia. The coastline faces a bay dotted with about nine small islands (notably Diaporos) which give parts of the sea a lagoon-style feel.
+
+The beaches are generally sandy or soft sand, with shallow, clear waters, and the setting is more relaxed and natural than many resort beaches. The combination of islands, caves, shallow bays and calm seas makes it especially appealing for swimming, snorkeling, and boat exploration.
+
+Because the area is less intensely developed than big resort zones, some stretches have basic infrastructure, while others remain more wild or minimally serviced.</image:caption>
     </image:image>
   </url>
   <url>
@@ -779,6 +1199,21 @@
       <image:loc>https://upload.wikimedia.org/wikipedia/commons/1/1a/Xigia_Beach_Zakynthos_%2845561234755%29.jpg</image:loc>
       <image:title>Xigia - Greek Beach</image:title>
       <image:caption>Xigia Beach, also known as Xigia Sulphur Beach, is a striking natural destination on the northeastern coast of Zakynthos. Towering white cliffs cradle small coves where sulfur springs flow directly into the sea, giving the water a milky-turquoise hue. It’s known for its therapeutic waters thought to benefit skin, muscles, and overall wellbeing. The shore is composed of fine white pebbles, with steep staircases leading down to the water. Because of the cliffs, parts of the beach are shaded in certain times of day — especially early morning and late afternoon.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/chalkidiki/zografou-beach-chalkidiki</loc>
+    <lastmod>2025-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Zografou_Beach%2C_Sithonia%2C_Chalkidiki%2C_Greece_03.jpg/1024px-Zografou_Beach%2C_Sithonia%2C_Chalkidiki%2C_Greece_03.jpg?20080513150131</image:loc>
+      <image:title>Zografou beach - Greek Beach</image:title>
+      <image:caption>Zografou is a secluded cove-style beach lying south of Vourvourou, between Vourvourou and Armenistis. It is part of a camping / bungalow area (Camp Porto Elea) and remains less crowded than many main beaches.
+
+The shore is a mix of sand and pebbles / small rocks, with deeper water not far from the coast. It is surrounded by rock formations and lush vegetation in the hinterland. Because it is somewhat hidden / less developed, it attracts people who prefer quieter, more natural beach settings.
+
+One user review notes: “almost no sand, mostly small rocks … a lot of rocks in the water” and warns of sea urchins near ends.</image:caption>
     </image:image>
   </url>
   
