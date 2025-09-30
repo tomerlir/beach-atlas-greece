@@ -30,14 +30,18 @@ import { useUmamiPageviews } from "@/hooks/useUmami";
 
 const queryClient = new QueryClient();
 
+const RouteAnalytics = () => {
+  useUmamiPageviews();
+  return null;
+};
+
 const AppContent = () => {
   // Register service worker for caching and offline support
   useServiceWorker();
-  // Track SPA pageviews on route changes
-  useUmamiPageviews();
 
   return (
     <BrowserRouter>
+      <RouteAnalytics />
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Index />} />
