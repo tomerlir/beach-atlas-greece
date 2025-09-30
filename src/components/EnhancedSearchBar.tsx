@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useDebouncedSearch } from '@/hooks/useDebouncedSearch';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FilterState } from '@/hooks/useUrlState';
+import { analytics } from '@/lib/analytics';
 
 interface EnhancedSearchBarProps {
   filters: FilterState;
@@ -108,7 +109,10 @@ export default function EnhancedSearchBar({
 
         {/* Search Button */}
         <Button
-          onClick={() => {/* search logic already handled by onChange */}}
+          onClick={() => {
+            // fire a search_submit event with q_length and current result presence
+            analytics.event('search_submit', { q_length: searchInput.length });
+          }}
           className="h-14 px-8 bg-accent text-accent-foreground hover:bg-accent/90 border-2 border-l-0 border-accent rounded-r-2xl rounded-l-none font-medium"
           aria-label="Search beaches"
         >

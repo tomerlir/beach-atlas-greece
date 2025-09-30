@@ -1,5 +1,6 @@
 import { useState, useCallback, useRef } from 'react';
 import { useToast } from '@/hooks/use-toast';
+import { analytics } from '@/lib/analytics';
 
 interface GeolocationState {
   location: GeolocationPosition | null;
@@ -31,6 +32,7 @@ export const useGeolocation = () => {
         description: error,
         variant: "destructive",
       });
+      analytics.event('near_me_denied', { granted: false });
       return;
     }
 
@@ -68,6 +70,7 @@ export const useGeolocation = () => {
             error: null,
             permission: 'granted',
           });
+          analytics.event('near_me_enable', { granted: true });
           toast({
             title: "Location found",
             description: "Using your location to show nearby beaches.",
@@ -102,6 +105,8 @@ export const useGeolocation = () => {
             error: errorMessage,
             permission,
           });
+          const granted = permission === 'granted';
+          analytics.event(granted ? 'near_me_enable' : 'near_me_denied', { granted });
           
           toast({
             title: "Location error",

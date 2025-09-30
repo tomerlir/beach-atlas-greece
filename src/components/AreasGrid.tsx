@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import OptimizedImage from "@/components/OptimizedImage";
 import PhotoAttribution from "@/components/PhotoAttribution";
+import { analytics } from "@/lib/analytics";
 
 interface AreasGridProps {
   maxAreas?: number;
@@ -111,6 +112,7 @@ const AreasGrid = ({ maxAreas = 12, showViewAll = true, className = "" }: AreasG
                 to={`/${area.slug}`}
                 className="group block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-xl flex-shrink-0 w-32"
                 aria-label={`Explore ${area.beach_count} beaches in ${area.name}`}
+                onClick={() => analytics.event('area_chip_click', { area_slug: area.slug })}
               >
                 <Card className="h-full transition-all duration-300 hover:shadow-strong overflow-hidden border-0 bg-white shadow-soft hover:shadow-medium">
                   {/* Area Image - Fixed 3:2 aspect ratio */}

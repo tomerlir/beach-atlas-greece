@@ -1,6 +1,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { analytics } from "@/lib/analytics";
 
 interface PaginationProps {
   currentPage: number;
@@ -39,7 +40,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
       <Button
         variant="outline"
         size="sm"
-        onClick={() => onPageChange(currentPage - 1)}
+        onClick={() => { analytics.event('paginate', { page: currentPage - 1 }); onPageChange(currentPage - 1); }}
         disabled={currentPage === 1}
         className="flex items-center gap-1 text-xs sm:text-sm"
       >
@@ -56,7 +57,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
             <Button
               variant={1 === currentPage ? "default" : "outline"}
               size="sm"
-              onClick={() => onPageChange(1)}
+            onClick={() => { analytics.event('paginate', { page: 1 }); onPageChange(1); }}
               className="w-8 sm:w-10 text-xs sm:text-sm"
             >
               1
@@ -73,7 +74,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
             key={page}
             variant={page === currentPage ? "default" : "outline"}
             size="sm"
-            onClick={() => onPageChange(page)}
+            onClick={() => { analytics.event('paginate', { page }); onPageChange(page); }}
             className="w-8 sm:w-10 text-xs sm:text-sm"
           >
             {page}
@@ -89,7 +90,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
             <Button
               variant={totalPages === currentPage ? "default" : "outline"}
               size="sm"
-              onClick={() => onPageChange(totalPages)}
+              onClick={() => { analytics.event('paginate', { page: totalPages }); onPageChange(totalPages); }}
               className="w-8 sm:w-10 text-xs sm:text-sm"
             >
               {totalPages}
@@ -102,7 +103,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
       <Button
         variant="outline"
         size="sm"
-        onClick={() => onPageChange(currentPage + 1)}
+        onClick={() => { analytics.event('paginate', { page: currentPage + 1 }); onPageChange(currentPage + 1); }}
         disabled={currentPage === totalPages}
         className="flex items-center gap-1 text-xs sm:text-sm"
       >

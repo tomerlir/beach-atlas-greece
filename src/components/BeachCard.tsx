@@ -18,6 +18,7 @@ import PhotoAttribution from "@/components/PhotoAttribution";
 import { generateBeachImageAltText } from "@/lib/accessibility";
 import { generateBeachUrl } from "@/lib/utils";
 import { useNavigationState } from "@/hooks/useNavigationState";
+import { analytics } from "@/lib/analytics";
 
 interface Beach {
   id: string;
@@ -115,6 +116,7 @@ const BeachCard = ({ beach, distance, showDistance = true, compact = false }: Be
 
   // Handle click to store navigation source for better back navigation
   const handleBeachCardClick = () => {
+    analytics.event('open_beach', { id: beach.id, name: beach.name, area: beach.area });
     storeNavigationSource();
   };
 

@@ -27,6 +27,7 @@ import WaveConditionsDropdown from '@/components/WaveConditionsDropdown';
 import OrganizedDropdown from '@/components/OrganizedDropdown';
 import SortDropdown from '@/components/SortDropdown';
 import { getAmenityLabel } from '@/lib/amenities';
+import { analytics } from '@/lib/analytics';
 
 interface FilterBarProps {
   filters: FilterState;
@@ -63,6 +64,7 @@ export default function FilterBar({
 
 
   const handleBlueFlagToggle = useCallback((checked: boolean) => {
+    analytics.event(checked ? 'filter_apply' : 'filter_clear', { name: 'blue_flag', value: String(checked) });
     onFiltersChange({ blueFlag: checked, page: 1 });
   }, [onFiltersChange]);
 
@@ -75,6 +77,7 @@ export default function FilterBar({
     // When disabling Near me, revert to A->Z sorting
     const updates: Partial<FilterState> = { nearMe: checked, page: 1 };
     if (checked) {
+      analytics.event('near_me_enable', { granted: true });
       updates.sort = 'distance.asc';
     } else {
       // When turning off near me, revert to A->Z sorting

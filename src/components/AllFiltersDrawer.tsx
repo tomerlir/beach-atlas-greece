@@ -12,6 +12,7 @@ import { useBeachCount } from '@/hooks/useBeachCount';
 import { useDraftState } from '@/hooks/useDraftState';
 import { FilterState } from '@/hooks/useUrlState';
 import { getAllAmenities } from '@/lib/amenities';
+import { analytics } from '@/lib/analytics';
 
 interface AllFiltersDrawerProps {
   isOpen: boolean;
@@ -86,6 +87,22 @@ export default function AllFiltersDrawer({
 
   const handleApply = () => {
     onApplyFilters(draftFilters);
+    // Track applied filters with coarse names and values; include live count as results
+    if (draftFilters.blueFlag !== filters.blueFlag) {
+      analytics.event('filter_apply', { name: 'blue_flag', value: String(draftFilters.blueFlag), results: liveCount });
+    }
+    if (draftFilters.organized.join(',') !== filters.organized.join(',')) {
+      analytics.event('filter_apply', { name: 'type', value: draftFilters.organized.join(','), results: liveCount });
+    }
+    if (draftFilters.parking.join(',') !== filters.parking.join(',')) {
+      analytics.event('filter_apply', { name: 'parking', value: draftFilters.parking.join(','), results: liveCount });
+    }
+    if (draftFilters.waveConditions.join(',') !== filters.waveConditions.join(',')) {
+      analytics.event('filter_apply', { name: 'wave', value: draftFilters.waveConditions.join(','), results: liveCount });
+    }
+    if (draftFilters.amenities.join(',') !== filters.amenities.join(',')) {
+      analytics.event('filter_apply', { name: 'amenities', value: draftFilters.amenities.join(','), results: liveCount });
+    }
     onClose();
   };
 
@@ -106,6 +123,7 @@ export default function AllFiltersDrawer({
       page: 1,
       nearMe: false,
     });
+    analytics.event('filter_clear', { name: 'all' });
   };
 
   const toggleAmenity = (amenityId: string) => {

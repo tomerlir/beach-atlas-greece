@@ -26,12 +26,15 @@ import NotFound from "./pages/NotFound";
 import { useServiceWorker } from "@/hooks/useServiceWorker";
 import ScrollToTop from "@/components/ScrollToTop";
 import AcceptInvite from "./pages/admin/AcceptInvite";
+import { useUmamiPageviews } from "@/hooks/useUmami";
 
 const queryClient = new QueryClient();
 
 const AppContent = () => {
   // Register service worker for caching and offline support
   useServiceWorker();
+  // Track SPA pageviews on route changes
+  useUmamiPageviews();
 
   return (
     <BrowserRouter>
