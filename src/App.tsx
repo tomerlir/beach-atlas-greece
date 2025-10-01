@@ -26,14 +26,8 @@ import NotFound from "./pages/NotFound";
 import { useServiceWorker } from "@/hooks/useServiceWorker";
 import ScrollToTop from "@/components/ScrollToTop";
 import AcceptInvite from "./pages/admin/AcceptInvite";
-import { useUmamiPageviews } from "@/hooks/useUmami";
 
 const queryClient = new QueryClient();
-
-const RouteAnalytics = () => {
-  useUmamiPageviews();
-  return null;
-};
 
 const AppContent = () => {
   // Register service worker for caching and offline support
@@ -41,7 +35,6 @@ const AppContent = () => {
 
   return (
     <BrowserRouter>
-      <RouteAnalytics />
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Index />} />
