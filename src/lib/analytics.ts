@@ -6,7 +6,7 @@ const isBrowser = typeof window !== 'undefined';
 
 function getUmami(): any | null {
   if (!isBrowser) return null;
-  // @ts-ignore - umami is injected by script tag
+  // @ts-ignore - umami is injected by script tag in the index.html file
   return (window as any).umami || null;
 }
 
