@@ -16,6 +16,11 @@ export const useServiceWorker = (): ServiceWorkerState => {
   });
 
   useEffect(() => {
+    // Don't register service worker in development
+    if (import.meta.env.DEV) {
+      return;
+    }
+
     // Check if service workers are supported
     if (!('serviceWorker' in navigator)) {
       return;

@@ -41,23 +41,21 @@ const AdminLayout: React.FC = () => {
     }`;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="flex min-h-screen bg-background">
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div 
-          className="fixed inset-0 z-40 lg:hidden"
+          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
           onClick={() => setSidebarOpen(false)}
           aria-hidden="true"
-        >
-          <div className="fixed inset-0 bg-black/25" />
-        </div>
+        />
       )}
 
       {/* Sidebar */}
-      <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-card border-r border-border transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 flex flex-col ${
+      <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-card border-r border-border shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:sticky lg:h-screen flex flex-col ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}>
-        <div className="flex items-center justify-between h-16 px-4 border-b border-border">
+        <div className="flex items-center justify-between h-16 px-4 border-b border-border shrink-0">
           <h2 className="text-lg font-semibold text-foreground">
             Admin Panel
           </h2>
@@ -72,28 +70,32 @@ const AdminLayout: React.FC = () => {
           </Button>
         </div>
         
-        <nav className="mt-4 px-4 space-y-2 flex-1 overflow-y-auto">
-          {navigationItems.map((item) => (
-            <NavLink
-              key={item.name}
-              to={item.href}
-              end={item.href === '/admin'}
-              className={getNavLinkClass}
-              onClick={() => setSidebarOpen(false)}
-            >
-              <item.icon className="mr-3 h-4 w-4" />
-              {item.name}
-            </NavLink>
-          ))}
+        <nav className="flex-1 overflow-y-auto px-3 py-4">
+          <div className="space-y-1">
+            {navigationItems.map((item) => (
+              <NavLink
+                key={item.name}
+                to={item.href}
+                end={item.href === '/admin'}
+                className={getNavLinkClass}
+                onClick={() => setSidebarOpen(false)}
+              >
+                <item.icon className="mr-3 h-5 w-5 shrink-0" />
+                {item.name}
+              </NavLink>
+            ))}
+          </div>
         </nav>
 
         {/* User info and sign out */}
-        <div className="mt-auto p-4 border-t border-border bg-card">
-          <div className="space-y-2">
-            <p className="text-xs text-muted-foreground">Signed in as:</p>
-            <p className="text-sm font-medium text-foreground truncate">
-              {profile?.email}
-            </p>
+        <div className="shrink-0 p-4 border-t border-border bg-muted/50">
+          <div className="space-y-3">
+            <div>
+              <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Signed in as</p>
+              <p className="text-sm font-medium text-foreground truncate">
+                {profile?.email}
+              </p>
+            </div>
             <Button
               variant="outline"
               size="sm"
@@ -106,21 +108,21 @@ const AdminLayout: React.FC = () => {
             </Button>
           </div>
         </div>
-      </div>
+      </aside>
 
       {/* Main content */}
-      <div className="lg:pl-64">
+      <div className="flex-1 flex flex-col min-w-0">
         {/* Top bar */}
-        <header className="bg-card border-b border-border h-16 flex items-center justify-between px-4">
-          <div className="flex items-center">
+        <header className="sticky top-0 z-30 bg-card border-b border-border h-16 flex items-center px-4 lg:px-6 shrink-0 shadow-sm">
+          <div className="flex items-center gap-3">
             <Button
               variant="ghost"
               size="sm"
-              className="lg:hidden mr-2"
+              className="lg:hidden"
               onClick={() => setSidebarOpen(true)}
               aria-label="Open sidebar"
             >
-              <Menu className="h-4 w-4" />
+              <Menu className="h-5 w-5" />
             </Button>
             <h1 className="text-xl font-semibold text-foreground">
               Greek Beaches Directory
@@ -129,8 +131,8 @@ const AdminLayout: React.FC = () => {
         </header>
 
         {/* Page content */}
-        <main className="flex-1 p-6">
-          <div className="max-w-7xl mx-auto">
+        <main className="flex-1 overflow-auto">
+          <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
             <Outlet />
           </div>
         </main>
