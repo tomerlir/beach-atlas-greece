@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -268,8 +268,6 @@ const Area = () => {
                 <EnhancedSearchBar
                   filters={filters}
                   onFiltersChange={updateFilters}
-                  userLocation={location}
-                  hasResults={filteredBeaches.length > 0}
                   className="w-full"
                   placeholder={`Search beaches in ${areaName}...`}
                 />

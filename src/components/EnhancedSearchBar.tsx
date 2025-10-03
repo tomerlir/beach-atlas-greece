@@ -1,8 +1,7 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Search, X } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { useDebouncedSearch } from '@/hooks/useDebouncedSearch';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FilterState } from '@/hooks/useUrlState';
 import { analytics } from '@/lib/analytics';
@@ -10,8 +9,6 @@ import { analytics } from '@/lib/analytics';
 interface EnhancedSearchBarProps {
   filters: FilterState;
   onFiltersChange: (updates: Partial<FilterState>) => void;
-  userLocation: GeolocationPosition | null;
-  hasResults: boolean;
   className?: string;
   placeholder?: string;
 }
@@ -19,30 +16,37 @@ interface EnhancedSearchBarProps {
 export default function EnhancedSearchBar({
   filters,
   onFiltersChange,
-  userLocation,
-  hasResults,
   className = '',
   placeholder = "Search beaches, islands, or places in Greece...",
 }: EnhancedSearchBarProps) {
   const [searchFocused, setSearchFocused] = useState(false);
+  const [searchInput, setSearchInput] = useState(filters.search);
   const inputRef = useRef<HTMLInputElement>(null);
   const isMobile = useIsMobile();
   
-  // Debounced search with 200ms delay for better responsiveness
-  const { searchInput, setSearchInput, clearSearchInput } = useDebouncedSearch(
-    filters.search,
-    (value: string) => onFiltersChange({ search: value, page: 1 }),
-    200
-  );
+  // Sync local state when filters.search changes externally (e.g., clear button)
+  useEffect(() => {
+    setSearchInput(filters.search);
+  }, [filters.search]);
 
-  // Handle search input changes
-  const handleSearchChange = (value: string) => {
-    setSearchInput(value);
+  // Handle search submission
+  const handleSearchSubmit = () => {
+    if (searchInput !== filters.search) {
+      onFiltersChange({ search: searchInput, page: 1 });
+      analytics.event('search_submit', { q_length: searchInput.length });
+    }
+  };
+
+  // Handle Enter key press
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSearchSubmit();
+    }
   };
 
   // Handle clear search
   const handleClearSearch = () => {
-    clearSearchInput();
+    setSearchInput('');
     onFiltersChange({ search: '', page: 1 });
     inputRef.current?.focus();
   };
@@ -75,7 +79,8 @@ export default function EnhancedSearchBar({
             ref={inputRef}
             placeholder={responsivePlaceholder}
             value={searchInput}
-            onChange={(e) => handleSearchChange(e.target.value)}
+            onChange={(e) => setSearchInput(e.target.value)}
+            onKeyDown={handleKeyDown}
             onFocus={() => setSearchFocused(true)}
             onBlur={() => setSearchFocused(false)}
             style={{ color: '#4b5563' }}
@@ -109,10 +114,7 @@ export default function EnhancedSearchBar({
 
         {/* Search Button */}
         <Button
-          onClick={() => {
-            // fire a search_submit event with q_length and current result presence
-            analytics.event('search_submit', { q_length: searchInput.length });
-          }}
+          onClick={handleSearchSubmit}
           className="h-14 px-8 bg-accent text-accent-foreground hover:bg-accent/90 border-2 border-l-0 border-accent rounded-r-2xl rounded-l-none font-medium"
           aria-label="Search beaches"
         >

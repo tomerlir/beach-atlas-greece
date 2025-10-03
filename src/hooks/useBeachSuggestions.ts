@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { Beach } from '@/types/beach';
@@ -47,7 +47,7 @@ export const useBeachSuggestions = ({
 }: UseBeachSuggestionsProps) => {
   const [suggestions, setSuggestions] = useState<SuggestionWithReason[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [cache, setCache] = useState<Map<string, SuggestionWithReason[]>>(new Map());
+  const cacheRef = useRef<Map<string, SuggestionWithReason[]>>(new Map());
 
   // Create cache key from filter state
   const cacheKey = useMemo(() => {
@@ -55,7 +55,7 @@ export const useBeachSuggestions = ({
       nearMe: filters.nearMe,
       organized: filters.organized,
       blueFlag: filters.blueFlag,
-      amenities: filters.amenities.sort(),
+      amenities: [...filters.amenities].sort(),
       coords: userLocation ? [userLocation.coords.latitude, userLocation.coords.longitude] : null
     });
     return key;
@@ -93,8 +93,8 @@ export const useBeachSuggestions = ({
     }
 
     // Check cache first
-    if (cache.has(cacheKey)) {
-      setSuggestions(cache.get(cacheKey)!);
+    if (cacheRef.current.has(cacheKey)) {
+      setSuggestions(cacheRef.current.get(cacheKey)!);
       return;
     }
 
@@ -217,7 +217,7 @@ export const useBeachSuggestions = ({
       }
 
       // Cache the results
-      setCache(prev => new Map(prev).set(cacheKey, suggestions));
+      cacheRef.current.set(cacheKey, suggestions);
       setSuggestions(suggestions);
     } catch (error) {
       console.error('Error generating suggestions:', error);
@@ -225,7 +225,7 @@ export const useBeachSuggestions = ({
     } finally {
       setIsLoading(false);
     }
-  }, [allBeaches, filters, userLocation, hasResults, cacheKey, cache]);
+  }, [allBeaches, hasResults, cacheKey]);
 
   // Trigger suggestions when no results
   useEffect(() => {
