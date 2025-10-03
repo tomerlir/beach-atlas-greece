@@ -5,12 +5,15 @@ import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FilterState } from '@/hooks/useUrlState';
 import { analytics } from '@/lib/analytics';
+import { extractFromQuery } from '@/lib/nlpExtractor';
 
 interface EnhancedSearchBarProps {
   filters: FilterState;
   onFiltersChange: (updates: Partial<FilterState>) => void;
   className?: string;
   placeholder?: string;
+  enableNLP?: boolean; // Enable natural language processing
+  currentArea?: string; // Current area context (for area pages)
 }
 
 export default function EnhancedSearchBar({
@@ -18,6 +21,8 @@ export default function EnhancedSearchBar({
   onFiltersChange,
   className = '',
   placeholder = "Search beaches, islands, or places in Greece...",
+  enableNLP = true,
+  currentArea,
 }: EnhancedSearchBarProps) {
   const [searchFocused, setSearchFocused] = useState(false);
   const [searchInput, setSearchInput] = useState(filters.search);
@@ -29,11 +34,70 @@ export default function EnhancedSearchBar({
     setSearchInput(filters.search);
   }, [filters.search]);
 
-  // Handle search submission
+  // Handle search submission with NLP extraction
   const handleSearchSubmit = () => {
     if (searchInput !== filters.search) {
-      onFiltersChange({ search: searchInput, page: 1 });
-      analytics.event('search_submit', { q_length: searchInput.length });
+      // If NLP is enabled, extract structured filters
+      if (enableNLP && searchInput.trim()) {
+        const extracted = extractFromQuery(searchInput);
+        
+        // Build filter updates
+        const updates: Partial<FilterState> = { page: 1 };
+        
+        // Homepage: apply filters + place text for search
+        if (!currentArea) {
+          // NOTE: We currently don't have a dedicated 'type' filter in FilterState
+          // so type extraction is implicit through search text matching
+          if (extracted.waveConditions && extracted.waveConditions.length > 0) {
+            updates.waveConditions = extracted.waveConditions;
+          }
+          if (extracted.parking && extracted.parking.length > 0) {
+            updates.parking = extracted.parking;
+          }
+          if (extracted.amenities && extracted.amenities.length > 0) {
+            updates.amenities = extracted.amenities;
+          }
+          if (extracted.blueFlag) {
+            updates.blueFlag = true;
+          }
+          // Use place as search text if provided (for substring matching on name/area)
+          updates.search = extracted.place || searchInput;
+        } else {
+          // Area page: apply filters only (ignore place unless it's different)
+          if (extracted.waveConditions && extracted.waveConditions.length > 0) {
+            updates.waveConditions = extracted.waveConditions;
+          }
+          if (extracted.parking && extracted.parking.length > 0) {
+            updates.parking = extracted.parking;
+          }
+          if (extracted.amenities && extracted.amenities.length > 0) {
+            updates.amenities = extracted.amenities;
+          }
+          if (extracted.blueFlag) {
+            updates.blueFlag = true;
+          }
+          // Keep search text for name matching within area
+          updates.search = searchInput;
+          
+          // Store the extracted place for mismatch detection
+          if (extracted.place) {
+            updates.extractedPlace = extracted.place;
+          } else {
+            // Clear extractedPlace if no place detected
+            updates.extractedPlace = '';
+          }
+        }
+        
+        onFiltersChange(updates);
+        analytics.event('nlp_search_submit', { 
+          q_length: searchInput.length,
+          extracted_filters: Object.keys(extracted).length
+        });
+      } else {
+        // No NLP: just use as plain search text
+        onFiltersChange({ search: searchInput, page: 1 });
+        analytics.event('search_submit', { q_length: searchInput.length });
+      }
     }
   };
 
@@ -47,7 +111,7 @@ export default function EnhancedSearchBar({
   // Handle clear search
   const handleClearSearch = () => {
     setSearchInput('');
-    onFiltersChange({ search: '', page: 1 });
+    onFiltersChange({ search: '', extractedPlace: '', page: 1 });
     inputRef.current?.focus();
   };
 

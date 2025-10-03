@@ -10,11 +10,13 @@ import BeachCard from "@/components/BeachCard";
 import BeachCardSkeleton from "@/components/BeachCardSkeleton";
 import Pagination from "@/components/Pagination";
 import { GeolocationErrorBanner } from "@/components/GeolocationErrorBanner";
+import { RelaxationBanner } from "@/components/RelaxationBanner";
 import EnhancedSearchBar from "@/components/EnhancedSearchBar";
 import AreasGrid from "@/components/AreasGrid";
 import { useGeolocation } from "@/hooks/useGeolocation";
 import { useUrlState } from "@/hooks/useUrlState";
 import { useBeachFiltering } from "@/hooks/useBeachFiltering";
+import { useFilterRelaxation } from "@/hooks/useFilterRelaxation";
 import { useDistanceCalculation } from "@/hooks/useDistanceCalculation";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
 import { Beach } from "@/types/beach";
@@ -73,6 +75,16 @@ const Index = () => {
 
   // Filter and sort beaches
   const filteredBeaches = useBeachFiltering(beachesWithDistance, filters, location);
+
+  // Check if we should show relaxation suggestion
+  const relaxation = useFilterRelaxation(beaches, filteredBeaches.length, filters);
+
+  // Handle applying relaxation
+  const handleApplyRelaxation = () => {
+    if (relaxation) {
+      updateFilters(relaxation.relaxedFilters);
+    }
+  };
 
   // Pagination
   const totalPages = Math.ceil(filteredBeaches.length / BEACHES_PER_PAGE);
@@ -297,6 +309,16 @@ const Index = () => {
             onRetry={handleGeolocationRetry}
             onDismiss={handleDismissGeolocationError}
             isRetrying={isLoadingLocation}
+          />
+        </div>
+      )}
+
+      {/* Relaxation Banner */}
+      {relaxation && filteredBeaches.length === 0 && (
+        <div className="container mx-auto px-4 py-2">
+          <RelaxationBanner
+            steps={relaxation.steps}
+            onApplyRelaxation={handleApplyRelaxation}
           />
         </div>
       )}

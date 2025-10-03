@@ -11,6 +11,7 @@ export interface FilterState {
   sort: string | null;
   page: number;
   nearMe: boolean; // New field to track if "Near me" is enabled
+  extractedPlace?: string; // Extracted place from NLP (for area mismatch detection)
 }
 
 const defaultFilters: FilterState = {
@@ -75,6 +76,10 @@ export function useUrlState() {
     // Parse nearMe
     const nearMe = searchParams.get('nearMe');
     if (nearMe === 'true') state.nearMe = true;
+    
+    // Parse extractedPlace
+    const extractedPlace = searchParams.get('extractedPlace');
+    if (extractedPlace) state.extractedPlace = extractedPlace;
     
     // Parse page
     const page = searchParams.get('page');
@@ -164,6 +169,15 @@ export function useUrlState() {
           newParams.set('nearMe', 'true');
         } else {
           newParams.delete('nearMe');
+        }
+      }
+      
+      // Update extractedPlace
+      if (updates.extractedPlace !== undefined) {
+        if (updates.extractedPlace) {
+          newParams.set('extractedPlace', updates.extractedPlace);
+        } else {
+          newParams.delete('extractedPlace');
         }
       }
       
