@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import { CONTACT_EMAIL } from "@/lib/constants";
@@ -12,14 +12,12 @@ import BeachCardSkeleton from "@/components/BeachCardSkeleton";
 import Pagination from "@/components/Pagination";
 import { GeolocationErrorBanner } from "@/components/GeolocationErrorBanner";
 import EnhancedSearchBar from "@/components/EnhancedSearchBar";
-import { AreaMismatchBanner } from "@/components/AreaMismatchBanner";
 import { useGeolocation } from "@/hooks/useGeolocation";
 import { useAreaUrlState } from "@/hooks/useAreaUrlState";
 import { useAreaBeachFiltering } from "@/hooks/useAreaBeachFiltering";
 import { useDistanceCalculation } from "@/hooks/useDistanceCalculation";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
 import { useAreaBySlug, useNearbyAreas } from "@/hooks/useAreas";
-import { placeMatchesArea } from "@/lib/nlpExtractor";
 import { Beach } from "@/types/beach";
 import type { Area } from "@/types/area";
 import heroImage from "@/assets/hero-background.png";
@@ -32,7 +30,6 @@ const BEACHES_PER_PAGE = 9;
 
 const Area = () => {
   const { areaSlug } = useParams<{ areaSlug: string }>();
-  const navigate = useNavigate();
   const { location, isLoading: isLoadingLocation, getCurrentLocation, permission: locationPermission, error: locationError } = useGeolocation();
   const [isAllFiltersOpen, setIsAllFiltersOpen] = useState(false);
   const [showGeolocationError, setShowGeolocationError] = useState(false);
@@ -156,12 +153,6 @@ const Area = () => {
     setShowGeolocationError(false);
   };
 
-  // Check if there's an area mismatch (user searched for different place)
-  const showMismatch = areaName && filters.extractedPlace && !placeMatchesArea(filters.extractedPlace, areaName);
-  const mismatchSearchUrl = showMismatch 
-    ? `/?search=${encodeURIComponent(filters.extractedPlace || '')}`
-    : '';
-
   // If area not found, show 404
   if (!isLoading && !error && areaSlug && !areaName) {
     return <NotFound />;
@@ -279,8 +270,6 @@ const Area = () => {
                   onFiltersChange={updateFilters}
                   className="w-full"
                   placeholder={`Search beaches in ${areaName}...`}
-                  enableNLP={true}
-                  currentArea={areaName}
                 />
               </div>
             )}
@@ -339,17 +328,6 @@ const Area = () => {
                   onRetry={handleGeolocationRetry}
                   onDismiss={handleDismissGeolocationError}
                   isRetrying={isLoadingLocation}
-                />
-              </div>
-            )}
-
-            {/* Area Mismatch Banner */}
-            {showMismatch && (
-              <div className="container mx-auto px-4 py-2">
-                <AreaMismatchBanner
-                  searchedPlace={filters.extractedPlace || ''}
-                  currentArea={areaName}
-                  searchUrl={mismatchSearchUrl}
                 />
               </div>
             )}

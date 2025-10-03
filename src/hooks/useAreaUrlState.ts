@@ -12,7 +12,6 @@ export interface AreaFilterState {
   page: number;
   nearMe: boolean;
   area: string; // Area is locked and cannot be changed
-  extractedPlace?: string; // Extracted place from NLP (for area mismatch detection)
 }
 
 const defaultFilters: Omit<AreaFilterState, 'area'> = {
@@ -77,10 +76,6 @@ export function useAreaUrlState(areaName: string) {
     // Parse nearMe
     const nearMe = searchParams.get('nearMe');
     if (nearMe === 'true') state.nearMe = true;
-    
-    // Parse extractedPlace
-    const extractedPlace = searchParams.get('extractedPlace');
-    if (extractedPlace) state.extractedPlace = extractedPlace;
     
     // Parse page
     const page = searchParams.get('page');
@@ -170,15 +165,6 @@ export function useAreaUrlState(areaName: string) {
           newParams.set('nearMe', 'true');
         } else {
           newParams.delete('nearMe');
-        }
-      }
-      
-      // Update extractedPlace
-      if ('extractedPlace' in updates) {
-        if (updates.extractedPlace) {
-          newParams.set('extractedPlace', updates.extractedPlace);
-        } else {
-          newParams.delete('extractedPlace');
         }
       }
       
