@@ -41,6 +41,42 @@ export type Database = {
         }
         Relationships: []
       }
+      admin_invites: {
+        Row: {
+          accepted: boolean
+          accepted_at: string | null
+          created_at: string
+          email: string
+          email_lower: string | null
+          expires_at: string
+          id: string
+          invited_by: string
+          token: string
+        }
+        Insert: {
+          accepted?: boolean
+          accepted_at?: string | null
+          created_at?: string
+          email: string
+          email_lower?: string | null
+          expires_at?: string
+          id?: string
+          invited_by: string
+          token?: string
+        }
+        Update: {
+          accepted?: boolean
+          accepted_at?: string | null
+          created_at?: string
+          email?: string
+          email_lower?: string | null
+          expires_at?: string
+          id?: string
+          invited_by?: string
+          token?: string
+        }
+        Relationships: []
+      }
       areas: {
         Row: {
           created_at: string | null
@@ -184,6 +220,30 @@ export type Database = {
         }
         Relationships: []
       }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       beaches_with_areas: {
@@ -227,6 +287,10 @@ export type Database = {
       }
     }
     Functions: {
+      accept_admin_invite: {
+        Args: { invite_token: string }
+        Returns: boolean
+      }
       bootstrap_first_admin: {
         Args: { admin_email: string }
         Returns: boolean
@@ -234,6 +298,10 @@ export type Database = {
       can_access_admin_functions: {
         Args: Record<PropertyKey, never>
         Returns: boolean
+      }
+      create_admin_invite: {
+        Args: { invitee_email: string }
+        Returns: string
       }
       demote_from_admin: {
         Args: { target_user_id: string }
@@ -273,9 +341,27 @@ export type Database = {
           user_id: string
         }[]
       }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
       is_admin: {
         Args: Record<PropertyKey, never>
         Returns: boolean
+      }
+      list_admin_invites: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          accepted: boolean
+          created_at: string
+          email: string
+          expires_at: string
+          id: string
+          invited_by: string
+        }[]
       }
       log_admin_action: {
         Args: {
@@ -291,7 +377,7 @@ export type Database = {
       }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -418,6 +504,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const

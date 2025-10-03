@@ -105,8 +105,7 @@ export const useGeolocation = () => {
             error: errorMessage,
             permission,
           });
-          const granted = permission === 'granted';
-          analytics.event(granted ? 'near_me_enable' : 'near_me_denied', { granted });
+          analytics.event('near_me_denied', { granted: false });
           
           toast({
             title: "Location error",
