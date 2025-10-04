@@ -24,6 +24,7 @@ import { FilterState } from '@/hooks/useUrlState';
 import AmenitiesDropdown from '@/components/AmenitiesDropdown';
 import ParkingDropdown from '@/components/ParkingDropdown';
 import WaveConditionsDropdown from '@/components/WaveConditionsDropdown';
+import BeachTypeDropdown from '@/components/BeachTypeDropdown';
 import OrganizedDropdown from '@/components/OrganizedDropdown';
 import SortDropdown from '@/components/SortDropdown';
 import { getAmenityLabel } from '@/lib/amenities';
@@ -95,6 +96,7 @@ export default function FilterBar({
     filters.parking.length > 0,
     filters.amenities.length > 0,
     filters.waveConditions.length > 0,
+    filters.type.length > 0,
   ].filter(Boolean).length;
 
 
@@ -104,7 +106,7 @@ export default function FilterBar({
   return (
     <div className="relative z-20">
       {/* Main Filter Bar */}
-      <div className="w-full py-4 pb-6">
+      <div className="w-full">
         <div className="flex flex-col gap-4">
           {/* Facets Group - First Row */}
           {!isMobile ? (
@@ -179,6 +181,14 @@ export default function FilterBar({
 
               {/* Wave Conditions Dropdown */}
               <WaveConditionsDropdown
+                filters={filters}
+                onFiltersChange={onFiltersChange}
+                onOpenAllFilters={onOpenAllFilters}
+                showCountBadge={showCountBadge}
+              />
+
+              {/* Beach Type Dropdown */}
+              <BeachTypeDropdown
                 filters={filters}
                 onFiltersChange={onFiltersChange}
                 onOpenAllFilters={onOpenAllFilters}
@@ -292,6 +302,14 @@ export default function FilterBar({
 
               {/* Wave Conditions Dropdown */}
               <WaveConditionsDropdown
+                filters={filters}
+                onFiltersChange={onFiltersChange}
+                onOpenAllFilters={onOpenAllFilters}
+                showCountBadge={showCountBadge}
+              />
+
+              {/* Beach Type Dropdown */}
+              <BeachTypeDropdown
                 filters={filters}
                 onFiltersChange={onFiltersChange}
                 onOpenAllFilters={onOpenAllFilters}

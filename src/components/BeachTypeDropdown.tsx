@@ -1,30 +1,32 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Check, ChevronDown, Waves } from 'lucide-react';
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { Mountain, Check, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { useIsMobile } from '@/hooks/use-mobile';
 import { useDraftState } from '@/hooks/useDraftState';
+import { useIsMobile } from '@/hooks/use-mobile';
 import { FilterState } from '@/hooks/useUrlState';
 
-interface OrganizedDropdownProps {
+interface BeachTypeDropdownProps {
   filters: FilterState;
-  onFiltersChange: (filters: FilterState) => void;
+  onFiltersChange: (updates: Partial<FilterState>) => void;
   onOpenAllFilters: () => void;
   showCountBadge?: boolean;
 }
 
-const organizedOptions = [
-  { value: 'organized', label: 'Organized' },
-  { value: 'unorganized', label: 'Unorganized' },
+const beachTypeOptions = [
+  { value: 'SANDY', label: 'Sandy' },
+  { value: 'PEBBLY', label: 'Pebbly' },
+  { value: 'MIXED', label: 'Mixed' },
+  { value: 'OTHER', label: 'Rocky/Other' },
 ];
 
-export default function OrganizedDropdown({
+export default function BeachTypeDropdown({
   filters,
   onFiltersChange,
   onOpenAllFilters,
   showCountBadge = false,
-}: OrganizedDropdownProps) {
+}: BeachTypeDropdownProps) {
   const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -39,13 +41,13 @@ export default function OrganizedDropdown({
     setIsOpen(true);
   }, []);
 
-  // Toggle organized option in draft state
-  const toggleOrganizedDraft = useCallback((organizedValue: string) => {
-    const newOrganized = draftFilters.organized.includes(organizedValue)
-      ? draftFilters.organized.filter(value => value !== organizedValue)
-      : [...draftFilters.organized, organizedValue];
-    updateDraft({ organized: newOrganized });
-  }, [draftFilters.organized, updateDraft]);
+  // Toggle beach type in draft state
+  const toggleBeachTypeDraft = useCallback((typeValue: string) => {
+    const newTypes = draftFilters.type.includes(typeValue as 'SANDY' | 'PEBBLY' | 'MIXED' | 'OTHER')
+      ? draftFilters.type.filter(value => value !== typeValue)
+      : [...draftFilters.type, typeValue as 'SANDY' | 'PEBBLY' | 'MIXED' | 'OTHER'];
+    updateDraft({ type: newTypes });
+  }, [draftFilters.type, updateDraft]);
 
   // Apply draft changes and close
   const handleApply = useCallback(() => {
@@ -54,13 +56,15 @@ export default function OrganizedDropdown({
     triggerRef.current?.focus();
   }, [draftFilters, onFiltersChange]);
 
-  // Reset organized draft
+  // Reset beach type draft
   const handleReset = useCallback(() => {
-    updateDraft({ organized: [] });
+    updateDraft({ type: [] });
   }, [updateDraft]);
 
   // Keyboard navigation
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (!isOpen) return;
+
     switch (e.key) {
       case 'Escape':
         setIsOpen(false);
@@ -68,21 +72,25 @@ export default function OrganizedDropdown({
         break;
       case 'ArrowDown':
         e.preventDefault();
-        setFocusedIndex(prev => Math.min(prev + 1, organizedOptions.length - 1));
+        setFocusedIndex(prev => 
+          prev < beachTypeOptions.length - 1 ? prev + 1 : 0
+        );
         break;
       case 'ArrowUp':
         e.preventDefault();
-        setFocusedIndex(prev => Math.max(prev - 1, -1));
+        setFocusedIndex(prev => 
+          prev > 0 ? prev - 1 : beachTypeOptions.length - 1
+        );
         break;
       case 'Enter':
       case ' ':
         e.preventDefault();
-        if (focusedIndex >= 0 && focusedIndex < organizedOptions.length) {
-          toggleOrganizedDraft(organizedOptions[focusedIndex].value);
+        if (focusedIndex >= 0 && focusedIndex < beachTypeOptions.length) {
+          toggleBeachTypeDraft(beachTypeOptions[focusedIndex].value);
         }
         break;
     }
-  }, [focusedIndex, toggleOrganizedDraft]);
+  }, [isOpen, focusedIndex, toggleBeachTypeDraft]);
 
   // Focus management
   useEffect(() => {
@@ -100,8 +108,8 @@ export default function OrganizedDropdown({
   }, [isOpen]);
 
   // Calculate counts
-  const selectedCount = draftFilters.organized.length;
-  const appliedCount = filters.organized.length;
+  const selectedCount = draftFilters.type.length;
+  const appliedCount = filters.type.length;
 
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
@@ -116,13 +124,14 @@ export default function OrganizedDropdown({
             }`}
           aria-expanded={isOpen}
           aria-haspopup="listbox"
-          aria-controls="organized-listbox"
-          aria-label={appliedCount > 0 ? `${isMobile ? 'Setup' : 'Beach setup'}, ${appliedCount} selected` : (isMobile ? 'Setup' : 'Beach setup')}
-          data-testid="organized-trigger"
-          id="organized-trigger"
+          aria-controls="beach-type-listbox"
+          aria-label={appliedCount > 0 ? `Beach type, ${appliedCount} selected` : 'Beach type'}
+          data-testid="beach-type-trigger"
+          id="beach-type-trigger"
         >
-            <Waves className="h-4 w-4 mr-2" />
-            {isMobile ? 'Setup' : 'Beach setup'}
+            <Mountain className="h-4 w-4 mr-2" />
+            <span className="hidden sm:inline">Beach type</span>
+            <span className="sm:hidden">Type</span>
             <div className="ml-1 h-4 w-1 flex items-center justify-center">
               {appliedCount > 0 && (
                 <span className="text-xs">{appliedCount}</span>
@@ -135,26 +144,26 @@ export default function OrganizedDropdown({
         className="w-80 max-w-[calc(100vw-2rem)] p-0"
         align="start"
         onKeyDown={handleKeyDown}
-        data-testid="organized-panel"
-        id="organized-panel"
+        data-testid="beach-type-panel"
+        id="beach-type-panel"
       >
         {/* List */}
         <div 
           ref={listRef}
           className="max-h-80 overflow-y-auto"
           role="listbox"
-          aria-label="Beach setup options"
-          id="organized-listbox"
+          aria-label="Beach type"
+          id="beach-type-listbox"
         >
-          {organizedOptions.map((option, index) => {
-            const isSelected = draftFilters.organized.includes(option.value);
+          {beachTypeOptions.map((option, index) => {
+            const isSelected = draftFilters.type.includes(option.value as 'SANDY' | 'PEBBLY' | 'MIXED' | 'OTHER');
             const isFocused = focusedIndex === index;
             
             return (
               <button
                 key={option.value}
                 data-index={index}
-                onClick={() => toggleOrganizedDraft(option.value)}
+                onClick={() => toggleBeachTypeDraft(option.value)}
                 className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors min-h-[44px] ${
                   isSelected ? 'bg-muted/30' : ''
                 } ${isFocused ? 'ring-2 ring-ring ring-offset-1' : ''}`}
@@ -180,7 +189,7 @@ export default function OrganizedDropdown({
               onClick={handleReset}
               className="flex-1 min-h-[44px]"
             >
-              Clear
+              Reset
             </Button>
             <Button
               size="sm"

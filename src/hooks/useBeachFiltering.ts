@@ -9,12 +9,17 @@ export const useBeachFiltering = (
 ): (Beach & { distance?: number })[] => {
   return useMemo(() => {
     let filtered = beaches.filter(beach => {
-      // Search filter
+      // Search filter - matches beach name or area
       if (filters.search) {
-        const searchTerm = filters.search.toLowerCase();
-        const matchesName = beach.name.toLowerCase().includes(searchTerm);
-        const matchesPlace = beach.area.toLowerCase().includes(searchTerm);
-        if (!matchesName && !matchesPlace) return false;
+        const searchTerm = filters.search.toLowerCase().trim();
+        
+        // Direct search: check if the search term appears in beach name or area
+        // The search term should already be cleaned by naturalLanguageSearch.ts
+        if (searchTerm) {
+          const matchesName = beach.name && beach.name.toLowerCase().includes(searchTerm);
+          const matchesArea = beach.area && beach.area.toLowerCase().includes(searchTerm);
+          if (!matchesName && !matchesArea) return false;
+        }
       }
 
       // Organized filter
@@ -38,13 +43,18 @@ export const useBeachFiltering = (
       // Amenities filter
       if (filters.amenities.length > 0) {
         const hasAllAmenities = filters.amenities.every(amenity => 
-          beach.amenities.includes(amenity)
+          beach.amenities && beach.amenities.includes(amenity)
         );
         if (!hasAllAmenities) return false;
       }
 
       // Wave conditions filter
       if (filters.waveConditions.length > 0 && !filters.waveConditions.includes(beach.wave_conditions as any)) {
+        return false;
+      }
+
+      // Type filter (beach surface)
+      if (filters.type.length > 0 && !filters.type.includes(beach.type as any)) {
         return false;
       }
 

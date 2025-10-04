@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { MapPin, Sun, CheckCircle, Car, Flag, X, Search, Check, Waves } from 'lucide-react';
+import { MapPin, Sun, CheckCircle, Car, Flag, X, Search, Check, Waves, Mountain } from 'lucide-react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -41,6 +41,13 @@ const waveConditionsOptions = [
   { value: 'MODERATE', label: 'Moderate' },
   { value: 'WAVY', label: 'Wavy' },
   { value: 'SURFABLE', label: 'Surfable' },
+];
+
+const beachTypeOptions = [
+  { value: 'SANDY', label: 'Sandy' },
+  { value: 'PEBBLY', label: 'Pebbly' },
+  { value: 'MIXED', label: 'Mixed' },
+  { value: 'OTHER', label: 'Rocky/Other' },
 ];
 
 export default function AllFiltersDrawer({
@@ -367,6 +374,49 @@ export default function AllFiltersDrawer({
                         ? draftFilters.waveConditions.filter(wc => wc !== option.value)
                         : [...draftFilters.waveConditions, option.value as any];
                       updateDraft({ waveConditions: newWaveConditions });
+                    }}
+                    className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors min-h-[44px] rounded-md ${
+                      isSelected ? 'bg-muted/30' : ''
+                    }`}
+                    role="option"
+                    aria-selected={isSelected}
+                  >
+                    <span className="text-sm font-medium">{option.label}</span>
+                    {isSelected && (
+                      <Check className="h-4 w-4 text-primary" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Beach Type Section */}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-base flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Mountain className="h-4 w-4 text-primary" />
+                Beach Type
+              </div>
+              {draftFilters.type.length > 0 && (
+                <span className="text-muted-foreground text-xs font-normal">
+                  • {draftFilters.type.length} selected
+                </span>
+              )}
+            </h3>
+            
+            <div className="space-y-1">
+              {beachTypeOptions.map((option) => {
+                const isSelected = draftFilters.type.includes(option.value as any);
+                
+                return (
+                  <button
+                    key={option.value}
+                    onClick={() => {
+                      const newTypes = isSelected
+                        ? draftFilters.type.filter(type => type !== option.value)
+                        : [...draftFilters.type, option.value as any];
+                      updateDraft({ type: newTypes });
                     }}
                     className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors min-h-[44px] rounded-md ${
                       isSelected ? 'bg-muted/30' : ''

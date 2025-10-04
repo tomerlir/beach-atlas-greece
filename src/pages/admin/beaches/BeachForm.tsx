@@ -165,7 +165,7 @@ const BeachForm: React.FC = () => {
     // Compute slug: prefer provided, otherwise from name
     const currentSlugInput = draft.slug.trim();
     const generatedFromName = slugify(draft.name);
-    let slugValue = currentSlugInput || generatedFromName;
+    const slugValue = currentSlugInput || generatedFromName;
 
     // Normalize legacy parking values (e.g., 'ample','limited','none') to new enum
     const parkingRaw = draft.parking;

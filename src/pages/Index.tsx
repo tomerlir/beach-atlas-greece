@@ -5,7 +5,7 @@ import { CONTACT_EMAIL } from "@/lib/constants";
 import Header from "@/components/Header";
 import FilterBar from "@/components/FilterBar";
 import AllFiltersDrawer from "@/components/AllFiltersDrawer";
-import ResultsHeader from "@/components/ResultsHeader";
+import ResultsSummary from "@/components/ResultsSummary";
 import BeachCard from "@/components/BeachCard";
 import BeachCardSkeleton from "@/components/BeachCardSkeleton";
 import Pagination from "@/components/Pagination";
@@ -24,6 +24,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { Helmet } from "react-helmet-async";
 import { generateAreaSlug } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
+import ErrorBoundary from "@/components/ErrorBoundary";
 
 const BEACHES_PER_PAGE = 9;
 
@@ -74,6 +75,7 @@ const Index = () => {
   // Filter and sort beaches
   const filteredBeaches = useBeachFiltering(beachesWithDistance, filters, location);
 
+
   // Pagination
   const totalPages = Math.ceil(filteredBeaches.length / BEACHES_PER_PAGE);
   const startIndex = (filters.page - 1) * BEACHES_PER_PAGE;
@@ -117,6 +119,9 @@ const Index = () => {
   const handleRemoveWaveCondition = (value: string) => {
     updateFilters({ waveConditions: filters.waveConditions.filter((v) => v !== value), page: 1 });
   };
+  const handleRemoveBeachType = (value: string) => {
+    updateFilters({ type: filters.type.filter((v) => v !== value), page: 1 });
+  };
   const handleRemoveAmenity = (value: string) => {
     updateFilters({ amenities: filters.amenities.filter((v) => v !== value), page: 1 });
   };
@@ -153,6 +158,11 @@ const Index = () => {
   // Handle dismissing the geolocation error banner
   const handleDismissGeolocationError = () => {
     setShowGeolocationError(false);
+  };
+
+  // Handle natural language search usage tracking (no longer needed since we always use NL search)
+  const handleNaturalLanguageSearch = (wasUsed: boolean) => {
+    // No longer needed since we always use natural language search
   };
 
   // Generate SEO data
@@ -252,7 +262,9 @@ const Index = () => {
             <EnhancedSearchBar
               filters={filters}
               onFiltersChange={updateFilters}
+              onClearAll={resetFilters}
               className="w-full"
+              onNaturalLanguageSearch={handleNaturalLanguageSearch}
             />
           </div>
         </div>
@@ -275,20 +287,6 @@ const Index = () => {
         </div>
       </div>
 
-      {/* Popular Beaches / Results Header */}
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between">
-          {filters.search || filters.organized.length > 0 || filters.blueFlag || filters.parking.length > 0 || filters.waveConditions.length > 0 || filters.amenities.length > 0 || filters.nearMe ? (
-            <h2 className="text-sm text-muted-foreground">
-              {filteredBeaches.length} beaches found
-            </h2>
-          ) : (
-            <h2 className="text-sm text-muted-foreground">
-              Popular beaches
-            </h2>
-          )}
-        </div>
-      </div>
 
       {/* Geolocation Error Banner */}
       {showGeolocationError && (
@@ -301,7 +299,17 @@ const Index = () => {
         </div>
       )}
 
-      <main className="container mx-auto px-4 py-4 pb-20 md:pb-8">
+      <main className="container mx-auto px-4 md:pb-8">
+        {/* Results Summary */}
+        {!isLoading && !error && (
+          <ResultsSummary
+            resultCount={filteredBeaches.length}
+            filters={filters}
+            userLocation={location}
+            onClearAllFilters={handleClearAllFilters}
+          />
+        )}
+        
         {/* Screen reader announcements */}
         <div aria-live="polite" aria-atomic="true" className="sr-only">
           {!isLoading && !error && `${filteredBeaches.length} beaches found`}
@@ -329,32 +337,35 @@ const Index = () => {
         {/* Beach Grid */}
         {!isLoading && !error && (
           <>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {paginatedBeaches.map((beach) => (
-                <BeachCard 
-                  key={beach.id} 
-                  beach={beach} 
-                  distance={beach.distance}
-                  showDistance={filters.nearMe && !locationError && !!location}
-                />
-              ))}
-            </div>
+            <ErrorBoundary>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {paginatedBeaches.map((beach) => (
+                  <BeachCard 
+                    key={beach.id} 
+                    beach={beach} 
+                    distance={beach.distance}
+                    showDistance={filters.nearMe && !locationError && !!location}
+                  />
+                ))}
+              </div>
+            </ErrorBoundary>
 
             {/* No Results */}
             {filteredBeaches.length === 0 && (
-              <EmptyState
-                filters={filters}
-                userLocation={location}
-                onClearAllFilters={handleClearAllFilters}
-                onTurnOffNearMe={handleTurnOffNearMe}
-                onResetParking={handleResetParking}
-                onClearSearch={handleClearSearch}
-                onRemoveOrganized={handleRemoveOrganized}
-                onRemoveParking={handleRemoveParking}
-                onRemoveWaveCondition={handleRemoveWaveCondition}
-                onRemoveAmenity={handleRemoveAmenity}
-                onClearBlueFlag={handleClearBlueFlag}
-              />
+                <EmptyState
+                  filters={filters}
+                  userLocation={location}
+                  onClearAllFilters={handleClearAllFilters}
+                  onTurnOffNearMe={handleTurnOffNearMe}
+                  onResetParking={handleResetParking}
+                  onClearSearch={handleClearSearch}
+                  onRemoveOrganized={handleRemoveOrganized}
+                  onRemoveParking={handleRemoveParking}
+                  onRemoveWaveCondition={handleRemoveWaveCondition}
+                  onRemoveBeachType={handleRemoveBeachType}
+                  onRemoveAmenity={handleRemoveAmenity}
+                  onClearBlueFlag={handleClearBlueFlag}
+                />
             )}
 
             {/* Pagination */}

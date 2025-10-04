@@ -10,16 +10,42 @@ export const useAreaBeachFiltering = (
   return useMemo(() => {
     let filtered = beaches.filter(beach => {
       // Area filter (always applied and locked)
-      if (beach.area !== filters.area) {
+      if (!beach.area || beach.area !== filters.area) {
         return false;
       }
 
       // Search filter
       if (filters.search) {
         const searchTerm = filters.search.toLowerCase();
-        const matchesName = beach.name.toLowerCase().includes(searchTerm);
-        const matchesPlace = beach.area.toLowerCase().includes(searchTerm);
-        if (!matchesName && !matchesPlace) return false;
+        
+        // For natural language queries, extract meaningful search terms
+        // Remove common filter words and prepositions to get location/name terms
+        const filterWords = [
+          'beach', 'beaches', 'in', 'on', 'at', 'with', 'and', 'or', 'the', 'a', 'an', 
+          'i', 'want', 'need', 'find', 'show', 'me', 'all', 'some', 'any', 'please',
+          'for', 'to', 'from', 'by', 'of', 'are', 'is', 'that', 'this', 'these', 'those',
+          'blue', 'flag', 'sandy', 'sand', 'calm', 'parking', 'lifeguard', 'bar', 
+          'food', 'music', 'showers', 'toilets', 'umbrellas', 'sunbeds', 'organized',
+          'pebbly', 'pebble', 'pebbles', 'rocky', 'mixed', 'wavy', 'waves', 'moderate'
+        ];
+        const meaningfulWords = searchTerm
+          .split(/\s+/)
+          .filter(word => word.length > 2 && !filterWords.includes(word))
+          .filter(word => !/^\d+$/.test(word)); // Remove pure numbers
+        
+        // If we have meaningful words, search for them
+        if (meaningfulWords.length > 0) {
+          const hasMatch = meaningfulWords.some(word => 
+            (beach.name && beach.name.toLowerCase().includes(word)) || 
+            (beach.area && beach.area.toLowerCase().includes(word))
+          );
+          if (!hasMatch) return false;
+        } else {
+          // Fallback to original search term if no meaningful words found
+          const matchesName = beach.name && beach.name.toLowerCase().includes(searchTerm);
+          const matchesPlace = beach.area && beach.area.toLowerCase().includes(searchTerm);
+          if (!matchesName && !matchesPlace) return false;
+        }
       }
 
       // Organized filter
@@ -43,13 +69,18 @@ export const useAreaBeachFiltering = (
       // Amenities filter
       if (filters.amenities.length > 0) {
         const hasAllAmenities = filters.amenities.every(amenity => 
-          beach.amenities.includes(amenity)
+          beach.amenities && beach.amenities.includes(amenity)
         );
         if (!hasAllAmenities) return false;
       }
 
       // Wave conditions filter
       if (filters.waveConditions.length > 0 && !filters.waveConditions.includes(beach.wave_conditions as any)) {
+        return false;
+      }
+
+      // Type filter (beach surface)
+      if (filters.type.length > 0 && !filters.type.includes(beach.type as any)) {
         return false;
       }
 

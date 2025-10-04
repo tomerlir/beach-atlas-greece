@@ -116,7 +116,7 @@ const BeachDetail = () => {
     queryKey: ["more-in-area", area, beachName],
     queryFn: async () => {
       if (!area || !beachName) return [] as Beach[];
-      return fetchMoreInArea(area, beachName, 5);
+      return fetchMoreInArea(area, beachName, 2);
     },
     enabled: !!area && !!beachName,
     staleTime: 5 * 60 * 1000,
@@ -366,8 +366,20 @@ const BeachDetail = () => {
         <Header />
       
       <main className="max-w-4xl md:max-w-5xl mx-auto px-4 py-8">
+        {/* Breadcrumb Navigation - at the top */}
+        <div className="bg-background py-2 mb-2">
+          <div className="max-w-4xl md:max-w-5xl mx-auto">
+            <BreadcrumbsWithJsonLd items={[
+              { label: "Home", href: "/" },
+              { label: "Areas", href: "/areas" },
+              { label: beach.area || 'Unknown Area', href: `/${generateAreaSlug(beach.area || 'unknown')}` },
+              { label: beach.name } // current
+            ]} />
+          </div>
+        </div>
+
         {/* Back to results link */}
-        <Button variant="ghost" onClick={handleBackNavigation} className="mb-6">
+        <Button variant="ghost" onClick={handleBackNavigation} className="mb-6 px-3 py-2 h-auto text-sm">
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back to results
         </Button>
@@ -410,79 +422,70 @@ const BeachDetail = () => {
           )}
         </figure>
 
-        {/* Breadcrumb Navigation - under main media */}
-        <div className="bg-background py-2">
-          <div className="max-w-4xl md:max-w-5xl mx-auto">
-            <BreadcrumbsWithJsonLd items={[
-              { label: "Home", href: "/" },
-              { label: "Areas", href: "/areas" },
-              { label: beach.area || 'Unknown Area', href: `/${generateAreaSlug(beach.area || 'unknown')}` },
-              { label: beach.name } // current
-            ]} />
-          </div>
-        </div>
-
-        {/* Title & Chips - Show immediately when content is ready */}
+        {/* Title & Actions - Show immediately when content is ready */}
         {shouldShowContent && (
-          <div className="mb-2">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-3">
-              {beach.name}
-            </h1>
-            <div className="flex items-center gap-2 mb-2">
-              <Link
-                to={`/${generateAreaSlug(beach.area)}`}
-                aria-label={`View beaches in ${beach.area}`}
-                className="inline-flex items-center gap-2 text-sm md:text-base rounded-full border border-border/50 bg-muted/40 px-3 py-1 text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-colors"
-              >
-                <MapPin className="h-4 w-4 md:h-5 md:w-5 text-primary" aria-hidden="true" />
-                <span className="font-medium">{beach.area}</span>
-              </Link>
-              <div
-                aria-label={`Information last verified ${beach.updated_at ? formatRelativeTime(beach.updated_at) : 'recently'}`}
-                className="inline-flex items-center gap-2 text-sm md:text-base rounded-full border border-border/50 bg-muted/40 px-3 py-1 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                role="status"
-              >
-                <Clock className="h-4 w-4 md:h-5 md:w-5 text-primary" aria-hidden="true" />
-                <span className="font-medium">Verified {beach.updated_at ? formatRelativeTime(beach.updated_at) : 'recently'}</span>
+          <div className="mb-8">
+            {/* Title and Action Buttons Row */}
+            <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
+              <div className="flex-1">
+                <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-3">
+                  {beach.name}
+                </h1>
+                <div className="flex items-center gap-2 mb-2">
+                  <Link
+                    to={`/${generateAreaSlug(beach.area)}`}
+                    aria-label={`View beaches in ${beach.area}`}
+                    className="inline-flex items-center gap-2 text-sm md:text-base rounded-full border border-border/50 bg-muted/40 px-3 py-1 text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-colors"
+                  >
+                    <MapPin className="h-4 w-4 md:h-5 md:w-5 text-primary" aria-hidden="true" />
+                    <span className="font-medium">{beach.area}</span>
+                  </Link>
+                  <div
+                    aria-label={`Information last verified ${beach.updated_at ? formatRelativeTime(beach.updated_at) : 'recently'}`}
+                    className="inline-flex items-center gap-2 text-sm md:text-base rounded-full border border-border/50 bg-muted/40 px-3 py-1 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                    role="status"
+                  >
+                    <Clock className="h-4 w-4 md:h-5 md:w-5 text-primary" aria-hidden="true" />
+                    <span className="font-medium">Verified {beach.updated_at ? formatRelativeTime(beach.updated_at) : 'recently'}</span>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {beach.blue_flag && (
+                    <Badge className="bg-blue-600 text-white">
+                      <Flag className="h-3 w-3 mr-1" aria-hidden="true" />
+                      Blue Flag
+                    </Badge>
+                  )}
+                </div>
+              </div>
+              
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 lg:flex-shrink-0">
+                <Button 
+                  onClick={handleOpenInMaps} 
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 flex-1 sm:flex-none"
+                >
+                  <MapPin className="h-4 w-4 mr-2" aria-hidden="true" />
+                  Directions
+                </Button>
+                <Button 
+                  variant="outline"
+                  onClick={handleShare}
+                  className="flex-1 sm:flex-none"
+                >
+                  <Share2 className="h-4 w-4 mr-2" aria-hidden="true" />
+                  Share
+                </Button>
+                <Button 
+                  variant="outline"
+                  onClick={handleFeedback}
+                  className="flex-1 sm:flex-none"
+                >
+                  <MessageSquare className="h-4 w-4 mr-2" aria-hidden="true" />
+                  Feedback
+                </Button>
               </div>
             </div>
-            <div className="flex flex-wrap gap-2 mt-4">
-              {beach.blue_flag && (
-                <Badge className="bg-blue-600 text-white">
-                  <Flag className="h-3 w-3 mr-1" aria-hidden="true" />
-                  Blue Flag
-                </Badge>
-              )}
-            </div>
-          </div>
-        )}
-
-        {/* Actions - Show immediately when content is ready */}
-        {shouldShowContent && (
-          <div className="flex flex-col sm:flex-row gap-3 mb-8">
-            <Button 
-              onClick={handleOpenInMaps} 
-              className="bg-primary text-primary-foreground hover:bg-primary/90 flex-1 sm:flex-none"
-            >
-              <MapPin className="h-4 w-4 mr-2" aria-hidden="true" />
-              Open in Maps
-            </Button>
-            <Button 
-              variant="outline"
-              onClick={handleShare}
-              className="flex-1 sm:flex-none"
-            >
-              <Share2 className="h-4 w-4 mr-2" aria-hidden="true" />
-              Share
-            </Button>
-            <Button 
-              variant="outline"
-              onClick={handleFeedback}
-              className="flex-1 sm:flex-none"
-            >
-              <MessageSquare className="h-4 w-4 mr-2" aria-hidden="true" />
-              Feedback
-            </Button>
           </div>
         )}
 
@@ -550,12 +553,6 @@ const BeachDetail = () => {
                       {isDescriptionExpanded ? "Read less" : "Read more"}
                     </Button>
                   )}
-                  <p className="mt-3 text-sm text-muted-foreground">
-                    Not what you were looking for?{" "}
-                    <Link to={`/${generateAreaSlug(beach.area)}`} className="underline underline-offset-2 hover:no-underline">
-                      See all beaches in {beach.area}
-                    </Link>.
-                  </p>
                 </div>
               </section>
             )}

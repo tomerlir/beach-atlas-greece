@@ -25,6 +25,8 @@ import EmptyState from "@/components/EmptyState";
 import NotFound from "@/pages/NotFound";
 import PhotoAttribution from "@/components/PhotoAttribution";
 import { BreadcrumbsWithJsonLd } from "@/components/breadcrumbs/BreadcrumbsWithJsonLd";
+import PlaceMismatchNotification from "@/components/PlaceMismatchNotification";
+import ErrorBoundary from "@/components/ErrorBoundary";
 
 const BEACHES_PER_PAGE = 9;
 
@@ -33,6 +35,7 @@ const Area = () => {
   const { location, isLoading: isLoadingLocation, getCurrentLocation, permission: locationPermission, error: locationError } = useGeolocation();
   const [isAllFiltersOpen, setIsAllFiltersOpen] = useState(false);
   const [showGeolocationError, setShowGeolocationError] = useState(false);
+  const [placeMismatch, setPlaceMismatch] = useState<{ place: string; area: string } | null>(null);
   const { preloadVisibleBeachImages } = useImagePreloader();
 
   // Fetch area data by slug
@@ -75,6 +78,8 @@ const Area = () => {
   // Filter and sort beaches (including area filter)
   const filteredBeaches = useAreaBeachFiltering(beachesWithDistance, filters, location);
 
+  // Filter relaxation for natural language searches
+
   // Pagination
   const totalPages = Math.ceil(filteredBeaches.length / BEACHES_PER_PAGE);
   const startIndex = (filters.page - 1) * BEACHES_PER_PAGE;
@@ -94,6 +99,7 @@ const Area = () => {
   // Empty state button handlers
   const handleClearAllFilters = () => {
     resetFilters();
+    setPlaceMismatch(null); // Clear place mismatch notification when clearing all filters
   };
 
   const handleTurnOffNearMe = () => {
@@ -116,6 +122,9 @@ const Area = () => {
   };
   const handleRemoveWaveCondition = (value: string) => {
     updateFilters({ waveConditions: filters.waveConditions.filter((v) => v !== value), page: 1 });
+  };
+  const handleRemoveBeachType = (value: string) => {
+    updateFilters({ type: filters.type.filter((v) => v !== value), page: 1 });
   };
   const handleRemoveAmenity = (value: string) => {
     updateFilters({ amenities: filters.amenities.filter((v) => v !== value), page: 1 });
@@ -152,6 +161,26 @@ const Area = () => {
   const handleDismissGeolocationError = () => {
     setShowGeolocationError(false);
   };
+
+  // Handle place mismatch from natural language search
+  const handlePlaceMismatch = (place: string, areaName: string) => {
+    setPlaceMismatch({ place, area: areaName });
+  };
+
+  // Handle dismissing place mismatch notification
+  const handleDismissPlaceMismatch = () => {
+    setPlaceMismatch(null);
+  };
+
+  // Handle natural language search usage tracking (no longer needed since we always use NL search)
+  const handleNaturalLanguageSearch = (wasUsed: boolean) => {
+    // No longer needed since we always use natural language search
+  };
+
+  // Clear place mismatch notification when navigating to a different area
+  useEffect(() => {
+    setPlaceMismatch(null);
+  }, [areaSlug]);
 
   // If area not found, show 404
   if (!isLoading && !error && areaSlug && !areaName) {
@@ -268,8 +297,12 @@ const Area = () => {
                 <EnhancedSearchBar
                   filters={filters}
                   onFiltersChange={updateFilters}
+                  onClearAll={handleClearAllFilters}
                   className="w-full"
                   placeholder={`Search beaches in ${areaName}...`}
+                  areaName={areaName}
+                  onPlaceMismatch={handlePlaceMismatch}
+                  onNaturalLanguageSearch={handleNaturalLanguageSearch}
                 />
               </div>
             )}
@@ -334,24 +367,18 @@ const Area = () => {
           </>
         )}
 
-        {/* Results Header - only show if area exists */}
-        {areaName && (
-          <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between">
-              {filters.search || filters.organized.length > 0 || filters.blueFlag || filters.parking.length > 0 || filters.waveConditions.length > 0 || filters.amenities.length > 0 || filters.nearMe ? (
-                <h2 className="text-sm text-muted-foreground">
-                  {filteredBeaches.length} beaches found
-                </h2>
-              ) : (
-                <h2 className="text-sm text-muted-foreground">
-                  Popular beaches in {areaName}
-                </h2>
-              )}
-            </div>
-          </div>
-        )}
 
         <main className="container mx-auto px-4 py-4 pb-20 md:pb-8">
+          {/* Place Mismatch Notification */}
+          {placeMismatch && (
+            <PlaceMismatchNotification
+              searchedPlace={placeMismatch.place}
+              currentArea={placeMismatch.area}
+              onDismiss={handleDismissPlaceMismatch}
+            />
+          )}
+
+          
           {/* Screen reader announcements */}
           <div aria-live="polite" aria-atomic="true" className="sr-only">
             {!isLoading && !error && areaName && `${filteredBeaches.length} beaches found in ${areaName}`}
@@ -379,16 +406,18 @@ const Area = () => {
           {/* Beach Grid - only show if area exists */}
           {!isLoading && !error && areaName && (
             <>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {paginatedBeaches.map((beach) => (
-                  <BeachCard 
-                    key={beach.id} 
-                    beach={beach} 
-                    distance={beach.distance}
-                    showDistance={filters.nearMe && !locationError && !!location}
-                  />
-                ))}
-              </div>
+              <ErrorBoundary>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {paginatedBeaches.map((beach) => (
+                    <BeachCard 
+                      key={beach.id} 
+                      beach={beach} 
+                      distance={beach.distance}
+                      showDistance={filters.nearMe && !locationError && !!location}
+                    />
+                  ))}
+                </div>
+              </ErrorBoundary>
 
               {/* No Results */}
               {filteredBeaches.length === 0 && (
@@ -402,6 +431,7 @@ const Area = () => {
                   onRemoveOrganized={handleRemoveOrganized}
                   onRemoveParking={handleRemoveParking}
                   onRemoveWaveCondition={handleRemoveWaveCondition}
+                  onRemoveBeachType={handleRemoveBeachType}
                   onRemoveAmenity={handleRemoveAmenity}
                   onClearBlueFlag={handleClearBlueFlag}
                   areaName={areaName}

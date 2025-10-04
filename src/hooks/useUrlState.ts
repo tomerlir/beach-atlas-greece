@@ -3,11 +3,13 @@ import { useSearchParams } from 'react-router-dom';
 
 export interface FilterState {
   search: string;
+  originalQuery?: string; // User's raw input for NLQ - preserved for display
   organized: string[];
   blueFlag: boolean;
   parking: string[];
   amenities: string[];
   waveConditions: ('CALM' | 'MODERATE' | 'WAVY' | 'SURFABLE')[];
+  type: ('SANDY' | 'PEBBLY' | 'MIXED' | 'OTHER')[]; // Beach surface type
   sort: string | null;
   page: number;
   nearMe: boolean; // New field to track if "Near me" is enabled
@@ -15,11 +17,13 @@ export interface FilterState {
 
 const defaultFilters: FilterState = {
   search: '',
+  originalQuery: undefined,
   organized: [],
   blueFlag: false,
   parking: [],
   amenities: [],
   waveConditions: [],
+  type: [],
   sort: 'name.asc',
   page: 1,
   nearMe: false,
@@ -34,6 +38,10 @@ export function useUrlState() {
     // Parse search
     const search = searchParams.get('search');
     if (search) state.search = search;
+    
+    // Parse originalQuery (user's raw NLQ input)
+    const originalQuery = searchParams.get('originalQuery');
+    if (originalQuery) state.originalQuery = originalQuery;
     
     // Parse organized
     const organized = searchParams.get('organized');
@@ -63,6 +71,15 @@ export function useUrlState() {
       const validWaveConditions = ['CALM', 'MODERATE', 'WAVY', 'SURFABLE'] as const;
       state.waveConditions = waveConditions.split(',').filter((condition): condition is 'CALM' | 'MODERATE' | 'WAVY' | 'SURFABLE' => 
         Boolean(condition) && validWaveConditions.includes(condition as any)
+      );
+    }
+    
+    // Parse type (beach surface)
+    const type = searchParams.get('type');
+    if (type) {
+      const validTypes = ['SANDY', 'PEBBLY', 'MIXED', 'OTHER'] as const;
+      state.type = type.split(',').filter((t): t is 'SANDY' | 'PEBBLY' | 'MIXED' | 'OTHER' => 
+        Boolean(t) && validTypes.includes(t as any)
       );
     }
     
@@ -96,6 +113,15 @@ export function useUrlState() {
           newParams.set('search', updates.search);
         } else {
           newParams.delete('search');
+        }
+      }
+      
+      // Update originalQuery
+      if (updates.originalQuery !== undefined) {
+        if (updates.originalQuery) {
+          newParams.set('originalQuery', updates.originalQuery);
+        } else {
+          newParams.delete('originalQuery');
         }
       }
       
@@ -141,6 +167,15 @@ export function useUrlState() {
           newParams.set('waveConditions', updates.waveConditions.join(','));
         } else {
           newParams.delete('waveConditions');
+        }
+      }
+      
+      // Update type
+      if (updates.type !== undefined) {
+        if (updates.type.length > 0) {
+          newParams.set('type', updates.type.join(','));
+        } else {
+          newParams.delete('type');
         }
       }
       

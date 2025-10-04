@@ -10,15 +10,16 @@ interface PaginationProps {
 }
 
 const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) => {
-  if (totalPages <= 1) return null;
   const isMobile = useIsMobile();
+  
+  if (totalPages <= 1) return null;
 
   const getPageNumbers = () => {
     const pages = [];
     const showPages = isMobile ? 3 : 5; // Show 3 pages on mobile, 5 on desktop
     
     let startPage = Math.max(1, currentPage - Math.floor(showPages / 2));
-    let endPage = Math.min(totalPages, startPage + showPages - 1);
+    const endPage = Math.min(totalPages, startPage + showPages - 1);
     
     // Adjust startPage if we're near the end
     if (endPage - startPage < showPages - 1) {

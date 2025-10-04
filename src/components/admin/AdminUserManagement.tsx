@@ -34,6 +34,14 @@ export const AdminUserManagement: React.FC = () => {
   const [invites, setInvites] = useState<Array<{ id: string; email: string; invited_by: string; accepted: boolean; created_at: string; expires_at: string; }>>([]);
   const [invitesLoading, setInvitesLoading] = useState(false);
 
+  // Move useEffect before early return to avoid conditional hook usage
+  useEffect(() => {
+    if (profile && profile.role === 'admin') {
+      fetchUsers();
+      fetchInvites();
+    }
+  }, [profile]);
+
   // Check if current user is admin
   if (!profile || profile.role !== 'admin') {
     return (
@@ -199,11 +207,6 @@ export const AdminUserManagement: React.FC = () => {
       setBootstrapLoading(false);
     }
   };
-
-  useEffect(() => {
-    fetchUsers();
-    fetchInvites();
-  }, []);
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {

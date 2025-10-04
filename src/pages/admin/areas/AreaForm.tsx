@@ -126,7 +126,7 @@ const AreaForm: React.FC = () => {
     
     const currentSlugInput = draft.slug.trim();
     const generatedFromName = slugify(draft.name);
-    let slugValue = currentSlugInput || generatedFromName;
+    const slugValue = currentSlugInput || generatedFromName;
 
     const candidate = {
       name: draft.name,

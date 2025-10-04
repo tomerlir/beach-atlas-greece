@@ -18,6 +18,7 @@ interface EmptyStateProps {
   onRemoveOrganized?: (value: string) => void;
   onRemoveParking?: (value: string) => void;
   onRemoveWaveCondition?: (value: string) => void;
+  onRemoveBeachType?: (value: string) => void;
   onRemoveAmenity?: (value: string) => void;
   onClearBlueFlag?: () => void;
   // Optional: when present, restrict suggestions to this area only
@@ -34,6 +35,7 @@ export default function EmptyState({
   onRemoveOrganized,
   onRemoveParking,
   onRemoveWaveCondition,
+  onRemoveBeachType,
   onRemoveAmenity,
   onClearBlueFlag,
   areaName,
@@ -45,7 +47,8 @@ export default function EmptyState({
     filters.blueFlag ||
     filters.parking.length > 0 ||
     filters.amenities.length > 0 ||
-    filters.waveConditions.length > 0;
+    filters.waveConditions.length > 0 ||
+    filters.type.length > 0;
 
   // Check if near me is enabled
   const isNearMeEnabled = filters.nearMe;

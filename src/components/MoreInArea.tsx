@@ -39,8 +39,8 @@ export function MoreInArea({ area, beaches }: { area: SlimArea; beaches: Beach[]
               </Link>
             </CarouselItem>
           </CarouselContent>
-          <CarouselPrevious className="hidden sm:flex" />
-          <CarouselNext className="hidden sm:flex" />
+          <CarouselPrevious className="hidden sm:flex lg:hidden" />
+          <CarouselNext className="hidden sm:flex lg:hidden" />
         </Carousel>
       </div>
     </section>
