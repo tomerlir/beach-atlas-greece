@@ -148,7 +148,16 @@ export default function EnhancedSearchBar({
       has_place: !!extracted.place,
       cleaned_term_length: extracted.cleanedSearchTerm.length,
       is_nlq: hasExtractedFilters,
-      context: areaName ? 'area' : 'homepage'
+      context: areaName ? 'area' : 'homepage',
+      // Detailed filter breakdown for NLQ analysis
+      filters_extracted: {
+        type: extracted.filters.type || [],
+        wave_conditions: extracted.filters.waveConditions || [],
+        parking: extracted.filters.parking || [],
+        amenities: extracted.filters.amenities || [],
+        blue_flag: extracted.filters.blueFlag || false,
+        place: extracted.place || null
+      }
     });
   };
 

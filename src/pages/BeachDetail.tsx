@@ -37,6 +37,7 @@ import { BreadcrumbsWithJsonLd } from "@/components/breadcrumbs/BreadcrumbsWithJ
 import { formatRelativeTime } from "@/lib/utils";
 import { fetchMoreInArea } from "@/lib/fetchMoreInArea";
 import MoreInArea from "@/components/MoreInArea";
+import { analytics } from "@/lib/analytics";
 
 type Beach = Tables<'beaches'>;
 
@@ -155,11 +156,14 @@ const BeachDetail = () => {
   // Action handlers
   const handleOpenInMaps = useCallback(() => {
     if (!beach) return;
+    analytics.event('start_directions', { beach_id: beach.id });
     setIsMapsDialogOpen(true);
   }, [beach]);
 
   const handleShare = useCallback(async () => {
     if (!beach) return;
+    
+    analytics.event('share_beach', { beach_id: beach.id });
     
     const url = window.location.href;
     try {
