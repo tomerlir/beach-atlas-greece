@@ -356,10 +356,23 @@ export function applyExtractedFilters(
   currentFilters: FilterState,
   extracted: NaturalLanguageResult
 ): FilterState {
-  const newFilters: FilterState = {
+  // Start from a clean baseline so each search is "fresh"
+  // Preserve non-filter controls like sort and nearMe, but clear prior filters
+  const baseline: FilterState = {
     ...currentFilters,
+    search: '',
+    organized: [],
+    blueFlag: false,
+    parking: [],
+    amenities: [],
+    waveConditions: [],
+    type: [],
+    page: 1,
+  };
+  
+  const newFilters: FilterState = {
+    ...baseline,
     ...extracted.filters,
-    page: 1, // Reset to first page when applying new filters
   };
   
   // Use the cleaned search term for filtering
@@ -376,10 +389,23 @@ export function applyExtractedFiltersForArea(
   currentFilters: FilterState,
   extracted: NaturalLanguageResult
 ): FilterState {
-  const newFilters: FilterState = {
+  // Start from a clean baseline so each search is "fresh" in area context too
+  // Preserve non-filter controls like sort and nearMe, but clear prior filters
+  const baseline: FilterState = {
     ...currentFilters,
+    search: '',
+    organized: [],
+    blueFlag: false,
+    parking: [],
+    amenities: [],
+    waveConditions: [],
+    type: [],
+    page: 1,
+  };
+  
+  const newFilters: FilterState = {
+    ...baseline,
     ...extracted.filters,
-    page: 1, // Reset to first page when applying new filters
   };
   
   // For area context, use cleaned search term for beach name matching
