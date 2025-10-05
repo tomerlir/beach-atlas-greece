@@ -15,6 +15,7 @@ interface MapsSelectionDialogProps {
   latitude: number;
   longitude: number;
   beachName: string;
+  areaName?: string;
 }
 
 export const MapsSelectionDialog = ({
@@ -23,12 +24,15 @@ export const MapsSelectionDialog = ({
   latitude,
   longitude,
   beachName,
+  areaName,
 }: MapsSelectionDialogProps) => {
   const [isOpening, setIsOpening] = useState(false);
 
   const openInGoogleMaps = () => {
     setIsOpening(true);
-    const url = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+    // Prefer name-based search so Maps shows a friendly label. Fallback to coords.
+    const query = encodeURIComponent(areaName ? `${beachName}, ${areaName}` : beachName);
+    const url = `https://www.google.com/maps/search/?api=1&query=${query}`;
     window.open(url, '_blank');
     setTimeout(() => {
       setIsOpening(false);
@@ -38,7 +42,9 @@ export const MapsSelectionDialog = ({
 
   const openInAppleMaps = () => {
     setIsOpening(true);
-    const url = `https://maps.apple.com/?q=${latitude},${longitude}&ll=${latitude},${longitude}`;
+    // Use name-based query with coordinates hint so label appears pretty but position remains accurate
+    const name = encodeURIComponent(areaName ? `${beachName}, ${areaName}` : beachName);
+    const url = `https://maps.apple.com/?q=${name}&ll=${latitude},${longitude}`;
     window.open(url, '_blank');
     setTimeout(() => {
       setIsOpening(false);

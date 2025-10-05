@@ -600,6 +600,7 @@ const BeachDetail = () => {
           latitude={beach.latitude}
           longitude={beach.longitude}
           beachName={beach.name}
+          areaName={beach.area}
         />
       )}
 
