@@ -94,21 +94,21 @@ function generateSitemap(beaches: Beach[], areas: Area[]): string {
   
   <!-- Main Pages -->
   <url>
-    <loc>${SITE_URL}</loc>
+    <loc>${escapeXml(SITE_URL)}</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
-    <loc>${SITE_URL}/about</loc>
+    <loc>${escapeXml(`${SITE_URL}/about`)}</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>${SITE_URL}/ontology</loc>
+    <loc>${escapeXml(`${SITE_URL}/ontology`)}</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -121,7 +121,7 @@ function generateSitemap(beaches: Beach[], areas: Area[]): string {
     const lastmod = new Date(area.updated_at).toISOString().split('T')[0];
     sitemap += `
   <url>
-    <loc>${SITE_URL}/${area.slug}</loc>
+    <loc>${escapeXml(`${SITE_URL}/${area.slug}`)}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -140,7 +140,7 @@ function generateSitemap(beaches: Beach[], areas: Area[]): string {
     
     sitemap += `
   <url>
-    <loc>${SITE_URL}/${areaSlug}/${beach.slug}</loc>
+    <loc>${escapeXml(`${SITE_URL}/${areaSlug}/${beach.slug}`)}</loc>
     <lastmod>${lastmod}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>`;
@@ -149,7 +149,7 @@ function generateSitemap(beaches: Beach[], areas: Area[]): string {
     if (beach.photo_url) {
       sitemap += `
     <image:image>
-      <image:loc>${beach.photo_url}</image:loc>
+      <image:loc>${escapeXml(beach.photo_url)}</image:loc>
       <image:title>${escapeXml(beach.name)} - Greek Beach</image:title>
       <image:caption>${escapeXml(beach.description || `Beautiful beach in Greece: ${beach.name}`)}</image:caption>
     </image:image>`;
