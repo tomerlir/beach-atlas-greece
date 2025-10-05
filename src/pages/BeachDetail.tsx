@@ -621,6 +621,12 @@ const BeachDetail = () => {
               About
             </a>
             <a 
+              href="/ontology" 
+              className="text-muted-foreground hover:text-primary transition-colors"
+            >
+              Ontology
+            </a>
+            <a 
               href={`mailto:${CONTACT_EMAIL}`} 
               className="text-muted-foreground hover:text-primary transition-colors"
             >

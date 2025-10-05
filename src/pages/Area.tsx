@@ -496,6 +496,12 @@ const Area = () => {
               >
                 About
               </Link>
+              <Link 
+                to="/ontology" 
+                className="text-muted-foreground hover:text-primary transition-colors"
+              >
+                Ontology
+              </Link>
               <a 
                 href={`mailto:${CONTACT_EMAIL}`} 
                 className="text-muted-foreground hover:text-primary transition-colors"
