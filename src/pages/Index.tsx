@@ -23,7 +23,6 @@ import EmptyState from "@/components/EmptyState";
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Helmet } from "react-helmet-async";
 import { generateAreaSlug } from "@/lib/utils";
-import { useToast } from "@/hooks/use-toast";
 import ErrorBoundary from "@/components/ErrorBoundary";
 
 const BEACHES_PER_PAGE = 9;
@@ -35,20 +34,6 @@ const Index = () => {
   const [showGeolocationError, setShowGeolocationError] = useState(false);
   const { preloadVisibleBeachImages } = useImagePreloader();
   const isMobile = useIsMobile();
-  const { toast } = useToast();
-
-  // Show first-time search tip toast
-  useEffect(() => {
-    const hasSeenSearchTip = localStorage.getItem('hasSeenSearchTip');
-    if (!hasSeenSearchTip) {
-      toast({
-        title: "💡 Search Tip",
-        description: "Type your search and press Enter or click Search to find beaches",
-        duration: 5000,
-      });
-      localStorage.setItem('hasSeenSearchTip', 'true');
-    }
-  }, [toast]);
 
   // Fetch beaches from Supabase
   const { data: beaches = [], isLoading, error } = useQuery({
