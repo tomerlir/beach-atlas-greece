@@ -112,6 +112,7 @@ const AMENITY_MAPPINGS: Record<string, string> = {
   'beach bars': 'beach_bar',
   'water sports': 'water_sports',
   'family friendly': 'family_friendly',
+  'family-friendly': 'family_friendly',
   'blue flag': 'blue_flag', // Special case - also sets blueFlag boolean
   'boat trips': 'boat_trips',
   'cliff jumping': 'cliff_jumping',
