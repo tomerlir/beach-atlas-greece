@@ -129,22 +129,36 @@ const AMENITY_MAPPINGS: Record<string, string> = {
   'traditional tavernas': 'taverna',
   'traditional taverna': 'taverna',
   
-  // Single words
+  // Single words - including both singular and plural forms
   'sunbeds': 'sunbeds',
+  'sunbed': 'sunbeds',
   'umbrellas': 'umbrellas',
+  'umbrella': 'umbrellas',
+  'parking': 'parking',
   'showers': 'showers',
+  'shower': 'showers',
   'toilets': 'toilets',
+  'toilet': 'toilets',
   'lifeguard': 'lifeguard',
+  'lifeguards': 'lifeguard',
   'taverna': 'taverna',
+  'tavernas': 'taverna',
   'food': 'food',
   'music': 'music',
   'snorkeling': 'snorkeling',
+  'snorkel': 'snorkeling',
   'fishing': 'fishing',
+  'fish': 'fishing',
   'photography': 'photography',
   'photos': 'photography',
+  'photo': 'photography',
   'pictures': 'photography',
+  'picture': 'photography',
   'hiking': 'hiking',
+  'hike': 'hiking',
   'birdwatching': 'birdwatching',
+  'birdwatch': 'birdwatching',
+  'cliff jump': 'cliff_jumping',
 };
 
 // Common Greek place names and variations
