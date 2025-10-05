@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
-import { ArrowUp } from 'lucide-react';
+import { Search } from 'lucide-react';
+import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FilterState } from '@/hooks/useUrlState';
@@ -25,7 +26,7 @@ export default function EnhancedSearchBar({
   onFiltersChange,
   onClearAll,
   className = '',
-  placeholder = "Search beaches, islands, or places in Greece...",
+  placeholder = "Search beaches...",
   areaName,
   onPlaceMismatch,
   onNaturalLanguageSearch,
@@ -33,7 +34,7 @@ export default function EnhancedSearchBar({
   const [searchFocused, setSearchFocused] = useState(false);
   const [searchInput, setSearchInput] = useState(filters.originalQuery || filters.search);
   const [isClearing, setIsClearing] = useState(false); // Prevent infinite loops during clearing
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const isMobile = useIsMobile();
   
   // Track previous search input to detect manual clearing
@@ -162,8 +163,8 @@ export default function EnhancedSearchBar({
   };
 
   // Handle keyboard shortcuts
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
       e.preventDefault();
       handleSearchSubmit();
     } else if (e.key === 'Escape') {
@@ -183,74 +184,99 @@ export default function EnhancedSearchBar({
       // Fallback to just clearing search and originalQuery if onClearAll not provided
       onFiltersChange({ search: '', originalQuery: undefined, page: 1 });
     }
-    textareaRef.current?.focus();
+    inputRef.current?.focus();
   };
 
 
-  // Create AI-style placeholder text that encourages natural language queries
-  const getResponsivePlaceholder = () => {
+  // AI-powered dynamic placeholder text showcasing NLQ intelligence
+  // Use useState to ensure placeholder only changes when searchInput is empty and component mounts
+  const [aiPlaceholder, setAiPlaceholder] = useState(() => {
+    const examples = [
+      "Ask me: 'Show me secluded beaches with crystal clear water near Crete'",
+      "Try: 'Find family-friendly beaches with shallow water and lifeguards'", 
+      "Ask: 'What are the best beaches for windsurfing with strong winds?'",
+      "Search: 'Beaches with beach bars and music, not too crowded'",
+      "Ask: 'Show me beaches where I can see the sunset with my partner'",
+      "Try: 'Find beaches with good snorkeling and marine life'",
+      "Ask: 'What beaches have the softest sand and are wheelchair accessible?'",
+      "Search: 'Beaches with traditional Greek tavernas right on the sand'",
+      "Ask: 'Show me beaches with ancient ruins or historical sites nearby'",
+      "Try: 'Find beaches with the bluest water and best for Instagram photos'",
+      "Ask: 'What are the quietest beaches away from tourist crowds?'",
+      "Search: 'Beaches with beach volleyball courts and water sports'"
+    ];
+    
     if (isMobile) {
       return 'Ask me about beaches...';
     }
-    return 'Ask me about beaches in Greece... (e.g., "Show me sandy beaches with parking near Corfu")';
-  };
+    return examples[Math.floor(Math.random() * examples.length)];
+  });
 
-  const responsivePlaceholder = getResponsivePlaceholder();
+  // Only change placeholder when searchInput becomes empty (user cleared search)
+  useEffect(() => {
+    if (searchInput.length === 0) {
+      const examples = [
+        "Ask me: 'Show me sandy beaches with calm waters near Crete'",
+        "Try: 'Find family-friendly beaches with lifeguards'", 
+        "Ask: 'What are the best beaches for windsurfing with strong winds?'",
+        "Search: 'Beaches with beach bars and music'",
+        "Try: 'Find calm beaches with good snorkeling'",
+        "Search: 'Beaches with traditional Greek tavernas in Corfu'",
+        "Try: 'Find beaches for Instagram photos'",
+        "Search: 'Beaches with water sports'"
+      ];
+      
+      if (isMobile) {
+        setAiPlaceholder('Ask me about beaches...');
+      } else {
+        setAiPlaceholder(examples[Math.floor(Math.random() * examples.length)]);
+      }
+    }
+  }, [searchInput, isMobile]);
 
   return (
     <div className={`relative w-full ${className}`}>
-      <div className="relative group">
-        {/* AI-Style Textarea Container */}
-        <div className={`relative bg-white/95 border-2 rounded-2xl transition-all duration-200 ease-in-out
-          ${searchFocused 
-            ? 'border-primary shadow-lg shadow-primary/20' 
-            : 'border-border hover:border-primary/50 hover:shadow-md'
-          } focus-within:border-primary focus-within:shadow-lg focus-within:shadow-primary/20`}>
-          
-          {/* Main AI-Style Textarea */}
-          <textarea
-            ref={textareaRef}
-            placeholder={responsivePlaceholder}
+      <div className="relative group flex">
+        {/* Search Icon */}
+        <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5 transition-colors group-focus-within:text-primary z-10" />
+        
+        {/* Main Search Input */}
+        <div className="relative flex-1">
+          <Input
+            ref={inputRef}
+            placeholder={aiPlaceholder}
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
             onKeyDown={handleKeyDown}
             onFocus={() => setSearchFocused(true)}
             onBlur={() => setSearchFocused(false)}
-            className="w-full min-h-[3.5rem] max-h-32 px-4 py-3 pr-12 text-lg bg-transparent border-0 rounded-2xl resize-none
-              text-gray-600 placeholder:text-muted-foreground/70 focus:outline-none focus:ring-0 cursor-text"
-            style={{ 
-              color: '#4b5563',
-              lineHeight: '1.5'
-            }}
-            rows={2}
-            aria-label="Ask about beaches in Greece"
-            title="Press Esc to clear"
+            style={{ color: '#4b5563' }}
+            className={`
+              w-full pl-12 pr-4 h-14 text-lg bg-white/95 border-2 rounded-l-2xl rounded-r-none border-r-0
+              transition-all duration-200 ease-in-out
+              text-gray-600
+              ${searchFocused 
+                ? 'border-primary shadow-lg shadow-primary/20' 
+                : 'border-border hover:border-primary/50 hover:shadow-md'
+              }
+              focus:ring-0 focus:border-primary focus:shadow-lg focus:shadow-primary/20
+              placeholder:text-muted-foreground/70
+            `}
+            aria-label="Search beaches by name or location"
           />
           
-
-          {/* Send Button - positioned at bottom right */}
-          <Button
-            onClick={handleSearchSubmit}
-            className="absolute bottom-3 right-3 h-8 w-8 p-0 bg-primary hover:bg-primary/90 rounded-full z-10 text-white shadow-lg"
-            aria-label="Send message"
-            disabled={!searchInput.trim()}
-          >
-            <ArrowUp className="h-4 w-4" />
-          </Button>
         </div>
+
+        {/* Search Button */}
+        <Button
+          onClick={handleSearchSubmit}
+          className="h-14 px-8 bg-accent text-accent-foreground hover:bg-accent/90 border-2 border-l-0 border-accent rounded-r-2xl rounded-l-none font-medium"
+          aria-label="Search beaches"
+        >
+          Search
+        </Button>
       </div>
 
-      {/* AI-Style Help Text - positioned above to avoid hero section overflow */}
-      {searchFocused && searchInput.length < 2 && (
-        <div className="absolute bottom-full left-0 right-0 mb-2 bg-white border border-border rounded-2xl shadow-xl p-4 z-[9999]">
-          <div className="text-sm text-muted-foreground">
-            <p className="font-medium mb-2 text-foreground">💡 AI Search Tips:</p>
-            <ul className="space-y-1 text-sm">
-              <li>Ask naturally: "Show me sandy beaches with parking near Corfu"</li>
-            </ul>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

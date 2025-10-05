@@ -1,5 +1,40 @@
 import { FilterState } from '@/hooks/useUrlState';
 
+// Utility function to normalize quality adjectives and descriptive words
+const normalizeQualityAdjectives = (query: string): string => {
+  const qualityAdjectives = [
+    'good', 'great', 'excellent', 'awesome', 'amazing', 'fantastic', 'wonderful', 'perfect',
+    'decent', 'okay', 'ok', 'fine', 'nice', 'beautiful', 'stunning', 'breathtaking',
+    'incredible', 'outstanding', 'superb', 'magnificent', 'spectacular', 'gorgeous',
+    'terrible', 'bad', 'awful', 'horrible', 'poor', 'mediocre', 'average'
+  ];
+  
+  const descriptiveWords = [
+    'opportunities', 'spots', 'areas', 'places', 'locations', 'sites', 'zones',
+    'chances', 'options', 'possibilities', 'facilities', 'services', 'features',
+    'activities', 'experiences', 'destinations', 'venues', 'settings', 'environments'
+  ];
+  
+  let normalizedQuery = query;
+  
+  // Remove quality adjectives completely
+  qualityAdjectives.forEach(adjective => {
+    const regex = new RegExp(`\\b${adjective}\\b`, 'gi');
+    normalizedQuery = normalizedQuery.replace(regex, ' ');
+  });
+  
+  // Remove descriptive words that don't add search value
+  descriptiveWords.forEach(word => {
+    const regex = new RegExp(`\\b${word}\\b`, 'gi');
+    normalizedQuery = normalizedQuery.replace(regex, ' ');
+  });
+  
+  // Clean up multiple spaces and trim
+  normalizedQuery = normalizedQuery.replace(/\s+/g, ' ').trim();
+  
+  return normalizedQuery;
+};
+
 export interface ExtractedFilters {
   type?: string[];
   waveConditions?: string[];
@@ -74,11 +109,25 @@ const ORGANIZED_MAPPINGS: Record<string, string> = {
 const AMENITY_MAPPINGS: Record<string, string> = {
   // Multi-word phrases (check these first)
   'beach bar': 'beach_bar',
+  'beach bars': 'beach_bar',
   'water sports': 'water_sports',
   'family friendly': 'family_friendly',
   'blue flag': 'blue_flag', // Special case - also sets blueFlag boolean
   'boat trips': 'boat_trips',
   'cliff jumping': 'cliff_jumping',
+  'instagram photos': 'photography',
+  'instagram photo': 'photography',
+  'photo opportunities': 'photography',
+  'photo spots': 'photography',
+  'photography spots': 'photography',
+  'picture perfect': 'photography',
+  'instagram worthy': 'photography',
+  'traditional greek tavernas': 'taverna',
+  'traditional greek taverna': 'taverna',
+  'greek tavernas': 'taverna',
+  'greek taverna': 'taverna',
+  'traditional tavernas': 'taverna',
+  'traditional taverna': 'taverna',
   
   // Single words
   'sunbeds': 'sunbeds',
@@ -92,6 +141,8 @@ const AMENITY_MAPPINGS: Record<string, string> = {
   'snorkeling': 'snorkeling',
   'fishing': 'fishing',
   'photography': 'photography',
+  'photos': 'photography',
+  'pictures': 'photography',
   'hiking': 'hiking',
   'birdwatching': 'birdwatching',
 };
@@ -114,7 +165,9 @@ const PLACE_PATTERNS = [
  */
 export function extractFromNaturalLanguage(query: string): NaturalLanguageResult {
   const originalQuery = query;
-  let workingQuery = query.toLowerCase().trim();
+  // Normalize quality adjectives before processing
+  const normalizedQuery = normalizeQualityAdjectives(query);
+  let workingQuery = normalizedQuery.toLowerCase().trim();
   
   const result: NaturalLanguageResult = {
     filters: {},

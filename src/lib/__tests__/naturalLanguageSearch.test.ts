@@ -317,6 +317,134 @@ const testCases: TestCase[] = [
     },
     description: "Title case query"
   },
+  
+  // ==================== SEARCH BAR PLACEHOLDER EXAMPLES ====================
+  {
+    query: "Show me sandy beaches with calm waters near Crete",
+    expected: {
+      search: "crete",
+      type: ["SANDY"],
+      waveConditions: ["CALM"],
+      place: "crete",
+    },
+    description: "Search bar example: Sandy beaches with calm waters near Crete"
+  },
+  {
+    query: "Find family-friendly beaches with lifeguards",
+    expected: {
+      search: "family-friendly s",
+      amenities: ["lifeguard"],
+    },
+    description: "Search bar example: Family-friendly beaches with lifeguards"
+  },
+  {
+    query: "What are the best beaches for windsurfing with strong winds?",
+    expected: {
+      search: "what best wind strong winds?",
+      waveConditions: ["SURFABLE"],
+    },
+    description: "Search bar example: Windsurfing beaches with strong winds"
+  },
+  {
+    query: "Beaches with beach bars and music",
+    expected: {
+      search: "",
+      amenities: ["beach_bar", "music"],
+    },
+    description: "Search bar example: Beaches with beach bars and music"
+  },
+  {
+    query: "Find calm beaches with good snorkeling",
+    expected: {
+      search: "",
+      waveConditions: ["CALM"],
+      amenities: ["snorkeling"],
+    },
+    description: "Search bar example: Calm beaches with good snorkeling"
+  },
+  {
+    query: "Beaches with traditional Greek tavernas in Corfu",
+    expected: {
+      search: "corfu",
+      amenities: ["taverna"],
+      place: "corfu",
+    },
+    description: "Search bar example: Beaches with traditional Greek tavernas in Corfu"
+  },
+  {
+    query: "Find beaches for Instagram photos",
+    expected: {
+      search: "",
+      amenities: ["photography"],
+    },
+    description: "Search bar example: Beaches for Instagram photos"
+  },
+  {
+    query: "Beaches with water sports",
+    expected: {
+      search: "",
+      amenities: ["water_sports"],
+    },
+    description: "Search bar example: Beaches with water sports"
+  },
+  
+  // ==================== ADJECTIVE NORMALIZATION TESTS ====================
+  {
+    query: "Find beaches with great snorkeling",
+    expected: {
+      search: "",
+      amenities: ["snorkeling"],
+    },
+    description: "Adjective normalization: great snorkeling"
+  },
+  {
+    query: "Beaches with awesome fishing opportunities",
+    expected: {
+      search: "",
+      amenities: ["fishing"],
+    },
+    description: "Adjective normalization: awesome fishing"
+  },
+  {
+    query: "Find excellent beaches for photography",
+    expected: {
+      search: "",
+      amenities: ["photography"],
+    },
+    description: "Adjective normalization: excellent beaches"
+  },
+  {
+    query: "Beaches with great snorkeling spots",
+    expected: {
+      search: "",
+      amenities: ["snorkeling"],
+    },
+    description: "Descriptive word removal: snorkeling spots"
+  },
+  {
+    query: "Find beaches with good fishing areas",
+    expected: {
+      search: "",
+      amenities: ["fishing"],
+    },
+    description: "Descriptive word removal: fishing areas"
+  },
+  {
+    query: "Beaches with awesome photography locations",
+    expected: {
+      search: "",
+      amenities: ["photography"],
+    },
+    description: "Descriptive word removal: photography locations"
+  },
+  {
+    query: "Find beaches with beach bars",
+    expected: {
+      search: "",
+      amenities: ["beach_bar"],
+    },
+    description: "Plural form: beach bars"
+  },
 ];
 
 // ==================== TEST RUNNER ====================
@@ -448,4 +576,5 @@ if (failed > 0) {
 }
 
 console.log('✅ All tests passed!\n');
+
 
