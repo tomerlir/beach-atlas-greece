@@ -110,7 +110,7 @@ export default function FilterBar({
         <div className="flex flex-col gap-4">
           {/* Facets Group - First Row */}
           {!isMobile ? (
-            <div className="flex gap-2 md:gap-3 items-center justify-center lg:overflow-x-auto lg:scrollbar-hide">
+            <div className="flex gap-2 md:gap-3 items-center justify-start overflow-x-auto scrollbar-hide pb-1">
 
 
               {/* Near Me Toggle */}
