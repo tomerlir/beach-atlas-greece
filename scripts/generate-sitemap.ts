@@ -107,6 +107,13 @@ function generateSitemap(beaches: Beach[], areas: Area[]): string {
     <priority>0.8</priority>
   </url>
   
+  <url>
+    <loc>${SITE_URL}/ontology</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
   <!-- Area Pages -->`;
 
   // Add area pages
@@ -207,7 +214,7 @@ async function main() {
     console.log(`✅ Sitemap generated successfully!`);
     console.log(`📁 Location: ${sitemapPath}`);
     console.log(`🔗 URL: ${SITE_URL}/sitemap.xml`);
-    console.log(`📄 Contains ${beaches.length + areas.length + 2} URLs (${beaches.length} beaches + ${areas.length} areas + 2 main pages)`);
+    console.log(`📄 Contains ${beaches.length + areas.length + 3} URLs (${beaches.length} beaches + ${areas.length} areas + 3 main pages)`);
 
     // Validate XML structure
     const urlCount = (sitemapXml.match(/<url>/g) || []).length;
