@@ -1,12 +1,17 @@
 import { FilterState } from '@/hooks/useUrlState';
 
-// Utility function to normalize quality adjectives and descriptive words
+// Utility function to normalize quality adjectives, intent words, and descriptive words
 const normalizeQualityAdjectives = (query: string): string => {
   const qualityAdjectives = [
     'good', 'great', 'excellent', 'awesome', 'amazing', 'fantastic', 'wonderful', 'perfect',
     'decent', 'okay', 'ok', 'fine', 'nice', 'beautiful', 'stunning', 'breathtaking',
     'incredible', 'outstanding', 'superb', 'magnificent', 'spectacular', 'gorgeous',
     'terrible', 'bad', 'awful', 'horrible', 'poor', 'mediocre', 'average'
+  ];
+  
+  // Intent words that shouldn't affect filtering and should be removed
+  const intentWords = [
+    'best', 'top', 'popular', 'famous', 'must-see', 'must see', 'most', 'greatest'
   ];
   
   const descriptiveWords = [
@@ -20,6 +25,12 @@ const normalizeQualityAdjectives = (query: string): string => {
   // Remove quality adjectives completely
   qualityAdjectives.forEach(adjective => {
     const regex = new RegExp(`\\b${adjective}\\b`, 'gi');
+    normalizedQuery = normalizedQuery.replace(regex, ' ');
+  });
+  
+  // Remove intent words like "best", "top", etc.
+  intentWords.forEach(word => {
+    const regex = new RegExp(`\\b${word}\\b`, 'gi');
     normalizedQuery = normalizedQuery.replace(regex, ' ');
   });
   
@@ -304,8 +315,8 @@ export function extractFromNaturalLanguage(query: string): NaturalLanguageResult
     // Common verbs and auxiliaries
     'show', 'find', 'get', 'give', 'search', 'looking', 'want', 'need', 'would', 'could', 'should',
     'like', 'love', 'prefer', 'wish', 'hope',
-    // Pronouns and determiners
-    'i', 'me', 'my', 'we', 'us', 'our', 'you', 'your',
+    // Pronouns, determiners, and question words
+    'i', 'me', 'my', 'we', 'us', 'our', 'you', 'your', 'what',
     'a', 'an', 'the', 'some', 'any', 'all', 'every', 'each',
     'this', 'that', 'these', 'those',
     // Prepositions
@@ -318,12 +329,14 @@ export function extractFromNaturalLanguage(query: string): NaturalLanguageResult
     'have', 'has', 'had', 'having',
     // Common words
     'please', 'thank', 'thanks',
+    // Intent/quality words
+    'best', 'top', 'popular', 'famous', 'most', 'greatest', 'must-see', 'must', 'see',
     // Filter-related words that should never be in search term (already extracted as filters)
     'beach', 'beaches', 'flag', 'blue',
     // Beach type keywords (already extracted)
     'sandy', 'sand', 'pebbly', 'pebble', 'pebbles', 'mixed', 'rocky', 'rock', 'rocks',
     // Wave condition keywords (already extracted) - including plural forms
-    'calm', 'still', 'peaceful', 'moderate', 'wavy', 'waves', 'water', 'waters', 'surfable', 'surf', 'surfing',
+    'calm', 'still', 'peaceful', 'moderate', 'wavy', 'waves', 'water', 'waters', 'surfable', 'surf', 'surfing', 'wind', 'winds', 'strong',
     // Parking keywords (already extracted)
     'parking', 'lot', 'roadside', 'street',
     // Organized keywords (already extracted)
@@ -337,10 +350,11 @@ export function extractFromNaturalLanguage(query: string): NaturalLanguageResult
   // Split by whitespace and filter out fluff words, then rejoin
   const cleanedWords = workingQuery
     .split(/\s+/)
+    .map(word => word.replace(/^[^a-z0-9]+|[^a-z0-9]+$/gi, ''))
     .filter(word => {
       const trimmedWord = word.trim();
-      // Keep the word only if it's not in the fluff list and has meaningful length
-      return trimmedWord.length > 0 && !nlFluffWords.includes(trimmedWord);
+      const lower = trimmedWord.toLowerCase();
+      return trimmedWord.length > 0 && !nlFluffWords.includes(lower);
     })
     .join(' ')
     .trim();

@@ -21,6 +21,49 @@ interface TestCase {
 }
 
 const testCases: TestCase[] = [
+  // ==================== BEST/TOP INTENT QUERIES ====================
+  {
+    query: "best beaches in Corfu",
+    expected: {
+      search: "corfu",
+      place: "corfu",
+    },
+    description: "Intent words removed; location retained"
+  },
+  {
+    query: "top beach Mykonos",
+    expected: {
+      search: "mykonos",
+      place: "mykonos",
+      // singular/plural beach terms should be stripped from search
+    },
+    description: "Intent word 'top' removed; place extracted"
+  },
+  {
+    query: "popular sandy beaches",
+    expected: {
+      search: "",
+      type: ["SANDY"],
+    },
+    description: "Intent word 'popular' removed; type extracted"
+  },
+  {
+    query: "famous beaches with calm waters",
+    expected: {
+      search: "",
+      waveConditions: ["CALM"],
+    },
+    description: "Intent word 'famous' removed; waves extracted"
+  },
+  {
+    query: "best organized beaches in Rhodes",
+    expected: {
+      search: "rhodes",
+      organized: ["organized"],
+      place: "rhodes",
+    },
+    description: "Intent word 'best' removed; organized + place extracted"
+  },
   // ==================== BASIC QUERIES ====================
   {
     query: "sandy beaches",
@@ -364,15 +407,15 @@ const testCases: TestCase[] = [
   {
     query: "Find family-friendly beaches with lifeguards",
     expected: {
-      search: "family-friendly s",
-      amenities: ["lifeguard"],
+      search: "",
+      amenities: ["family_friendly", "lifeguard"],
     },
     description: "Search bar example: Family-friendly beaches with lifeguards"
   },
   {
     query: "What are the best beaches for windsurfing with strong winds?",
     expected: {
-      search: "what best wind strong winds?",
+      search: "",
       waveConditions: ["SURFABLE"],
     },
     description: "Search bar example: Windsurfing beaches with strong winds"
