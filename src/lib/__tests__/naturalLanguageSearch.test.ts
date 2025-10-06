@@ -114,6 +114,38 @@ const testCases: TestCase[] = [
     description: "Blue flag certification"
   },
   {
+    query: "blue flag status beaches",
+    expected: {
+      search: "",
+      blueFlag: true,
+    },
+    description: "Blue flag status synonym"
+  },
+  {
+    query: "blue-flag beaches",
+    expected: {
+      search: "",
+      blueFlag: true,
+    },
+    description: "Blue-flag hyphenated synonym"
+  },
+  {
+    query: "blue flag certified beaches",
+    expected: {
+      search: "",
+      blueFlag: true,
+    },
+    description: "Blue flag certified synonym"
+  },
+  {
+    query: "beaches with blue flag certification",
+    expected: {
+      search: "",
+      blueFlag: true,
+    },
+    description: "Blue flag certification phrase"
+  },
+  {
     query: "blue flag sandy beaches in Santorini",
     expected: {
       search: "santorini",

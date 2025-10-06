@@ -453,14 +453,7 @@ const BeachDetail = () => {
                     <span className="font-medium">Verified {beach.updated_at ? formatRelativeTime(beach.updated_at) : 'recently'}</span>
                   </div>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {beach.blue_flag && (
-                    <Badge className="bg-blue-600 text-white">
-                      <Flag className="h-3 w-3 mr-1" aria-hidden="true" />
-                      Blue Flag
-                    </Badge>
-                  )}
-                </div>
+                {/* Removed Blue Flag badge from header metadata per request */}
               </div>
               
               {/* Action Buttons */}
@@ -496,9 +489,12 @@ const BeachDetail = () => {
         {/* Overview - Show when content is ready */}
         {shouldShowContent && (
           <div className="space-y-8">
+            {/* Divider between header/meta and first content section */}
+            <hr className="border-neutral-200/30" />
+
             {/* At a Glance */}
             <section>
-              <h2 className="text-2xl font-semibold mb-6">At a Glance</h2>
+              <h2 className="text-2xl font-semibold mb-6">Summary</h2>
               <dl className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex items-center gap-3">
                   <Palmtree className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
@@ -540,11 +536,14 @@ const BeachDetail = () => {
               </dl>
             </section>
 
+            {/* Divider between sections */}
+            {beach.description && <hr className="border-neutral-200/30" />}
+
             {/* About Section */}
             {beach.description && (
-              <section className="divide-y divide-neutral-200/30">
-                <h2 className="text-2xl font-semibold mb-4">About This Beach</h2>
-                <div className="pt-6">
+              <section>
+                <h2 className="text-2xl font-semibold mb-4">Description</h2>
+                <div>
                   <p className="text-muted-foreground whitespace-pre-line leading-relaxed">
                     {displayDescription}
                   </p>
@@ -561,11 +560,14 @@ const BeachDetail = () => {
               </section>
             )}
 
+            {/* Divider between sections */}
+            {beach.amenities && beach.amenities.length > 0 && <hr className="border-neutral-200/30" />}
+
             {/* Amenities */}
             {beach.amenities && beach.amenities.length > 0 && (
-              <section className="divide-y divide-neutral-200/30">
+              <section>
                 <h2 className="text-2xl font-semibold mb-6">Amenities</h2>
-                <div className="pt-6 space-y-6">
+                <div className="space-y-6">
                   {Object.entries(amenitiesByCategory).map(([category, amenities]) => (
                     <div key={category}>
                       <h3 className="text-lg font-medium mb-3 capitalize">{category}</h3>

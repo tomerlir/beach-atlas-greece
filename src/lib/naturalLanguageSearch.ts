@@ -114,6 +114,11 @@ const AMENITY_MAPPINGS: Record<string, string> = {
   'family friendly': 'family_friendly',
   'family-friendly': 'family_friendly',
   'blue flag': 'blue_flag', // Special case - also sets blueFlag boolean
+  'blue-flag': 'blue_flag',
+  'blue flag status': 'blue_flag',
+  'blue flag certified': 'blue_flag',
+  'blue flag certification': 'blue_flag',
+  'blue flag award': 'blue_flag',
   'boat trips': 'boat_trips',
   'cliff jumping': 'cliff_jumping',
   'instagram photos': 'photography',
