@@ -5,7 +5,8 @@ import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FilterState } from '@/hooks/useUrlState';
 import { analytics } from '@/lib/analytics';
-import { extractFromNaturalLanguage, applyExtractedFilters, applyExtractedFiltersForArea, doesPlaceMatchArea } from '@/lib/naturalLanguageSearch';
+import { extractFromNaturalLanguage, applyExtractedFilters, applyExtractedFiltersForArea, doesPlaceMatchArea, setKnownPlaces } from '@/lib/naturalLanguageSearch';
+import { useAreas } from '@/hooks/useAreas';
 
 interface EnhancedSearchBarProps {
   filters: FilterState;
@@ -36,9 +37,18 @@ export default function EnhancedSearchBar({
   const [isClearing, setIsClearing] = useState(false); // Prevent infinite loops during clearing
   const inputRef = useRef<HTMLInputElement>(null);
   const isMobile = useIsMobile();
+  const { data: areas } = useAreas();
   
   // Track previous search input to detect manual clearing
   const prevSearchInputRef = useRef(searchInput);
+  // Keep NLQ place dictionary in sync with active areas
+  useEffect(() => {
+    if (areas && areas.length > 0) {
+      const names = areas.map(a => a.name).filter(Boolean) as string[];
+      setKnownPlaces(names);
+    }
+  }, [areas]);
+
   
   // Sync local state when filters change externally (e.g., clear button, navigation, back button)
   // ALWAYS prefer originalQuery if it exists (user's raw input), otherwise fall back to search (cleaned term)

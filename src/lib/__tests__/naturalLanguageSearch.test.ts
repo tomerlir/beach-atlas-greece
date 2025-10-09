@@ -23,6 +23,15 @@ interface TestCase {
 const testCases: TestCase[] = [
   // ==================== BEST/TOP INTENT QUERIES ====================
   {
+    query: "Best shallow waters beach corfu",
+    expected: {
+      search: "corfu",
+      waveConditions: ["CALM"],
+      place: "corfu",
+    },
+    description: "Intent+synonym handling: 'Best shallow waters' + place",
+  },
+  {
     query: "best beaches in Corfu",
     expected: {
       search: "corfu",
@@ -651,5 +660,3 @@ if (failed > 0) {
 }
 
 console.log('✅ All tests passed!\n');
-
-
