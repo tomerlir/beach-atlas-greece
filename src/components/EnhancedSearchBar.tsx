@@ -6,7 +6,6 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { FilterState } from '@/hooks/useUrlState';
 import { analytics } from '@/lib/analytics';
 import { extractFromNaturalLanguage, applyExtractedFilters, applyExtractedFiltersForArea, doesPlaceMatchArea } from '@/lib/naturalLanguageSearch';
-import MobileSearchOverlay from './MobileSearchOverlay';
 
 interface EnhancedSearchBarProps {
   filters: FilterState;
@@ -34,8 +33,7 @@ export default function EnhancedSearchBar({
 }: EnhancedSearchBarProps) {
   const [searchFocused, setSearchFocused] = useState(false);
   const [searchInput, setSearchInput] = useState(filters.originalQuery || filters.search);
-  const [isClearing, setIsClearing] = useState(false);
-  const [mobileOverlayOpen, setMobileOverlayOpen] = useState(false);
+  const [isClearing, setIsClearing] = useState(false); // Prevent infinite loops during clearing
   const inputRef = useRef<HTMLInputElement>(null);
   const isMobile = useIsMobile();
   
@@ -236,40 +234,6 @@ export default function EnhancedSearchBar({
     }
   }, [searchInput, isMobile]);
 
-  // Mobile: Show compact search trigger + overlay
-  if (isMobile) {
-    return (
-      <>
-        {/* Compact Search Trigger */}
-        <div className={`relative w-full ${className}`}>
-          <button
-            onClick={() => setMobileOverlayOpen(true)}
-            className="w-full flex items-center gap-3 px-4 py-3 bg-card border-2 border-border rounded-xl hover:border-primary/50 transition-all duration-200 shadow-sm active:scale-[0.98]"
-            aria-label="Open search"
-          >
-            <Search className="h-5 w-5 text-muted-foreground shrink-0" />
-            <span className="text-muted-foreground text-sm truncate flex-1 text-left">
-              {searchInput || "Ask me about beaches..."}
-            </span>
-          </button>
-        </div>
-
-        {/* Full-Screen Mobile Search Overlay */}
-        <MobileSearchOverlay
-          isOpen={mobileOverlayOpen}
-          onClose={() => setMobileOverlayOpen(false)}
-          filters={filters}
-          onFiltersChange={onFiltersChange}
-          onClearAll={onClearAll}
-          areaName={areaName}
-          onPlaceMismatch={onPlaceMismatch}
-          onNaturalLanguageSearch={onNaturalLanguageSearch}
-        />
-      </>
-    );
-  }
-
-  // Desktop: Full inline search bar
   return (
     <div className={`relative w-full ${className}`}>
       <div className="relative group flex">
@@ -286,9 +250,11 @@ export default function EnhancedSearchBar({
             onKeyDown={handleKeyDown}
             onFocus={() => setSearchFocused(true)}
             onBlur={() => setSearchFocused(false)}
+            style={{ color: '#4b5563' }}
             className={`
-              w-full pl-12 pr-4 h-14 text-lg bg-card border-2 rounded-l-2xl rounded-r-none border-r-0
+              w-full pl-12 pr-4 h-14 text-lg bg-white/95 border-2 rounded-l-2xl rounded-r-none border-r-0
               transition-all duration-200 ease-in-out
+              text-gray-600
               ${searchFocused 
                 ? 'border-primary shadow-lg shadow-primary/20' 
                 : 'border-border hover:border-primary/50 hover:shadow-md'
@@ -298,17 +264,19 @@ export default function EnhancedSearchBar({
             `}
             aria-label="Search beaches by name or location"
           />
+          
         </div>
 
         {/* Search Button */}
         <Button
           onClick={handleSearchSubmit}
-          className="h-14 px-8 bg-accent text-accent-foreground hover:bg-accent/90 border-2 border-l-0 border-accent rounded-r-2xl rounded-l-none font-medium shadow-md hover:shadow-lg transition-all"
+          className="h-14 px-8 bg-accent text-accent-foreground hover:bg-accent/90 border-2 border-l-0 border-accent rounded-r-2xl rounded-l-none font-medium"
           aria-label="Search beaches"
         >
           Search
         </Button>
       </div>
+
     </div>
   );
 }
