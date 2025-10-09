@@ -66,45 +66,46 @@ export const ShareDialog = ({
       name: 'Copy Link',
       icon: copied ? Check : Link2,
       color: 'text-primary',
-      bgColor: 'bg-primary/10 hover:bg-primary/20',
+      bgColor: 'bg-primary/10',
       action: handleCopyLink,
     },
     {
       name: 'WhatsApp',
       icon: MessageCircle,
-      color: 'text-primary',
-      bgColor: 'bg-primary/10 hover:bg-primary/20',
+      color: 'text-[#25D366]',
+      bgColor: 'bg-[#25D366]/10',
       action: () => {
-        window.open(`https://wa.me/?text=${encodedTitle}%20${encodedUrl}`, '_blank');
+        window.open(`https://wa.me/?text=${encodedTitle}%20${encodedUrl}`, '_blank', 'noopener,noreferrer');
       },
     },
     {
       name: 'Facebook',
       icon: Facebook,
-      color: 'text-secondary',
-      bgColor: 'bg-secondary/10 hover:bg-secondary/20',
+      color: 'text-[#1877F2]',
+      bgColor: 'bg-[#1877F2]/10',
       action: () => {
-        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`, '_blank');
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`, '_blank', 'noopener,noreferrer');
       },
     },
     {
       name: 'Twitter',
       icon: Twitter,
-      color: 'text-secondary',
-      bgColor: 'bg-secondary/10 hover:bg-secondary/20',
+      color: 'text-foreground',
+      bgColor: 'bg-muted',
       action: () => {
-        window.open(`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`, '_blank');
+        window.open(`https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`, '_blank', 'noopener,noreferrer');
       },
     },
     {
       name: 'Email',
       icon: Mail,
       color: 'text-accent',
-      bgColor: 'bg-accent/10 hover:bg-accent/20',
+      bgColor: 'bg-accent/10',
       action: () => {
         const subject = encodedTitle;
         const body = `Check out this beach: ${url}${description ? `\n\n${description}` : ''}`;
-        window.location.href = `mailto:?subject=${subject}&body=${encodeURIComponent(body)}`;
+        const mailtoLink = `mailto:?subject=${subject}&body=${encodeURIComponent(body)}`;
+        window.open(mailtoLink, '_self');
       },
     },
   ];
@@ -113,18 +114,7 @@ export const ShareDialog = ({
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle className="flex items-center justify-between">
-            Share Beach
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={onClose}
-              className="h-6 w-6 rounded-full"
-              aria-label="Close"
-            >
-              <X className="h-4 w-4" />
-            </Button>
-          </DialogTitle>
+          <DialogTitle>Share Beach</DialogTitle>
           <DialogDescription>
             Share {title} with friends and family
           </DialogDescription>
@@ -154,10 +144,11 @@ export const ShareDialog = ({
             return (
               <button
                 key={option.name}
+                type="button"
                 onClick={option.action}
-                className={`flex flex-col items-center gap-2 p-4 rounded-lg transition-all duration-200 hover:scale-105 ${option.bgColor}`}
+                className={`flex flex-col items-center gap-2 p-4 rounded-lg transition-all duration-200 hover:scale-105 active:scale-95 ${option.bgColor} hover:bg-opacity-80`}
               >
-                <div className={`w-12 h-12 rounded-full ${option.bgColor} flex items-center justify-center`}>
+                <div className="w-12 h-12 rounded-full bg-background/50 flex items-center justify-center">
                   <Icon className={`h-6 w-6 ${option.color}`} />
                 </div>
                 <span className="text-xs font-medium text-foreground text-center">
