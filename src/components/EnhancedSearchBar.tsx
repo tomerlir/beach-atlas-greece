@@ -238,7 +238,7 @@ export default function EnhancedSearchBar({
     <div className={`relative w-full ${className}`}>
       <div className="relative group flex">
         {/* Search Icon */}
-        <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5 transition-colors group-focus-within:text-primary z-10" />
+        <Search className="absolute left-3 md:left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4 md:h-5 md:w-5 transition-colors group-focus-within:text-primary z-10" />
         
         {/* Main Search Input */}
         <div className="relative flex-1">
@@ -252,7 +252,7 @@ export default function EnhancedSearchBar({
             onBlur={() => setSearchFocused(false)}
             style={{ color: '#4b5563' }}
             className={`
-              w-full pl-12 pr-4 h-14 text-lg bg-white/95 border-2 rounded-l-2xl rounded-r-none border-r-0
+              w-full pl-10 pr-2 md:pl-12 md:pr-4 h-12 md:h-14 text-base md:text-lg bg-white/95 border-2 rounded-l-xl md:rounded-l-2xl rounded-r-none border-r-0
               transition-all duration-200 ease-in-out
               text-gray-600
               ${searchFocused 
@@ -260,7 +260,7 @@ export default function EnhancedSearchBar({
                 : 'border-border hover:border-primary/50 hover:shadow-md'
               }
               focus:ring-0 focus:border-primary focus:shadow-lg focus:shadow-primary/20
-              placeholder:text-muted-foreground/70
+              placeholder:text-muted-foreground/70 placeholder:text-sm md:placeholder:text-base
             `}
             aria-label="Search beaches by name or location"
           />
@@ -270,7 +270,7 @@ export default function EnhancedSearchBar({
         {/* Search Button */}
         <Button
           onClick={handleSearchSubmit}
-          className="h-14 px-8 bg-accent text-accent-foreground hover:bg-accent/90 border-2 border-l-0 border-accent rounded-r-2xl rounded-l-none font-medium"
+          className="h-12 md:h-14 px-3 md:px-8 bg-accent text-accent-foreground hover:bg-accent/90 border-2 border-l-0 border-accent rounded-r-xl md:rounded-r-2xl rounded-l-none font-medium text-sm md:text-base"
           aria-label="Search beaches"
         >
           Search
