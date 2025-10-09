@@ -429,58 +429,65 @@ const BeachDetail = () => {
         {/* Title & Actions - Show immediately when content is ready */}
         {shouldShowContent && (
           <div className="mb-8">
-            {/* Title and Action Buttons Row */}
-            <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-4">
-              <div className="flex-1">
-                <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-3">
+            {/* Title and Action Buttons in Same Row */}
+            <div className="flex items-start justify-between gap-3 mb-4">
+              <div className="flex-1 min-w-0">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3">
                   {beach.name}
                 </h1>
-                <div className="flex items-center gap-2 mb-2">
-                  <Link
-                    to={`/${generateAreaSlug(beach.area)}`}
-                    aria-label={`View beaches in ${beach.area}`}
-                    className="inline-flex items-center gap-2 text-sm md:text-base rounded-full border border-border/50 bg-muted/40 px-3 py-1 text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-colors"
-                  >
-                    <MapPin className="h-4 w-4 md:h-5 md:w-5 text-primary" aria-hidden="true" />
-                    <span className="font-medium">{beach.area}</span>
-                  </Link>
-                  <div
-                    aria-label={`Information last verified ${beach.updated_at ? formatRelativeTime(beach.updated_at) : 'recently'}`}
-                    className="inline-flex items-center gap-2 text-sm md:text-base rounded-full border border-border/50 bg-muted/40 px-3 py-1 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                    role="status"
-                  >
-                    <Clock className="h-4 w-4 md:h-5 md:w-5 text-primary" aria-hidden="true" />
-                    <span className="font-medium">Verified {beach.updated_at ? formatRelativeTime(beach.updated_at) : 'recently'}</span>
-                  </div>
-                </div>
-                {/* Removed Blue Flag badge from header metadata per request */}
               </div>
               
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3 lg:flex-shrink-0">
+              {/* Icon-Only Action Buttons */}
+              <div className="flex gap-2 flex-shrink-0">
                 <Button 
                   onClick={handleOpenInMaps} 
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 flex-1 sm:flex-none"
+                  size="icon"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 h-9 w-9 md:h-10 md:w-10"
+                  aria-label="Get directions"
+                  title="Get directions"
                 >
-                  <MapPin className="h-4 w-4 mr-2" aria-hidden="true" />
-                  Directions
+                  <MapPin className="h-4 w-4 md:h-5 md:w-5" aria-hidden="true" />
                 </Button>
                 <Button 
                   variant="outline"
+                  size="icon"
                   onClick={handleShare}
-                  className="flex-1 sm:flex-none"
+                  className="h-9 w-9 md:h-10 md:w-10"
+                  aria-label="Share this beach"
+                  title="Share this beach"
                 >
-                  <Share2 className="h-4 w-4 mr-2" aria-hidden="true" />
-                  Share
+                  <Share2 className="h-4 w-4 md:h-5 md:w-5" aria-hidden="true" />
                 </Button>
                 <Button 
                   variant="outline"
+                  size="icon"
                   onClick={handleFeedback}
-                  className="flex-1 sm:flex-none"
+                  className="h-9 w-9 md:h-10 md:w-10"
+                  aria-label="Send feedback"
+                  title="Send feedback"
                 >
-                  <MessageSquare className="h-4 w-4 mr-2" aria-hidden="true" />
-                  Feedback
+                  <MessageSquare className="h-4 w-4 md:h-5 md:w-5" aria-hidden="true" />
                 </Button>
+              </div>
+            </div>
+            
+            {/* Area and Verification Info Below Title */}
+            <div className="flex flex-wrap items-center gap-2 mb-2">
+              <Link
+                to={`/${generateAreaSlug(beach.area)}`}
+                aria-label={`View beaches in ${beach.area}`}
+                className="inline-flex items-center gap-2 text-sm md:text-base rounded-full border border-border/50 bg-muted/40 px-3 py-1 text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-colors"
+              >
+                <MapPin className="h-4 w-4 md:h-5 md:w-5 text-primary" aria-hidden="true" />
+                <span className="font-medium">{beach.area}</span>
+              </Link>
+              <div
+                aria-label={`Information last verified ${beach.updated_at ? formatRelativeTime(beach.updated_at) : 'recently'}`}
+                className="inline-flex items-center gap-2 text-sm md:text-base rounded-full border border-border/50 bg-muted/40 px-3 py-1 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                role="status"
+              >
+                <Clock className="h-4 w-4 md:h-5 md:w-5 text-primary" aria-hidden="true" />
+                <span className="font-medium">Verified {beach.updated_at ? formatRelativeTime(beach.updated_at) : 'recently'}</span>
               </div>
             </div>
           </div>
