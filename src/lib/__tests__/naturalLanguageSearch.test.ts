@@ -360,7 +360,7 @@ const testCases: TestCase[] = [
     query: "wavy beaches for surfing",
     expected: {
       search: "",
-      waveConditions: ["SURFABLE"],
+      waveConditions: ["WAVY,SURFABLE"],
     },
     description: "Surfing query"
   },
