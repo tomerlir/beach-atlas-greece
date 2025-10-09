@@ -29,6 +29,7 @@ import { Tables } from "@/integrations/supabase/types";
 import { getAmenityConfig, getAmenitiesByCategory } from "@/lib/amenities";
 import OptimizedImage from "@/components/OptimizedImage";
 import PhotoAttribution from "@/components/PhotoAttribution";
+import { ShareDialog } from "@/components/ShareDialog";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
 import { useProgressiveLoading } from "@/hooks/useProgressiveLoading";
 import { generateBeachImageAltText } from "@/lib/accessibility";
@@ -77,7 +78,7 @@ const BeachDetail = () => {
   
   // State management
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
-  const [shareTooltip, setShareTooltip] = useState(false);
+  const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
 
   // Note: Geolocation removed to prevent unwanted permission prompts
 
@@ -172,26 +173,28 @@ const BeachDetail = () => {
     analytics.event('share_beach', { beach_id: beach.id });
     
     const url = window.location.href;
-    try {
-      if (navigator.share) {
-        await navigator.share({
-          title: beach.name,
-          text: `Check out ${beach.name} in ${beach.area}`,
-          url: url,
-        });
-      } else {
-        await navigator.clipboard.writeText(url);
-        setShareTooltip(true);
-        setTimeout(() => setShareTooltip(false), 2000);
-        toast({
-          title: "Link copied!",
-          description: "Beach URL copied to clipboard",
-        });
+    const shareData = {
+      title: beach.name,
+      text: `Check out ${beach.name} in ${beach.area}`,
+      url: url,
+    };
+    
+    // Try native share first (mobile devices)
+    if (navigator.share && navigator.canShare?.(shareData)) {
+      try {
+        await navigator.share(shareData);
+        return;
+      } catch (error) {
+        // User cancelled or error - fall through to dialog
+        if ((error as Error).name !== 'AbortError') {
+          console.error('Share error:', error);
+        }
       }
-    } catch (error) {
-      console.error('Error sharing:', error);
     }
-  }, [beach, toast]);
+    
+    // Fallback to custom share dialog
+    setIsShareDialogOpen(true);
+  }, [beach]);
 
   const handleFeedback = useCallback(() => {
     if (!beach) return;
@@ -646,6 +649,17 @@ const BeachDetail = () => {
           </p>
         </div>
       </footer>
+
+      {/* Share Dialog */}
+      {beach && (
+        <ShareDialog
+          isOpen={isShareDialogOpen}
+          onClose={() => setIsShareDialogOpen(false)}
+          url={window.location.href}
+          title={beach.name}
+          description={`Discover ${beach.name} in ${beach.area}, Greece`}
+        />
+      )}
       </div>
     </>
   );
