@@ -127,7 +127,7 @@ const Ontology = () => {
               </h2>
               
               <div className="grid gap-6">
-                <div className="bg-white border border-gray-200 rounded-lg p-6">
+                <div className="bg-card border border-border rounded-lg p-6">
                   <h3 className="text-xl font-semibold mb-3 flex items-center">
                     <MapPin className="w-5 h-5 mr-2 text-primary" />
                     Location & Identity
@@ -152,7 +152,7 @@ const Ontology = () => {
                   </div>
                 </div>
 
-                <div className="bg-white border border-gray-200 rounded-lg p-6">
+                <div className="bg-card border border-border rounded-lg p-6">
                   <h3 className="text-xl font-semibold mb-3 flex items-center">
                     <Waves className="w-5 h-5 mr-2 text-primary" />
                     Beach Characteristics
@@ -177,7 +177,7 @@ const Ontology = () => {
                   </div>
                 </div>
 
-                <div className="bg-white border border-gray-200 rounded-lg p-6">
+                <div className="bg-card border border-border rounded-lg p-6">
                   <h3 className="text-xl font-semibold mb-3 flex items-center">
                     <Car className="w-5 h-5 mr-2 text-primary" />
                     Access & Parking
@@ -201,7 +201,7 @@ const Ontology = () => {
               
               <div className="grid gap-6">
                 {/* Facilities */}
-                <div className="bg-white border border-gray-200 rounded-lg p-6">
+                <div className="bg-card border border-border rounded-lg p-6">
                   <h3 className="text-xl font-semibold mb-4 text-gray-900">Facilities</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {facilities.map((amenity) => (
@@ -223,7 +223,7 @@ const Ontology = () => {
                 </div>
 
                 {/* Safety */}
-                <div className="bg-white border border-gray-200 rounded-lg p-6">
+                <div className="bg-card border border-border rounded-lg p-6">
                   <h3 className="text-xl font-semibold mb-4 text-gray-900">Safety</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {safety.map((amenity) => (
@@ -241,7 +241,7 @@ const Ontology = () => {
                 </div>
 
                 {/* Services */}
-                <div className="bg-white border border-gray-200 rounded-lg p-6">
+                <div className="bg-card border border-border rounded-lg p-6">
                   <h3 className="text-xl font-semibold mb-4 text-gray-900">Services</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {services.map((amenity) => (
@@ -262,7 +262,7 @@ const Ontology = () => {
                 </div>
 
                 {/* Activities */}
-                <div className="bg-white border border-gray-200 rounded-lg p-6">
+                <div className="bg-card border border-border rounded-lg p-6">
                   <h3 className="text-xl font-semibold mb-4 text-gray-900">Activities</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {activities.map((amenity) => (
@@ -297,7 +297,7 @@ const Ontology = () => {
               </h2>
               
               <div className="grid gap-6">
-                <div className="bg-white border border-gray-200 rounded-lg p-6">
+                <div className="bg-card border border-border rounded-lg p-6">
                   <h3 className="text-xl font-semibold mb-4 text-gray-900">Verification Status</h3>
                   <div className="space-y-4">
                     <div className="flex items-start">
@@ -317,7 +317,7 @@ const Ontology = () => {
                   </div>
                 </div>
 
-                <div className="bg-white border border-gray-200 rounded-lg p-6">
+                <div className="bg-card border border-border rounded-lg p-6">
                   <h3 className="text-xl font-semibold mb-4 text-gray-900">Data Sources</h3>
                   <div className="space-y-3">
                     <div>
@@ -344,7 +344,7 @@ const Ontology = () => {
                 Metadata
               </h2>
               
-              <div className="bg-white border border-gray-200 rounded-lg p-6">
+              <div className="bg-card border border-border rounded-lg p-6">
                 <div className="space-y-4">
                   <div>
                     <h4 className="font-medium text-gray-900">Created At</h4>
@@ -380,7 +380,7 @@ const Ontology = () => {
                 </p>
                 <a 
                   href={`mailto:${CONTACT_EMAIL}?subject=Ontology%20Feedback&body=Please%20describe%20your%20suggestion%20or%20correction%20here...`}
-                  className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
+                  className="inline-flex items-center px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
                 >
                   Send Feedback
                 </a>

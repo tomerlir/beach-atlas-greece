@@ -196,7 +196,7 @@ export default function AllFiltersDrawer({
                 placeholder="Search beaches or places…"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
-                className="pl-10 h-11 bg-white border-border focus:ring-primary"
+                className="pl-10 h-11 bg-card border-border focus:ring-primary"
                 aria-label="Search beaches by name or location"
               />
             </div>

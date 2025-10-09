@@ -130,7 +130,7 @@ const BeachCard = ({ beach, distance, showDistance = true, compact = false }: Be
       onMouseLeave={cancelPrefetch}
       onClick={handleBeachCardClick}
     >
-      <Card className={`group hover:shadow-strong transition-all duration-300 overflow-hidden border-0 bg-white shadow-soft hover:shadow-medium h-full ${compact ? 'rounded-lg' : ''}`}>
+      <Card className={`group hover:shadow-strong transition-all duration-300 overflow-hidden border-0 bg-card shadow-soft hover:shadow-medium h-full ${compact ? 'rounded-lg' : ''}`}>
         {/* Beach Image */}
         <div className={`${compact ? 'aspect-[4/3]' : 'aspect-video'} bg-gradient-ocean relative overflow-hidden`}>
           {beach.photo_url ? (
@@ -155,7 +155,7 @@ const BeachCard = ({ beach, distance, showDistance = true, compact = false }: Be
           {/* Badges Overlay */}
           <div className={`absolute bottom-2 left-2 sm:bottom-3 sm:left-3 flex gap-1 sm:gap-2 flex-wrap max-w-[calc(100%-4rem)] sm:max-w-none`}>
             {beach.organized && (
-              <Badge variant="secondary" className="bg-white/95 text-foreground shadow-sm backdrop-blur-sm">
+              <Badge variant="secondary" className="bg-card/95 text-foreground shadow-sm backdrop-blur-sm">
                 <CheckCircle className="h-3 w-3 mr-1 text-green-600" />
                 <span className={`${compact ? 'hidden' : 'hidden sm:inline'}`}>Organized</span>
                 <span className={`${compact ? '' : 'sm:hidden'}`}>Org</span>
@@ -168,7 +168,7 @@ const BeachCard = ({ beach, distance, showDistance = true, compact = false }: Be
                 <span className={`${compact ? '' : 'sm:hidden'}`}>Flag</span>
               </Badge>
             )}
-            <Badge variant="outline" className="bg-white/95 text-foreground border-white/50 shadow-sm backdrop-blur-sm">
+            <Badge variant="outline" className="bg-card/95 text-foreground border-card/50 shadow-sm backdrop-blur-sm">
               <Car className={`h-3 w-3 mr-1 ${parkingInfo.color}`} />
               <span className={`${compact ? 'hidden' : 'hidden sm:inline'}`}>{parkingInfo.label}</span>
               <span className={`${compact ? '' : 'sm:hidden'}`}>{parkingInfo.label.split(' ')[0]}</span>
@@ -178,7 +178,7 @@ const BeachCard = ({ beach, distance, showDistance = true, compact = false }: Be
           {/* Distance Badge */}
           {distance && showDistance && (
             <div className="absolute top-3 right-3">
-              <Badge variant="outline" className="bg-white/95 text-foreground border-white/50 shadow-sm backdrop-blur-sm">
+              <Badge variant="outline" className="bg-card/95 text-foreground border-card/50 shadow-sm backdrop-blur-sm">
                 <MapPin className="h-3 w-3 mr-1" />
                 {Math.round(distance)} km
               </Badge>

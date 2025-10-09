@@ -80,7 +80,7 @@ const SearchFilters = ({
           placeholder="Search beaches by name or location..."
           value={filters.search}
           onChange={(e) => updateFilters({ search: e.target.value })}
-          className="pl-12 h-12 bg-white shadow-soft border-border focus:ring-primary text-base rounded-xl"
+          className="pl-12 h-12 bg-card shadow-soft border-border focus:ring-primary text-base rounded-xl"
         />
       </div>
 

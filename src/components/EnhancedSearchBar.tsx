@@ -252,7 +252,7 @@ export default function EnhancedSearchBar({
             onBlur={() => setSearchFocused(false)}
             style={{ color: '#4b5563' }}
             className={`
-              w-full pl-10 pr-2 md:pl-12 md:pr-4 h-12 md:h-14 text-base md:text-lg bg-white/95 border-2 rounded-l-xl md:rounded-l-2xl rounded-r-none border-r-0
+              w-full pl-10 pr-2 md:pl-12 md:pr-4 h-12 md:h-14 text-base md:text-lg bg-card/95 border-2 rounded-l-xl md:rounded-l-2xl rounded-r-none border-r-0
               transition-all duration-200 ease-in-out
               text-gray-600
               ${searchFocused 

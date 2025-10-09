@@ -43,12 +43,12 @@ const AreasGrid = ({ maxAreas = 12, showViewAll = true, className = "" }: AreasG
           {/* Loading skeleton - horizontal scroll for all screen sizes */}
           <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2">
             {Array.from({ length: maxAreas }).map((_, i) => (
-              <Card key={i} className="animate-pulse overflow-hidden border-0 bg-white shadow-soft flex-shrink-0 w-32">
+              <Card key={i} className="animate-pulse overflow-hidden border-0 bg-card shadow-soft flex-shrink-0 w-32">
                 <div className="aspect-[3/2] bg-gradient-ocean relative">
                   <div className="absolute inset-0 bg-gradient-to-br from-slate-200 to-slate-300 animate-pulse" />
-                  <div className="absolute top-2 right-2 h-4 w-12 bg-white/50 rounded-full"></div>
+                  <div className="absolute top-2 right-2 h-4 w-12 bg-card/50 rounded-full"></div>
                   <div className="absolute bottom-2 left-2 right-2">
-                    <div className="h-3 bg-white/50 rounded w-3/4"></div>
+                    <div className="h-3 bg-card/50 rounded w-3/4"></div>
                   </div>
                 </div>
               </Card>
@@ -114,7 +114,7 @@ const AreasGrid = ({ maxAreas = 12, showViewAll = true, className = "" }: AreasG
                 aria-label={`Explore ${area.beach_count} beaches in ${area.name}`}
                 onClick={() => analytics.event('area_chip_click', { area_slug: area.slug })}
               >
-                <Card className="h-full transition-all duration-300 hover:shadow-strong overflow-hidden border-0 bg-white shadow-soft hover:shadow-medium">
+                <Card className="h-full transition-all duration-300 hover:shadow-strong overflow-hidden border-0 bg-card shadow-soft hover:shadow-medium">
                   {/* Area Image - Fixed 3:2 aspect ratio */}
                   <div className="aspect-[3/2] bg-gradient-ocean relative overflow-hidden">
                     {area.hero_photo_url ? (
@@ -138,7 +138,7 @@ const AreasGrid = ({ maxAreas = 12, showViewAll = true, className = "" }: AreasG
                     
                     {/* Beach Count Badge */}
                     <div className="absolute top-2 right-2">
-                      <Badge variant="outline" className="bg-white/95 text-foreground border-white/50 shadow-sm backdrop-blur-sm text-xs px-1.5 py-0.5">
+                      <Badge variant="outline" className="bg-card/95 text-foreground border-card/50 shadow-sm backdrop-blur-sm text-xs px-1.5 py-0.5">
                         <MapPin className="h-2.5 w-2.5 mr-1" />
                         {area.beach_count}
                       </Badge>

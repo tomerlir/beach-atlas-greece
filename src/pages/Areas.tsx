@@ -109,15 +109,15 @@ const Areas = () => {
           {isLoading && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {Array.from({ length: 6 }).map((_, i) => (
-                <Card key={i} className="animate-pulse overflow-hidden border-0 bg-white shadow-soft">
+                <Card key={i} className="animate-pulse overflow-hidden border-0 bg-card shadow-soft">
                   {/* Image skeleton */}
                   <div className="aspect-video bg-gradient-ocean relative">
                     <div className="absolute inset-0 bg-gradient-to-br from-slate-200 to-slate-300 animate-pulse" />
                     {/* Badge skeleton */}
-                    <div className="absolute top-3 right-3 h-6 w-20 bg-white/50 rounded-full"></div>
+                    <div className="absolute top-3 right-3 h-6 w-20 bg-card/50 rounded-full"></div>
                     {/* Title skeleton */}
                     <div className="absolute bottom-3 left-3 right-3">
-                      <div className="h-5 bg-white/50 rounded w-2/3"></div>
+                      <div className="h-5 bg-card/50 rounded w-2/3"></div>
                     </div>
                   </div>
                   <CardContent className="p-4">
@@ -162,7 +162,7 @@ const Areas = () => {
                         className="group block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-xl"
                         aria-label={`Explore beaches in ${area.name}`}
                       >
-                        <Card className="h-full transition-all duration-300 hover:shadow-strong overflow-hidden border-0 bg-white shadow-soft hover:shadow-medium">
+                        <Card className="h-full transition-all duration-300 hover:shadow-strong overflow-hidden border-0 bg-card shadow-soft hover:shadow-medium">
                           {/* Area Image */}
                           <div className="aspect-video bg-gradient-ocean relative overflow-hidden">
                             {area.hero_photo_url ? (
@@ -186,7 +186,7 @@ const Areas = () => {
                             
                             {/* Beach Count Badge */}
                             <div className="absolute bottom-3 left-3">
-                              <Badge variant="outline" className="bg-white/95 text-foreground border-white/50 shadow-sm backdrop-blur-sm">
+                              <Badge variant="outline" className="bg-card/95 text-foreground border-card/50 shadow-sm backdrop-blur-sm">
                                 {area.beach_count} beaches
                               </Badge>
                             </div>
