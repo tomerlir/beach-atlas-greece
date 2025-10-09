@@ -1,5 +1,6 @@
 import { useParams, Link, useLocation, useNavigate } from "react-router-dom";
 import { generateAreaSlug } from "@/lib/utils";
+import { openInMaps } from "@/lib/maps";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { Helmet } from "react-helmet-async";
@@ -25,7 +26,6 @@ import { useToast } from "@/hooks/use-toast";
 import { useIsMobile } from "@/hooks/use-mobile";
 import Header from "@/components/Header";
 import { Tables } from "@/integrations/supabase/types";
-import { MapsSelectionDialog } from "@/components/MapsSelectionDialog";
 import { getAmenityConfig, getAmenitiesByCategory } from "@/lib/amenities";
 import OptimizedImage from "@/components/OptimizedImage";
 import PhotoAttribution from "@/components/PhotoAttribution";
@@ -78,7 +78,6 @@ const BeachDetail = () => {
   // State management
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [shareTooltip, setShareTooltip] = useState(false);
-  const [isMapsDialogOpen, setIsMapsDialogOpen] = useState(false);
 
   // Note: Geolocation removed to prevent unwanted permission prompts
 
@@ -157,7 +156,14 @@ const BeachDetail = () => {
   const handleOpenInMaps = useCallback(() => {
     if (!beach) return;
     analytics.event('start_directions', { beach_id: beach.id });
-    setIsMapsDialogOpen(true);
+    
+    // Open maps directly based on device (iOS → Apple Maps, Android/Desktop → Google Maps)
+    openInMaps({
+      latitude: beach.latitude,
+      longitude: beach.longitude,
+      name: beach.name,
+      area: beach.area
+    });
   }, [beach]);
 
   const handleShare = useCallback(async () => {
@@ -602,18 +608,6 @@ const BeachDetail = () => {
         )}
       </main>
       
-      {/* Maps Selection Dialog */}
-      {beach && (
-        <MapsSelectionDialog
-          isOpen={isMapsDialogOpen}
-          onClose={() => setIsMapsDialogOpen(false)}
-          latitude={beach.latitude}
-          longitude={beach.longitude}
-          beachName={beach.name}
-          areaName={beach.area}
-        />
-      )}
-
       {/* More in Area Section */}
       {beach && siblings.length > 0 && (
         <div className="max-w-4xl md:max-w-5xl mx-auto px-4">
