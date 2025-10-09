@@ -172,29 +172,38 @@ const BeachDetail = () => {
     
     analytics.event('share_beach', { beach_id: beach.id });
     
-    const url = window.location.href;
     const shareData = {
       title: beach.name,
       text: `Check out ${beach.name} in ${beach.area}`,
-      url: url,
+      url: window.location.href,
     };
     
-    // Try native share first (mobile devices)
+    // Try native share first (industry standard)
     if (navigator.share && navigator.canShare?.(shareData)) {
       try {
         await navigator.share(shareData);
         return;
       } catch (error) {
-        // User cancelled or error - fall through to dialog
+        // User cancelled - don't show error, just return
         if ((error as Error).name !== 'AbortError') {
           console.error('Share error:', error);
         }
+        return;
       }
     }
     
-    // Fallback to custom share dialog
-    setIsShareDialogOpen(true);
-  }, [beach]);
+    // Fallback: Copy to clipboard (simple and effective)
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      toast({
+        title: "Link copied!",
+        description: "Beach URL copied to clipboard",
+      });
+    } catch (error) {
+      // Final fallback: show simple dialog
+      setIsShareDialogOpen(true);
+    }
+  }, [beach, toast]);
 
   const handleFeedback = useCallback(() => {
     if (!beach) return;
