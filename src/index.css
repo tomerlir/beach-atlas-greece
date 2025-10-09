@@ -8,52 +8,52 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Mediterranean color palette inspired by Greek beaches */
-    --background: 208 100% 99%;
-    --foreground: 208 25% 15%;
+    /* New Brand System - Dreamy Greek Beach Experience */
+    --background: 204 45% 98%; /* #F7FAFC Seafoam White */
+    --foreground: 218 17% 35%; /* #4A5568 Slate Gray */
 
     --card: 0 0% 100%;
-    --card-foreground: 208 25% 15%;
+    --card-foreground: 218 17% 35%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 208 25% 15%;
+    --popover-foreground: 218 17% 35%;
 
-    /* Aegean blue primary */
-    --primary: 199 89% 48%;
+    /* Aegean Teal primary */
+    --primary: 180 82% 33%; /* #0F9B9B */
     --primary-foreground: 0 0% 100%;
-    --primary-light: 199 89% 65%;
-    --primary-dark: 199 89% 35%;
+    --primary-light: 180 82% 45%;
+    --primary-dark: 180 82% 25%;
 
-    /* Sandy secondary */
-    --secondary: 40 45% 92%;
-    --secondary-foreground: 208 25% 15%;
+    /* Santorini Deep Blue secondary */
+    --secondary: 201 100% 42%; /* #008AD4 */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 208 30% 96%;
-    --muted-foreground: 208 15% 45%;
+    --muted: 204 30% 94%;
+    --muted-foreground: 218 17% 50%;
 
-    /* Greek blue accent */
-    --accent: 207 90% 54%;
+    /* Bougainvillea Fuchsia accent */
+    --accent: 340 61% 57%; /* #D44D7A */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 208 20% 90%;
-    --input: 208 20% 90%;
-    --ring: 199 89% 48%;
+    --border: 218 17% 88%;
+    --input: 218 17% 88%;
+    --ring: 180 82% 33%;
 
-    /* Greek theme colors */
-    --ocean: 197 71% 52%;
-    --ocean-light: 197 71% 70%;
-    --sand: 42 58% 85%;
-    --sunset: 14 91% 60%;
+    /* Brand theme colors */
+    --ocean: 180 82% 33%; /* Aegean Teal */
+    --ocean-light: 180 82% 45%;
+    --sand: 204 45% 98%; /* Seafoam White */
+    --sunset: 35 100% 64%; /* #FFB347 Sunset Gold */
     --white-marble: 0 0% 98%;
-    --olive: 67 55% 58%;
+    --olive: 340 61% 57%; /* Bougainvillea Fuchsia */
 
     /* Gradients */
-    --gradient-ocean: linear-gradient(135deg, hsl(var(--ocean)), hsl(var(--primary)));
-    --gradient-sunset: linear-gradient(135deg, hsl(var(--sunset)), hsl(var(--primary-light)));
-    --gradient-sand: linear-gradient(135deg, hsl(var(--sand)), hsl(var(--secondary)));
+    --gradient-ocean: linear-gradient(135deg, hsl(var(--ocean)), hsl(var(--secondary)));
+    --gradient-sunset: linear-gradient(135deg, hsl(var(--sunset)), hsl(var(--accent)));
+    --gradient-sand: linear-gradient(135deg, hsl(var(--sand)), hsl(var(--background)));
 
     /* Shadows */
     --shadow-soft: 0 2px 10px -2px hsl(var(--primary) / 0.1);
@@ -73,43 +73,43 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 208 50% 3%;
-    --foreground: 208 50% 98%;
+    --background: 218 28% 13%;
+    --foreground: 204 45% 98%;
 
-    --card: 208 50% 5%;
-    --card-foreground: 208 50% 98%;
+    --card: 218 28% 16%;
+    --card-foreground: 204 45% 98%;
 
-    --popover: 208 50% 5%;
-    --popover-foreground: 208 50% 98%;
+    --popover: 218 28% 16%;
+    --popover-foreground: 204 45% 98%;
 
-    --primary: 199 89% 65%;
-    --primary-foreground: 208 50% 3%;
-    --primary-light: 199 89% 75%;
-    --primary-dark: 199 89% 45%;
+    --primary: 180 82% 45%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 180 82% 55%;
+    --primary-dark: 180 82% 33%;
 
-    --secondary: 208 50% 10%;
-    --secondary-foreground: 208 50% 98%;
+    --secondary: 201 100% 52%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 208 50% 10%;
-    --muted-foreground: 208 20% 65%;
+    --muted: 218 28% 20%;
+    --muted-foreground: 218 17% 70%;
 
-    --accent: 207 90% 64%;
-    --accent-foreground: 208 50% 3%;
+    --accent: 340 61% 65%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 208 50% 98%;
+    --destructive-foreground: 204 45% 98%;
 
-    --border: 208 50% 15%;
-    --input: 208 50% 15%;
-    --ring: 199 89% 65%;
+    --border: 218 28% 25%;
+    --input: 218 28% 25%;
+    --ring: 180 82% 45%;
 
     /* Dark theme adjustments */
-    --ocean: 197 71% 62%;
-    --ocean-light: 197 71% 80%;
-    --sand: 42 58% 75%;
-    --sunset: 14 91% 70%;
-    --white-marble: 208 50% 8%;
-    --olive: 67 55% 68%;
+    --ocean: 180 82% 45%;
+    --ocean-light: 180 82% 55%;
+    --sand: 204 30% 88%;
+    --sunset: 35 100% 70%;
+    --white-marble: 218 28% 16%;
+    --olive: 340 61% 65%;
 
     --sidebar-background: 208 50% 5%;
     --sidebar-foreground: 208 50% 98%;
@@ -129,6 +129,12 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
   }
 }
 
