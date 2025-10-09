@@ -26,8 +26,8 @@ export const DataFreshnessMeta = ({ beach }: DataFreshnessMetaProps) => {
   // Build aria-label for accessibility
   const ariaLabel = `Verification status: ${displayLabel} on ${exactTimestamp}`;
 
-  // Color classes: blue for verified, green for updated
-  const iconColorClass = beach.verified_at ? 'text-blue-600' : 'text-green-600';
+  // Color classes: primary for verified, secondary for updated
+  const iconColorClass = beach.verified_at ? 'text-primary' : 'text-secondary';
 
   return (
     <div 

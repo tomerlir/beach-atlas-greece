@@ -146,7 +146,7 @@ export default function ResultsSummary({
                 {hasActiveFilters && (
                     <button
                         onClick={onClearAllFilters}
-                        className="text-blue-600 hover:text-blue-800 underline text-sm flex-shrink-0 bg-transparent border-none cursor-pointer"
+                        className="text-secondary hover:text-secondary/80 underline text-sm flex-shrink-0 bg-transparent border-none cursor-pointer"
                     >
                         Clear all
                     </button>

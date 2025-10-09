@@ -45,7 +45,7 @@ const AreasGrid = ({ maxAreas = 12, showViewAll = true, className = "" }: AreasG
             {Array.from({ length: maxAreas }).map((_, i) => (
               <Card key={i} className="animate-pulse overflow-hidden border-0 bg-card shadow-soft flex-shrink-0 w-32">
                 <div className="aspect-[3/2] bg-gradient-ocean relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-slate-200 to-slate-300 animate-pulse" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-muted/50 to-muted animate-pulse" />
                   <div className="absolute top-2 right-2 h-4 w-12 bg-card/50 rounded-full"></div>
                   <div className="absolute bottom-2 left-2 right-2">
                     <div className="h-3 bg-card/50 rounded w-3/4"></div>

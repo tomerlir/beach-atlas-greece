@@ -372,9 +372,9 @@ const Ontology = () => {
 
             {/* Suggest a Fix */}
             <section className="mb-12">
-              <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-8">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Suggest a Fix</h2>
-                <p className="text-gray-700 mb-6">
+              <div className="bg-gradient-to-r from-secondary/10 to-accent/10 border border-secondary/20 rounded-lg p-8">
+                <h2 className="text-2xl font-bold text-foreground mb-4">Suggest a Fix</h2>
+                <p className="text-muted-foreground mb-6">
                   Found incorrect information or want to suggest improvements to our data model? 
                   We welcome your feedback to help us maintain the highest data quality standards.
                 </p>

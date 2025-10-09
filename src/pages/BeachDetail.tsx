@@ -408,8 +408,8 @@ const BeachDetail = () => {
                 onLoad={handleImageLoad}
                 onError={handleImageError}
                 fallbackComponent={
-                  <div className="w-full aspect-[16/9] bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl shadow-lg flex items-center justify-center">
-                    <Waves className="h-16 w-16 md:h-24 md:w-24 text-white opacity-50" />
+                  <div className="w-full aspect-[16/9] bg-gradient-to-br from-ocean to-secondary rounded-xl shadow-lg flex items-center justify-center">
+                    <Waves className="h-16 w-16 md:h-24 md:w-24 text-primary-foreground opacity-50" />
                   </div>
                 }
               />
@@ -420,8 +420,8 @@ const BeachDetail = () => {
               />
             </>
           ) : (
-            <div className="w-full aspect-[16/9] bg-gradient-to-br from-blue-400 to-blue-600 rounded-xl shadow-lg flex items-center justify-center">
-              <Waves className="h-16 w-16 md:h-24 md:w-24 text-white opacity-50" />
+            <div className="w-full aspect-[16/9] bg-gradient-to-br from-ocean to-secondary rounded-xl shadow-lg flex items-center justify-center">
+              <Waves className="h-16 w-16 md:h-24 md:w-24 text-primary-foreground opacity-50" />
             </div>
           )}
         </figure>

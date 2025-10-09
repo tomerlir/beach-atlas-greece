@@ -29,7 +29,7 @@ export function MoreInArea({ area, beaches }: { area: SlimArea; beaches: Beach[]
             <CarouselItem className="basis-[85%] sm:basis-1/2 lg:basis-1/3">
               <Link
                 to={areaHref}
-                className="block h-full w-full border rounded-lg hover:bg-gray-50 transition-colors"
+                className="block h-full w-full border rounded-lg hover:bg-muted/50 transition-colors"
                 aria-label={`View all beaches in ${area.name}`}
                 onClick={() => analytics.event('view_all_area_click', { area_slug: area.slug || area.name })}
               >

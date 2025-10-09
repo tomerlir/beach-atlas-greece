@@ -44,10 +44,10 @@ interface BeachCardProps {
 
 // Map parking types to icons and colors
 const parkingConfig: Record<string, { label: string; icon: any; color: string }> = {
-  NONE: { label: "No Parking", icon: XCircle, color: "text-red-500" },
-  ROADSIDE: { label: "Roadside Parking", icon: AlertCircle, color: "text-orange-500" },
-  SMALL_LOT: { label: "Small Lot", icon: AlertCircle, color: "text-yellow-500" },
-  LARGE_LOT: { label: "Large Lot", icon: CheckCircle, color: "text-green-500" }
+  NONE: { label: "No Parking", icon: XCircle, color: "text-destructive" },
+  ROADSIDE: { label: "Roadside Parking", icon: AlertCircle, color: "text-accent" },
+  SMALL_LOT: { label: "Small Lot", icon: AlertCircle, color: "text-sunset" },
+  LARGE_LOT: { label: "Large Lot", icon: CheckCircle, color: "text-primary" }
 };
 
 const BeachCard = ({ beach, distance, showDistance = true, compact = false }: BeachCardProps) => {
@@ -61,7 +61,7 @@ const BeachCard = ({ beach, distance, showDistance = true, compact = false }: Be
   const parkingInfo = parkingConfig[beach.parking] || { 
     label: "Parking Unknown", 
     icon: AlertCircle, 
-    color: "text-gray-500" 
+    color: "text-muted-foreground" 
   };
 
   // Fallback component for when image fails to load
@@ -156,7 +156,7 @@ const BeachCard = ({ beach, distance, showDistance = true, compact = false }: Be
           <div className={`absolute bottom-2 left-2 sm:bottom-3 sm:left-3 flex gap-1 sm:gap-2 flex-wrap max-w-[calc(100%-4rem)] sm:max-w-none`}>
             {beach.organized && (
               <Badge variant="secondary" className="bg-card/95 text-foreground shadow-sm backdrop-blur-sm">
-                <CheckCircle className="h-3 w-3 mr-1 text-green-600" />
+                <CheckCircle className="h-3 w-3 mr-1 text-primary" />
                 <span className={`${compact ? 'hidden' : 'hidden sm:inline'}`}>Organized</span>
                 <span className={`${compact ? '' : 'sm:hidden'}`}>Org</span>
               </Badge>

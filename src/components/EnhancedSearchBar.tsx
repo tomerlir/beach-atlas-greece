@@ -250,11 +250,10 @@ export default function EnhancedSearchBar({
             onKeyDown={handleKeyDown}
             onFocus={() => setSearchFocused(true)}
             onBlur={() => setSearchFocused(false)}
-            style={{ color: '#4b5563' }}
             className={`
               w-full pl-10 pr-2 md:pl-12 md:pr-4 h-12 md:h-14 text-base md:text-lg bg-card/95 border-2 rounded-l-xl md:rounded-l-2xl rounded-r-none border-r-0
               transition-all duration-200 ease-in-out
-              text-gray-600
+              text-foreground
               ${searchFocused 
                 ? 'border-primary shadow-lg shadow-primary/20' 
                 : 'border-border hover:border-primary/50 hover:shadow-md'

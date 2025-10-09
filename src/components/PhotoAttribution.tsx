@@ -71,8 +71,8 @@ const PhotoAttribution: React.FC<PhotoAttributionProps> = ({
   // Compact mode for homepage cards - shows only author name with minimal styling
   if (compact) {
     return (
-      <div className={`absolute bottom-1 right-1 bg-black/60 backdrop-blur-sm text-white text-[10px] px-1.5 py-0.5 rounded text-nowrap ${className}`}>
-        <span className="text-white/90 truncate max-w-[80px] block">
+      <div className={`absolute bottom-1 right-1 bg-foreground/60 backdrop-blur-sm text-background text-[10px] px-1.5 py-0.5 rounded text-nowrap ${className}`}>
+        <span className="text-background/90 truncate max-w-[80px] block">
           {attribution.author}
         </span>
       </div>
@@ -81,36 +81,36 @@ const PhotoAttribution: React.FC<PhotoAttributionProps> = ({
 
   // Full mode for detail pages - shows complete attribution
   return (
-    <div className={`absolute bottom-2 right-2 bg-black/70 backdrop-blur-sm text-white text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-sm sm:rounded-md max-w-[calc(100%-1rem)] ${className}`}>
+    <div className={`absolute bottom-2 right-2 bg-foreground/70 backdrop-blur-sm text-background text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-sm sm:rounded-md max-w-[calc(100%-1rem)] ${className}`}>
       <div className="flex items-center gap-0.5 sm:gap-1 flex-wrap">
-        <span className="text-white/90">
+        <span className="text-background/90">
           {attribution.author}
         </span>
         
         {attribution.license && (
           <>
-            <span className="text-white/70">•</span>
+            <span className="text-background/70">•</span>
             {attribution.licenseUrl ? (
               <a
                 href={attribution.licenseUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/90 hover:text-white underline decoration-dotted underline-offset-2 transition-colors"
+                className="text-background/90 hover:text-background underline decoration-dotted underline-offset-2 transition-colors"
                 title={`View ${attribution.license} license`}
               >
                 {attribution.license}
                 <ExternalLink className="inline w-2.5 h-2.5 sm:w-3 sm:h-3 ml-0.5 sm:ml-1" />
               </a>
             ) : (
-              <span className="text-white/70">{attribution.license}</span>
+              <span className="text-background/70">{attribution.license}</span>
             )}
           </>
         )}
         
         {attribution.source && (
           <>
-            <span className="text-white/70">•</span>
-            <span className="text-white/70">via {attribution.source}</span>
+            <span className="text-background/70">•</span>
+            <span className="text-background/70">via {attribution.source}</span>
           </>
         )}
       </div>

@@ -144,7 +144,7 @@ const SearchFilters = ({
                       className="text-primary w-4 h-4"
                     />
                     <div className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-green-600" />
+                      <CheckCircle className="h-4 w-4 text-primary" />
                       <span className="text-sm font-medium group-hover:text-primary transition-colors">Organized</span>
                     </div>
                   </label>
@@ -157,7 +157,7 @@ const SearchFilters = ({
                       className="text-primary w-4 h-4"
                     />
                     <div className="flex items-center gap-2">
-                      <XCircle className="h-4 w-4 text-orange-600" />
+                      <XCircle className="h-4 w-4 text-accent" />
                       <span className="text-sm font-medium group-hover:text-primary transition-colors">Unorganized</span>
                     </div>
                   </label>
@@ -170,7 +170,7 @@ const SearchFilters = ({
                       className="text-primary w-4 h-4"
                     />
                     <div className="flex items-center gap-2">
-                      <AlertCircle className="h-4 w-4 text-blue-600" />
+                      <AlertCircle className="h-4 w-4 text-secondary" />
                       <span className="text-sm font-medium group-hover:text-primary transition-colors">Both</span>
                     </div>
                   </label>
@@ -204,31 +204,31 @@ const SearchFilters = ({
                   <SelectContent>
                     <SelectItem value="any">
                       <div className="flex items-center gap-2">
-                        <AlertCircle className="h-4 w-4 text-gray-500" />
+                        <AlertCircle className="h-4 w-4 text-muted-foreground" />
                         Any parking
                       </div>
                     </SelectItem>
                     <SelectItem value="LARGE_LOT">
                       <div className="flex items-center gap-2">
-                        <CheckCircle className="h-4 w-4 text-green-500" />
+                        <CheckCircle className="h-4 w-4 text-primary" />
                         Large lot
                       </div>
                     </SelectItem>
                     <SelectItem value="SMALL_LOT">
                       <div className="flex items-center gap-2">
-                        <AlertCircle className="h-4 w-4 text-yellow-500" />
+                        <AlertCircle className="h-4 w-4 text-sunset" />
                         Small lot
                       </div>
                     </SelectItem>
                     <SelectItem value="ROADSIDE">
                       <div className="flex items-center gap-2">
-                        <AlertCircle className="h-4 w-4 text-orange-500" />
+                        <AlertCircle className="h-4 w-4 text-accent" />
                         Roadside
                       </div>
                     </SelectItem>
                     <SelectItem value="NONE">
                       <div className="flex items-center gap-2">
-                        <XCircle className="h-4 w-4 text-red-500" />
+                        <XCircle className="h-4 w-4 text-destructive" />
                         No parking
                       </div>
                     </SelectItem>

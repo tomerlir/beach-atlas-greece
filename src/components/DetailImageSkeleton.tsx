@@ -9,7 +9,7 @@ const DetailImageSkeleton = ({ className }: DetailImageSkeletonProps) => {
   return (
     <div className={`w-full aspect-[16/9] rounded-xl shadow-lg overflow-hidden ${className || ''}`}>
       {/* Animated gradient background */}
-      <div className="relative w-full h-full bg-gradient-to-br from-blue-400 via-blue-500 to-blue-600">
+      <div className="relative w-full h-full bg-gradient-to-br from-ocean via-ocean-light to-secondary">
         {/* Animated overlay for loading effect */}
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse" />
         

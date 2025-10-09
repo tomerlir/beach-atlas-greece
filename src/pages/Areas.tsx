@@ -112,7 +112,7 @@ const Areas = () => {
                 <Card key={i} className="animate-pulse overflow-hidden border-0 bg-card shadow-soft">
                   {/* Image skeleton */}
                   <div className="aspect-video bg-gradient-ocean relative">
-                    <div className="absolute inset-0 bg-gradient-to-br from-slate-200 to-slate-300 animate-pulse" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-muted/50 to-muted animate-pulse" />
                     {/* Badge skeleton */}
                     <div className="absolute top-3 right-3 h-6 w-20 bg-card/50 rounded-full"></div>
                     {/* Title skeleton */}

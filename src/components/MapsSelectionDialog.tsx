@@ -73,8 +73,8 @@ export const MapsSelectionDialog = ({
             variant="outline"
           >
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center">
-                <span className="text-white text-xs font-bold">G</span>
+              <div className="w-8 h-8 rounded-full bg-secondary flex items-center justify-center">
+                <span className="text-secondary-foreground text-xs font-bold">G</span>
               </div>
               <div className="text-left">
                 <div className="font-medium">Google Maps</div>
@@ -90,8 +90,8 @@ export const MapsSelectionDialog = ({
             variant="outline"
           >
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center">
-                <Navigation className="h-4 w-4 text-white" />
+              <div className="w-8 h-8 rounded-full bg-foreground flex items-center justify-center">
+                <Navigation className="h-4 w-4 text-background" />
               </div>
               <div className="text-left">
                 <div className="font-medium">Apple Maps</div>

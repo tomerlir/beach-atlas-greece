@@ -6,7 +6,7 @@ const BeachCardSkeleton = () => {
     <Card className="overflow-hidden border-0 bg-card shadow-soft h-full">
       {/* Image Skeleton */}
       <div className="aspect-video bg-gradient-ocean relative overflow-hidden">
-        <Skeleton className="w-full h-full bg-gradient-to-br from-slate-200 to-slate-300 animate-pulse" />
+        <Skeleton className="w-full h-full bg-gradient-to-br from-muted/50 to-muted animate-pulse" />
         
         {/* Badge Skeletons */}
         <div className="absolute top-3 left-3 flex gap-2">

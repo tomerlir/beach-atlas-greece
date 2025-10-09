@@ -37,31 +37,31 @@ export const AMENITY_MAP: Record<string, AmenityConfig> = {
   sunbeds: { 
     label: "Sunbeds", 
     icon: Clock, 
-    color: "text-yellow-600",
+    color: "text-sunset",
     category: 'facilities'
   },
   umbrellas: { 
     label: "Umbrellas", 
     icon: Palmtree, 
-    color: "text-blue-600",
+    color: "text-secondary",
     category: 'facilities'
   },
   parking: { 
     label: "Parking", 
     icon: Car, 
-    color: "text-green-600",
+    color: "text-primary",
     category: 'facilities'
   },
   showers: { 
     label: "Showers", 
     icon: Droplets, 
-    color: "text-blue-500",
+    color: "text-secondary",
     category: 'facilities'
   },
   toilets: { 
     label: "Toilets", 
     icon: Shield, 
-    color: "text-gray-600",
+    color: "text-muted-foreground",
     category: 'facilities'
   },
   
@@ -69,7 +69,7 @@ export const AMENITY_MAP: Record<string, AmenityConfig> = {
   lifeguard: { 
     label: "Lifeguard", 
     icon: LifeBuoy, 
-    color: "text-red-600",
+    color: "text-accent",
     category: 'safety'
   },
   
@@ -77,25 +77,25 @@ export const AMENITY_MAP: Record<string, AmenityConfig> = {
   beach_bar: { 
     label: "Beach Bar", 
     icon: Wine, 
-    color: "text-red-600",
+    color: "text-accent",
     category: 'services'
   },
   taverna: { 
     label: "Taverna", 
     icon: Utensils, 
-    color: "text-orange-600",
+    color: "text-sunset",
     category: 'services'
   },
   food: { 
     label: "Food", 
     icon: Utensils, 
-    color: "text-orange-500",
+    color: "text-sunset",
     category: 'services'
   },
   music: { 
     label: "Music", 
     icon: Music, 
-    color: "text-pink-600",
+    color: "text-accent",
     category: 'services'
   },
   
@@ -103,55 +103,55 @@ export const AMENITY_MAP: Record<string, AmenityConfig> = {
   snorkeling: { 
     label: "Snorkeling", 
     icon: Eye, 
-    color: "text-teal-600",
+    color: "text-primary",
     category: 'activities'
   },
   water_sports: { 
     label: "Water Sports", 
     icon: Waves, 
-    color: "text-cyan-600",
+    color: "text-secondary",
     category: 'activities'
   },
   family_friendly: { 
     label: "Family Friendly", 
     icon: Users, 
-    color: "text-rose-600",
+    color: "text-accent",
     category: 'activities'
   },
   boat_trips: { 
     label: "Boat Trips", 
     icon: Anchor, 
-    color: "text-blue-700",
+    color: "text-secondary",
     category: 'activities'
   },
   fishing: { 
     label: "Fishing", 
     icon: Anchor, 
-    color: "text-emerald-600",
+    color: "text-primary",
     category: 'activities'
   },
   photography: { 
     label: "Photography", 
     icon: Camera, 
-    color: "text-purple-600",
+    color: "text-accent",
     category: 'activities'
   },
   hiking: { 
     label: "Hiking", 
     icon: Mountain, 
-    color: "text-green-600",
+    color: "text-primary",
     category: 'activities'
   },
   birdwatching: { 
     label: "Birdwatching", 
     icon: Eye, 
-    color: "text-indigo-600",
+    color: "text-secondary",
     category: 'activities'
   },
   cliff_jumping: { 
     label: "Cliff Jumping", 
     icon: Mountain, 
-    color: "text-gray-600",
+    color: "text-muted-foreground",
     category: 'activities'
   }
 };

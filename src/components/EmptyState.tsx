@@ -103,7 +103,7 @@ export default function EmptyState({
               <button
                 type="button"
                 onClick={onClearAllFilters}
-                className="text-blue-600 underline underline-offset-2 hover:no-underline"
+                className="text-secondary underline underline-offset-2 hover:no-underline"
               >
                 clear all
               </button>
@@ -195,7 +195,7 @@ export default function EmptyState({
                         {areaName ? (
                           <Link
                             to={generateAreaUrl(areaName)}
-                            className="block h-full w-full border rounded-lg hover:bg-gray-50 transition-colors"
+                            className="block h-full w-full border rounded-lg hover:bg-muted/50 transition-colors"
                             aria-label={`View all beaches in ${areaName}`}
                           >
                             <div className="flex h-full items-center justify-center p-4 text-center">
@@ -205,7 +205,7 @@ export default function EmptyState({
                         ) : (
                           <Link
                             to="/"
-                            className="block h-full w-full border rounded-lg hover:bg-gray-50 transition-colors"
+                            className="block h-full w-full border rounded-lg hover:bg-muted/50 transition-colors"
                             aria-label="View all beaches"
                           >
                             <div className="flex h-full items-center justify-center p-4 text-center">
