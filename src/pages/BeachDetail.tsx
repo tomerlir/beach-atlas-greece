@@ -441,15 +441,16 @@ const BeachDetail = () => {
               <div className="flex gap-2 flex-shrink-0">
                 <Button 
                   onClick={handleOpenInMaps} 
+                  variant="cta"
                   size="icon"
-                  className="bg-primary text-primary-foreground hover:bg-primary/90 h-9 w-9 md:h-10 md:w-10"
+                  className="h-9 w-9 md:h-10 md:w-10"
                   aria-label="Get directions"
                   title="Get directions"
                 >
                   <MapPin className="h-4 w-4 md:h-5 md:w-5" aria-hidden="true" />
                 </Button>
                 <Button 
-                  variant="outline"
+                  variant="cta"
                   size="icon"
                   onClick={handleShare}
                   className="h-9 w-9 md:h-10 md:w-10"
