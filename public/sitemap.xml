@@ -6,21 +6,21 @@
   <!-- Main Pages -->
   <url>
     <loc>https://beachesofgreece.com</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-10</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
     <loc>https://beachesofgreece.com/about</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://beachesofgreece.com/ontology</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -110,6 +110,51 @@ Facilities are mainly in the adjacent fish tavernas; the beach itself is largely
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/milos/firiplaka-beach-milos</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Aerial_view_of_Paralia_Firiplaka_on_Milos_Island%2C_Greece.jpg/1024px-Aerial_view_of_Paralia_Firiplaka_on_Milos_Island%2C_Greece.jpg?20210317192618</image:loc>
+      <image:title> Firiplaka beach - Greek Beach</image:title>
+      <image:caption>South-coast beach backed by steep volcanic cliffs. Shoreline is mostly sand with some white pebbles; water is typically very clear and shallow close in. Generally sheltered from the prevailing Meltemi (north) winds, but exposed to southerlies—conditions range from calm to moderate and can become wavier with S winds. 
+
+Access by car/ATV via mostly asphalt road with a final gravel stretch; a short walk down to the beach. Small seasonal setup with sunbeds/umbrellas and a simple beach bar; otherwise limited facilities. Parking is limited near the beach. 
+
+Notable cautions: rockfall warnings due to the cliff, narrow strips of beach at the base of the cliff, and no regular lifeguard service.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/milos/firopotamos-beach-milos</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Firopotamos_%CE%A6%CF%85%CF%81%CE%BF%CF%80%CF%8C%CF%84%CE%B1%CE%BC%CE%BF%CF%82_Milos_%CE%9C%CE%AE%CE%BB%CE%BF%CF%82_2021-11-12_2528.jpg/1024px-Firopotamos_%CE%A6%CF%85%CF%81%CE%BF%CF%80%CF%8C%CF%84%CE%B1%CE%BC%CE%BF%CF%82_Milos_%CE%9C%CE%AE%CE%BB%CE%BF%CF%82_2021-11-12_2528.jpg?20220228233936</image:loc>
+      <image:title> Firopotamos beach - Greek Beach</image:title>
+      <image:caption>Small cove on Milos’ north coast backed by a syrmata fishing settlement and the chapel of Agios Nikolaos. Shore is a short arc of mixed sand and fine pebbles; seabed turns rocky toward the sides, with very clear, turquoise water. The bay is partially sheltered, but it is exposed to the prevailing Meltemi (N winds), so conditions are often calm to moderate; on strong northerlies it can get choppy. 
+
+Access is via a paved but steep, narrow downhill road. Parking is limited at the end of the road and by the village entrance. In season there are organized facilities (sunbeds/umbrellas, a simple beach bar) and basic showers/toilets; no lifeguard. Popular for relaxed swimming and casual snorkelling along the rocks. 
+
+Cliff-jumping platforms near the chapel are used by visitors—jumping is at your own risk. Area gets crowded in peak hours; arrive early. No current Blue Flag listing.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/naxos/maragkas-beach-naxos</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Maragkas_beach.jpg/1024px-Maragkas_beach.jpg?20210922150600</image:loc>
+      <image:title> Maragkas beach - Greek Beach</image:title>
+      <image:caption>Long, mostly sandy stretch between Agia Anna and Plaka with crystal-clear, shallow waters. Partially organized with sections of sunbeds/umbrellas and plenty of free area. Generally open to the north Aegean (Meltemi) winds, so conditions vary from calm to choppy; expect moderate waves when winds pick up. 
+
+Access is easy by road and local bus from Naxos Town; the coastal road here is partly unpaved with mainly roadside parking. Nearby cafés/tavernas and a camping complex provide food and services. 
+
+Note: a nudist-friendly section is commonly reported near the small hilltop chapel south of Agia Anna; no confirmed lifeguard presence.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/chalkidiki/polychrono-beach-chalkidiki</loc>
     <lastmod>2025-09-29</lastmod>
     <changefreq>weekly</changefreq>
@@ -134,14 +179,46 @@ The village also has a full complement of tourism services (taverns, shops, caf�
     </image:image>
   </url>
   <url>
-    <loc>https://beachesofgreece.com/mykonos/agia-anna-mykonos</loc>
-    <lastmod>2025-09-23</lastmod>
+    <loc>https://beachesofgreece.com/naxos/agia-anna-beach-naxos</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Naxos_Agia_Anna_2025-06-27_1592.jpg/1024px-Naxos_Agia_Anna_2025-06-27_1592.jpg?20250717203858</image:loc>
+      <image:title>Agia Anna beach - Greek Beach</image:title>
+      <image:caption>West-coast beach just south of Agios Prokopios, effectively continuing toward Maragas/Plaka. Predominantly fine sand with some smooth rock outcrops; water is typically very clear. West-facing and partly sheltered; when the summer Meltemi blows, the northern stretch feels breezier and can have more chop, while the southern end near the small fishing port is calmer. 
+
+Access is easy: ~5–6 km from Naxos Town/port with frequent bus service and drive-up access; parking is mostly along the seafront. Large organized zones with sunbeds/umbrellas, beach bars and tavernas; basic facilities (showers/toilets) present in season. Family-friendly shoreline; light snorkeling around rocks. 
+
+Notable cautions: crowded in peak months; minor boat traffic by the small port; expect more waves on windy days.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/mykonos/agia-anna-beach-mykonos</loc>
+    <lastmod>2025-10-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
       <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Mykonos_Agia_Anna_01.jpg/2048px-Mykonos_Agia_Anna_01.jpg?20140827220912</image:loc>
-      <image:title>Agia Anna - Greek Beach</image:title>
+      <image:title>Agia Anna beach - Greek Beach</image:title>
       <image:caption>Agia Anna is a beautiful, well-organized beach located in the Kalafatis area of Mykonos. It offers golden sandy shores, crystal-clear waters, and a relaxed yet vibrant beach-club vibe. The setting is scenic with rocky features at the edges, and nearby hills giving views over the Aegean. It’s ideal for sunbathers, swimmers, and those who enjoy a mix of chill and social ambience. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/paros/agia-irini-beach-paros</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Cyclades_Paros_Palm_Beach_-_panoramio.jpg/1024px-Cyclades_Paros_Palm_Beach_-_panoramio.jpg?20170512083216</image:loc>
+      <image:title>Agia Irini beach - Greek Beach</image:title>
+      <image:caption>Two small coves on Paros’ west coast, often called “Palm Beach,” with narrow sandy strands separated by rocks. Seabed is mostly sand with some stones/rocky patches at the edges; water is typically clear. 
+
+The west-facing, cove-like setting is well sheltered from the prevailing Meltemi (north) winds, so conditions are usually calm with gentle chop. Parts of the beach are organized with sunbeds/umbrellas and a beach club/tavernas; other sections remain simple. 
+
+Access is by car/scooter via a short (partly unpaved) side road; no convenient bus stop. Parking is just above/behind the beach but limited. 
+
+Notable cautions: limited space and shade, can get crowded in peak season; watch for submerged rocks near the sides and occasional boat traffic close to shore.</image:caption>
     </image:image>
   </url>
   <url>
@@ -169,6 +246,19 @@ Access is straightforward from the village; parking is available locally (roadsi
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/naxos/agiassos-beach-naxos</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Agiassos.jpg/1024px-Agiassos.jpg?20210219105731</image:loc>
+      <image:title>Agiassos beach - Greek Beach</image:title>
+      <image:caption>Long, quiet bay on Naxos’ southwest coast with fine sand and generally clear, shallow water. The beach is largely unorganized (no rental sunbeds/umbrellas or lifeguard). It sits in a sheltered bay that is usually calm under the prevailing north Meltemi; conditions can vary with other wind directions. Access is by asphalt road via Sagri (car or scooter recommended); limited seasonal bus service may operate. Parking is informal along the road or beside tavernas. 
+
+There are a couple of simple seafront tavernas for meals and drinks; otherwise facilities are minimal, and shade is scarce. Suitable for families due to gentle entry, but swimmers should be mindful of the absence of supervision and the area’s remoteness (bring water, sun protection, and check fuel).</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/crete/agiofaraggo-beach-crete</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
@@ -191,17 +281,6 @@ Access is straightforward from the village; parking is available locally (roadsi
     </image:image>
   </url>
   <url>
-    <loc>https://beachesofgreece.com/corfu/agios-georgios-beach-corfu</loc>
-    <lastmod>2025-09-26</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/AgiosGeorgios125.JPG/1024px-AgiosGeorgios125.JPG?20150531221436</image:loc>
-      <image:title>Agios Georgios beach - Greek Beach</image:title>
-      <image:caption>Agios Georgios Pagon (northwest Corfu) is a long, gently curving bay with soft golden sand and shallow, clear waters. The sheltered bay, lush hillsides, and the relatively gentle slope into the sea make it ideal for swimming, families, and relaxing beach days. The scenic drive to the beach (used in For Your Eyes Only Bond film) is part of the charm.</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://beachesofgreece.com/chalkidiki/agios-georgios-beach-chalkidiki</loc>
     <lastmod>2025-09-29</lastmod>
     <changefreq>weekly</changefreq>
@@ -210,6 +289,32 @@ Access is straightforward from the village; parking is available locally (roadsi
       <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Ammouliani_%283%29.jpg/1024px-Ammouliani_%283%29.jpg?20120531203125</image:loc>
       <image:title>Agios Georgios beach - Greek Beach</image:title>
       <image:caption>Agios Georgios lies on the eastern / northeastern coast of Ammouliani island (just off Sithonia, Chalkidiki). The beach is considered one of the more beautiful on the southern side of Ammouliani. It is named after a small church (chapel) located on the coast. The setting is peaceful and attractive, especially for those seeking a quieter beach experience rather than a full resort beach.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/naxos/agios-georgios-beach-naxos</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Naxos3.jpg/1024px-Naxos3.jpg?20060917142042</image:loc>
+      <image:title>Agios Georgios beach - Greek Beach</image:title>
+      <image:caption>City beach on the south side of Naxos Town with predominantly fine sand and some rocky/pebblier patches toward the southern end. Water is usually clear and shallow for a long distance, making it popular with families. The bay is relatively sheltered from the prevailing northern Meltemi, so conditions tend to be calm; a lagoon area to the south hosts beginner-friendly windsurfing. 
+
+Access is on foot from town or by paved road; multiple public parking areas sit near the beachfront. The shore is partly organized with rows of sunbeds/umbrellas run by cafés/hotels, plus beach bars and tavernas behind the sand. Public showers and toilets exist near the main organized zone. 
+
+Cautions: gets very crowded in peak season; watch for windsurfers in the lagoon area and occasional small craft near the town harbor entrance.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/corfu/agios-georgios-beach-corfu</loc>
+    <lastmod>2025-09-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/AgiosGeorgios125.JPG/1024px-AgiosGeorgios125.JPG?20150531221436</image:loc>
+      <image:title>Agios Georgios beach - Greek Beach</image:title>
+      <image:caption>Agios Georgios Pagon (northwest Corfu) is a long, gently curving bay with soft golden sand and shallow, clear waters. The sheltered bay, lush hillsides, and the relatively gentle slope into the sea make it ideal for swimming, families, and relaxing beach days. The scenic drive to the beach (used in For Your Eyes Only Bond film) is part of the charm.</image:caption>
     </image:image>
   </url>
   <url>
@@ -258,6 +363,21 @@ Because of its orientation, the beach offers panoramic views from the main road,
       <image:caption>Agios Mamas is a village on the Kassandra peninsula, near Nea Moudania, with a long sandy coastline stretching from the delta of the Olynthios river and connecting with the beaches of Kalyves Polygyrou. The beach here is broad and sandy, with clear shallow waters, making it appealing for both locals and tourists. The area behind the beach is developed with village amenities, and the beach has both organized and more natural stretches.
 
 It’s also ecologically notable: the area between Agios Mamas and Potidea includes lagoon-style water areas and is part of a Natura 2000 protected zone, hosting aquatic birds.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/lefkada/agios-nikitas-beach-lefkada</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/60.Agios_Nikitas_-_Plaja_-_panoramio.jpg/1024px-60.Agios_Nikitas_-_Plaja_-_panoramio.jpg?20170108152740</image:loc>
+      <image:title>Agios Nikitas beach - Greek Beach</image:title>
+      <image:caption>Small bay at the foot of Agios Nikitas village on Lefkada’s west coast. Shore is a sand–pebble mix (generally coarse sand with small pebbles). Water is typically very clear, with turquoise hues. 
+
+The bay faces the open Ionian and is partly sheltered, but westerly winds can bring moderate waves and occasional swell. Access is on foot via the village’s pedestrian lane after parking at the entrance or small private lots; the lane is flat and short. Restaurants and cafés line the waterfront; restrooms are mainly in venues, not on-beach. 
+
+A seasonal water taxi runs from the beach to nearby Milos Beach. Space is limited and it can get crowded in high season; parking fills early. Cautions: changing wave conditions with wind, limited shaded areas, constrained beach width at times.</image:caption>
     </image:image>
   </url>
   <url>
@@ -348,6 +468,19 @@ Adjacent Natura 2000 wetland supports birdlife and signed paths; avoid disturbin
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/milos/agkali-beach-milos</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/View_of_Agali_Beach.jpg/1024px-View_of_Agali_Beach.jpg?20170529021640</image:loc>
+      <image:title>Agkali beach - Greek Beach</image:title>
+      <image:caption>Small cove on the E/SE coast of Milos near Komia. Shore is mostly pebbles with some coarse sand patches; seabed turns to rock in places. Water is typically very clear. The cove sits below steep cliffs and is relatively sheltered, but swell can wrap in with onshore winds. No formal facilities on the public shore (nearby hotel umbrellas are for guests), so shade and services are limited. 
+
+Access via rough, unpaved road with a short walk-down path; also reachable by boat. Expect limited space and no lifeguard. Notable cautions: uneven/rocky entry in spots, falling-rock potential below cliffs, and challenging access for low-clearance cars.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/mykonos/agrari-beach-mykonos</loc>
     <lastmod>2025-09-30</lastmod>
     <changefreq>weekly</changefreq>
@@ -410,6 +543,21 @@ Notable cautions: stay clear of marked lanes for watercraft and occasional small
 Access is straightforward from the resort road on foot or by car, with plentiful seafront businesses directly behind the beach. The central sections are organized with rentable sunbeds/umbrellas, beach bars and tavernas; quieter stretches exist further from the village center. Water sports operators and boat trips to nearby sights (e.g., Blue Caves/Navagio) depart from this area, so bathers should remain within buoyed zones and be mindful of passing craft. 
 
 No persistent hazards are reported beyond typical summer sun/heat exposure and occasional boat activity</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/naxos/alyko-beach-naxos</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Strand_beach_Aliko_Naxos_%2823719985739%29.jpg/1024px-Strand_beach_Aliko_Naxos_%2823719985739%29.jpg?20160227234020</image:loc>
+      <image:title>Alyko beach - Greek Beach</image:title>
+      <image:caption>Sandy coves backed by a protected cedar (juniper) dune system on Naxos’ southwest coast. The seabed is mostly sand with some scattered rocks; water is typically very clear. Orientation and the small bays give partial shelter from the prevailing northerly Meltemi, so conditions range from calm to light chop; during strong winds, waves and currents can increase. 
+
+Access is via paved roads (through Plaka/Tripodes) with short footpaths through the dunes—stay on paths to protect vegetation. No formal facilities on the beach: no lifeguard, toilets, or showers; limited natural shade. Parking is informal along the approach roads and clearings before the forest. Good for low-key swimming, snorkeling over rock patches, coastal walks through the cedar forest, and photography. 
+
+Cautions: unorganized beach with no services, occasional currents in strong winds, fragile dune habitat (do not disturb plants), and uneven rocky patches when entering in places.</image:caption>
     </image:image>
   </url>
   <url>
@@ -529,6 +677,21 @@ Access is convenient from Poseidonos Avenue and there is valet or managed parkin
       <image:caption>Avlaki is a Blue Flag beach about 4 km south of Porto Rafti, easily reached via Attiki Odos. The shore is mainly sandy (some finer, though pockets of pebbles may appear near the edges) and the seabed slopes gently—entry to the water is smooth and comfortable. The water is clear and calm under typical conditions; in strong winds light ripples may form. 
 
 The beach is organized: visitors can rent sunbeds and umbrellas, there is a restaurant-bar, lifeguards, changing cabins and toilets. Some free (non-organized) stretches exist outside the managed zone. Parking is available nearby. Because parts remain unmanaged, swimmers should stay within marked safe zones and watch for variable seabed at margins.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/naxos/azalas-beach-naxos</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Azalas_-_panoramio.jpg/1024px-Azalas_-_panoramio.jpg?20170223140542</image:loc>
+      <image:title>Azalas Beach - Greek Beach</image:title>
+      <image:caption>Remote cove on Naxos’ east coast, just north of Moutsouna. The shore is mainly pebbles with pockets of coarse sand, while the seabed is largely sandy—water is typically very clear. Tamarisk trees provide limited natural shade. 
+
+The beach is unorganized (no sunbeds, umbrellas, lifeguard, or services); nearest food and supplies are in Moutsouna. Access is by road (asphalt then a short dirt section); final approach is straightforward and walk-in. Exposed to the Meltemi (N–NE) and east winds, so conditions range from moderate to distinctly wavy in summer; calmer on windless days. 
+
+Rocky sections and small inlets suit snorkeling and fishing, but caution is advised for slippery rocks, occasional waves and the absence of on-site facilities or supervision.</image:caption>
     </image:image>
   </url>
   <url>
@@ -692,6 +855,23 @@ Limited, low-key facilities operate under park rules: a restricted number of sun
       <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Dassia_Kerkyra.jpg/1024px-Dassia_Kerkyra.jpg?20180422111112</image:loc>
       <image:title>Dassia beach - Greek Beach</image:title>
       <image:caption>Dassia is a popular beach on the east coast of Corfu, located about 10-12 km from Corfu Town. The beach is a mix of sand and fine pebbles, with a gently sloping seabed that gives shallow waters for a good distance — making it pleasant for swimmers, families, and those wanting both comfort and natural scenery. The bay is large, lined with hotels, tavernas, cafés, and lush green hills in the background. The water is generally clear and inviting, though it can get busy in summer.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/lefkada/desimi-beach-lefkada</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/%CE%94%CE%B5%CF%83%CE%AF%CE%BC%CE%B9.JPG/1024px-%CE%94%CE%B5%CF%83%CE%AF%CE%BC%CE%B9.JPG?20210212151828</image:loc>
+      <image:title>Desimi beach - Greek Beach</image:title>
+      <image:caption>Sheltered cove on Lefkada’s east coast near Vlichos/Geni. Shore is a coarse sand–pebble mix with very clear, typically calm water due to the bay’s protection from prevailing swell. Depth increases gradually in most parts but can deepen quickly near the boat channel. 
+
+Popular for snorkeling along the rocky sides and short paddles to nearby caves; several local operators rent kayaks/pedalos/boats and run short trips. Access is via paved road; parking is limited in small lots by the campsites/tavernas or along short stretches near the beach. 
+
+There are waterfront tavernas and two adjacent campgrounds; public beach sections are generally unorganized (no standard rows of sunbeds/umbrellas, no public lifeguard). 
+
+Limited natural shade from trees; bring shade in peak sun. Cautions: frequent small-boat traffic close to shore in high season; narrow beach can feel crowded; watch for slippery rocks underfoot in the corners.</image:caption>
     </image:image>
   </url>
   <url>
@@ -870,6 +1050,23 @@ Waters are usually calm and family-friendly, with gentle entry and good clarity;
     <lastmod>2025-10-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/milos/gerakas-beach-milos</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Gerekas_001.jpg/1024px-Gerekas_001.jpg?20131008180541</image:loc>
+      <image:title>Gerakas beach - Greek Beach</image:title>
+      <image:caption>Small sandy cove on Milos’ south coast, backed by high white volcanic/perlite cliffs with active sand-slides. Water is very clear and typically calm under prevailing summer northerlies (Meltemi), though southern swells can raise chop. 
+
+Access is by sea only (boat tours/private boat); there is no road access or shore facilities. 
+
+The beach is unorganized—no sunbeds, bars, toilets, or lifeguard. Depth increases fairly quickly near shore; good visibility favors casual snorkeling along the rocks. Notable cautions: unstable cliffs and falling sand from slopes—avoid sitting directly beneath; occasional warm spots from mild geothermal activity; swell/exposure can vary with southerly winds. 
+
+Popular stop on circumnavigation cruises; can be crowded at peak times despite remote setting.</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/gerakini-beach-chalkidiki</loc>
@@ -1112,6 +1309,21 @@ It’s popular, especially from mid-morning onwards, so arriving early is recomm
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/naxos/kastraki-beach-naxos</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Kastraki_Naxos_Greece_2018080418420NP3273.jpg/1024px-Kastraki_Naxos_Greece_2018080418420NP3273.jpg?20180916052325</image:loc>
+      <image:title>Kastraki beach - Greek Beach</image:title>
+      <image:caption>Long west-coast strand south of Mikri Vigla and north of Alyko/Glyfada. Predominantly fine, light sand with clear, turquoise water. Generally open to the Aegean with exposure to the northerly Meltemi; conditions range from calm to choppy depending on wind, with small waves more likely on windy days. 
+
+Access is by paved road; public bus services the area in season. Parking is mostly along the road or at venues behind the beach. Parts of the shoreline are unorganized, while several sections have managed sunbeds/umbrellas and low-key beach bars/tavernas. No widely reported lifeguard presence. 
+
+Cautions: limited natural shade; wind/wave chop during Meltemi; facilities are scattered rather than continuous.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/lefkada/kathisma-beach-lefkada</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -1159,6 +1371,34 @@ Typically the waters are calm, though wind-driven ripples may emerge in breezy c
 Access is easy by road through Limni Keri. There are organized sections with rentable sunbeds and umbrellas, plus seafront tavernas. Large parking areas are available near the harbor end of the beach. Popular activities include boat trips to Marathonisi and the Keri Caves; the rocky edges and clear water suit casual snorkeling. 
 
 Cautions: mixed/pebble entry (water shoes helpful), active boat traffic from tour and rental boats, and the wider area lies within the National Marine Park (observe local rules and marked zones).</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/milos/kleftiko-milos</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Sailing_yachts_near_the_caves_at_Kleftiko_on_Milos_Island%2C_Greece.jpg/1024px-Sailing_yachts_near_the_caves_at_Kleftiko_on_Milos_Island%2C_Greece.jpg?20210317194940</image:loc>
+      <image:title>Kleftiko - Greek Beach</image:title>
+      <image:caption>Iconic bay of white volcanic cliffs and sea caves on southwest Milos. Shoreline is mostly rocky platforms and cave inlets with a few small pockets of coarse sand/pebbles; seabed is predominantly rock/sand with very clear, turquoise water. Generally sheltered from northerly meltemi winds, but strong south winds can reduce clarity. 
+
+Access is primarily by boat tours from Adamas/Kipoi; there is also a rough hiking path (≈40–50 min from the trailhead near Agios Ioannis) that reaches the rocks above the coves. No services on site (no shade, sunbeds, toilets, or lifeguard). 
+
+Expect significant boat traffic in season; take care around anchors and when swimming through caves/arches. Suitable for snorkeling; popular for photography. There is no practical road access or dedicated parking at the site.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/paros/kolymbithres-beach-paros</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Naousa_beach.jpg/1024px-Naousa_beach.jpg?20090315180929</image:loc>
+      <image:title>Kolymbithres beach - Greek Beach</image:title>
+      <image:caption>Iconic series of small sandy coves separated by smooth granite rock formations inside Naoussa Bay. Seabed is mostly sand with some rock ledges; water is very clear and typically calm/shallow due to the sheltered bay, though strong Meltemi days can bring chop. Several organized sections operate seasonally with sunbeds/umbrellas and beach bars; basic facilities (showers/toilets) are available via beach clubs/restaurants. 
+
+Access by car (short walk from small parking areas along the beach road), public bus from Naoussa, or water taxi from Naoussa port. Notable cautions: limited parking and free towel space in peak hours; uneven rock slabs between coves; crowds in summer.</image:caption>
     </image:image>
   </url>
   <url>
@@ -1211,6 +1451,21 @@ The northern end is more developed; the southern end is quieter with rocky edges
 The area is organized with extensive sunbed/umbrella concessions and beach bars. Boat rentals and turtle-watching trips depart from the beach; water sports operate in designated areas. Important cautions: this is a protected loggerhead turtle nesting zone—beach use is limited to daytime (approx. 07:00 to sunset), stay within the lower 5 m of shore, avoid marked nests, and keep clear of hatchlings. 
 
 Expect heavy crowds, music from bars, and frequent boat traffic in season.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/paros/lageri-beach-paros</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Cyclades_Paros_Lageri_Plage_04092014_-_panoramio_%281%29.jpg/1024px-Cyclades_Paros_Lageri_Plage_04092014_-_panoramio_%281%29.jpg?20170512074517</image:loc>
+      <image:title>Lageri beach - Greek Beach</image:title>
+      <image:caption>Secluded sandy beach on the west side of the Santa Maria cape within Naoussa Bay. Fine sand with low dunes and scattered cedar bushes; water is typically crystal-clear and shallow near shore. Being inside the bay, waves are usually calm, though the area can be windy under the summer meltemi. 
+
+No organized facilities (no sunbeds, bars, lifeguard, or toilets). Access is via a rough/dirt road and then a short footpath; most visitors park along the narrow roadside and walk in. Also reached seasonally by small boats/water-taxis from Naoussa. 
+
+Notable cautions: limited natural shade; bring water/supplies; the southern section is commonly used by nudists; paths cross fragile dune/cedar habitat—stay on trails.</image:caption>
     </image:image>
   </url>
   <url>
@@ -1281,6 +1536,21 @@ A dedicated car park sits on the clifftop by the access. Notable cautions: falli
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/paros/logora-beach-paros</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Cyclades_Paros_Marpissa_Logora_Beach_06092014_-_panoramio.jpg/1024px-Cyclades_Paros_Marpissa_Logora_Beach_06092014_-_panoramio.jpg?20170512133958</image:loc>
+      <image:title>Logora beach - Greek Beach</image:title>
+      <image:caption>Long, partly organized beach on Paros’ southeast coast near Piso Livadi. The shore is predominantly fine golden sand with some scattered small pebbles in places; seabed is mostly sandy. Water is typically clear and shallow close to shore, suitable for casual swimming and light snorkeling. 
+
+Exposure is to the east–southeast; conditions are generally calm but can become choppy under strong Meltemi winds. 
+
+Access is easy by road and local bus stops nearby; the beach is walkable from Piso Livadi. Facilities include sections with sunbeds/umbrellas, showers and nearby tavernas/cafés; water sports are available in season. Note that parts of the beach are managed/paid and it can get busy in peak summer.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/zakynthos/makris-gialos-zakynthos</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -1303,21 +1573,6 @@ A dedicated car park sits on the clifftop by the access. Notable cautions: falli
     </image:image>
   </url>
   <url>
-    <loc>https://beachesofgreece.com/corfu/marathias-beach-corfu</loc>
-    <lastmod>2025-09-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Marathias_Strand.JPG/1024px-Marathias_Strand.JPG?20121115102446</image:loc>
-      <image:title>Marathias beach - Greek Beach</image:title>
-      <image:caption>Marathias is a long, sandy stretch on Corfu’s southwestern coast, backed by low dunes and olive groves. The sand is fine and golden, with just occasional pebbles at the water’s edge. The seabed slopes gently, so the shallow water extends well out, making it family-friendly for long wading. Water is generally calm; in typical conditions only light ripples appear, though stronger winds may stir modest chop. 
-
-The beach is well organized in its central sectors, with sunbeds, umbrellas, showers, changing booths, restrooms, and a beach bar / restaurants along the strip. At the far ends quieter zones exist with fewer amenities for those seeking more privacy. Access is by road, and parking is available close to the beach (roadside and in small lots). 
-
-Because of its length and layout, it rarely feels overpacked even in summer, though the center can be busier midday. Caution: in edge zones, the seabed may have uneven patches or rocks; swimmers should stay within supervised areas, and arriving early is wise to secure parking or shade.</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://beachesofgreece.com/zakynthos/marathias-beach-zakynthos</loc>
     <lastmod>2025-10-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -1333,6 +1588,21 @@ Notable cautions: steep access path, stony entry (water shoes recommended), wate
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/corfu/marathias-beach-corfu</loc>
+    <lastmod>2025-09-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Marathias_Strand.JPG/1024px-Marathias_Strand.JPG?20121115102446</image:loc>
+      <image:title>Marathias beach - Greek Beach</image:title>
+      <image:caption>Marathias is a long, sandy stretch on Corfu’s southwestern coast, backed by low dunes and olive groves. The sand is fine and golden, with just occasional pebbles at the water’s edge. The seabed slopes gently, so the shallow water extends well out, making it family-friendly for long wading. Water is generally calm; in typical conditions only light ripples appear, though stronger winds may stir modest chop. 
+
+The beach is well organized in its central sectors, with sunbeds, umbrellas, showers, changing booths, restrooms, and a beach bar / restaurants along the strip. At the far ends quieter zones exist with fewer amenities for those seeking more privacy. Access is by road, and parking is available close to the beach (roadside and in small lots). 
+
+Because of its length and layout, it rarely feels overpacked even in summer, though the center can be busier midday. Caution: in edge zones, the seabed may have uneven patches or rocks; swimmers should stay within supervised areas, and arriving early is wise to secure parking or shade.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/attica/marathon-beach-attica</loc>
     <lastmod>2025-09-30</lastmod>
     <changefreq>weekly</changefreq>
@@ -1343,6 +1613,21 @@ Notable cautions: steep access path, stony entry (water shoes recommended), wate
       <image:caption>Marathon Beach (along the Nea Makri / Agios Panteleimonas stretch) features a long sandy shore with a gently sloping seabed and remarkably clear shallow water; the sand is typically fine and golden, though occasional rockers or coarser grains appear near edges. The sea is usually calm, with only light chop under stronger winds. The beach is partly organized: many sections offer sunbeds, umbrellas, showers, toilets and lifeguards, while other parts remain free and more natural. 
 
 Access is by coastal road with nearby municipal parking and roadside spaces. Beach bars and tavernas line the shore. Caution: in less supervised stretches, swim carefully and watch for submerged rocks or sudden depth changes. In busy season parts may feel crowded.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/lefkada/megali-petra-beach-lefkada</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/85.Plaja_Megali_Petra_%28Piatra_Mare%29_-_panoramio.jpg/1024px-85.Plaja_Megali_Petra_%28Piatra_Mare%29_-_panoramio.jpg?20170108153442</image:loc>
+      <image:title>Megali Petra beach - Greek Beach</image:title>
+      <image:caption>Pebble–sand mix cove on Lefkada’s exposed west coast, named for the large shore and in-water boulders. Substrate ranges from coarse sand to fine pebbles; water is typically very clear. Open to prevailing W–NW winds, so conditions can turn wavy and the seabed deepens quickly. 
+
+Access is via a narrow, steep asphalt road from Kalamitsi; final approach includes a short footpath. Parking is limited to small paid lots near the end of the road plus some roadside spots. Seasonal rental of a few umbrellas/sunbeds may be present, but there are no permanent facilities on the beach and no lifeguard. 
+
+Cautions: limited/steep parking access, slippery rocks, sudden depth and strong shore break when swell is up. For food/drinks, options are at nearby Kavalikefta/Avali beaches.</image:caption>
     </image:image>
   </url>
   <url>
@@ -1411,6 +1696,21 @@ The coastline here is not extremely dramatic — it’s more gentle and pleasant
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/paros/molos-beach-paros</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Cyclades_Paros_Molos_Beach_Vue_Naxos_-_panoramio.jpg/1024px-Cyclades_Paros_Molos_Beach_Vue_Naxos_-_panoramio.jpg?20170512133918</image:loc>
+      <image:title>Molos beach - Greek Beach</image:title>
+      <image:caption>Long, quiet bay on Paros’ east coast with fine sand and very clear, shallow water. Generally a calm, protected shoreline; the meltemi can bring strong wind but waves are usually low. Unorganized (no fixed sunbeds/umbrellas or lifeguard); limited natural shade from tamarisk trees. 
+
+Access by paved and short dirt roads from Marmara; cars typically park along the roadside behind the beach. No Blue Flag listing. A simple taverna operates at the south end; rocky sections toward the north headland offer basic snorkeling. Popular for low-key walks and coastal trails (links to Kalogeros). 
+
+Cautions: exposure to wind, little shade/water provision, and the surrounding dunes/area fall under environmental protection—avoid disturbing vegetation and wildlife.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/corfu/mon-repos-beach-corfu</loc>
     <lastmod>2025-10-01</lastmod>
     <changefreq>weekly</changefreq>
@@ -1426,6 +1726,21 @@ Notable cautions: space is limited in peak season; there’s a jetty/pier used f
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/paros/monastiri-beach-paros</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Cyclades_Paros_Agios_Ioanis_Plage_04092014_-_panoramio.jpg/1024px-Cyclades_Paros_Agios_Ioanis_Plage_04092014_-_panoramio.jpg?20170512074356</image:loc>
+      <image:title>Monastiri beach - Greek Beach</image:title>
+      <image:caption>Sheltered sandy cove within Paros Park (Agios Ioannis Detis peninsula), facing Naoussa Bay. Fine sand with some rocky edges near the northern side; very clear, shallow water for at least ~100 m. 
+
+The cove is well protected from the prevailing Meltemi (N winds), so conditions are typically calm with minimal wave action. Access is via an asphalt road with on-site parking, or by seasonal water taxi from Naoussa. 
+
+The beach is organized with sunbeds/umbrellas and a beach bar/restaurant; a watersports center operates in season. Popular and busy in peak months; music from the organized section and limited natural shade. Caution: rocks near the sides for snorkelers and boat traffic in the bay; arrive early for parking in high season.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/corfu/moraitika-beach-corfu</loc>
     <lastmod>2025-10-01</lastmod>
     <changefreq>weekly</changefreq>
@@ -1438,6 +1753,21 @@ Notable cautions: space is limited in peak season; there’s a jetty/pier used f
 Access is easy on foot from the resort streets; buses stop on the main road and lanes lead to multiple beach entrances. The beach is organized with sunbeds and umbrellas for rent, and there are numerous beachfront tavernas, bars and cafés. Public toilets and showers are reported near organized sections. Water sports (e.g., pedalos, SUP/jet-ski/banana rides) operate in season. 
 
 Typical cautions: busy and densely set sunbed rows in high season; watch for boat and water-sports traffic near marked lanes; some pebbly/stoney patches at the entry—water shoes may help.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/lefkada/mylos-beach-lefkada</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/66.Agios_Nikitas_-_Plaja_Mylos_vazuta_de_sus_-_panoramio.jpg/1024px-66.Agios_Nikitas_-_Plaja_Mylos_vazuta_de_sus_-_panoramio.jpg?20170108152800</image:loc>
+      <image:title>Mylos beach - Greek Beach</image:title>
+      <image:caption>Long, natural west-coast beach between Agios Nikitas and Kathisma with a sand-and-pebble mix and very clear Ionian water. Exposed to prevailing NW–W winds; conditions often become wavy with shore-break and a relatively steep drop-off. 
+
+No road access: reach via a steep 15–20-minute footpath from Agios Nikitas or by seasonal water-taxi from the village. There are typically no facilities on the beach and little natural shade. Use sturdy footwear for the trail and bring supplies. 
+
+Notable cautions: waves and currents on windy days, sudden depth, occasional boat traffic near the drop-off point, and no lifeguard presence.</image:caption>
     </image:image>
   </url>
   <url>
@@ -1506,6 +1836,68 @@ The shoreline is backed by the town’s promenade, cafés, tavernas, and service
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/paros/new-golden-beach-paros</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/New_golden_beach_-_panoramio_-_brunobarbato_%281%29.jpg/1024px-New_golden_beach_-_panoramio_-_brunobarbato_%281%29.jpg?20160310051155</image:loc>
+      <image:title>New Golden beach - Greek Beach</image:title>
+      <image:caption>Long, fine-sand beach on Paros’ SE coast facing Naxos. Locally called Tserdakia, it has clear, usually turquoise water and a gently sloping sandy seabed. The bay is exposed to the summer Meltemi; winds are frequent and can build chop and small waves, making it a noted wind- and wing-surf spot. 
+
+Access is straightforward by car or bus from Parikia/Naoussa; shoreline lanes run behind the beach. Parts are organized with sunbeds/umbrellas and watersports centers; nearby beachfront hotels and cafes serve the beach. Expect crowds and higher prices in peak season. 
+
+Cautions: strong winds and active windsurf corridors; occasional rocky patches/reef sections; limited natural shade.&quot;</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/lefkada/nidri-beach-lefkada</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Nydri%2C_Lefkada_IMG_5055.jpg_-_panoramio.jpg/1024px-Nydri%2C_Lefkada_IMG_5055.jpg_-_panoramio.jpg?20170620093324</image:loc>
+      <image:title>Nidri beach - Greek Beach</image:title>
+      <image:caption>Town beach on Lefkada’s sheltered east coast, opposite the islets of Madouri and Skorpios. Shoreline is a mix of coarse sand and small pebbles with generally clear, tranquil water thanks to the protected bay; short wind-chop and wakes can occur from passing boats. 
+
+Exposure is low compared with the island’s west coast, so waves are usually calm. Access is straightforward via the seafront promenade within the village; multiple paid parking areas lie a short walk behind the beach, and the waterfront is flat. Large stretches are organized by hotels and beach bars offering sunbeds and umbrellas, with unserviced spots between. 
+
+Watersports operators based in Nidri (kayak, SUP, parasailing, jet ski/boat rentals) and numerous day-cruise boats depart from the nearby port. Notable cautions: frequent boat and water-sports traffic close to shore—keep clear of craft lanes; the seabed is pebbly in places, so water shoes may help</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/lefkada/nikiana-beach-lefkada</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/1_a_nikiana_beach_july_2024_t.jpg/1024px-1_a_nikiana_beach_july_2024_t.jpg?20240916171907</image:loc>
+      <image:title>Nikiana beach - Greek Beach</image:title>
+      <image:caption>Small east-coast village beach on Lefkada with a mixed sand-and-pebble shore and very clear, typically calm water. The southeast exposure and shelter of the mainland/channel mean waves are usually minimal except in stronger onshore breezes. 
+
+Access is easy directly off the coastal road through Nikiana; the beach sits beside the harbor/front with short walks from roadside parking. Parts of the beach are organized seasonally with sunbeds/umbrellas and a simple beach bar/cantina; otherwise it remains low-key. 
+
+Entry can be pebbly—water shoes help. Depth drops gradually and the water is often used by families; visibility is good for casual snorkeling near rocks. Pedalos/SUPs are sometimes available from local operators. Space is limited, and parking can be tight in peak season. 
+
+Watch for small-boat traffic near the pier and occasional mooring lines; avoid swimming close to the harbor approach.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/naxos/orkos-beach-naxos</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Naxos_Mikri_Vigla_2025-06-27_1577_Orkos_Kirades.jpg/1024px-Naxos_Mikri_Vigla_2025-06-27_1577_Orkos_Kirades.jpg?20250719202858</image:loc>
+      <image:title>Orkos beach - Greek Beach</image:title>
+      <image:caption>Orkos Beach is a chain of small sandy coves between Plaka and Mikri Vigla on Naxos’ southwest coast. The shore is predominantly fine sand with rocky outcrops separating the coves, and the water is typically very clear. 
+
+The area is exposed to the Meltemi and prevailing northerlies, so conditions are often windy with chop/waves. Access is via the main road toward Mikri Vigla and a short dirt track; parking is informal along the roadside/dirt clearings. There are no permanent facilities or lifeguards and no organized sections. 
+
+Caution: gusty winds, shorebreak and currents when the Meltemi blows, and rocks between coves.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/mykonos/ornos-mykonos</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -1539,6 +1931,36 @@ The shoreline is backed by the town’s promenade, cafés, tavernas, and service
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/milos/paleochori-beach-milos</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Cyclades_Milos_Paleochori_Plage_-_panoramio_%281%29.jpg/1024px-Cyclades_Milos_Paleochori_Plage_-_panoramio_%281%29.jpg?20170512063409</image:loc>
+      <image:title>Paleochori beach - Greek Beach</image:title>
+      <image:caption>Large south-coast bay with multicolored volcanic cliffs, clear water and a sand–pebble mix. Generally sheltered from the summer Meltemi (N) and calmer than north-coast beaches; more exposed when southerly winds blow. 
+
+Access by paved road and seasonal KTEL bus; on-site/dedicated parking is just behind the beach. Parts are organized with sunbeds, umbrellas, beach bars and tavernas along the central section; quieter, more natural stretches lie to the east/west. 
+
+Geothermal activity creates warm patches and occasional sulfur odour; hot sand and shallow-water vents can occur near rocks—wear footwear, avoid digging and heed any local signage. Good visibility for casual snorkeling; water-sports are operated in season.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/naxos/panormos-beach-naxos</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Panormos_SE_Naxos_119596.jpg/1024px-Panormos_SE_Naxos_119596.jpg?20140415120735</image:loc>
+      <image:title>Panormos beach - Greek Beach</image:title>
+      <image:caption>Small cove at the SE tip of Naxos near Moutsouna. Shore is a mix of sand and fine pebbles; seabed mostly fine sand with clear, clean water. The bay is relatively sheltered from the prevailing northerly Meltemi, so conditions are often calm, though exposure can increase when winds turn onshore. Access is by the coastal road from Moutsouna that ends at Panermos; final approach is narrow and partly unpaved. 
+
+Parking is mainly along the roadside near the harbor. Facilities are limited: a simple taverna/beach bar sits behind the beach, but there is no evidence of formal organization with rented sunbeds/umbrellas. No lifeguard; wheelchair access is not available. 
+
+Shade is from a few palm trees; bring supplies and water. Use caution on the drive and around rocks at the cove edges.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/mykonos/panormos-beach-mykonos</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -1547,6 +1969,36 @@ The shoreline is backed by the town’s promenade, cafés, tavernas, and service
       <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Mykonos_Panormos_01.jpg/1024px-Mykonos_Panormos_01.jpg?20140820183246</image:loc>
       <image:title>Panormos beach - Greek Beach</image:title>
       <image:caption>Panormos is a relaxed, elegant sandy beach on the northern side of Mykonos, about 7 km from Mykonos Town. Located in a protected bay, it features soft pale sand, shallow and clear water, and fewer crowds than many of the southern beaches. The setting combines natural beauty with upscale touches — stylish beach bars/restaurants and boutique-style accommodations mix with tranquil spots. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/milos/papafragas-beach-milos</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Papafragas_Beach_between_cliffs_on_Milos_Island%2C_Greece.jpg/1024px-Papafragas_Beach_between_cliffs_on_Milos_Island%2C_Greece.jpg?20210317193443</image:loc>
+      <image:title>Papafragas beach - Greek Beach</image:title>
+      <image:caption>Tiny slot-canyon cove on Milos’ north coast near Phylakopi. The beach is a very small strip of mostly sand (some pebbles) at the end of a narrow, cliff-lined channel with exceptionally clear water and sea caves. 
+
+It is exposed to the Meltemi/north winds, so conditions range from calm on quiet days to notably wavy when it blows; the channel can funnel swell and currents. Access is on foot via a short but steep, carved path/steps cut into the rock; footing can be slippery and sections are hazardous. 
+
+Periodic safety closures/fencing may restrict descent. No facilities on site. Parking is limited at the clifftop area and along the road. Notable cautions: rockfall risk, steep descent, waves/surge in the channel.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/milos/papikinou-beach-milos</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Cyclades_Milos_Papikinou_Plage_Taverne_O%5E_Hamos_-_panoramio.jpg/1024px-Cyclades_Milos_Papikinou_Plage_Taverne_O%5E_Hamos_-_panoramio.jpg?20170512063745</image:loc>
+      <image:title>Papikinou beach - Greek Beach</image:title>
+      <image:caption>Long, narrow beach lining the east side of Adamas Bay, about 1 km from the port. Shore is mainly sand with some small pebbles and tamarisk trees offering natural shade. Water is typically clear and shallow, and—being inside the bay and sheltered from the Meltemi—usually calm with low wave energy. 
+
+Access is easy on foot, by bus, or by car along the coastal road. Parking is mostly along the roadside with limited spaces. Several cafes/tavernas sit just behind parts of the beach, and some sections operate with sunbeds and umbrellas; no verified lifeguard presence. 
+
+Cautions: stretches are close to the main road; dedicated parking is limited; organization varies by section.</image:caption>
     </image:image>
   </url>
   <url>
@@ -1579,6 +2031,21 @@ The southern part is lightly organized with seasonal sunbeds/umbrellas and a cou
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/lefkada/pefkoulia-beach-lefkada</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Lefkas13.JPG/1024px-Lefkas13.JPG?20140617121402</image:loc>
+      <image:title>Pefkoulia beach - Greek Beach</image:title>
+      <image:caption>Long west-coast beach between Tsoukalades and Agios Nikitas. Shore is a mix of coarse sand and small pebbles; water is typically very clear and gets deep quickly. Exposed to prevailing NW winds, so it can be wavy with a strong shore break on windy days; calmer in light winds. 
+
+Easy drive-up access directly from the main coastal road. There is an organized section with sunbed/umbrella rentals and a beach bar/taverna above the southern/central part; large stretches remain unorganized. 
+
+Parking is available in dedicated lots near the beach and along the roadside, but fills in peak season. Cautions: sudden depth, waves/swell when windy, limited natural shade away from the pines at the edges; no consistently verifiable public lifeguard or facilities beyond those of the beach bar.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/chalkidiki/perigiali-beach-chalkidiki</loc>
     <lastmod>2025-09-29</lastmod>
     <changefreq>weekly</changefreq>
@@ -1600,6 +2067,36 @@ The southern part is lightly organized with seasonal sunbeds/umbrellas and a cou
       <image:caption>Perivolos Beach (Παραλία Περβολός) lies on the southeastern coast of Santorini, extending between Perissa and Agios Georgios. It’s known for its black volcanic sand / pebbly-volcanic shore and stylish, lively beach club scene.
 
 Because it is long and well organized, Perivolos offers both social, activity-rich zones (with bars, music, water sports) and more relaxed stretches away from the busiest parts.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/paros/piperi-beach-paros</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/GR-paros-naoussa-piperi-strand.jpg/1024px-GR-paros-naoussa-piperi-strand.jpg?20121114005851</image:loc>
+      <image:title>Piperi beach - Greek Beach</image:title>
+      <image:caption>Small cove on the west side of Naoussa, within easy walking distance from the village. Shoreline is mixed: sandy center with rocks/pebbles and rocky shelves at both ends; seabed becomes sand a little further out. Water is typically clear. Set inside Naoussa Bay, it is somewhat sheltered from the Meltemi; waves are usually calm but can be choppy with strong north winds. 
+
+Access is straightforward on foot from Naoussa; limited street parking above the beach with a short stair descent. Facilities vary by season and are often hotel-run nearby rather than dedicated municipal infrastructure; do not expect lifeguard or public toilets. 
+
+Notable cautions: very limited space, can be crowded in peak season; uneven/rocky entry in places and occasional stones underfoot; roadside parking is scarce.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/paros/piso-livadi-beach-paros</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/GR-paros-piso-livada-beach.jpg/1024px-GR-paros-piso-livada-beach.jpg?20121114010307</image:loc>
+      <image:title>Piso Livadi beach - Greek Beach</image:title>
+      <image:caption>Small village beach inside the fishing harbour of Piso Livadi on Paros’ east coast. Shore is mainly sand with some pebbly patches; seabed is mostly sandy with a gentle, shallow entry and usually clear water. 
+
+The east side of Paros is exposed to the Meltemi (N–NE summer winds), so conditions range from calm to light chop; the harbour gives partial shelter but short-period waves can occur when winds pick up. Access is easy on foot from the seafront; there is a local bus stop in the village and a small municipal parking area nearby. Tavernas and cafés line the waterfront. Boat excursions to nearby islands depart from the adjacent pier. 
+
+Notable cautions: proximity to the harbour means boat traffic—stay within the swim area; limited natural shade (some trees) and the beach is small, so it can feel crowded in peak season.</image:caption>
     </image:image>
   </url>
   <url>
@@ -1625,6 +2122,21 @@ Because it is long and well organized, Perivolos offers both social, activity-ri
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/milos/plathiena-beach-milos</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Milos-2.jpg/1024px-Milos-2.jpg?20090321201504</image:loc>
+      <image:title>Plathiena beach - Greek Beach</image:title>
+      <image:caption>North-facing cove near Plaka with a mixed sand–pebble shore and very clear, typically turquoise water. Semi-sheltered by low cliffs but exposed to northerlies (Meltemi), so it’s usually calm to moderate but can turn wavy when winds pick up. 
+
+Access is by narrow paved/part-dirt road; there is a small parking area by the beach and additional roadside parking. No scheduled bus service; reach by car, taxi, scooter or on foot from Plaka. Seasonal organization with sunbeds/umbrellas and a beach bar/food kiosk. 
+
+Shallow entry in parts; good for casual snorkeling along the rocks. Cautions: limited natural shade, facilities operate seasonally, no lifeguard, and conditions deteriorate with strong north winds.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/mykonos/platis-gialos-mykonos</loc>
     <lastmod>2025-09-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -1633,6 +2145,21 @@ Because it is long and well organized, Perivolos offers both social, activity-ri
       <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Platis_Gialos_-_panoramio.jpg/1024px-Platis_Gialos_-_panoramio.jpg?20160226145235</image:loc>
       <image:title>Platis Gialos - Greek Beach</image:title>
       <image:caption>Platis Gialos (Platys Gialós) is a bustling, well-developed beach on the southern side of Mykonos, about 6 km south of Mykonos Town. It features long stretches of fine golden sand and crystal-clear shallow waters, making it a very popular spot for families and tourists. The bay is semi-sheltered, so conditions are comfortable for swimming, and an inviting mix of beach clubs, restaurants, and hotels line the shore.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/milos/pollonia-beach-milos</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Pollonia%2C_Milos%2C_152933q.jpg/1024px-Pollonia%2C_Milos%2C_152933q.jpg?20151029123308</image:loc>
+      <image:title>Pollonia beach - Greek Beach</image:title>
+      <image:caption>Sheltered village beach in a crescent bay on the NE of Milos with fine sand (predominantly sandy, occasional small pebbly patches) and clear, shallow water. Generally calm due to the enclosed bay; can get choppy with strong N/NE meltemi. Easy, level access directly from the waterfront road and promenade. 
+
+Seasonal organization with sunbeds/umbrellas and nearby cafés/tavernas along the shore; public showers and toilets are reported in season. 
+
+Small dedicated parking area plus on-street options near the beach. Family-friendly setting; basic snorkeling along the rocky edges. Notable cautions: limited parking at peak times; proximity to the small port and boat/traffic activity on the waterfront; exposure to wind when meltemi strengthens; no consistently verified lifeguard presence.</image:caption>
     </image:image>
   </url>
   <url>
@@ -1736,6 +2263,21 @@ Possidi is partly organized with facilities nearer the village, while farther st
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/paros/pounta-beach-paros</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Paros_pounda_-_panoramio_-_brunobarbato_%283%29.jpg/1024px-Paros_pounda_-_panoramio_-_brunobarbato_%283%29.jpg?20160322125223</image:loc>
+      <image:title>Pounta beach - Greek Beach</image:title>
+      <image:caption>Sandy beach on Paros’ west coast, by the Pounta (Pounda) ferry port across the narrow channel to Antiparos. Fine sand with clear, typically shallow waters. Very wind-exposed in summer (Meltemi) with steady side-shore winds; surface can be choppy and often wavy, and the area is a major kite/windsurf spot with active schools operating on the beach. Access is easy by road; buses and the Antiparos car ferry serve the adjacent port.
+
+Large on-site parking at the port area. A small section is organized with rentable sunbeds and umbrellas; the rest is open shoreline used mostly for watersports rather than leisurely swimming. 
+
+Notable cautions: frequent strong winds, heavy kitesurfing activity with launch/landing zones and right-of-way rules; stay clear of the ferry approach and marked watersports areas.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/crete/preveli-beach-crete</loc>
     <lastmod>2025-09-26</lastmod>
     <changefreq>weekly</changefreq>
@@ -1744,6 +2286,21 @@ Possidi is partly organized with facilities nearer the village, while farther st
       <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Preveli_Palm_Beach_Panorama_02.JPG/1024px-Preveli_Palm_Beach_Panorama_02.JPG?20141209200757</image:loc>
       <image:title>Preveli beach - Greek Beach</image:title>
       <image:caption>Preveli sits at the mouth of the Kourtaliotiko Gorge on Crete’s southern coast, where the Megalopotamos river meets the sea and forms a lagoon before flowing into the Libyan Sea. A lush palm forest (Phoenix theophrasti) lines the banks, offering a tropical oasis feel. Behind the beach, a gorge climbs up steep terrain, giving an adventurous backdrop. The sand/pebble beach is backed by greenery and the river, making for an exotic, scenic destination. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/milos/provatas-beach-milos</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Cyclades_Milos_Provatas_Plage_-_panoramio.jpg/1024px-Cyclades_Milos_Provatas_Plage_-_panoramio.jpg?20170512063424</image:loc>
+      <image:title>Provatas beach - Greek Beach</image:title>
+      <image:caption>South-coast beach with golden, fine sand and very clear, shallow water. Generally sheltered from the summer northerly (Meltemi) winds, so the sea is usually calm; however, during southerlies it can see heavier surf. Access is easy via paved road, and there is local bus service from Adamas. 
+
+Parts of the beach are organized with sunbeds/umbrellas and adjacent tavernas/beach bars; other stretches remain open. Limited natural shade. Large, dedicated parking area behind the beach. 
+
+Caution: on windy days waves can cover much of the sandy strip; observe conditions before placing belongings near the water.</image:caption>
     </image:image>
   </url>
   <url>
@@ -1770,6 +2327,21 @@ Because of its location between two major peninsulas, it is sometimes chosen as 
       <image:caption>Psarou Beach sits in a graceful horseshoe bay a few kilometers from Mykonos Town, offering a refined beach experience. The sand is fine and soft, and the seabed slopes gently, giving clear and calm water well suited for relaxed swimming. It is highly organized: luxurious sunbeds and umbrellas, upscale beach bars (notably Nammos), showers, toilets, and lifeguards operate along most of the stretch. Water sports such as diving and jet skiing are available. 
 
 Parking exists but is limited and often paid, and many visitors prefer to reach the beach by bus or walking from nearby Platis Gialos. Because of its popularity, securing sunbeds may require booking, and free sandy zones are scarce early in the season. Crowds and high prices characterize peak hours.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/naxos/pyrgaki-beach-naxos</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Naxos_-_Pirgaki_-_Sand_Beach_-_panoramio.jpg/1024px-Naxos_-_Pirgaki_-_Sand_Beach_-_panoramio.jpg?20161202142717</image:loc>
+      <image:title>Pyrgaki beach - Greek Beach</image:title>
+      <image:caption>Long, quiet stretch on Naxos’ southwest coast with fine, golden sand; small inlets at the ends have pebbles. Water is typically clear and shallow near shore. The main coves are somewhat sheltered from the prevailing north (Meltemi) winds, but open sections can see moderate chop and blowing sand on windy days. 
+
+Access is by car via paved road most of the way, then a short, easy dirt section; parking is in a small free area near the beach. Facilities are minimal: no lifeguard, and services are limited to a few nearby tavernas. 
+
+Noted as suitable for families/young children; anglers use the rocky ends. Cautions: no organized rescue, limited shade, respect the protected dunes/cedar area behind the beach.&quot;</image:caption>
     </image:image>
   </url>
   <url>
@@ -1836,6 +2408,21 @@ Because it’s a managed, resort beach, many of the services are well maintained
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/paros/santa-maria-beach-paros</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Spiaggia_di_santa_maria_-_panoramio_-_brunobarbato.jpg/1024px-Spiaggia_di_santa_maria_-_panoramio_-_brunobarbato.jpg?20160310050905</image:loc>
+      <image:title>Santa Maria beach - Greek Beach</image:title>
+      <image:caption>Large sandy beach on Paros’ NE coast with clear, shallow water and views to Naxos. Mostly fine sand with occasional small pebbles near the backshore. The bay is fairly sheltered but can become choppy under strong Meltemi (N) winds. 
+
+Highly organized in sections with sunbeds/umbrellas, beach bars, and a water-sports club; quieter free sections exist at the ends. Access by paved road; a free, large dirt parking area sits directly behind the beach. Public showers and toilets are present at organized areas. Reached by car, taxi, or local bus via Naoussa.
+
+In peak season it gets crowded and music from beach bars can be loud. Suitable for families in calm conditions; popular for snorkeling near rocky edges and for various water activities.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/milos/sarakiniko-beach-milos</loc>
     <lastmod>2025-10-04</lastmod>
     <changefreq>weekly</changefreq>
@@ -1897,6 +2484,21 @@ The beach is fully organized with sunbeds/umbrellas, showers, toilets, beach bar
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/naxos/stelida-beach-naxos</loc>
+    <lastmod>2025-10-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Stelida%2C_Naxos_-_panoramio.jpg/1024px-Stelida%2C_Naxos_-_panoramio.jpg?20161130112647</image:loc>
+      <image:title>Stelida beach - Greek Beach</image:title>
+      <image:caption>A quiet cove on the north side of the Stelida peninsula near Agios Prokopios. Shore is a sand-and-pebble mix with generally clear, calm blue waters in settled weather. The beach is exposed to the northerly Meltemi; conditions can become choppy and it’s best avoided when strong north winds blow. 
+
+Access is by asphalt road with a short stretch of earth road at the end; final approach is on foot.
+
+Limited facilities: a few seasonal sunbeds/umbrellas may be set up; no reliable shade, services, or lifeguard. Parking is mainly along the access road and nearby shoulders. Take water and sun protection.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/mykonos/super-paradise-beach-mykonos</loc>
     <lastmod>2025-09-30</lastmod>
     <changefreq>weekly</changefreq>
@@ -1920,6 +2522,21 @@ Access is via road, and a private/paid parking area exists at the club. In peak 
       <image:caption>Toroni is a long sandy beach (over 2 km) in front of the village of Toroni, located along the western side of the Toroneos Gulf, between Tristinika and Porto Koufo. The beach blends organized and “free” zones, allowing both serviced and more natural stretches. There are ruins of a Byzantine / ancient castle (Likithos) at one end, adding historical interest.
 
 Toroni is considered appealing to families, and the organized parts are fully serviced, while large parts of the wide beach are less restricted.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/paros/tripiti-beach-paros</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Cyclades_Paros_Tripiti_Beach_06092014_-_panoramio.jpg/1024px-Cyclades_Paros_Tripiti_Beach_06092014_-_panoramio.jpg?20170512134008</image:loc>
+      <image:title>Tripiti beach - Greek Beach</image:title>
+      <image:caption>Small, secluded cove on Paros’ south coast between Drios and Aliki. Shore is a mix of sand with pebbles and rocks; water is typically very clear. Sheltered from the prevailing northerly Meltemi winds, so conditions are commonly calm to light-moderate. 
+
+Access is via a short unpaved track and a brief walk from the main road; there is no dedicated parking and space is limited along the roadside. 
+
+The beach is unorganized—no sunbeds, umbrellas, bars, or toilets—so bring water and supplies. Some tamarisk trees offer limited natural shade. No lifeguard. Take care on rocks and in occasional swell, and note the lack of services nearby (closest options are at Glyfa/Drios).</image:caption>
     </image:image>
   </url>
   <url>
@@ -1949,6 +2566,19 @@ Cautions: can be very busy in peak season with dense rows of sunbeds; swimmers s
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/milos/vani-beach-milos</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Cape_Vani%2C_Milos%2C_15M6073.jpg/1024px-Cape_Vani%2C_Milos%2C_15M6073.jpg?20151102133906</image:loc>
+      <image:title>Vani beach - Greek Beach</image:title>
+      <image:caption>Small remote cove below Cape Vani on Milos’ NW coast, adjacent to the historic manganese mine. Shoreline is mostly small pebbles with some coarse grit; seabed similar. Waters are typically very clear but the site is exposed to the Aegean, so with prevailing N–NW Meltemi winds it often has noticeable swell and chop; calmer on light-wind or southerly days. 
+
+Access is primarily by boat tours that circuit the island; reaching it by land involves rough unpaved 4x4 tracks and a short hike, and many visitors view it from the cape rather than swim. There are no facilities or shade, and the mine ruins/cliffs back the cove. Not ideal for families or long swims; best for scenery and photos.</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/attica/varkiza-beach-attica</loc>
     <lastmod>2025-09-30</lastmod>
     <changefreq>weekly</changefreq>
@@ -1959,6 +2589,21 @@ Cautions: can be very busy in peak season with dense rows of sunbeds; swimmers s
       <image:caption>Varkiza Beach lies along the Athenian Riviera and blends relaxed charm with full service. Much of the shore is sandy with scattered pebbles, and the seabed slopes gently, giving clear, shallow water for a good stretch. The beach is split into organized zones—sunbeds, umbrellas, beach bars and cafés under management—and more open public stretches. 
 
 Access is easy from Poseidonos Avenue or the coastal road, and public transport reaches close by. On-site parking (including valet) is offered. The beach sees waves mostly small to moderate, though winds (especially from the sea) may stir light chop. Be prepared for crowds on summer weekends and extra cost for prime locations. Follow lifeguard rules and respect paid vs free zones.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/lefkada/vasiliki-beach-lefkada</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Beach_in_Vasiliki_Lefkada.jpg/1024px-Beach_in_Vasiliki_Lefkada.jpg?20240103204353</image:loc>
+      <image:title>Vasiliki beach - Greek Beach</image:title>
+      <image:caption>Long bay on south Lefkada with a mainly pebbly shoreline and some sandy sections (more sand toward Ponti). Water is typically clear with shallow entry in places. Mornings are usually calm/light onshore; by early afternoon a strong cross-shore thermal wind develops, drawing windsurfers and creating flat to choppy conditions rather than true surf. 
+
+Access is easy from the village seafront promenade, with several organized sections offering sunbeds/umbrellas, beach bars and tavernas. Watersports centers operate for windsurfing, SUP and kayak. Parking is mostly along the coastal road; a free lot exists at the Ponti end of the bay. 
+
+Cautions: afternoons get busy with boards and boat activity—swimmers should stay near shore or marked zones; frequent water-taxi/boats depart from the port; wind can be strong later in the day; dedicated public toilets/showers are limited and mainly found in venues behind the beach.</image:caption>
     </image:image>
   </url>
   <url>
@@ -2061,6 +2706,19 @@ Portions of the shoreline nearer to hotel or private areas may be more maintaine
       <image:loc>https://upload.wikimedia.org/wikipedia/commons/4/46/AspriParalia.jpg</image:loc>
       <image:title>White Beach - Greek Beach</image:title>
       <image:caption>A small secluded cove on the southwestern coast near Akrotiri, White Beach is framed by tall, dramatic white cliffs that give the place its name. Though the cliffs are pale, the shore consists of pebbles and grey/black volcanic sand, creating a striking contrast with the turquoise sea. The waters are clear and shallow close to shore, perfect for swimming and snorkeling. Because it’s secluded, it&apos;s more peaceful than many of the more popular Santorini beaches. </image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/paros/xifara-beach-paros</loc>
+    <lastmod>2025-10-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/%CE%9E%CE%B9%CF%86%CE%AC%CF%81%CE%B1_2.jpg/1024px-%CE%9E%CE%B9%CF%86%CE%AC%CF%81%CE%B1_2.jpg?20170510225406</image:loc>
+      <image:title>Xifara beach - Greek Beach</image:title>
+      <image:caption>Small, quiet cove on the road from Naoussa to Santa Maria (≈3–4 km from Naoussa). Shore is a sand–pebble mix with very clear, shallow waters. It lies on the NE side within Naoussa Bay and is exposed to the summer Meltemi (north) winds, so the sea is usually calm to mildly choppy but can get more agitated on windy days. Access is via paved road; parking is informal along the roadside. 
+
+The beach is largely non-organized (occasional private umbrellas may appear), with no reliable on-site services. Good for a quick swim and basic snorkeling along the rocky patches. Notable cautions: limited shade, no lifeguard or toilets, and wind/waves when Meltemi blows.</image:caption>
     </image:image>
   </url>
   <url>
