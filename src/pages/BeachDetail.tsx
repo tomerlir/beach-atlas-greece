@@ -497,7 +497,7 @@ const BeachDetail = () => {
                 aria-label={`View beaches in ${beach.area}`}
                 className="inline-flex items-center gap-2 text-sm md:text-base rounded-full border border-border/50 bg-muted/40 px-3 py-1 text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-colors"
               >
-                <MapPin className="h-4 w-4 md:h-5 md:w-5 text-primary" aria-hidden="true" />
+                <MapPin className="h-4 w-4 md:h-5 md:w-5 text-secondary" aria-hidden="true" />
                 <span className="font-medium">{beach.area}</span>
               </Link>
               <div
@@ -505,7 +505,7 @@ const BeachDetail = () => {
                 className="inline-flex items-center gap-2 text-sm md:text-base rounded-full border border-border/50 bg-muted/40 px-3 py-1 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 role="status"
               >
-                <Clock className="h-4 w-4 md:h-5 md:w-5 text-primary" aria-hidden="true" />
+                <Clock className="h-4 w-4 md:h-5 md:w-5 text-secondary" aria-hidden="true" />
                 <span className="font-medium">Verified {beach.updated_at ? formatRelativeTime(beach.updated_at) : 'recently'}</span>
               </div>
             </div>
@@ -523,28 +523,28 @@ const BeachDetail = () => {
               <h2 className="text-2xl font-semibold mb-6">Summary</h2>
               <dl className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="flex items-center gap-3">
-                  <Palmtree className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+                  <Palmtree className="h-5 w-5 text-secondary" aria-hidden="true" />
                   <div>
                     <dt className="text-sm font-medium text-muted-foreground">Beach Type</dt>
                     <dd className="text-sm">{typeLabels[beach.type] || beach.type}</dd>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Waves className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+                  <Waves className="h-5 w-5 text-secondary" aria-hidden="true" />
                   <div>
                     <dt className="text-sm font-medium text-muted-foreground">Wave Conditions</dt>
                     <dd className="text-sm">{waveLabels[beach.wave_conditions] || beach.wave_conditions}</dd>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Shield className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+                  <Shield className="h-5 w-5 text-secondary" aria-hidden="true" />
                   <div>
                     <dt className="text-sm font-medium text-muted-foreground">Organization</dt>
                     <dd className="text-sm">{beach.organized ? "Organized" : "Unorganized"}</dd>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Car className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+                  <Car className="h-5 w-5 text-secondary" aria-hidden="true" />
                   <div>
                     <dt className="text-sm font-medium text-muted-foreground">Parking</dt>
                     <dd className="text-sm">{parkingLabels[beach.parking] || beach.parking}</dd>
@@ -552,7 +552,7 @@ const BeachDetail = () => {
                 </div>
                 {beach.blue_flag && (
                   <div className="flex items-center gap-3">
-                    <Flag className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+                    <Flag className="h-5 w-5 text-secondary" aria-hidden="true" />
                     <div>
                       <dt className="text-sm font-medium text-muted-foreground">Certification</dt>
                       <dd className="text-sm">Blue Flag Certified</dd>
@@ -606,7 +606,7 @@ const BeachDetail = () => {
                             role="button"
                             aria-label={`${label} available`}
                           >
-                            <IconComponent className="h-4 w-4 text-primary" aria-hidden="true" />
+                            <IconComponent className="h-4 w-4 text-secondary" aria-hidden="true" />
                             <span className="text-sm font-medium">{label}</span>
                           </div>
                         ))}

@@ -44,10 +44,10 @@ interface BeachCardProps {
 
 // Map parking types to icons and colors
 const parkingConfig: Record<string, { label: string; icon: any; color: string }> = {
-  NONE: { label: "No Parking", icon: XCircle, color: "text-destructive" },
-  ROADSIDE: { label: "Roadside Parking", icon: AlertCircle, color: "text-accent" },
-  SMALL_LOT: { label: "Small Lot", icon: AlertCircle, color: "text-sunset" },
-  LARGE_LOT: { label: "Large Lot", icon: CheckCircle, color: "text-primary" }
+  NONE: { label: "No Parking", icon: XCircle, color: "text-secondary" },
+  ROADSIDE: { label: "Roadside Parking", icon: AlertCircle, color: "text-secondary" },
+  SMALL_LOT: { label: "Small Lot", icon: AlertCircle, color: "text-secondary" },
+  LARGE_LOT: { label: "Large Lot", icon: CheckCircle, color: "text-secondary" }
 };
 
 const BeachCard = ({ beach, distance, showDistance = true, compact = false }: BeachCardProps) => {
@@ -155,15 +155,15 @@ const BeachCard = ({ beach, distance, showDistance = true, compact = false }: Be
           {/* Badges Overlay */}
           <div className={`absolute bottom-2 left-2 sm:bottom-3 sm:left-3 flex gap-1 sm:gap-2 flex-wrap max-w-[calc(100%-4rem)] sm:max-w-none`}>
             {beach.organized && (
-              <Badge variant="secondary" className="bg-card/95 text-foreground shadow-sm backdrop-blur-sm">
-                <CheckCircle className="h-3 w-3 mr-1 text-primary" />
+              <Badge variant="secondary" className="bg-secondary/95 text-secondary-foreground shadow-sm backdrop-blur-sm">
+                <CheckCircle className="h-3 w-3 mr-1 text-secondary-foreground" />
                 <span className={`${compact ? 'hidden' : 'hidden sm:inline'}`}>Organized</span>
                 <span className={`${compact ? '' : 'sm:hidden'}`}>Org</span>
               </Badge>
             )}
             {beach.blue_flag && (
-              <Badge className="bg-primary/95 text-primary-foreground shadow-sm backdrop-blur-sm">
-                <Flag className="h-3 w-3 mr-1" />
+              <Badge className="bg-secondary/95 text-secondary-foreground shadow-sm backdrop-blur-sm">
+                <Flag className="h-3 w-3 mr-1 text-secondary-foreground" />
                 <span className={`${compact ? 'hidden' : 'hidden sm:inline'}`}>Blue Flag</span>
                 <span className={`${compact ? '' : 'sm:hidden'}`}>Flag</span>
               </Badge>
@@ -179,7 +179,7 @@ const BeachCard = ({ beach, distance, showDistance = true, compact = false }: Be
           {distance && showDistance && (
             <div className="absolute top-3 right-3">
               <Badge variant="outline" className="bg-card/95 text-foreground border-card/50 shadow-sm backdrop-blur-sm">
-                <MapPin className="h-3 w-3 mr-1" />
+                <MapPin className="h-3 w-3 mr-1 text-secondary" />
                 {Math.round(distance)} km
               </Badge>
             </div>
@@ -200,7 +200,7 @@ const BeachCard = ({ beach, distance, showDistance = true, compact = false }: Be
               {beach.name}
             </h3>
             <div className="flex items-center text-muted-foreground text-sm">
-              <MapPin className="h-4 w-4 mr-2 text-primary" />
+              <MapPin className="h-4 w-4 mr-2 text-secondary" />
               <span className="font-medium">{beach.area}</span>
             </div>
           </div>

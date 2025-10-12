@@ -112,11 +112,11 @@ export default function AmenitiesDropdown({
       <PopoverTrigger asChild>
         <Button
           ref={triggerRef}
-          variant={appliedCount > 0 ? "default" : "outline"}
+          variant={appliedCount > 0 ? "default" : "ghost"}
           size="sm"
           onClick={handleTriggerClick}
-            className={`px-3 py-2 rounded-xl border h-auto whitespace-nowrap flex-shrink-0 ${
-              appliedCount > 0 ? '' : 'text-foreground bg-muted/65'
+            className={`px-3 py-2 rounded-xl h-auto whitespace-nowrap flex-shrink-0 ${
+              appliedCount > 0 ? '' : 'text-foreground bg-muted/65 border-2 border-muted shadow-sm'
             }`}
           aria-expanded={isOpen}
           aria-haspopup="listbox"
@@ -168,7 +168,7 @@ export default function AmenitiesDropdown({
               >
                 <span className="text-sm font-medium">{amenity.label}</span>
                 {isSelected && (
-                  <Check className="h-4 w-4 text-primary" />
+                  <Check className="h-4 w-4 text-secondary" />
                 )}
               </button>
             );
@@ -179,7 +179,7 @@ export default function AmenitiesDropdown({
         <div className="p-4 pb-8 border-t bg-background sticky bottom-0 rounded-b-md pb-[max(2rem,env(safe-area-inset-bottom))]">
           <div className="flex gap-2">
             <Button
-              variant="outline"
+              variant="ghost"
               size="sm"
               onClick={handleReset}
               className="flex-1 min-h-[44px]"

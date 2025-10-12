@@ -117,11 +117,11 @@ export default function FilterBar({
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
-                    variant={filters.nearMe ? "default" : "outline"}
+                    variant={filters.nearMe ? "default" : "ghost"}
                     size="sm"
                     onClick={() => handleNearMeToggle(!filters.nearMe)}
                     disabled={isLoadingLocation}
-                    className={`px-3 py-2 rounded-xl border h-auto flex-shrink-0 mb-1 ${!filters.nearMe ? 'text-foreground bg-muted/65' : ''}`}
+                    className={`px-3 py-2 rounded-xl h-auto flex-shrink-0 mb-1 ${!filters.nearMe ? 'text-foreground bg-muted/65 border-2 border-muted shadow-sm' : ''}`}
                     role="switch"
                     aria-checked={filters.nearMe}
                     aria-label={`Near me (${filters.nearMe ? 'on' : 'off'})`}
@@ -143,10 +143,10 @@ export default function FilterBar({
 
               {/* Blue Flag Toggle */}
               <Button
-                variant={filters.blueFlag ? "default" : "outline"}
+                variant={filters.blueFlag ? "default" : "ghost"}
                 size="sm"
                 onClick={() => handleBlueFlagToggle(!filters.blueFlag)}
-                className={`px-3 py-2 rounded-xl border h-auto flex-shrink-0 mb-1 ${!filters.blueFlag ? 'text-foreground bg-muted/65' : ''}`}
+                className={`px-3 py-2 rounded-xl h-auto flex-shrink-0 mb-1 ${!filters.blueFlag ? 'text-foreground bg-muted/65 border-2 border-muted shadow-sm' : ''}`}
                 role="switch"
                 aria-checked={filters.blueFlag}
                 aria-label={`Blue Flag (${filters.blueFlag ? 'on' : 'off'})`}
@@ -196,11 +196,11 @@ export default function FilterBar({
               />
 
               {/* All Filters Button */}
-              <Button
-                variant="outline"
+              {/* <Button
+                variant="ghost"
                 size="sm"
                 onClick={onOpenAllFilters}
-                className="px-3 py-2 rounded-xl border h-auto text-foreground flex-shrink-0 bg-muted/65"
+                className="px-3 py-2 rounded-xl h-auto text-foreground flex-shrink-0 bg-muted/65"
                 aria-label="Open all filters"
               >
                 <Filter className="h-4 w-4 md:h-5 md:w-5 mr-2" />
@@ -212,7 +212,7 @@ export default function FilterBar({
                     </Badge>
                   )}
                 </div>
-              </Button>
+              </Button> */}
 
               {/* Vertical Separator */}
               <div className="h-6 w-px bg-border mx-1 flex-shrink-0" />
@@ -238,11 +238,11 @@ export default function FilterBar({
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
-                    variant={filters.nearMe ? "default" : "outline"}
+                    variant={filters.nearMe ? "default" : "ghost"}
                     size="sm"
                     onClick={() => handleNearMeToggle(!filters.nearMe)}
                     disabled={isLoadingLocation}
-                    className={`px-3 py-2 rounded-xl border h-auto flex-shrink-0 mb-1 ${!filters.nearMe ? 'text-foreground bg-muted/65' : ''}`}
+                    className={`px-3 py-2 rounded-xl h-auto flex-shrink-0 mb-1 ${!filters.nearMe ? 'text-foreground bg-muted/65 border-2 border-muted shadow-sm' : ''}`}
                     role="switch"
                     aria-checked={filters.nearMe}
                     aria-label={`Near me (${filters.nearMe ? 'on' : 'off'})`}
@@ -264,10 +264,10 @@ export default function FilterBar({
 
               {/* Blue Flag Toggle */}
               <Button
-                variant={filters.blueFlag ? "default" : "outline"}
+                variant={filters.blueFlag ? "default" : "ghost"}
                 size="sm"
                 onClick={() => handleBlueFlagToggle(!filters.blueFlag)}
-                className={`px-3 py-2 rounded-xl border h-auto flex-shrink-0 mb-1 ${!filters.blueFlag ? 'text-foreground bg-muted/65' : ''}`}
+                className={`px-3 py-2 rounded-xl h-auto flex-shrink-0 mb-1 ${!filters.blueFlag ? 'text-foreground bg-muted/65 border-2 border-muted shadow-sm' : ''}`}
                 role="switch"
                 aria-checked={filters.blueFlag}
                 aria-label={`Blue Flag (${filters.blueFlag ? 'on' : 'off'})`}
@@ -316,15 +316,15 @@ export default function FilterBar({
                 showCountBadge={showCountBadge}
               />
 
-              <Button
-                variant="outline"
+              {/* <Button
+                variant="ghost"
                 size="sm"
                 onClick={onOpenAllFilters}
-                className="px-3 py-2 rounded-xl border h-auto whitespace-nowrap flex-shrink-0 text-foreground flex-shrink-0 bg-muted/65 mb-1"
+                className={`px-3 py-2 rounded-xl h-auto whitespace-nowrap flex-shrink-0 mb-1`}
                 aria-label="Open all filters"
               >
-                <Filter className="h-4 w-4 mr-2" />
-                All Filters
+                <Filter className="h-4 w-4 md:h-5 md:w-5" />
+                <span className="ml-2 text-sm">All Filters</span>
                 <div className="ml-2 h-4 w-4 flex items-center justify-center">
                   {activeFiltersCount > 0 && (
                     <Badge variant="secondary" className="h-4 w-4 p-0 flex items-center justify-center text-xs">
@@ -332,7 +332,7 @@ export default function FilterBar({
                     </Badge>
                   )}
                 </div>
-              </Button>
+              </Button> */}
 
               {/* Vertical Separator */}
               <div className="h-6 w-px bg-border mx-1 flex-shrink-0" />

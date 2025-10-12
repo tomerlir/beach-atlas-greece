@@ -123,7 +123,7 @@ const SearchFilters = ({
           <Card className="border-0 shadow-soft">
             <CardHeader className="pb-4">
               <CardTitle className="text-lg font-semibold flex items-center gap-2">
-                <Filter className="h-5 w-5 text-primary" />
+                <Filter className="h-5 w-5 text-secondary" />
                 Filter Options
               </CardTitle>
             </CardHeader>
@@ -131,7 +131,7 @@ const SearchFilters = ({
               {/* Organized Toggle */}
               <div className="space-y-4">
                 <h4 className="font-semibold text-base flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-primary" />
+                  <CheckCircle className="h-4 w-4 text-secondary" />
                   Beach Type
                 </h4>
                 <div className="flex gap-6">
@@ -144,7 +144,7 @@ const SearchFilters = ({
                       className="text-primary w-4 h-4"
                     />
                     <div className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-primary" />
+                      <CheckCircle className="h-4 w-4 text-secondary" />
                       <span className="text-sm font-medium group-hover:text-primary transition-colors">Organized</span>
                     </div>
                   </label>
@@ -186,7 +186,7 @@ const SearchFilters = ({
                   className="w-5 h-5"
                 />
                 <label htmlFor="blue-flag" className="text-sm font-medium cursor-pointer flex items-center gap-2">
-                  <Flag className="h-4 w-4 text-primary" />
+                  <Flag className="h-4 w-4 text-secondary" />
                   Blue Flag certified beaches only
                 </label>
               </div>
@@ -194,7 +194,7 @@ const SearchFilters = ({
               {/* Parking */}
               <div className="space-y-3">
                 <label className="text-sm font-semibold flex items-center gap-2">
-                  <Car className="h-4 w-4 text-primary" />
+                  <Car className="h-4 w-4 text-secondary" />
                   Parking Availability
                 </label>
                 <Select value={filters.parking} onValueChange={(value) => updateFilters({ parking: value })}>
@@ -210,7 +210,7 @@ const SearchFilters = ({
                     </SelectItem>
                     <SelectItem value="LARGE_LOT">
                       <div className="flex items-center gap-2">
-                        <CheckCircle className="h-4 w-4 text-primary" />
+                        <CheckCircle className="h-4 w-4 text-secondary" />
                         Large lot
                       </div>
                     </SelectItem>
@@ -239,7 +239,7 @@ const SearchFilters = ({
               {/* Amenities */}
               <div className="space-y-4">
                 <h4 className="font-semibold text-base flex items-center gap-2">
-                  <Sun className="h-4 w-4 text-primary" />
+                  <Sun className="h-4 w-4 text-secondary" />
                   Amenities
                 </h4>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">

@@ -18,14 +18,14 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 218 17% 35%;
 
-    /* Aegean Teal primary */
-    --primary: 180 82% 33%; /* #0F9B9B */
+    /* Santorini Deep Blue primary */
+    --primary: 201 100% 42%; /* #008AD4 */
     --primary-foreground: 0 0% 100%;
-    --primary-light: 180 82% 45%;
-    --primary-dark: 180 82% 25%;
+    --primary-light: 201 100% 52%;
+    --primary-dark: 201 100% 32%;
 
-    /* Santorini Deep Blue secondary */
-    --secondary: 201 100% 42%; /* #008AD4 */
+    /* Aegean Teal secondary */
+    --secondary: 180 82% 33%; /* #0F9B9B */
     --secondary-foreground: 0 0% 100%;
 
     --muted: 204 30% 94%;
@@ -40,11 +40,11 @@ All colors MUST be HSL.
 
     --border: 218 17% 88%;
     --input: 218 17% 88%;
-    --ring: 180 82% 33%;
+    --ring: 201 100% 42%;
 
     /* Brand theme colors */
-    --ocean: 180 82% 33%; /* Aegean Teal */
-    --ocean-light: 180 82% 45%;
+    --ocean: 201 100% 42%; /* Santorini Deep Blue */
+    --ocean-light: 201 100% 52%;
     --sand: 204 45% 98%; /* Seafoam White */
     --sunset: 35 100% 64%; /* #FFB347 Sunset Gold */
     --white-marble: 0 0% 98%;
@@ -82,12 +82,12 @@ All colors MUST be HSL.
     --popover: 218 28% 16%;
     --popover-foreground: 204 45% 98%;
 
-    --primary: 180 82% 45%;
+    --primary: 201 100% 52%;
     --primary-foreground: 0 0% 100%;
-    --primary-light: 180 82% 55%;
-    --primary-dark: 180 82% 33%;
+    --primary-light: 201 100% 62%;
+    --primary-dark: 201 100% 42%;
 
-    --secondary: 201 100% 52%;
+    --secondary: 180 82% 45%;
     --secondary-foreground: 0 0% 100%;
 
     --muted: 218 28% 20%;
@@ -101,11 +101,11 @@ All colors MUST be HSL.
 
     --border: 218 28% 25%;
     --input: 218 28% 25%;
-    --ring: 180 82% 45%;
+    --ring: 201 100% 52%;
 
     /* Dark theme adjustments */
-    --ocean: 180 82% 45%;
-    --ocean-light: 180 82% 55%;
+    --ocean: 201 100% 52%;
+    --ocean-light: 201 100% 62%;
     --sand: 204 30% 88%;
     --sunset: 35 100% 70%;
     --white-marble: 218 28% 16%;
@@ -164,4 +164,5 @@ All colors MUST be HSL.
   .scrollbar-hide::-webkit-scrollbar { 
     display: none;  /* Safari and Chrome */
   }
+
 }

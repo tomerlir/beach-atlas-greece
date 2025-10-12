@@ -331,7 +331,7 @@ export default function ResultsSummary({
 
                     {userLocation && filters.nearMe && filters.sort?.startsWith('distance') && (
                         <div className="flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full flex-shrink-0">
-                            <MapPin className="h-4 w-4 text-primary" />
+                            <MapPin className="h-4 w-4 text-secondary" />
                             <span className="text-sm font-medium text-primary">
                                 sorted by distance
                             </span>

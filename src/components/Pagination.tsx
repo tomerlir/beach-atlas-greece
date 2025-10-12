@@ -2,6 +2,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { analytics } from "@/lib/analytics";
+import { useRef } from "react";
 
 interface PaginationProps {
   currentPage: number;
@@ -11,8 +12,35 @@ interface PaginationProps {
 
 const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) => {
   const isMobile = useIsMobile();
+  const contentRef = useRef<HTMLDivElement>(null);
   
   if (totalPages <= 1) return null;
+
+  const handlePageChange = (page: number) => {
+    // Scroll to the top of the content area to prevent layout shift issues
+    const scrollToContentTop = () => {
+      // Try to find the content area (beach cards container) to scroll to
+      const contentElement = contentRef.current?.closest('main') || 
+                            document.querySelector('main') ||
+                            document.querySelector('[data-content-area]') ||
+                            document.body;
+      
+      if (contentElement) {
+        const rect = contentElement.getBoundingClientRect();
+        const scrollTop = window.pageYOffset + rect.top - 20; // 20px offset for breathing room
+        window.scrollTo({ top: scrollTop, behavior: 'smooth' });
+      }
+    };
+
+    // Update the page
+    analytics.event('paginate', { page });
+    onPageChange(page);
+    
+    // Scroll to content top after a brief delay to ensure content has rendered
+    requestAnimationFrame(() => {
+      scrollToContentTop();
+    });
+  };
 
   const getPageNumbers = () => {
     const pages = [];
@@ -36,19 +64,24 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
   const pageNumbers = getPageNumbers();
 
   return (
-    <div className="flex items-center justify-center gap-1 sm:gap-2 mt-8 px-2">
+    <div ref={contentRef} className="flex items-center justify-center gap-1 sm:gap-2 mt-8 px-2">
       {/* Previous Button */}
-      <Button
-        variant="outline"
-        size="sm"
-        onClick={() => { analytics.event('paginate', { page: currentPage - 1 }); onPageChange(currentPage - 1); }}
-        disabled={currentPage === 1}
-        className="flex items-center gap-1 text-xs sm:text-sm"
-      >
-        <ChevronLeft className="h-3 w-3 sm:h-4 sm:w-4" />
-        <span className="hidden sm:inline">Previous</span>
-        <span className="sm:hidden">Prev</span>
-      </Button>
+      <div className="w-16 sm:w-20 flex justify-end">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => handlePageChange(currentPage - 1)}
+          className={`flex items-center gap-1 text-xs sm:text-sm transition-all duration-300 ease-out ${
+            currentPage > 1 
+              ? 'opacity-100 visible translate-x-0 scale-100' 
+              : 'opacity-0 invisible -translate-x-2 scale-95 pointer-events-none'
+          }`}
+        >
+          <ChevronLeft className="h-3 w-3 sm:h-4 sm:w-4" />
+          <span className="hidden sm:inline">Previous</span>
+          <span className="sm:hidden">Prev</span>
+        </Button>
+      </div>
 
       {/* Page Numbers */}
       <div className="flex items-center gap-1">
@@ -58,7 +91,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
             <Button
               variant={1 === currentPage ? "default" : "outline"}
               size="sm"
-            onClick={() => { analytics.event('paginate', { page: 1 }); onPageChange(1); }}
+            onClick={() => handlePageChange(1)}
               className="w-8 sm:w-10 text-xs sm:text-sm"
             >
               1
@@ -75,7 +108,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
             key={page}
             variant={page === currentPage ? "default" : "outline"}
             size="sm"
-            onClick={() => { analytics.event('paginate', { page }); onPageChange(page); }}
+            onClick={() => handlePageChange(page)}
             className="w-8 sm:w-10 text-xs sm:text-sm"
           >
             {page}
@@ -91,7 +124,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
             <Button
               variant={totalPages === currentPage ? "default" : "outline"}
               size="sm"
-              onClick={() => { analytics.event('paginate', { page: totalPages }); onPageChange(totalPages); }}
+              onClick={() => handlePageChange(totalPages)}
               className="w-8 sm:w-10 text-xs sm:text-sm"
             >
               {totalPages}
@@ -101,17 +134,22 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
       </div>
 
       {/* Next Button */}
-      <Button
-        variant="outline"
-        size="sm"
-        onClick={() => { analytics.event('paginate', { page: currentPage + 1 }); onPageChange(currentPage + 1); }}
-        disabled={currentPage === totalPages}
-        className="flex items-center gap-1 text-xs sm:text-sm"
-      >
-        <span className="hidden sm:inline">Next</span>
-        <span className="sm:hidden">Next</span>
-        <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
-      </Button>
+      <div className="w-16 sm:w-20 flex justify-start">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => handlePageChange(currentPage + 1)}
+          className={`flex items-center gap-1 text-xs sm:text-sm transition-all duration-300 ease-out ${
+            currentPage < totalPages 
+              ? 'opacity-100 visible translate-x-0 scale-100' 
+              : 'opacity-0 invisible translate-x-2 scale-95 pointer-events-none'
+          }`}
+        >
+          <span className="hidden sm:inline">Next</span>
+          <span className="sm:hidden">Next</span>
+          <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
+        </Button>
+      </div>
     </div>
   );
 };

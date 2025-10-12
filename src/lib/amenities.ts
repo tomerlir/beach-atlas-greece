@@ -37,7 +37,7 @@ export const AMENITY_MAP: Record<string, AmenityConfig> = {
   sunbeds: { 
     label: "Sunbeds", 
     icon: Clock, 
-    color: "text-sunset",
+    color: "text-secondary",
     category: 'facilities'
   },
   umbrellas: { 
@@ -49,7 +49,7 @@ export const AMENITY_MAP: Record<string, AmenityConfig> = {
   parking: { 
     label: "Parking", 
     icon: Car, 
-    color: "text-primary",
+    color: "text-secondary",
     category: 'facilities'
   },
   showers: { 
@@ -61,7 +61,7 @@ export const AMENITY_MAP: Record<string, AmenityConfig> = {
   toilets: { 
     label: "Toilets", 
     icon: Shield, 
-    color: "text-muted-foreground",
+    color: "text-secondary",
     category: 'facilities'
   },
   
@@ -69,7 +69,7 @@ export const AMENITY_MAP: Record<string, AmenityConfig> = {
   lifeguard: { 
     label: "Lifeguard", 
     icon: LifeBuoy, 
-    color: "text-accent",
+    color: "text-secondary",
     category: 'safety'
   },
   
@@ -77,25 +77,25 @@ export const AMENITY_MAP: Record<string, AmenityConfig> = {
   beach_bar: { 
     label: "Beach Bar", 
     icon: Wine, 
-    color: "text-accent",
+    color: "text-secondary",
     category: 'services'
   },
   taverna: { 
     label: "Taverna", 
     icon: Utensils, 
-    color: "text-sunset",
+    color: "text-secondary",
     category: 'services'
   },
   food: { 
     label: "Food", 
     icon: Utensils, 
-    color: "text-sunset",
+    color: "text-secondary",
     category: 'services'
   },
   music: { 
     label: "Music", 
     icon: Music, 
-    color: "text-accent",
+    color: "text-secondary",
     category: 'services'
   },
   
@@ -103,7 +103,7 @@ export const AMENITY_MAP: Record<string, AmenityConfig> = {
   snorkeling: { 
     label: "Snorkeling", 
     icon: Eye, 
-    color: "text-primary",
+    color: "text-secondary",
     category: 'activities'
   },
   water_sports: { 
@@ -115,7 +115,7 @@ export const AMENITY_MAP: Record<string, AmenityConfig> = {
   family_friendly: { 
     label: "Family Friendly", 
     icon: Users, 
-    color: "text-accent",
+    color: "text-secondary",
     category: 'activities'
   },
   boat_trips: { 
@@ -127,19 +127,19 @@ export const AMENITY_MAP: Record<string, AmenityConfig> = {
   fishing: { 
     label: "Fishing", 
     icon: Anchor, 
-    color: "text-primary",
+    color: "text-secondary",
     category: 'activities'
   },
   photography: { 
     label: "Photography", 
     icon: Camera, 
-    color: "text-accent",
+    color: "text-secondary",
     category: 'activities'
   },
   hiking: { 
     label: "Hiking", 
     icon: Mountain, 
-    color: "text-primary",
+    color: "text-secondary",
     category: 'activities'
   },
   birdwatching: { 
@@ -151,7 +151,7 @@ export const AMENITY_MAP: Record<string, AmenityConfig> = {
   cliff_jumping: { 
     label: "Cliff Jumping", 
     icon: Mountain, 
-    color: "text-muted-foreground",
+    color: "text-secondary",
     category: 'activities'
   }
 };

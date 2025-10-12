@@ -186,7 +186,7 @@ export default function AllFiltersDrawer({
           {/* Search Section */}
           <div className="space-y-4">
             <h3 className="font-semibold text-base flex items-center gap-2">
-              <Search className="h-4 w-4 text-primary" />
+              <Search className="h-4 w-4 text-secondary" />
               Search
             </h3>
             
@@ -205,7 +205,7 @@ export default function AllFiltersDrawer({
           {/* Near me Section */}
           <div className="space-y-4">
             <h3 className="font-semibold text-base flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-primary" />
+              <MapPin className="h-4 w-4 text-secondary" />
               Near me
             </h3>
             
@@ -242,7 +242,7 @@ export default function AllFiltersDrawer({
           {/* Blue Flag Section */}
           <div className="space-y-4">
             <h3 className="font-semibold text-base flex items-center gap-2">
-              <Flag className="h-4 w-4 text-primary" />
+              <Flag className="h-4 w-4 text-secondary" />
               Blue Flag
             </h3>
             
@@ -263,7 +263,7 @@ export default function AllFiltersDrawer({
           <div className="space-y-4">
             <h3 className="font-semibold text-base flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <CheckCircle className="h-4 w-4 text-primary" />
+                <CheckCircle className="h-4 w-4 text-secondary" />
                 Beach setup
               </div>
               {draftFilters.organized.length > 0 && (
@@ -297,7 +297,7 @@ export default function AllFiltersDrawer({
                   >
                     <span className="text-sm font-medium">{option.label}</span>
                     {isSelected && (
-                      <Check className="h-4 w-4 text-primary" />
+                      <Check className="h-4 w-4 text-secondary" />
                     )}
                   </button>
                 );
@@ -309,7 +309,7 @@ export default function AllFiltersDrawer({
           <div className="space-y-4">
             <h3 className="font-semibold text-base flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Car className="h-4 w-4 text-primary" />
+                <Car className="h-4 w-4 text-secondary" />
                 Parking
               </div>
               {draftFilters.parking.length > 0 && (
@@ -340,7 +340,7 @@ export default function AllFiltersDrawer({
                   >
                     <span className="text-sm font-medium">{option.label}</span>
                     {isSelected && (
-                      <Check className="h-4 w-4 text-primary" />
+                      <Check className="h-4 w-4 text-secondary" />
                     )}
                   </button>
                 );
@@ -352,7 +352,7 @@ export default function AllFiltersDrawer({
           <div className="space-y-4">
             <h3 className="font-semibold text-base flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Waves className="h-4 w-4 text-primary" />
+                <Waves className="h-4 w-4 text-secondary" />
                 Wave Conditions
               </div>
               {draftFilters.waveConditions.length > 0 && (
@@ -383,7 +383,7 @@ export default function AllFiltersDrawer({
                   >
                     <span className="text-sm font-medium">{option.label}</span>
                     {isSelected && (
-                      <Check className="h-4 w-4 text-primary" />
+                      <Check className="h-4 w-4 text-secondary" />
                     )}
                   </button>
                 );
@@ -395,7 +395,7 @@ export default function AllFiltersDrawer({
           <div className="space-y-4">
             <h3 className="font-semibold text-base flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Mountain className="h-4 w-4 text-primary" />
+                <Mountain className="h-4 w-4 text-secondary" />
                 Beach Type
               </div>
               {draftFilters.type.length > 0 && (
@@ -426,7 +426,7 @@ export default function AllFiltersDrawer({
                   >
                     <span className="text-sm font-medium">{option.label}</span>
                     {isSelected && (
-                      <Check className="h-4 w-4 text-primary" />
+                      <Check className="h-4 w-4 text-secondary" />
                     )}
                   </button>
                 );
@@ -438,7 +438,7 @@ export default function AllFiltersDrawer({
           <div className="space-y-4">
             <h3 className="font-semibold text-base flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Sun className="h-4 w-4 text-primary" />
+                <Sun className="h-4 w-4 text-secondary" />
                 Amenities
               </div>
               {selectedAmenitiesCount > 0 && (
@@ -464,7 +464,7 @@ export default function AllFiltersDrawer({
                   >
                     <span className="text-sm font-medium">{amenity.label}</span>
                     {isSelected && (
-                      <Check className="h-4 w-4 text-primary" />
+                      <Check className="h-4 w-4 text-secondary" />
                     )}
                   </button>
                 );
