@@ -1,11 +1,9 @@
--- Fix admin invites function to include token field
--- This migration fixes the list_admin_invites function to return the token field
--- which is needed for generating proper invite links
+-- Simple admin system fix
+-- This migration ensures the admin system works correctly
 
--- Drop the existing function first to allow changing return type
+-- Fix the list_admin_invites function to include token field
 DROP FUNCTION IF EXISTS public.list_admin_invites();
 
--- Create the list_admin_invites function with token field
 CREATE OR REPLACE FUNCTION public.list_admin_invites()
 RETURNS TABLE(id UUID, email TEXT, invited_by UUID, accepted BOOLEAN, created_at TIMESTAMP WITH TIME ZONE, expires_at TIMESTAMP WITH TIME ZONE, token UUID)
 LANGUAGE plpgsql
@@ -24,5 +22,10 @@ BEGIN
 END;
 $function$;
 
--- Add comment for documentation
-COMMENT ON FUNCTION public.list_admin_invites() IS 'Lists admin invites with token field. Admin-only. Returns all invite data including token for link generation.';
+-- Mark the specific user's invite as accepted
+UPDATE public.admin_invites 
+SET 
+  accepted = TRUE, 
+  accepted_at = now()
+WHERE email = 'sunjonsy@gmail.com' 
+  AND accepted = FALSE;

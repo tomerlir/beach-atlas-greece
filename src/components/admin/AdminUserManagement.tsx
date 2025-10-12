@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Loader2, Shield, User, UserCheck, UserX, Plus, Link as LinkIcon, RefreshCcw } from 'lucide-react';
+import { Loader2, Shield, User, UserCheck, UserX, Plus, Link as LinkIcon, RefreshCcw, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface User {
@@ -33,6 +33,8 @@ export const AdminUserManagement: React.FC = () => {
   const [inviteToken, setInviteToken] = useState<string | null>(null);
   const [invites, setInvites] = useState<Array<{ id: string; email: string; invited_by: string; accepted: boolean; created_at: string; expires_at: string; token: string; }>>([]);
   const [invitesLoading, setInvitesLoading] = useState(false);
+  const [verifyEmail, setVerifyEmail] = useState('');
+  const [verifyLoading, setVerifyLoading] = useState(false);
 
   // Move useEffect before early return to avoid conditional hook usage
   useEffect(() => {
@@ -208,6 +210,36 @@ export const AdminUserManagement: React.FC = () => {
     }
   };
 
+  const manualVerifyEmail = async () => {
+    if (!verifyEmail.trim()) {
+      setError('Please enter an email address to verify');
+      return;
+    }
+
+    try {
+      setVerifyLoading(true);
+      setError(null);
+      
+      const { error } = await supabase.rpc('manual_verify_user_email' as any, {
+        target_email: verifyEmail.trim()
+      });
+      
+      if (error) {
+        setError(`Failed to verify email: ${error.message}`);
+        return;
+      }
+      
+      setSuccess(`Email ${verifyEmail} has been manually verified successfully`);
+      setVerifyEmail('');
+      await fetchUsers();
+    } catch (err) {
+      setError(`Error verifying email: ${err}`);
+    } finally {
+      setVerifyLoading(false);
+    }
+  };
+
+
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
       year: 'numeric',
@@ -343,6 +375,48 @@ export const AdminUserManagement: React.FC = () => {
               </CardContent>
             </Card>
           )}
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg flex items-center gap-2">
+                <Mail className="h-4 w-4" /> Manual Email Verification
+              </CardTitle>
+              <CardDescription>
+                Manually verify a user's email if they're stuck waiting for verification emails.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="verify-email">Email to Verify</Label>
+                <Input
+                  id="verify-email"
+                  type="email"
+                  placeholder="user@example.com"
+                  value={verifyEmail}
+                  onChange={(e) => setVerifyEmail(e.target.value)}
+                />
+              </div>
+              <Button 
+                onClick={manualVerifyEmail}
+                disabled={verifyLoading}
+                className="w-full"
+                variant="outline"
+              >
+                {verifyLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Verifying...
+                  </>
+                ) : (
+                  <>
+                    <Mail className="mr-2 h-4 w-4" />
+                    Verify Email
+                  </>
+                )}
+              </Button>
+            </CardContent>
+          </Card>
+
 
           <div className="space-y-4">
             <div className="flex items-center justify-between">
