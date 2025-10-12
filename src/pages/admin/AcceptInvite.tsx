@@ -43,9 +43,21 @@ const AcceptInvite: React.FC = () => {
         setIsLoading(false);
         return;
       }
-      setStep('verify');
+      
+      // Try to accept invite immediately (bypass email verification)
+      setStep('accepting');
+      const { error: acceptError } = await supabase.rpc('accept_admin_invite_no_verification' as any, { invite_token: token });
+      if (acceptError) {
+        // If bypass fails, fall back to email verification flow
+        setStep('verify');
+      } else {
+        // Success! User is now admin
+        setStep('done');
+        setTimeout(() => navigate('/admin'), 1000);
+      }
     } catch (err) {
       setError(String(err));
+      setStep('verify'); // Fall back to verification flow
     } finally {
       setIsLoading(false);
     }
@@ -62,13 +74,20 @@ const AcceptInvite: React.FC = () => {
         return;
       }
       setStep('accepting');
-      const { error: acceptError } = await supabase.rpc('accept_admin_invite' as any, { invite_token: token });
+      
+      // Try bypass function first (no email verification required)
+      const { error: acceptError } = await supabase.rpc('accept_admin_invite_no_verification' as any, { invite_token: token });
       if (acceptError) {
-        setError(acceptError.message);
-        setStep('enter');
-        setIsLoading(false);
-        return;
+        // Fall back to regular accept function
+        const { error: fallbackError } = await supabase.rpc('accept_admin_invite' as any, { invite_token: token });
+        if (fallbackError) {
+          setError(fallbackError.message);
+          setStep('enter');
+          setIsLoading(false);
+          return;
+        }
       }
+      
       setStep('done');
       setTimeout(() => navigate('/admin'), 1000);
     } catch (err) {
@@ -117,11 +136,11 @@ const AcceptInvite: React.FC = () => {
               <Alert>
                 <Mail className="h-4 w-4" />
                 <AlertDescription>
-                  We sent a verification email. After confirming, click the button below to sign in and accept the invite.
+                  If you received a verification email, please check it and click the link. If you didn't receive an email, you can still proceed by clicking the button below to sign in and accept the invite.
                 </AlertDescription>
               </Alert>
               <Button className="w-full" onClick={handleSignIn} disabled={isLoading}>
-                {isLoading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Signing in...</> : 'I verified my email – Sign in'}
+                {isLoading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Processing...</> : 'Continue to Accept Invite'}
               </Button>
             </div>
           )}

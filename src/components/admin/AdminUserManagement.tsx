@@ -31,7 +31,7 @@ export const AdminUserManagement: React.FC = () => {
   const [inviteEmail, setInviteEmail] = useState('');
   const [inviteLoading, setInviteLoading] = useState(false);
   const [inviteToken, setInviteToken] = useState<string | null>(null);
-  const [invites, setInvites] = useState<Array<{ id: string; email: string; invited_by: string; accepted: boolean; created_at: string; expires_at: string; }>>([]);
+  const [invites, setInvites] = useState<Array<{ id: string; email: string; invited_by: string; accepted: boolean; created_at: string; expires_at: string; token: string; }>>([]);
   const [invitesLoading, setInvitesLoading] = useState(false);
 
   // Move useEffect before early return to avoid conditional hook usage
@@ -299,7 +299,7 @@ export const AdminUserManagement: React.FC = () => {
                         <span className="font-medium">{inv.email}</span>
                         <span className="text-muted-foreground ml-2">expires {new Date(inv.expires_at).toLocaleDateString()}</span>
                       </div>
-                      <Link to={`/admin/accept-invite?token=${inviteToken ?? ''}`} className="text-primary hover:underline">Open link</Link>
+                      <Link to={`/admin/accept-invite?token=${inv.token}`} className="text-primary hover:underline">Open link</Link>
                     </div>
                   ))}
                 </div>
