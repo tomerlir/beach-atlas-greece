@@ -60,12 +60,12 @@ export const AdminUserManagement: React.FC = () => {
     try {
       setLoading(true);
       const { data, error } = await supabase.rpc('get_users_for_admin' as any);
-      
+
       if (error) {
         setError(`Failed to fetch users: ${error.message}`);
         return;
       }
-      
+
       setUsers((data as User[]) || []);
     } catch (err) {
       setError(`Error fetching users: ${err}`);
@@ -125,23 +125,23 @@ export const AdminUserManagement: React.FC = () => {
     try {
       setPromoting(userId);
       setError(null);
-      
+
       const { error } = await supabase.rpc('promote_to_admin' as any, {
         target_user_id: userId
       });
-      
+
       if (error) {
         setError(`Failed to promote user: ${error.message}`);
         return;
       }
-      
+
       // Log the admin action
       await supabase.rpc('log_admin_action' as any, {
         action_type: 'promote_to_admin',
         target_user_id: userId,
         action_details: { timestamp: new Date().toISOString() }
       });
-      
+
       setSuccess('User promoted to admin successfully');
       await fetchUsers();
     } catch (err) {
@@ -155,23 +155,23 @@ export const AdminUserManagement: React.FC = () => {
     try {
       setDemoting(userId);
       setError(null);
-      
+
       const { error } = await supabase.rpc('demote_from_admin' as any, {
         target_user_id: userId
       });
-      
+
       if (error) {
         setError(`Failed to demote user: ${error.message}`);
         return;
       }
-      
+
       // Log the admin action
       await supabase.rpc('log_admin_action' as any, {
         action_type: 'demote_from_admin',
         target_user_id: userId,
         action_details: { timestamp: new Date().toISOString() }
       });
-      
+
       setSuccess('User demoted from admin successfully');
       await fetchUsers();
     } catch (err) {
@@ -190,16 +190,16 @@ export const AdminUserManagement: React.FC = () => {
     try {
       setBootstrapLoading(true);
       setError(null);
-      
+
       const { error } = await supabase.rpc('bootstrap_first_admin' as any, {
         admin_email: bootstrapEmail.trim()
       });
-      
+
       if (error) {
         setError(`Failed to create admin: ${error.message}`);
         return;
       }
-      
+
       setSuccess('First admin created successfully');
       setBootstrapEmail('');
       await fetchUsers();
@@ -219,16 +219,16 @@ export const AdminUserManagement: React.FC = () => {
     try {
       setVerifyLoading(true);
       setError(null);
-      
+
       const { error } = await supabase.rpc('manual_verify_user_email' as any, {
         target_email: verifyEmail.trim()
       });
-      
+
       if (error) {
         setError(`Failed to verify email: ${error.message}`);
         return;
       }
-      
+
       setSuccess(`Email ${verifyEmail} has been manually verified successfully`);
       setVerifyEmail('');
       await fetchUsers();
@@ -270,7 +270,7 @@ export const AdminUserManagement: React.FC = () => {
               <AlertDescription>{error}</AlertDescription>
             </Alert>
           )}
-          
+
           {success && (
             <Alert>
               <AlertDescription>{success}</AlertDescription>
@@ -325,14 +325,13 @@ export const AdminUserManagement: React.FC = () => {
                 <div className="text-sm text-muted-foreground">No pending invites.</div>
               ) : (
                 <div className="space-y-2">
-                  {invites.map((inv) => (
-                    <div key={inv.id} className="flex items-center justify-between text-sm">
-                      <div>
-                        <span className="font-medium">{inv.email}</span>
-                        <span className="text-muted-foreground ml-2">expires {new Date(inv.expires_at).toLocaleDateString()}</span>
-                      </div>
-                      <Link to={`/admin/accept-invite?token=${inv.token}`} className="text-primary hover:underline">Open link</Link>
+                  {invites.filter(inv => !inv.accepted).map((inv) => (<div key={inv.id} className="flex items-center justify-between text-sm">
+                    <div>
+                      <span className="font-medium">{inv.email}</span>
+                      <span className="text-muted-foreground ml-2">expires {new Date(inv.expires_at).toLocaleDateString()}</span>
                     </div>
+                    <Link to={`/admin/accept-invite?token=${inv.token}`} className="text-primary hover:underline">Open link</Link>
+                  </div>
                   ))}
                 </div>
               )}
@@ -358,7 +357,7 @@ export const AdminUserManagement: React.FC = () => {
                     onChange={(e) => setBootstrapEmail(e.target.value)}
                   />
                 </div>
-                <Button 
+                <Button
                   onClick={bootstrapFirstAdmin}
                   disabled={bootstrapLoading}
                   className="w-full"
@@ -396,7 +395,7 @@ export const AdminUserManagement: React.FC = () => {
                   onChange={(e) => setVerifyEmail(e.target.value)}
                 />
               </div>
-              <Button 
+              <Button
                 onClick={manualVerifyEmail}
                 disabled={verifyLoading}
                 className="w-full"
@@ -421,9 +420,9 @@ export const AdminUserManagement: React.FC = () => {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-semibold">All Users</h3>
-              <Button 
-                variant="outline" 
-                size="sm" 
+              <Button
+                variant="outline"
+                size="sm"
                 onClick={fetchUsers}
                 disabled={loading}
               >
@@ -471,7 +470,7 @@ export const AdminUserManagement: React.FC = () => {
                             )}
                           </div>
                         </div>
-                        
+
                         <div className="flex gap-2">
                           {user.role === 'admin' ? (
                             <Button
@@ -507,7 +506,7 @@ export const AdminUserManagement: React.FC = () => {
                     </CardContent>
                   </Card>
                 ))}
-                
+
                 {users.length === 0 && (
                   <div className="text-center py-8 text-muted-foreground">
                     No users found.
