@@ -9,8 +9,23 @@ export const useBeachFiltering = (
 ): (Beach & { distance?: number })[] => {
   return useMemo(() => {
     let filtered = beaches.filter(beach => {
-      // Search filter - matches beach name or area
-      if (filters.search) {
+      // Location filter - filter by extracted location(s)
+      if (filters.locations && filters.locations.length > 0) {
+        // Multiple locations: beach must match at least one location
+        const matchesAnyLocation = filters.locations.some(location => {
+          const locationTerm = location.toLowerCase().trim();
+          return beach.area && beach.area.toLowerCase().includes(locationTerm);
+        });
+        if (!matchesAnyLocation) return false;
+      } else if (filters.location) {
+        // Single location: beach must match the location
+        const locationTerm = filters.location.toLowerCase().trim();
+        const matchesArea = beach.area && beach.area.toLowerCase().includes(locationTerm);
+        if (!matchesArea) return false;
+      }
+      
+      // Search filter - matches beach name or area (only if no location filter)
+      if (filters.search && !filters.location && !filters.locations) {
         const searchTerm = filters.search.toLowerCase().trim();
         
         // Direct search: check if the search term appears in beach name or area

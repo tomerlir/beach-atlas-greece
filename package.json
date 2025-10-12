@@ -9,7 +9,10 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "generate-sitemap": "tsx scripts/generate-sitemap.ts"
+    "generate-sitemap": "tsx scripts/generate-sitemap.ts",
+    "test:nlp": "tsx scripts/test-nlp.ts",
+    "test:nlp-demo": "tsx src/lib/__tests__/nlpDemo.ts",
+    "test:nlp-comprehensive": "tsx src/lib/__tests__/comprehensiveNlpTests.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -46,6 +49,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
+    "compromise": "^14.14.4",
     "date-fns": "^3.6.0",
     "embla-carousel-react": "^8.6.0",
     "input-otp": "^1.4.2",
@@ -64,6 +68,10 @@
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.9",
+    "wink-distance": "^2.0.2",
+    "wink-eng-lite-web-model": "^1.8.1",
+    "wink-nlp": "^2.4.0",
+    "wink-nlp-utils": "^2.1.0",
     "zod": "^3.25.76"
   },
   "devDependencies": {

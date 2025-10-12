@@ -85,6 +85,8 @@ export default function EnhancedSearchBar({
           onFiltersChange({ 
             search: '', 
             originalQuery: undefined,
+            location: undefined,
+            locations: undefined,
             type: [],
             waveConditions: [],
             parking: [],
@@ -109,7 +111,7 @@ export default function EnhancedSearchBar({
   }, [searchInput, filters, onClearAll, onFiltersChange, onNaturalLanguageSearch, isClearing]);
 
   // Handle search submission - ALWAYS use NLQ extraction (simpler and more robust)
-  const handleSearchSubmit = () => {
+  const handleSearchSubmit = async () => {
     const trimmedInput = searchInput.trim();
     
     // Early return if search hasn't changed
@@ -117,59 +119,69 @@ export default function EnhancedSearchBar({
       return;
     }
     
-    // ALWAYS extract filters from the query
-    // The extraction logic is smart enough to handle both:
-    // - Natural language queries (extracts filters)
-    // - Simple searches (returns empty filters, just location/name)
-    const extracted = extractFromNaturalLanguage(trimmedInput);
-    
-    // Determine if this was actually a natural language query (had filters extracted)
-    const hasExtractedFilters = Object.keys(extracted.filters).length > 0;
-    
-    // Notify parent whether NL extraction found anything
-    onNaturalLanguageSearch?.(hasExtractedFilters);
-    
-    if (areaName) {
-      // Area page context
-      const newFilters = applyExtractedFiltersForArea(filters, extracted);
-      // Store BOTH the cleaned search term AND the original query
-      onFiltersChange({
-        ...newFilters,
-        originalQuery: trimmedInput, // Always preserve user's exact input
-      });
+    try {
+      // ALWAYS extract filters from the query
+      // The extraction logic is smart enough to handle both:
+      // - Natural language queries (extracts filters)
+      // - Simple searches (returns empty filters, just location/name)
+      const extracted = await extractFromNaturalLanguage(trimmedInput);
       
-      // Check for place mismatch
-      if (extracted.place && !doesPlaceMatchArea(extracted.place, areaName) && onPlaceMismatch) {
-        onPlaceMismatch(extracted.place, areaName);
+      // Determine if this was actually a natural language query (had filters extracted)
+      const hasExtractedFilters = Object.keys(extracted.filters).length > 0;
+      
+      // Notify parent whether NL extraction found anything
+      onNaturalLanguageSearch?.(hasExtractedFilters);
+      
+      if (areaName) {
+        // Area page context
+        const newFilters = applyExtractedFiltersForArea(filters, extracted);
+        // Store BOTH the cleaned search term AND the original query
+        onFiltersChange({
+          ...newFilters,
+          originalQuery: trimmedInput, // Always preserve user's exact input
+        });
+        
+        // Check for place mismatch
+        if (extracted.place && !doesPlaceMatchArea(extracted.place, areaName) && onPlaceMismatch) {
+          onPlaceMismatch(extracted.place, areaName);
+        }
+      } else {
+        // Homepage context
+        const newFilters = applyExtractedFilters(filters, extracted);
+        // Store BOTH the cleaned search term AND the original query
+        onFiltersChange({
+          ...newFilters,
+          originalQuery: trimmedInput, // Always preserve user's exact input
+        });
       }
-    } else {
-      // Homepage context
-      const newFilters = applyExtractedFilters(filters, extracted);
-      // Store BOTH the cleaned search term AND the original query
+      
+      // Track analytics with detailed info
+      analytics.event('search_submit', { 
+        q_length: trimmedInput.length,
+        extracted_filters: Object.keys(extracted.filters).length,
+        has_place: !!extracted.place,
+        cleaned_term_length: extracted.cleanedSearchTerm.length,
+        is_nlq: hasExtractedFilters,
+        context: areaName ? 'area' : 'homepage',
+        // Detailed filter breakdown for NLQ analysis
+        filters_extracted: {
+          type: extracted.filters.type || [],
+          wave_conditions: extracted.filters.waveConditions || [],
+          parking: extracted.filters.parking || [],
+          amenities: extracted.filters.amenities || [],
+          blue_flag: extracted.filters.blueFlag || false,
+          place: extracted.place || null
+        }
+      });
+    } catch (error) {
+      console.error('Search extraction failed:', error);
+      // Fallback to basic search
       onFiltersChange({
-        ...newFilters,
-        originalQuery: trimmedInput, // Always preserve user's exact input
+        search: trimmedInput,
+        originalQuery: trimmedInput,
+        page: 1
       });
     }
-    
-    // Track analytics with detailed info
-    analytics.event('search_submit', { 
-      q_length: trimmedInput.length,
-      extracted_filters: Object.keys(extracted.filters).length,
-      has_place: !!extracted.place,
-      cleaned_term_length: extracted.cleanedSearchTerm.length,
-      is_nlq: hasExtractedFilters,
-      context: areaName ? 'area' : 'homepage',
-      // Detailed filter breakdown for NLQ analysis
-      filters_extracted: {
-        type: extracted.filters.type || [],
-        wave_conditions: extracted.filters.waveConditions || [],
-        parking: extracted.filters.parking || [],
-        amenities: extracted.filters.amenities || [],
-        blue_flag: extracted.filters.blueFlag || false,
-        place: extracted.place || null
-      }
-    });
   };
 
   // Handle keyboard shortcuts
@@ -192,7 +204,7 @@ export default function EnhancedSearchBar({
       onClearAll();
     } else {
       // Fallback to just clearing search and originalQuery if onClearAll not provided
-      onFiltersChange({ search: '', originalQuery: undefined, page: 1 });
+      onFiltersChange({ search: '', originalQuery: undefined, location: undefined, locations: undefined, page: 1 });
     }
     inputRef.current?.focus();
   };

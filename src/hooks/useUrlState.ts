@@ -4,6 +4,8 @@ import { useSearchParams } from 'react-router-dom';
 export interface FilterState {
   search: string;
   originalQuery?: string; // User's raw input for NLQ - preserved for display
+  location?: string; // Primary extracted location from natural language queries
+  locations?: string[]; // All extracted locations for multi-location queries
   organized: string[];
   blueFlag: boolean;
   parking: string[];
@@ -18,6 +20,8 @@ export interface FilterState {
 const defaultFilters: FilterState = {
   search: '',
   originalQuery: undefined,
+  location: undefined,
+  locations: undefined,
   organized: [],
   blueFlag: false,
   parking: [],
@@ -42,6 +46,16 @@ export function useUrlState() {
     // Parse originalQuery (user's raw NLQ input)
     const originalQuery = searchParams.get('originalQuery');
     if (originalQuery) state.originalQuery = originalQuery;
+    
+    // Parse location
+    const location = searchParams.get('location');
+    if (location) state.location = location;
+    
+    // Parse locations (multiple locations)
+    const locations = searchParams.get('locations');
+    if (locations) {
+      state.locations = locations.split(',').filter(Boolean);
+    }
     
     // Parse organized
     const organized = searchParams.get('organized');
@@ -122,6 +136,24 @@ export function useUrlState() {
           newParams.set('originalQuery', updates.originalQuery);
         } else {
           newParams.delete('originalQuery');
+        }
+      }
+      
+      // Update location
+      if (updates.location !== undefined) {
+        if (updates.location) {
+          newParams.set('location', updates.location);
+        } else {
+          newParams.delete('location');
+        }
+      }
+      
+      // Update locations (multiple locations)
+      if (updates.locations !== undefined) {
+        if (updates.locations && updates.locations.length > 0) {
+          newParams.set('locations', updates.locations.join(','));
+        } else {
+          newParams.delete('locations');
         }
       }
       
