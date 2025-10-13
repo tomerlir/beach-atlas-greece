@@ -254,29 +254,31 @@ const Map = () => {
               style={{ height: "100%", width: "100%" }}
               className="z-0"
             >
-              <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              />
-              
-              {filteredBeaches.map((beach) => (
-                <Marker
-                  key={beach.id}
-                  position={[beach.latitude, beach.longitude]}
-                >
-                  <Popup maxWidth={300} className="beach-popup">
-                    <div className="p-2">
-                      <BeachCard
-                        beach={beach}
-                        distance={beach.distance}
-                        showDistance={filters.nearMe && !locationError && !!location}
-                      />
-                    </div>
-                  </Popup>
-                </Marker>
-              ))}
+              <>
+                <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                
+                {filteredBeaches.map((beach) => (
+                  <Marker
+                    key={beach.id}
+                    position={[beach.latitude, beach.longitude]}
+                  >
+                    <Popup maxWidth={300} className="beach-popup">
+                      <div className="p-2">
+                        <BeachCard
+                          beach={beach}
+                          distance={beach.distance}
+                          showDistance={filters.nearMe && !locationError && !!location}
+                        />
+                      </div>
+                    </Popup>
+                  </Marker>
+                ))}
 
-              <AutoFitBounds beaches={filteredBeaches} />
+                <AutoFitBounds beaches={filteredBeaches} />
+              </>
             </MapContainer>
           )}
         </div>
