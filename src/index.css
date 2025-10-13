@@ -122,6 +122,27 @@ All colors MUST be HSL.
   }
 }
 
+/* Leaflet popup: render only our card, no default chrome (scoped to map container) */
+.leaflet-popup-contrast .leaflet-popup-content-wrapper,
+.leaflet-popup-contrast .leaflet-popup-tip-container,
+.leaflet-popup-contrast .leaflet-popup-content {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Remove default inner spacing and tip entirely */
+.leaflet-popup-contrast .leaflet-popup-content {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.leaflet-popup-contrast .leaflet-popup-tip-container { display: none !important; }
+
+/* Tighten the overall container so it hugs the card */
+.leaflet-popup-contrast {
+  margin: 0 !important;
+}
+
 @layer base {
   * {
     @apply border-border;

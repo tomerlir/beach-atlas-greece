@@ -160,6 +160,14 @@ export class LocationMatcher {
       
       // Major Cities and Regions
       {
+        place: 'attica',
+        area: 'attica',
+        confidence: 1.0,
+        coordinates: { latitude: 37.9838, longitude: 23.7275 },
+        aliases: ['attica', 'attiki', 'attika'],
+        hierarchy: { region: 'attica' }
+      },
+      {
         place: 'athens',
         area: 'attica',
         confidence: 1.0,

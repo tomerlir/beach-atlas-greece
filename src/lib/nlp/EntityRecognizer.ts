@@ -80,7 +80,7 @@ export class EntityRecognizer {
     this.placePatterns.set('kythnos', /\bkythnos\b/i);
     
     // Major Greek cities and regions
-    this.placePatterns.set('attica', /\b(athens?|attica)\b/i);
+    this.placePatterns.set('attica', /\b(athens?|attica|attiki|attika)\b/i);
     this.placePatterns.set('chalkidiki', /\b(thessaloniki|chalkidiki)\b/i);
     this.placePatterns.set('patras', /\bpatras?\b/i);
     this.placePatterns.set('heraklion', /\bheraklion\b/i);

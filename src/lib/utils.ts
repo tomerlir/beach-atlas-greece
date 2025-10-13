@@ -103,7 +103,6 @@ export const AMENITY_OPTIONS = [
   'toilets',
   'food',
   'lifeguard',
-  'parking',
 ] as const;
 
 export const TYPE_OPTIONS = ['SANDY','PEBBLY','MIXED','OTHER'] as const;

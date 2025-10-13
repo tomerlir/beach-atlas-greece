@@ -24,6 +24,7 @@ import AdminSettings from "./pages/admin/AdminSettings";
 import BeachDetail from "./pages/BeachDetail";
 import Area from "./pages/Area";
 import NotFound from "./pages/NotFound";
+import MapPage from "./pages/Map";
 import { useServiceWorker } from "@/hooks/useServiceWorker";
 import ScrollToTop from "@/components/ScrollToTop";
 import AcceptInvite from "./pages/admin/AcceptInvite";
@@ -41,6 +42,7 @@ const AppContent = () => {
         <Route path="/" element={<Index />} />
         <Route path="/about" element={<About />} />
         <Route path="/areas" element={<Areas />} />
+        <Route path="/map" element={<MapPage />} />
         <Route path="/ontology" element={<Ontology />} />
         <Route path="/:areaSlug" element={<Area />} />
         <Route path="/:area/:beach-name" element={<BeachDetail />} />

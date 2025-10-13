@@ -115,8 +115,8 @@ export default function AmenitiesDropdown({
           variant={appliedCount > 0 ? "default" : "ghost"}
           size="sm"
           onClick={handleTriggerClick}
-            className={`px-3 py-2 rounded-xl h-auto whitespace-nowrap flex-shrink-0 ${
-              appliedCount > 0 ? '' : 'text-foreground bg-muted/65 border-2 border-muted shadow-sm'
+            className={`px-3 py-2 rounded-xl h-auto min-h-[40px] whitespace-nowrap flex-shrink-0 border-2 shadow-md hover:shadow-lg ${
+              appliedCount > 0 ? 'border-transparent' : 'text-foreground bg-muted/65 border-muted'
             }`}
           aria-expanded={isOpen}
           aria-haspopup="listbox"

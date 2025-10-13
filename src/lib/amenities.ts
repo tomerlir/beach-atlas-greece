@@ -46,12 +46,6 @@ export const AMENITY_MAP: Record<string, AmenityConfig> = {
     color: "text-secondary",
     category: 'facilities'
   },
-  parking: { 
-    label: "Parking", 
-    icon: Car, 
-    color: "text-secondary",
-    category: 'facilities'
-  },
   showers: { 
     label: "Showers", 
     icon: Droplets, 

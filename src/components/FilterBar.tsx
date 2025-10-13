@@ -121,7 +121,7 @@ export default function FilterBar({
                     size="sm"
                     onClick={() => handleNearMeToggle(!filters.nearMe)}
                     disabled={isLoadingLocation}
-                    className={`px-3 py-2 rounded-xl h-auto flex-shrink-0 mb-1 ${!filters.nearMe ? 'text-foreground bg-muted/65 border-2 border-muted shadow-sm' : ''}`}
+                    className={`px-3 py-2 rounded-xl h-auto min-h-[40px] whitespace-nowrap flex-shrink-0 border-2 shadow-md hover:shadow-lg ${filters.nearMe ? 'border-transparent' : 'text-foreground bg-muted/65 border-muted'}`}
                     role="switch"
                     aria-checked={filters.nearMe}
                     aria-label={`Near me (${filters.nearMe ? 'on' : 'off'})`}
@@ -146,7 +146,7 @@ export default function FilterBar({
                 variant={filters.blueFlag ? "default" : "ghost"}
                 size="sm"
                 onClick={() => handleBlueFlagToggle(!filters.blueFlag)}
-                className={`px-3 py-2 rounded-xl h-auto flex-shrink-0 mb-1 ${!filters.blueFlag ? 'text-foreground bg-muted/65 border-2 border-muted shadow-sm' : ''}`}
+                className={`px-3 py-2 rounded-xl h-auto min-h-[40px] whitespace-nowrap flex-shrink-0 border-2 shadow-md hover:shadow-lg ${filters.blueFlag ? 'border-transparent' : 'text-foreground bg-muted/65 border-muted'}`}
                 role="switch"
                 aria-checked={filters.blueFlag}
                 aria-label={`Blue Flag (${filters.blueFlag ? 'on' : 'off'})`}
@@ -215,10 +215,10 @@ export default function FilterBar({
               </Button> */}
 
               {/* Vertical Separator */}
-              <div className="h-6 w-px bg-border mx-1 flex-shrink-0" />
+              {/* <div className="h-6 w-px bg-border mx-1 flex-shrink-0" /> */}
 
               {/* Sort Dropdown */}
-              <div className="flex-shrink-0">
+              {/* <div className="flex-shrink-0">
                 <SortDropdown
                   filters={filters}
                   onFiltersChange={onFiltersChange}
@@ -227,7 +227,7 @@ export default function FilterBar({
                   onLocationRequest={onLocationRequest}
                   isLoadingLocation={isLoadingLocation}
                 />
-              </div>
+              </div> */}
             </div>
           ) : (
             /* Mobile: Scrollable facet chips */
@@ -242,7 +242,7 @@ export default function FilterBar({
                     size="sm"
                     onClick={() => handleNearMeToggle(!filters.nearMe)}
                     disabled={isLoadingLocation}
-                    className={`px-3 py-2 rounded-xl h-auto flex-shrink-0 mb-1 ${!filters.nearMe ? 'text-foreground bg-muted/65 border-2 border-muted shadow-sm' : ''}`}
+                    className={`px-3 py-2 rounded-xl h-auto min-h-[40px] whitespace-nowrap flex-shrink-0 border-2 shadow-md hover:shadow-lg ${filters.nearMe ? 'border-transparent' : 'text-foreground bg-muted/65 border-muted'}`}
                     role="switch"
                     aria-checked={filters.nearMe}
                     aria-label={`Near me (${filters.nearMe ? 'on' : 'off'})`}
@@ -267,7 +267,7 @@ export default function FilterBar({
                 variant={filters.blueFlag ? "default" : "ghost"}
                 size="sm"
                 onClick={() => handleBlueFlagToggle(!filters.blueFlag)}
-                className={`px-3 py-2 rounded-xl h-auto flex-shrink-0 mb-1 ${!filters.blueFlag ? 'text-foreground bg-muted/65 border-2 border-muted shadow-sm' : ''}`}
+                className={`px-3 py-2 rounded-xl h-auto min-h-[40px] whitespace-nowrap flex-shrink-0 border-2 shadow-md hover:shadow-lg ${filters.blueFlag ? 'border-transparent' : 'text-foreground bg-muted/65 border-muted'}`}
                 role="switch"
                 aria-checked={filters.blueFlag}
                 aria-label={`Blue Flag (${filters.blueFlag ? 'on' : 'off'})`}
@@ -335,10 +335,10 @@ export default function FilterBar({
               </Button> */}
 
               {/* Vertical Separator */}
-              <div className="h-6 w-px bg-border mx-1 flex-shrink-0" />
+              {/* <div className="h-6 w-px bg-border mx-1 flex-shrink-0" /> */}
 
               {/* Sort Dropdown for Mobile */}
-              <div className="flex-shrink-0">
+              {/* <div className="flex-shrink-0">
                 <SortDropdown
                   filters={filters}
                   onFiltersChange={onFiltersChange}
@@ -347,7 +347,7 @@ export default function FilterBar({
                   onLocationRequest={onLocationRequest}
                   isLoadingLocation={isLoadingLocation}
                 />
-              </div>
+              </div> */}
             </div>
           )}
         </div>
