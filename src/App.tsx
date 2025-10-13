@@ -10,6 +10,7 @@ import AdminLayout from "@/components/admin/AdminLayout";
 import Index from "./pages/Index";
 import About from "./pages/About";
 import Areas from "./pages/Areas";
+import Map from "./pages/Map";
 import Ontology from "./pages/Ontology";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -41,6 +42,7 @@ const AppContent = () => {
         <Route path="/" element={<Index />} />
         <Route path="/about" element={<About />} />
         <Route path="/areas" element={<Areas />} />
+        <Route path="/map" element={<Map />} />
         <Route path="/ontology" element={<Ontology />} />
         <Route path="/:areaSlug" element={<Area />} />
         <Route path="/:area/:beach-name" element={<BeachDetail />} />

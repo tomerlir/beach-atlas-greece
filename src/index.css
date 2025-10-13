@@ -165,4 +165,19 @@ All colors MUST be HSL.
     display: none;  /* Safari and Chrome */
   }
 
+  /* Leaflet popup styles for beach cards */
+  .leaflet-popup-content-wrapper {
+    @apply rounded-lg shadow-medium;
+    padding: 0;
+  }
+
+  .leaflet-popup-content {
+    margin: 0;
+    width: auto !important;
+  }
+
+  .beach-popup .leaflet-popup-content {
+    width: 300px !important;
+  }
 }
+
