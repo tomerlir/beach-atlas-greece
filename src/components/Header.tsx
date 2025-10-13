@@ -22,12 +22,6 @@ const Header = () => {
                 Explore areas
               </Link>
               <Link 
-                to="/map" 
-                className="text-muted-foreground hover:text-secondary transition-colors font-medium inline-block"
-              >
-                Map
-              </Link>
-              <Link 
                 to="/about" 
                 className="text-muted-foreground hover:text-secondary transition-colors font-medium inline-block"
               >
