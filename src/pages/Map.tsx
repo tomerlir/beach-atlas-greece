@@ -158,6 +158,31 @@ const Map = () => {
   const seoDescription = "Explore Greek beaches on an interactive map. Filter by amenities, Blue Flag certification, and more to find your perfect beach.";
   const canonicalUrl = "https://beachesofgreece.com/map";
 
+  // React-Leaflet runtime expects a function child (render-prop) in this version; TS types say ReactNode.
+  // We provide a function but type it as any to satisfy both.
+  const mapChildren: any = () => (
+    <>
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      {filteredBeaches.map((beach) => (
+        <Marker key={beach.id} position={[beach.latitude, beach.longitude]}>
+          <Popup maxWidth={300} className="beach-popup">
+            <div className="p-2">
+              <BeachCard
+                beach={beach}
+                distance={beach.distance}
+                showDistance={filters.nearMe && !locationError && !!location}
+              />
+            </div>
+          </Popup>
+        </Marker>
+      ))}
+      <AutoFitBounds beaches={filteredBeaches} />
+    </>
+  );
+
   return (
     <>
       <Helmet>
@@ -247,40 +272,17 @@ const Map = () => {
             </div>
           )}
 
-          {!isLoading && !error && filteredBeaches.length > 0 && (
+          {!isLoading && !error && (
             <MapContainer
               center={[38.5, 23.0]}
               zoom={6}
               style={{ height: "100%", width: "100%" }}
               className="z-0"
             >
-              <>
-                <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                
-                {filteredBeaches.map((beach) => (
-                  <Marker
-                    key={beach.id}
-                    position={[beach.latitude, beach.longitude]}
-                  >
-                    <Popup maxWidth={300} className="beach-popup">
-                      <div className="p-2">
-                        <BeachCard
-                          beach={beach}
-                          distance={beach.distance}
-                          showDistance={filters.nearMe && !locationError && !!location}
-                        />
-                      </div>
-                    </Popup>
-                  </Marker>
-                ))}
-
-                <AutoFitBounds beaches={filteredBeaches} />
-              </>
+              {mapChildren}
             </MapContainer>
           )}
+
         </div>
 
         {/* All Filters Drawer */}
