@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { CONTACT_EMAIL } from "@/lib/constants";
 import { Helmet } from "react-helmet-async";
 import { BreadcrumbsWithJsonLd } from "@/components/breadcrumbs/BreadcrumbsWithJsonLd";
@@ -304,7 +305,7 @@ const Ontology = () => {
                       <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 mr-3 flex-shrink-0" />
                       <div>
                         <h4 className="font-medium text-gray-900">Verified</h4>
-                        <p className="text-gray-600 text-sm">Data has been verified through official sources or on-site visits</p>
+                        <p className="text-gray-600 text-sm">Data has been verified through a combination of online research, on-site visits, or official local tourism boards</p>
                       </div>
                     </div>
                     <div className="flex items-start">
@@ -321,16 +322,16 @@ const Ontology = () => {
                   <h3 className="text-xl font-semibold mb-4 text-gray-900">Data Sources</h3>
                   <div className="space-y-3">
                     <div>
-                      <h4 className="font-medium text-gray-900">Official Sources</h4>
-                      <p className="text-gray-600 text-sm">Tourism boards, local authorities, Blue Flag Foundation</p>
+                      <h4 className="font-medium text-gray-900">Online Research</h4>
+                      <p className="text-gray-600 text-sm">Comprehensive online research from multiple sources</p>
                     </div>
                     <div>
-                      <h4 className="font-medium text-gray-900">Community Input</h4>
-                      <p className="text-gray-600 text-sm">Verified visitor reports and local knowledge</p>
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-gray-900">On-site Verification</h4>
+                      <h4 className="font-medium text-gray-900">On-site Visits</h4>
                       <p className="text-gray-600 text-sm">Direct observation and measurement by our team</p>
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-gray-900">Official Local Sources</h4>
+                      <p className="text-gray-600 text-sm">Tourism boards, local authorities, Blue Flag Foundation</p>
                     </div>
                   </div>
                 </div>
@@ -372,7 +373,7 @@ const Ontology = () => {
 
             {/* Suggest a Fix */}
             <section className="mb-12">
-              <div className="bg-gradient-to-r from-secondary/10 to-accent/10 border border-secondary/20 rounded-lg p-8">
+              <div className="bg-gradient-to-r from-ocean/10 to-ocean-light/10 border border-ocean/20 rounded-lg p-8">
                 <h2 className="text-2xl font-bold text-foreground mb-4">Suggest a Fix</h2>
                 <p className="text-muted-foreground mb-6">
                   Found incorrect information or want to suggest improvements to our data model? 
@@ -388,6 +389,8 @@ const Ontology = () => {
             </section>
           </div>
         </main>
+
+        <Footer />
       </div>
     </>
   );

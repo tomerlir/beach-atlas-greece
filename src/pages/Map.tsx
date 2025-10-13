@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import EnhancedSearchBar from "@/components/EnhancedSearchBar";
 import FilterBar from "@/components/FilterBar";
 import BeachCard from "@/components/BeachCard";
@@ -249,6 +250,8 @@ const MapPage = () => {
         </main>
 
         {/* All Filters Drawer temporarily removed on Map page */}
+
+        <Footer />
       </div>
     </>
   );

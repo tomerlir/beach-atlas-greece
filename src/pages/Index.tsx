@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { CONTACT_EMAIL } from "@/lib/constants";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import FilterBar from "@/components/FilterBar";
 import AllFiltersDrawer from "@/components/AllFiltersDrawer";
 import ResultsSummary from "@/components/ResultsSummary";
@@ -379,37 +380,7 @@ const Index = () => {
         locationPermission={locationPermission}
       />
 
-      {/* Footer */}
-      <footer className="bg-muted py-8 mt-16">
-        <div className="container mx-auto px-4 text-center">
-          <div className="flex items-center justify-center gap-6 mb-4">
-            <a 
-              href="/about" 
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              About
-            </a>
-            <a 
-              href="/ontology" 
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              Ontology
-            </a>
-            <a 
-              href={`mailto:${CONTACT_EMAIL}`} 
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              Feedback
-            </a>
-          </div>
-          <p className="text-muted-foreground text-sm">
-            © 2025 Beaches of Greece . Discover the beauty of Greece.
-          </p>
-          <p className="text-muted-foreground text-xs mt-2">
-            Information is for guidance only, please verify locally.
-          </p>
-        </div>
-      </footer>
+      <Footer />
       </div>
     </>
   );

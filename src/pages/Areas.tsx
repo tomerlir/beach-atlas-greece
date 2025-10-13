@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { Waves } from "lucide-react";
 import { useAreasWithBeachCount } from "@/hooks/useAreas";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import OptimizedImage from "@/components/OptimizedImage";
@@ -225,37 +226,7 @@ const Areas = () => {
           )}
         </main>
 
-        {/* Footer */}
-        <footer className="bg-muted py-8 mt-16">
-          <div className="container mx-auto px-4 text-center">
-            <div className="flex items-center justify-center gap-6 mb-4">
-              <Link 
-                to="/about" 
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                About
-              </Link>
-              <Link 
-                to="/ontology" 
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                Ontology
-              </Link>
-              <a 
-                href={`mailto:${CONTACT_EMAIL}`} 
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                Feedback
-              </a>
-            </div>
-            <p className="text-muted-foreground text-sm">
-              © 2025 Beaches of Greece . Discover the beauty of Greece.
-            </p>
-            <p className="text-muted-foreground text-xs mt-2">
-              Information is for guidance only, please verify locally.
-            </p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );
