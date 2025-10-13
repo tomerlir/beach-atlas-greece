@@ -40,15 +40,15 @@ export class SentimentAnalyzer {
   ]);
 
   private intentKeywords = {
-    search: ['find', 'show', 'get', 'search', 'looking', 'want', 'need', 'where'],
-    preference: ['prefer', 'like', 'love', 'favorite', 'best', 'top', 'recommend'],
+    search: ['find', 'show', 'get', 'search', 'looking', 'want', 'need'],
+    preference: ['prefer', 'like', 'favorite', 'best', 'top', 'recommend', 'suggest', 'quiet'],
     question: ['what', 'which', 'where', 'when', 'how', 'who', 'why', '?'],
     complaint: ['terrible', 'bad', 'awful', 'horrible', 'poor', 'hate', 'dislike'],
-    praise: ['amazing', 'fantastic', 'wonderful', 'perfect', 'love', 'excellent']
+    praise: ['amazing', 'fantastic', 'wonderful', 'perfect', 'excellent', 'beautiful', 'stunning']
   };
 
   private intensityModifiers = {
-    high: ['extremely', 'incredibly', 'absolutely', 'totally', 'completely', 'very'],
+    high: ['extremely', 'incredibly', 'absolutely', 'totally', 'completely', 'very', 'most'],
     medium: ['quite', 'rather', 'pretty', 'fairly', 'somewhat'],
     low: ['slightly', 'a bit', 'kind of', 'sort of']
   };
@@ -68,6 +68,11 @@ export class SentimentAnalyzer {
    * Analyze sentiment of text
    */
   public async analyzeSentiment(text: string): Promise<SentimentResult> {
+    // Handle null/undefined input gracefully
+    if (!text || typeof text !== 'string') {
+      text = '';
+    }
+    
     const processedText = await this.textProcessor.processText(text);
     const normalizedText = processedText.normalized.toLowerCase();
     
@@ -91,7 +96,9 @@ export class SentimentAnalyzer {
     // Determine intensity
     for (const [level, modifiers] of Object.entries(this.intensityModifiers)) {
       if (modifiers.some(modifier => normalizedText.includes(modifier))) {
-        intensity = level as 'low' | 'medium' | 'high';
+        if (level === 'high' || level === 'medium' || level === 'low') {
+          intensity = level;
+        }
         break;
       }
     }
@@ -99,26 +106,26 @@ export class SentimentAnalyzer {
     // Calculate polarity and confidence
     const totalScore = positiveScore + negativeScore;
     let polarity: 'positive' | 'negative' | 'neutral' = 'neutral';
-    let confidence = 0.5;
+    let confidence = 0.4; // Base confidence for neutral
 
     if (totalScore > 0) {
       if (positiveScore > negativeScore) {
         polarity = 'positive';
-        confidence = Math.min(0.9, 0.5 + (positiveScore - negativeScore) / totalScore);
+        confidence = Math.min(0.9, 0.6 + (positiveScore - negativeScore) / totalScore * 0.3);
       } else if (negativeScore > positiveScore) {
         polarity = 'negative';
-        confidence = Math.min(0.9, 0.5 + (negativeScore - positiveScore) / totalScore);
+        confidence = Math.min(0.9, 0.6 + (negativeScore - positiveScore) / totalScore * 0.3);
       }
     }
 
     // Determine intent
-    const intent = this.analyzeIntent(text, polarity);
+    const intentAnalysis = this.analyzeIntent(text, polarity);
 
     return {
       polarity,
       confidence,
-      intent,
-      intensity,
+      intent: intentAnalysis.primaryIntent,
+      intensity: intensity as 'high' | 'medium' | 'low',
       keywords
     };
   }
@@ -127,6 +134,11 @@ export class SentimentAnalyzer {
    * Analyze user intent
    */
   public analyzeIntent(text: string, sentiment?: 'positive' | 'negative' | 'neutral'): IntentAnalysis {
+    // Handle null/undefined input gracefully
+    if (!text || typeof text !== 'string') {
+      text = '';
+    }
+    
     const normalizedText = text.toLowerCase();
     const intentScores: Record<string, number> = {
       search: 0,
@@ -136,21 +148,28 @@ export class SentimentAnalyzer {
       praise: 0
     };
 
-    // Score based on keywords
+    // Score based on keywords with context awareness
     for (const [intent, keywords] of Object.entries(this.intentKeywords)) {
       for (const keyword of keywords) {
         if (normalizedText.includes(keyword)) {
-          intentScores[intent]++;
+          // Give higher weight to certain keywords
+          if (intent === 'search' && ['find', 'show', 'get', 'search', 'looking', 'want', 'need'].includes(keyword)) {
+            intentScores[intent] += 2; // Higher weight for clear search intent
+          } else if (intent === 'question' && keyword === 'where' && normalizedText.includes('are')) {
+            intentScores[intent] += 1; // Standard weight for "where are" questions
+          } else {
+            intentScores[intent]++;
+          }
         }
       }
     }
 
-    // Adjust scores based on sentiment
+    // Adjust scores based on sentiment (smaller adjustments)
     if (sentiment === 'positive') {
-      intentScores.praise += 0.5;
-      intentScores.preference += 0.3;
+      intentScores.praise += 0.2;
+      intentScores.preference += 0.1;
     } else if (sentiment === 'negative') {
-      intentScores.complaint += 0.5;
+      intentScores.complaint += 0.2;
     }
 
     // Find primary intent
@@ -177,7 +196,7 @@ export class SentimentAnalyzer {
     return {
       primaryIntent: primaryIntent.intent as any,
       secondaryIntents,
-      confidence: Math.min(0.95, primaryIntent.score / 3),
+      confidence: Math.min(0.95, Math.max(0.6, primaryIntent.score / 1.2)), // Higher base confidence
       modifiers
     };
   }
@@ -187,7 +206,7 @@ export class SentimentAnalyzer {
    */
   public isRecommendationQuery(text: string): boolean {
     const recommendationPatterns = [
-      /\b(best|top|recommended|suggested|favorite|preferred)\b/i,
+      /\b(best|top|recommended|suggested|favorite|preferred|recommend|suggest)\b/i,
       /\b(what.*should.*visit|where.*should.*go|which.*best)\b/i,
       /\b(must.*see|must.*visit|worth.*visiting)\b/i
     ];

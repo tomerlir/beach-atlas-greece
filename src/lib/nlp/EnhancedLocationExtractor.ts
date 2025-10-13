@@ -38,6 +38,11 @@ export class EnhancedLocationExtractor {
     query: string,
     entities: EntityRecognitionResult
   ): LocationExtractionResult {
+    // Handle null/undefined input gracefully
+    if (!query || typeof query !== 'string') {
+      query = '';
+    }
+    
     const normalizedQuery = query.toLowerCase().trim();
     
     // Strategy 1: Use entity recognition results first

@@ -92,6 +92,11 @@ export class FuzzyMatcher {
       caseSensitive = false
     } = options;
 
+    // Handle null/undefined input gracefully
+    if (!query || typeof query !== 'string') {
+      query = '';
+    }
+
     const results: MatchResult[] = [];
     const normalizedQuery = caseSensitive ? query : query.toLowerCase();
 

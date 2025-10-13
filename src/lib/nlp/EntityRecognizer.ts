@@ -187,6 +187,11 @@ export class EntityRecognizer {
    * Recognize entities in text
    */
   public async recognizeEntities(text: string): Promise<EntityRecognitionResult> {
+    // Handle null/undefined input gracefully
+    if (!text || typeof text !== 'string') {
+      text = '';
+    }
+    
     const processedText = await this.textProcessor.processText(text);
     
     const result: EntityRecognitionResult = {
