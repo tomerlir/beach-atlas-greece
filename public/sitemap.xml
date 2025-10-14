@@ -39,6 +39,20 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>https://beachesofgreece.com/faq</loc>
+    <lastmod>2025-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://beachesofgreece.com/guide</loc>
+    <lastmod>2025-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
   <!-- Area Pages -->
   <url>
     <loc>https://beachesofgreece.com/attica</loc>
