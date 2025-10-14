@@ -155,6 +155,10 @@ const Index = () => {
   const seoTitle = "Greek Beaches Directory - Find Your Perfect Beach in Greece";
   const seoDescription = "Discover the most beautiful beaches in Greece. Search by location, amenities, and Blue Flag certification. Complete directory of Greek island and mainland beaches.";
   const canonicalUrl = "https://beachesofgreece.com";
+  
+  // Prevent indexing of filtered/paginated URLs (canonical points to clean URL)
+  const hasQueryParams = window.location.search.length > 0;
+  const shouldNoIndex = hasQueryParams;
 
   // Generate JSON-LD structured data
   const jsonLd = {
@@ -205,6 +209,9 @@ const Index = () => {
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />
         <link rel="canonical" href={canonicalUrl} />
+        
+        {/* Prevent indexing of filtered/paginated URLs */}
+        {shouldNoIndex && <meta name="robots" content="noindex, follow" />}
         
         {/* Open Graph tags */}
         <meta property="og:title" content={seoTitle} />

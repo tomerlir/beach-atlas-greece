@@ -8,6 +8,10 @@ Allow: /about
 Allow: /*/
 Allow: /sitemap.xml
 
+# Block URLs with query parameters (filters, pagination, search)
+# These should only use canonical tags to point to the clean URL
+Disallow: /*?*
+
 # Disallow admin and private areas
 Disallow: /admin/
 Disallow: /admin/login

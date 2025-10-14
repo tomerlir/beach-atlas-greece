@@ -194,6 +194,10 @@ const Area = () => {
     ? `Discover the best beaches in ${areaName}, Greece. Find organized and unorganized beaches with detailed information about amenities, parking, and conditions.`
     : 'The requested area could not be found.';
   const canonicalUrl = areaName ? `https://beachesofgreece.com/${areaSlug}` : undefined;
+  
+  // Prevent indexing of filtered/paginated URLs (canonical points to clean URL)
+  const hasQueryParams = window.location.search.length > 0;
+  const shouldNoIndex = hasQueryParams;
 
   // Generate JSON-LD structured data
   const jsonLd = areaName ? {
@@ -244,6 +248,9 @@ const Area = () => {
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />
         {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+        
+        {/* Prevent indexing of filtered/paginated URLs */}
+        {shouldNoIndex && <meta name="robots" content="noindex, follow" />}
         
         {/* Open Graph tags */}
         <meta property="og:title" content={seoTitle} />

@@ -1,0 +1,10 @@
+# Cloudflare Pages / Generic Redirects
+# Force HTTPS and non-WWW
+
+# HTTP to HTTPS redirects
+http://beachesofgreece.com/*  https://beachesofgreece.com/:splat  301
+http://www.beachesofgreece.com/*  https://beachesofgreece.com/:splat  301
+
+# WWW to non-WWW redirect
+https://www.beachesofgreece.com/*  https://beachesofgreece.com/:splat  301
+

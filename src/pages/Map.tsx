@@ -137,6 +137,10 @@ const MapPage = () => {
   const seoTitle = "Map of Greek Beaches - Explore on an Interactive Map";
   const seoDescription = "Explore Greek beaches on an interactive map. Use powerful search and filters to find exactly what you want, then zoom to matching beaches automatically.";
   const canonicalUrl = "https://beachesofgreece.com/map";
+  
+  // Prevent indexing of filtered URLs (canonical points to clean URL)
+  const hasQueryParams = window.location.search.length > 0;
+  const shouldNoIndex = hasQueryParams;
 
   const mapHeightClass = "h-[60vh] md:h-[70vh] lg:h-[75vh]";
 
@@ -146,6 +150,9 @@ const MapPage = () => {
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />
         <link rel="canonical" href={canonicalUrl} />
+        
+        {/* Prevent indexing of filtered URLs */}
+        {shouldNoIndex && <meta name="robots" content="noindex, follow" />}
       </Helmet>
 
       <div className="min-h-screen bg-background">
