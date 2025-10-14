@@ -54,6 +54,8 @@ export function buildExplanation(input: ExplanationInput): Explanation {
 
   const hasActiveFilters = Boolean(
     filters.search ||
+    filters.location ||
+    (filters.locations && filters.locations.length > 0) ||
     (filters.organized && filters.organized.length > 0) ||
     filters.blueFlag ||
     (filters.parking && filters.parking.length > 0) ||

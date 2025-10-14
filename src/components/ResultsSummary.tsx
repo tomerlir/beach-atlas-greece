@@ -67,6 +67,8 @@ export function generateResultsExplanation(
     userLocation: GeolocationPosition | null
 ): string[] {
     const hasActiveFilters = filters.search ||
+        filters.location ||
+        (filters.locations && filters.locations.length > 0) ||
         filters.organized.length > 0 ||
         filters.blueFlag ||
         filters.parking.length > 0 ||
@@ -237,6 +239,8 @@ export default function ResultsSummary({
         return null;
     }
     const hasActiveFilters = filters.search ||
+        filters.location ||
+        (filters.locations && filters.locations.length > 0) ||
         filters.organized.length > 0 ||
         filters.blueFlag ||
         filters.parking.length > 0 ||

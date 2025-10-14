@@ -68,6 +68,7 @@ export default function EnhancedSearchBar({
     const wasNonEmpty = prevSearchInputRef.current.trim().length > 0;
     const isNowEmpty = searchInput.trim().length === 0;
     const hasActiveFiltersOrSearch = filters.search || filters.originalQuery || 
+      filters.location || (filters.locations && filters.locations.length > 0) ||
       filters.type.length > 0 || filters.waveConditions.length > 0 ||
       filters.parking.length > 0 || filters.amenities.length > 0 ||
       filters.organized.length > 0 || filters.blueFlag;
@@ -113,6 +114,29 @@ export default function EnhancedSearchBar({
   // Handle search submission - ALWAYS use NLQ extraction (simpler and more robust)
   const handleSearchSubmit = async () => {
     const trimmedInput = searchInput.trim();
+    
+    // If input is empty, clear all filters
+    if (trimmedInput === '') {
+      if (onClearAll) {
+        onClearAll();
+      } else {
+        onFiltersChange({ 
+          search: '', 
+          originalQuery: undefined,
+          location: undefined,
+          locations: undefined,
+          type: [],
+          waveConditions: [],
+          parking: [],
+          amenities: [],
+          organized: [],
+          blueFlag: false,
+          page: 1 
+        });
+      }
+      onNaturalLanguageSearch?.(false); // Reset NL search flag
+      return;
+    }
     
     // Early return if search hasn't changed
     if (trimmedInput === filters.search && !filters.originalQuery) {

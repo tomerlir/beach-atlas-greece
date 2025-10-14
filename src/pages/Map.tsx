@@ -223,7 +223,12 @@ const MapPage = () => {
                 bounds={GREECE_BOUNDS}
               >
                 <InvalidateSizeOnMount />
+                {/* Satellite imagery base layer */}
                 <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}" />
+                {/* Roads and transportation overlay */}
+                {/* <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}" /> */}
+                {/* Borders, place names, and labels overlay */}
+                <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}" />
 
                 <FitBoundsOnData beaches={filteredBeaches as Beach[]} fallbackBounds={GREECE_BOUNDS} />
 

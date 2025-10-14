@@ -43,6 +43,8 @@ export default function EmptyState({
   // Check if any filters are active (excluding nearMe as it's not a traditional filter)
   const hasActiveFilters = 
     filters.search ||
+    filters.location ||
+    (filters.locations && filters.locations.length > 0) ||
     filters.organized.length > 0 ||
     filters.blueFlag ||
     filters.parking.length > 0 ||
