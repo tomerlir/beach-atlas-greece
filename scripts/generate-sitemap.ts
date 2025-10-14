@@ -108,6 +108,20 @@ function generateSitemap(beaches: Beach[], areas: Area[]): string {
   </url>
   
   <url>
+    <loc>${escapeXml(`${SITE_URL}/areas`)}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <url>
+    <loc>${escapeXml(`${SITE_URL}/map`)}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>${escapeXml(`${SITE_URL}/ontology`)}</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>monthly</changefreq>
@@ -214,7 +228,7 @@ async function main() {
     console.log(`✅ Sitemap generated successfully!`);
     console.log(`📁 Location: ${sitemapPath}`);
     console.log(`🔗 URL: ${SITE_URL}/sitemap.xml`);
-    console.log(`📄 Contains ${beaches.length + areas.length + 3} URLs (${beaches.length} beaches + ${areas.length} areas + 3 main pages)`);
+    console.log(`📄 Contains ${beaches.length + areas.length + 5} URLs (${beaches.length} beaches + ${areas.length} areas + 5 main pages)`);
 
     // Validate XML structure
     const urlCount = (sitemapXml.match(/<url>/g) || []).length;
