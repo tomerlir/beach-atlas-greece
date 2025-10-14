@@ -199,13 +199,15 @@ const Area = () => {
   const hasQueryParams = window.location.search.length > 0;
   const shouldNoIndex = hasQueryParams;
 
-  // Generate JSON-LD structured data
+  // Generate JSON-LD structured data with freshness signals
   const jsonLd = areaName ? {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": `Beaches in ${areaName}, Greece | Beach Atlas`,
     "description": area?.description || `Discover the best beaches in ${areaName}, Greece. Find organized and unorganized beaches with detailed information about amenities, parking, and conditions.`,
     "url": canonicalUrl,
+    "datePublished": area?.created_at ? new Date(area.created_at).toISOString().split('T')[0] : "2024-01-01",
+    "dateModified": area?.updated_at ? new Date(area.updated_at).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
     "mainEntity": {
       "@type": "ItemList",
       "name": `Beaches in ${areaName}`,

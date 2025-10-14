@@ -3,14 +3,13 @@ import Footer from "@/components/Footer";
 import { CONTACT_EMAIL } from "@/lib/constants";
 import { Helmet } from "react-helmet-async";
 import { BreadcrumbsWithJsonLd } from "@/components/breadcrumbs/BreadcrumbsWithJsonLd";
+import OrganizationSchema from "@/components/OrganizationSchema";
 import { getAmenitiesByCategory } from "@/lib/amenities";
 import { 
   MapPin, 
   Waves, 
   Car, 
   Shield, 
-  Star, 
-  Camera, 
   Clock,
   CheckCircle,
   AlertCircle,
@@ -28,13 +27,124 @@ const Ontology = () => {
     day: 'numeric' 
   });
 
-  // Generate JSON-LD structured data
+  // Generate JSON-LD structured data for WebPage
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": seoTitle,
     "description": seoDescription,
     "url": canonicalUrl,
+    "datePublished": "2024-01-01",
+    "dateModified": new Date().toISOString().split('T')[0],
+  };
+
+  // Dataset Schema - Critical for AI engines to understand our structured data
+  const datasetSchema = {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "name": "Greek Beaches Comprehensive Database",
+    "description": "A comprehensive, structured database of beaches across Greece with verified information about location, amenities, accessibility, conditions, and environmental certifications. Each beach entry includes coordinates, type (sandy/pebbly/mixed), wave conditions, parking availability, organized/unorganized status, Blue Flag certification, and detailed amenities.",
+    "url": "https://beachesofgreece.com/ontology",
+    "license": "https://creativecommons.org/licenses/by-nc/4.0/",
+    "keywords": [
+      "Greek beaches",
+      "Greece",
+      "beach database",
+      "Blue Flag beaches",
+      "beach amenities",
+      "beach conditions",
+      "coastal tourism",
+      "travel data",
+      "geographic data",
+      "beach accessibility",
+      "beach types",
+      "wave conditions",
+      "parking facilities",
+      "organized beaches",
+      "Greek islands",
+      "mainland Greece"
+    ],
+    "creator": {
+      "@type": "Organization",
+      "name": "Beaches of Greece",
+      "url": "https://beachesofgreece.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Beaches of Greece",
+      "url": "https://beachesofgreece.com"
+    },
+    "datePublished": "2024-01-01",
+    "dateModified": new Date().toISOString().split('T')[0],
+    "spatialCoverage": {
+      "@type": "Place",
+      "name": "Greece",
+      "geo": {
+        "@type": "GeoShape",
+        "box": "34.8 19.3 41.7 29.6"
+      }
+    },
+    "temporalCoverage": "2024/..",
+    "distribution": [
+      {
+        "@type": "DataDownload",
+        "encodingFormat": "application/json",
+        "contentUrl": "https://beachesofgreece.com/api/beaches"
+      }
+    ],
+    "variableMeasured": [
+      {
+        "@type": "PropertyValue",
+        "name": "Beach Type",
+        "description": "Surface type of the beach",
+        "value": "SANDY, PEBBLY, MIXED, OTHER"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Wave Conditions",
+        "description": "Typical wave conditions during summer season",
+        "value": "CALM, MODERATE, WAVY, SURFABLE"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Parking Availability",
+        "description": "Parking facilities near the beach",
+        "value": "NONE, ROADSIDE, SMALL_LOT, LARGE_LOT"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Organization Status",
+        "description": "Whether the beach has commercial amenities and services",
+        "value": "ORGANIZED, UNORGANIZED"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Blue Flag Certification",
+        "description": "International eco-certification status",
+        "value": "true/false with certification year"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Amenities",
+        "description": "Available facilities and services",
+        "value": "toilets, showers, umbrellas, sunbeds, beach_bar, restaurant, lifeguard, changing_rooms, playground, water_sports, wheelchair_access, accessible_toilets, beach_wheelchair, dogs_allowed"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Geographic Coordinates",
+        "description": "Precise location coordinates",
+        "value": "latitude, longitude"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Verification Date",
+        "description": "Date when beach information was last verified",
+        "value": "ISO 8601 date"
+      }
+    ],
+    "measurementTechnique": "Data collected through on-site visits, official tourism boards, environmental agencies, and community feedback. All entries include verification timestamps and source attribution.",
+    "isAccessibleForFree": true,
+    "inLanguage": ["en", "el"]
   };
 
   // Get amenities by category
@@ -64,11 +174,19 @@ const Ontology = () => {
         <meta name="twitter:description" content={seoDescription} />
         <meta name="twitter:image" content={`${import.meta.env.VITE_SITE_URL || 'https://beachesofgreece.com'}/hero-background.png`} />
         
-        {/* JSON-LD structured data */}
+        {/* JSON-LD structured data - WebPage */}
         <script type="application/ld+json">
           {JSON.stringify(jsonLd)}
         </script>
+        
+        {/* JSON-LD structured data - Dataset for AI engines */}
+        <script type="application/ld+json">
+          {JSON.stringify(datasetSchema)}
+        </script>
       </Helmet>
+      
+      {/* Organization Schema for AI engines */}
+      <OrganizationSchema />
 
       <div className="min-h-screen bg-background">
         <Header />

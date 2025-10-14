@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { CONTACT_EMAIL } from "@/lib/constants";
 import { Helmet } from "react-helmet-async";
 import { BreadcrumbsWithJsonLd } from "@/components/breadcrumbs/BreadcrumbsWithJsonLd";
+import OrganizationSchema from "@/components/OrganizationSchema";
 
 const About = () => {
   
@@ -46,6 +47,9 @@ const About = () => {
           {JSON.stringify(jsonLd)}
         </script>
       </Helmet>
+      
+      {/* Organization Schema for AI engines */}
+      <OrganizationSchema />
 
       <div className="min-h-screen bg-background">
         <Header />

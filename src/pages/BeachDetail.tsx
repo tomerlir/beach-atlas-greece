@@ -298,13 +298,15 @@ const BeachDetail = () => {
   const seoDescription = beach.description || `Discover ${beach.name} in ${beach.area}, Greece. ${beach.organized ? 'Organized' : 'Unorganized'} beach with ${beach.type.toLowerCase()} sand and ${beach.wave_conditions.toLowerCase()} conditions.`;
   const canonicalUrl = `https://beachesofgreece.com/${generateAreaSlug(beach.area)}/${beach.slug}`;
 
-  // Generate JSON-LD structured data
+  // Generate JSON-LD structured data with freshness signals
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": `${beach.name} - ${beach.area} | Beach Atlas`,
     "description": beach.description || `Discover ${beach.name} in ${beach.area}, Greece`,
     "url": canonicalUrl,
+    "datePublished": beach.created_at ? new Date(beach.created_at).toISOString().split('T')[0] : "2024-01-01",
+    "dateModified": beach.updated_at ? new Date(beach.updated_at).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
     "mainEntity": {
       "@type": "TouristAttraction",
       "@id": canonicalUrl,
@@ -323,6 +325,7 @@ const BeachDetail = () => {
       },
       "isAccessibleForFree": true,
       "image": beach.photo_url ? [beach.photo_url] : undefined,
+      "dateModified": beach.updated_at ? new Date(beach.updated_at).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
       "amenityFeature": beach.amenities?.map(amenity => ({
         "@type": "LocationFeatureSpecification",
         "name": amenity,

@@ -67,6 +67,85 @@ Allow: /
 Allow: /about
 Allow: /*/
 
+# AI Search Engines & LLM Crawlers
+# These bots power AI assistants and need access to provide accurate answers
+User-agent: GPTBot
+Allow: /
+Allow: /about
+Allow: /areas
+Allow: /*/
+Crawl-delay: 1
+
+User-agent: ChatGPT-User
+Allow: /
+Allow: /about
+Allow: /areas
+Allow: /*/
+Crawl-delay: 1
+
+User-agent: CCBot
+Allow: /
+Allow: /about
+Allow: /areas
+Allow: /*/
+Crawl-delay: 1
+
+User-agent: Claude-Web
+Allow: /
+Allow: /about
+Allow: /areas
+Allow: /*/
+Crawl-delay: 1
+
+User-agent: anthropic-ai
+Allow: /
+Allow: /about
+Allow: /areas
+Allow: /*/
+Crawl-delay: 1
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /about
+Allow: /areas
+Allow: /*/
+Crawl-delay: 1
+
+User-agent: Amazonbot
+Allow: /
+Allow: /about
+Allow: /areas
+Allow: /*/
+Crawl-delay: 1
+
+User-agent: Applebot-Extended
+Allow: /
+Allow: /about
+Allow: /areas
+Allow: /*/
+Crawl-delay: 1
+
+User-agent: Omgilibot
+Allow: /
+Allow: /about
+Allow: /areas
+Allow: /*/
+Crawl-delay: 1
+
+User-agent: FacebookBot
+Allow: /
+Allow: /about
+Allow: /areas
+Allow: /*/
+Crawl-delay: 1
+
+User-agent: Google-Extended
+Allow: /
+Allow: /about
+Allow: /areas
+Allow: /*/
+Crawl-delay: 1
+
 # Block aggressive crawlers
 User-agent: AhrefsBot
 Disallow: /

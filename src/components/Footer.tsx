@@ -12,16 +12,22 @@ const Footer = () => {
             About
           </a>
           <a 
+            href="/faq" 
+            className="text-muted-foreground hover:text-primary transition-colors"
+          >
+            FAQ
+          </a>
+          <a 
+            href="/guide" 
+            className="text-muted-foreground hover:text-primary transition-colors"
+          >
+            Guide
+          </a>
+          <a 
             href="/ontology" 
             className="text-muted-foreground hover:text-primary transition-colors"
           >
             Ontology
-          </a>
-          <a 
-            href={`mailto:${CONTACT_EMAIL}`} 
-            className="text-muted-foreground hover:text-primary transition-colors"
-          >
-            Feedback
           </a>
         </div>
         <p className="text-muted-foreground text-sm">

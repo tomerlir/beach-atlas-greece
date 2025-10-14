@@ -25,6 +25,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import { Helmet } from "react-helmet-async";
 import { generateAreaSlug } from "@/lib/utils";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import OrganizationSchema from "@/components/OrganizationSchema";
 
 const BEACHES_PER_PAGE = 9;
 
@@ -160,13 +161,15 @@ const Index = () => {
   const hasQueryParams = window.location.search.length > 0;
   const shouldNoIndex = hasQueryParams;
 
-  // Generate JSON-LD structured data
+  // Generate JSON-LD structured data with freshness signals
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": seoTitle,
     "description": seoDescription,
     "url": canonicalUrl,
+    "datePublished": "2024-01-01",
+    "dateModified": new Date().toISOString().split('T')[0],
     "mainEntity": {
       "@type": "ItemList",
       "name": "Greek Beaches",
@@ -230,6 +233,9 @@ const Index = () => {
           {JSON.stringify(jsonLd)}
         </script>
       </Helmet>
+      
+      {/* Organization Schema for AI engines */}
+      <OrganizationSchema />
 
       <div className="min-h-screen bg-background">
         <Header />

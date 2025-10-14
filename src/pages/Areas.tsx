@@ -8,9 +8,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import OptimizedImage from "@/components/OptimizedImage";
 import PhotoAttribution from "@/components/PhotoAttribution";
-import { CONTACT_EMAIL } from "@/lib/constants";
 import heroImage from "@/assets/area-hero.png";
 import { BreadcrumbsWithJsonLd } from "@/components/breadcrumbs/BreadcrumbsWithJsonLd";
+import OrganizationSchema from "@/components/OrganizationSchema";
 
 const Areas = () => {
   const { data: areas = [], isLoading, error } = useAreasWithBeachCount();
@@ -71,6 +71,9 @@ const Areas = () => {
           {JSON.stringify(jsonLd)}
         </script>
       </Helmet>
+      
+      {/* Organization Schema for AI engines */}
+      <OrganizationSchema />
 
       <div className="min-h-screen bg-background">
         <Header />
