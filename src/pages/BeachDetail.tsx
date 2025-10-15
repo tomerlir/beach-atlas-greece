@@ -19,7 +19,6 @@ import {
   Clock,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/hooks/use-toast";
@@ -27,7 +26,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Tables } from "@/integrations/supabase/types";
-import { getAmenityConfig, getAmenitiesByCategory } from "@/lib/amenities";
+import { getAmenityConfig } from "@/lib/amenities";
 import OptimizedImage from "@/components/OptimizedImage";
 import PhotoAttribution from "@/components/PhotoAttribution";
 import { ShareDialog } from "@/components/ShareDialog";
@@ -40,6 +39,7 @@ import { formatRelativeTime } from "@/lib/utils";
 import { fetchMoreInArea } from "@/lib/fetchMoreInArea";
 import MoreInArea from "@/components/MoreInArea";
 import { analytics } from "@/lib/analytics";
+import { createBeachViewEvent, createStartDirectionsEvent, createShareBeachEvent } from "@/lib/analyticsEvents";
 
 type Beach = Tables<'beaches'>;
 
@@ -113,6 +113,13 @@ const BeachDetail = () => {
     gcTime: 10 * 60 * 1000, // 10 minutes (renamed from cacheTime in newer versions)
   });
 
+  // Track beach view after data is loaded
+  useEffect(() => {
+    if (beach) {
+      analytics.event('beach_view', createBeachViewEvent(beach.id) as any);
+    }
+  }, [beach]);
+
   // Fetch siblings in same area, excluding current beach
   const { data: siblings = [] } = useQuery({
     queryKey: ["more-in-area", area, beachName],
@@ -157,7 +164,10 @@ const BeachDetail = () => {
   // Action handlers
   const handleOpenInMaps = useCallback(() => {
     if (!beach) return;
-    analytics.event('start_directions', { beach_id: beach.id });
+    
+    // Track directions intent and CBM
+    analytics.event('start_directions', createStartDirectionsEvent(beach.id, 'detail') as any);
+    analytics.cbm(beach.id, 'directions');
     
     // Open maps directly based on device (iOS → Apple Maps, Android/Desktop → Google Maps)
     openInMaps({
@@ -171,7 +181,9 @@ const BeachDetail = () => {
   const handleShare = useCallback(async () => {
     if (!beach) return;
     
-    analytics.event('share_beach', { beach_id: beach.id });
+    // Track share intent and CBM
+    analytics.event('share_beach', createShareBeachEvent(beach.id, 'webshare') as any);
+    analytics.cbm(beach.id, 'share');
     
     const shareData = {
       title: beach.name,

@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FilterState } from '@/hooks/useUrlState';
 import { analytics } from '@/lib/analytics';
+import { createSearchSubmitEvent } from '@/lib/analyticsEvents';
 import { extractFromNaturalLanguage, applyExtractedFilters, applyExtractedFiltersForArea, doesPlaceMatchArea, setKnownPlaces } from '@/lib/naturalLanguageSearch';
 import { useAreas } from '@/hooks/useAreas';
 
@@ -180,23 +181,21 @@ export default function EnhancedSearchBar({
       }
       
       // Track analytics with detailed info
-      analytics.event('search_submit', { 
-        q_length: trimmedInput.length,
-        extracted_filters: Object.keys(extracted.filters).length,
-        has_place: !!extracted.place,
-        cleaned_term_length: extracted.cleanedSearchTerm.length,
-        is_nlq: hasExtractedFilters,
-        context: areaName ? 'area' : 'homepage',
-        // Detailed filter breakdown for NLQ analysis
-        filters_extracted: {
+      const searchEvent = createSearchSubmitEvent(
+        trimmedInput,
+        {
           type: extracted.filters.type || [],
           wave_conditions: extracted.filters.waveConditions || [],
           parking: extracted.filters.parking || [],
           amenities: extracted.filters.amenities || [],
           blue_flag: extracted.filters.blueFlag || false,
-          place: extracted.place || null
-        }
-      });
+          place: extracted.place || null,
+          cleaned_term: extracted.cleanedSearchTerm,
+        },
+        areaName ? 'area' : 'homepage'
+      );
+      
+      analytics.event('search_submit', searchEvent as any);
     } catch (error) {
       console.error('Search extraction failed:', error);
       // Fallback to basic search

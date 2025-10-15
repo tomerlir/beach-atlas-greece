@@ -94,10 +94,26 @@ export default {
             height: "0",
           },
         },
+        // Slide up with a subtle spring-like overshoot for banners/modals
+        "banner-slide-up": {
+          "0%": {
+            opacity: "0",
+            transform: "translateY(24px)",
+          },
+          "70%": {
+            opacity: "1",
+            transform: "translateY(-2px)",
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translateY(0)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "banner-slide-up": "banner-slide-up 0.2s ease-out both",
       },
     },
   },

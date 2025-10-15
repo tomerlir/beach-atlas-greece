@@ -16,6 +16,8 @@ import { Helmet } from "react-helmet-async";
 import heroImage from "@/assets/hero-background.png";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import ResultsSummary from "@/components/ResultsSummary";
+import { analytics } from "@/lib/analytics";
+import { createMapOpenEvent, createMapInteractEvent, createMapPinOpenEvent } from "@/lib/analyticsEvents";
 
 // Leaflet + React-Leaflet
 import "leaflet/dist/leaflet.css";
@@ -104,11 +106,42 @@ function InvalidateSizeOnMount() {
   return null;
 }
 
+function MapEventTracker() {
+  const map = useMap();
+  
+  useEffect(() => {
+    if (!map) return;
+
+    const handleMoveEnd = () => {
+      analytics.event('map_interact', createMapInteractEvent('pan'));
+    };
+
+    const handleZoomEnd = () => {
+      analytics.event('map_interact', createMapInteractEvent('zoom'));
+    };
+
+    map.on('moveend', handleMoveEnd);
+    map.on('zoomend', handleZoomEnd);
+
+    return () => {
+      map.off('moveend', handleMoveEnd);
+      map.off('zoomend', handleZoomEnd);
+    };
+  }, [map]);
+
+  return null;
+}
+
 const MapPage = () => {
   const isMobile = useIsMobile();
   const { filters, updateFilters, resetFilters } = useUrlState();
   const { location, isLoading: isLoadingLocation, getCurrentLocation, permission: locationPermission, error: locationError } = useGeolocation();
   // All filters drawer temporarily disabled on Map page
+
+  // Track map open event
+  useEffect(() => {
+    analytics.event('map_open', createMapOpenEvent('nav'));
+  }, []);
 
   const { data: beaches = [] } = useQuery({
     queryKey: ["beaches"],
@@ -238,12 +271,17 @@ const MapPage = () => {
                 <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}" />
 
                 <FitBoundsOnData beaches={filteredBeaches as Beach[]} fallbackBounds={GREECE_BOUNDS} />
+                <MapEventTracker />
 
                 {filteredBeaches
                   .filter((b) => b.latitude != null && b.longitude != null)
                   .map((b) => (
                   <Marker key={b.id} position={[b.latitude as number, b.longitude as number]}>
-                    <Popup>
+                    <Popup eventHandlers={{
+                      popupopen: () => {
+                        analytics.event('map_pin_open', createMapPinOpenEvent(b.id));
+                      }
+                    }}>
                       <div className="max-w-[340px]">
                         <BeachCard
                           beach={b as Beach}

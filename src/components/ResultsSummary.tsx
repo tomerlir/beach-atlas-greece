@@ -2,6 +2,9 @@ import { MapPin } from 'lucide-react';
 import { FilterState } from '@/hooks/useUrlState';
 import { getAmenityLabel } from '@/lib/amenities';
 import { buildExplanation } from '@/lib/explanations/explanationEngine';
+import { analytics } from '@/lib/analytics';
+import { createResultsViewEvent } from '@/lib/analyticsEvents';
+import { useEffect } from 'react';
 
 interface ResultsSummaryProps {
     resultCount: number;
@@ -234,6 +237,14 @@ export default function ResultsSummary({
     onClearAllFilters,
     isLoading = false,
 }: ResultsSummaryProps) {
+    // Track results view
+    useEffect(() => {
+        if (resultCount > 0) {
+            const isRelaxed = filters.search && resultCount < 10; // Simple heuristic for relaxed results
+            analytics.event('results_view', createResultsViewEvent(resultCount, isRelaxed) as any);
+        }
+    }, [resultCount, filters.search]);
+
     // Do not render in EmptyState: that component already conveys the explanation
     if (!isLoading && resultCount === 0) {
         return null;

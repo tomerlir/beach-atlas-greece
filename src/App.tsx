@@ -1,4 +1,5 @@
 import { Toaster } from "@/components/ui/toaster";
+import { useState } from "react";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -12,6 +13,7 @@ import About from "./pages/About";
 import Areas from "./pages/Areas";
 import Ontology from "./pages/Ontology";
 import Guide from "./pages/Guide";
+import Privacy from "./pages/Privacy";
 import FAQ from "./pages/FAQ";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -30,16 +32,28 @@ import MapPage from "./pages/Map";
 import { useServiceWorker } from "@/hooks/useServiceWorker";
 import ScrollToTop from "@/components/ScrollToTop";
 import AcceptInvite from "./pages/admin/AcceptInvite";
+import ConsentBanner from "@/components/ConsentBanner";
+import AnalyticsInspector from "@/lib/AnalyticsInspector";
+import AnalyticsRouter from "@/components/AnalyticsRouter";
 
 const queryClient = new QueryClient();
 
 const AppContent = () => {
   // Register service worker for caching and offline support
   useServiceWorker();
+  const [inspectorVisible, setInspectorVisible] = useState(false);
 
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <AnalyticsRouter />
+      <ConsentBanner />
+      {!import.meta.env.PROD && (
+        <AnalyticsInspector
+          isVisible={inspectorVisible}
+          onToggle={() => setInspectorVisible((v) => !v)}
+        />
+      )}
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/about" element={<About />} />
@@ -47,6 +61,7 @@ const AppContent = () => {
         <Route path="/map" element={<MapPage />} />
         <Route path="/ontology" element={<Ontology />} />
         <Route path="/guide" element={<Guide />} />
+        <Route path="/privacy" element={<Privacy />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/:areaSlug" element={<Area />} />
         <Route path="/:area/:beach-name" element={<BeachDetail />} />

@@ -1,23 +1,10 @@
-import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 import {
   MapPin,
-  Filter,
-  ChevronDown,
   AlertCircle,
-  CheckCircle,
-  Car,
   Flag,
-  Sun,
-  Umbrella,
-  Waves,
-  X,
-  Plus,
-  Lock,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FilterState } from '@/hooks/useUrlState';
@@ -26,9 +13,8 @@ import ParkingDropdown from '@/components/ParkingDropdown';
 import WaveConditionsDropdown from '@/components/WaveConditionsDropdown';
 import BeachTypeDropdown from '@/components/BeachTypeDropdown';
 import OrganizedDropdown from '@/components/OrganizedDropdown';
-import SortDropdown from '@/components/SortDropdown';
-import { getAmenityLabel } from '@/lib/amenities';
 import { analytics } from '@/lib/analytics';
+import { createFilterApplyEvent, createFilterClearEvent } from '@/lib/analyticsEvents';
 
 interface FilterBarProps {
   filters: FilterState;
@@ -65,7 +51,11 @@ export default function FilterBar({
 
 
   const handleBlueFlagToggle = useCallback((checked: boolean) => {
-    analytics.event(checked ? 'filter_apply' : 'filter_clear', { name: 'blue_flag', value: String(checked) });
+    if (checked) {
+      analytics.event('filter_apply', createFilterApplyEvent('blue_flag', String(checked), 0) as any);
+    } else {
+      analytics.event('filter_clear', createFilterClearEvent('blue_flag') as any);
+    }
     onFiltersChange({ blueFlag: checked, page: 1 });
   }, [onFiltersChange]);
 
@@ -78,7 +68,7 @@ export default function FilterBar({
     // When disabling Near me, revert to A->Z sorting
     const updates: Partial<FilterState> = { nearMe: checked, page: 1 };
     if (checked) {
-      analytics.event('near_me_enable', { granted: true });
+      analytics.event('filter_apply', createFilterApplyEvent('near_me', 'true', 0) as any);
       updates.sort = 'distance.asc';
     } else {
       // When turning off near me, revert to A->Z sorting

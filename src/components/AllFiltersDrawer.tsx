@@ -1,10 +1,9 @@
-import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { MapPin, Sun, CheckCircle, Car, Flag, X, Search, Check, Waves, Mountain } from 'lucide-react';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
-import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { useDebounce } from '@/hooks/useDebounce';
 import { useDebouncedSearch } from '@/hooks/useDebouncedSearch';
@@ -13,6 +12,7 @@ import { useDraftState } from '@/hooks/useDraftState';
 import { FilterState } from '@/hooks/useUrlState';
 import { getAllAmenities } from '@/lib/amenities';
 import { analytics } from '@/lib/analytics';
+import { createFilterApplyEvent, createFilterClearEvent } from '@/lib/analyticsEvents';
 
 interface AllFiltersDrawerProps {
   isOpen: boolean;
@@ -96,19 +96,19 @@ export default function AllFiltersDrawer({
     onApplyFilters(draftFilters);
     // Track applied filters with coarse names and values; include live count as results
     if (draftFilters.blueFlag !== filters.blueFlag) {
-      analytics.event('filter_apply', { name: 'blue_flag', value: String(draftFilters.blueFlag), results: liveCount });
+      analytics.event('filter_apply', createFilterApplyEvent('blue_flag', String(draftFilters.blueFlag), liveCount as number) as any);
     }
     if (draftFilters.organized.join(',') !== filters.organized.join(',')) {
-      analytics.event('filter_apply', { name: 'type', value: draftFilters.organized.join(','), results: liveCount });
+      analytics.event('filter_apply', createFilterApplyEvent('type', draftFilters.organized.join(','), liveCount as number) as any);
     }
     if (draftFilters.parking.join(',') !== filters.parking.join(',')) {
-      analytics.event('filter_apply', { name: 'parking', value: draftFilters.parking.join(','), results: liveCount });
+      analytics.event('filter_apply', createFilterApplyEvent('parking', draftFilters.parking.join(','), liveCount as number) as any);
     }
     if (draftFilters.waveConditions.join(',') !== filters.waveConditions.join(',')) {
-      analytics.event('filter_apply', { name: 'wave', value: draftFilters.waveConditions.join(','), results: liveCount });
+      analytics.event('filter_apply', createFilterApplyEvent('wave', draftFilters.waveConditions.join(','), liveCount as number) as any);
     }
     if (draftFilters.amenities.join(',') !== filters.amenities.join(',')) {
-      analytics.event('filter_apply', { name: 'amenities', value: draftFilters.amenities.join(','), results: liveCount });
+      analytics.event('filter_apply', createFilterApplyEvent('amenities', draftFilters.amenities.join(','), liveCount as number) as any);
     }
     onClose();
   };
@@ -130,7 +130,7 @@ export default function AllFiltersDrawer({
       page: 1,
       nearMe: false,
     });
-    analytics.event('filter_clear', { name: 'all' });
+    analytics.event('filter_clear', createFilterClearEvent('all') as any);
   };
 
   const toggleAmenity = (amenityId: string) => {

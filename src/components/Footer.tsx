@@ -29,6 +29,24 @@ const Footer = () => {
           >
             Ontology
           </a>
+          <a 
+            href="/privacy" 
+            className="text-muted-foreground hover:text-primary transition-colors"
+          >
+            Privacy policy
+          </a>
+          <button
+            type="button"
+            onClick={() => {
+              try {
+                window.dispatchEvent(new CustomEvent('open-privacy-preferences'));
+              } catch {}
+            }}
+            className="text-muted-foreground hover:text-primary transition-colors underline-offset-4 hover:underline"
+            aria-label="Open privacy preferences"
+          >
+            Privacy preferences
+          </button>
         </div>
         <p className="text-muted-foreground text-sm">
           © 2025 Beaches of Greece . Discover the beauty of Greece.
