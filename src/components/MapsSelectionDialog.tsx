@@ -54,13 +54,13 @@ export const MapsSelectionDialog = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md" aria-describedby="maps-dialog-desc">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <MapPin className="h-5 w-5" />
             Open {beachName} in Maps
           </DialogTitle>
-          <DialogDescription>
+          <DialogDescription id="maps-dialog-desc">
             Choose your preferred mapping application to view the beach location.
           </DialogDescription>
         </DialogHeader>

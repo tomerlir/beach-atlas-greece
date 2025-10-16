@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -53,15 +53,15 @@ export function ShareDialog({ isOpen, onClose, url, title, description }: ShareD
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md" aria-describedby="share-dialog-desc">
         <DialogHeader>
           <DialogTitle>Share this beach</DialogTitle>
+          <DialogDescription id="share-dialog-desc">
+            Copy the link to share this beach with others.
+          </DialogDescription>
         </DialogHeader>
         
         <div className="py-4">
-          <p className="text-sm text-muted-foreground mb-4">
-            Copy the link to share this beach with others.
-          </p>
           
           {/* Copy Link - Primary action */}
           <Button

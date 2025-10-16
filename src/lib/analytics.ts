@@ -105,10 +105,8 @@ class AnalyticsSDK {
       console.groupEnd();
     }
     
-    // Only track initial page load if consent is already accepted
-    if (isBrowser && this.consent === 'accepted') {
-      this.trackInitialPageLoad();
-    }
+    // Don't track initial page load here - let setConsent handle it
+    // This prevents double tracking when consent is accepted
   }
 
   private trackInitialPageLoad() {
@@ -131,12 +129,18 @@ class AnalyticsSDK {
     // Notify callbacks
     this.consentCallbacks.forEach(cb => cb(state));
     
-    // If consent was just accepted, load Umami script and flush the queue
+    // If consent was just accepted, load Umami script and enable tracking
     if (previousState !== 'accepted' && state === 'accepted') {
       this.loadUmamiScript();
       // Track the initial pageview now that consent is given
       this.trackInitialPageLoad();
       this.flushEventQueue();
+    }
+    
+    // If consent was just revoked, disable Umami tracking and clean up
+    if (previousState === 'accepted' && state === 'rejected') {
+      this.disableUmamiTracking();
+      this.cleanupUmamiScript();
     }
     
     if (this.debug) {
@@ -544,29 +548,107 @@ class AnalyticsSDK {
     
     this.umamiScriptLoaded = true;
     
-    // Create and load the Umami script
-    const script = document.createElement('script');
-    script.src = 'https://cloud.umami.is/script.js';
-    script.setAttribute('data-website-id', 'b3e6e36a-8334-4086-8a80-d3c894414392');
-    script.setAttribute('data-domains', 'beachesofgreece.com');
-    script.setAttribute('data-auto-track', 'false');
-    script.defer = true;
-    
-    script.onload = () => {
+    try {
+      // Create and load the Umami script
+      const script = document.createElement('script');
+      script.src = 'https://cloud.umami.is/script.js';
+      script.setAttribute('data-website-id', 'b3e6e36a-8334-4086-8a80-d3c894414392');
+      script.setAttribute('data-domains', 'beachesofgreece.com');
+      script.setAttribute('data-auto-track', 'false');
+      script.defer = true;
+      
+      // Store script reference for cleanup
+      (script as any).__umami_script = true;
+      
+      script.onload = () => {
+        if (this.debug) {
+          console.log('📊 Umami script loaded');
+        }
+        this.setupUmamiReadyWatcher();
+        // Enable tracking if consent is still accepted
+        if (this.consent === 'accepted') {
+          this.enableUmamiTracking();
+        }
+      };
+      
+      script.onerror = (error) => {
+        if (this.debug) {
+          console.error('❌ Failed to load Umami script:', error);
+        }
+        this.umamiScriptLoaded = false;
+        // Reset consent to unknown on script load failure
+        this.consent = 'unknown';
+        localStorage.removeItem('analytics_consent');
+      };
+      
+      document.head.appendChild(script);
+    } catch (error) {
       if (this.debug) {
-        console.log('📊 Umami script loaded');
-      }
-      this.setupUmamiReadyWatcher();
-    };
-    
-    script.onerror = () => {
-      if (this.debug) {
-        console.error('❌ Failed to load Umami script');
+        console.error('❌ Error creating Umami script:', error);
       }
       this.umamiScriptLoaded = false;
-    };
+    }
+  }
+
+  private disableUmamiTracking() {
+    if (!isBrowser || !window.umami) return;
     
-    document.head.appendChild(script);
+    // Use Umami's built-in disable method
+    if (typeof (window.umami as any).disable === 'function') {
+      (window.umami as any).disable();
+      if (this.debug) {
+        console.log('🚫 Umami tracking disabled');
+      }
+    }
+  }
+
+  private enableUmamiTracking() {
+    if (!isBrowser || !window.umami) return;
+    
+    try {
+      // Use Umami's built-in enable method
+      if (typeof (window.umami as any).enable === 'function') {
+        (window.umami as any).enable();
+        if (this.debug) {
+          console.log('✅ Umami tracking enabled');
+        }
+      }
+    } catch (error) {
+      if (this.debug) {
+        console.error('❌ Error enabling Umami tracking:', error);
+      }
+    }
+  }
+
+  private cleanupUmamiScript() {
+    if (!isBrowser) return;
+    
+    try {
+      // Remove Umami script from DOM
+      const scripts = document.querySelectorAll('script[src*="cloud.umami.is"]');
+      scripts.forEach(script => {
+        if ((script as any).__umami_script) {
+          script.remove();
+        }
+      });
+      
+      // Clear intervals
+      if (this.umamiReadyInterval) {
+        clearInterval(this.umamiReadyInterval);
+        this.umamiReadyInterval = null;
+      }
+      
+      // Reset script loaded flag
+      this.umamiScriptLoaded = false;
+      
+      if (this.debug) {
+        console.log('🧹 Umami script cleaned up');
+      }
+    } catch (error) {
+      if (this.debug) {
+        console.error('❌ Error cleaning up Umami script:', error);
+      }
+    }
   }
 
   private setupUmamiReadyWatcher() {
@@ -668,34 +750,51 @@ class AnalyticsSDK {
 
   private sendToUmami(name: string, props: AnalyticsProps) {
     if (!isBrowser) return;
-    // In development, do not send to Umami and do not queue
-    if (typeof import.meta !== 'undefined' && !import.meta.env.PROD) {
+    
+    // Double-check consent before sending (defensive programming)
+    if (this.consent !== 'accepted') {
+      if (this.debug) {
+        console.log('🚫 Analytics event blocked - consent not accepted:', name);
+      }
       return;
     }
     
     const umami = window.umami;
     if (!umami?.track) {
-      // Umami not ready, queue the event
-      this.eventQueue.push({
-        name,
-        props,
-        timestamp: Date.now(),
-      });
+      // Umami not ready, queue the event only if consent is still accepted
+      if (this.consent === 'accepted') {
+        this.eventQueue.push({
+          name,
+          props,
+          timestamp: Date.now(),
+        });
+      }
       return;
     }
     
     try {
+      // In development, log the event but don't send to Umami
+      if (typeof import.meta !== 'undefined' && !import.meta.env.PROD) {
+        if (this.debug) {
+          console.log('🔍 [DEV] Would send to Umami:', name, props);
+        }
+        return;
+      }
+      
+      // In production, send to Umami
       umami.track(name, props);
     } catch (error) {
       if (this.debug) {
         console.error('Analytics tracking error:', error);
       }
-      // Queue for retry
-      this.eventQueue.push({
-        name,
-        props,
-        timestamp: Date.now(),
-      });
+      // Queue for retry only if consent is still accepted
+      if (this.consent === 'accepted') {
+        this.eventQueue.push({
+          name,
+          props,
+          timestamp: Date.now(),
+        });
+      }
     }
   }
 
