@@ -6,51 +6,58 @@
   <!-- Main Pages -->
   <url>
     <loc>https://beachesofgreece.com</loc>
-    <lastmod>2025-10-14</lastmod>
+    <lastmod>2025-10-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
     <loc>https://beachesofgreece.com/about</loc>
-    <lastmod>2025-10-14</lastmod>
+    <lastmod>2025-10-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://beachesofgreece.com/areas</loc>
-    <lastmod>2025-10-14</lastmod>
+    <lastmod>2025-10-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://beachesofgreece.com/map</loc>
-    <lastmod>2025-10-14</lastmod>
+    <lastmod>2025-10-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://beachesofgreece.com/ontology</loc>
-    <lastmod>2025-10-14</lastmod>
+    <lastmod>2025-10-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://beachesofgreece.com/faq</loc>
-    <lastmod>2025-10-14</lastmod>
+    <lastmod>2025-10-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>https://beachesofgreece.com/guide</loc>
-    <lastmod>2025-10-14</lastmod>
+    <lastmod>2025-10-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://beachesofgreece.com/privacy</loc>
+    <lastmod>2025-10-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
   
   <!-- Area Pages -->
@@ -207,17 +214,6 @@ The village also has a full complement of tourism services (taverns, shops, caf�
     </image:image>
   </url>
   <url>
-    <loc>https://beachesofgreece.com/mykonos/agia-anna-beach-mykonos</loc>
-    <lastmod>2025-10-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Mykonos_Agia_Anna_01.jpg/2048px-Mykonos_Agia_Anna_01.jpg?20140827220912</image:loc>
-      <image:title>Agia Anna beach - Greek Beach</image:title>
-      <image:caption>Agia Anna is a beautiful, well-organized beach located in the Kalafatis area of Mykonos. It offers golden sandy shores, crystal-clear waters, and a relaxed yet vibrant beach-club vibe. The setting is scenic with rocky features at the edges, and nearby hills giving views over the Aegean. It’s ideal for sunbathers, swimmers, and those who enjoy a mix of chill and social ambience. </image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://beachesofgreece.com/naxos/agia-anna-beach-naxos</loc>
     <lastmod>2025-10-05</lastmod>
     <changefreq>weekly</changefreq>
@@ -230,6 +226,17 @@ The village also has a full complement of tourism services (taverns, shops, caf�
 Access is easy: ~5–6 km from Naxos Town/port with frequent bus service and drive-up access; parking is mostly along the seafront. Large organized zones with sunbeds/umbrellas, beach bars and tavernas; basic facilities (showers/toilets) present in season. Family-friendly shoreline; light snorkeling around rocks. 
 
 Notable cautions: crowded in peak months; minor boat traffic by the small port; expect more waves on windy days.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/mykonos/agia-anna-beach-mykonos</loc>
+    <lastmod>2025-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Mykonos_Agia_Anna_01.jpg/2048px-Mykonos_Agia_Anna_01.jpg?20140827220912</image:loc>
+      <image:title>Agia Anna beach - Greek Beach</image:title>
+      <image:caption>Agia Anna is a beautiful, well-organized beach located in the Kalafatis area of Mykonos. It offers golden sandy shores, crystal-clear waters, and a relaxed yet vibrant beach-club vibe. The setting is scenic with rocky features at the edges, and nearby hills giving views over the Aegean. It’s ideal for sunbathers, swimmers, and those who enjoy a mix of chill and social ambience. </image:caption>
     </image:image>
   </url>
   <url>
@@ -1601,21 +1608,6 @@ Access is easy by road and local bus stops nearby; the beach is walkable from Pi
     </image:image>
   </url>
   <url>
-    <loc>https://beachesofgreece.com/corfu/marathias-beach-corfu</loc>
-    <lastmod>2025-09-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Marathias_Strand.JPG/1024px-Marathias_Strand.JPG?20121115102446</image:loc>
-      <image:title>Marathias beach - Greek Beach</image:title>
-      <image:caption>Marathias is a long, sandy stretch on Corfu’s southwestern coast, backed by low dunes and olive groves. The sand is fine and golden, with just occasional pebbles at the water’s edge. The seabed slopes gently, so the shallow water extends well out, making it family-friendly for long wading. Water is generally calm; in typical conditions only light ripples appear, though stronger winds may stir modest chop. 
-
-The beach is well organized in its central sectors, with sunbeds, umbrellas, showers, changing booths, restrooms, and a beach bar / restaurants along the strip. At the far ends quieter zones exist with fewer amenities for those seeking more privacy. Access is by road, and parking is available close to the beach (roadside and in small lots). 
-
-Because of its length and layout, it rarely feels overpacked even in summer, though the center can be busier midday. Caution: in edge zones, the seabed may have uneven patches or rocks; swimmers should stay within supervised areas, and arriving early is wise to secure parking or shade.</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://beachesofgreece.com/zakynthos/marathias-beach-zakynthos</loc>
     <lastmod>2025-10-02</lastmod>
     <changefreq>weekly</changefreq>
@@ -1628,6 +1620,21 @@ Because of its length and layout, it rarely feels overpacked even in summer, tho
 Access is by narrow road to tavern/roadside parking and then a short but steep footpath/descent to the shore (not ideal for limited mobility). Facilities are minimal: a few managed sunbeds/umbrellas in season; no lifeguard and usually no on-beach bars (tavernas are just above/nearby). 
 
 Notable cautions: steep access path, stony entry (water shoes recommended), water deepens quickly, limited shade and services.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/corfu/marathias-beach-corfu</loc>
+    <lastmod>2025-09-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Marathias_Strand.JPG/1024px-Marathias_Strand.JPG?20121115102446</image:loc>
+      <image:title>Marathias beach - Greek Beach</image:title>
+      <image:caption>Marathias is a long, sandy stretch on Corfu’s southwestern coast, backed by low dunes and olive groves. The sand is fine and golden, with just occasional pebbles at the water’s edge. The seabed slopes gently, so the shallow water extends well out, making it family-friendly for long wading. Water is generally calm; in typical conditions only light ripples appear, though stronger winds may stir modest chop. 
+
+The beach is well organized in its central sectors, with sunbeds, umbrellas, showers, changing booths, restrooms, and a beach bar / restaurants along the strip. At the far ends quieter zones exist with fewer amenities for those seeking more privacy. Access is by road, and parking is available close to the beach (roadside and in small lots). 
+
+Because of its length and layout, it rarely feels overpacked even in summer, though the center can be busier midday. Caution: in edge zones, the seabed may have uneven patches or rocks; swimmers should stay within supervised areas, and arriving early is wise to secure parking or shade.</image:caption>
     </image:image>
   </url>
   <url>
@@ -1974,6 +1981,17 @@ Geothermal activity creates warm patches and occasional sulfur odour; hot sand a
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/mykonos/panormos-beach-mykonos</loc>
+    <lastmod>2025-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Mykonos_Panormos_01.jpg/1024px-Mykonos_Panormos_01.jpg?20140820183246</image:loc>
+      <image:title>Panormos beach - Greek Beach</image:title>
+      <image:caption>Panormos is a relaxed, elegant sandy beach on the northern side of Mykonos, about 7 km from Mykonos Town. Located in a protected bay, it features soft pale sand, shallow and clear water, and fewer crowds than many of the southern beaches. The setting combines natural beauty with upscale touches — stylish beach bars/restaurants and boutique-style accommodations mix with tranquil spots. </image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/naxos/panormos-beach-naxos</loc>
     <lastmod>2025-10-06</lastmod>
     <changefreq>weekly</changefreq>
@@ -1986,17 +2004,6 @@ Geothermal activity creates warm patches and occasional sulfur odour; hot sand a
 Parking is mainly along the roadside near the harbor. Facilities are limited: a simple taverna/beach bar sits behind the beach, but there is no evidence of formal organization with rented sunbeds/umbrellas. No lifeguard; wheelchair access is not available. 
 
 Shade is from a few palm trees; bring supplies and water. Use caution on the drive and around rocks at the cove edges.</image:caption>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://beachesofgreece.com/mykonos/panormos-beach-mykonos</loc>
-    <lastmod>2025-10-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Mykonos_Panormos_01.jpg/1024px-Mykonos_Panormos_01.jpg?20140820183246</image:loc>
-      <image:title>Panormos beach - Greek Beach</image:title>
-      <image:caption>Panormos is a relaxed, elegant sandy beach on the northern side of Mykonos, about 7 km from Mykonos Town. Located in a protected bay, it features soft pale sand, shallow and clear water, and fewer crowds than many of the southern beaches. The setting combines natural beauty with upscale touches — stylish beach bars/restaurants and boutique-style accommodations mix with tranquil spots. </image:caption>
     </image:image>
   </url>
   <url>
@@ -2045,11 +2052,11 @@ Because the beach is almost fully occupied by beds, free spaces are scarce and c
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/paramonas-beach-corfu</loc>
-    <lastmod>2025-10-01</lastmod>
+    <lastmod>2025-10-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://commons.wikimedia.org/wiki/File:GRC_%E2%80%94_Region_Ionische_Inseln_%E2%80%94_Regionalbezirk_Kerkyra_%E2%80%94_Paramonas_(Strand)_Mattes_2021.jpg&quot;&gt;&lt;img width=&quot;1024&quot; alt=&quot;GRC — Region Ionische Inseln — Regionalbezirk Kerkyra — Paramonas (Strand) Mattes 2021&quot; src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/GRC_%E2%80%94_Region_Ionische_Inseln_%E2%80%94_Regionalbezirk_Kerkyra_%E2%80%94_Paramonas_%28Strand%29_Mattes_2021.jpg/1024px-GRC_%E2%80%94_Region_Ionische_Inseln_%E2%80%94_Regionalbezirk_Kerkyra_%E2%80%94_Paramonas_%28Strand%29_Mattes_2021.jpg?20210924193454</image:loc>
+      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/GRC_%E2%80%94_Region_Ionische_Inseln_%E2%80%94_Regionalbezirk_Kerkyra_%E2%80%94_Paramonas_%28Strand%29_Mattes_2021.jpg/1024px-GRC_%E2%80%94_Region_Ionische_Inseln_%E2%80%94_Regionalbezirk_Kerkyra_%E2%80%94_Paramonas_%28Strand%29_Mattes_2021.jpg?20210924193454</image:loc>
       <image:title>Paramonas beach - Greek Beach</image:title>
       <image:caption>West-facing beach on Corfu’s southwest coast near the village of Paramonas. Shoreline is mostly sand with some pebbly sections; seabed is sandy with occasional stones. Water is typically clear and shallow for a short distance, then gradually deepens. Exposure to the open Ionian means conditions are generally calm to moderate, with a tendency for wind and chop in the afternoons. 
 

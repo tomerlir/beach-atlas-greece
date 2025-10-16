@@ -142,6 +142,13 @@ function generateSitemap(beaches: Beach[], areas: Area[]): string {
     <priority>0.7</priority>
   </url>
   
+  <url>
+    <loc>${escapeXml(`${SITE_URL}/privacy`)}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
   <!-- Area Pages -->`;
 
   // Add area pages
