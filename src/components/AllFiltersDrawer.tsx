@@ -12,7 +12,7 @@ import { useDraftState } from '@/hooks/useDraftState';
 import { FilterState } from '@/hooks/useUrlState';
 import { getAllAmenities } from '@/lib/amenities';
 import { analytics } from '@/lib/analytics';
-import { createFilterApplyEvent, createFilterClearEvent } from '@/lib/analyticsEvents';
+import { createFilterApplyEvent, createFilterClearEvent, BeachType, WaveCondition } from '@/lib/analyticsEvents';
 
 interface AllFiltersDrawerProps {
   isOpen: boolean;
@@ -96,19 +96,19 @@ export default function AllFiltersDrawer({
     onApplyFilters(draftFilters);
     // Track applied filters with coarse names and values; include live count as results
     if (draftFilters.blueFlag !== filters.blueFlag) {
-      analytics.event('filter_apply', createFilterApplyEvent('blue_flag', String(draftFilters.blueFlag), liveCount as number) as any);
+      analytics.event('filter_apply', createFilterApplyEvent('blue_flag', String(draftFilters.blueFlag), liveCount as number));
     }
     if (draftFilters.organized.join(',') !== filters.organized.join(',')) {
-      analytics.event('filter_apply', createFilterApplyEvent('type', draftFilters.organized.join(','), liveCount as number) as any);
+      analytics.event('filter_apply', createFilterApplyEvent('type', draftFilters.organized.join(','), liveCount as number));
     }
     if (draftFilters.parking.join(',') !== filters.parking.join(',')) {
-      analytics.event('filter_apply', createFilterApplyEvent('parking', draftFilters.parking.join(','), liveCount as number) as any);
+      analytics.event('filter_apply', createFilterApplyEvent('parking', draftFilters.parking.join(','), liveCount as number));
     }
     if (draftFilters.waveConditions.join(',') !== filters.waveConditions.join(',')) {
-      analytics.event('filter_apply', createFilterApplyEvent('wave', draftFilters.waveConditions.join(','), liveCount as number) as any);
+      analytics.event('filter_apply', createFilterApplyEvent('wave', draftFilters.waveConditions.join(','), liveCount as number));
     }
     if (draftFilters.amenities.join(',') !== filters.amenities.join(',')) {
-      analytics.event('filter_apply', createFilterApplyEvent('amenities', draftFilters.amenities.join(','), liveCount as number) as any);
+      analytics.event('filter_apply', createFilterApplyEvent('amenities', draftFilters.amenities.join(','), liveCount as number));
     }
     onClose();
   };
@@ -130,7 +130,7 @@ export default function AllFiltersDrawer({
       page: 1,
       nearMe: false,
     });
-    analytics.event('filter_clear', createFilterClearEvent('all') as any);
+    analytics.event('filter_clear', createFilterClearEvent('all'));
   };
 
   const toggleAmenity = (amenityId: string) => {
@@ -364,7 +364,7 @@ export default function AllFiltersDrawer({
             
             <div className="space-y-1">
               {waveConditionsOptions.map((option) => {
-                const isSelected = draftFilters.waveConditions.includes(option.value as any);
+                const isSelected = draftFilters.waveConditions.includes(option.value as WaveCondition);
                 
                 return (
                   <button
@@ -372,7 +372,7 @@ export default function AllFiltersDrawer({
                     onClick={() => {
                       const newWaveConditions = isSelected
                         ? draftFilters.waveConditions.filter(wc => wc !== option.value)
-                        : [...draftFilters.waveConditions, option.value as any];
+                        : [...draftFilters.waveConditions, option.value as WaveCondition];
                       updateDraft({ waveConditions: newWaveConditions });
                     }}
                     className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors min-h-[44px] rounded-md ${
@@ -407,7 +407,7 @@ export default function AllFiltersDrawer({
             
             <div className="space-y-1">
               {beachTypeOptions.map((option) => {
-                const isSelected = draftFilters.type.includes(option.value as any);
+                const isSelected = draftFilters.type.includes(option.value as BeachType);
                 
                 return (
                   <button
@@ -415,7 +415,7 @@ export default function AllFiltersDrawer({
                     onClick={() => {
                       const newTypes = isSelected
                         ? draftFilters.type.filter(type => type !== option.value)
-                        : [...draftFilters.type, option.value as any];
+                        : [...draftFilters.type, option.value as BeachType];
                       updateDraft({ type: newTypes });
                     }}
                     className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors min-h-[44px] rounded-md ${

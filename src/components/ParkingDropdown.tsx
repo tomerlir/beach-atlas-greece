@@ -6,12 +6,15 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { useDraftState } from '@/hooks/useDraftState';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FilterState } from '@/hooks/useUrlState';
+import { analytics } from '@/lib/analytics';
+import { createFilterApplyEvent, createFilterClearEvent } from '@/lib/analyticsEvents';
 
 interface ParkingDropdownProps {
   filters: FilterState;
   onFiltersChange: (updates: Partial<FilterState>) => void;
   onOpenAllFilters: () => void;
   showCountBadge?: boolean;
+  resultCount?: number; // For analytics
 }
 
 const parkingOptions = [
@@ -26,6 +29,7 @@ export default function ParkingDropdown({
   onFiltersChange,
   onOpenAllFilters,
   showCountBadge = false,
+  resultCount = 0,
 }: ParkingDropdownProps) {
   const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = useState(false);
@@ -51,15 +55,37 @@ export default function ParkingDropdown({
 
   // Apply draft changes and close
   const handleApply = useCallback(() => {
+    // Track analytics for filter changes
+    const previousParking = filters.parking;
+    const newParking = draftFilters.parking;
+    
+    // Track individual parking changes
+    const addedParking = newParking.filter(parking => !previousParking.includes(parking));
+    const removedParking = previousParking.filter(parking => !newParking.includes(parking));
+    
+    // Emit filter_apply events for added parking options
+    addedParking.forEach(parking => {
+      analytics.event('filter_apply', createFilterApplyEvent('parking', parking, resultCount));
+    });
+    
+    // Emit filter_clear events for removed parking options
+    removedParking.forEach(parking => {
+      analytics.event('filter_clear', createFilterClearEvent('parking'));
+    });
+    
     onFiltersChange(draftFilters);
     setIsOpen(false);
     triggerRef.current?.focus();
-  }, [draftFilters, onFiltersChange]);
+  }, [draftFilters, onFiltersChange, filters.parking, resultCount]);
 
   // Reset parking draft
   const handleReset = useCallback(() => {
+    // Track analytics for clearing all parking options
+    if (draftFilters.parking.length > 0) {
+      analytics.event('filter_clear', createFilterClearEvent('parking'));
+    }
     updateDraft({ parking: [] });
-  }, [updateDraft]);
+  }, [updateDraft, draftFilters.parking.length]);
 
   // Keyboard navigation
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => {

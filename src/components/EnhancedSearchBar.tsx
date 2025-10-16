@@ -9,6 +9,8 @@ import { createSearchSubmitEvent } from '@/lib/analyticsEvents';
 import { extractFromNaturalLanguage, applyExtractedFilters, applyExtractedFiltersForArea, doesPlaceMatchArea, setKnownPlaces } from '@/lib/naturalLanguageSearch';
 import { useAreas } from '@/hooks/useAreas';
 
+const isBrowser = typeof window !== 'undefined';
+
 interface EnhancedSearchBarProps {
   filters: FilterState;
   onFiltersChange: (updates: Partial<FilterState>) => void;
@@ -180,6 +182,14 @@ export default function EnhancedSearchBar({
         });
       }
       
+      // Generate query hash for linking search → results → engagement
+      const queryHash = analytics.generateQueryHash(trimmedInput, extracted.filters);
+      
+      // Store query hash in sessionStorage for linking to beach engagements
+      if (isBrowser) {
+        sessionStorage.setItem('current_query_hash', queryHash);
+      }
+      
       // Track analytics with detailed info
       const searchEvent = createSearchSubmitEvent(
         trimmedInput,
@@ -195,7 +205,10 @@ export default function EnhancedSearchBar({
         areaName ? 'area' : 'homepage'
       );
       
-      analytics.event('search_submit', searchEvent as any);
+      analytics.event('search_submit', searchEvent);
+      
+      // Track search for session management and quality tracking
+      analytics.trackSearch(queryHash);
     } catch (error) {
       console.error('Search extraction failed:', error);
       // Fallback to basic search

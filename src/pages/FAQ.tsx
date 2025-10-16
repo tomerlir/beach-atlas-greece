@@ -4,6 +4,7 @@ import { CONTACT_EMAIL } from "@/lib/constants";
 import { Helmet } from "react-helmet-async";
 import { BreadcrumbsWithJsonLd } from "@/components/breadcrumbs/BreadcrumbsWithJsonLd";
 import OrganizationSchema from "@/components/OrganizationSchema";
+import { Link } from "react-router-dom";
 import {
   Accordion,
   AccordionContent,
@@ -245,10 +246,10 @@ const FAQ = () => {
                 <CardContent className="p-6">
                   <h3 className="font-semibold text-lg mb-3">More to explore</h3>
                   <div className="flex flex-wrap gap-3">
-                    <Button asChild size="sm" variant="outline"><a href="/guide">Beach Selection Guide</a></Button>
-                    <Button asChild size="sm" variant="outline"><a href="/areas">Browse Areas</a></Button>
-                    <Button asChild size="sm" variant="outline"><a href="/map">Open Map</a></Button>
-                    <Button asChild size="sm" variant="outline"><a href="/ontology">Beach Data Ontology</a></Button>
+                    <Button asChild size="sm" variant="outline"><Link to="/guide">Beach Selection Guide</Link></Button>
+                    <Button asChild size="sm" variant="outline"><Link to="/areas">Browse Areas</Link></Button>
+                    <Button asChild size="sm" variant="outline"><Link to="/map">Open Map</Link></Button>
+                    <Button asChild size="sm" variant="outline"><Link to="/ontology">Beach Data Ontology</Link></Button>
                   </div>
                 </CardContent>
               </Card>

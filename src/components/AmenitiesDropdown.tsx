@@ -6,12 +6,15 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { useDraftState } from '@/hooks/useDraftState';
 import { FilterState } from '@/hooks/useUrlState';
 import { getAllAmenities } from '@/lib/amenities';
+import { analytics } from '@/lib/analytics';
+import { createFilterApplyEvent, createFilterClearEvent } from '@/lib/analyticsEvents';
 
 interface AmenitiesDropdownProps {
   filters: FilterState;
   onFiltersChange: (updates: Partial<FilterState>) => void;
   onOpenAllFilters: () => void;
   showCountBadge?: boolean;
+  resultCount?: number; // For analytics
 }
 
 // Get all amenities from centralized map
@@ -22,6 +25,7 @@ export default function AmenitiesDropdown({
   onFiltersChange,
   onOpenAllFilters,
   showCountBadge = false,
+  resultCount = 0,
 }: AmenitiesDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -46,15 +50,40 @@ export default function AmenitiesDropdown({
 
   // Apply draft changes and close
   const handleApply = useCallback(() => {
+    // Track analytics for filter changes
+    const previousAmenities = filters.amenities;
+    const newAmenities = draftFilters.amenities;
+    
+    // Track individual amenity changes
+    const addedAmenities = newAmenities.filter(id => !previousAmenities.includes(id));
+    const removedAmenities = previousAmenities.filter(id => !newAmenities.includes(id));
+    
+    // Emit filter_apply events for added amenities
+    addedAmenities.forEach(amenityId => {
+      const amenity = allAmenities.find(a => a.id === amenityId);
+      if (amenity) {
+        analytics.event('filter_apply', createFilterApplyEvent('amenities', amenityId, resultCount));
+      }
+    });
+    
+    // Emit filter_clear events for removed amenities
+    removedAmenities.forEach(amenityId => {
+      analytics.event('filter_clear', createFilterClearEvent('amenities'));
+    });
+    
     onFiltersChange(draftFilters);
     setIsOpen(false);
     triggerRef.current?.focus();
-  }, [draftFilters, onFiltersChange]);
+  }, [draftFilters, onFiltersChange, filters.amenities, resultCount]);
 
   // Reset amenities draft
   const handleReset = useCallback(() => {
+    // Track analytics for clearing all amenities
+    if (draftFilters.amenities.length > 0) {
+      analytics.event('filter_clear', createFilterClearEvent('amenities'));
+    }
     updateDraft({ amenities: [] });
-  }, [updateDraft]);
+  }, [updateDraft, draftFilters.amenities.length]);
 
   // Keyboard navigation
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => {

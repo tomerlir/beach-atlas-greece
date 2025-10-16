@@ -6,12 +6,15 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { useDraftState } from '@/hooks/useDraftState';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FilterState } from '@/hooks/useUrlState';
+import { analytics } from '@/lib/analytics';
+import { createFilterApplyEvent, createFilterClearEvent } from '@/lib/analyticsEvents';
 
 interface BeachTypeDropdownProps {
   filters: FilterState;
   onFiltersChange: (updates: Partial<FilterState>) => void;
   onOpenAllFilters: () => void;
   showCountBadge?: boolean;
+  resultCount?: number; // For analytics
 }
 
 const beachTypeOptions = [
@@ -26,6 +29,7 @@ export default function BeachTypeDropdown({
   onFiltersChange,
   onOpenAllFilters,
   showCountBadge = false,
+  resultCount = 0,
 }: BeachTypeDropdownProps) {
   const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = useState(false);
@@ -51,15 +55,37 @@ export default function BeachTypeDropdown({
 
   // Apply draft changes and close
   const handleApply = useCallback(() => {
+    // Track analytics for filter changes
+    const previousTypes = filters.type;
+    const newTypes = draftFilters.type;
+    
+    // Track individual type changes
+    const addedTypes = newTypes.filter(type => !previousTypes.includes(type));
+    const removedTypes = previousTypes.filter(type => !newTypes.includes(type));
+    
+    // Emit filter_apply events for added types
+    addedTypes.forEach(type => {
+      analytics.event('filter_apply', createFilterApplyEvent('beach_type', type, resultCount));
+    });
+    
+    // Emit filter_clear events for removed types
+    removedTypes.forEach(type => {
+      analytics.event('filter_clear', createFilterClearEvent('beach_type'));
+    });
+    
     onFiltersChange(draftFilters);
     setIsOpen(false);
     triggerRef.current?.focus();
-  }, [draftFilters, onFiltersChange]);
+  }, [draftFilters, onFiltersChange, filters.type, resultCount]);
 
   // Reset beach type draft
   const handleReset = useCallback(() => {
+    // Track analytics for clearing all beach types
+    if (draftFilters.type.length > 0) {
+      analytics.event('filter_clear', createFilterClearEvent('beach_type'));
+    }
     updateDraft({ type: [] });
-  }, [updateDraft]);
+  }, [updateDraft, draftFilters.type.length]);
 
   // Keyboard navigation
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => {

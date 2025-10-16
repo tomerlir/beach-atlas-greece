@@ -107,9 +107,9 @@ export default function AnalyticsInspector({ isVisible, onToggle }: AnalyticsIns
   }
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 w-96 max-h-[80vh]">
-      <Card className="shadow-xl border-2">
-        <CardHeader className="pb-3">
+    <div className="fixed bottom-4 right-4 z-50 w-[36rem] max-w-[calc(100vw-2rem)]">
+      <Card className="shadow-xl border-2 max-h-[85vh] flex flex-col overflow-hidden">
+        <CardHeader className="pb-3 flex-shrink-0">
           <div className="flex items-center justify-between">
             <CardTitle className="text-sm font-medium flex items-center gap-2">
               <BarChart3 className="h-4 w-4" />
@@ -147,7 +147,7 @@ export default function AnalyticsInspector({ isVisible, onToggle }: AnalyticsIns
           </div>
         </CardHeader>
         
-        <CardContent className="pt-0">
+        <CardContent className="pt-0 pb-4 overflow-hidden flex-1 min-h-0">
           <div className="flex items-center justify-between mb-3">
             <Badge variant="secondary" className="text-xs">
               {events.length} events
@@ -158,8 +158,8 @@ export default function AnalyticsInspector({ isVisible, onToggle }: AnalyticsIns
             </div>
           </div>
           
-          <ScrollArea className="h-64">
-            <div className="space-y-2">
+          <ScrollArea className="h-[calc(85vh-10rem)]">
+            <div className="space-y-2 pr-4">
               {events.length === 0 ? (
                 <div className="text-center text-muted-foreground text-sm py-8">
                   No events yet. Interact with the app to see analytics events.
@@ -170,7 +170,7 @@ export default function AnalyticsInspector({ isVisible, onToggle }: AnalyticsIns
                     key={event.id}
                     className="border rounded-lg p-3 bg-card text-sm"
                   >
-                    <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center justify-between mb-2 gap-2 flex-wrap">
                       <Badge 
                         className={`text-xs ${getEventColor(event.name)}`}
                         variant="outline"
@@ -178,14 +178,14 @@ export default function AnalyticsInspector({ isVisible, onToggle }: AnalyticsIns
                         {event.name}
                       </Badge>
                       <div className="flex items-center gap-1">
-                        <span className="text-xs text-muted-foreground">
+                        <span className="text-xs text-muted-foreground whitespace-nowrap">
                           {formatTimestamp(event.timestamp)}
                         </span>
                         <Button
                           onClick={() => copyEventToClipboard(event)}
                           variant="ghost"
                           size="sm"
-                          className="h-5 w-5 p-0"
+                          className="h-5 w-5 p-0 flex-shrink-0"
                           title="Copy event data"
                         >
                           <Copy className="h-3 w-3" />
@@ -193,15 +193,15 @@ export default function AnalyticsInspector({ isVisible, onToggle }: AnalyticsIns
                       </div>
                     </div>
                     
-                    <div className="space-y-1">
+                    <div className="space-y-1.5">
                       {Object.entries(event.props).map(([key, value]) => (
-                        <div key={key} className="flex justify-between text-xs">
-                          <span className="text-muted-foreground font-mono">
+                        <div key={key} className="text-xs">
+                          <span className="text-muted-foreground font-mono block mb-0.5">
                             {key}:
                           </span>
-                          <span className="font-mono text-right max-w-[200px] truncate">
+                          <span className="font-mono block break-all bg-muted/30 rounded px-2 py-1">
                             {typeof value === 'object' 
-                              ? JSON.stringify(value) 
+                              ? JSON.stringify(value, null, 2) 
                               : String(value)
                             }
                           </span>

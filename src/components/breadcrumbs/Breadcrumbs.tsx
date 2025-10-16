@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export type Crumb = { 
   label: string; 
@@ -19,12 +20,12 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items }) => {
           <li key={index} className="flex items-center gap-1">
             {index > 0 && <span aria-hidden="true">›</span>}
             {crumb.href ? (
-              <a 
-                href={crumb.href} 
+              <Link 
+                to={crumb.href} 
                 className="hover:underline hover:text-gray-700 transition-colors"
               >
                 {crumb.label}
-              </a>
+              </Link>
             ) : (
               <span 
                 aria-current="page" 

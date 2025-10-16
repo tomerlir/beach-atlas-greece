@@ -6,7 +6,7 @@ import { BreadcrumbsWithJsonLd } from "@/components/breadcrumbs/BreadcrumbsWithJ
 
 const Privacy = () => {
   const seoTitle = "Privacy Policy - Beaches of Greece";
-  const seoDescription = "Privacy policy describing strictly necessary technologies, cookieless analytics via Umami Cloud, data collected, retention, and how to change consent.";
+  const seoDescription = "Privacy policy describing strictly necessary technologies, cookieless analytics via Umami Cloud, data collected (page views, referrers, events), purposes, GDPR rights, retention, and how to change consent.";
   const canonicalUrl = "https://beachesofgreece.com/privacy";
 
   const jsonLd = {
@@ -92,35 +92,87 @@ const Privacy = () => {
             <h2>Analytics (optional, cookieless)</h2>
             <p>
               We use privacy-friendly, cookieless analytics provided by <strong>Umami Cloud</strong> to understand how
-              the site is used and to improve features. Analytics only runs if you explicitly opt-in from the consent
-              banner or the footer link.
+              the site is used and to improve features. Analytics only runs if you explicitly opt in from the consent
+              banner or the <em>Privacy preferences</em> link in the footer.
             </p>
 
-            <h3>What we collect</h3>
+            <h3>What we track</h3>
+            <p>
+              When enabled, we track page views and usage to measure traffic and content performance. Our analytics
+              implementation is documented in <code>src/lib/analytics.ts</code> and uses events to record key actions
+              (e.g., search interactions, map engagement, session summaries).
+            </p>
+
+            <h3>Data collected by Umami</h3>
             <ul>
-              <li>Page views and navigation paths</li>
-              <li>Anonymous usage events (e.g., searches, map interactions, filter usage)</li>
-              <li>Non-identifying context (e.g., session ID, timestamp)</li>
+              <li>Page views (URL path) and navigation paths</li>
+              <li>Referrer URL (the page you came from), where available</li>
+              <li>Anonymous events such as searches, map interactions, and filter usage</li>
+              <li>Non-identifying context such as timestamp and a random session identifier</li>
+              <li>Technical metadata like browser, operating system, device type, viewport size, and language</li>
+              <li>UTM parameters for campaign attribution when present</li>
+              <li>
+                Approximate location derived from IP at request time for aggregated statistics; IP addresses are not
+                stored by our implementation
+              </li>
             </ul>
 
             <h3>What we do not collect</h3>
             <ul>
-              <li>No personal identifiers (no names, emails)</li>
-              <li>No marketing cookies</li>
-              <li>No cross-site tracking or third-party advertising</li>
+              <li>No personal identifiers (no names, emails, precise location)</li>
+              <li>No marketing cookies and no cross-site tracking</li>
+              <li>No third-party advertising or profiling</li>
             </ul>
 
-            <h3>Retention and purpose</h3>
+            <h3>Purpose and legal basis</h3>
             <p>
-              Data is used in aggregate to measure usage and improve the product experience. Retention is managed by
-              Umami Cloud in accordance with their service policies. We do not sell or share analytics data for
-              advertising.
+              The purpose is to understand website traffic and content performance so we can improve features and
+              reliability. The legal basis under the GDPR is your <strong>consent</strong> (Article 6(1)(a)), which you
+              may withdraw at any time.
+            </p>
+
+            <h3>Data retention</h3>
+            <p>
+              We retain analytics data for up to <strong>12 months</strong> in Umami. Retention is configurable; if we
+              change this window, we will update this page. We do not sell or share analytics data for advertising.
             </p>
 
             <h2>Change or withdraw your consent</h2>
             <p>
               You can change your analytics preference at any time by clicking the <em>Privacy preferences</em> link in
               the site footer. Turning analytics off will stop further analytics events from being sent.
+            </p>
+
+            <h2>Your rights (GDPR)</h2>
+            <ul>
+              <li>Access your personal data</li>
+              <li>Request deletion (erasure) of your personal data</li>
+              <li>Correct inaccurate data</li>
+              <li>Restrict or object to processing</li>
+              <li>Data portability</li>
+              <li>Withdraw consent at any time (does not affect prior lawful processing)</li>
+              <li>Lodge a complaint with your local supervisory authority</li>
+            </ul>
+
+            <h2>Data controller and processor</h2>
+            <p>
+              The data controller is Beaches of Greece. Umami Cloud provides analytics services as our data processor.
+            </p>
+
+            <h2>International transfers</h2>
+            <p>
+              Depending on your location and service infrastructure, analytics data may be processed outside your
+              country. We rely on appropriate safeguards offered by our service providers.
+            </p>
+
+            <h2>Children</h2>
+            <p>
+              This site is not directed to children under 13, and we do not knowingly collect personal data from them.
+            </p>
+
+            <h2>Changes to this policy</h2>
+            <p>
+              We may update this policy from time to time. The “Last updated” date above reflects the latest changes.
             </p>
 
             <h2>Contact</h2>

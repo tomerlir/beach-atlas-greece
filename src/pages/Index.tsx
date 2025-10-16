@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { CONTACT_EMAIL } from "@/lib/constants";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FilterBar from "@/components/FilterBar";
@@ -12,7 +11,6 @@ import BeachCardSkeleton from "@/components/BeachCardSkeleton";
 import Pagination from "@/components/Pagination";
 import { GeolocationErrorBanner } from "@/components/GeolocationErrorBanner";
 import EnhancedSearchBar from "@/components/EnhancedSearchBar";
-import AreasGrid from "@/components/AreasGrid";
 import { useGeolocation } from "@/hooks/useGeolocation";
 import { useUrlState } from "@/hooks/useUrlState";
 import { useBeachFiltering } from "@/hooks/useBeachFiltering";
@@ -344,6 +342,7 @@ const Index = () => {
                     beach={beach} 
                     distance={beach.distance}
                     showDistance={filters.nearMe && !locationError && !!location}
+                    engagementSource={filters.search ? 'search' : 'browsing'}
                   />
                 ))}
               </div>

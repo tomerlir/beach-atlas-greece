@@ -237,11 +237,26 @@ export default function ResultsSummary({
     onClearAllFilters,
     isLoading = false,
 }: ResultsSummaryProps) {
-    // Track results view
+    // Track results view with query hash and search quality classification
     useEffect(() => {
-        if (resultCount > 0) {
-            const isRelaxed = filters.search && resultCount < 10; // Simple heuristic for relaxed results
-            analytics.event('results_view', createResultsViewEvent(resultCount, isRelaxed) as any);
+        // Only track results_view if there's an actual search query
+        if (!filters.search) {
+            return;
+        }
+
+        const isRelaxed = resultCount > 0 && resultCount < 10; // Simple heuristic
+        const queryHash = typeof window !== 'undefined'
+            ? sessionStorage.getItem('current_query_hash') || undefined
+            : undefined;
+
+        // Emit results_view only when there's a search
+        analytics.event('results_view', createResultsViewEvent(resultCount, isRelaxed, queryHash));
+
+        // Emit search_quality signals based on results
+        if (resultCount === 0) {
+            analytics.trackSearchQuality('empty');
+        } else if (isRelaxed) {
+            analytics.trackSearchQuality('relaxed');
         }
     }, [resultCount, filters.search]);
 

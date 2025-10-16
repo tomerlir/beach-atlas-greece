@@ -3,8 +3,9 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
-import { X, Shield, BarChart3 } from 'lucide-react';
+import { X, BarChart3 } from 'lucide-react';
 import { analytics, type ConsentState } from '@/lib/analytics';
+import { Link } from 'react-router-dom';
 
 export default function ConsentBanner() {
   const [consent, setConsent] = useState<ConsentState>('unknown');
@@ -86,11 +87,17 @@ export default function ConsentBanner() {
             </div>
           </div>
 
-          <DialogFooter className="sm:justify-between gap-2">
-            <Button variant="ghost" onClick={() => setOpen(false)}>Cancel</Button>
-            <div className="flex gap-2">
-              <Button variant="outline" onClick={() => { handleReject(); setOpen(false); }}>Reject all</Button>
-              <Button onClick={() => { handleAccept(); setOpen(false); }}>Accept all</Button>
+          <DialogFooter className="flex-col sm:flex-row gap-2">
+            <Button variant="ghost" onClick={() => setOpen(false)} className="w-full sm:w-auto">
+              Cancel
+            </Button>
+            <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+              <Button variant="outline" onClick={() => { handleReject(); setOpen(false); }} className="w-full sm:w-auto">
+                Reject all
+              </Button>
+              <Button onClick={() => { handleAccept(); setOpen(false); }} className="w-full sm:w-auto">
+                Accept all
+              </Button>
             </div>
           </DialogFooter>
         </DialogContent>
@@ -100,53 +107,49 @@ export default function ConsentBanner() {
       {isVisible && (
         <div className="fixed z-50 bottom-0 left-0 right-0 sm:bottom-4 sm:right-4 sm:left-auto sm:w-[420px]">
           <div className="mx-auto sm:mx-0 bg-background border border-border shadow-lg rounded-none sm:rounded-lg px-4 py-4 animate-banner-slide-up motion-reduce:animate-none">
-            <div className="flex items-start gap-3">
-              <div className="flex-shrink-0 mt-1">
-                <Shield className="h-5 w-5 text-muted-foreground" />
-              </div>
-              
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-2">
+            <div className="space-y-3">
+              {/* Header row with icon, title and X button */}
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
                   <BarChart3 className="h-4 w-4 text-muted-foreground" />
                   <h3 className="text-sm font-medium text-foreground">
                     Privacy preferences
                   </h3>
                 </div>
-                
-                <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
-                  With your permission, we’d also like to enable privacy-friendly analytics (cookieless) to help us improve Beaches of Greece.
-                  <a 
-                    href="/privacy" 
-                    className="text-primary hover:underline ml-1"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Privacy policy
-                  </a>
-                </p>
-
-                <div className="flex flex-col sm:flex-row gap-2">
-                  <Button onClick={handleAccept} size="sm" className="w-full sm:w-auto">
-                    Accept all
-                  </Button>
-                  <Button onClick={handleReject} variant="outline" size="sm" className="w-full sm:w-auto">
-                    Reject all
-                  </Button>
-                  <Button onClick={() => setOpen(true)} variant="secondary" size="sm" className="w-full sm:w-auto">
-                    Customize
-                  </Button>
-                </div>
+                <Button
+                  onClick={handleReject}
+                  variant="ghost"
+                  size="sm"
+                  className="flex-shrink-0 h-8 w-8 p-0 -mr-2"
+                  aria-label="Close banner"
+                >
+                  <X className="h-4 w-4" />
+                </Button>
               </div>
               
-              <Button
-                onClick={handleReject}
-                variant="ghost"
-                size="sm"
-                className="flex-shrink-0 h-8 w-8 p-0"
-                aria-label="Close banner"
-              >
-                <X className="h-4 w-4" />
-              </Button>
+              {/* Description - full width */}
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                With your permission, we'd also like to enable privacy-friendly analytics (cookieless) to help us improve Beaches of Greece.
+                <Link 
+                  to="/privacy" 
+                  className="text-primary hover:underline ml-1"
+                >
+                  Privacy policy
+                </Link>
+              </p>
+
+              {/* Buttons - full width */}
+              <div className="flex flex-col sm:flex-row gap-2 w-full">
+                <Button onClick={handleAccept} size="default" className="w-full sm:flex-1">
+                  Accept all
+                </Button>
+                <Button onClick={handleReject} variant="outline" size="default" className="w-full sm:flex-1">
+                  Reject all
+                </Button>
+                <Button onClick={() => setOpen(true)} variant="secondary" size="default" className="w-full sm:flex-1">
+                  Customize
+                </Button>
+              </div>
             </div>
           </div>
         </div>

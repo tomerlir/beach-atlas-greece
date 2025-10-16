@@ -1,5 +1,4 @@
 import type { FilterState } from '@/hooks/useUrlState';
-import { analytics } from '@/lib/analytics';
 import {
   FacetKey,
   getAmenitiesPart,
@@ -118,13 +117,6 @@ export function buildExplanation(input: ExplanationInput): Explanation {
 
   const secondaryCount = Math.max(0, base.length - primary.length);
   const fullText = toSentence(base.map(p => p.text));
-
-  // Fire lightweight analytics (safe in browser only)
-  analytics.event('results_explanation_composed', {
-    partsCount: base.length,
-    primaryCount: primary.length,
-    facetsIncluded: Array.from(new Set(base.map(p => p.facet))).join(','),
-  });
 
   return { reasonParts: base, primary, secondaryCount, fullText };
 }
