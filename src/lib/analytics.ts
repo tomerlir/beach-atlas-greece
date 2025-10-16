@@ -61,6 +61,7 @@ class AnalyticsSDK {
   private sessionState: SessionState;
   private inactivityCheckInterval: NodeJS.Timeout | null = null;
   private umamiReadyInterval: NodeJS.Timeout | null = null;
+  private umamiScriptLoaded = false;
 
   constructor() {
     this.sessionId = this.generateSessionId();
@@ -83,8 +84,12 @@ class AnalyticsSDK {
       this.captureUTMParams();
       this.setupOnlineHandler();
       this.setupInactivityCheck();
-      this.setupUmamiReadyWatcher();
       this.setupPageLifecycleHandlers();
+      
+      // Only setup Umami watcher if consent is already accepted
+      if (this.consent === 'accepted') {
+        this.loadUmamiScript();
+      }
     }
   }
 
@@ -100,8 +105,8 @@ class AnalyticsSDK {
       console.groupEnd();
     }
     
-    // Track initial page load if in browser
-    if (isBrowser) {
+    // Only track initial page load if consent is already accepted
+    if (isBrowser && this.consent === 'accepted') {
       this.trackInitialPageLoad();
     }
   }
@@ -126,8 +131,11 @@ class AnalyticsSDK {
     // Notify callbacks
     this.consentCallbacks.forEach(cb => cb(state));
     
-    // If consent was just accepted, flush the queue
+    // If consent was just accepted, load Umami script and flush the queue
     if (previousState !== 'accepted' && state === 'accepted') {
+      this.loadUmamiScript();
+      // Track the initial pageview now that consent is given
+      this.trackInitialPageLoad();
       this.flushEventQueue();
     }
     
@@ -529,6 +537,36 @@ class AnalyticsSDK {
         };
       }
     }, CHECK_INTERVAL);
+  }
+
+  private loadUmamiScript() {
+    if (!isBrowser || this.umamiScriptLoaded) return;
+    
+    this.umamiScriptLoaded = true;
+    
+    // Create and load the Umami script
+    const script = document.createElement('script');
+    script.src = 'https://cloud.umami.is/script.js';
+    script.setAttribute('data-website-id', 'b3e6e36a-8334-4086-8a80-d3c894414392');
+    script.setAttribute('data-domains', 'beachesofgreece.com');
+    script.setAttribute('data-auto-track', 'false');
+    script.defer = true;
+    
+    script.onload = () => {
+      if (this.debug) {
+        console.log('📊 Umami script loaded');
+      }
+      this.setupUmamiReadyWatcher();
+    };
+    
+    script.onerror = () => {
+      if (this.debug) {
+        console.error('❌ Failed to load Umami script');
+      }
+      this.umamiScriptLoaded = false;
+    };
+    
+    document.head.appendChild(script);
   }
 
   private setupUmamiReadyWatcher() {
