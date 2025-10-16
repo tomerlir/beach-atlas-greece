@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState, useRef, useCallback } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { authSupabase } from '@/integrations/supabase/client';
+import { useLocation } from 'react-router-dom';
 
 interface Profile {
   id: string;
@@ -31,11 +32,15 @@ export const useAuth = () => {
 };
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const location = useLocation();
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
   const [hasExplicitlySignedOut, setHasExplicitlySignedOut] = useState(false);
+  
+  // Only initialize auth on admin routes
+  const isAdminRoute = location.pathname.startsWith('/admin');
   
   // Add refs for request cancellation and debouncing
   const fetchProfileAbortController = useRef<AbortController | null>(null);
@@ -106,6 +111,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []); // Remove session?.user?.email dependency to prevent race condition
 
   useEffect(() => {
+    // Only initialize auth on admin routes to prevent cookies on non-admin routes
+    if (!isAdminRoute) {
+      setLoading(false);
+      return;
+    }
+
     // Set up auth state listener
     const { data: { subscription } } = authSupabase.auth.onAuthStateChange(
       (event, session) => {
@@ -162,7 +173,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         fetchProfileAbortController.current.abort();
       }
     };
-  }, [hasExplicitlySignedOut]); // Remove fetchProfile dependency to prevent race condition
+  }, [hasExplicitlySignedOut, isAdminRoute]); // Add isAdminRoute dependency
 
   // Separate effect to handle explicit sign out flag
   useEffect(() => {
@@ -173,6 +184,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [hasExplicitlySignedOut]);
 
   const signIn = async (email: string, password: string) => {
+    // Only allow sign in on admin routes
+    if (!isAdminRoute) {
+      return { error: new Error('Authentication only available on admin routes') };
+    }
+    
     const { error } = await authSupabase.auth.signInWithPassword({
       email,
       password
@@ -187,6 +203,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const signOut = async () => {
+    // Only allow sign out on admin routes
+    if (!isAdminRoute) {
+      return;
+    }
+    
     await authSupabase.auth.signOut();
     // Clear all auth state immediately
     setUser(null);
