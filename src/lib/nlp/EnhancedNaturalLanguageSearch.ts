@@ -3,12 +3,12 @@
  * Integrates advanced NLP techniques for improved query understanding
  */
 
-import { FilterState } from '@/hooks/useUrlState';
-import { TextProcessor } from './TextProcessor';
-import { EntityRecognizer, EntityRecognitionResult } from './EntityRecognizer';
-import { SentimentAnalyzer, SentimentResult, IntentAnalysis } from './SentimentAnalyzer';
-import { FuzzyMatcher, MatchResult } from './FuzzyMatcher';
-import { EnhancedLocationExtractor, LocationExtractionResult } from './EnhancedLocationExtractor';
+import { FilterState } from "@/hooks/useUrlState";
+import { TextProcessor } from "./TextProcessor";
+import { EntityRecognizer, EntityRecognitionResult } from "./EntityRecognizer";
+import { SentimentAnalyzer, SentimentResult, IntentAnalysis } from "./SentimentAnalyzer";
+import { FuzzyMatcher, MatchResult } from "./FuzzyMatcher";
+import { EnhancedLocationExtractor, LocationExtractionResult } from "./EnhancedLocationExtractor";
 
 export interface EnhancedExtractionResult {
   filters: Partial<FilterState>;
@@ -28,8 +28,8 @@ export interface SearchContext {
   userPreferences?: string[];
   searchHistory?: string[];
   location?: string;
-  timeOfDay?: 'morning' | 'afternoon' | 'evening';
-  season?: 'spring' | 'summer' | 'autumn' | 'winter';
+  timeOfDay?: "morning" | "afternoon" | "evening";
+  season?: "spring" | "summer" | "autumn" | "winter";
 }
 
 export class EnhancedNaturalLanguageSearch {
@@ -39,28 +39,116 @@ export class EnhancedNaturalLanguageSearch {
   private sentimentAnalyzer: SentimentAnalyzer;
   private fuzzyMatcher: FuzzyMatcher;
   private locationExtractor: EnhancedLocationExtractor;
-  
+
   // Known places for enhanced matching
   private knownPlaces: string[] = [
-    'crete', 'corfu', 'mykonos', 'santorini', 'rhodes', 'zakynthos', 'kefalonia',
-    'paros', 'naxos', 'ios', 'milos', 'sifnos', 'folegandros', 'amorgos',
-    'skiathos', 'skopelos', 'alonissos', 'lesbos', 'chios', 'samos',
-    'kos', 'patmos', 'syros', 'tinos', 'andros', 'kea', 'kythnos',
-    'paleokastritsa', 'oia', 'fira', 'lindos', 'myrtos', 'navagio',
-    'balos', 'elafonisi', 'falassarna', 'gramvousa',
+    "crete",
+    "corfu",
+    "mykonos",
+    "santorini",
+    "rhodes",
+    "zakynthos",
+    "kefalonia",
+    "paros",
+    "naxos",
+    "ios",
+    "milos",
+    "sifnos",
+    "folegandros",
+    "amorgos",
+    "skiathos",
+    "skopelos",
+    "alonissos",
+    "lesbos",
+    "chios",
+    "samos",
+    "kos",
+    "patmos",
+    "syros",
+    "tinos",
+    "andros",
+    "kea",
+    "kythnos",
+    "paleokastritsa",
+    "oia",
+    "fira",
+    "lindos",
+    "myrtos",
+    "navagio",
+    "balos",
+    "elafonisi",
+    "falassarna",
+    "gramvousa",
     // Major Greek cities and regions
-    'attica', 'chalkidiki', 'patras', 'heraklion', 'larissa', 'volos',
-    'ioannina', 'kavala', 'serres', 'drama', 'alexandroupoli', 'komotini',
-    'xanthi', 'katerini', 'trikala', 'lamia', 'agrinio', 'kalamata',
-    'sparti', 'tripoli', 'corinth', 'argos', 'nafplio', 'mycenae',
-    'epidaurus', 'olympia', 'delphi', 'meteora', 'mount athos',
+    "attica",
+    "chalkidiki",
+    "patras",
+    "heraklion",
+    "larissa",
+    "volos",
+    "ioannina",
+    "kavala",
+    "serres",
+    "drama",
+    "alexandroupoli",
+    "komotini",
+    "xanthi",
+    "katerini",
+    "trikala",
+    "lamia",
+    "agrinio",
+    "kalamata",
+    "sparti",
+    "tripoli",
+    "corinth",
+    "argos",
+    "nafplio",
+    "mycenae",
+    "epidaurus",
+    "olympia",
+    "delphi",
+    "meteora",
+    "mount athos",
     // Additional popular destinations
-    'lefkada', 'ithaca', 'kefalonia', 'zakynthos', 'kythira', 'antikythera',
-    'hydra', 'spetses', 'poros', 'aegina', 'salamis', 'evia', 'skopelos',
-    'alonnissos', 'skyros', 'limnos', 'thasos', 'samothrace', 'lesvos',
-    'chios', 'psara', 'ikaria', 'fourni', 'samos', 'patmos', 'lipsi',
-    'kalymnos', 'kos', 'nissyros', 'tilos', 'symi', 'rhodes', 'karpathos',
-    'kasos', 'kastellorizo', 'crete', 'gavdos', 'kythira', 'antikythera'
+    "lefkada",
+    "ithaca",
+    "kefalonia",
+    "zakynthos",
+    "kythira",
+    "antikythera",
+    "hydra",
+    "spetses",
+    "poros",
+    "aegina",
+    "salamis",
+    "evia",
+    "skopelos",
+    "alonnissos",
+    "skyros",
+    "limnos",
+    "thasos",
+    "samothrace",
+    "lesvos",
+    "chios",
+    "psara",
+    "ikaria",
+    "fourni",
+    "samos",
+    "patmos",
+    "lipsi",
+    "kalymnos",
+    "kos",
+    "nissyros",
+    "tilos",
+    "symi",
+    "rhodes",
+    "karpathos",
+    "kasos",
+    "kastellorizo",
+    "crete",
+    "gavdos",
+    "kythira",
+    "antikythera",
   ];
 
   // Blue flag patterns
@@ -73,7 +161,7 @@ export class EnhancedNaturalLanguageSearch {
     /\bblue-flag\s+certified\b/i,
     /\bblue-flag\s+beach\b/i,
     /\bawarded\s+blue\s+flag\b/i,
-    /\bblue\s+flag\b/i
+    /\bblue\s+flag\b/i,
   ];
 
   private constructor() {
@@ -95,42 +183,48 @@ export class EnhancedNaturalLanguageSearch {
    * Enhanced natural language processing with advanced NLP techniques
    */
   public async processQuery(
-    query: string, 
+    query: string,
     context?: SearchContext
   ): Promise<EnhancedExtractionResult> {
     const startTime = Date.now();
-    
+
     try {
       // Process text with advanced NLP
       const processedText = await this.textProcessor.processText(query);
-      
+
       // Recognize entities
       const entities = await this.entityRecognizer.recognizeEntities(query);
-      
+
       // Extract locations using enhanced location matching
       const locationExtraction = this.locationExtractor.extractLocations(query, entities);
-      
+
       // Analyze sentiment and intent
       const sentiment = await this.sentimentAnalyzer.analyzeSentiment(query);
       const intent = this.sentimentAnalyzer.analyzeIntent(query, sentiment.polarity);
-      
+
       // Extract filters using enhanced techniques
       const filters = await this.extractFilters(query, entities, sentiment, intent, context);
-      
+
       // Determine place from location extraction
       const place = locationExtraction.primaryLocation?.place;
-      
+
       // Clean search term using location extraction results
       const cleanedSearchTerm = locationExtraction.remainingQuery;
-      
+
       // Calculate overall confidence including location extraction
       const confidence = this.calculateConfidence(entities, sentiment, intent, locationExtraction);
-      
+
       // Generate suggestions
-      const suggestions = this.generateSuggestions(query, entities, sentiment, intent, locationExtraction);
-      
+      const suggestions = this.generateSuggestions(
+        query,
+        entities,
+        sentiment,
+        intent,
+        locationExtraction
+      );
+
       const processingTime = Date.now() - startTime;
-      
+
       return {
         filters,
         place,
@@ -142,12 +236,11 @@ export class EnhancedNaturalLanguageSearch {
         entities,
         locationExtraction,
         processingTime,
-        suggestions
+        suggestions,
       };
-      
     } catch (error) {
-      console.error('Enhanced NLP processing failed:', error);
-      
+      console.error("Enhanced NLP processing failed:", error);
+
       // Fallback to basic processing
       return this.fallbackProcessing(query, Date.now() - startTime);
     }
@@ -167,11 +260,11 @@ export class EnhancedNaturalLanguageSearch {
 
     // Extract beach types - map to exact FilterBar values
     if (entities.beachTypes.length > 0) {
-      const validTypes: ('SANDY' | 'PEBBLY' | 'MIXED' | 'OTHER')[] = [];
-      entities.beachTypes.forEach(entity => {
+      const validTypes: ("SANDY" | "PEBBLY" | "MIXED" | "OTHER")[] = [];
+      entities.beachTypes.forEach((entity) => {
         const normalized = entity.normalized.toUpperCase();
-        if (['SANDY', 'PEBBLY', 'MIXED', 'OTHER'].includes(normalized)) {
-          validTypes.push(normalized as 'SANDY' | 'PEBBLY' | 'MIXED' | 'OTHER');
+        if (["SANDY", "PEBBLY", "MIXED", "OTHER"].includes(normalized)) {
+          validTypes.push(normalized as "SANDY" | "PEBBLY" | "MIXED" | "OTHER");
         }
       });
       if (validTypes.length > 0) {
@@ -181,11 +274,11 @@ export class EnhancedNaturalLanguageSearch {
 
     // Extract wave conditions - map to exact FilterBar values
     if (entities.waveConditions.length > 0) {
-      const validWaveConditions: ('CALM' | 'MODERATE' | 'WAVY' | 'SURFABLE')[] = [];
-      entities.waveConditions.forEach(entity => {
+      const validWaveConditions: ("CALM" | "MODERATE" | "WAVY" | "SURFABLE")[] = [];
+      entities.waveConditions.forEach((entity) => {
         const normalized = entity.normalized.toUpperCase();
-        if (['CALM', 'MODERATE', 'WAVY', 'SURFABLE'].includes(normalized)) {
-          validWaveConditions.push(normalized as 'CALM' | 'MODERATE' | 'WAVY' | 'SURFABLE');
+        if (["CALM", "MODERATE", "WAVY", "SURFABLE"].includes(normalized)) {
+          validWaveConditions.push(normalized as "CALM" | "MODERATE" | "WAVY" | "SURFABLE");
         }
       });
       if (validWaveConditions.length > 0) {
@@ -196,9 +289,9 @@ export class EnhancedNaturalLanguageSearch {
     // Extract parking - map to exact FilterBar values
     if (entities.parking.length > 0) {
       const validParking: string[] = [];
-      entities.parking.forEach(entity => {
+      entities.parking.forEach((entity) => {
         const normalized = entity.normalized.toUpperCase();
-        if (['NONE', 'ROADSIDE', 'SMALL_LOT', 'LARGE_LOT'].includes(normalized)) {
+        if (["NONE", "ROADSIDE", "SMALL_LOT", "LARGE_LOT"].includes(normalized)) {
           validParking.push(normalized);
         }
       });
@@ -210,30 +303,30 @@ export class EnhancedNaturalLanguageSearch {
     // Extract amenities - map to exact database values
     if (entities.amenities.length > 0) {
       const validAmenities: string[] = [];
-      entities.amenities.forEach(entity => {
+      entities.amenities.forEach((entity) => {
         const normalized = entity.normalized.toLowerCase();
         // Map to exact amenity values used in the database
         const amenityMapping: Record<string, string> = {
-          'sunbeds': 'sunbeds',
-          'umbrellas': 'umbrellas',
-          'showers': 'showers',
-          'toilets': 'toilets',
-          'lifeguard': 'lifeguard',
-          'beach_bar': 'beach_bar',
-          'taverna': 'taverna',
-          'food': 'food',
-          'music': 'music',
-          'snorkeling': 'snorkeling',
-          'water_sports': 'water_sports',
-          'family_friendly': 'family_friendly',
-          'boat_trips': 'boat_trips',
-          'fishing': 'fishing',
-          'photography': 'photography',
-          'hiking': 'hiking',
-          'birdwatching': 'birdwatching',
-          'cliff_jumping': 'cliff_jumping'
+          sunbeds: "sunbeds",
+          umbrellas: "umbrellas",
+          showers: "showers",
+          toilets: "toilets",
+          lifeguard: "lifeguard",
+          beach_bar: "beach_bar",
+          taverna: "taverna",
+          food: "food",
+          music: "music",
+          snorkeling: "snorkeling",
+          water_sports: "water_sports",
+          family_friendly: "family_friendly",
+          boat_trips: "boat_trips",
+          fishing: "fishing",
+          photography: "photography",
+          hiking: "hiking",
+          birdwatching: "birdwatching",
+          cliff_jumping: "cliff_jumping",
         };
-        
+
         if (amenityMapping[normalized]) {
           validAmenities.push(amenityMapping[normalized]);
         }
@@ -246,9 +339,9 @@ export class EnhancedNaturalLanguageSearch {
     // Extract organization - map to FilterBar format
     if (entities.organization.length > 0) {
       const validOrganized: string[] = [];
-      entities.organization.forEach(entity => {
+      entities.organization.forEach((entity) => {
         const normalized = entity.normalized.toLowerCase();
-        if (normalized === 'organized' || normalized === 'unorganized') {
+        if (normalized === "organized" || normalized === "unorganized") {
           validOrganized.push(normalized);
         }
       });
@@ -289,9 +382,9 @@ export class EnhancedNaturalLanguageSearch {
       if (word.length >= 3) {
         const match = this.fuzzyMatcher.findBestMatch(word, this.knownPlaces, {
           threshold: 0.7,
-          methods: ['fuzzy', 'phonetic']
+          methods: ["fuzzy", "phonetic"],
         });
-        
+
         if (match) {
           return match.text;
         }
@@ -305,104 +398,148 @@ export class EnhancedNaturalLanguageSearch {
    * Clean search term by removing extracted entities and filters
    */
   private cleanSearchTerm(
-    query: string, 
-    entities: EntityRecognitionResult, 
+    query: string,
+    entities: EntityRecognitionResult,
     filters: Partial<FilterState>,
     detectedPlace?: string
   ): string {
     let cleaned = query.toLowerCase();
-    
+
     // If a known place was detected, remove it completely and return empty string
     // This ensures that known locations don't interfere with search
     if (detectedPlace && this.knownPlaces.includes(detectedPlace.toLowerCase())) {
       // Remove the detected place name
-      const placePattern = new RegExp(`\\b${detectedPlace.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi');
-      cleaned = cleaned.replace(placePattern, ' ');
-      
+      const placePattern = new RegExp(
+        `\\b${detectedPlace.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`,
+        "gi"
+      );
+      cleaned = cleaned.replace(placePattern, " ");
+
       // Remove all other recognized entities
-      entities.all.forEach(entity => {
-        if (entity.type !== 'place') { // Don't remove places again
-          const pattern = new RegExp(`\\b${entity.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi');
-          cleaned = cleaned.replace(pattern, ' ');
+      entities.all.forEach((entity) => {
+        if (entity.type !== "place") {
+          // Don't remove places again
+          const pattern = new RegExp(
+            `\\b${entity.text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`,
+            "gi"
+          );
+          cleaned = cleaned.replace(pattern, " ");
         }
       });
-      
+
       // Remove blue flag patterns
-      this.blueFlagPatterns.forEach(pattern => {
-        cleaned = cleaned.replace(pattern, ' ');
+      this.blueFlagPatterns.forEach((pattern) => {
+        cleaned = cleaned.replace(pattern, " ");
       });
-      
+
       // Remove common beach-related words
       const commonWords = [
-        'beach', 'beaches', 'sea', 'ocean', 'coast', 'coastal', 'location', 'spot', 'place', 'area'
+        "beach",
+        "beaches",
+        "sea",
+        "ocean",
+        "coast",
+        "coastal",
+        "location",
+        "spot",
+        "place",
+        "area",
       ];
-      
-      commonWords.forEach(word => {
-        const pattern = new RegExp(`\\b${word}\\b`, 'gi');
-        cleaned = cleaned.replace(pattern, ' ');
+
+      commonWords.forEach((word) => {
+        const pattern = new RegExp(`\\b${word}\\b`, "gi");
+        cleaned = cleaned.replace(pattern, " ");
       });
-      
+
       // Remove common prepositions and connectors
       const connectors = [
-        'in', 'at', 'near', 'around', 'close to', 'by', 'with', 'and', 'or', 'but',
-        'show', 'me', 'find', 'get', 'want', 'need', 'looking for', 'search for'
+        "in",
+        "at",
+        "near",
+        "around",
+        "close to",
+        "by",
+        "with",
+        "and",
+        "or",
+        "but",
+        "show",
+        "me",
+        "find",
+        "get",
+        "want",
+        "need",
+        "looking for",
+        "search for",
       ];
-      
-      connectors.forEach(connector => {
-        const pattern = new RegExp(`\\b${connector}\\b`, 'gi');
-        cleaned = cleaned.replace(pattern, ' ');
+
+      connectors.forEach((connector) => {
+        const pattern = new RegExp(`\\b${connector}\\b`, "gi");
+        cleaned = cleaned.replace(pattern, " ");
       });
-      
+
       // Clean up extra spaces
-      cleaned = cleaned.replace(/\s+/g, ' ').trim();
-      
+      cleaned = cleaned.replace(/\s+/g, " ").trim();
+
       // If we have a known place, return the cleaned search term (may contain descriptive words)
       return cleaned;
     }
-    
+
     // For unknown places or no place detected, keep the search term
     // Remove all recognized entities except places (keep unknown places in search)
-    entities.all.forEach(entity => {
-      if (entity.type !== 'place') {
-        const pattern = new RegExp(`\\b${entity.text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi');
-        cleaned = cleaned.replace(pattern, ' ');
+    entities.all.forEach((entity) => {
+      if (entity.type !== "place") {
+        const pattern = new RegExp(
+          `\\b${entity.text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`,
+          "gi"
+        );
+        cleaned = cleaned.replace(pattern, " ");
       }
     });
-    
+
     // Remove blue flag patterns
-    this.blueFlagPatterns.forEach(pattern => {
-      cleaned = cleaned.replace(pattern, ' ');
+    this.blueFlagPatterns.forEach((pattern) => {
+      cleaned = cleaned.replace(pattern, " ");
     });
-    
+
     // Remove common beach-related words
     const commonWords = [
-      'beach', 'beaches', 'sea', 'ocean', 'coast', 'coastal', 'location', 'spot', 'place', 'area'
+      "beach",
+      "beaches",
+      "sea",
+      "ocean",
+      "coast",
+      "coastal",
+      "location",
+      "spot",
+      "place",
+      "area",
     ];
-    
-    commonWords.forEach(word => {
-      const pattern = new RegExp(`\\b${word}\\b`, 'gi');
-      cleaned = cleaned.replace(pattern, ' ');
+
+    commonWords.forEach((word) => {
+      const pattern = new RegExp(`\\b${word}\\b`, "gi");
+      cleaned = cleaned.replace(pattern, " ");
     });
-    
+
     // Clean up extra spaces
-    cleaned = cleaned.replace(/\s+/g, ' ').trim();
-    
-    return cleaned.length >= 2 ? cleaned : '';
+    cleaned = cleaned.replace(/\s+/g, " ").trim();
+
+    return cleaned.length >= 2 ? cleaned : "";
   }
 
   /**
    * Detect blue flag certification
    */
   private detectBlueFlag(query: string): boolean {
-    return this.blueFlagPatterns.some(pattern => pattern.test(query));
+    return this.blueFlagPatterns.some((pattern) => pattern.test(query));
   }
 
   /**
    * Detect "near me" intent from query
    */
   private detectNearMeIntent(
-    query: string, 
-    entities: EntityRecognitionResult, 
+    query: string,
+    entities: EntityRecognitionResult,
     sentiment: SentimentResult
   ): boolean {
     const nearMePatterns = [
@@ -416,28 +553,28 @@ export class EnhancedNaturalLanguageSearch {
       /\bwithin\s+walking\s+distance\b/i,
       /\bwithin\s+driving\s+distance\b/i,
       /\bclosest\s+beaches?\b/i,
-      /\bnearest\s+beaches?\b/i
+      /\bnearest\s+beaches?\b/i,
     ];
 
-    return nearMePatterns.some(pattern => pattern.test(query));
+    return nearMePatterns.some((pattern) => pattern.test(query));
   }
 
   /**
    * Apply sentiment-based adjustments to filters
    */
   private applySentimentAdjustments(
-    filters: Partial<FilterState>, 
-    sentiment: SentimentResult, 
+    filters: Partial<FilterState>,
+    sentiment: SentimentResult,
     intent: IntentAnalysis
   ): void {
     // If user expresses strong positive sentiment about specific features,
     // we might want to prioritize those
-    if (sentiment.polarity === 'positive' && sentiment.intensity === 'high') {
+    if (sentiment.polarity === "positive" && sentiment.intensity === "high") {
       // Could add logic to boost confidence of positive features
     }
-    
+
     // If user is asking for recommendations, we might want to be more inclusive
-    if (intent.primaryIntent === 'preference' && this.sentimentAnalyzer.isRecommendationQuery('')) {
+    if (intent.primaryIntent === "preference" && this.sentimentAnalyzer.isRecommendationQuery("")) {
       // Could add logic to expand search criteria
     }
   }
@@ -447,27 +584,27 @@ export class EnhancedNaturalLanguageSearch {
    */
   private applyContextAdjustments(filters: Partial<FilterState>, context: SearchContext): void {
     // Time-based adjustments
-    if (context.timeOfDay === 'morning') {
+    if (context.timeOfDay === "morning") {
       // Morning preferences might favor calm waters
       if (!filters.waveConditions) {
-        filters.waveConditions = ['CALM'];
+        filters.waveConditions = ["CALM"];
       }
     }
-    
+
     // Season-based adjustments
-    if (context.season === 'summer') {
+    if (context.season === "summer") {
       // Summer might favor family-friendly amenities
       if (!filters.amenities) {
         filters.amenities = [];
       }
-      if (!filters.amenities.includes('family_friendly')) {
-        filters.amenities.push('family_friendly');
+      if (!filters.amenities.includes("family_friendly")) {
+        filters.amenities.push("family_friendly");
       }
     }
-    
+
     // User preference adjustments
     if (context.userPreferences) {
-      context.userPreferences.forEach(preference => {
+      context.userPreferences.forEach((preference) => {
         // Map user preferences to filter categories
         // This would need to be customized based on your preference system
       });
@@ -484,22 +621,23 @@ export class EnhancedNaturalLanguageSearch {
     locationExtraction: LocationExtractionResult
   ): number {
     let confidence = 0.5; // Base confidence
-    
+
     // Boost confidence based on entity recognition
     if (entities.all.length > 0) {
-      const avgEntityConfidence = entities.all.reduce((sum, entity) => sum + entity.confidence, 0) / entities.all.length;
+      const avgEntityConfidence =
+        entities.all.reduce((sum, entity) => sum + entity.confidence, 0) / entities.all.length;
       confidence += avgEntityConfidence * 0.25;
     }
-    
+
     // Boost confidence based on sentiment analysis
     confidence += sentiment.confidence * 0.15;
-    
+
     // Boost confidence based on intent analysis
     confidence += intent.confidence * 0.15;
-    
+
     // Boost confidence based on location extraction
     confidence += locationExtraction.confidence * 0.25;
-    
+
     return Math.min(0.95, Math.max(0.1, confidence));
   }
 
@@ -514,36 +652,36 @@ export class EnhancedNaturalLanguageSearch {
     locationExtraction: LocationExtractionResult
   ): string[] {
     const suggestions: string[] = [];
-    
+
     // If no location was detected, suggest popular places
     if (locationExtraction.allLocations.length === 0) {
-      suggestions.push('Try searching for beaches in Crete, Corfu, or Mykonos');
+      suggestions.push("Try searching for beaches in Crete, Corfu, or Mykonos");
     }
-    
+
     // If no amenities were detected, suggest popular amenities
     if (entities.amenities.length === 0) {
-      suggestions.push('Consider adding amenities like sunbeds, umbrellas, or lifeguards');
+      suggestions.push("Consider adding amenities like sunbeds, umbrellas, or lifeguards");
     }
-    
+
     // If sentiment is negative, suggest positive alternatives
-    if (sentiment.polarity === 'negative') {
-      suggestions.push('Try searching for calm, family-friendly beaches');
+    if (sentiment.polarity === "negative") {
+      suggestions.push("Try searching for calm, family-friendly beaches");
     }
-    
+
     // If intent is unclear, provide guidance
     if (intent.confidence < 0.5) {
-      suggestions.push('Be more specific about what you\'re looking for');
+      suggestions.push("Be more specific about what you're looking for");
     }
-    
+
     // Location-specific suggestions
-    if (locationExtraction.searchStrategy === 'multi') {
-      suggestions.push('Try searching for one location at a time for better results');
+    if (locationExtraction.searchStrategy === "multi") {
+      suggestions.push("Try searching for one location at a time for better results");
     }
-    
+
     if (locationExtraction.confidence < 0.7) {
-      suggestions.push('Try being more specific with the location name');
+      suggestions.push("Try being more specific with the location name");
     }
-    
+
     return suggestions;
   }
 
@@ -552,24 +690,24 @@ export class EnhancedNaturalLanguageSearch {
    */
   private fallbackProcessing(query: string, processingTime: number): EnhancedExtractionResult {
     // Basic fallback - you could integrate your existing logic here
-    const safeQuery = query || '';
+    const safeQuery = query || "";
     return {
       filters: {},
       originalQuery: safeQuery,
       cleanedSearchTerm: safeQuery.toLowerCase(),
       confidence: 0.3,
       sentiment: {
-        polarity: 'neutral',
+        polarity: "neutral",
         confidence: 0.5,
-        intent: 'search',
-        intensity: 'low',
-        keywords: []
+        intent: "search",
+        intensity: "low",
+        keywords: [],
       },
       intent: {
-        primaryIntent: 'search',
+        primaryIntent: "search",
         secondaryIntents: [],
         confidence: 0.3,
-        modifiers: []
+        modifiers: [],
       },
       entities: {
         places: [],
@@ -578,7 +716,7 @@ export class EnhancedNaturalLanguageSearch {
         waveConditions: [],
         parking: [],
         organization: [],
-        all: []
+        all: [],
       },
       locationExtraction: {
         primaryLocation: undefined,
@@ -586,11 +724,11 @@ export class EnhancedNaturalLanguageSearch {
         allLocations: [],
         locationQuery: query,
         confidence: 0.3,
-        searchStrategy: 'exact',
-        remainingQuery: query
+        searchStrategy: "exact",
+        remainingQuery: query,
       },
       processingTime,
-      suggestions: ['Try being more specific about your beach preferences']
+      suggestions: ["Try being more specific about your beach preferences"],
     };
   }
 
@@ -598,7 +736,7 @@ export class EnhancedNaturalLanguageSearch {
    * Update known places
    */
   public setKnownPlaces(places: string[]): void {
-    this.knownPlaces = places.map(place => place.toLowerCase());
+    this.knownPlaces = places.map((place) => place.toLowerCase());
   }
 
   /**
@@ -612,7 +750,7 @@ export class EnhancedNaturalLanguageSearch {
     return {
       textProcessor: this.textProcessor.getCacheStats(),
       entityRecognizer: {}, // Could add stats here
-      fuzzyMatcher: {} // Could add stats here
+      fuzzyMatcher: {}, // Could add stats here
     };
   }
 

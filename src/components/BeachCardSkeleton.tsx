@@ -7,13 +7,13 @@ const BeachCardSkeleton = () => {
       {/* Image Skeleton */}
       <div className="aspect-video bg-gradient-ocean relative overflow-hidden">
         <Skeleton className="w-full h-full bg-gradient-to-br from-muted/50 to-muted animate-pulse" />
-        
+
         {/* Badge Skeletons */}
         <div className="absolute top-3 left-3 flex gap-2">
           <Skeleton className="h-6 w-20 bg-card/80" />
           <Skeleton className="h-6 w-16 bg-card/80" />
         </div>
-        
+
         {/* Distance Badge Skeleton */}
         <div className="absolute top-3 right-3">
           <Skeleton className="h-6 w-16 bg-card/80" />

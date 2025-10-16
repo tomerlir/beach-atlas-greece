@@ -1,17 +1,17 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { ChevronDown, ArrowUpDown } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Label } from '@/components/ui/label';
-import { useToast } from '@/hooks/use-toast';
-import { FilterState } from '@/hooks/useUrlState';
+import React, { useState, useCallback, useEffect } from "react";
+import { ChevronDown, ArrowUpDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { useToast } from "@/hooks/use-toast";
+import { FilterState } from "@/hooks/useUrlState";
 
 interface SortDropdownProps {
   filters: FilterState;
   onFiltersChange: (updates: Partial<FilterState>) => void;
   userLocation: GeolocationPosition | null;
-  locationPermission: 'granted' | 'denied' | 'prompt' | null;
+  locationPermission: "granted" | "denied" | "prompt" | null;
   onLocationRequest: () => void;
   isLoadingLocation: boolean;
 }
@@ -34,21 +34,21 @@ export default function SortDropdown({
   const { toast } = useToast();
 
   // Determine if location is available and active
-  const isLocationActive = filters.nearMe && userLocation && locationPermission === 'granted';
+  const isLocationActive = filters.nearMe && userLocation && locationPermission === "granted";
 
   // Get available sort options based on location state
   const getSortOptions = useCallback((): SortOption[] => {
     if (isLocationActive) {
       return [
-        { value: 'distance.asc', label: 'Distance: Near to Far' },
-        { value: 'distance.desc', label: 'Distance: Far to Near' },
-        { value: 'name.asc', label: 'Name: A → Z' },
-        { value: 'name.desc', label: 'Name: Z → A' },
+        { value: "distance.asc", label: "Distance: Near to Far" },
+        { value: "distance.desc", label: "Distance: Far to Near" },
+        { value: "name.asc", label: "Name: A → Z" },
+        { value: "name.desc", label: "Name: Z → A" },
       ];
     } else {
       return [
-        { value: 'name.asc', label: 'Name: A → Z' },
-        { value: 'name.desc', label: 'Name: Z → A' },
+        { value: "name.asc", label: "Name: A → Z" },
+        { value: "name.desc", label: "Name: Z → A" },
       ];
     }
   }, [isLocationActive]);
@@ -56,33 +56,36 @@ export default function SortDropdown({
   const sortOptions = getSortOptions();
 
   // Get current sort value, defaulting to name.asc if none set
-  const currentSort = filters.sort || 'name.asc';
+  const currentSort = filters.sort || "name.asc";
 
   // Get display label for current sort
   const getCurrentSortLabel = useCallback(() => {
-    const option = sortOptions.find(opt => opt.value === currentSort);
-    return option?.label || 'Name: A → Z';
+    const option = sortOptions.find((opt) => opt.value === currentSort);
+    return option?.label || "Name: A → Z";
   }, [currentSort, sortOptions]);
 
   // Handle sort change
-  const handleSortChange = useCallback((value: string) => {
-    const newSort = value as FilterState['sort'];
-    
-    // If distance sorting is selected but location is not available, request location
-    if (value.startsWith('distance.') && !isLocationActive) {
-      onLocationRequest();
-      // Don't change sort yet - wait for location to be available
-      return;
-    }
+  const handleSortChange = useCallback(
+    (value: string) => {
+      const newSort = value as FilterState["sort"];
 
-    onFiltersChange({ sort: newSort, page: 1 });
-    setIsOpen(false);
-  }, [onFiltersChange, isLocationActive, onLocationRequest]);
+      // If distance sorting is selected but location is not available, request location
+      if (value.startsWith("distance.") && !isLocationActive) {
+        onLocationRequest();
+        // Don't change sort yet - wait for location to be available
+        return;
+      }
+
+      onFiltersChange({ sort: newSort, page: 1 });
+      setIsOpen(false);
+    },
+    [onFiltersChange, isLocationActive, onLocationRequest]
+  );
 
   // Handle location state changes - fallback to name sorting if location becomes unavailable
   const handleLocationFallback = useCallback(() => {
-    if (currentSort.startsWith('distance.') && !isLocationActive) {
-      onFiltersChange({ sort: 'name.asc', page: 1 });
+    if (currentSort.startsWith("distance.") && !isLocationActive) {
+      onFiltersChange({ sort: "name.asc", page: 1 });
       toast({
         title: "Location unavailable",
         description: "Switched to name sorting as location is no longer available.",
@@ -116,22 +119,19 @@ export default function SortDropdown({
       <PopoverContent className="w-64 p-0" align="start">
         <div className="p-3">
           <h4 className="font-semibold text-sm mb-3">Sort by</h4>
-          <RadioGroup
-            value={currentSort}
-            onValueChange={handleSortChange}
-          >
+          <RadioGroup value={currentSort} onValueChange={handleSortChange}>
             {sortOptions.map((option) => {
               const isDisabled = option.requiresLocation && !isLocationActive;
               return (
                 <div key={option.value} className="flex items-center space-x-2 py-2">
-                  <RadioGroupItem 
-                    value={option.value} 
+                  <RadioGroupItem
+                    value={option.value}
                     id={`sort-${option.value}`}
                     disabled={isDisabled}
                   />
-                  <Label 
-                    htmlFor={`sort-${option.value}`} 
-                    className={`text-sm cursor-pointer flex-1 ${isDisabled ? 'text-muted-foreground' : ''}`}
+                  <Label
+                    htmlFor={`sort-${option.value}`}
+                    className={`text-sm cursor-pointer flex-1 ${isDisabled ? "text-muted-foreground" : ""}`}
                   >
                     {option.label}
                     {isDisabled && (
@@ -144,7 +144,7 @@ export default function SortDropdown({
               );
             })}
           </RadioGroup>
-          
+
           {/* Show location request button if distance options are disabled */}
           {!isLocationActive && (
             <div className="mt-3 pt-3 border-t">
@@ -154,17 +154,17 @@ export default function SortDropdown({
                 onClick={() => {
                   onLocationRequest();
                   // Also enable Near me filter and set default distance sorting
-                  onFiltersChange({ 
-                    nearMe: true, 
-                    sort: 'distance.asc', // Default to "Distance: Near to Far"
-                    page: 1 
+                  onFiltersChange({
+                    nearMe: true,
+                    sort: "distance.asc", // Default to "Distance: Near to Far"
+                    page: 1,
                   });
                   setIsOpen(false);
                 }}
                 disabled={isLoadingLocation}
                 className="w-full text-xs text-muted-foreground hover:text-foreground"
               >
-                {isLoadingLocation ? 'Getting location...' : 'Enable location for distance sorting'}
+                {isLoadingLocation ? "Getting location..." : "Enable location for distance sorting"}
               </Button>
             </div>
           )}

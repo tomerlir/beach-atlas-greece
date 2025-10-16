@@ -5,42 +5,53 @@ This directory contains standardized breadcrumb components for the Beach Atlas a
 ## Components
 
 ### `Breadcrumbs`
+
 A basic breadcrumb component that renders a navigation trail.
 
 **Props:**
+
 - `items: Crumb[]` - Array of breadcrumb items
 
 **Usage:**
+
 ```tsx
-<Breadcrumbs items={[
-  { label: "Home", href: "/" },
-  { label: "Areas", href: "/areas" },
-  { label: "Current Page" } // no href = current page
-]} />
+<Breadcrumbs
+  items={[
+    { label: "Home", href: "/" },
+    { label: "Areas", href: "/areas" },
+    { label: "Current Page" }, // no href = current page
+  ]}
+/>
 ```
 
 ### `BreadcrumbsWithJsonLd`
+
 A breadcrumb component that also generates JSON-LD structured data for SEO.
 
 **Props:**
+
 - `items: Crumb[]` - Array of breadcrumb items
 
 **Usage:**
+
 ```tsx
-<BreadcrumbsWithJsonLd items={[
-  { label: "Home", href: "/" },
-  { label: "Areas", href: "/areas" },
-  { label: "Current Page" }
-]} />
+<BreadcrumbsWithJsonLd
+  items={[
+    { label: "Home", href: "/" },
+    { label: "Areas", href: "/areas" },
+    { label: "Current Page" },
+  ]}
+/>
 ```
 
 ## Types
 
 ### `Crumb`
+
 ```ts
-type Crumb = { 
-  label: string; 
-  href?: string; 
+type Crumb = {
+  label: string;
+  href?: string;
 };
 ```
 
@@ -49,9 +60,10 @@ type Crumb = {
 
 ## Environment Configuration
 
-The `BreadcrumbsWithJsonLd` component uses the `VITE_SITE_URL` environment variable for generating absolute URLs in JSON-LD. 
+The `BreadcrumbsWithJsonLd` component uses the `VITE_SITE_URL` environment variable for generating absolute URLs in JSON-LD.
 
 Add to your `.env` file:
+
 ```
 VITE_SITE_URL=https://beachesofgreece.com
 ```
@@ -68,6 +80,7 @@ VITE_SITE_URL=https://beachesofgreece.com
 ## Styling
 
 The breadcrumbs use Tailwind CSS classes:
+
 - Small, muted text (`text-sm text-gray-500`)
 - Hover effects on links
 - Current page is highlighted (`text-gray-700 font-medium`)

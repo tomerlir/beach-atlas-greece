@@ -1,14 +1,21 @@
-import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Switch } from '@/components/ui/switch';
-import { Label } from '@/components/ui/label';
-import { X, BarChart3 } from 'lucide-react';
-import { analytics, type ConsentState } from '@/lib/analytics';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { X, BarChart3 } from "lucide-react";
+import { analytics, type ConsentState } from "@/lib/analytics";
+import { Link } from "react-router-dom";
 
 export default function ConsentBanner() {
-  const [consent, setConsent] = useState<ConsentState>('unknown');
+  const [consent, setConsent] = useState<ConsentState>("unknown");
   const [isVisible, setIsVisible] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -18,13 +25,13 @@ export default function ConsentBanner() {
   useEffect(() => {
     const currentConsent = analytics.getConsent();
     setConsent(currentConsent);
-    setIsVisible(currentConsent === 'unknown');
-    setAnalyticsAllowed(currentConsent === 'accepted');
+    setIsVisible(currentConsent === "unknown");
+    setAnalyticsAllowed(currentConsent === "accepted");
 
     const unsubscribe = analytics.onConsentChange((newConsent) => {
       setConsent(newConsent);
-      setIsVisible(newConsent === 'unknown');
-      setAnalyticsAllowed(newConsent === 'accepted');
+      setIsVisible(newConsent === "unknown");
+      setAnalyticsAllowed(newConsent === "accepted");
     });
 
     return unsubscribe;
@@ -35,25 +42,25 @@ export default function ConsentBanner() {
     const handler = () => {
       try {
         const current = analytics.getConsent();
-        setAnalyticsAllowed(current === 'accepted');
+        setAnalyticsAllowed(current === "accepted");
       } catch {}
       setOpen(true);
     };
-    window.addEventListener('open-privacy-preferences', handler);
-    return () => window.removeEventListener('open-privacy-preferences', handler);
+    window.addEventListener("open-privacy-preferences", handler);
+    return () => window.removeEventListener("open-privacy-preferences", handler);
   }, []);
 
   const handleAccept = () => {
-    analytics.setConsent('accepted');
+    analytics.setConsent("accepted");
   };
 
   const handleReject = () => {
-    analytics.setConsent('rejected');
+    analytics.setConsent("rejected");
   };
 
   // Preferences dialog primary actions handled via Accept/Reject buttons
   const handleApply = () => {
-    analytics.setConsent(analyticsAllowed ? 'accepted' : 'rejected');
+    analytics.setConsent(analyticsAllowed ? "accepted" : "rejected");
     setOpen(false);
   };
 
@@ -65,7 +72,8 @@ export default function ConsentBanner() {
           <DialogHeader>
             <DialogTitle>Privacy preferences</DialogTitle>
             <DialogDescription id="consent-pref-desc">
-              Choose which optional features you want to allow. You can change your choice at any time from the site footer.
+              Choose which optional features you want to allow. You can change your choice at any
+              time from the site footer.
             </DialogDescription>
           </DialogHeader>
 
@@ -73,17 +81,28 @@ export default function ConsentBanner() {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <div className="text-sm font-medium text-foreground">Strictly necessary</div>
-                <div className="text-sm text-muted-foreground">Required for core site functionality. Always on.</div>
+                <div className="text-sm text-muted-foreground">
+                  Required for core site functionality. Always on.
+                </div>
               </div>
               <Switch checked disabled aria-readonly aria-label="Strictly necessary" />
             </div>
 
             <div className="flex items-start justify-between gap-4">
               <div>
-                <Label htmlFor="analytics-switch" className="text-sm font-medium">Analytics</Label>
-                <div className="text-sm text-muted-foreground">Cookieless analytics to help us understand usage and improve features.</div>
+                <Label htmlFor="analytics-switch" className="text-sm font-medium">
+                  Analytics
+                </Label>
+                <div className="text-sm text-muted-foreground">
+                  Cookieless analytics to help us understand usage and improve features.
+                </div>
               </div>
-              <Switch id="analytics-switch" checked={analyticsAllowed} onCheckedChange={setAnalyticsAllowed} aria-label="Analytics" />
+              <Switch
+                id="analytics-switch"
+                checked={analyticsAllowed}
+                onCheckedChange={setAnalyticsAllowed}
+                aria-label="Analytics"
+              />
             </div>
           </div>
 
@@ -92,10 +111,23 @@ export default function ConsentBanner() {
               Cancel
             </Button>
             <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
-              <Button variant="outline" onClick={() => { handleReject(); setOpen(false); }} className="w-full sm:w-auto">
+              <Button
+                variant="outline"
+                onClick={() => {
+                  handleReject();
+                  setOpen(false);
+                }}
+                className="w-full sm:w-auto"
+              >
                 Reject all
               </Button>
-              <Button onClick={() => { handleAccept(); setOpen(false); }} className="w-full sm:w-auto">
+              <Button
+                onClick={() => {
+                  handleAccept();
+                  setOpen(false);
+                }}
+                className="w-full sm:w-auto"
+              >
                 Accept all
               </Button>
             </div>
@@ -112,9 +144,7 @@ export default function ConsentBanner() {
               <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
                   <BarChart3 className="h-4 w-4 text-muted-foreground" />
-                  <h3 className="text-sm font-medium text-foreground">
-                    Privacy preferences
-                  </h3>
+                  <h3 className="text-sm font-medium text-foreground">Privacy preferences</h3>
                 </div>
                 <Button
                   onClick={handleReject}
@@ -126,14 +156,12 @@ export default function ConsentBanner() {
                   <X className="h-4 w-4" />
                 </Button>
               </div>
-              
+
               {/* Description - full width */}
               <p className="text-sm text-muted-foreground leading-relaxed">
-                With your permission, we'd also like to enable privacy-friendly analytics (cookieless) to help us improve Beaches of Greece.
-                <Link 
-                  to="/privacy" 
-                  className="text-primary hover:underline ml-1"
-                >
+                With your permission, we'd also like to enable privacy-friendly analytics
+                (cookieless) to help us improve Beaches of Greece.
+                <Link to="/privacy" className="text-primary hover:underline ml-1">
                   Privacy policy
                 </Link>
               </p>
@@ -143,10 +171,20 @@ export default function ConsentBanner() {
                 <Button onClick={handleAccept} size="default" className="w-full sm:flex-1">
                   Accept all
                 </Button>
-                <Button onClick={handleReject} variant="outline" size="default" className="w-full sm:flex-1">
+                <Button
+                  onClick={handleReject}
+                  variant="outline"
+                  size="default"
+                  className="w-full sm:flex-1"
+                >
                   Reject all
                 </Button>
-                <Button onClick={() => setOpen(true)} variant="secondary" size="default" className="w-full sm:flex-1">
+                <Button
+                  onClick={() => setOpen(true)}
+                  variant="secondary"
+                  size="default"
+                  className="w-full sm:flex-1"
+                >
                   Customize
                 </Button>
               </div>

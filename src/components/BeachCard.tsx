@@ -1,13 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { 
-  MapPin, 
-  Waves, 
-  Car, 
-  Flag, 
-  CheckCircle,
-  XCircle,
-  AlertCircle
-} from "lucide-react";
+import { MapPin, Waves, Car, Flag, CheckCircle, XCircle, AlertCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
@@ -39,30 +31,35 @@ interface BeachCardProps {
   distance?: number;
   showDistance?: boolean;
   compact?: boolean;
-  engagementSource?: 'search' | 'map' | 'browsing' | 'area_explore';
+  engagementSource?: "search" | "map" | "browsing" | "area_explore";
 }
-
 
 // Map parking types to icons and colors
 const parkingConfig: Record<string, { label: string; icon: any; color: string }> = {
   NONE: { label: "No Parking", icon: XCircle, color: "text-secondary" },
   ROADSIDE: { label: "Roadside Parking", icon: AlertCircle, color: "text-secondary" },
   SMALL_LOT: { label: "Small Lot", icon: AlertCircle, color: "text-secondary" },
-  LARGE_LOT: { label: "Large Lot", icon: CheckCircle, color: "text-secondary" }
+  LARGE_LOT: { label: "Large Lot", icon: CheckCircle, color: "text-secondary" },
 };
 
-const BeachCard = ({ beach, distance, showDistance = true, compact = false, engagementSource }: BeachCardProps) => {
-  const { prefetchWithImage, cancelPrefetch } = useAdvancedPrefetch({ 
-    delay: 50, 
-    preloadImages: true, 
-    preloadData: true 
+const BeachCard = ({
+  beach,
+  distance,
+  showDistance = true,
+  compact = false,
+  engagementSource,
+}: BeachCardProps) => {
+  const { prefetchWithImage, cancelPrefetch } = useAdvancedPrefetch({
+    delay: 50,
+    preloadImages: true,
+    preloadData: true,
   });
   const { storeNavigationSource } = useNavigationState();
 
-  const parkingInfo = parkingConfig[beach.parking] || { 
-    label: "Parking Unknown", 
-    icon: AlertCircle, 
-    color: "text-muted-foreground" 
+  const parkingInfo = parkingConfig[beach.parking] || {
+    label: "Parking Unknown",
+    icon: AlertCircle,
+    color: "text-muted-foreground",
   };
 
   // Fallback component for when image fails to load
@@ -84,7 +81,7 @@ const BeachCard = ({ beach, distance, showDistance = true, compact = false, enga
           }
         });
       },
-      { rootMargin: '300px' } // Increased margin for earlier prefetching
+      { rootMargin: "300px" } // Increased margin for earlier prefetching
     );
 
     // Use a ref to get the element instead of querySelector
@@ -99,7 +96,7 @@ const BeachCard = ({ beach, distance, showDistance = true, compact = false, enga
           prefetchObserver.observe(retryElement);
         }
       }, 100);
-      
+
       return () => {
         clearTimeout(retryTimeout);
         prefetchObserver.disconnect();
@@ -121,8 +118,8 @@ const BeachCard = ({ beach, distance, showDistance = true, compact = false, enga
   };
 
   return (
-    <Link 
-      to={beachUrl} 
+    <Link
+      to={beachUrl}
       className="block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-xl min-h-[44px] min-w-[44px]"
       aria-label={`View details for ${beach.name} beach`}
       data-beach-id={beach.id}
@@ -130,9 +127,13 @@ const BeachCard = ({ beach, distance, showDistance = true, compact = false, enga
       onMouseLeave={cancelPrefetch}
       onClick={handleBeachCardClick}
     >
-      <Card className={`group hover:shadow-strong transition-all duration-300 overflow-hidden border-0 bg-card shadow-soft hover:shadow-medium h-full ${compact ? 'rounded-lg' : ''}`}>
+      <Card
+        className={`group hover:shadow-strong transition-all duration-300 overflow-hidden border-0 bg-card shadow-soft hover:shadow-medium h-full ${compact ? "rounded-lg" : ""}`}
+      >
         {/* Beach Image */}
-        <div className={`${compact ? 'aspect-[4/3]' : 'aspect-video'} bg-gradient-ocean relative overflow-hidden`}>
+        <div
+          className={`${compact ? "aspect-[4/3]" : "aspect-video"} bg-gradient-ocean relative overflow-hidden`}
+        >
           {beach.photo_url ? (
             <OptimizedImage
               src={beach.photo_url}
@@ -141,44 +142,63 @@ const BeachCard = ({ beach, distance, showDistance = true, compact = false, enga
               height={compact ? 240 : 225}
               className="group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
-              sizes={compact ? "(max-width: 768px) 75vw, (max-width: 1200px) 33vw, 320px" : "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"}
+              sizes={
+                compact
+                  ? "(max-width: 768px) 75vw, (max-width: 1200px) 33vw, 320px"
+                  : "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              }
               quality={85}
               fallbackComponent={fallbackComponent}
             />
           ) : (
             fallbackComponent
           )}
-          
+
           {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-          
+
           {/* Badges Overlay */}
-          <div className={`absolute bottom-2 left-2 sm:bottom-3 sm:left-3 flex gap-1 sm:gap-2 flex-wrap max-w-[calc(100%-4rem)] sm:max-w-none`}>
+          <div
+            className={`absolute bottom-2 left-2 sm:bottom-3 sm:left-3 flex gap-1 sm:gap-2 flex-wrap max-w-[calc(100%-4rem)] sm:max-w-none`}
+          >
             {beach.organized && (
-              <Badge variant="secondary" className="bg-secondary/95 text-secondary-foreground shadow-sm backdrop-blur-sm">
+              <Badge
+                variant="secondary"
+                className="bg-secondary/95 text-secondary-foreground shadow-sm backdrop-blur-sm"
+              >
                 <CheckCircle className="h-3 w-3 mr-1 text-secondary-foreground" />
-                <span className={`${compact ? 'hidden' : 'hidden sm:inline'}`}>Organized</span>
-                <span className={`${compact ? '' : 'sm:hidden'}`}>Org</span>
+                <span className={`${compact ? "hidden" : "hidden sm:inline"}`}>Organized</span>
+                <span className={`${compact ? "" : "sm:hidden"}`}>Org</span>
               </Badge>
             )}
             {beach.blue_flag && (
               <Badge className="bg-secondary/95 text-secondary-foreground shadow-sm backdrop-blur-sm">
                 <Flag className="h-3 w-3 mr-1 text-secondary-foreground" />
-                <span className={`${compact ? 'hidden' : 'hidden sm:inline'}`}>Blue Flag</span>
-                <span className={`${compact ? '' : 'sm:hidden'}`}>Flag</span>
+                <span className={`${compact ? "hidden" : "hidden sm:inline"}`}>Blue Flag</span>
+                <span className={`${compact ? "" : "sm:hidden"}`}>Flag</span>
               </Badge>
             )}
-            <Badge variant="outline" className="bg-card/95 text-foreground border-card/50 shadow-sm backdrop-blur-sm">
+            <Badge
+              variant="outline"
+              className="bg-card/95 text-foreground border-card/50 shadow-sm backdrop-blur-sm"
+            >
               <Car className={`h-3 w-3 mr-1 ${parkingInfo.color}`} />
-              <span className={`${compact ? 'hidden' : 'hidden sm:inline'}`}>{parkingInfo.label}</span>
-              <span className={`${compact ? '' : 'sm:hidden'}`}>{parkingInfo.label.split(' ')[0]}</span>
+              <span className={`${compact ? "hidden" : "hidden sm:inline"}`}>
+                {parkingInfo.label}
+              </span>
+              <span className={`${compact ? "" : "sm:hidden"}`}>
+                {parkingInfo.label.split(" ")[0]}
+              </span>
             </Badge>
           </div>
 
           {/* Distance Badge */}
           {distance && showDistance && (
             <div className="absolute top-3 right-3">
-              <Badge variant="outline" className="bg-card/95 text-foreground border-card/50 shadow-sm backdrop-blur-sm">
+              <Badge
+                variant="outline"
+                className="bg-card/95 text-foreground border-card/50 shadow-sm backdrop-blur-sm"
+              >
                 <MapPin className="h-3 w-3 mr-1 text-secondary" />
                 {Math.round(distance)} km
               </Badge>
@@ -186,17 +206,19 @@ const BeachCard = ({ beach, distance, showDistance = true, compact = false, enga
           )}
 
           {/* Photo Attribution - compact mode for homepage cards */}
-          <PhotoAttribution 
+          <PhotoAttribution
             photoSource={beach.photo_source}
             className="z-10 absolute bottom-1 right-1"
             compact={true}
           />
         </div>
 
-        <CardContent className={`${compact ? 'p-3' : 'p-5'}`}>
+        <CardContent className={`${compact ? "p-3" : "p-5"}`}>
           {/* Beach Name & Location */}
-          <div className={`${compact ? 'mb-2' : 'mb-4'}`}>
-            <h3 className={`font-bold ${compact ? 'text-base' : 'text-xl'} text-foreground mb-1 group-hover:text-primary transition-colors`}>
+          <div className={`${compact ? "mb-2" : "mb-4"}`}>
+            <h3
+              className={`font-bold ${compact ? "text-base" : "text-xl"} text-foreground mb-1 group-hover:text-primary transition-colors`}
+            >
               {beach.name}
             </h3>
             <div className="flex items-center text-muted-foreground text-sm">
@@ -212,7 +234,6 @@ const BeachCard = ({ beach, distance, showDistance = true, compact = false, enga
             </p>
           )}
 
-
           {/* Amenities with Icons */}
           {!compact && beach.amenities.length > 0 && (
             <div className="space-y-3">
@@ -221,11 +242,11 @@ const BeachCard = ({ beach, distance, showDistance = true, compact = false, enga
                 {beach.amenities.slice(0, 4).map((amenity) => {
                   const config = getAmenityConfig(amenity);
                   if (!config) return null;
-                  
+
                   const IconComponent = config.icon;
                   return (
-                    <div 
-                      key={amenity} 
+                    <div
+                      key={amenity}
                       className="flex items-center gap-1.5 px-2.5 py-1.5 bg-muted/60 rounded-full text-xs font-medium text-foreground hover:bg-muted transition-colors"
                     >
                       <IconComponent className={`h-3.5 w-3.5 ${config.color}`} />

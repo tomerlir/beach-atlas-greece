@@ -45,16 +45,21 @@ const defaultMarkerIcon = new L.Icon({
 
 // Ensure all markers use our explicit default icon instance
 // (safer across navigations and bundlers)
-// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+ 
 (L.Marker as any).prototype.options.icon = defaultMarkerIcon;
-
 
 const GREECE_BOUNDS: L.LatLngBoundsExpression = [
   [34.6, 19.0],
   [41.8, 29.6],
 ];
 
-function FitBoundsOnData({ beaches, fallbackBounds }: { beaches: Beach[]; fallbackBounds: L.LatLngBoundsExpression; }) {
+function FitBoundsOnData({
+  beaches,
+  fallbackBounds,
+}: {
+  beaches: Beach[];
+  fallbackBounds: L.LatLngBoundsExpression;
+}) {
   const map = useMap();
   useEffect(() => {
     if (!map) return;
@@ -108,7 +113,7 @@ function InvalidateSizeOnMount() {
 
 function MapEngagementTracker() {
   const map = useMap();
-  
+
   useEffect(() => {
     if (!map) return;
 
@@ -120,12 +125,12 @@ function MapEngagementTracker() {
       analytics.trackMapInteraction();
     };
 
-    map.on('moveend', handleMoveEnd);
-    map.on('zoomend', handleZoomEnd);
+    map.on("moveend", handleMoveEnd);
+    map.on("zoomend", handleZoomEnd);
 
     return () => {
-      map.off('moveend', handleMoveEnd);
-      map.off('zoomend', handleZoomEnd);
+      map.off("moveend", handleMoveEnd);
+      map.off("zoomend", handleZoomEnd);
     };
   }, [map]);
 
@@ -135,28 +140,34 @@ function MapEngagementTracker() {
 // Component to track when a popup's content is shown
 function PopupTracker({ beachId }: { beachId: string }) {
   const hasTracked = useRef(false);
-  
+
   useEffect(() => {
     if (!hasTracked.current) {
       analytics.trackMapBeachView(beachId);
       hasTracked.current = true;
     }
   }, [beachId]);
-  
+
   return null;
 }
 
 const MapPage = () => {
   const isMobile = useIsMobile();
   const { filters, updateFilters, resetFilters } = useUrlState();
-  const { location, isLoading: isLoadingLocation, getCurrentLocation, permission: locationPermission, error: locationError } = useGeolocation();
+  const {
+    location,
+    isLoading: isLoadingLocation,
+    getCurrentLocation,
+    permission: locationPermission,
+    error: locationError,
+  } = useGeolocation();
   // All filters drawer temporarily disabled on Map page
 
   // Track map open event and start engagement session
   useEffect(() => {
-    analytics.event('map_open', createMapOpenEvent('nav'));
+    analytics.event("map_open", createMapOpenEvent("nav"));
     analytics.startMapSession();
-    
+
     return () => {
       analytics.endMapSession();
     };
@@ -187,9 +198,10 @@ const MapPage = () => {
   }, [location, filters.nearMe, filters.sort, updateFilters]);
 
   const seoTitle = "Map of Greek Beaches - Explore on an Interactive Map";
-  const seoDescription = "Explore Greek beaches on an interactive map. Use powerful search and filters to find exactly what you want, then zoom to matching beaches automatically.";
+  const seoDescription =
+    "Explore Greek beaches on an interactive map. Use powerful search and filters to find exactly what you want, then zoom to matching beaches automatically.";
   const canonicalUrl = "https://beachesofgreece.com/map";
-  
+
   // Prevent indexing of filtered URLs (canonical points to clean URL)
   const hasQueryParams = window.location.search.length > 0;
   const shouldNoIndex = hasQueryParams;
@@ -202,7 +214,7 @@ const MapPage = () => {
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />
         <link rel="canonical" href={canonicalUrl} />
-        
+
         {/* Prevent indexing of filtered URLs */}
         {shouldNoIndex && <meta name="robots" content="noindex, follow" />}
       </Helmet>
@@ -214,11 +226,16 @@ const MapPage = () => {
         <section className="relative h-[30vh] flex flex-col justify-center bg-gradient-ocean overflow-hidden">
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${heroImage})`, backgroundPosition: isMobile ? "center left" : "center top" }}
+            style={{
+              backgroundImage: `url(${heroImage})`,
+              backgroundPosition: isMobile ? "center left" : "center top",
+            }}
           />
 
           <div className="relative z-10 text-center text-white px-4 w-full">
-            <h1 className="text-4xl md:text-6xl font-bold mb-8 drop-shadow-lg">Explore Beaches on the Map</h1>
+            <h1 className="text-4xl md:text-6xl font-bold mb-8 drop-shadow-lg">
+              Explore Beaches on the Map
+            </h1>
             <div className="max-w-2xl mx-auto">
               <EnhancedSearchBar
                 filters={filters}
@@ -262,7 +279,9 @@ const MapPage = () => {
         {/* Map Section */}
         <main className="container mx-auto px-4 md:pb-8">
           <ErrorBoundary>
-            <div className={`w-full rounded-xl overflow-hidden border border-border/30 shadow-sm ${mapHeightClass} leaflet-popup-contrast relative z-0`}>
+            <div
+              className={`w-full rounded-xl overflow-hidden border border-border/30 shadow-sm ${mapHeightClass} leaflet-popup-contrast relative z-0`}
+            >
               {/* Scoped styling to improve popup close button visibility over photos */}
               <style>
                 {`
@@ -277,10 +296,7 @@ const MapPage = () => {
                 }
                 `}
               </style>
-              <MapContainer
-                className="w-full h-full"
-                bounds={GREECE_BOUNDS}
-              >
+              <MapContainer className="w-full h-full" bounds={GREECE_BOUNDS}>
                 <InvalidateSizeOnMount />
                 {/* Satellite imagery base layer */}
                 <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}" />
@@ -289,26 +305,29 @@ const MapPage = () => {
                 {/* Borders, place names, and labels overlay */}
                 <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}" />
 
-                <FitBoundsOnData beaches={filteredBeaches as Beach[]} fallbackBounds={GREECE_BOUNDS} />
+                <FitBoundsOnData
+                  beaches={filteredBeaches as Beach[]}
+                  fallbackBounds={GREECE_BOUNDS}
+                />
                 <MapEngagementTracker />
 
                 {filteredBeaches
                   .filter((b) => b.latitude != null && b.longitude != null)
                   .map((b) => (
-                  <Marker key={b.id} position={[b.latitude as number, b.longitude as number]}>
-                    <Popup>
-                      <div className="max-w-[340px]">
-                        <PopupTracker beachId={b.id} />
-                        <BeachCard
-                          beach={b as Beach}
-                          distance={(b as any).distance}
-                          showDistance={filters.nearMe && !locationError && !!location}
-                          engagementSource="map"
-                        />
-                      </div>
-                    </Popup>
-                  </Marker>
-                ))}
+                    <Marker key={b.id} position={[b.latitude as number, b.longitude as number]}>
+                      <Popup>
+                        <div className="max-w-[340px]">
+                          <PopupTracker beachId={b.id} />
+                          <BeachCard
+                            beach={b as Beach}
+                            distance={(b as any).distance}
+                            showDistance={filters.nearMe && !locationError && !!location}
+                            engagementSource="map"
+                          />
+                        </div>
+                      </Popup>
+                    </Marker>
+                  ))}
               </MapContainer>
             </div>
           </ErrorBoundary>
@@ -325,5 +344,3 @@ const MapPage = () => {
 };
 
 export default MapPage;
-
-

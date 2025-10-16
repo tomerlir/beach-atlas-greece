@@ -1,20 +1,16 @@
-import { useCallback } from 'react';
-import {
-  MapPin,
-  AlertCircle,
-  Flag,
-} from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { useIsMobile } from '@/hooks/use-mobile';
-import { FilterState } from '@/hooks/useUrlState';
-import AmenitiesDropdown from '@/components/AmenitiesDropdown';
-import ParkingDropdown from '@/components/ParkingDropdown';
-import WaveConditionsDropdown from '@/components/WaveConditionsDropdown';
-import BeachTypeDropdown from '@/components/BeachTypeDropdown';
-import OrganizedDropdown from '@/components/OrganizedDropdown';
-import { analytics } from '@/lib/analytics';
-import { createFilterApplyEvent, createFilterClearEvent } from '@/lib/analyticsEvents';
+import { useCallback } from "react";
+import { MapPin, AlertCircle, Flag } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { FilterState } from "@/hooks/useUrlState";
+import AmenitiesDropdown from "@/components/AmenitiesDropdown";
+import ParkingDropdown from "@/components/ParkingDropdown";
+import WaveConditionsDropdown from "@/components/WaveConditionsDropdown";
+import BeachTypeDropdown from "@/components/BeachTypeDropdown";
+import OrganizedDropdown from "@/components/OrganizedDropdown";
+import { analytics } from "@/lib/analytics";
+import { createFilterApplyEvent, createFilterClearEvent } from "@/lib/analyticsEvents";
 
 interface FilterBarProps {
   filters: FilterState;
@@ -23,14 +19,11 @@ interface FilterBarProps {
   onLocationRequest: () => void;
   isLoadingLocation: boolean;
   onOpenAllFilters: () => void;
-  locationPermission: 'granted' | 'denied' | 'prompt' | null;
+  locationPermission: "granted" | "denied" | "prompt" | null;
   resultCount: number;
   showCountBadge?: boolean;
   areaName?: string; // Optional area name for area-specific pages
 }
-
-
-
 
 export default function FilterBar({
   filters,
@@ -46,38 +39,44 @@ export default function FilterBar({
 }: FilterBarProps) {
   const isMobile = useIsMobile();
 
-
   // Handle filter changes
 
+  const handleBlueFlagToggle = useCallback(
+    (checked: boolean) => {
+      if (checked) {
+        analytics.event(
+          "filter_apply",
+          createFilterApplyEvent("blue_flag", String(checked), resultCount)
+        );
+      } else {
+        analytics.event("filter_clear", createFilterClearEvent("blue_flag"));
+      }
+      onFiltersChange({ blueFlag: checked, page: 1 });
+    },
+    [onFiltersChange, resultCount]
+  );
 
-  const handleBlueFlagToggle = useCallback((checked: boolean) => {
-    if (checked) {
-      analytics.event('filter_apply', createFilterApplyEvent('blue_flag', String(checked), resultCount));
-    } else {
-      analytics.event('filter_clear', createFilterClearEvent('blue_flag'));
-    }
-    onFiltersChange({ blueFlag: checked, page: 1 });
-  }, [onFiltersChange, resultCount]);
+  const handleNearMeToggle = useCallback(
+    (checked: boolean) => {
+      if (checked && !userLocation) {
+        onLocationRequest();
+      }
 
-  const handleNearMeToggle = useCallback((checked: boolean) => {
-    if (checked && !userLocation) {
-      onLocationRequest();
-    }
+      // When enabling Near me, automatically set distance sorting
+      // When disabling Near me, revert to A->Z sorting
+      const updates: Partial<FilterState> = { nearMe: checked, page: 1 };
+      if (checked) {
+        analytics.event("filter_apply", createFilterApplyEvent("near_me", "true", resultCount));
+        updates.sort = "distance.asc";
+      } else {
+        // When turning off near me, revert to A->Z sorting
+        updates.sort = "name.asc";
+      }
 
-    // When enabling Near me, automatically set distance sorting
-    // When disabling Near me, revert to A->Z sorting
-    const updates: Partial<FilterState> = { nearMe: checked, page: 1 };
-    if (checked) {
-      analytics.event('filter_apply', createFilterApplyEvent('near_me', 'true', resultCount));
-      updates.sort = 'distance.asc';
-    } else {
-      // When turning off near me, revert to A->Z sorting
-      updates.sort = 'name.asc';
-    }
-
-    onFiltersChange(updates);
-  }, [onFiltersChange, userLocation, onLocationRequest, resultCount]);
-
+      onFiltersChange(updates);
+    },
+    [onFiltersChange, userLocation, onLocationRequest, resultCount]
+  );
 
   // Calculate active filter counts for "All Filters" button
   const activeFiltersCount = [
@@ -89,10 +88,6 @@ export default function FilterBar({
     filters.type.length > 0,
   ].filter(Boolean).length;
 
-
-
-
-
   return (
     <div className="relative z-20">
       {/* Main Filter Bar */}
@@ -101,8 +96,6 @@ export default function FilterBar({
           {/* Facets Group - First Row */}
           {!isMobile ? (
             <div className="flex gap-2 md:gap-3 items-center justify-start overflow-x-auto scrollbar-hide pb-1">
-
-
               {/* Near Me Toggle */}
               <Tooltip>
                 <TooltipTrigger asChild>
@@ -111,16 +104,16 @@ export default function FilterBar({
                     size="sm"
                     onClick={() => handleNearMeToggle(!filters.nearMe)}
                     disabled={isLoadingLocation}
-                    className={`px-3 py-2 rounded-xl h-auto min-h-[40px] whitespace-nowrap flex-shrink-0 border-2 shadow-md hover:shadow-lg ${filters.nearMe ? 'border-transparent' : 'text-foreground bg-muted/65 border-muted'}`}
+                    className={`px-3 py-2 rounded-xl h-auto min-h-[40px] whitespace-nowrap flex-shrink-0 border-2 shadow-md hover:shadow-lg ${filters.nearMe ? "border-transparent" : "text-foreground bg-muted/65 border-muted"}`}
                     role="switch"
                     aria-checked={filters.nearMe}
-                    aria-label={`Near me (${filters.nearMe ? 'on' : 'off'})`}
+                    aria-label={`Near me (${filters.nearMe ? "on" : "off"})`}
                   >
                     <MapPin className="h-4 w-4 md:h-5 md:w-5" />
                     <span className="ml-2 text-sm">Near me</span>
                   </Button>
                 </TooltipTrigger>
-                {locationPermission === 'denied' && (
+                {locationPermission === "denied" && (
                   <TooltipContent>
                     <div className="flex items-center gap-2">
                       <AlertCircle className="h-4 w-4" />
@@ -130,16 +123,15 @@ export default function FilterBar({
                 )}
               </Tooltip>
 
-
               {/* Blue Flag Toggle */}
               <Button
                 variant={filters.blueFlag ? "default" : "ghost"}
                 size="sm"
                 onClick={() => handleBlueFlagToggle(!filters.blueFlag)}
-                className={`px-3 py-2 rounded-xl h-auto min-h-[40px] whitespace-nowrap flex-shrink-0 border-2 shadow-md hover:shadow-lg ${filters.blueFlag ? 'border-transparent' : 'text-foreground bg-muted/65 border-muted'}`}
+                className={`px-3 py-2 rounded-xl h-auto min-h-[40px] whitespace-nowrap flex-shrink-0 border-2 shadow-md hover:shadow-lg ${filters.blueFlag ? "border-transparent" : "text-foreground bg-muted/65 border-muted"}`}
                 role="switch"
                 aria-checked={filters.blueFlag}
-                aria-label={`Blue Flag (${filters.blueFlag ? 'on' : 'off'})`}
+                aria-label={`Blue Flag (${filters.blueFlag ? "on" : "off"})`}
               >
                 <Flag className="h-4 w-4 md:h-5 md:w-5" />
                 <span className="ml-2 text-sm">Blue Flag</span>
@@ -227,8 +219,6 @@ export default function FilterBar({
           ) : (
             /* Mobile: Scrollable facet chips */
             <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide justify-start pb-1">
-
-
               {/* Near Me Toggle */}
               <Tooltip>
                 <TooltipTrigger asChild>
@@ -237,16 +227,16 @@ export default function FilterBar({
                     size="sm"
                     onClick={() => handleNearMeToggle(!filters.nearMe)}
                     disabled={isLoadingLocation}
-                    className={`px-3 py-2 rounded-xl h-auto min-h-[40px] whitespace-nowrap flex-shrink-0 border-2 shadow-md hover:shadow-lg ${filters.nearMe ? 'border-transparent' : 'text-foreground bg-muted/65 border-muted'}`}
+                    className={`px-3 py-2 rounded-xl h-auto min-h-[40px] whitespace-nowrap flex-shrink-0 border-2 shadow-md hover:shadow-lg ${filters.nearMe ? "border-transparent" : "text-foreground bg-muted/65 border-muted"}`}
                     role="switch"
                     aria-checked={filters.nearMe}
-                    aria-label={`Near me (${filters.nearMe ? 'on' : 'off'})`}
+                    aria-label={`Near me (${filters.nearMe ? "on" : "off"})`}
                   >
                     <MapPin className="h-4 w-4 md:h-5 md:w-5" />
                     <span className="ml-2 text-sm">Near me</span>
                   </Button>
                 </TooltipTrigger>
-                {locationPermission === 'denied' && (
+                {locationPermission === "denied" && (
                   <TooltipContent>
                     <div className="flex items-center gap-2">
                       <AlertCircle className="h-4 w-4" />
@@ -256,16 +246,15 @@ export default function FilterBar({
                 )}
               </Tooltip>
 
-
               {/* Blue Flag Toggle */}
               <Button
                 variant={filters.blueFlag ? "default" : "ghost"}
                 size="sm"
                 onClick={() => handleBlueFlagToggle(!filters.blueFlag)}
-                className={`px-3 py-2 rounded-xl h-auto min-h-[40px] whitespace-nowrap flex-shrink-0 border-2 shadow-md hover:shadow-lg ${filters.blueFlag ? 'border-transparent' : 'text-foreground bg-muted/65 border-muted'}`}
+                className={`px-3 py-2 rounded-xl h-auto min-h-[40px] whitespace-nowrap flex-shrink-0 border-2 shadow-md hover:shadow-lg ${filters.blueFlag ? "border-transparent" : "text-foreground bg-muted/65 border-muted"}`}
                 role="switch"
                 aria-checked={filters.blueFlag}
-                aria-label={`Blue Flag (${filters.blueFlag ? 'on' : 'off'})`}
+                aria-label={`Blue Flag (${filters.blueFlag ? "on" : "off"})`}
               >
                 <Flag className="h-4 w-4 md:h-5 md:w-5" />
                 <span className="ml-2 text-sm">Blue Flag</span>
@@ -353,10 +342,9 @@ export default function FilterBar({
         </div>
       </div>
 
-
       {/* Screen reader announcements */}
       <div aria-live="polite" aria-atomic="true" className="sr-only">
-        {resultCount} beaches found{areaName ? ` in ${areaName}` : ''}
+        {resultCount} beaches found{areaName ? ` in ${areaName}` : ""}
       </div>
     </div>
   );

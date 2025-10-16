@@ -1,8 +1,8 @@
-import { FilterState } from '@/hooks/useUrlState';
-import { EnhancedNaturalLanguageSearch, EnhancedExtractionResult, SearchContext } from './nlp';
+import { FilterState } from "@/hooks/useUrlState";
+import { EnhancedNaturalLanguageSearch, EnhancedExtractionResult, SearchContext } from "./nlp";
 
 // Re-export the enhanced types for convenience
-export type { EnhancedExtractionResult, SearchContext } from './nlp';
+export type { EnhancedExtractionResult, SearchContext } from "./nlp";
 
 // Enhanced NLP processor instance
 const enhancedNLP = EnhancedNaturalLanguageSearch.getInstance();
@@ -19,7 +19,7 @@ export async function extractFromNaturalLanguage(query: string): Promise<Enhance
  * Enhanced natural language extraction with context support
  */
 export async function extractFromNaturalLanguageWithContext(
-  query: string, 
+  query: string,
   context?: SearchContext
 ): Promise<EnhancedExtractionResult> {
   return await enhancedNLP.processQuery(query, context);
@@ -34,7 +34,7 @@ export function applyExtractedFilters(
 ): FilterState {
   const baseline: FilterState = {
     ...currentFilters,
-    search: '',
+    search: "",
     location: undefined,
     locations: undefined,
     organized: [],
@@ -45,19 +45,19 @@ export function applyExtractedFilters(
     type: [],
     page: 1,
   };
-  
+
   const newFilters: FilterState = {
     ...baseline,
     ...extracted.filters,
   };
-  
+
   // Set location(s) if extracted
   if (extracted.locationExtraction.allLocations.length > 0) {
-    const allLocationNames = extracted.locationExtraction.allLocations.map(loc => loc.place);
-    
+    const allLocationNames = extracted.locationExtraction.allLocations.map((loc) => loc.place);
+
     // Set primary location (first one)
     newFilters.location = allLocationNames[0];
-    
+
     // Set all locations if there are multiple
     if (allLocationNames.length > 1) {
       newFilters.locations = allLocationNames;
@@ -66,9 +66,9 @@ export function applyExtractedFilters(
     // Fallback to single place for backward compatibility
     newFilters.location = extracted.place;
   }
-  
+
   // Only set search term if it contains meaningful content and we don't have specific filters
-  const hasSpecificFilters = 
+  const hasSpecificFilters =
     (newFilters.type && newFilters.type.length > 0) ||
     (newFilters.waveConditions && newFilters.waveConditions.length > 0) ||
     (newFilters.parking && newFilters.parking.length > 0) ||
@@ -78,14 +78,18 @@ export function applyExtractedFilters(
     newFilters.nearMe ||
     newFilters.location ||
     (newFilters.locations && newFilters.locations.length > 0); // Include multiple locations as specific filters
-  
+
   // Only use search term if it's meaningful and we don't have specific filters
-  if (!hasSpecificFilters && extracted.cleanedSearchTerm && extracted.cleanedSearchTerm.length >= 2) {
+  if (
+    !hasSpecificFilters &&
+    extracted.cleanedSearchTerm &&
+    extracted.cleanedSearchTerm.length >= 2
+  ) {
     newFilters.search = extracted.cleanedSearchTerm;
   } else {
-    newFilters.search = '';
+    newFilters.search = "";
   }
-  
+
   return newFilters;
 }
 
@@ -98,7 +102,7 @@ export function applyExtractedFiltersForArea(
 ): FilterState {
   const baseline: FilterState = {
     ...currentFilters,
-    search: '',
+    search: "",
     location: undefined,
     locations: undefined,
     organized: [],
@@ -109,19 +113,19 @@ export function applyExtractedFiltersForArea(
     type: [],
     page: 1,
   };
-  
+
   const newFilters: FilterState = {
     ...baseline,
     ...extracted.filters,
   };
-  
+
   // Set location(s) if extracted
   if (extracted.locationExtraction.allLocations.length > 0) {
-    const allLocationNames = extracted.locationExtraction.allLocations.map(loc => loc.place);
-    
+    const allLocationNames = extracted.locationExtraction.allLocations.map((loc) => loc.place);
+
     // Set primary location (first one)
     newFilters.location = allLocationNames[0];
-    
+
     // Set all locations if there are multiple
     if (allLocationNames.length > 1) {
       newFilters.locations = allLocationNames;
@@ -130,9 +134,9 @@ export function applyExtractedFiltersForArea(
     // Fallback to single place for backward compatibility
     newFilters.location = extracted.place;
   }
-  
+
   // Only set search term if it contains meaningful content and we don't have specific filters
-  const hasSpecificFilters = 
+  const hasSpecificFilters =
     (newFilters.type && newFilters.type.length > 0) ||
     (newFilters.waveConditions && newFilters.waveConditions.length > 0) ||
     (newFilters.parking && newFilters.parking.length > 0) ||
@@ -142,14 +146,18 @@ export function applyExtractedFiltersForArea(
     newFilters.nearMe ||
     newFilters.location ||
     (newFilters.locations && newFilters.locations.length > 0); // Include multiple locations as specific filters
-  
+
   // Only use search term if it's meaningful and we don't have specific filters
-  if (!hasSpecificFilters && extracted.cleanedSearchTerm && extracted.cleanedSearchTerm.length >= 2) {
+  if (
+    !hasSpecificFilters &&
+    extracted.cleanedSearchTerm &&
+    extracted.cleanedSearchTerm.length >= 2
+  ) {
     newFilters.search = extracted.cleanedSearchTerm;
   } else {
-    newFilters.search = '';
+    newFilters.search = "";
   }
-  
+
   return newFilters;
 }
 
@@ -158,9 +166,9 @@ export function applyExtractedFiltersForArea(
  */
 export function doesPlaceMatchArea(place: string | undefined, areaName: string): boolean {
   if (!place) return true;
-  
+
   // Use the enhanced location extractor for better matching
-  const locationExtractor = enhancedNLP['locationExtractor'];
+  const locationExtractor = enhancedNLP["locationExtractor"];
   return locationExtractor.doesLocationMatchArea(place, areaName);
 }
 
@@ -192,14 +200,14 @@ export function createSearchContext(options: {
   userPreferences?: string[];
   searchHistory?: string[];
   location?: string;
-  timeOfDay?: 'morning' | 'afternoon' | 'evening';
-  season?: 'spring' | 'summer' | 'autumn' | 'winter';
+  timeOfDay?: "morning" | "afternoon" | "evening";
+  season?: "spring" | "summer" | "autumn" | "winter";
 }): SearchContext {
   return {
     userPreferences: options.userPreferences,
     searchHistory: options.searchHistory,
     location: options.location,
     timeOfDay: options.timeOfDay,
-    season: options.season
+    season: options.season,
   };
 }

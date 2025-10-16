@@ -14,27 +14,27 @@ export function generateBeachImageAltText(beach: {
   blue_flag?: boolean;
 }): string {
   const { name, area, type, wave_conditions, blue_flag } = beach;
-  
+
   // Base description with beach name and location
   let altText = `${name} beach in ${area}`;
-  
+
   // Add beach type if available
-  if (type && type !== 'OTHER') {
-    const typeDescription = type.toLowerCase().replace('_', ' ');
+  if (type && type !== "OTHER") {
+    const typeDescription = type.toLowerCase().replace("_", " ");
     altText += `, featuring a ${typeDescription} shoreline`;
   }
-  
+
   // Add wave conditions if available
   if (wave_conditions) {
     const waveDescription = wave_conditions.toLowerCase();
     altText += ` with ${waveDescription} water conditions`;
   }
-  
+
   // Add blue flag status if available
   if (blue_flag) {
     altText += `, certified with Blue Flag status for environmental quality`;
   }
-  
+
   return altText;
 }
 
@@ -49,7 +49,6 @@ export function generateGenericBeachAltText(beachName?: string, location?: strin
   } else if (location) {
     return `Beach in ${location}`;
   } else {
-    return 'Beach landscape';
+    return "Beach landscape";
   }
 }
-

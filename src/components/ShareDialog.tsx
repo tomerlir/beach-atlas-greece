@@ -1,4 +1,10 @@
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -18,31 +24,31 @@ export function ShareDialog({ isOpen, onClose, url, title, description }: ShareD
     try {
       // Ensure URL is properly formatted
       const cleanUrl = url.trim();
-      
+
       // Try modern clipboard API first
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(cleanUrl);
       } else {
         // Fallback for older browsers or non-secure contexts
-        const textArea = document.createElement('textarea');
+        const textArea = document.createElement("textarea");
         textArea.value = cleanUrl;
-        textArea.style.position = 'fixed';
-        textArea.style.left = '-999999px';
-        textArea.style.top = '-999999px';
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        textArea.style.top = "-999999px";
         document.body.appendChild(textArea);
         textArea.focus();
         textArea.select();
-        document.execCommand('copy');
+        document.execCommand("copy");
         document.body.removeChild(textArea);
       }
-      
+
       toast({
         title: "Link copied!",
         description: "Beach URL copied to clipboard",
       });
       onClose();
     } catch (error) {
-      console.error('Failed to copy:', error);
+      console.error("Failed to copy:", error);
       toast({
         title: "Copy failed",
         description: "Unable to copy link. Please try again.",
@@ -60,9 +66,8 @@ export function ShareDialog({ isOpen, onClose, url, title, description }: ShareD
             Copy the link to share this beach with others.
           </DialogDescription>
         </DialogHeader>
-        
+
         <div className="py-4">
-          
           {/* Copy Link - Primary action */}
           <Button
             type="button"

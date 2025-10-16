@@ -5,15 +5,15 @@ import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import { CONTACT_EMAIL } from "@/lib/constants";
-import { 
-  MapPin, 
-  Waves, 
-  Car, 
-  Flag, 
-  ArrowLeft, 
-  Shield, 
-  Palmtree, 
-  Users, 
+import {
+  MapPin,
+  Waves,
+  Car,
+  Flag,
+  ArrowLeft,
+  Shield,
+  Palmtree,
+  Users,
   Share2,
   MessageSquare,
   Clock,
@@ -40,8 +40,7 @@ import { fetchMoreInArea } from "@/lib/fetchMoreInArea";
 import MoreInArea from "@/components/MoreInArea";
 import { analytics } from "@/lib/analytics";
 
-type Beach = Tables<'beaches'>;
-
+type Beach = Tables<"beaches">;
 
 // Map beach types to readable labels
 const typeLabels: Record<string, string> = {
@@ -51,10 +50,10 @@ const typeLabels: Record<string, string> = {
   OTHER: "Other",
 };
 
-// Map wave conditions to readable labels  
+// Map wave conditions to readable labels
 const waveLabels: Record<string, string> = {
   CALM: "Calm Waters",
-  MODERATE: "Moderate Waves", 
+  MODERATE: "Moderate Waves",
   WAVY: "Wavy",
   SURFABLE: "Surfable",
 };
@@ -75,7 +74,7 @@ const BeachDetail = () => {
   const isMobile = useIsMobile();
   const { isPreloaded, getPreloadResult } = useImagePreloader();
   const { navigateBack } = useNavigationState();
-  
+
   // State management
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
@@ -83,11 +82,15 @@ const BeachDetail = () => {
   // Note: Geolocation removed to prevent unwanted permission prompts
 
   // Fetch beach data with optimized caching
-  const { data: beach, isLoading, error } = useQuery({
+  const {
+    data: beach,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["beach", beachName],
     queryFn: async () => {
       if (!beachName) throw new Error("No beach name provided");
-      
+
       const { data, error } = await supabase
         .from("beaches")
         .select("*")
@@ -99,12 +102,12 @@ const BeachDetail = () => {
         console.error("Beach fetch error:", error);
         throw error;
       }
-      
+
       // Validate that the area matches the URL parameter
       if (area && generateAreaSlug(data.area) !== area) {
         throw new Error("Area mismatch");
       }
-      
+
       return data;
     },
     enabled: !!beachName,
@@ -116,33 +119,33 @@ const BeachDetail = () => {
   useEffect(() => {
     if (beach) {
       // Get query hash if available - this indicates search source
-      const queryHash = sessionStorage.getItem('current_query_hash') || undefined;
-      
+      const queryHash = sessionStorage.getItem("current_query_hash") || undefined;
+
       // Determine engagement source from navigation history and search context
-      const navigationSource = sessionStorage.getItem('beach-navigation-source');
-      let source: 'search' | 'map' | 'browsing' | 'area_explore' = 'browsing';
-      
+      const navigationSource = sessionStorage.getItem("beach-navigation-source");
+      let source: "search" | "map" | "browsing" | "area_explore" = "browsing";
+
       // If there's a query hash, this is definitely from a search
       if (queryHash) {
-        source = 'search';
+        source = "search";
       } else if (navigationSource) {
-        if (navigationSource.includes('/map')) {
-          source = 'map';
-        } else if (navigationSource.includes('/') && navigationSource !== '/') {
+        if (navigationSource.includes("/map")) {
+          source = "map";
+        } else if (navigationSource.includes("/") && navigationSource !== "/") {
           // Check if coming from another beach page (beach-to-beach navigation)
-          const pathParts = navigationSource.split('/').filter(Boolean);
+          const pathParts = navigationSource.split("/").filter(Boolean);
           if (pathParts.length >= 2) {
             // This is a beach URL (e.g., /corfu/beach1), so it's browsing
-            source = 'browsing';
+            source = "browsing";
           } else {
             // This is an area URL (e.g., /corfu), so it's area exploration
-            source = 'area_explore';
+            source = "area_explore";
           }
         } else {
-          source = 'browsing'; // From homepage without search
+          source = "browsing"; // From homepage without search
         }
       }
-      
+
       // Track engagement with correct page_path context
       // Only pass queryHash if it exists (i.e., if this is from a search)
       analytics.trackBeachEngagement(beach.id, source, queryHash);
@@ -168,8 +171,8 @@ const BeachDetail = () => {
     handleImageLoad,
     handleImageError,
   } = useProgressiveLoading(isLoading, !!beach?.photo_url, {
-    contentDelay: 0,    // Show content immediately
-    imageDelay: 0,      // Start image loading immediately to prevent layout shift
+    contentDelay: 0, // Show content immediately
+    imageDelay: 0, // Start image loading immediately to prevent layout shift
     enableProgressiveMode: false, // Disable progressive mode to always show image container
   });
 
@@ -193,41 +196,41 @@ const BeachDetail = () => {
   // Action handlers
   const handleOpenInMaps = useCallback(() => {
     if (!beach) return;
-    
+
     // Track conversion event
-    analytics.event('beach_conversion', {
+    analytics.event("beach_conversion", {
       beach_id: beach.id,
-      action: 'directions',
-      source: 'detail',
+      action: "directions",
+      source: "detail",
     });
     analytics.trackConversion();
-    
+
     // Open maps directly based on device (iOS → Apple Maps, Android/Desktop → Google Maps)
     openInMaps({
       latitude: beach.latitude,
       longitude: beach.longitude,
       name: beach.name,
-      area: beach.area
+      area: beach.area,
     });
   }, [beach]);
 
   const handleShare = useCallback(async () => {
     if (!beach) return;
-    
+
     // Track conversion event
-    analytics.event('beach_conversion', {
+    analytics.event("beach_conversion", {
       beach_id: beach.id,
-      action: 'share',
-      source: 'detail',
+      action: "share",
+      source: "detail",
     });
     analytics.trackConversion();
-    
+
     const shareData = {
       title: beach.name,
       text: `Check out ${beach.name} in ${beach.area}`,
       url: window.location.href,
     };
-    
+
     // Try native share first (industry standard)
     if (navigator.share && navigator.canShare?.(shareData)) {
       try {
@@ -235,13 +238,13 @@ const BeachDetail = () => {
         return;
       } catch (error) {
         // User cancelled - don't show error, just return
-        if ((error as Error).name !== 'AbortError') {
-          console.error('Share error:', error);
+        if ((error as Error).name !== "AbortError") {
+          console.error("Share error:", error);
         }
         return;
       }
     }
-    
+
     // Fallback: Copy to clipboard (simple and effective)
     try {
       await navigator.clipboard.writeText(window.location.href);
@@ -257,7 +260,7 @@ const BeachDetail = () => {
 
   const handleFeedback = useCallback(() => {
     if (!beach) return;
-    
+
     const subject = `Feedback: ${beach.name} (${beach.slug})`;
     const body = `Hi,\n\nI'd like to provide feedback for the beach "${beach.name}" at ${beach.area}.\n\nFeedback:\n\n\nThank you!`;
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -266,29 +269,32 @@ const BeachDetail = () => {
   // Handle back navigation - go to previous page if available, otherwise fallback to area or home
   const handleBackNavigation = useCallback(() => {
     // First try to use the stored navigation source (most reliable for mobile)
-    const fallbackPath = area ? `/${generateAreaSlug(area)}` : '/';
+    const fallbackPath = area ? `/${generateAreaSlug(area)}` : "/";
     navigateBack(fallbackPath);
   }, [navigateBack, area]);
 
   // Group amenities by category
   const amenitiesByCategory = useMemo(() => {
     if (!beach?.amenities) return {};
-    
-    return beach.amenities.reduce((acc, amenity) => {
-      const config = getAmenityConfig(amenity) || { 
-        label: amenity, 
-        icon: Users, 
-        color: "text-gray-600",
-        category: 'activities' as const 
-      };
-      
-      if (!acc[config.category]) {
-        acc[config.category] = [];
-      }
-      acc[config.category].push({ key: amenity, ...config, category: config.category });
-      
-      return acc;
-    }, {} as Record<string, Array<{ key: string; label: string; icon: any; category: string }>>);
+
+    return beach.amenities.reduce(
+      (acc, amenity) => {
+        const config = getAmenityConfig(amenity) || {
+          label: amenity,
+          icon: Users,
+          color: "text-gray-600",
+          category: "activities" as const,
+        };
+
+        if (!acc[config.category]) {
+          acc[config.category] = [];
+        }
+        acc[config.category].push({ key: amenity, ...config, category: config.category });
+
+        return acc;
+      },
+      {} as Record<string, Array<{ key: string; label: string; icon: any; category: string }>>
+    );
   }, [beach?.amenities]);
 
   // Progressive loading - show content immediately, image loads separately
@@ -338,75 +344,89 @@ const BeachDetail = () => {
   }
 
   const shouldShowReadMore = beach.description && beach.description.length > 200;
-  const displayDescription = shouldShowReadMore && !isDescriptionExpanded 
-    ? beach.description.slice(0, 200) + "..."
-    : beach.description;
+  const displayDescription =
+    shouldShowReadMore && !isDescriptionExpanded
+      ? beach.description.slice(0, 200) + "..."
+      : beach.description;
 
   // Generate SEO data
   const seoTitle = `${beach.name} - ${beach.area} | Beach Atlas`;
-  const seoDescription = beach.description || `Discover ${beach.name} in ${beach.area}, Greece. ${beach.organized ? 'Organized' : 'Unorganized'} beach with ${beach.type.toLowerCase()} sand and ${beach.wave_conditions.toLowerCase()} conditions.`;
+  const seoDescription =
+    beach.description ||
+    `Discover ${beach.name} in ${beach.area}, Greece. ${beach.organized ? "Organized" : "Unorganized"} beach with ${beach.type.toLowerCase()} sand and ${beach.wave_conditions.toLowerCase()} conditions.`;
   const canonicalUrl = `https://beachesofgreece.com/${generateAreaSlug(beach.area)}/${beach.slug}`;
 
   // Generate JSON-LD structured data with freshness signals
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": `${beach.name} - ${beach.area} | Beach Atlas`,
-    "description": beach.description || `Discover ${beach.name} in ${beach.area}, Greece`,
-    "url": canonicalUrl,
-    "datePublished": beach.created_at ? new Date(beach.created_at).toISOString().split('T')[0] : "2024-01-01",
-    "dateModified": beach.updated_at ? new Date(beach.updated_at).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
-    "mainEntity": {
+    name: `${beach.name} - ${beach.area} | Beach Atlas`,
+    description: beach.description || `Discover ${beach.name} in ${beach.area}, Greece`,
+    url: canonicalUrl,
+    datePublished: beach.created_at
+      ? new Date(beach.created_at).toISOString().split("T")[0]
+      : "2024-01-01",
+    dateModified: beach.updated_at
+      ? new Date(beach.updated_at).toISOString().split("T")[0]
+      : new Date().toISOString().split("T")[0],
+    mainEntity: {
       "@type": "TouristAttraction",
       "@id": canonicalUrl,
-      "name": beach.name,
-      "description": beach.description,
-      "url": canonicalUrl,
-      "address": {
+      name: beach.name,
+      description: beach.description,
+      url: canonicalUrl,
+      address: {
         "@type": "PostalAddress",
-        "addressLocality": beach.area,
-        "addressCountry": "Greece"
+        addressLocality: beach.area,
+        addressCountry: "Greece",
       },
-      "geo": {
+      geo: {
         "@type": "GeoCoordinates",
-        "latitude": beach.latitude,
-        "longitude": beach.longitude
+        latitude: beach.latitude,
+        longitude: beach.longitude,
       },
-      "isAccessibleForFree": true,
-      "image": beach.photo_url ? [beach.photo_url] : undefined,
-      "dateModified": beach.updated_at ? new Date(beach.updated_at).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
-      "amenityFeature": beach.amenities?.map(amenity => ({
-        "@type": "LocationFeatureSpecification",
-        "name": amenity,
-        "value": true
-      })) || [],
-      "additionalProperty": [
+      isAccessibleForFree: true,
+      image: beach.photo_url ? [beach.photo_url] : undefined,
+      dateModified: beach.updated_at
+        ? new Date(beach.updated_at).toISOString().split("T")[0]
+        : new Date().toISOString().split("T")[0],
+      amenityFeature:
+        beach.amenities?.map((amenity) => ({
+          "@type": "LocationFeatureSpecification",
+          name: amenity,
+          value: true,
+        })) || [],
+      additionalProperty: [
         {
           "@type": "PropertyValue",
-          "name": "Beach Type",
-          "value": beach.type
-        },
-        {
-          "@type": "PropertyValue", 
-          "name": "Wave Conditions",
-          "value": beach.wave_conditions
-        },
-        {
-          "@type": "PropertyValue",
-          "name": "Organization",
-          "value": beach.organized ? "Organized" : "Unorganized"
+          name: "Beach Type",
+          value: beach.type,
         },
         {
           "@type": "PropertyValue",
-          "name": "Parking",
-          "value": beach.parking
+          name: "Wave Conditions",
+          value: beach.wave_conditions,
         },
-        ...(beach.blue_flag ? [{
+        {
           "@type": "PropertyValue",
-          "name": "Blue Flag Certified",
-          "value": "Yes"
-        }] : [])
-      ]
+          name: "Organization",
+          value: beach.organized ? "Organized" : "Unorganized",
+        },
+        {
+          "@type": "PropertyValue",
+          name: "Parking",
+          value: beach.parking,
+        },
+        ...(beach.blue_flag
+          ? [
+              {
+                "@type": "PropertyValue",
+                name: "Blue Flag Certified",
+                value: "Yes",
+              },
+            ]
+          : []),
+      ],
     },
   };
 
@@ -416,7 +436,7 @@ const BeachDetail = () => {
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />
         <link rel="canonical" href={canonicalUrl} />
-        
+
         {/* Open Graph tags */}
         <meta property="og:title" content={seoTitle} />
         <meta property="og:description" content={seoDescription} />
@@ -424,274 +444,290 @@ const BeachDetail = () => {
         <meta property="og:url" content={canonicalUrl} />
         {beach.photo_url && <meta property="og:image" content={beach.photo_url} />}
         <meta property="og:site_name" content="Beach Atlas Greece" />
-        
+
         {/* Twitter Card tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDescription} />
         {beach.photo_url && <meta name="twitter:image" content={beach.photo_url} />}
-        
+
         {/* JSON-LD structured data */}
-        <script type="application/ld+json">
-          {JSON.stringify(jsonLd)}
-        </script>
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
 
       <div className="min-h-screen bg-background">
         <Header />
-      
-      <main className="max-w-4xl md:max-w-5xl mx-auto px-4 py-8">
-        {/* Breadcrumb Navigation - at the top */}
-        <div className="bg-background py-2 mb-2">
-          <div className="max-w-4xl md:max-w-5xl mx-auto">
-            <BreadcrumbsWithJsonLd items={[
-              { label: "Home", href: "/" },
-              { label: "Areas", href: "/areas" },
-              { label: beach.area || 'Unknown Area', href: `/${generateAreaSlug(beach.area || 'unknown')}` },
-              { label: beach.name } // current
-            ]} />
+
+        <main className="max-w-4xl md:max-w-5xl mx-auto px-4 py-8">
+          {/* Breadcrumb Navigation - at the top */}
+          <div className="bg-background py-2 mb-2">
+            <div className="max-w-4xl md:max-w-5xl mx-auto">
+              <BreadcrumbsWithJsonLd
+                items={[
+                  { label: "Home", href: "/" },
+                  { label: "Areas", href: "/areas" },
+                  {
+                    label: beach.area || "Unknown Area",
+                    href: `/${generateAreaSlug(beach.area || "unknown")}`,
+                  },
+                  { label: beach.name }, // current
+                ]}
+              />
+            </div>
           </div>
-        </div>
 
-        {/* Back to results link */}
-        <Button variant="ghost" onClick={handleBackNavigation} className="mb-6 px-3 py-2 h-auto text-sm">
-          <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to results
-        </Button>
+          {/* Back to results link */}
+          <Button
+            variant="ghost"
+            onClick={handleBackNavigation}
+            className="mb-6 px-3 py-2 h-auto text-sm"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Back to results
+          </Button>
 
-        {/* Image Card - Always render to prevent layout shift */}
-        <figure className="mb-6 w-full max-w-full overflow-hidden relative">
-          {beach.photo_url ? (
-            <>
-              <OptimizedImage
-                src={beach.photo_url}
-                alt={generateBeachImageAltText(beach)}
-                width={800}
-                height={450}
-                className="w-full aspect-[16/9] rounded-xl shadow-lg"
-                priority={false} // Changed to false for progressive loading
-                loading="lazy" // Changed to lazy for progressive loading
-                placeholder="blur" // Use blur placeholder to prevent layout shift
-                placeholderPalette="default" // Use default beach-themed placeholder
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
-                quality={90}
-                useDetailSkeleton={false} // Use blur placeholder instead of skeleton
-                onLoad={handleImageLoad}
-                onError={handleImageError}
-                fallbackComponent={
-                  <div className="w-full aspect-[16/9] bg-gradient-to-br from-ocean to-secondary rounded-xl shadow-lg flex items-center justify-center">
-                    <Waves className="h-16 w-16 md:h-24 md:w-24 text-primary-foreground opacity-50" />
-                  </div>
-                }
-              />
-              {/* Photo Attribution - positioned just outside the image */}
-              <PhotoAttribution 
-                photoSource={beach.photo_source}
-                className="z-10"
-              />
-            </>
-          ) : (
-            <div className="w-full aspect-[16/9] bg-gradient-to-br from-ocean to-secondary rounded-xl shadow-lg flex items-center justify-center">
-              <Waves className="h-16 w-16 md:h-24 md:w-24 text-primary-foreground opacity-50" />
+          {/* Image Card - Always render to prevent layout shift */}
+          <figure className="mb-6 w-full max-w-full overflow-hidden relative">
+            {beach.photo_url ? (
+              <>
+                <OptimizedImage
+                  src={beach.photo_url}
+                  alt={generateBeachImageAltText(beach)}
+                  width={800}
+                  height={450}
+                  className="w-full aspect-[16/9] rounded-xl shadow-lg"
+                  priority={false} // Changed to false for progressive loading
+                  loading="lazy" // Changed to lazy for progressive loading
+                  placeholder="blur" // Use blur placeholder to prevent layout shift
+                  placeholderPalette="default" // Use default beach-themed placeholder
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
+                  quality={90}
+                  useDetailSkeleton={false} // Use blur placeholder instead of skeleton
+                  onLoad={handleImageLoad}
+                  onError={handleImageError}
+                  fallbackComponent={
+                    <div className="w-full aspect-[16/9] bg-gradient-to-br from-ocean to-secondary rounded-xl shadow-lg flex items-center justify-center">
+                      <Waves className="h-16 w-16 md:h-24 md:w-24 text-primary-foreground opacity-50" />
+                    </div>
+                  }
+                />
+                {/* Photo Attribution - positioned just outside the image */}
+                <PhotoAttribution photoSource={beach.photo_source} className="z-10" />
+              </>
+            ) : (
+              <div className="w-full aspect-[16/9] bg-gradient-to-br from-ocean to-secondary rounded-xl shadow-lg flex items-center justify-center">
+                <Waves className="h-16 w-16 md:h-24 md:w-24 text-primary-foreground opacity-50" />
+              </div>
+            )}
+          </figure>
+
+          {/* Title & Actions - Show immediately when content is ready */}
+          {shouldShowContent && (
+            <div className="mb-8">
+              {/* Title and Action Buttons in Same Row */}
+              <div className="flex items-start justify-between gap-3 mb-4">
+                <div className="flex-1 min-w-0">
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3">
+                    {beach.name}
+                  </h1>
+                </div>
+
+                {/* Icon-Only Action Buttons */}
+                <div className="flex gap-2 flex-shrink-0">
+                  <Button
+                    onClick={handleOpenInMaps}
+                    variant="cta"
+                    size="icon"
+                    className="h-9 w-9 md:h-10 md:w-10"
+                    aria-label="Get directions"
+                    title="Get directions"
+                  >
+                    <MapPin className="h-4 w-4 md:h-5 md:w-5" aria-hidden="true" />
+                  </Button>
+                  <Button
+                    variant="cta"
+                    size="icon"
+                    onClick={handleShare}
+                    className="h-9 w-9 md:h-10 md:w-10"
+                    aria-label="Share this beach"
+                    title="Share this beach"
+                  >
+                    <Share2 className="h-4 w-4 md:h-5 md:w-5" aria-hidden="true" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    onClick={handleFeedback}
+                    className="h-9 w-9 md:h-10 md:w-10"
+                    aria-label="Send feedback"
+                    title="Send feedback"
+                  >
+                    <MessageSquare className="h-4 w-4 md:h-5 md:w-5" aria-hidden="true" />
+                  </Button>
+                </div>
+              </div>
+
+              {/* Area and Verification Info Below Title */}
+              <div className="flex flex-wrap items-center gap-2 mb-2">
+                <Link
+                  to={`/${generateAreaSlug(beach.area)}`}
+                  aria-label={`View beaches in ${beach.area}`}
+                  className="inline-flex items-center gap-2 text-sm md:text-base rounded-full border border-border/50 bg-muted/40 px-3 py-1 text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-colors"
+                >
+                  <MapPin className="h-4 w-4 md:h-5 md:w-5 text-secondary" aria-hidden="true" />
+                  <span className="font-medium">{beach.area}</span>
+                </Link>
+                <div
+                  aria-label={`Information last verified ${beach.updated_at ? formatRelativeTime(beach.updated_at) : "recently"}`}
+                  className="inline-flex items-center gap-2 text-sm md:text-base rounded-full border border-border/50 bg-muted/40 px-3 py-1 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  role="status"
+                >
+                  <Clock className="h-4 w-4 md:h-5 md:w-5 text-secondary" aria-hidden="true" />
+                  <span className="font-medium">
+                    Verified {beach.updated_at ? formatRelativeTime(beach.updated_at) : "recently"}
+                  </span>
+                </div>
+              </div>
             </div>
           )}
-        </figure>
 
-        {/* Title & Actions - Show immediately when content is ready */}
-        {shouldShowContent && (
-          <div className="mb-8">
-            {/* Title and Action Buttons in Same Row */}
-            <div className="flex items-start justify-between gap-3 mb-4">
-              <div className="flex-1 min-w-0">
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3">
-                  {beach.name}
-                </h1>
-              </div>
-              
-              {/* Icon-Only Action Buttons */}
-              <div className="flex gap-2 flex-shrink-0">
-                <Button 
-                  onClick={handleOpenInMaps} 
-                  variant="cta"
-                  size="icon"
-                  className="h-9 w-9 md:h-10 md:w-10"
-                  aria-label="Get directions"
-                  title="Get directions"
-                >
-                  <MapPin className="h-4 w-4 md:h-5 md:w-5" aria-hidden="true" />
-                </Button>
-                <Button 
-                  variant="cta"
-                  size="icon"
-                  onClick={handleShare}
-                  className="h-9 w-9 md:h-10 md:w-10"
-                  aria-label="Share this beach"
-                  title="Share this beach"
-                >
-                  <Share2 className="h-4 w-4 md:h-5 md:w-5" aria-hidden="true" />
-                </Button>
-                <Button 
-                  variant="outline"
-                  size="icon"
-                  onClick={handleFeedback}
-                  className="h-9 w-9 md:h-10 md:w-10"
-                  aria-label="Send feedback"
-                  title="Send feedback"
-                >
-                  <MessageSquare className="h-4 w-4 md:h-5 md:w-5" aria-hidden="true" />
-                </Button>
-              </div>
-            </div>
-            
-            {/* Area and Verification Info Below Title */}
-            <div className="flex flex-wrap items-center gap-2 mb-2">
-              <Link
-                to={`/${generateAreaSlug(beach.area)}`}
-                aria-label={`View beaches in ${beach.area}`}
-                className="inline-flex items-center gap-2 text-sm md:text-base rounded-full border border-border/50 bg-muted/40 px-3 py-1 text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background transition-colors"
-              >
-                <MapPin className="h-4 w-4 md:h-5 md:w-5 text-secondary" aria-hidden="true" />
-                <span className="font-medium">{beach.area}</span>
-              </Link>
-              <div
-                aria-label={`Information last verified ${beach.updated_at ? formatRelativeTime(beach.updated_at) : 'recently'}`}
-                className="inline-flex items-center gap-2 text-sm md:text-base rounded-full border border-border/50 bg-muted/40 px-3 py-1 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                role="status"
-              >
-                <Clock className="h-4 w-4 md:h-5 md:w-5 text-secondary" aria-hidden="true" />
-                <span className="font-medium">Verified {beach.updated_at ? formatRelativeTime(beach.updated_at) : 'recently'}</span>
-              </div>
-            </div>
-          </div>
-        )}
+          {/* Overview - Show when content is ready */}
+          {shouldShowContent && (
+            <div className="space-y-8">
+              {/* Divider between header/meta and first content section */}
+              <hr className="border-neutral-200/30" />
 
-        {/* Overview - Show when content is ready */}
-        {shouldShowContent && (
-          <div className="space-y-8">
-            {/* Divider between header/meta and first content section */}
-            <hr className="border-neutral-200/30" />
-
-            {/* At a Glance */}
-            <section>
-              <h2 className="text-2xl font-semibold mb-6">Summary</h2>
-              <dl className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="flex items-center gap-3">
-                  <Palmtree className="h-5 w-5 text-secondary" aria-hidden="true" />
-                  <div>
-                    <dt className="text-sm font-medium text-muted-foreground">Beach Type</dt>
-                    <dd className="text-sm">{typeLabels[beach.type] || beach.type}</dd>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Waves className="h-5 w-5 text-secondary" aria-hidden="true" />
-                  <div>
-                    <dt className="text-sm font-medium text-muted-foreground">Wave Conditions</dt>
-                    <dd className="text-sm">{waveLabels[beach.wave_conditions] || beach.wave_conditions}</dd>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Shield className="h-5 w-5 text-secondary" aria-hidden="true" />
-                  <div>
-                    <dt className="text-sm font-medium text-muted-foreground">Organization</dt>
-                    <dd className="text-sm">{beach.organized ? "Organized" : "Unorganized"}</dd>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Car className="h-5 w-5 text-secondary" aria-hidden="true" />
-                  <div>
-                    <dt className="text-sm font-medium text-muted-foreground">Parking</dt>
-                    <dd className="text-sm">{parkingLabels[beach.parking] || beach.parking}</dd>
-                  </div>
-                </div>
-                {beach.blue_flag && (
+              {/* At a Glance */}
+              <section>
+                <h2 className="text-2xl font-semibold mb-6">Summary</h2>
+                <dl className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex items-center gap-3">
-                    <Flag className="h-5 w-5 text-secondary" aria-hidden="true" />
+                    <Palmtree className="h-5 w-5 text-secondary" aria-hidden="true" />
                     <div>
-                      <dt className="text-sm font-medium text-muted-foreground">Certification</dt>
-                      <dd className="text-sm">Blue Flag Certified</dd>
+                      <dt className="text-sm font-medium text-muted-foreground">Beach Type</dt>
+                      <dd className="text-sm">{typeLabels[beach.type] || beach.type}</dd>
                     </div>
                   </div>
-                )}
-              </dl>
-            </section>
-
-            {/* Divider between sections */}
-            {beach.description && <hr className="border-neutral-200/30" />}
-
-            {/* About Section */}
-            {beach.description && (
-              <section>
-                <h2 className="text-2xl font-semibold mb-4">Description</h2>
-                <div>
-                  <p className="text-muted-foreground whitespace-pre-line leading-relaxed">
-                    {displayDescription}
-                  </p>
-                  {shouldShowReadMore && (
-                    <Button 
-                      variant="link" 
-                      onClick={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
-                      className="p-0 h-auto mt-2"
-                    >
-                      {isDescriptionExpanded ? "Read less" : "Read more"}
-                    </Button>
-                  )}
-                </div>
-              </section>
-            )}
-
-            {/* Divider between sections */}
-            {beach.amenities && beach.amenities.length > 0 && <hr className="border-neutral-200/30" />}
-
-            {/* Amenities */}
-            {beach.amenities && beach.amenities.length > 0 && (
-              <section>
-                <h2 className="text-2xl font-semibold mb-6">Amenities</h2>
-                <div className="space-y-6">
-                  {Object.entries(amenitiesByCategory).map(([category, amenities]) => (
-                    <div key={category}>
-                      <h3 className="text-lg font-medium mb-3 capitalize">{category}</h3>
-                      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        {amenities.map(({ key, label, icon: IconComponent }) => (
-                          <div 
-                            key={key} 
-                            className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2"
-                            tabIndex={0}
-                            role="button"
-                            aria-label={`${label} available`}
-                          >
-                            <IconComponent className="h-4 w-4 text-secondary" aria-hidden="true" />
-                            <span className="text-sm font-medium">{label}</span>
-                          </div>
-                        ))}
+                  <div className="flex items-center gap-3">
+                    <Waves className="h-5 w-5 text-secondary" aria-hidden="true" />
+                    <div>
+                      <dt className="text-sm font-medium text-muted-foreground">Wave Conditions</dt>
+                      <dd className="text-sm">
+                        {waveLabels[beach.wave_conditions] || beach.wave_conditions}
+                      </dd>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Shield className="h-5 w-5 text-secondary" aria-hidden="true" />
+                    <div>
+                      <dt className="text-sm font-medium text-muted-foreground">Organization</dt>
+                      <dd className="text-sm">{beach.organized ? "Organized" : "Unorganized"}</dd>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Car className="h-5 w-5 text-secondary" aria-hidden="true" />
+                    <div>
+                      <dt className="text-sm font-medium text-muted-foreground">Parking</dt>
+                      <dd className="text-sm">{parkingLabels[beach.parking] || beach.parking}</dd>
+                    </div>
+                  </div>
+                  {beach.blue_flag && (
+                    <div className="flex items-center gap-3">
+                      <Flag className="h-5 w-5 text-secondary" aria-hidden="true" />
+                      <div>
+                        <dt className="text-sm font-medium text-muted-foreground">Certification</dt>
+                        <dd className="text-sm">Blue Flag Certified</dd>
                       </div>
                     </div>
-                  ))}
-                </div>
+                  )}
+                </dl>
               </section>
-            )}
-          </div>
+
+              {/* Divider between sections */}
+              {beach.description && <hr className="border-neutral-200/30" />}
+
+              {/* About Section */}
+              {beach.description && (
+                <section>
+                  <h2 className="text-2xl font-semibold mb-4">Description</h2>
+                  <div>
+                    <p className="text-muted-foreground whitespace-pre-line leading-relaxed">
+                      {displayDescription}
+                    </p>
+                    {shouldShowReadMore && (
+                      <Button
+                        variant="link"
+                        onClick={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
+                        className="p-0 h-auto mt-2"
+                      >
+                        {isDescriptionExpanded ? "Read less" : "Read more"}
+                      </Button>
+                    )}
+                  </div>
+                </section>
+              )}
+
+              {/* Divider between sections */}
+              {beach.amenities && beach.amenities.length > 0 && (
+                <hr className="border-neutral-200/30" />
+              )}
+
+              {/* Amenities */}
+              {beach.amenities && beach.amenities.length > 0 && (
+                <section>
+                  <h2 className="text-2xl font-semibold mb-6">Amenities</h2>
+                  <div className="space-y-6">
+                    {Object.entries(amenitiesByCategory).map(([category, amenities]) => (
+                      <div key={category}>
+                        <h3 className="text-lg font-medium mb-3 capitalize">{category}</h3>
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                          {amenities.map(({ key, label, icon: IconComponent }) => (
+                            <div
+                              key={key}
+                              className="flex items-center gap-3 p-3 rounded-lg bg-muted/50 focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2"
+                              tabIndex={0}
+                              role="button"
+                              aria-label={`${label} available`}
+                            >
+                              <IconComponent
+                                className="h-4 w-4 text-secondary"
+                                aria-hidden="true"
+                              />
+                              <span className="text-sm font-medium">{label}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+            </div>
+          )}
+        </main>
+
+        {/* More in Area Section */}
+        {beach && siblings.length > 0 && (
+          <MoreInArea
+            area={
+              { ...(beach as any), name: beach.area, slug: generateAreaSlug(beach.area) } as any
+            }
+            beaches={siblings as any}
+          />
         )}
-      </main>
-      
-      {/* More in Area Section */}
-      {beach && siblings.length > 0 && (
-        <div className="max-w-4xl md:max-w-5xl mx-auto px-4">
-          <MoreInArea area={{ ...(beach as any), name: beach.area, slug: generateAreaSlug(beach.area) } as any} beaches={siblings as any} />
-        </div>
-      )}
 
-      <Footer />
+        <Footer />
 
-      {/* Share Dialog */}
-      {beach && (
-        <ShareDialog
-          isOpen={isShareDialogOpen}
-          onClose={() => setIsShareDialogOpen(false)}
-          url={window.location.href}
-          title={beach.name}
-          description={`Discover ${beach.name} in ${beach.area}, Greece`}
-        />
-      )}
+        {/* Share Dialog */}
+        {beach && (
+          <ShareDialog
+            isOpen={isShareDialogOpen}
+            onClose={() => setIsShareDialogOpen(false)}
+            url={window.location.href}
+            title={beach.name}
+            description={`Discover ${beach.name} in ${beach.area}, Greece`}
+          />
+        )}
       </div>
     </>
   );

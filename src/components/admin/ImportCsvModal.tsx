@@ -1,26 +1,39 @@
-import React, { useState, useRef, useCallback } from 'react';
-import { Upload, X, AlertCircle, CheckCircle, Loader2, FileText } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { authSupabase } from '@/integrations/supabase/client';
-import { useToast } from '@/hooks/use-toast';
-import { useAreas } from '@/hooks/useAreas';
-import Papa from 'papaparse';
-import { 
-  normalizeRow, 
-  classify, 
-  ValidationError, 
+import React, { useState, useRef, useCallback } from "react";
+import { Upload, X, AlertCircle, CheckCircle, Loader2, FileText } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { authSupabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+import { useAreas } from "@/hooks/useAreas";
+import Papa from "papaparse";
+import {
+  normalizeRow,
+  classify,
+  ValidationError,
   ClassificationResult,
   csvRowToDbInsert,
   csvRowToDbUpdate,
-  BeachCsvRow
-} from '@/utils/csv/beachCsvSchema';
+  BeachCsvRow,
+} from "@/utils/csv/beachCsvSchema";
 
 interface ImportSummary {
   totalRows: number;
@@ -38,24 +51,28 @@ interface ImportCsvModalProps {
 }
 
 const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
-  const [step, setStep] = useState<'upload' | 'preview' | 'importing' | 'complete'>('upload');
+  const [step, setStep] = useState<"upload" | "preview" | "importing" | "complete">("upload");
   const [file, setFile] = useState<File | null>(null);
   const [parsedData, setParsedData] = useState<any[]>([]);
   const [summary, setSummary] = useState<ImportSummary | null>(null);
   const [previewRows, setPreviewRows] = useState<ClassificationResult[]>([]);
   const [existingSlugs, setExistingSlugs] = useState<Set<string>>(new Set());
   const [importProgress, setImportProgress] = useState(0);
-  const [importResults, setImportResults] = useState<{ created: number; updated: number; errors: number }>({ created: 0, updated: 0, errors: 0 });
+  const [importResults, setImportResults] = useState<{
+    created: number;
+    updated: number;
+    errors: number;
+  }>({ created: 0, updated: 0, errors: 0 });
   const [isDragOver, setIsDragOver] = useState(false);
-  
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
-  
+
   // Fetch areas for area_id mapping
   const { data: areas = [] } = useAreas();
 
   const resetModal = useCallback(() => {
-    setStep('upload');
+    setStep("upload");
     setFile(null);
     setParsedData([]);
     setSummary(null);
@@ -64,13 +81,13 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
     setImportProgress(0);
     setImportResults({ created: 0, updated: 0, errors: 0 });
     if (fileInputRef.current) {
-      fileInputRef.current.value = '';
+      fileInputRef.current.value = "";
     }
   }, []);
 
   const handleClose = useCallback(() => {
-    if (step === 'preview' && parsedData.length > 0) {
-      if (window.confirm('Are you sure you want to close? All parsed data will be lost.')) {
+    if (step === "preview" && parsedData.length > 0) {
+      if (window.confirm("Are you sure you want to close? All parsed data will be lost.")) {
         resetModal();
         onClose();
       }
@@ -84,11 +101,11 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
     const selectedFile = event.target.files?.[0];
     if (!selectedFile) return;
 
-    if (!selectedFile.name.toLowerCase().endsWith('.csv')) {
+    if (!selectedFile.name.toLowerCase().endsWith(".csv")) {
       toast({
-        title: 'Invalid File',
-        description: 'Please select a CSV file.',
-        variant: 'destructive'
+        title: "Invalid File",
+        description: "Please select a CSV file.",
+        variant: "destructive",
       });
       return;
     }
@@ -124,11 +141,11 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
     if (files.length === 0) return;
 
     const droppedFile = files[0];
-    if (!droppedFile.name.toLowerCase().endsWith('.csv')) {
+    if (!droppedFile.name.toLowerCase().endsWith(".csv")) {
       toast({
-        title: 'Invalid File',
-        description: 'Please drop a CSV file.',
-        variant: 'destructive'
+        title: "Invalid File",
+        description: "Please drop a CSV file.",
+        variant: "destructive",
       });
       return;
     }
@@ -146,9 +163,9 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
         complete: async (results) => {
           if (results.errors.length > 0) {
             toast({
-              title: 'Parse Error',
+              title: "Parse Error",
               description: `Failed to parse CSV: ${results.errors[0].message}`,
-              variant: 'destructive'
+              variant: "destructive",
             });
             return;
           }
@@ -158,17 +175,17 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
         },
         error: (error) => {
           toast({
-            title: 'Parse Error',
+            title: "Parse Error",
             description: `Failed to parse CSV: ${error.message}`,
-            variant: 'destructive'
+            variant: "destructive",
           });
-        }
+        },
       });
     } catch (error) {
       toast({
-        title: 'Parse Error',
-        description: error instanceof Error ? error.message : 'Unknown error occurred',
-        variant: 'destructive'
+        title: "Parse Error",
+        description: error instanceof Error ? error.message : "Unknown error occurred",
+        variant: "destructive",
       });
     }
   };
@@ -176,13 +193,11 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
   const performDryRun = async (data: any[]) => {
     try {
       // Fetch existing slugs
-      const { data: existingBeaches, error } = await supabase
-        .from('beaches')
-        .select('slug');
+      const { data: existingBeaches, error } = await supabase.from("beaches").select("slug");
 
       if (error) throw error;
 
-      const slugs = new Set(existingBeaches?.map(b => b.slug) || []);
+      const slugs = new Set(existingBeaches?.map((b) => b.slug) || []);
       setExistingSlugs(slugs);
 
       // Process each row
@@ -197,8 +212,8 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
       for (let i = 0; i < data.length; i++) {
         const rawRow = data[i];
         const normalizedResult = normalizeRow(rawRow, i + 1);
-        
-        if (normalizedResult.classification === 'error') {
+
+        if (normalizedResult.classification === "error") {
           errorCount++;
           allErrors.push(...normalizedResult.errors);
           results.push(normalizedResult);
@@ -209,30 +224,37 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
           errorCount++;
           allErrors.push({
             row: i + 1,
-            column: 'general',
-            message: 'Failed to normalize row',
-            value: JSON.stringify(rawRow)
+            column: "general",
+            message: "Failed to normalize row",
+            value: JSON.stringify(rawRow),
           });
           results.push({
-            classification: 'error',
-            errors: [{
-              row: i + 1,
-              column: 'general',
-              message: 'Failed to normalize row',
-              value: JSON.stringify(rawRow)
-            }]
+            classification: "error",
+            errors: [
+              {
+                row: i + 1,
+                column: "general",
+                message: "Failed to normalize row",
+                value: JSON.stringify(rawRow),
+              },
+            ],
           });
           continue;
         }
 
-        const classificationResult = classify(slugs, normalizedResult.normalizedRow, i + 1, seenSlugs);
-        
-        if (classificationResult.classification === 'error') {
+        const classificationResult = classify(
+          slugs,
+          normalizedResult.normalizedRow,
+          i + 1,
+          seenSlugs
+        );
+
+        if (classificationResult.classification === "error") {
           errorCount++;
           allErrors.push(...classificationResult.errors);
-        } else if (classificationResult.classification === 'create') {
+        } else if (classificationResult.classification === "create") {
           createCount++;
-        } else if (classificationResult.classification === 'update') {
+        } else if (classificationResult.classification === "update") {
           updateCount++;
         } else {
           skipCount++;
@@ -249,18 +271,17 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
         updateCount,
         skipCount,
         errorCount,
-        errors: allErrors.slice(0, 30) // Limit to 30 errors for display
+        errors: allErrors.slice(0, 30), // Limit to 30 errors for display
       });
 
       // Set preview rows (first 20)
       setPreviewRows(results.slice(0, 20));
-      setStep('preview');
-
+      setStep("preview");
     } catch (error) {
       toast({
-        title: 'Dry Run Failed',
-        description: error instanceof Error ? error.message : 'Unknown error occurred',
-        variant: 'destructive'
+        title: "Dry Run Failed",
+        description: error instanceof Error ? error.message : "Unknown error occurred",
+        variant: "destructive",
       });
     }
   };
@@ -268,22 +289,26 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
   const handleImport = async () => {
     if (!summary || summary.errorCount > 0) {
       toast({
-        title: 'Cannot Import',
-        description: 'Please fix all errors before importing.',
-        variant: 'destructive'
+        title: "Cannot Import",
+        description: "Please fix all errors before importing.",
+        variant: "destructive",
       });
       return;
     }
 
-    if (!window.confirm('This will upsert by slug. Blank cells do not overwrite existing data. Proceed?')) {
+    if (
+      !window.confirm(
+        "This will upsert by slug. Blank cells do not overwrite existing data. Proceed?"
+      )
+    ) {
       return;
     }
 
-    setStep('importing');
+    setStep("importing");
     setImportProgress(0);
 
     try {
-      const validRows = previewRows.filter(r => r.classification !== 'error' && r.normalizedRow);
+      const validRows = previewRows.filter((r) => r.classification !== "error" && r.normalizedRow);
       const chunkSize = 200;
       let created = 0;
       let updated = 0;
@@ -291,24 +316,25 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
 
       for (let i = 0; i < validRows.length; i += chunkSize) {
         const chunk = validRows.slice(i, i + chunkSize);
-        const creates = chunk.filter(r => r.classification === 'create');
-        const updates = chunk.filter(r => r.classification === 'update');
+        const creates = chunk.filter((r) => r.classification === "create");
+        const updates = chunk.filter((r) => r.classification === "update");
 
         // Process creates
         if (creates.length > 0) {
           // Create area name to area_id mapping
-          const areaIdMap = areas.reduce((acc, area) => {
-            acc[area.name] = area.id;
-            return acc;
-          }, {} as Record<string, string>);
-          
-          const createData = creates.map(r => csvRowToDbInsert(r.normalizedRow!, areaIdMap));
-          const { error: createError } = await supabase
-            .from('beaches')
-            .insert(createData);
+          const areaIdMap = areas.reduce(
+            (acc, area) => {
+              acc[area.name] = area.id;
+              return acc;
+            },
+            {} as Record<string, string>
+          );
+
+          const createData = creates.map((r) => csvRowToDbInsert(r.normalizedRow!, areaIdMap));
+          const { error: createError } = await supabase.from("beaches").insert(createData);
 
           if (createError) {
-            console.error('Create error:', createError);
+            console.error("Create error:", createError);
             errors += creates.length;
           } else {
             created += creates.length;
@@ -318,19 +344,22 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
         // Process updates
         for (const update of updates) {
           // Create area name to area_id mapping
-          const areaIdMap = areas.reduce((acc, area) => {
-            acc[area.name] = area.id;
-            return acc;
-          }, {} as Record<string, string>);
-          
+          const areaIdMap = areas.reduce(
+            (acc, area) => {
+              acc[area.name] = area.id;
+              return acc;
+            },
+            {} as Record<string, string>
+          );
+
           const updateData = csvRowToDbUpdate(update.normalizedRow!, areaIdMap);
           const { error: updateError } = await supabase
-            .from('beaches')
+            .from("beaches")
             .update(updateData)
-            .eq('slug', update.normalizedRow!.slug);
+            .eq("slug", update.normalizedRow!.slug);
 
           if (updateError) {
-            console.error('Update error:', updateError);
+            console.error("Update error:", updateError);
             errors++;
           } else {
             updated++;
@@ -341,31 +370,38 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
         setImportResults({ created, updated, errors });
       }
 
-      setStep('complete');
+      setStep("complete");
       toast({
-        title: 'Import Complete',
+        title: "Import Complete",
         description: `Created: ${created}, Updated: ${updated}, Errors: ${errors}`,
       });
-
     } catch (error) {
       toast({
-        title: 'Import Failed',
-        description: error instanceof Error ? error.message : 'Unknown error occurred',
-        variant: 'destructive'
+        title: "Import Failed",
+        description: error instanceof Error ? error.message : "Unknown error occurred",
+        variant: "destructive",
       });
-      setStep('preview');
+      setStep("preview");
     }
   };
 
   const getClassificationBadge = (classification: string) => {
     switch (classification) {
-      case 'create':
-        return <Badge variant="default" className="bg-green-100 text-green-800">Create</Badge>;
-      case 'update':
-        return <Badge variant="default" className="bg-blue-100 text-blue-800">Update</Badge>;
-      case 'skip':
+      case "create":
+        return (
+          <Badge variant="default" className="bg-green-100 text-green-800">
+            Create
+          </Badge>
+        );
+      case "update":
+        return (
+          <Badge variant="default" className="bg-blue-100 text-blue-800">
+            Update
+          </Badge>
+        );
+      case "skip":
         return <Badge variant="secondary">Skip</Badge>;
-      case 'error':
+      case "error":
         return <Badge variant="destructive">Error</Badge>;
       default:
         return <Badge variant="outline">{classification}</Badge>;
@@ -374,11 +410,11 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
 
   const renderUploadStep = () => (
     <div className="space-y-4">
-      <div 
+      <div
         className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors cursor-pointer ${
-          isDragOver 
-            ? 'border-primary bg-primary/5' 
-            : 'border-muted-foreground/25 hover:border-muted-foreground/50'
+          isDragOver
+            ? "border-primary bg-primary/5"
+            : "border-muted-foreground/25 hover:border-muted-foreground/50"
         }`}
         onDragOver={handleDragOver}
         onDragEnter={handleDragEnter}
@@ -386,18 +422,19 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
         onDrop={handleDrop}
         onClick={() => fileInputRef.current?.click()}
       >
-        <Upload className={`mx-auto h-12 w-12 mb-4 transition-colors ${
-          isDragOver ? 'text-primary' : 'text-muted-foreground'
-        }`} />
+        <Upload
+          className={`mx-auto h-12 w-12 mb-4 transition-colors ${
+            isDragOver ? "text-primary" : "text-muted-foreground"
+          }`}
+        />
         <div className="space-y-2">
           <h3 className="text-lg font-medium">
-            {isDragOver ? 'Drop CSV file here' : 'Upload CSV File'}
+            {isDragOver ? "Drop CSV file here" : "Upload CSV File"}
           </h3>
           <p className="text-sm text-muted-foreground">
-            {isDragOver 
-              ? 'Release to upload the file' 
-              : 'Drag and drop a CSV file or click to select'
-            }
+            {isDragOver
+              ? "Release to upload the file"
+              : "Drag and drop a CSV file or click to select"}
           </p>
         </div>
         <input
@@ -407,7 +444,7 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
           onChange={handleFileSelect}
           className="hidden"
         />
-        <Button 
+        <Button
           onClick={(e) => {
             e.stopPropagation();
             fileInputRef.current?.click();
@@ -475,9 +512,7 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
       <Card>
         <CardHeader>
           <CardTitle>Preview (First 20 Rows)</CardTitle>
-          <CardDescription>
-            Showing how rows will be processed
-          </CardDescription>
+          <CardDescription>Showing how rows will be processed</CardDescription>
         </CardHeader>
         <CardContent>
           <ScrollArea className="h-64">
@@ -496,19 +531,15 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
                   <TableRow key={index}>
                     <TableCell>{index + 1}</TableCell>
                     <TableCell className="font-mono text-sm">
-                      {row.normalizedRow?.slug || 'N/A'}
+                      {row.normalizedRow?.slug || "N/A"}
                     </TableCell>
                     <TableCell className="max-w-48 truncate" title={row.normalizedRow?.name}>
-                      {row.normalizedRow?.name || 'N/A'}
+                      {row.normalizedRow?.name || "N/A"}
                     </TableCell>
-                    <TableCell>
-                      {getClassificationBadge(row.classification)}
-                    </TableCell>
+                    <TableCell>{getClassificationBadge(row.classification)}</TableCell>
                     <TableCell>
                       {row.errors.length > 0 ? (
-                        <div className="text-red-600 text-sm">
-                          {row.errors[0].message}
-                        </div>
+                        <div className="text-red-600 text-sm">{row.errors[0].message}</div>
                       ) : (
                         <CheckCircle className="h-4 w-4 text-green-600" />
                       )}
@@ -523,14 +554,11 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
 
       {/* Actions */}
       <div className="flex justify-between">
-        <Button variant="outline" onClick={() => setStep('upload')}>
+        <Button variant="outline" onClick={() => setStep("upload")}>
           <Upload className="mr-2 h-4 w-4" />
           Choose Different File
         </Button>
-        <Button 
-          onClick={handleImport}
-          disabled={summary?.errorCount > 0}
-        >
+        <Button onClick={handleImport} disabled={summary?.errorCount > 0}>
           Import {summary?.createCount + summary?.updateCount} Rows
         </Button>
       </div>
@@ -542,15 +570,11 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
       <Loader2 className="mx-auto h-12 w-12 animate-spin text-primary" />
       <div className="space-y-2">
         <h3 className="text-lg font-medium">Importing Data</h3>
-        <p className="text-sm text-muted-foreground">
-          Processing rows in chunks of 200...
-        </p>
+        <p className="text-sm text-muted-foreground">Processing rows in chunks of 200...</p>
       </div>
       <div className="space-y-2">
         <Progress value={importProgress} className="w-full" />
-        <p className="text-sm text-muted-foreground">
-          {importProgress}% complete
-        </p>
+        <p className="text-sm text-muted-foreground">{importProgress}% complete</p>
       </div>
       <div className="grid grid-cols-3 gap-4 text-sm">
         <div>
@@ -574,9 +598,7 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
       <CheckCircle className="mx-auto h-12 w-12 text-green-600" />
       <div className="space-y-2">
         <h3 className="text-lg font-medium">Import Complete</h3>
-        <p className="text-sm text-muted-foreground">
-          Successfully processed all rows
-        </p>
+        <p className="text-sm text-muted-foreground">Successfully processed all rows</p>
       </div>
       <div className="grid grid-cols-3 gap-4 text-sm">
         <div>
@@ -593,7 +615,7 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
         </div>
       </div>
       <div className="flex justify-center gap-2">
-        <Button onClick={() => window.location.href = '/admin/beaches?sort=updated_at&dir=desc'}>
+        <Button onClick={() => (window.location.href = "/admin/beaches?sort=updated_at&dir=desc")}>
           View Beaches
         </Button>
         <Button variant="outline" onClick={handleClose}>
@@ -605,7 +627,10 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto" aria-describedby="import-csv-desc">
+      <DialogContent
+        className="max-w-4xl max-h-[90vh] overflow-y-auto"
+        aria-describedby="import-csv-desc"
+      >
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Upload className="h-5 w-5" />
@@ -616,10 +641,10 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
           </DialogDescription>
         </DialogHeader>
 
-        {step === 'upload' && renderUploadStep()}
-        {step === 'preview' && renderPreviewStep()}
-        {step === 'importing' && renderImportingStep()}
-        {step === 'complete' && renderCompleteStep()}
+        {step === "upload" && renderUploadStep()}
+        {step === "preview" && renderPreviewStep()}
+        {step === "importing" && renderImportingStep()}
+        {step === "complete" && renderCompleteStep()}
       </DialogContent>
     </Dialog>
   );

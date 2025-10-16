@@ -1,5 +1,5 @@
-import React from 'react';
-import { ExternalLink } from 'lucide-react';
+import React from "react";
+import { ExternalLink } from "lucide-react";
 
 interface PhotoAttributionProps {
   photoSource?: string;
@@ -10,16 +10,16 @@ interface PhotoAttributionProps {
 /**
  * PhotoAttribution component for displaying proper photo credits
  * Follows industry standards for legal protection and aesthetic appeal
- * 
+ *
  * Expected photo_source format examples:
  * - "dronepicr, CC BY 2.0 <https://creativecommons.org/licenses/by/2.0>, via Wikimedia Commons"
  * - "Photo by John Smith via Unsplash"
  * - "Image by Jane Doe, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0/>"
  */
-const PhotoAttribution: React.FC<PhotoAttributionProps> = ({ 
-  photoSource, 
+const PhotoAttribution: React.FC<PhotoAttributionProps> = ({
+  photoSource,
   className = "",
-  compact = false
+  compact = false,
 }) => {
   if (!photoSource) return null;
 
@@ -33,7 +33,7 @@ const PhotoAttribution: React.FC<PhotoAttributionProps> = ({
         license: ccMatch[2].trim(),
         licenseUrl: ccMatch[3].trim(),
         source: ccMatch[4].trim(),
-        isCC: true
+        isCC: true,
       };
     }
 
@@ -43,7 +43,7 @@ const PhotoAttribution: React.FC<PhotoAttributionProps> = ({
       return {
         author: simpleMatch[1].trim(),
         source: simpleMatch[2].trim(),
-        isCC: false
+        isCC: false,
       };
     }
 
@@ -54,15 +54,15 @@ const PhotoAttribution: React.FC<PhotoAttributionProps> = ({
         author: licenseMatch[1].trim(),
         license: licenseMatch[2].trim(),
         licenseUrl: licenseMatch[3].trim(),
-        isCC: licenseMatch[2].includes('CC'),
-        source: undefined
+        isCC: licenseMatch[2].includes("CC"),
+        source: undefined,
       };
     }
 
     // Fallback: treat as simple author name
     return {
       author: source.trim(),
-      isCC: false
+      isCC: false,
     };
   };
 
@@ -71,22 +71,22 @@ const PhotoAttribution: React.FC<PhotoAttributionProps> = ({
   // Compact mode for homepage cards - shows only author name with minimal styling
   if (compact) {
     return (
-      <div className={`absolute bottom-1 right-1 bg-foreground/60 backdrop-blur-sm text-background text-[10px] px-1.5 py-0.5 rounded text-nowrap ${className}`}>
-        <span className="text-background/90 truncate max-w-[80px] block">
-          {attribution.author}
-        </span>
+      <div
+        className={`absolute bottom-1 right-1 bg-foreground/60 backdrop-blur-sm text-background text-[10px] px-1.5 py-0.5 rounded text-nowrap ${className}`}
+      >
+        <span className="text-background/90 truncate max-w-[80px] block">{attribution.author}</span>
       </div>
     );
   }
 
   // Full mode for detail pages - shows complete attribution
   return (
-    <div className={`absolute bottom-2 right-2 bg-foreground/70 backdrop-blur-sm text-background text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-sm sm:rounded-md max-w-[calc(100%-1rem)] ${className}`}>
+    <div
+      className={`absolute bottom-2 right-2 bg-foreground/70 backdrop-blur-sm text-background text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-sm sm:rounded-md max-w-[calc(100%-1rem)] ${className}`}
+    >
       <div className="flex items-center gap-0.5 sm:gap-1 flex-wrap">
-        <span className="text-background/90">
-          {attribution.author}
-        </span>
-        
+        <span className="text-background/90">{attribution.author}</span>
+
         {attribution.license && (
           <>
             <span className="text-background/70">•</span>
@@ -106,7 +106,7 @@ const PhotoAttribution: React.FC<PhotoAttributionProps> = ({
             )}
           </>
         )}
-        
+
         {attribution.source && (
           <>
             <span className="text-background/70">•</span>

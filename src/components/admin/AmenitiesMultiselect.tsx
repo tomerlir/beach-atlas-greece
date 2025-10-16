@@ -1,12 +1,12 @@
-import React, { useState, useMemo } from 'react';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { ChevronDown, ChevronRight, Search, X } from 'lucide-react';
-import { AMENITY_MAP, getAmenitiesByCategory, getAmenityLabel } from '@/lib/amenities';
-import { cn } from '@/lib/utils';
+import React, { useState, useMemo } from "react";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { ChevronDown, ChevronRight, Search, X } from "lucide-react";
+import { AMENITY_MAP, getAmenitiesByCategory, getAmenityLabel } from "@/lib/amenities";
+import { cn } from "@/lib/utils";
 
 interface AmenitiesMultiselectProps {
   value: string[];
@@ -17,38 +17,39 @@ interface AmenitiesMultiselectProps {
 const AmenitiesMultiselect: React.FC<AmenitiesMultiselectProps> = ({
   value = [],
   onChange,
-  className
+  className,
 }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
-    new Set(['facilities', 'services']) // Expand most common categories by default
+    new Set(["facilities", "services"]) // Expand most common categories by default
   );
 
   // Filter amenities based on search term
   const filteredAmenities = useMemo(() => {
     if (!searchTerm.trim()) {
       return {
-        facilities: getAmenitiesByCategory('facilities'),
-        safety: getAmenitiesByCategory('safety'),
-        services: getAmenitiesByCategory('services'),
-        activities: getAmenitiesByCategory('activities')
+        facilities: getAmenitiesByCategory("facilities"),
+        safety: getAmenitiesByCategory("safety"),
+        services: getAmenitiesByCategory("services"),
+        activities: getAmenitiesByCategory("activities"),
       };
     }
 
     const searchLower = searchTerm.toLowerCase();
     const allAmenities = Object.entries(AMENITY_MAP).map(([id, config]) => ({ id, ...config }));
-    
-    const filtered = allAmenities.filter(amenity => 
-      amenity.label.toLowerCase().includes(searchLower) ||
-      amenity.id.toLowerCase().includes(searchLower)
+
+    const filtered = allAmenities.filter(
+      (amenity) =>
+        amenity.label.toLowerCase().includes(searchLower) ||
+        amenity.id.toLowerCase().includes(searchLower)
     );
 
     // Group filtered amenities by category
     return {
-      facilities: filtered.filter(a => a.category === 'facilities'),
-      safety: filtered.filter(a => a.category === 'safety'),
-      services: filtered.filter(a => a.category === 'services'),
-      activities: filtered.filter(a => a.category === 'activities')
+      facilities: filtered.filter((a) => a.category === "facilities"),
+      safety: filtered.filter((a) => a.category === "safety"),
+      services: filtered.filter((a) => a.category === "services"),
+      activities: filtered.filter((a) => a.category === "activities"),
     };
   }, [searchTerm]);
 
@@ -64,13 +65,13 @@ const AmenitiesMultiselect: React.FC<AmenitiesMultiselectProps> = ({
 
   const toggleAmenity = (amenityId: string) => {
     const newValue = value.includes(amenityId)
-      ? value.filter(id => id !== amenityId)
+      ? value.filter((id) => id !== amenityId)
       : [...value, amenityId];
     onChange(newValue);
   };
 
   const removeAmenity = (amenityId: string) => {
-    onChange(value.filter(id => id !== amenityId));
+    onChange(value.filter((id) => id !== amenityId));
   };
 
   const clearAll = () => {
@@ -78,29 +79,22 @@ const AmenitiesMultiselect: React.FC<AmenitiesMultiselectProps> = ({
   };
 
   const categoryLabels = {
-    facilities: 'Facilities',
-    safety: 'Safety',
-    services: 'Services',
-    activities: 'Activities'
+    facilities: "Facilities",
+    safety: "Safety",
+    services: "Services",
+    activities: "Activities",
   };
 
   const renderCategory = (category: keyof typeof categoryLabels, amenities: any[]) => {
     if (amenities.length === 0) return null;
 
     const isExpanded = expandedCategories.has(category);
-    const selectedCount = amenities.filter(a => value.includes(a.id)).length;
+    const selectedCount = amenities.filter((a) => value.includes(a.id)).length;
 
     return (
-      <Collapsible
-        key={category}
-        open={isExpanded}
-        onOpenChange={() => toggleCategory(category)}
-      >
+      <Collapsible key={category} open={isExpanded} onOpenChange={() => toggleCategory(category)}>
         <CollapsibleTrigger asChild>
-          <Button
-            variant="ghost"
-            className="w-full justify-between p-2 h-auto font-medium"
-          >
+          <Button variant="ghost" className="w-full justify-between p-2 h-auto font-medium">
             <div className="flex items-center gap-2">
               {isExpanded ? (
                 <ChevronDown className="h-4 w-4" />
@@ -120,7 +114,7 @@ const AmenitiesMultiselect: React.FC<AmenitiesMultiselectProps> = ({
           {amenities.map((amenity) => {
             const Icon = amenity.icon;
             const isSelected = value.includes(amenity.id);
-            
+
             return (
               <div
                 key={amenity.id}
@@ -178,13 +172,9 @@ const AmenitiesMultiselect: React.FC<AmenitiesMultiselectProps> = ({
               const amenity = AMENITY_MAP[amenityId];
               if (!amenity) return null;
               const Icon = amenity.icon;
-              
+
               return (
-                <Badge
-                  key={amenityId}
-                  variant="secondary"
-                  className="flex items-center gap-1 pr-1"
-                >
+                <Badge key={amenityId} variant="secondary" className="flex items-center gap-1 pr-1">
                   <Icon className={cn("h-3 w-3", amenity.color)} />
                   <span className="text-xs">{amenity.label}</span>
                   <Button
@@ -204,18 +194,14 @@ const AmenitiesMultiselect: React.FC<AmenitiesMultiselectProps> = ({
 
       {/* Categories */}
       <div className="space-y-1 border rounded-md">
-        {renderCategory('facilities', filteredAmenities.facilities)}
-        {renderCategory('safety', filteredAmenities.safety)}
-        {renderCategory('services', filteredAmenities.services)}
-        {renderCategory('activities', filteredAmenities.activities)}
+        {renderCategory("facilities", filteredAmenities.facilities)}
+        {renderCategory("safety", filteredAmenities.safety)}
+        {renderCategory("services", filteredAmenities.services)}
+        {renderCategory("activities", filteredAmenities.activities)}
       </div>
 
       {/* Hidden input for form submission */}
-      <input
-        type="hidden"
-        name="amenities"
-        value={value.join(',')}
-      />
+      <input type="hidden" name="amenities" value={value.join(",")} />
     </div>
   );
 };

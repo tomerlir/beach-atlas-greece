@@ -1,4 +1,4 @@
-import { useCallback, useRef, useEffect } from 'react';
+import { useCallback, useRef, useEffect } from "react";
 
 interface ImagePreloadOptions {
   priority?: boolean;
@@ -25,172 +25,165 @@ export const useImagePreloader = () => {
   const activeLoads = useRef(0);
 
   // Generate optimized image URL (same logic as OptimizedImage)
-  const getOptimizedImageUrl = useCallback((
-    src: string, 
-    width: number, 
-    height: number, 
-    quality: number = 80
-  ): string => {
-    // If it's already a placeholder or optimized URL, return as is
-    if (src.includes('placehold.co') || src.includes('res.cloudinary.com')) {
-      return src;
-    }
-
-    // For Unsplash images, use their optimization API
-    if (src.includes('unsplash.com')) {
-      const url = new URL(src);
-      url.searchParams.set('w', width.toString());
-      url.searchParams.set('h', height.toString());
-      url.searchParams.set('q', quality.toString());
-      url.searchParams.set('fm', 'webp');
-      return url.toString();
-    }
-
-    return src;
-  }, []);
-
-  // Preload a single image with concurrency control
-  const preloadImage = useCallback((
-    src: string, 
-    options: ImagePreloadOptions = {}
-  ): Promise<PreloadResult> => {
-    return new Promise((resolve) => {
-      const {
-        priority = false,
-        quality = 80,
-        width = 400,
-        height = 225
-      } = options;
-
-      // Check if already preloaded
-      if (preloadedImages.current.has(src)) {
-        resolve(preloadedImages.current.get(src)!);
-        return;
+  const getOptimizedImageUrl = useCallback(
+    (src: string, width: number, height: number, quality: number = 80): string => {
+      // If it's already a placeholder or optimized URL, return as is
+      if (src.includes("placehold.co") || src.includes("res.cloudinary.com")) {
+        return src;
       }
 
-      // Check if currently loading
-      if (loadingImages.current.has(src)) {
-        // Wait for the existing load to complete with proper cleanup
-        const checkInterval = setInterval(() => {
-          if (preloadedImages.current.has(src)) {
+      // For Unsplash images, use their optimization API
+      if (src.includes("unsplash.com")) {
+        const url = new URL(src);
+        url.searchParams.set("w", width.toString());
+        url.searchParams.set("h", height.toString());
+        url.searchParams.set("q", quality.toString());
+        url.searchParams.set("fm", "webp");
+        return url.toString();
+      }
+
+      return src;
+    },
+    []
+  );
+
+  // Preload a single image with concurrency control
+  const preloadImage = useCallback(
+    (src: string, options: ImagePreloadOptions = {}): Promise<PreloadResult> => {
+      return new Promise((resolve) => {
+        const { priority = false, quality = 80, width = 400, height = 225 } = options;
+
+        // Check if already preloaded
+        if (preloadedImages.current.has(src)) {
+          resolve(preloadedImages.current.get(src)!);
+          return;
+        }
+
+        // Check if currently loading
+        if (loadingImages.current.has(src)) {
+          // Wait for the existing load to complete with proper cleanup
+          const checkInterval = setInterval(() => {
+            if (preloadedImages.current.has(src)) {
+              clearInterval(checkInterval);
+              activeIntervals.current.delete(checkInterval);
+              resolve(preloadedImages.current.get(src)!);
+            }
+          }, 50);
+          activeIntervals.current.add(checkInterval);
+
+          // Set a timeout to prevent infinite waiting
+          const timeout = setTimeout(() => {
             clearInterval(checkInterval);
             activeIntervals.current.delete(checkInterval);
-            resolve(preloadedImages.current.get(src)!);
-          }
-        }, 50);
-        activeIntervals.current.add(checkInterval);
-        
-        // Set a timeout to prevent infinite waiting
-        const timeout = setTimeout(() => {
-          clearInterval(checkInterval);
-          activeIntervals.current.delete(checkInterval);
-          activeTimeouts.current.delete(timeout);
+            activeTimeouts.current.delete(timeout);
+            resolve({
+              success: false,
+              url: src,
+              loadTime: 0,
+            });
+          }, 10000); // 10 second timeout
+          activeTimeouts.current.add(timeout);
+
+          // Return early to avoid duplicate processing
+          return;
+        }
+
+        // Check concurrency limit
+        if (activeLoads.current >= concurrencyLimit.current) {
+          // Queue the request for later processing
+          preloadQueue.current.push(src);
           resolve({
             success: false,
             url: src,
-            loadTime: 0
+            loadTime: 0,
           });
-        }, 10000); // 10 second timeout
-        activeTimeouts.current.add(timeout);
-        
-        // Return early to avoid duplicate processing
-        return;
-      }
-
-      // Check concurrency limit
-      if (activeLoads.current >= concurrencyLimit.current) {
-        // Queue the request for later processing
-        preloadQueue.current.push(src);
-        resolve({
-          success: false,
-          url: src,
-          loadTime: 0
-        });
-        return;
-      }
-
-      const startTime = Date.now();
-      loadingImages.current.add(src);
-      activeLoads.current++;
-
-      // Create abort controller for this request
-      const abortController = new AbortController();
-      activeRequests.current.set(src, abortController);
-
-      const optimizedSrc = getOptimizedImageUrl(src, width, height, quality);
-      const img = new Image();
-
-      // Check if request was aborted before setting up handlers
-      if (abortController.signal.aborted) {
-        loadingImages.current.delete(src);
-        activeLoads.current--;
-        activeRequests.current.delete(src);
-        resolve({
-          success: false,
-          url: src,
-          loadTime: 0
-        });
-        return;
-      }
-
-      img.onload = () => {
-        // Check if request was aborted
-        if (abortController.signal.aborted) {
           return;
         }
 
-        const loadTime = Date.now() - startTime;
-        const result: PreloadResult = {
-          success: true,
-          url: optimizedSrc,
-          loadTime
-        };
-        
-        preloadedImages.current.set(src, result);
-        loadingImages.current.delete(src);
-        activeLoads.current--;
-        activeRequests.current.delete(src);
-        
-        if (process.env.NODE_ENV === 'development') {
-          console.log(`Image preloaded: ${src} in ${loadTime}ms`);
-        }
-        
-        resolve(result);
-      };
+        const startTime = Date.now();
+        loadingImages.current.add(src);
+        activeLoads.current++;
 
-      img.onerror = () => {
-        // Check if request was aborted
+        // Create abort controller for this request
+        const abortController = new AbortController();
+        activeRequests.current.set(src, abortController);
+
+        const optimizedSrc = getOptimizedImageUrl(src, width, height, quality);
+        const img = new Image();
+
+        // Check if request was aborted before setting up handlers
         if (abortController.signal.aborted) {
+          loadingImages.current.delete(src);
+          activeLoads.current--;
+          activeRequests.current.delete(src);
+          resolve({
+            success: false,
+            url: src,
+            loadTime: 0,
+          });
           return;
         }
 
-        const loadTime = Date.now() - startTime;
-        const result: PreloadResult = {
-          success: false,
-          url: src,
-          loadTime
+        img.onload = () => {
+          // Check if request was aborted
+          if (abortController.signal.aborted) {
+            return;
+          }
+
+          const loadTime = Date.now() - startTime;
+          const result: PreloadResult = {
+            success: true,
+            url: optimizedSrc,
+            loadTime,
+          };
+
+          preloadedImages.current.set(src, result);
+          loadingImages.current.delete(src);
+          activeLoads.current--;
+          activeRequests.current.delete(src);
+
+          if (process.env.NODE_ENV === "development") {
+            console.log(`Image preloaded: ${src} in ${loadTime}ms`);
+          }
+
+          resolve(result);
         };
-        
-        preloadedImages.current.set(src, result);
-        loadingImages.current.delete(src);
-        activeLoads.current--;
-        activeRequests.current.delete(src);
-        
-        if (process.env.NODE_ENV === 'development') {
-          console.warn(`Image preload failed: ${src}`);
+
+        img.onerror = () => {
+          // Check if request was aborted
+          if (abortController.signal.aborted) {
+            return;
+          }
+
+          const loadTime = Date.now() - startTime;
+          const result: PreloadResult = {
+            success: false,
+            url: src,
+            loadTime,
+          };
+
+          preloadedImages.current.set(src, result);
+          loadingImages.current.delete(src);
+          activeLoads.current--;
+          activeRequests.current.delete(src);
+
+          if (process.env.NODE_ENV === "development") {
+            console.warn(`Image preload failed: ${src}`);
+          }
+
+          resolve(result);
+        };
+
+        // Set priority loading
+        if (priority) {
+          img.fetchPriority = "high";
         }
-        
-        resolve(result);
-      };
 
-      // Set priority loading
-      if (priority) {
-        img.fetchPriority = 'high';
-      }
-
-      img.src = optimizedSrc;
-    });
-  }, [getOptimizedImageUrl]);
+        img.src = optimizedSrc;
+      });
+    },
+    [getOptimizedImageUrl]
+  );
 
   // Process preload queue with concurrency control
   const processQueue = useCallback(async () => {
@@ -203,14 +196,12 @@ export const useImagePreloader = () => {
     while (preloadQueue.current.length > 0 && activeLoads.current < concurrencyLimit.current) {
       const availableSlots = concurrencyLimit.current - activeLoads.current;
       const batch = preloadQueue.current.splice(0, availableSlots);
-      
-      await Promise.allSettled(
-        batch.map(src => preloadImage(src))
-      );
+
+      await Promise.allSettled(batch.map((src) => preloadImage(src)));
 
       // Small delay between batches to avoid overwhelming the browser
       if (preloadQueue.current.length > 0) {
-        await new Promise(resolve => setTimeout(resolve, 100));
+        await new Promise((resolve) => setTimeout(resolve, 100));
       }
     }
 
@@ -218,45 +209,50 @@ export const useImagePreloader = () => {
   }, [preloadImage]);
 
   // Add images to preload queue
-  const queueImages = useCallback((urls: string[], options: ImagePreloadOptions = {}) => {
-    const newUrls = urls.filter(url => 
-      !preloadedImages.current.has(url) && 
-      !loadingImages.current.has(url) && 
-      !preloadQueue.current.includes(url)
-    );
+  const queueImages = useCallback(
+    (urls: string[], options: ImagePreloadOptions = {}) => {
+      const newUrls = urls.filter(
+        (url) =>
+          !preloadedImages.current.has(url) &&
+          !loadingImages.current.has(url) &&
+          !preloadQueue.current.includes(url)
+      );
 
-    preloadQueue.current.push(...newUrls);
-    processQueue();
-  }, [processQueue]);
+      preloadQueue.current.push(...newUrls);
+      processQueue();
+    },
+    [processQueue]
+  );
 
   // Preload multiple images with priority
-  const preloadImages = useCallback(async (
-    urls: string[], 
-    options: ImagePreloadOptions = {}
-  ): Promise<PreloadResult[]> => {
-    const results = await Promise.allSettled(
-      urls.map(url => preloadImage(url, options))
-    );
+  const preloadImages = useCallback(
+    async (urls: string[], options: ImagePreloadOptions = {}): Promise<PreloadResult[]> => {
+      const results = await Promise.allSettled(urls.map((url) => preloadImage(url, options)));
 
-    return results.map(result => 
-      result.status === 'fulfilled' ? result.value : {
-        success: false,
-        url: '',
-        loadTime: 0
-      }
-    );
-  }, [preloadImage]);
+      return results.map((result) =>
+        result.status === "fulfilled"
+          ? result.value
+          : {
+              success: false,
+              url: "",
+              loadTime: 0,
+            }
+      );
+    },
+    [preloadImage]
+  );
 
   // Preload images for visible beach cards
-  const preloadVisibleBeachImages = useCallback((beaches: any[]) => {
-    const imageUrls = beaches
-      .filter(beach => beach.photo_url)
-      .map(beach => beach.photo_url);
+  const preloadVisibleBeachImages = useCallback(
+    (beaches: any[]) => {
+      const imageUrls = beaches.filter((beach) => beach.photo_url).map((beach) => beach.photo_url);
 
-    if (imageUrls.length > 0) {
-      queueImages(imageUrls, { quality: 85 });
-    }
-  }, [queueImages]);
+      if (imageUrls.length > 0) {
+        queueImages(imageUrls, { quality: 85 });
+      }
+    },
+    [queueImages]
+  );
 
   // Check if image is preloaded
   const isPreloaded = useCallback((src: string): boolean => {
@@ -271,18 +267,18 @@ export const useImagePreloader = () => {
   // Clear preloaded images (for memory management)
   const clearPreloadedImages = useCallback(() => {
     // Abort all active requests
-    activeRequests.current.forEach(controller => controller.abort());
+    activeRequests.current.forEach((controller) => controller.abort());
     activeRequests.current.clear();
-    
+
     // Clear all active intervals and timeouts
-    activeIntervals.current.forEach(interval => clearInterval(interval));
-    activeTimeouts.current.forEach(timeout => clearTimeout(timeout));
+    activeIntervals.current.forEach((interval) => clearInterval(interval));
+    activeTimeouts.current.forEach((timeout) => clearTimeout(timeout));
     activeIntervals.current.clear();
     activeTimeouts.current.clear();
-    
+
     // Reset concurrency tracking
     activeLoads.current = 0;
-    
+
     // Clear image data
     preloadedImages.current.clear();
     loadingImages.current.clear();
@@ -294,28 +290,28 @@ export const useImagePreloader = () => {
     // Clean up stale intervals and timeouts
     const now = Date.now();
     const staleThreshold = 30000; // 30 seconds
-    
+
     // Clean up intervals that have been running too long
-    const staleIntervals = Array.from(activeIntervals.current).filter(interval => {
+    const staleIntervals = Array.from(activeIntervals.current).filter((interval) => {
       // This is a simplified check - in a real implementation, you'd track creation time
       return true; // For now, clean up all intervals periodically
     });
-    
-    staleIntervals.forEach(interval => {
+
+    staleIntervals.forEach((interval) => {
       clearInterval(interval);
       activeIntervals.current.delete(interval);
     });
-    
+
     // Clean up timeouts that have been running too long
-    const staleTimeouts = Array.from(activeTimeouts.current).filter(timeout => {
+    const staleTimeouts = Array.from(activeTimeouts.current).filter((timeout) => {
       return true; // For now, clean up all timeouts periodically
     });
-    
-    staleTimeouts.forEach(timeout => {
+
+    staleTimeouts.forEach((timeout) => {
       clearTimeout(timeout);
       activeTimeouts.current.delete(timeout);
     });
-    
+
     // Limit the size of preloaded images cache to prevent memory bloat
     if (preloadedImages.current.size > 100) {
       const entries = Array.from(preloadedImages.current.entries());
@@ -342,22 +338,22 @@ export const useImagePreloader = () => {
   useEffect(() => {
     return () => {
       // Abort all active requests
-      activeRequests.current.forEach(controller => controller.abort());
+      activeRequests.current.forEach((controller) => controller.abort());
       activeRequests.current.clear();
-      
+
       // Clear all active intervals and timeouts immediately
-      activeIntervals.current.forEach(interval => {
+      activeIntervals.current.forEach((interval) => {
         clearInterval(interval);
       });
-      activeTimeouts.current.forEach(timeout => {
+      activeTimeouts.current.forEach((timeout) => {
         clearTimeout(timeout);
       });
       activeIntervals.current.clear();
       activeTimeouts.current.clear();
-      
+
       // Reset concurrency tracking
       activeLoads.current = 0;
-      
+
       // Clear all other data
       clearPreloadedImages();
     };
@@ -374,6 +370,6 @@ export const useImagePreloader = () => {
     performPeriodicCleanup,
     preloadedCount: preloadedImages.current.size,
     loadingCount: loadingImages.current.size,
-    queueCount: preloadQueue.current.length
+    queueCount: preloadQueue.current.length,
   };
 };

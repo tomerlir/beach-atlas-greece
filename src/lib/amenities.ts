@@ -1,16 +1,16 @@
-import { 
-  Sun, 
-  Umbrella, 
-  Utensils, 
-  Waves, 
-  Eye, 
-  Camera, 
-  Wine, 
-  Music, 
-  Mountain, 
-  Binoculars, 
-  Ship, 
-  Heart, 
+import {
+  Sun,
+  Umbrella,
+  Utensils,
+  Waves,
+  Eye,
+  Camera,
+  Wine,
+  Music,
+  Mountain,
+  Binoculars,
+  Ship,
+  Heart,
   Fish,
   ParkingCircle,
   Palmtree,
@@ -20,134 +20,134 @@ import {
   Car,
   LifeBuoy,
   Anchor,
-  Users
+  Users,
 } from "lucide-react";
 
 export interface AmenityConfig {
   label: string;
   icon: any;
   color: string;
-  category?: 'facilities' | 'safety' | 'services' | 'activities';
+  category?: "facilities" | "safety" | "services" | "activities";
 }
 
 // Centralized amenity map with consistent order, labels, and icons
 // Order is based on popularity and user experience
 export const AMENITY_MAP: Record<string, AmenityConfig> = {
   // Facilities
-  sunbeds: { 
-    label: "Sunbeds", 
-    icon: Clock, 
+  sunbeds: {
+    label: "Sunbeds",
+    icon: Clock,
     color: "text-secondary",
-    category: 'facilities'
+    category: "facilities",
   },
-  umbrellas: { 
-    label: "Umbrellas", 
-    icon: Palmtree, 
+  umbrellas: {
+    label: "Umbrellas",
+    icon: Palmtree,
     color: "text-secondary",
-    category: 'facilities'
+    category: "facilities",
   },
-  showers: { 
-    label: "Showers", 
-    icon: Droplets, 
+  showers: {
+    label: "Showers",
+    icon: Droplets,
     color: "text-secondary",
-    category: 'facilities'
+    category: "facilities",
   },
-  toilets: { 
-    label: "Toilets", 
-    icon: Shield, 
+  toilets: {
+    label: "Toilets",
+    icon: Shield,
     color: "text-secondary",
-    category: 'facilities'
+    category: "facilities",
   },
-  
+
   // Safety
-  lifeguard: { 
-    label: "Lifeguard", 
-    icon: LifeBuoy, 
+  lifeguard: {
+    label: "Lifeguard",
+    icon: LifeBuoy,
     color: "text-secondary",
-    category: 'safety'
+    category: "safety",
   },
-  
+
   // Services
-  beach_bar: { 
-    label: "Beach Bar", 
-    icon: Wine, 
+  beach_bar: {
+    label: "Beach Bar",
+    icon: Wine,
     color: "text-secondary",
-    category: 'services'
+    category: "services",
   },
-  taverna: { 
-    label: "Taverna", 
-    icon: Utensils, 
+  taverna: {
+    label: "Taverna",
+    icon: Utensils,
     color: "text-secondary",
-    category: 'services'
+    category: "services",
   },
-  food: { 
-    label: "Food", 
-    icon: Utensils, 
+  food: {
+    label: "Food",
+    icon: Utensils,
     color: "text-secondary",
-    category: 'services'
+    category: "services",
   },
-  music: { 
-    label: "Music", 
-    icon: Music, 
+  music: {
+    label: "Music",
+    icon: Music,
     color: "text-secondary",
-    category: 'services'
+    category: "services",
   },
-  
+
   // Activities
-  snorkeling: { 
-    label: "Snorkeling", 
-    icon: Eye, 
+  snorkeling: {
+    label: "Snorkeling",
+    icon: Eye,
     color: "text-secondary",
-    category: 'activities'
+    category: "activities",
   },
-  water_sports: { 
-    label: "Water Sports", 
-    icon: Waves, 
+  water_sports: {
+    label: "Water Sports",
+    icon: Waves,
     color: "text-secondary",
-    category: 'activities'
+    category: "activities",
   },
-  family_friendly: { 
-    label: "Family Friendly", 
-    icon: Users, 
+  family_friendly: {
+    label: "Family Friendly",
+    icon: Users,
     color: "text-secondary",
-    category: 'activities'
+    category: "activities",
   },
-  boat_trips: { 
-    label: "Boat Trips", 
-    icon: Anchor, 
+  boat_trips: {
+    label: "Boat Trips",
+    icon: Anchor,
     color: "text-secondary",
-    category: 'activities'
+    category: "activities",
   },
-  fishing: { 
-    label: "Fishing", 
-    icon: Anchor, 
+  fishing: {
+    label: "Fishing",
+    icon: Anchor,
     color: "text-secondary",
-    category: 'activities'
+    category: "activities",
   },
-  photography: { 
-    label: "Photography", 
-    icon: Camera, 
+  photography: {
+    label: "Photography",
+    icon: Camera,
     color: "text-secondary",
-    category: 'activities'
+    category: "activities",
   },
-  hiking: { 
-    label: "Hiking", 
-    icon: Mountain, 
+  hiking: {
+    label: "Hiking",
+    icon: Mountain,
     color: "text-secondary",
-    category: 'activities'
+    category: "activities",
   },
-  birdwatching: { 
-    label: "Birdwatching", 
-    icon: Eye, 
+  birdwatching: {
+    label: "Birdwatching",
+    icon: Eye,
     color: "text-secondary",
-    category: 'activities'
+    category: "activities",
   },
-  cliff_jumping: { 
-    label: "Cliff Jumping", 
-    icon: Mountain, 
+  cliff_jumping: {
+    label: "Cliff Jumping",
+    icon: Mountain,
     color: "text-secondary",
-    category: 'activities'
-  }
+    category: "activities",
+  },
 };
 
 // Helper function to get amenity config
@@ -159,7 +159,7 @@ export const getAmenityConfig = (amenityId: string): AmenityConfig | null => {
 export const getAllAmenities = () => {
   return Object.entries(AMENITY_MAP).map(([id, config]) => ({
     id,
-    ...config
+    ...config,
   }));
 };
 
@@ -169,7 +169,9 @@ export const getAmenityLabel = (amenityId: string): string => {
 };
 
 // Helper function to get amenities by category
-export const getAmenitiesByCategory = (category: 'facilities' | 'safety' | 'services' | 'activities') => {
+export const getAmenitiesByCategory = (
+  category: "facilities" | "safety" | "services" | "activities"
+) => {
   return Object.entries(AMENITY_MAP)
     .filter(([_, config]) => config.category === category)
     .map(([id, config]) => ({ id, ...config }));

@@ -5,12 +5,14 @@ This module provides advanced NLP capabilities for the Beach Atlas Greece applic
 ## 🚀 Features
 
 ### 1. **Advanced Text Processing**
+
 - **Tokenization**: Breaks down text into meaningful tokens
 - **Lemmatization**: Reduces words to their base forms
 - **Text Normalization**: Handles diacritics, case sensitivity, and special characters
 - **Language Detection**: Identifies Greek and English text
 
 ### 2. **Named Entity Recognition (NER)**
+
 - **Place Recognition**: Identifies Greek islands, cities, and locations
 - **Amenity Detection**: Recognizes beach facilities and services
 - **Beach Type Classification**: Identifies sandy, pebbly, mixed, and rocky beaches
@@ -19,18 +21,21 @@ This module provides advanced NLP capabilities for the Beach Atlas Greece applic
 - **Organization Status**: Identifies organized vs unorganized beaches
 
 ### 3. **Sentiment Analysis**
+
 - **Polarity Detection**: Identifies positive, negative, and neutral sentiment
 - **Intent Analysis**: Determines user intent (search, preference, question, complaint, praise)
 - **Intensity Measurement**: Measures sentiment strength (low, medium, high)
 - **Keyword Extraction**: Identifies sentiment-bearing words
 
 ### 4. **Advanced Fuzzy Matching**
+
 - **Multiple Algorithms**: Uses Jaro-Winkler, Levenshtein, and Jaccard similarity
 - **Phonetic Matching**: Handles Greek place name variations
 - **Semantic Similarity**: Groups related concepts
 - **Context-Aware Matching**: Considers query context for better results
 
 ### 5. **Context-Aware Processing**
+
 - **User Preferences**: Incorporates user preferences into search
 - **Time Context**: Considers time of day and season
 - **Search History**: Learns from previous searches
@@ -54,33 +59,33 @@ src/lib/nlp/
 ### Basic Usage
 
 ```typescript
-import { extractFromNaturalLanguage } from '@/lib/naturalLanguageSearch';
+import { extractFromNaturalLanguage } from "@/lib/naturalLanguageSearch";
 
 // Process a complex query using the enhanced NLP system
 const result = await extractFromNaturalLanguage(
   "I want the most amazing family-friendly beaches with lifeguards in Crete"
 );
 
-console.log(result.filters);        // Extracted filters
-console.log(result.sentiment);      // Sentiment analysis
-console.log(result.intent);         // Intent analysis
-console.log(result.entities);       // Recognized entities
-console.log(result.confidence);     // Overall confidence
+console.log(result.filters); // Extracted filters
+console.log(result.sentiment); // Sentiment analysis
+console.log(result.intent); // Intent analysis
+console.log(result.entities); // Recognized entities
+console.log(result.confidence); // Overall confidence
 ```
 
 ### With Context
 
 ```typescript
-import { 
+import {
   extractFromNaturalLanguageWithContext,
-  createSearchContext 
-} from '@/lib/naturalLanguageSearch';
+  createSearchContext,
+} from "@/lib/naturalLanguageSearch";
 
 const context = createSearchContext({
-  userPreferences: ['family-friendly', 'calm waters'],
-  timeOfDay: 'morning',
-  season: 'summer',
-  location: 'Crete'
+  userPreferences: ["family-friendly", "calm waters"],
+  timeOfDay: "morning",
+  season: "summer",
+  location: "Crete",
 });
 
 const result = await extractFromNaturalLanguageWithContext(
@@ -129,10 +134,13 @@ The enhanced NLP system provides significant improvements in query understanding
 ### Update Known Places
 
 ```typescript
-import { setKnownPlaces } from '@/lib/naturalLanguageSearch';
+import { setKnownPlaces } from "@/lib/naturalLanguageSearch";
 
 setKnownPlaces([
-  'crete', 'corfu', 'mykonos', 'santorini',
+  "crete",
+  "corfu",
+  "mykonos",
+  "santorini",
   // ... add more places
 ]);
 ```
@@ -140,7 +148,7 @@ setKnownPlaces([
 ### Clear Caches
 
 ```typescript
-import { clearNLPCaches } from '@/lib/naturalLanguageSearch';
+import { clearNLPCaches } from "@/lib/naturalLanguageSearch";
 
 // Clear all NLP caches to free memory
 clearNLPCaches();
@@ -149,18 +157,19 @@ clearNLPCaches();
 ### Get Statistics
 
 ```typescript
-import { getNLPStats } from '@/lib/naturalLanguageSearch';
+import { getNLPStats } from "@/lib/naturalLanguageSearch";
 
 const stats = getNLPStats();
-console.log('Cache size:', stats.textProcessor.size);
+console.log("Cache size:", stats.textProcessor.size);
 ```
 
 ## 🎯 Use Cases
 
 ### 1. **Complex Queries**
+
 ```
 Input: "I want the most beautiful family-friendly beaches with amazing snorkeling and traditional tavernas in Crete"
-Output: 
+Output:
 - Place: Crete
 - Beach Type: (any)
 - Amenities: family_friendly, snorkeling, taverna
@@ -169,6 +178,7 @@ Output:
 ```
 
 ### 2. **Question Processing**
+
 ```
 Input: "What are the best beaches for Instagram photos?"
 Output:
@@ -179,6 +189,7 @@ Output:
 ```
 
 ### 3. **Negative Preferences**
+
 ```
 Input: "I hate crowded beaches but love calm waters"
 Output:
@@ -189,6 +200,7 @@ Output:
 ```
 
 ### 4. **Accessibility Needs**
+
 ```
 Input: "Find beaches with wheelchair access and medical facilities"
 Output:
@@ -288,7 +300,7 @@ The NLP module has been updated to follow correct methodology for external depen
 
 ```typescript
 // Enable debug logging
-console.log('NLP Debug:', await extractFromNaturalLanguage(query));
+console.log("NLP Debug:", await extractFromNaturalLanguage(query));
 ```
 
 ## 📄 License

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 interface ServiceWorkerState {
   isSupported: boolean;
@@ -22,11 +22,11 @@ export const useServiceWorker = (): ServiceWorkerState => {
     }
 
     // Check if service workers are supported
-    if (!('serviceWorker' in navigator)) {
+    if (!("serviceWorker" in navigator)) {
       return;
     }
 
-    setState(prev => ({ ...prev, isSupported: true }));
+    setState((prev) => ({ ...prev, isSupported: true }));
 
     let registration: ServiceWorkerRegistration | null = null;
     let updateHandler: (() => void) | null = null;
@@ -34,11 +34,11 @@ export const useServiceWorker = (): ServiceWorkerState => {
     // Register service worker
     const registerSW = async () => {
       try {
-        registration = await navigator.serviceWorker.register('/sw.js', {
-          scope: '/',
+        registration = await navigator.serviceWorker.register("/sw.js", {
+          scope: "/",
         });
 
-        setState(prev => ({
+        setState((prev) => ({
           ...prev,
           isRegistered: true,
           registration,
@@ -49,45 +49,44 @@ export const useServiceWorker = (): ServiceWorkerState => {
           const newWorker = registration?.installing;
           if (newWorker) {
             const stateChangeHandler = () => {
-              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
                 // New content is available, prompt user to refresh
-                if (confirm('New version available! Refresh to update?')) {
+                if (confirm("New version available! Refresh to update?")) {
                   window.location.reload();
                 }
               }
             };
-            newWorker.addEventListener('statechange', stateChangeHandler);
+            newWorker.addEventListener("statechange", stateChangeHandler);
           }
         };
 
-        registration.addEventListener('updatefound', updateHandler);
-
+        registration.addEventListener("updatefound", updateHandler);
       } catch (error) {
-        console.error('Service worker registration failed:', error);
+        console.error("Service worker registration failed:", error);
       }
     };
 
     registerSW();
 
     // Handle online/offline status
-    const handleOnline = () => setState(prev => ({ ...prev, isOnline: true }));
-    const handleOffline = () => setState(prev => ({ ...prev, isOnline: false }));
+    const handleOnline = () => setState((prev) => ({ ...prev, isOnline: true }));
+    const handleOffline = () => setState((prev) => ({ ...prev, isOnline: false }));
 
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
 
     return () => {
       // Clean up event listeners
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
-      
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+
       // Clean up service worker registration
       if (registration && updateHandler) {
-        registration.removeEventListener('updatefound', updateHandler);
+        registration.removeEventListener("updatefound", updateHandler);
       }
-      
+
       // Clear registration reference
-      setState(prev => ({ ...prev, registration: null }));
+      setState((prev) => ({ ...prev, registration: null }));
     };
   }, []);
 

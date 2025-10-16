@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useEffect, useState, useRef, useCallback } from 'react';
-import { User, Session } from '@supabase/supabase-js';
-import { authSupabase } from '@/integrations/supabase/client';
-import { useLocation } from 'react-router-dom';
+import React, { createContext, useContext, useEffect, useState, useRef, useCallback } from "react";
+import { User, Session } from "@supabase/supabase-js";
+import { authSupabase } from "@/integrations/supabase/client";
+import { useLocation } from "react-router-dom";
 
 interface Profile {
   id: string;
@@ -26,7 +26,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };
@@ -38,10 +38,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
   const [hasExplicitlySignedOut, setHasExplicitlySignedOut] = useState(false);
-  
+
   // Only initialize auth on admin routes
-  const isAdminRoute = location.pathname.startsWith('/admin');
-  
+  const isAdminRoute = location.pathname.startsWith("/admin");
+
   // Add refs for request cancellation and debouncing
   const fetchProfileAbortController = useRef<AbortController | null>(null);
   const fetchProfileTimeout = useRef<NodeJS.Timeout | null>(null);
@@ -51,24 +51,24 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (fetchProfileAbortController.current) {
       fetchProfileAbortController.current.abort();
     }
-    
+
     // Clear any existing timeout
     if (fetchProfileTimeout.current) {
       clearTimeout(fetchProfileTimeout.current);
     }
-    
+
     // Create new abort controller
     fetchProfileAbortController.current = new AbortController();
-    
+
     try {
       const { data, error } = await authSupabase
-        .from('profiles')
-        .select('*')
-        .eq('user_id', userId)
+        .from("profiles")
+        .select("*")
+        .eq("user_id", userId)
         .maybeSingle();
 
       if (error) {
-        console.error('Error fetching profile:', error);
+        console.error("Error fetching profile:", error);
         setLoading(false);
         return;
       }
@@ -80,31 +80,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const email = userEmail || session?.user?.email;
         if (email) {
           const { data: newProfile, error: insertError } = await authSupabase
-            .from('profiles')
+            .from("profiles")
             .insert({
               user_id: userId,
               email: email,
-              role: 'user' // Default role is 'user', admin role must be assigned manually
+              role: "user", // Default role is 'user', admin role must be assigned manually
             })
             .select()
             .single();
 
           if (insertError) {
-            console.error('Error creating user profile:', insertError);
+            console.error("Error creating user profile:", insertError);
             // Don't set profile if creation failed
           } else {
             setProfile(newProfile);
           }
         } else {
-          console.error('No email available for profile creation');
+          console.error("No email available for profile creation");
         }
       }
     } catch (error) {
       // Ignore abort errors
-      if (error instanceof Error && error.name === 'AbortError') {
+      if (error instanceof Error && error.name === "AbortError") {
         return;
       }
-      console.error('Error in fetchProfile:', error);
+      console.error("Error in fetchProfile:", error);
     } finally {
       setLoading(false);
     }
@@ -118,33 +118,33 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
 
     // Set up auth state listener
-    const { data: { subscription } } = authSupabase.auth.onAuthStateChange(
-      (event, session) => {
-        setSession(session);
-        setUser(session?.user ?? null);
-        
-        if (session?.user) {
-          setLoading(true);
-          // Debounce fetchProfile calls to prevent race conditions
-          if (fetchProfileTimeout.current) {
-            clearTimeout(fetchProfileTimeout.current);
-          }
-          fetchProfileTimeout.current = setTimeout(() => {
-            fetchProfile(session.user.id, session.user.email);
-          }, 100);
-        } else {
-          setProfile(null);
-          setLoading(false);
+    const {
+      data: { subscription },
+    } = authSupabase.auth.onAuthStateChange((event, session) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+
+      if (session?.user) {
+        setLoading(true);
+        // Debounce fetchProfile calls to prevent race conditions
+        if (fetchProfileTimeout.current) {
+          clearTimeout(fetchProfileTimeout.current);
         }
+        fetchProfileTimeout.current = setTimeout(() => {
+          fetchProfile(session.user.id, session.user.email);
+        }, 100);
+      } else {
+        setProfile(null);
+        setLoading(false);
       }
-    );
+    });
 
     // Check for existing session only if we haven't explicitly signed out
     if (!hasExplicitlySignedOut) {
       authSupabase.auth.getSession().then(({ data: { session } }) => {
         setSession(session);
         setUser(session?.user ?? null);
-        
+
         if (session?.user) {
           setLoading(true);
           // Debounce fetchProfile calls to prevent race conditions
@@ -186,19 +186,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const signIn = async (email: string, password: string) => {
     // Only allow sign in on admin routes
     if (!isAdminRoute) {
-      return { error: new Error('Authentication only available on admin routes') };
+      return { error: new Error("Authentication only available on admin routes") };
     }
-    
+
     const { error } = await authSupabase.auth.signInWithPassword({
       email,
-      password
+      password,
     });
-    
+
     // Reset the explicit sign out flag on successful sign in
     if (!error) {
       setHasExplicitlySignedOut(false);
     }
-    
+
     return { error };
   };
 
@@ -207,7 +207,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (!isAdminRoute) {
       return;
     }
-    
+
     await authSupabase.auth.signOut();
     // Clear all auth state immediately
     setUser(null);
@@ -215,16 +215,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setProfile(null);
     setLoading(false);
     setHasExplicitlySignedOut(true);
-    
+
     // Clear any remaining session data from localStorage
     const keysToRemove = [];
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
-      if (key && key.startsWith('sb-xnkyfxvncpawqpqccdby-')) {
+      if (key && key.startsWith("sb-xnkyfxvncpawqpqccdby-")) {
         keysToRemove.push(key);
       }
     }
-    keysToRemove.forEach(key => localStorage.removeItem(key));
+    keysToRemove.forEach((key) => localStorage.removeItem(key));
   };
 
   const value = {
@@ -233,12 +233,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     profile,
     loading,
     signIn,
-    signOut
+    signOut,
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

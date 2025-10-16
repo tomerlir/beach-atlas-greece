@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from "react";
 
 interface ProgressiveLoadingState {
   contentLoaded: boolean;
@@ -10,7 +10,7 @@ interface ProgressiveLoadingState {
 
 interface ProgressiveLoadingOptions {
   contentDelay?: number; // Delay before showing content (ms)
-  imageDelay?: number;   // Delay before starting image load (ms)
+  imageDelay?: number; // Delay before starting image load (ms)
   enableProgressiveMode?: boolean;
 }
 
@@ -19,11 +19,7 @@ export const useProgressiveLoading = (
   hasImage: boolean,
   options: ProgressiveLoadingOptions = {}
 ) => {
-  const {
-    contentDelay = 0,
-    imageDelay = 100,
-    enableProgressiveMode = true
-  } = options;
+  const { contentDelay = 0, imageDelay = 100, enableProgressiveMode = true } = options;
 
   const [state, setState] = useState<ProgressiveLoadingState>({
     contentLoaded: false,
@@ -37,7 +33,7 @@ export const useProgressiveLoading = (
   useEffect(() => {
     if (!isLoading && enableProgressiveMode) {
       const timer = setTimeout(() => {
-        setState(prev => ({
+        setState((prev) => ({
           ...prev,
           contentLoaded: true,
           showContent: true,
@@ -47,7 +43,7 @@ export const useProgressiveLoading = (
       return () => clearTimeout(timer);
     } else if (!isLoading && !enableProgressiveMode) {
       // If progressive mode is disabled, show everything immediately
-      setState(prev => ({
+      setState((prev) => ({
         ...prev,
         contentLoaded: true,
         showContent: true,
@@ -60,7 +56,7 @@ export const useProgressiveLoading = (
   useEffect(() => {
     if (state.contentLoaded && hasImage && enableProgressiveMode) {
       const timer = setTimeout(() => {
-        setState(prev => ({
+        setState((prev) => ({
           ...prev,
           showImage: true,
         }));
@@ -72,7 +68,7 @@ export const useProgressiveLoading = (
 
   // Handle image load completion
   const handleImageLoad = useCallback(() => {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
       imageLoaded: true,
       isFullyLoaded: true,
@@ -81,7 +77,7 @@ export const useProgressiveLoading = (
 
   // Handle image load error
   const handleImageError = useCallback(() => {
-    setState(prev => ({
+    setState((prev) => ({
       ...prev,
       imageLoaded: false,
       isFullyLoaded: prev.contentLoaded, // Still fully loaded if content is ready

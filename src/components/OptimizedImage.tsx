@@ -25,22 +25,26 @@ interface OptimizedImageProps {
 }
 
 // Use the new placeholder utility functions
-const generateBlurDataURL = (width: number, height: number, palette: keyof typeof import('@/utils/imagePlaceholder').BEACH_COLOR_PALETTES = 'default'): string => {
+const generateBlurDataURL = (
+  width: number,
+  height: number,
+  palette: keyof typeof import("@/utils/imagePlaceholder").BEACH_COLOR_PALETTES = "default"
+): string => {
   try {
     // Try to use the cached beach-themed placeholder
     return getCachedPlaceholder(width, height, palette);
   } catch (error) {
     // Fallback to simple gradient if there's an issue
-    console.warn('Failed to generate beach placeholder, using fallback:', error);
+    console.warn("Failed to generate beach placeholder, using fallback:", error);
     return generateSimpleGradientPlaceholder(width, height);
   }
 };
 
 // Image optimization service (you can replace with your preferred service)
 const getOptimizedImageUrl = (
-  src: string, 
-  width: number, 
-  height: number, 
+  src: string,
+  width: number,
+  height: number,
   quality: number = 80
 ): string => {
   // For now, we'll use a simple approach
@@ -49,12 +53,12 @@ const getOptimizedImageUrl = (
   // - ImageKit
   // - Vercel's Image Optimization
   // - Or implement your own image proxy
-  
+
   // If it's already a placeholder, return as is
-  if (src.includes('placehold.co')) {
+  if (src.includes("placehold.co")) {
     return src;
   }
-  
+
   // For other URLs, you could implement your own optimization
   // This is a placeholder implementation
   return src;
@@ -103,9 +107,9 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
           }
         });
       },
-      { 
-        rootMargin: '50px',
-        threshold: 0.1
+      {
+        rootMargin: "50px",
+        threshold: 0.1,
       }
     );
 
@@ -119,7 +123,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
         observer.disconnect();
       } catch (error) {
         // Observer might already be disconnected, ignore error
-        console.warn('Observer cleanup warning:', error);
+        console.warn("Observer cleanup warning:", error);
       }
     };
   }, [priority, isInView]);
@@ -144,9 +148,11 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   }, [onError, src, trackImageError]);
 
   // Get optimized image URL - use preloaded URL if available
-  const optimizedSrc = isInView ? 
-    (isImagePreloaded && preloadResult?.success ? preloadResult.url : getOptimizedImageUrl(src, width, height, quality)) 
-    : '';
+  const optimizedSrc = isInView
+    ? isImagePreloaded && preloadResult?.success
+      ? preloadResult.url
+      : getOptimizedImageUrl(src, width, height, quality)
+    : "";
 
   // If image is preloaded, mark as loaded immediately
   useEffect(() => {
@@ -161,40 +167,41 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   }
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className={cn("relative overflow-hidden w-full", className)}
-      style={{ 
+      style={{
         aspectRatio: `${width}/${height}`,
         // Additional CSS to prevent layout shift
-        contain: 'layout style paint',
+        contain: "layout style paint",
         // Ensure proper mobile behavior
-        maxWidth: '100%',
-        height: 'auto'
+        maxWidth: "100%",
+        height: "auto",
       }}
     >
       {/* Blur placeholder - always present to prevent layout shift */}
       {placeholder === "blur" && !imageLoaded && !imageError && (
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ 
+          style={{
             backgroundImage: `url(${defaultBlurDataURL})`,
-            backgroundColor: '#0ea5e9', // Fallback color matching the gradient
+            backgroundColor: "#0ea5e9", // Fallback color matching the gradient
             // Apply blur effect via CSS filter - reduced for mobile performance
-            filter: 'blur(8px)',
-            transform: 'scale(1.02)' // Reduced scale for mobile
+            filter: "blur(8px)",
+            transform: "scale(1.02)", // Reduced scale for mobile
           }}
         />
       )}
 
       {/* Loading skeleton - only show if not using blur placeholder */}
-      {placeholder !== "blur" && !imageLoaded && !imageError && (
-        useDetailSkeleton ? (
+      {placeholder !== "blur" &&
+        !imageLoaded &&
+        !imageError &&
+        (useDetailSkeleton ? (
           <DetailImageSkeleton className="absolute inset-0" />
         ) : (
           <div className="absolute inset-0 bg-gradient-to-br from-muted/50 to-muted animate-pulse" />
-        )
-      )}
+        ))}
 
       {/* Actual image */}
       {isInView && !imageError && (
@@ -209,7 +216,9 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
           {...({ fetchpriority: priority ? "high" : "auto" } as any)}
           onLoad={handleLoad}
           onError={handleError}
-          onLoadStart={() => { loadStartTime.current = Date.now(); }}
+          onLoadStart={() => {
+            loadStartTime.current = Date.now();
+          }}
           className={cn(
             "absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out",
             imageLoaded ? "opacity-100" : "opacity-0"
@@ -221,8 +230,16 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       {imageError && !fallbackComponent && (
         <div className="absolute inset-0 bg-gradient-to-br from-ocean to-secondary flex items-center justify-center">
           <div className="text-primary-foreground text-center">
-            <svg className="w-12 h-12 mx-auto mb-2 opacity-60" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+            <svg
+              className="w-12 h-12 mx-auto mb-2 opacity-60"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path
+                fillRule="evenodd"
+                d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                clipRule="evenodd"
+              />
             </svg>
             <p className="text-sm opacity-80">Image unavailable</p>
           </div>

@@ -1,5 +1,5 @@
-import React from 'react';
-import AdminLoginForm from '@/components/auth/AdminLoginForm';
+import React from "react";
+import AdminLoginForm from "@/components/auth/AdminLoginForm";
 
 const AdminLogin = () => {
   return <AdminLoginForm />;

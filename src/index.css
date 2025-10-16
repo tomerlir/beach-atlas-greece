@@ -136,7 +136,9 @@ All colors MUST be HSL.
   margin: 0 !important;
   padding: 0 !important;
 }
-.leaflet-popup-contrast .leaflet-popup-tip-container { display: none !important; }
+.leaflet-popup-contrast .leaflet-popup-tip-container {
+  display: none !important;
+}
 
 /* Tighten the overall container so it hugs the card */
 .leaflet-popup-contrast {
@@ -150,11 +152,16 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', sans-serif;
+    font-family: "Inter", sans-serif;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Raleway', sans-serif;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Raleway", sans-serif;
     font-weight: 600;
   }
 }
@@ -164,26 +171,25 @@ All colors MUST be HSL.
   .safe-area-inset-bottom {
     padding-bottom: env(safe-area-inset-bottom);
   }
-  
+
   .safe-area-inset-top {
     padding-top: env(safe-area-inset-top);
   }
-  
+
   .safe-area-inset-left {
     padding-left: env(safe-area-inset-left);
   }
-  
+
   .safe-area-inset-right {
     padding-right: env(safe-area-inset-right);
   }
 
   /* Hide scrollbar but keep functionality */
   .scrollbar-hide {
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
   }
-  .scrollbar-hide::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
   }
-
 }

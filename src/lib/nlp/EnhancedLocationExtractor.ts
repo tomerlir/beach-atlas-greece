@@ -3,8 +3,8 @@
  * Integrates advanced location matching with NLP processing
  */
 
-import { LocationMatcher, LocationMatch } from '../location/LocationMatcher.js';
-import { EntityRecognitionResult } from './EntityRecognizer';
+import { LocationMatcher, LocationMatch } from "../location/LocationMatcher.js";
+import { EntityRecognitionResult } from "./EntityRecognizer";
 
 export interface LocationExtractionResult {
   primaryLocation?: LocationMatch;
@@ -12,7 +12,7 @@ export interface LocationExtractionResult {
   allLocations: LocationMatch[];
   locationQuery: string;
   confidence: number;
-  searchStrategy: 'exact' | 'fuzzy' | 'hierarchical' | 'proximity' | 'multi';
+  searchStrategy: "exact" | "fuzzy" | "hierarchical" | "proximity" | "multi";
   remainingQuery: string;
 }
 
@@ -39,16 +39,16 @@ export class EnhancedLocationExtractor {
     entities: EntityRecognitionResult
   ): LocationExtractionResult {
     // Handle null/undefined input gracefully
-    if (!query || typeof query !== 'string') {
-      query = '';
+    if (!query || typeof query !== "string") {
+      query = "";
     }
-    
+
     const normalizedQuery = query.toLowerCase().trim();
-    
+
     // Strategy 1: Use entity recognition results first
     let locations: LocationMatch[] = [];
-    let searchStrategy: LocationExtractionResult['searchStrategy'] = 'exact';
-    
+    let searchStrategy: LocationExtractionResult["searchStrategy"] = "exact";
+
     if (entities.places.length > 0) {
       // Process recognized place entities
       for (const placeEntity of entities.places) {
@@ -64,7 +64,7 @@ export class EnhancedLocationExtractor {
       const multiLocationResult = this.detectMultipleLocations(normalizedQuery);
       if (multiLocationResult.length > 0) {
         locations = multiLocationResult;
-        searchStrategy = 'multi';
+        searchStrategy = "multi";
       }
     }
 
@@ -73,7 +73,7 @@ export class EnhancedLocationExtractor {
       const directMatch = this.locationMatcher.findLocationMatch(normalizedQuery);
       if (directMatch) {
         locations.push(directMatch);
-        searchStrategy = 'fuzzy';
+        searchStrategy = "fuzzy";
       }
     }
 
@@ -82,7 +82,7 @@ export class EnhancedLocationExtractor {
       const proximityResult = this.detectProximitySearch(normalizedQuery);
       if (proximityResult) {
         locations = [proximityResult];
-        searchStrategy = 'proximity';
+        searchStrategy = "proximity";
       }
     }
 
@@ -91,13 +91,13 @@ export class EnhancedLocationExtractor {
       const hierarchicalResult = this.detectHierarchicalSearch(normalizedQuery);
       if (hierarchicalResult.length > 0) {
         locations = hierarchicalResult;
-        searchStrategy = 'hierarchical';
+        searchStrategy = "hierarchical";
       }
     }
 
     // Calculate overall confidence
     const confidence = this.calculateLocationConfidence(locations, normalizedQuery);
-    
+
     // Clean remaining query
     const remainingQuery = this.cleanQueryFromLocations(query, locations);
 
@@ -108,7 +108,7 @@ export class EnhancedLocationExtractor {
       locationQuery: normalizedQuery,
       confidence,
       searchStrategy,
-      remainingQuery
+      remainingQuery,
     };
   }
 
@@ -117,19 +117,21 @@ export class EnhancedLocationExtractor {
    */
   private detectMultipleLocations(query: string): LocationMatch[] {
     const locations: LocationMatch[] = [];
-    
+
     // Common conjunction patterns
-    const conjunctionPatterns = [
-      /\b(and|&|,)\b/gi,
-      /\b(plus|with|along with)\b/gi
-    ];
+    const conjunctionPatterns = [/\b(and|&|,)\b/gi, /\b(plus|with|along with)\b/gi];
 
     // Split query by conjunctions
     let parts: string[] = [query];
     for (const pattern of conjunctionPatterns) {
       const newParts: string[] = [];
       for (const part of parts) {
-        newParts.push(...part.split(pattern).map(p => p.trim()).filter(p => p.length > 0));
+        newParts.push(
+          ...part
+            .split(pattern)
+            .map((p) => p.trim())
+            .filter((p) => p.length > 0)
+        );
       }
       parts = newParts;
     }
@@ -137,7 +139,7 @@ export class EnhancedLocationExtractor {
     // Try to match each part as a location
     for (const part of parts) {
       const match = this.locationMatcher.findLocationMatch(part);
-      if (match && !locations.some(loc => loc.place === match.place)) {
+      if (match && !locations.some((loc) => loc.place === match.place)) {
         locations.push(match);
       }
     }
@@ -153,7 +155,7 @@ export class EnhancedLocationExtractor {
       /\bnear\s+([a-zA-Z\s]+)\b/i,
       /\bclose\s+to\s+([a-zA-Z\s]+)\b/i,
       /\baround\s+([a-zA-Z\s]+)\b/i,
-      /\bwithin\s+(\d+)\s*(km|kilometers?|miles?)\s+of\s+([a-zA-Z\s]+)\b/i
+      /\bwithin\s+(\d+)\s*(km|kilometers?|miles?)\s+of\s+([a-zA-Z\s]+)\b/i,
     ];
 
     for (const pattern of proximityPatterns) {
@@ -174,11 +176,21 @@ export class EnhancedLocationExtractor {
    */
   private detectHierarchicalSearch(query: string): LocationMatch[] {
     const locations: LocationMatch[] = [];
-    
+
     // Common region names
     const regionNames = [
-      'cyclades', 'dodecanese', 'ionian', 'sporades', 'north aegean', 'south aegean',
-      'attica', 'thessaly', 'macedonia', 'thrace', 'epirus', 'peloponnese'
+      "cyclades",
+      "dodecanese",
+      "ionian",
+      "sporades",
+      "north aegean",
+      "south aegean",
+      "attica",
+      "thessaly",
+      "macedonia",
+      "thrace",
+      "epirus",
+      "peloponnese",
     ];
 
     for (const region of regionNames) {
@@ -198,12 +210,15 @@ export class EnhancedLocationExtractor {
     if (locations.length === 0) return 0;
 
     // Base confidence from location matches
-    const avgLocationConfidence = locations.reduce((sum, loc) => sum + loc.confidence, 0) / locations.length;
-    
+    const avgLocationConfidence =
+      locations.reduce((sum, loc) => sum + loc.confidence, 0) / locations.length;
+
     // Boost confidence for exact matches
-    const exactMatchBoost = locations.some(loc => 
+    const exactMatchBoost = locations.some((loc) =>
       originalQuery.toLowerCase().includes(loc.place.toLowerCase())
-    ) ? 0.1 : 0;
+    )
+      ? 0.1
+      : 0;
 
     // Boost confidence for multiple locations (indicates complex query)
     const multiLocationBoost = locations.length > 1 ? 0.05 : 0;
@@ -220,29 +235,48 @@ export class EnhancedLocationExtractor {
     // Remove detected location names and their aliases
     for (const location of locations) {
       // Remove primary place name
-      const placePattern = new RegExp(`\\b${location.place.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi');
-      cleaned = cleaned.replace(placePattern, ' ');
+      const placePattern = new RegExp(
+        `\\b${location.place.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`,
+        "gi"
+      );
+      cleaned = cleaned.replace(placePattern, " ");
 
       // Remove aliases
       for (const alias of location.aliases) {
-        const aliasPattern = new RegExp(`\\b${alias.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi');
-        cleaned = cleaned.replace(aliasPattern, ' ');
+        const aliasPattern = new RegExp(
+          `\\b${alias.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`,
+          "gi"
+        );
+        cleaned = cleaned.replace(aliasPattern, " ");
       }
     }
 
     // Remove common location-related words
     const locationWords = [
-      'in', 'at', 'near', 'around', 'close to', 'within', 'of', 'from',
-      'beaches', 'beach', 'island', 'islands', 'region', 'area', 'place'
+      "in",
+      "at",
+      "near",
+      "around",
+      "close to",
+      "within",
+      "of",
+      "from",
+      "beaches",
+      "beach",
+      "island",
+      "islands",
+      "region",
+      "area",
+      "place",
     ];
 
     for (const word of locationWords) {
-      const pattern = new RegExp(`\\b${word}\\b`, 'gi');
-      cleaned = cleaned.replace(pattern, ' ');
+      const pattern = new RegExp(`\\b${word}\\b`, "gi");
+      cleaned = cleaned.replace(pattern, " ");
     }
 
     // Clean up extra spaces and trim
-    cleaned = cleaned.replace(/\s+/g, ' ').trim();
+    cleaned = cleaned.replace(/\s+/g, " ").trim();
 
     return cleaned;
   }
@@ -257,7 +291,10 @@ export class EnhancedLocationExtractor {
   /**
    * Get location suggestions for autocomplete
    */
-  public getLocationSuggestions(partialInput: string, maxSuggestions: number = 10): LocationMatch[] {
+  public getLocationSuggestions(
+    partialInput: string,
+    maxSuggestions: number = 10
+  ): LocationMatch[] {
     return this.locationMatcher.getLocationSuggestions(partialInput, maxSuggestions);
   }
 
@@ -271,21 +308,20 @@ export class EnhancedLocationExtractor {
     matchedLocation?: LocationMatch;
   } {
     const match = this.locationMatcher.findLocationMatch(query);
-    
+
     if (match && match.confidence > 0.8) {
       return {
         isValid: true,
         confidence: match.confidence,
-        matchedLocation: match
+        matchedLocation: match,
       };
     }
 
-    const suggestions = this.getLocationSuggestions(query, 5)
-      .map(loc => loc.place);
+    const suggestions = this.getLocationSuggestions(query, 5).map((loc) => loc.place);
 
     return {
       isValid: false,
-      suggestions: suggestions.length > 0 ? suggestions : undefined
+      suggestions: suggestions.length > 0 ? suggestions : undefined,
     };
   }
 
