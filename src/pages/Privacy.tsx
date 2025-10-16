@@ -84,7 +84,7 @@ const Privacy = () => {
                 Local storage for consent choice (<code>analytics_consent</code>) so your preference persists
               </li>
               <li>
-                Supabase authentication session (admin area only) stored in browser storage to keep admins logged in
+                Supabase authentication session (admin area only) - session cookies are only set when accessing admin features
               </li>
               <li>Security headers and HTTPS to protect data in transit</li>
             </ul>

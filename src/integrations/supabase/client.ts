@@ -12,7 +12,17 @@ if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
 
+// Public client for data fetching (no auth, no cookies)
 export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+  auth: {
+    persistSession: false, // Disable session persistence to avoid cookies
+    autoRefreshToken: false, // Disable token refresh
+    detectSessionInUrl: false, // Disable session detection
+  }
+});
+
+// Authenticated client for admin operations (with cookies)
+export const authSupabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   auth: {
     storage: localStorage,
     persistSession: true,

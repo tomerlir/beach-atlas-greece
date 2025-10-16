@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
-import { supabase } from '@/integrations/supabase/client';
+import { authSupabase } from '@/integrations/supabase/client';
 import type { Tables, TablesInsert, TablesUpdate } from '@/integrations/supabase/types';
 import { slugify } from '@/lib/utils';
 import { useAreaFormDraftState } from '@/hooks/useAreaFormDraftState';
@@ -49,7 +49,7 @@ const AreaForm: React.FC = () => {
   useEffect(() => {
     const load = async () => {
       if (mode === 'edit' && id) {
-        const { data, error } = await supabase.from('areas').select('*').eq('id', id).single();
+        const { data, error } = await authSupabase.from('areas').select('*').eq('id', id).single();
         if (error) {
           setServerError(error.message);
         } else {
@@ -164,7 +164,7 @@ const AreaForm: React.FC = () => {
         const uniqueSlug = await ensureUniqueSlug(parsed.data.slug as string);
         (parsed.data as any).slug = uniqueSlug;
         const payload: AreaInsert = parsed.data as AreaInsert;
-        const { data, error } = await supabase.from('areas').insert(payload).select().maybeSingle();
+        const { data, error } = await authSupabase.from('areas').insert(payload).select().maybeSingle();
         if (error || !data) throw error || new Error('Insert returned no row');
         toast({ title: 'Saved', description: 'Area created.' });
       } else if (mode === 'edit' && id) {
@@ -174,7 +174,7 @@ const AreaForm: React.FC = () => {
           ...(parsed.data as AreaUpdate), 
           id,
         };
-        const { data, error } = await supabase.from('areas').update(payload).eq('id', id).select().maybeSingle();
+        const { data, error } = await authSupabase.from('areas').update(payload).eq('id', id).select().maybeSingle();
         if (error || !data) throw error || new Error('Update matched no rows');
         toast({ title: 'Saved', description: 'Area updated.' });
       }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '@/integrations/supabase/client';
+import { authSupabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -59,7 +59,7 @@ export const AdminUserManagement: React.FC = () => {
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const { data, error } = await supabase.rpc('get_users_for_admin' as any);
+      const { data, error } = await authSupabase.rpc('get_users_for_admin' as any);
 
       if (error) {
         setError(`Failed to fetch users: ${error.message}`);
@@ -77,7 +77,7 @@ export const AdminUserManagement: React.FC = () => {
   const fetchInvites = async () => {
     try {
       setInvitesLoading(true);
-      const { data, error } = await supabase.rpc('list_admin_invites' as any);
+      const { data, error } = await authSupabase.rpc('list_admin_invites' as any);
       if (error) {
         setError(`Failed to fetch invites: ${error.message}`);
         return;
@@ -99,7 +99,7 @@ export const AdminUserManagement: React.FC = () => {
       setInviteLoading(true);
       setError(null);
       setInviteToken(null);
-      const { data, error } = await supabase.rpc('create_admin_invite' as any, { invitee_email: inviteEmail.trim() });
+      const { data, error } = await authSupabase.rpc('create_admin_invite' as any, { invitee_email: inviteEmail.trim() });
       if (error) {
         setError(`Failed to create invite: ${error.message}`);
         return;
@@ -110,7 +110,7 @@ export const AdminUserManagement: React.FC = () => {
       setInviteEmail('');
       await fetchInvites();
       // Audit log
-      await supabase.rpc('log_admin_action' as any, {
+      await authSupabase.rpc('log_admin_action' as any, {
         action_type: 'create_admin_invite',
         action_details: { token }
       });
@@ -126,7 +126,7 @@ export const AdminUserManagement: React.FC = () => {
       setPromoting(userId);
       setError(null);
 
-      const { error } = await supabase.rpc('promote_to_admin' as any, {
+      const { error } = await authSupabase.rpc('promote_to_admin' as any, {
         target_user_id: userId
       });
 
@@ -136,7 +136,7 @@ export const AdminUserManagement: React.FC = () => {
       }
 
       // Log the admin action
-      await supabase.rpc('log_admin_action' as any, {
+      await authSupabase.rpc('log_admin_action' as any, {
         action_type: 'promote_to_admin',
         target_user_id: userId,
         action_details: { timestamp: new Date().toISOString() }
@@ -156,7 +156,7 @@ export const AdminUserManagement: React.FC = () => {
       setDemoting(userId);
       setError(null);
 
-      const { error } = await supabase.rpc('demote_from_admin' as any, {
+      const { error } = await authSupabase.rpc('demote_from_admin' as any, {
         target_user_id: userId
       });
 
@@ -166,7 +166,7 @@ export const AdminUserManagement: React.FC = () => {
       }
 
       // Log the admin action
-      await supabase.rpc('log_admin_action' as any, {
+      await authSupabase.rpc('log_admin_action' as any, {
         action_type: 'demote_from_admin',
         target_user_id: userId,
         action_details: { timestamp: new Date().toISOString() }
@@ -191,7 +191,7 @@ export const AdminUserManagement: React.FC = () => {
       setBootstrapLoading(true);
       setError(null);
 
-      const { error } = await supabase.rpc('bootstrap_first_admin' as any, {
+      const { error } = await authSupabase.rpc('bootstrap_first_admin' as any, {
         admin_email: bootstrapEmail.trim()
       });
 
@@ -220,7 +220,7 @@ export const AdminUserManagement: React.FC = () => {
       setVerifyLoading(true);
       setError(null);
 
-      const { error } = await supabase.rpc('manual_verify_user_email' as any, {
+      const { error } = await authSupabase.rpc('manual_verify_user_email' as any, {
         target_email: verifyEmail.trim()
       });
 

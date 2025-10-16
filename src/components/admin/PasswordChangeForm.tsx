@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { supabase } from '@/integrations/supabase/client';
+import { authSupabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
 
 interface PasswordChangeFormProps {
@@ -87,7 +87,7 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({ onSucces
 
     try {
       // First, verify the current password by attempting to sign in
-      const { error: signInError } = await supabase.auth.signInWithPassword({
+      const { error: signInError } = await authSupabase.auth.signInWithPassword({
         email: user?.email || '',
         password: currentPassword,
       });
@@ -98,7 +98,7 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({ onSucces
       }
 
       // Update the password
-      const { error: updateError } = await supabase.auth.updateUser({
+      const { error: updateError } = await authSupabase.auth.updateUser({
         password: newPassword
       });
 

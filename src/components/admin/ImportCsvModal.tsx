@@ -8,7 +8,7 @@ import { Progress } from '@/components/ui/progress';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { supabase } from '@/integrations/supabase/client';
+import { authSupabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { useAreas } from '@/hooks/useAreas';
 import Papa from 'papaparse';

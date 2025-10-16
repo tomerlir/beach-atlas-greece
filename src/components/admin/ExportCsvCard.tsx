@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Download, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { supabase } from '@/integrations/supabase/client';
+import { authSupabase } from '@/integrations/supabase/client';
 import { downloadCsv, generateFilename } from '@/utils/csv/download';
 import { dbRowToCsvRow } from '@/utils/csv/beachCsvSchema';
 import { useToast } from '@/hooks/use-toast';

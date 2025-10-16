@@ -4,7 +4,7 @@ import { MapPin, Plus, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { supabase } from '@/integrations/supabase/client';
+import { authSupabase } from '@/integrations/supabase/client';
 import type { Tables } from '@/integrations/supabase/types';
 import { formatRelativeUpdatedAt } from '@/lib/utils';
 import { AdminUserManagement } from '@/components/admin/AdminUserManagement';

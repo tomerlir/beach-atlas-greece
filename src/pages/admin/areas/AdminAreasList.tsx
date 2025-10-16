@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
-import { supabase } from '@/integrations/supabase/client';
+import { authSupabase } from '@/integrations/supabase/client';
 import type { Tables } from '@/integrations/supabase/types';
 import { formatRelativeUpdatedAt } from '@/lib/utils';
 
@@ -45,7 +45,7 @@ const AdminAreasList: React.FC = () => {
     setLoading(true);
     try {
       // First get areas with basic filtering
-      let query = supabase.from('areas').select('*', { count: 'exact' });
+      let query = authSupabase.from('areas').select('*', { count: 'exact' });
       if (q) {
         query = query.or(`name.ilike.%${q}%,description.ilike.%${q}%`);
       }
@@ -120,7 +120,7 @@ const AdminAreasList: React.FC = () => {
     
     if (!confirm(`Delete area "${name}"? This cannot be undone.`)) return;
     try {
-      const { error } = await supabase.from('areas').delete().eq('id', id);
+      const { error } = await authSupabase.from('areas').delete().eq('id', id);
       if (error) throw error;
       toast({ title: 'Deleted', description: `${name} removed.` });
       await fetchAreas();

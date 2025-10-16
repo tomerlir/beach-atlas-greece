@@ -6,7 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
-import { supabase } from '@/integrations/supabase/client';
+import { authSupabase } from '@/integrations/supabase/client';
 import type { Tables, TablesInsert, TablesUpdate } from '@/integrations/supabase/types';
 import { AMENITY_OPTIONS, PARKING_OPTIONS, STATUS_OPTIONS, TYPE_OPTIONS, WAVE_OPTIONS, slugify } from '@/lib/utils';
 import AmenitiesMultiselect from '@/components/admin/AmenitiesMultiselect';
@@ -70,7 +70,7 @@ const BeachForm: React.FC = () => {
   useEffect(() => {
     const load = async () => {
       if (mode === 'edit' && id) {
-        const { data, error } = await supabase.from('beaches').select('*').eq('id', id).single();
+        const { data, error } = await authSupabase.from('beaches').select('*').eq('id', id).single();
         if (error) {
           setServerError(error.message);
         } else {
@@ -234,7 +234,7 @@ const BeachForm: React.FC = () => {
         const uniqueSlug = await ensureUniqueSlug(parsed.data.slug as string);
         (parsed.data as any).slug = uniqueSlug;
         const payload: BeachInsert = parsed.data as BeachInsert;
-        const { data, error } = await supabase.from('beaches').insert(payload).select().single();
+        const { data, error } = await authSupabase.from('beaches').insert(payload).select().single();
         if (error || !data) throw error || new Error('Insert returned no row');
         toast({ title: 'Saved', description: 'Beach created.' });
       } else if (mode === 'edit' && id) {
@@ -247,7 +247,7 @@ const BeachForm: React.FC = () => {
           // Add verified_at if markVerified is true
           ...(draft.markVerified ? { verified_at: new Date().toISOString() } : {})
         };
-        const { data, error } = await supabase.from('beaches').update(payload).eq('id', id).select().single();
+        const { data, error } = await authSupabase.from('beaches').update(payload).eq('id', id).select().single();
         if (error || !data) throw error || new Error('Update matched no rows');
         toast({ title: 'Saved', description: 'Beach updated.' });
       }
@@ -265,10 +265,10 @@ const BeachForm: React.FC = () => {
           const payloadBase = { ...(parsed.data as any) };
           delete (payloadBase as any).slug;
           if (mode === 'create') {
-            const { data, error } = await supabase.from('beaches').insert(payloadBase).select().single();
+            const { data, error } = await authSupabase.from('beaches').insert(payloadBase).select().single();
             if (error || !data) throw error || new Error('Insert returned no row');
           } else if (mode === 'edit' && id) {
-            const { data, error } = await supabase.from('beaches').update(payloadBase).eq('id', id).select().single();
+            const { data, error } = await authSupabase.from('beaches').update(payloadBase).eq('id', id).select().single();
             if (error || !data) throw error || new Error('Update matched no rows');
           }
           toast({ title: 'Saved', description: 'Saved without slug (schema not ready).', variant: 'default' });

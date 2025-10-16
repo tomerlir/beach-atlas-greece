@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { supabase } from '@/integrations/supabase/client';
+import { authSupabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -33,7 +33,7 @@ const AcceptInvite: React.FC = () => {
     setError(null);
     try {
       // Create account if it doesn't exist; Supabase will error if it exists
-      const { error: signUpError } = await supabase.auth.signUp({
+      const { error: signUpError } = await authSupabase.auth.signUp({
         email,
         password,
         options: { emailRedirectTo: window.location.origin + '/admin/accept-invite?token=' + token }
@@ -57,14 +57,14 @@ const AcceptInvite: React.FC = () => {
     setIsLoading(true);
     setError(null);
     try {
-      const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+      const { error: signInError } = await authSupabase.auth.signInWithPassword({ email, password });
       if (signInError) {
         setError(signInError.message);
         setIsLoading(false);
         return;
       }
       setStep('accepting');
-      const { error: acceptError } = await supabase.rpc('accept_admin_invite' as any, { invite_token: token });
+      const { error: acceptError } = await authSupabase.rpc('accept_admin_invite' as any, { invite_token: token });
       if (acceptError) {
         setError(acceptError.message);
         setStep('enter');

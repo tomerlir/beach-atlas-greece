@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState, useRef, useCallback } from 'react';
 import { User, Session } from '@supabase/supabase-js';
-import { supabase } from '@/integrations/supabase/client';
+import { authSupabase } from '@/integrations/supabase/client';
 
 interface Profile {
   id: string;
@@ -56,7 +56,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     fetchProfileAbortController.current = new AbortController();
     
     try {
-      const { data, error } = await supabase
+      const { data, error } = await authSupabase
         .from('profiles')
         .select('*')
         .eq('user_id', userId)
@@ -74,7 +74,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         // Create a default user profile for new users
         const email = userEmail || session?.user?.email;
         if (email) {
-          const { data: newProfile, error: insertError } = await supabase
+          const { data: newProfile, error: insertError } = await authSupabase
             .from('profiles')
             .insert({
               user_id: userId,
@@ -107,7 +107,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     // Set up auth state listener
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+    const { data: { subscription } } = authSupabase.auth.onAuthStateChange(
       (event, session) => {
         setSession(session);
         setUser(session?.user ?? null);
@@ -130,7 +130,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     // Check for existing session only if we haven't explicitly signed out
     if (!hasExplicitlySignedOut) {
-      supabase.auth.getSession().then(({ data: { session } }) => {
+      authSupabase.auth.getSession().then(({ data: { session } }) => {
         setSession(session);
         setUser(session?.user ?? null);
         
@@ -173,7 +173,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [hasExplicitlySignedOut]);
 
   const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({
+    const { error } = await authSupabase.auth.signInWithPassword({
       email,
       password
     });
@@ -187,7 +187,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const signOut = async () => {
-    await supabase.auth.signOut();
+    await authSupabase.auth.signOut();
     // Clear all auth state immediately
     setUser(null);
     setSession(null);

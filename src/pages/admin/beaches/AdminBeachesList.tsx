@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
-import { supabase } from '@/integrations/supabase/client';
+import { authSupabase } from '@/integrations/supabase/client';
 import type { Tables } from '@/integrations/supabase/types';
 import { AMENITY_OPTIONS, PARKING_OPTIONS, STATUS_OPTIONS, formatRelativeUpdatedAt } from '@/lib/utils';
 
@@ -45,7 +45,7 @@ const AdminBeachesList: React.FC = () => {
   const fetchBeaches = async () => {
     setLoading(true);
     try {
-      let query = supabase.from('beaches').select('*', { count: 'exact' });
+      let query = authSupabase.from('beaches').select('*', { count: 'exact' });
       if (q) {
         // OR across name/area
         query = query.or(`name.ilike.%${q}%,area.ilike.%${q}%`);
@@ -87,7 +87,7 @@ const AdminBeachesList: React.FC = () => {
   const onDelete = async (id: string, name: string) => {
     if (!confirm(`Delete beach "${name}"? This cannot be undone.`)) return;
     try {
-      const { error } = await supabase.from('beaches').delete().eq('id', id);
+      const { error } = await authSupabase.from('beaches').delete().eq('id', id);
       if (error) throw error;
       toast({ title: 'Deleted', description: `${name} removed.` });
       await fetchBeaches();
