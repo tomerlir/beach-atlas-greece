@@ -24,6 +24,10 @@
   X-Powered-By: 
   Server: 
 
+# Allow cookies only on admin routes for authentication
+/admin/*
+  # Cookie headers allowed for auth
+
 # Additional headers for service worker
 /sw.js
   Cache-Control: public, max-age=0, must-revalidate
