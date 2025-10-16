@@ -65,12 +65,12 @@ export default function BeachTypeDropdown({
     
     // Emit filter_apply events for added types
     addedTypes.forEach(type => {
-      analytics.event('filter_apply', createFilterApplyEvent('beach_type', type, resultCount) as any);
+      analytics.event('filter_apply', createFilterApplyEvent('beach_type', type, resultCount));
     });
     
     // Emit filter_clear events for removed types
     removedTypes.forEach(type => {
-      analytics.event('filter_clear', createFilterClearEvent('beach_type') as any);
+      analytics.event('filter_clear', createFilterClearEvent('beach_type'));
     });
     
     onFiltersChange(draftFilters);
@@ -82,7 +82,7 @@ export default function BeachTypeDropdown({
   const handleReset = useCallback(() => {
     // Track analytics for clearing all beach types
     if (draftFilters.type.length > 0) {
-      analytics.event('filter_clear', createFilterClearEvent('beach_type') as any);
+      analytics.event('filter_clear', createFilterClearEvent('beach_type'));
     }
     updateDraft({ type: [] });
   }, [updateDraft, draftFilters.type.length]);

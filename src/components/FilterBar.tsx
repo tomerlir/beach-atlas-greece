@@ -52,9 +52,9 @@ export default function FilterBar({
 
   const handleBlueFlagToggle = useCallback((checked: boolean) => {
     if (checked) {
-      analytics.event('filter_apply', createFilterApplyEvent('blue_flag', String(checked), resultCount) as any);
+      analytics.event('filter_apply', createFilterApplyEvent('blue_flag', String(checked), resultCount));
     } else {
-      analytics.event('filter_clear', createFilterClearEvent('blue_flag') as any);
+      analytics.event('filter_clear', createFilterClearEvent('blue_flag'));
     }
     onFiltersChange({ blueFlag: checked, page: 1 });
   }, [onFiltersChange, resultCount]);
@@ -68,7 +68,7 @@ export default function FilterBar({
     // When disabling Near me, revert to A->Z sorting
     const updates: Partial<FilterState> = { nearMe: checked, page: 1 };
     if (checked) {
-      analytics.event('filter_apply', createFilterApplyEvent('near_me', 'true', resultCount) as any);
+      analytics.event('filter_apply', createFilterApplyEvent('near_me', 'true', resultCount));
       updates.sort = 'distance.asc';
     } else {
       // When turning off near me, revert to A->Z sorting

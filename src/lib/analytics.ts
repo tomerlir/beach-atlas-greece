@@ -185,7 +185,7 @@ class AnalyticsSDK {
   }
 
   // Generate a simple hash for query tracking
-  generateQueryHash(query: string, filters: any = {}): string {
+  generateQueryHash(query: string, filters: Record<string, unknown> = {}): string {
     const data = JSON.stringify({ query, filters, ts: Date.now() });
     // Simple hash function
     let hash = 0;
@@ -511,7 +511,7 @@ class AnalyticsSDK {
     const CHECK_INTERVAL_MS = 250;
 
     const checkReady = () => {
-      const umami = (window as any).umami;
+      const umami = window.umami;
       attempts++;
       if (umami?.track) {
         if (this.umamiReadyInterval) clearInterval(this.umamiReadyInterval);
@@ -605,7 +605,7 @@ class AnalyticsSDK {
       return;
     }
     
-    const umami = (window as any).umami;
+    const umami = window.umami;
     if (!umami?.track) {
       // Umami not ready, queue the event
       this.eventQueue.push({
@@ -659,11 +659,11 @@ export const analytics = {
   setContext: (ctx: Partial<AnalyticsContext>) => analyticsSDK.setContext(ctx),
   trackPageview: (path?: string, referrer?: string) => analyticsSDK.trackPageview(path, referrer),
   event: (name: string, props?: AnalyticsProps) => analyticsSDK.event(name, props),
-  generateQueryHash: (query: string, filters?: any) => analyticsSDK.generateQueryHash(query, filters),
+  generateQueryHash: (query: string, filters?: Record<string, unknown>) => analyticsSDK.generateQueryHash(query, filters),
   trackBeachEngagement: (beachId: string, source: 'search' | 'map' | 'browsing' | 'area_explore', queryHash?: string) => 
     analyticsSDK.trackBeachEngagement(beachId, source, queryHash),
   trackSearch: (queryHash: string) => analyticsSDK.trackSearch(queryHash),
-  trackSearchQuality: (outcome: 'success' | 'empty' | 'relaxed' | 'abandoned', data?: any) => 
+  trackSearchQuality: (outcome: 'success' | 'empty' | 'relaxed' | 'abandoned', data?: { first_engagement_beach_id?: string; time_to_engagement_ms?: number }) => 
     analyticsSDK.trackSearchQuality(outcome, data),
   trackConversion: () => analyticsSDK.trackConversion(),
   startMapSession: () => analyticsSDK.startMapSession(),

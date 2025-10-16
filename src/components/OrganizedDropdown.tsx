@@ -63,12 +63,12 @@ export default function OrganizedDropdown({
     
     // Emit filter_apply events for added organized options
     addedOrganized.forEach(org => {
-      analytics.event('filter_apply', createFilterApplyEvent('organized', org, resultCount) as any);
+      analytics.event('filter_apply', createFilterApplyEvent('organized', org, resultCount));
     });
     
     // Emit filter_clear events for removed organized options
     removedOrganized.forEach(org => {
-      analytics.event('filter_clear', createFilterClearEvent('organized') as any);
+      analytics.event('filter_clear', createFilterClearEvent('organized'));
     });
     
     onFiltersChange(draftFilters);
@@ -80,7 +80,7 @@ export default function OrganizedDropdown({
   const handleReset = useCallback(() => {
     // Track analytics for clearing all organized options
     if (draftFilters.organized.length > 0) {
-      analytics.event('filter_clear', createFilterClearEvent('organized') as any);
+      analytics.event('filter_clear', createFilterClearEvent('organized'));
     }
     updateDraft({ organized: [] });
   }, [updateDraft, draftFilters.organized.length]);

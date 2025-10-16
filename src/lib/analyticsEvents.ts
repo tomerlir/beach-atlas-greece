@@ -7,6 +7,22 @@
 
 export type AnalyticsProps = Record<string, unknown>;
 
+// Umami global interface for type safety
+declare global {
+  interface Window {
+    umami?: {
+      track: (eventName: string, eventData?: Record<string, unknown>) => void;
+    };
+  }
+}
+
+// Filter type definitions for type safety
+export type BeachType = 'SANDY' | 'PEBBLY' | 'MIXED' | 'OTHER';
+export type WaveCondition = 'CALM' | 'MODERATE' | 'WAVY' | 'SURFABLE';
+export type ParkingType = 'NONE' | 'ROADSIDE' | 'SMALL_LOT' | 'LARGE_LOT';
+export type OrganizedType = 'ORGANIZED' | 'UNORGANIZED';
+export type FilterName = 'blue_flag' | 'near_me' | 'organized' | 'beach_type' | 'wave_conditions' | 'parking' | 'amenities' | 'type' | 'wave' | 'all';
+
 // Base event payloads
 export interface PageViewEvent {
   path: string;
@@ -36,14 +52,14 @@ export interface ResultsViewEvent {
   query_hash?: string;
 }
 
-export interface FilterApplyEvent {
-  name: string;
+export interface FilterApplyEvent extends AnalyticsProps {
+  name: FilterName;
   value: string;
   results: number;
 }
 
-export interface FilterClearEvent {
-  name: string;
+export interface FilterClearEvent extends AnalyticsProps {
+  name: FilterName;
 }
 
 export interface MapOpenEvent {
@@ -131,17 +147,17 @@ export const createResultsViewEvent = (count: number, relaxed: boolean, query_ha
   query_hash,
 });
 
-export const createFilterApplyEvent = (name: string, value: string, results: number): FilterApplyEvent => ({
+export const createFilterApplyEvent = (name: FilterName, value: string, results: number): FilterApplyEvent => ({
   name,
   value,
   results,
 });
 
-export const createFilterClearEvent = (name: string): FilterClearEvent => ({
+export const createFilterClearEvent = (name: FilterName): FilterClearEvent => ({
   name,
 });
 
-export const createMapOpenEvent = (entry: MapOpenEvent['entry']): AnalyticsProps => ({
+export const createMapOpenEvent = (entry: MapOpenEvent['entry']): MapOpenEvent => ({
   entry,
 });
 

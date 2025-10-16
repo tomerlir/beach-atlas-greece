@@ -65,12 +65,12 @@ export default function ParkingDropdown({
     
     // Emit filter_apply events for added parking options
     addedParking.forEach(parking => {
-      analytics.event('filter_apply', createFilterApplyEvent('parking', parking, resultCount) as any);
+      analytics.event('filter_apply', createFilterApplyEvent('parking', parking, resultCount));
     });
     
     // Emit filter_clear events for removed parking options
     removedParking.forEach(parking => {
-      analytics.event('filter_clear', createFilterClearEvent('parking') as any);
+      analytics.event('filter_clear', createFilterClearEvent('parking'));
     });
     
     onFiltersChange(draftFilters);
@@ -82,7 +82,7 @@ export default function ParkingDropdown({
   const handleReset = useCallback(() => {
     // Track analytics for clearing all parking options
     if (draftFilters.parking.length > 0) {
-      analytics.event('filter_clear', createFilterClearEvent('parking') as any);
+      analytics.event('filter_clear', createFilterClearEvent('parking'));
     }
     updateDraft({ parking: [] });
   }, [updateDraft, draftFilters.parking.length]);

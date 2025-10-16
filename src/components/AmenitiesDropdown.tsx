@@ -62,13 +62,13 @@ export default function AmenitiesDropdown({
     addedAmenities.forEach(amenityId => {
       const amenity = allAmenities.find(a => a.id === amenityId);
       if (amenity) {
-        analytics.event('filter_apply', createFilterApplyEvent('amenities', amenityId, resultCount) as any);
+        analytics.event('filter_apply', createFilterApplyEvent('amenities', amenityId, resultCount));
       }
     });
     
     // Emit filter_clear events for removed amenities
     removedAmenities.forEach(amenityId => {
-      analytics.event('filter_clear', createFilterClearEvent('amenities') as any);
+      analytics.event('filter_clear', createFilterClearEvent('amenities'));
     });
     
     onFiltersChange(draftFilters);
@@ -80,7 +80,7 @@ export default function AmenitiesDropdown({
   const handleReset = useCallback(() => {
     // Track analytics for clearing all amenities
     if (draftFilters.amenities.length > 0) {
-      analytics.event('filter_clear', createFilterClearEvent('amenities') as any);
+      analytics.event('filter_clear', createFilterClearEvent('amenities'));
     }
     updateDraft({ amenities: [] });
   }, [updateDraft, draftFilters.amenities.length]);

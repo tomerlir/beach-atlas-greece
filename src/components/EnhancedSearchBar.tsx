@@ -205,7 +205,7 @@ export default function EnhancedSearchBar({
         areaName ? 'area' : 'homepage'
       );
       
-      analytics.event('search_submit', searchEvent as any);
+      analytics.event('search_submit', searchEvent);
       
       // Track the search with abandonment timer
       analytics.trackSearch(queryHash);

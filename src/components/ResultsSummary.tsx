@@ -245,7 +245,7 @@ export default function ResultsSummary({
             : undefined;
 
         // Always emit results_view on results change for consistency (even when 0)
-        analytics.event('results_view', createResultsViewEvent(resultCount, isRelaxed, queryHash) as any);
+        analytics.event('results_view', createResultsViewEvent(resultCount, isRelaxed, queryHash));
 
         // Emit search_quality signals based on results
         if (filters.search) {
