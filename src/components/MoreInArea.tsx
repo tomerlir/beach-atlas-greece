@@ -1,9 +1,8 @@
-import React from 'react';
-import type { Beach } from '@/types/beach';
-import BeachCard from '@/components/BeachCard';
-import { Link } from 'react-router-dom';
-import { generateAreaUrl } from '@/lib/utils';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import React from "react";
+import type { Beach } from "@/types/beach";
+import BeachCard from "@/components/BeachCard";
+import { Link } from "react-router-dom";
+import { generateAreaUrl } from "@/lib/utils";
 
 type SlimArea = { name: string; slug: string };
 
@@ -13,36 +12,35 @@ export function MoreInArea({ area, beaches }: { area: SlimArea; beaches: Beach[]
   const areaHref = generateAreaUrl(area.slug || area.name);
 
   return (
-    <section className="mt-10">
+    <section className="mt-10 max-w-4xl md:max-w-5xl mx-auto px-4">
       <h2 className="text-xl font-medium">More beaches in {area.name}</h2>
-      <div className="mt-4">
-        <Carousel className="relative">
-          <CarouselContent>
-            {beaches.map((b) => (
-              <CarouselItem key={b.slug} className="basis-[85%] sm:basis-1/2 lg:basis-1/3">
-                <BeachCard beach={b} showDistance={false} compact engagementSource="browsing" />
-              </CarouselItem>
-            ))}
-            <CarouselItem className="basis-[85%] sm:basis-1/2 lg:basis-1/3">
-              <Link
-                to={areaHref}
-                className="block h-full w-full border rounded-lg hover:bg-muted/50 transition-colors"
-                aria-label={`View all beaches in ${area.name}`}
-              >
-                <div className="flex h-full items-center justify-center p-4 text-center">
-                  View all beaches in {area.name} →
-                </div>
-              </Link>
-            </CarouselItem>
-          </CarouselContent>
-          <CarouselPrevious className="hidden sm:flex lg:hidden" />
-          <CarouselNext className="hidden sm:flex lg:hidden" />
-        </Carousel>
+      <div className="mt-4 -mx-4 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        <div className="flex gap-4 pb-4 pl-4">
+          {beaches.map((b) => (
+            <div
+              key={b.slug}
+              className="flex-none w-[85%] sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)]"
+            >
+              <BeachCard beach={b} showDistance={false} compact engagementSource="browsing" />
+            </div>
+          ))}
+          <div className="flex-none w-[85%] sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)]">
+            <Link
+              to={areaHref}
+              className="block h-full w-full border rounded-lg hover:bg-muted/50 transition-colors"
+              aria-label={`View all beaches in ${area.name}`}
+            >
+              <div className="flex h-full items-center justify-center p-4 text-center">
+                View all beaches in {area.name} →
+              </div>
+            </Link>
+          </div>
+          {/* Spacer for proper right padding on scroll */}
+          <div className="flex-none w-4" aria-hidden="true"></div>
+        </div>
       </div>
     </section>
   );
 }
 
 export default MoreInArea;
-
-

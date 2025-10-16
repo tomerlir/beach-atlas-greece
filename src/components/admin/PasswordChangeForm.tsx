@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { Eye, EyeOff, Lock, CheckCircle, AlertCircle } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { authSupabase } from '@/integrations/supabase/client';
-import { useAuth } from '@/contexts/AuthContext';
+import React, { useState } from "react";
+import { Eye, EyeOff, Lock, CheckCircle, AlertCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { authSupabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface PasswordChangeFormProps {
   onSuccess?: () => void;
@@ -14,9 +14,9 @@ interface PasswordChangeFormProps {
 
 export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({ onSuccess }) => {
   const { user } = useAuth();
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -26,27 +26,27 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({ onSucces
 
   const validatePassword = (password: string): string[] => {
     const errors: string[] = [];
-    
+
     if (password.length < 8) {
-      errors.push('Password must be at least 8 characters long');
+      errors.push("Password must be at least 8 characters long");
     }
-    
+
     if (!/[A-Z]/.test(password)) {
-      errors.push('Password must contain at least one uppercase letter');
+      errors.push("Password must contain at least one uppercase letter");
     }
-    
+
     if (!/[a-z]/.test(password)) {
-      errors.push('Password must contain at least one lowercase letter');
+      errors.push("Password must contain at least one lowercase letter");
     }
-    
+
     if (!/[0-9]/.test(password)) {
-      errors.push('Password must contain at least one number');
+      errors.push("Password must contain at least one number");
     }
-    
+
     if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
-      errors.push('Password must contain at least one special character');
+      errors.push("Password must contain at least one special character");
     }
-    
+
     return errors;
   };
 
@@ -57,29 +57,29 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({ onSucces
 
     // Validation
     if (!currentPassword) {
-      setError('Current password is required');
+      setError("Current password is required");
       return;
     }
 
     if (!newPassword) {
-      setError('New password is required');
+      setError("New password is required");
       return;
     }
 
     if (newPassword !== confirmPassword) {
-      setError('New passwords do not match');
+      setError("New passwords do not match");
       return;
     }
 
     if (currentPassword === newPassword) {
-      setError('New password must be different from current password');
+      setError("New password must be different from current password");
       return;
     }
 
     // Password strength validation
     const passwordErrors = validatePassword(newPassword);
     if (passwordErrors.length > 0) {
-      setError(`Password requirements not met:\n${passwordErrors.join('\n')}`);
+      setError(`Password requirements not met:\n${passwordErrors.join("\n")}`);
       return;
     }
 
@@ -88,18 +88,18 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({ onSucces
     try {
       // First, verify the current password by attempting to sign in
       const { error: signInError } = await authSupabase.auth.signInWithPassword({
-        email: user?.email || '',
+        email: user?.email || "",
         password: currentPassword,
       });
 
       if (signInError) {
-        setError('Current password is incorrect');
+        setError("Current password is incorrect");
         return;
       }
 
       // Update the password
       const { error: updateError } = await authSupabase.auth.updateUser({
-        password: newPassword
+        password: newPassword,
       });
 
       if (updateError) {
@@ -107,18 +107,17 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({ onSucces
         return;
       }
 
-      setSuccess('Password updated successfully!');
-      
+      setSuccess("Password updated successfully!");
+
       // Clear form
-      setCurrentPassword('');
-      setNewPassword('');
-      setConfirmPassword('');
-      
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+
       // Call success callback if provided
       if (onSuccess) {
         onSuccess();
       }
-
     } catch (err) {
       setError(`An unexpected error occurred: ${err}`);
     } finally {
@@ -126,18 +125,20 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({ onSucces
     }
   };
 
-  const getPasswordStrength = (password: string): { strength: 'weak' | 'medium' | 'strong'; score: number } => {
+  const getPasswordStrength = (
+    password: string
+  ): { strength: "weak" | "medium" | "strong"; score: number } => {
     let score = 0;
-    
+
     if (password.length >= 8) score++;
     if (/[A-Z]/.test(password)) score++;
     if (/[a-z]/.test(password)) score++;
     if (/[0-9]/.test(password)) score++;
     if (/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) score++;
-    
-    if (score <= 2) return { strength: 'weak', score };
-    if (score <= 4) return { strength: 'medium', score };
-    return { strength: 'strong', score };
+
+    if (score <= 2) return { strength: "weak", score };
+    if (score <= 4) return { strength: "medium", score };
+    return { strength: "strong", score };
   };
 
   const passwordStrength = getPasswordStrength(newPassword);
@@ -161,7 +162,7 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({ onSucces
               <AlertDescription className="whitespace-pre-line">{error}</AlertDescription>
             </Alert>
           )}
-          
+
           {success && (
             <Alert>
               <CheckCircle className="h-4 w-4" />
@@ -174,7 +175,7 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({ onSucces
             <div className="relative">
               <Input
                 id="current-password"
-                type={showCurrentPassword ? 'text' : 'password'}
+                type={showCurrentPassword ? "text" : "password"}
                 value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
                 placeholder="Enter your current password"
@@ -189,11 +190,7 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({ onSucces
                 onClick={() => setShowCurrentPassword(!showCurrentPassword)}
                 disabled={isLoading}
               >
-                {showCurrentPassword ? (
-                  <EyeOff className="h-4 w-4" />
-                ) : (
-                  <Eye className="h-4 w-4" />
-                )}
+                {showCurrentPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </Button>
             </div>
           </div>
@@ -203,7 +200,7 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({ onSucces
             <div className="relative">
               <Input
                 id="new-password"
-                type={showNewPassword ? 'text' : 'password'}
+                type={showNewPassword ? "text" : "password"}
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="Enter your new password"
@@ -218,14 +215,10 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({ onSucces
                 onClick={() => setShowNewPassword(!showNewPassword)}
                 disabled={isLoading}
               >
-                {showNewPassword ? (
-                  <EyeOff className="h-4 w-4" />
-                ) : (
-                  <Eye className="h-4 w-4" />
-                )}
+                {showNewPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </Button>
             </div>
-            
+
             {/* Password Strength Indicator */}
             {newPassword && (
               <div className="space-y-2">
@@ -233,26 +226,30 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({ onSucces
                   <div className="flex-1 bg-muted rounded-full h-2">
                     <div
                       className={`h-2 rounded-full transition-all duration-300 ${
-                        passwordStrength.strength === 'weak'
-                          ? 'bg-red-500 w-1/3'
-                          : passwordStrength.strength === 'medium'
-                          ? 'bg-yellow-500 w-2/3'
-                          : 'bg-green-500 w-full'
+                        passwordStrength.strength === "weak"
+                          ? "bg-red-500 w-1/3"
+                          : passwordStrength.strength === "medium"
+                            ? "bg-yellow-500 w-2/3"
+                            : "bg-green-500 w-full"
                       }`}
                     />
                   </div>
-                  <span className={`text-xs font-medium ${
-                    passwordStrength.strength === 'weak'
-                      ? 'text-red-500'
-                      : passwordStrength.strength === 'medium'
-                      ? 'text-yellow-500'
-                      : 'text-green-500'
-                  }`}>
-                    {passwordStrength.strength.charAt(0).toUpperCase() + passwordStrength.strength.slice(1)}
+                  <span
+                    className={`text-xs font-medium ${
+                      passwordStrength.strength === "weak"
+                        ? "text-red-500"
+                        : passwordStrength.strength === "medium"
+                          ? "text-yellow-500"
+                          : "text-green-500"
+                    }`}
+                  >
+                    {passwordStrength.strength.charAt(0).toUpperCase() +
+                      passwordStrength.strength.slice(1)}
                   </span>
                 </div>
                 <div className="text-xs text-muted-foreground">
-                  Password requirements: 8+ characters, uppercase, lowercase, number, special character
+                  Password requirements: 8+ characters, uppercase, lowercase, number, special
+                  character
                 </div>
               </div>
             )}
@@ -263,7 +260,7 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({ onSucces
             <div className="relative">
               <Input
                 id="confirm-password"
-                type={showConfirmPassword ? 'text' : 'password'}
+                type={showConfirmPassword ? "text" : "password"}
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Confirm your new password"
@@ -278,14 +275,10 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({ onSucces
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                 disabled={isLoading}
               >
-                {showConfirmPassword ? (
-                  <EyeOff className="h-4 w-4" />
-                ) : (
-                  <Eye className="h-4 w-4" />
-                )}
+                {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </Button>
             </div>
-            
+
             {/* Password Match Indicator */}
             {confirmPassword && (
               <div className="flex items-center gap-2 text-xs">
@@ -304,9 +297,9 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({ onSucces
             )}
           </div>
 
-          <Button 
-            type="submit" 
-            className="w-full" 
+          <Button
+            type="submit"
+            className="w-full"
             disabled={isLoading || !currentPassword || !newPassword || !confirmPassword}
           >
             {isLoading ? (
@@ -315,7 +308,7 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({ onSucces
                 Updating Password...
               </>
             ) : (
-              'Update Password'
+              "Update Password"
             )}
           </Button>
         </form>

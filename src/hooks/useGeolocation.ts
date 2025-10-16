@@ -1,11 +1,11 @@
-import { useState, useCallback, useRef } from 'react';
-import { useToast } from '@/hooks/use-toast';
+import { useState, useCallback, useRef } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 interface GeolocationState {
   location: GeolocationPosition | null;
   isLoading: boolean;
   error: string | null;
-  permission: 'granted' | 'denied' | 'prompt' | null;
+  permission: "granted" | "denied" | "prompt" | null;
 }
 
 export const useGeolocation = () => {
@@ -16,7 +16,7 @@ export const useGeolocation = () => {
     permission: null,
   });
   const { toast } = useToast();
-  
+
   // Add refs for request cancellation and debouncing
   const currentWatchId = useRef<number | null>(null);
   const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
@@ -24,8 +24,8 @@ export const useGeolocation = () => {
 
   const getCurrentLocation = useCallback(() => {
     if (!navigator.geolocation) {
-      const error = 'Geolocation is not supported by this browser';
-      setState(prev => ({ ...prev, error, permission: 'denied' }));
+      const error = "Geolocation is not supported by this browser";
+      setState((prev) => ({ ...prev, error, permission: "denied" }));
       toast({
         title: "Location not supported",
         description: error,
@@ -47,7 +47,7 @@ export const useGeolocation = () => {
       }
 
       isRequestActive.current = true;
-      setState(prev => ({ ...prev, isLoading: true, error: null }));
+      setState((prev) => ({ ...prev, isLoading: true, error: null }));
 
       // Clear any existing watch
       if (currentWatchId.current !== null) {
@@ -66,7 +66,7 @@ export const useGeolocation = () => {
             location: position,
             isLoading: false,
             error: null,
-            permission: 'granted',
+            permission: "granted",
           });
           toast({
             title: "Location found",
@@ -80,29 +80,29 @@ export const useGeolocation = () => {
             return;
           }
 
-          let errorMessage = 'Unable to retrieve your location';
-          let permission: 'granted' | 'denied' | 'prompt' | null = 'prompt';
-          
+          let errorMessage = "Unable to retrieve your location";
+          let permission: "granted" | "denied" | "prompt" | null = "prompt";
+
           switch (error.code) {
             case error.PERMISSION_DENIED:
-              errorMessage = 'Location access denied. Please enable location services.';
-              permission = 'denied';
+              errorMessage = "Location access denied. Please enable location services.";
+              permission = "denied";
               break;
             case error.POSITION_UNAVAILABLE:
-              errorMessage = 'Location information is unavailable.';
+              errorMessage = "Location information is unavailable.";
               break;
             case error.TIMEOUT:
-              errorMessage = 'Location request timed out.';
+              errorMessage = "Location request timed out.";
               break;
           }
-          
+
           setState({
             location: null,
             isLoading: false,
             error: errorMessage,
             permission,
           });
-          
+
           toast({
             title: "Location error",
             description: errorMessage,
@@ -125,14 +125,14 @@ export const useGeolocation = () => {
       clearTimeout(debounceTimeout.current);
       debounceTimeout.current = null;
     }
-    
+
     if (currentWatchId.current !== null) {
       navigator.geolocation.clearWatch(currentWatchId.current);
       currentWatchId.current = null;
     }
-    
+
     isRequestActive.current = false;
-    setState(prev => ({ ...prev, isLoading: false }));
+    setState((prev) => ({ ...prev, isLoading: false }));
   }, []);
 
   return {

@@ -1,13 +1,13 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
-import { Car, Check, ChevronDown } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { useDraftState } from '@/hooks/useDraftState';
-import { useIsMobile } from '@/hooks/use-mobile';
-import { FilterState } from '@/hooks/useUrlState';
-import { analytics } from '@/lib/analytics';
-import { createFilterApplyEvent, createFilterClearEvent } from '@/lib/analyticsEvents';
+import { useState, useRef, useEffect, useCallback } from "react";
+import { Car, Check, ChevronDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { useDraftState } from "@/hooks/useDraftState";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { FilterState } from "@/hooks/useUrlState";
+import { analytics } from "@/lib/analytics";
+import { createFilterApplyEvent, createFilterClearEvent } from "@/lib/analyticsEvents";
 
 interface ParkingDropdownProps {
   filters: FilterState;
@@ -18,10 +18,10 @@ interface ParkingDropdownProps {
 }
 
 const parkingOptions = [
-  { value: 'NONE', label: 'None' },
-  { value: 'ROADSIDE', label: 'Roadside' },
-  { value: 'SMALL_LOT', label: 'Small lot' },
-  { value: 'LARGE_LOT', label: 'Large lot' },
+  { value: "NONE", label: "None" },
+  { value: "ROADSIDE", label: "Roadside" },
+  { value: "SMALL_LOT", label: "Small lot" },
+  { value: "LARGE_LOT", label: "Large lot" },
 ];
 
 export default function ParkingDropdown({
@@ -46,33 +46,36 @@ export default function ParkingDropdown({
   }, []);
 
   // Toggle parking option in draft state
-  const toggleParkingDraft = useCallback((parkingValue: string) => {
-    const newParking = draftFilters.parking.includes(parkingValue)
-      ? draftFilters.parking.filter(value => value !== parkingValue)
-      : [...draftFilters.parking, parkingValue];
-    updateDraft({ parking: newParking });
-  }, [draftFilters.parking, updateDraft]);
+  const toggleParkingDraft = useCallback(
+    (parkingValue: string) => {
+      const newParking = draftFilters.parking.includes(parkingValue)
+        ? draftFilters.parking.filter((value) => value !== parkingValue)
+        : [...draftFilters.parking, parkingValue];
+      updateDraft({ parking: newParking });
+    },
+    [draftFilters.parking, updateDraft]
+  );
 
   // Apply draft changes and close
   const handleApply = useCallback(() => {
     // Track analytics for filter changes
     const previousParking = filters.parking;
     const newParking = draftFilters.parking;
-    
+
     // Track individual parking changes
-    const addedParking = newParking.filter(parking => !previousParking.includes(parking));
-    const removedParking = previousParking.filter(parking => !newParking.includes(parking));
-    
+    const addedParking = newParking.filter((parking) => !previousParking.includes(parking));
+    const removedParking = previousParking.filter((parking) => !newParking.includes(parking));
+
     // Emit filter_apply events for added parking options
-    addedParking.forEach(parking => {
-      analytics.event('filter_apply', createFilterApplyEvent('parking', parking, resultCount));
+    addedParking.forEach((parking) => {
+      analytics.event("filter_apply", createFilterApplyEvent("parking", parking, resultCount));
     });
-    
+
     // Emit filter_clear events for removed parking options
-    removedParking.forEach(parking => {
-      analytics.event('filter_clear', createFilterClearEvent('parking'));
+    removedParking.forEach((parking) => {
+      analytics.event("filter_clear", createFilterClearEvent("parking"));
     });
-    
+
     onFiltersChange(draftFilters);
     setIsOpen(false);
     triggerRef.current?.focus();
@@ -82,46 +85,47 @@ export default function ParkingDropdown({
   const handleReset = useCallback(() => {
     // Track analytics for clearing all parking options
     if (draftFilters.parking.length > 0) {
-      analytics.event('filter_clear', createFilterClearEvent('parking'));
+      analytics.event("filter_clear", createFilterClearEvent("parking"));
     }
     updateDraft({ parking: [] });
   }, [updateDraft, draftFilters.parking.length]);
 
   // Keyboard navigation
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    if (!isOpen) return;
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (!isOpen) return;
 
-    switch (e.key) {
-      case 'Escape':
-        setIsOpen(false);
-        triggerRef.current?.focus();
-        break;
-      case 'ArrowDown':
-        e.preventDefault();
-        setFocusedIndex(prev => 
-          prev < parkingOptions.length - 1 ? prev + 1 : 0
-        );
-        break;
-      case 'ArrowUp':
-        e.preventDefault();
-        setFocusedIndex(prev => 
-          prev > 0 ? prev - 1 : parkingOptions.length - 1
-        );
-        break;
-      case 'Enter':
-      case ' ':
-        e.preventDefault();
-        if (focusedIndex >= 0 && focusedIndex < parkingOptions.length) {
-          toggleParkingDraft(parkingOptions[focusedIndex].value);
-        }
-        break;
-    }
-  }, [isOpen, focusedIndex, toggleParkingDraft]);
+      switch (e.key) {
+        case "Escape":
+          setIsOpen(false);
+          triggerRef.current?.focus();
+          break;
+        case "ArrowDown":
+          e.preventDefault();
+          setFocusedIndex((prev) => (prev < parkingOptions.length - 1 ? prev + 1 : 0));
+          break;
+        case "ArrowUp":
+          e.preventDefault();
+          setFocusedIndex((prev) => (prev > 0 ? prev - 1 : parkingOptions.length - 1));
+          break;
+        case "Enter":
+        case " ":
+          e.preventDefault();
+          if (focusedIndex >= 0 && focusedIndex < parkingOptions.length) {
+            toggleParkingDraft(parkingOptions[focusedIndex].value);
+          }
+          break;
+      }
+    },
+    [isOpen, focusedIndex, toggleParkingDraft]
+  );
 
   // Focus management
   useEffect(() => {
     if (isOpen && listRef.current) {
-      const focusedElement = listRef.current.querySelector(`[data-index="${focusedIndex}"]`) as HTMLElement;
+      const focusedElement = listRef.current.querySelector(
+        `[data-index="${focusedIndex}"]`
+      ) as HTMLElement;
       focusedElement?.focus();
     }
   }, [isOpen, focusedIndex]);
@@ -145,24 +149,22 @@ export default function ParkingDropdown({
           variant={appliedCount > 0 ? "default" : "ghost"}
           size="sm"
           onClick={handleTriggerClick}
-            className={`px-3 py-2 rounded-xl h-auto min-h-[40px] whitespace-nowrap flex-shrink-0 border-2 shadow-md hover:shadow-lg ${
-              appliedCount > 0 ? 'border-transparent' : 'text-foreground bg-muted/65 border-muted'
-            }`}
+          className={`px-3 py-2 rounded-xl h-auto min-h-[40px] whitespace-nowrap flex-shrink-0 border-2 shadow-md hover:shadow-lg ${
+            appliedCount > 0 ? "border-transparent" : "text-foreground bg-muted/65 border-muted"
+          }`}
           aria-expanded={isOpen}
           aria-haspopup="listbox"
           aria-controls="parking-listbox"
-          aria-label={appliedCount > 0 ? `Parking, ${appliedCount} selected` : 'Parking'}
+          aria-label={appliedCount > 0 ? `Parking, ${appliedCount} selected` : "Parking"}
           data-testid="parking-trigger"
           id="parking-trigger"
         >
-            <Car className="h-4 w-4 mr-2" />
-            Parking
-            <div className="ml-1 h-4 w-1 flex items-center justify-center">
-              {appliedCount > 0 && (
-                <span className="text-xs">{appliedCount}</span>
-              )}
-            </div>
-            <ChevronDown className="h-4 w-4 ml-2 flex-shrink-0" />
+          <Car className="h-4 w-4 mr-2" />
+          Parking
+          <div className="ml-1 h-4 w-1 flex items-center justify-center">
+            {appliedCount > 0 && <span className="text-xs">{appliedCount}</span>}
+          </div>
+          <ChevronDown className="h-4 w-4 ml-2 flex-shrink-0" />
         </Button>
       </PopoverTrigger>
       <PopoverContent
@@ -173,7 +175,7 @@ export default function ParkingDropdown({
         id="parking-panel"
       >
         {/* List */}
-        <div 
+        <div
           ref={listRef}
           className="max-h-80 overflow-y-auto"
           role="listbox"
@@ -183,23 +185,21 @@ export default function ParkingDropdown({
           {parkingOptions.map((option, index) => {
             const isSelected = draftFilters.parking.includes(option.value);
             const isFocused = focusedIndex === index;
-            
+
             return (
               <button
                 key={option.value}
                 data-index={index}
                 onClick={() => toggleParkingDraft(option.value)}
                 className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors min-h-[44px] ${
-                  isSelected ? 'bg-muted/30' : ''
-                } ${isFocused ? 'ring-2 ring-ring ring-offset-1' : ''}`}
+                  isSelected ? "bg-muted/30" : ""
+                } ${isFocused ? "ring-2 ring-ring ring-offset-1" : ""}`}
                 role="option"
                 aria-selected={isSelected}
                 tabIndex={-1}
               >
                 <span className="text-sm font-medium">{option.label}</span>
-                {isSelected && (
-                  <Check className="h-4 w-4 text-secondary" />
-                )}
+                {isSelected && <Check className="h-4 w-4 text-secondary" />}
               </button>
             );
           })}
@@ -208,19 +208,10 @@ export default function ParkingDropdown({
         {/* Sticky Footer */}
         <div className="p-4 pb-8 border-t bg-background sticky bottom-0 rounded-b-md pb-[max(2rem,env(safe-area-inset-bottom))]">
           <div className="flex gap-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleReset}
-              className="flex-1 min-h-[44px]"
-            >
+            <Button variant="ghost" size="sm" onClick={handleReset} className="flex-1 min-h-[44px]">
               Reset
             </Button>
-            <Button
-              size="sm"
-              onClick={handleApply}
-              className="flex-1 min-h-[44px]"
-            >
+            <Button size="sm" onClick={handleApply} className="flex-1 min-h-[44px]">
               Apply
             </Button>
           </div>

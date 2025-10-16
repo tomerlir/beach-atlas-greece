@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Eye, EyeOff, Trash2, Copy, Clock, BarChart3 } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Eye, EyeOff, Trash2, Copy, Clock, BarChart3 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 interface AnalyticsEvent {
   name: string;
@@ -30,9 +30,9 @@ export const addAnalyticsEvent = (name: string, props: Record<string, unknown>) 
     timestamp: Date.now(),
     id: `${name}_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
   };
-  
+
   eventBuffer.unshift(event);
-  
+
   // Keep only the most recent events
   if (eventBuffer.length > maxEvents) {
     eventBuffer.splice(maxEvents);
@@ -71,7 +71,7 @@ export default function AnalyticsInspector({ isVisible, onToggle }: AnalyticsIns
       props: event.props,
       timestamp: new Date(event.timestamp).toISOString(),
     };
-    
+
     navigator.clipboard.writeText(JSON.stringify(eventData, null, 2));
     toast({
       title: "Event copied",
@@ -84,12 +84,12 @@ export default function AnalyticsInspector({ isVisible, onToggle }: AnalyticsIns
   };
 
   const getEventColor = (eventName: string) => {
-    if (eventName === 'cbm') return 'bg-green-100 text-green-800 border-green-200';
-    if (eventName === 'search_submit') return 'bg-blue-100 text-blue-800 border-blue-200';
-    if (eventName === 'page_view') return 'bg-purple-100 text-purple-800 border-purple-200';
-    if (eventName.includes('filter')) return 'bg-orange-100 text-orange-800 border-orange-200';
-    if (eventName.includes('map')) return 'bg-cyan-100 text-cyan-800 border-cyan-200';
-    return 'bg-gray-100 text-gray-800 border-gray-200';
+    if (eventName === "cbm") return "bg-green-100 text-green-800 border-green-200";
+    if (eventName === "search_submit") return "bg-blue-100 text-blue-800 border-blue-200";
+    if (eventName === "page_view") return "bg-purple-100 text-purple-800 border-purple-200";
+    if (eventName.includes("filter")) return "bg-orange-100 text-orange-800 border-orange-200";
+    if (eventName.includes("map")) return "bg-cyan-100 text-cyan-800 border-cyan-200";
+    return "bg-gray-100 text-gray-800 border-gray-200";
   };
 
   if (!isVisible) {
@@ -146,7 +146,7 @@ export default function AnalyticsInspector({ isVisible, onToggle }: AnalyticsIns
             </div>
           </div>
         </CardHeader>
-        
+
         <CardContent className="pt-0 pb-4 overflow-hidden flex-1 min-h-0">
           <div className="flex items-center justify-between mb-3">
             <Badge variant="secondary" className="text-xs">
@@ -157,7 +157,7 @@ export default function AnalyticsInspector({ isVisible, onToggle }: AnalyticsIns
               Live
             </div>
           </div>
-          
+
           <ScrollArea className="h-[calc(85vh-10rem)]">
             <div className="space-y-2 pr-4">
               {events.length === 0 ? (
@@ -166,15 +166,9 @@ export default function AnalyticsInspector({ isVisible, onToggle }: AnalyticsIns
                 </div>
               ) : (
                 events.map((event) => (
-                  <div
-                    key={event.id}
-                    className="border rounded-lg p-3 bg-card text-sm"
-                  >
+                  <div key={event.id} className="border rounded-lg p-3 bg-card text-sm">
                     <div className="flex items-center justify-between mb-2 gap-2 flex-wrap">
-                      <Badge 
-                        className={`text-xs ${getEventColor(event.name)}`}
-                        variant="outline"
-                      >
+                      <Badge className={`text-xs ${getEventColor(event.name)}`} variant="outline">
                         {event.name}
                       </Badge>
                       <div className="flex items-center gap-1">
@@ -192,7 +186,7 @@ export default function AnalyticsInspector({ isVisible, onToggle }: AnalyticsIns
                         </Button>
                       </div>
                     </div>
-                    
+
                     <div className="space-y-1.5">
                       {Object.entries(event.props).map(([key, value]) => (
                         <div key={key} className="text-xs">
@@ -200,10 +194,9 @@ export default function AnalyticsInspector({ isVisible, onToggle }: AnalyticsIns
                             {key}:
                           </span>
                           <span className="font-mono block break-all bg-muted/30 rounded px-2 py-1">
-                            {typeof value === 'object' 
-                              ? JSON.stringify(value, null, 2) 
-                              : String(value)
-                            }
+                            {typeof value === "object"
+                              ? JSON.stringify(value, null, 2)
+                              : String(value)}
                           </span>
                         </div>
                       ))}

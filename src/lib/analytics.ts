@@ -1,6 +1,6 @@
 /**
  * Analytics SDK for Umami
- * 
+ *
  * Provides a comprehensive analytics solution with:
  * - Consent gating
  * - Event queuing until Umami is ready
@@ -11,12 +11,12 @@
  * - Developer-friendly debugging
  */
 
-import type { AnalyticsProps } from './analyticsEvents';
-import { addAnalyticsEvent } from './AnalyticsInspector';
+import type { AnalyticsProps } from "./analyticsEvents";
+import { addAnalyticsEvent } from "./AnalyticsInspector";
 
-const isBrowser = typeof window !== 'undefined';
+const isBrowser = typeof window !== "undefined";
 
-export type ConsentState = 'accepted' | 'rejected' | 'unknown';
+export type ConsentState = "accepted" | "rejected" | "unknown";
 
 interface AnalyticsContext {
   page_path?: string;
@@ -53,7 +53,7 @@ interface SessionState {
 class AnalyticsSDK {
   private enabled = false;
   private debug = false;
-  private consent: ConsentState = 'unknown';
+  private consent: ConsentState = "unknown";
   private context: AnalyticsContext = {};
   private eventQueue: QueuedEvent[] = [];
   private consentCallbacks: ((state: ConsentState) => void)[] = [];
@@ -66,7 +66,7 @@ class AnalyticsSDK {
   constructor() {
     this.sessionId = this.generateSessionId();
     this.context.session_id = this.sessionId;
-    
+
     // Initialize session state
     this.sessionState = {
       startTime: Date.now(),
@@ -78,16 +78,16 @@ class AnalyticsSDK {
       searchTimer: null,
       mapSession: null,
     };
-    
+
     if (isBrowser) {
       this.loadConsentState();
       this.captureUTMParams();
       this.setupOnlineHandler();
       this.setupInactivityCheck();
       this.setupPageLifecycleHandlers();
-      
+
       // Only setup Umami watcher if consent is already accepted
-      if (this.consent === 'accepted') {
+      if (this.consent === "accepted") {
         this.loadUmamiScript();
       }
     }
@@ -96,15 +96,15 @@ class AnalyticsSDK {
   init(opts: { enabled?: boolean; debug?: boolean } = {}) {
     this.enabled = opts.enabled ?? true;
     this.debug = opts.debug ?? false;
-    
+
     if (this.debug) {
-      console.group('🔍 Analytics SDK Initialized');
-      console.log('Enabled:', this.enabled);
-      console.log('Consent:', this.consent);
-      console.log('Context:', this.context);
+      console.group("🔍 Analytics SDK Initialized");
+      console.log("Enabled:", this.enabled);
+      console.log("Consent:", this.consent);
+      console.log("Context:", this.context);
       console.groupEnd();
     }
-    
+
     // Don't track initial page load here - let setConsent handle it
     // This prevents double tracking when consent is accepted
   }
@@ -113,7 +113,7 @@ class AnalyticsSDK {
     // Set initial page path in context
     const initialPath = window.location.pathname;
     this.setContext({ page_path: initialPath });
-    
+
     // Track the initial page view
     this.trackPageview(initialPath);
   }
@@ -121,30 +121,30 @@ class AnalyticsSDK {
   setConsent(state: ConsentState) {
     const previousState = this.consent;
     this.consent = state;
-    
+
     if (isBrowser) {
-      localStorage.setItem('analytics_consent', state);
+      localStorage.setItem("analytics_consent", state);
     }
-    
+
     // Notify callbacks
-    this.consentCallbacks.forEach(cb => cb(state));
-    
+    this.consentCallbacks.forEach((cb) => cb(state));
+
     // If consent was just accepted, load Umami script and enable tracking
-    if (previousState !== 'accepted' && state === 'accepted') {
+    if (previousState !== "accepted" && state === "accepted") {
       this.loadUmamiScript();
       // Track the initial pageview now that consent is given
       this.trackInitialPageLoad();
       this.flushEventQueue();
     }
-    
+
     // If consent was just revoked, disable Umami tracking and clean up
-    if (previousState === 'accepted' && state === 'rejected') {
+    if (previousState === "accepted" && state === "rejected") {
       this.disableUmamiTracking();
       this.cleanupUmamiScript();
     }
-    
+
     if (this.debug) {
-      console.log('🔒 Analytics consent changed:', state);
+      console.log("🔒 Analytics consent changed:", state);
     }
   }
 
@@ -164,25 +164,25 @@ class AnalyticsSDK {
 
   setContext(ctx: Partial<AnalyticsContext>) {
     this.context = { ...this.context, ...ctx };
-    
+
     if (this.debug) {
-      console.log('📊 Analytics context updated:', this.context);
+      console.log("📊 Analytics context updated:", this.context);
     }
   }
 
-
   trackPageview(pagePath?: string, referrer?: string) {
-    const currentPagePath = pagePath || this.context.page_path || (isBrowser ? window.location.pathname : '/');
+    const currentPagePath =
+      pagePath || this.context.page_path || (isBrowser ? window.location.pathname : "/");
     const currentReferrer = referrer || (isBrowser ? document.referrer : undefined);
     const previousPath = this.context.previous_path;
-    
+
     // Update context with current page path
-    this.setContext({ 
+    this.setContext({
       page_path: currentPagePath,
-      previous_path: this.context.page_path 
+      previous_path: this.context.page_path,
     });
-    
-    this.event('page_view', {
+
+    this.event("page_view", {
       page_path: currentPagePath,
       referrer: currentReferrer,
       previous_path: previousPath,
@@ -190,8 +190,8 @@ class AnalyticsSDK {
   }
 
   event(name: string, props?: AnalyticsProps) {
-    if (!this.enabled || this.consent !== 'accepted') {
-      if (this.consent === 'unknown') {
+    if (!this.enabled || this.consent !== "accepted") {
+      if (this.consent === "unknown") {
         // Queue events until consent is given
         this.eventQueue.push({
           name,
@@ -206,11 +206,11 @@ class AnalyticsSDK {
     this.updateActivity();
 
     const enrichedProps = this.enrichProps(props);
-    
+
     if (this.debug) {
       console.group(`📈 Analytics Event: ${name}`);
-      console.log('Props:', enrichedProps);
-      console.log('Context:', this.context);
+      console.log("Props:", enrichedProps);
+      console.log("Context:", this.context);
       console.groupEnd();
     }
 
@@ -227,23 +227,23 @@ class AnalyticsSDK {
     let hash = 0;
     for (let i = 0; i < data.length; i++) {
       const char = data.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
+      hash = (hash << 5) - hash + char;
       hash = hash & hash; // Convert to 32-bit integer
     }
     return Math.abs(hash).toString(36);
   }
 
   // Calculate session quality based on current state
-  calculateSessionQuality(): 'high' | 'medium' | 'low' {
-    if (this.sessionState.conversionsCount > 0) return 'high';
-    if (this.sessionState.engagedBeaches.size > 2) return 'medium';
-    return 'low';
+  calculateSessionQuality(): "high" | "medium" | "low" {
+    if (this.sessionState.conversionsCount > 0) return "high";
+    if (this.sessionState.engagedBeaches.size > 2) return "medium";
+    return "low";
   }
 
   // Track beach engagement with deduplication
   trackBeachEngagement(
-    beachId: string, 
-    source: 'search' | 'map' | 'browsing' | 'area_explore',
+    beachId: string,
+    source: "search" | "map" | "browsing" | "area_explore",
     queryHash?: string
   ) {
     // Only track first engagement with each beach
@@ -260,7 +260,7 @@ class AnalyticsSDK {
     // If this is from a search, track search quality as success
     if (queryHash && this.sessionState.currentSearch?.query_hash === queryHash) {
       const timeToEngagement = Date.now() - this.sessionState.currentSearch.timestamp;
-      this.trackSearchQuality('success', {
+      this.trackSearchQuality("success", {
         first_engagement_beach_id: beachId,
         time_to_engagement_ms: timeToEngagement,
       });
@@ -271,18 +271,18 @@ class AnalyticsSDK {
       beach_id: beachId,
       source,
     };
-    
+
     // Only include query_hash if it exists (i.e., if this is from a search)
     if (queryHash) {
       eventProps.query_hash = queryHash;
     }
-    
-    this.event('beach_engagement', eventProps);
+
+    this.event("beach_engagement", eventProps);
   }
 
   // Track search quality outcomes
   trackSearchQuality(
-    outcome: 'success' | 'empty' | 'relaxed' | 'abandoned',
+    outcome: "success" | "empty" | "relaxed" | "abandoned",
     data?: { first_engagement_beach_id?: string; time_to_engagement_ms?: number }
   ) {
     if (!this.sessionState.currentSearch) return;
@@ -294,7 +294,7 @@ class AnalyticsSDK {
     }
 
     // Emit search quality event
-    this.event('search_quality', {
+    this.event("search_quality", {
       query_hash: this.sessionState.currentSearch.query_hash,
       outcome,
       first_engagement_beach_id: data?.first_engagement_beach_id,
@@ -304,7 +304,7 @@ class AnalyticsSDK {
     // Clear current search
     try {
       if (isBrowser) {
-        sessionStorage.removeItem('current_query_hash');
+        sessionStorage.removeItem("current_query_hash");
       }
     } catch {}
     this.sessionState.currentSearch = null;
@@ -314,7 +314,7 @@ class AnalyticsSDK {
   trackSearch(queryHash: string) {
     // If there's a previous search that wasn't engaged, mark as abandoned
     if (this.sessionState.currentSearch) {
-      this.trackSearchQuality('abandoned');
+      this.trackSearchQuality("abandoned");
     }
 
     // Set new current search
@@ -326,7 +326,7 @@ class AnalyticsSDK {
 
     // Set 60-second timer for abandonment
     this.sessionState.searchTimer = setTimeout(() => {
-      this.trackSearchQuality('abandoned');
+      this.trackSearchQuality("abandoned");
     }, 60000); // 60 seconds
   }
 
@@ -355,50 +355,54 @@ class AnalyticsSDK {
     }, 30000); // 30 seconds
 
     if (this.debug) {
-      console.log('🗺️ Map session started');
+      console.log("🗺️ Map session started");
     }
   }
 
   // Track a map interaction (pan/zoom)
   trackMapInteraction() {
     if (!this.sessionState.mapSession) return;
-    
+
     this.sessionState.mapSession.interactions++;
-    
+
     if (this.debug) {
-      console.log(`🗺️ Map interaction tracked (total: ${this.sessionState.mapSession.interactions})`);
+      console.log(
+        `🗺️ Map interaction tracked (total: ${this.sessionState.mapSession.interactions})`
+      );
     }
   }
 
   // Track when a beach is viewed on the map (popup opened)
   trackMapBeachView(beachId: string) {
     if (!this.sessionState.mapSession) return;
-    
+
     this.sessionState.mapSession.viewedBeaches.add(beachId);
-    
+
     if (this.debug) {
-      console.log(`🗺️ Beach viewed on map: ${beachId} (unique: ${this.sessionState.mapSession.viewedBeaches.size})`);
+      console.log(
+        `🗺️ Beach viewed on map: ${beachId} (unique: ${this.sessionState.mapSession.viewedBeaches.size})`
+      );
     }
   }
 
   // Calculate exploration intensity based on interactions and beaches viewed
-  private calculateExplorationIntensity(): 'low' | 'medium' | 'high' {
-    if (!this.sessionState.mapSession) return 'low';
+  private calculateExplorationIntensity(): "low" | "medium" | "high" {
+    if (!this.sessionState.mapSession) return "low";
 
     const { interactions, viewedBeaches } = this.sessionState.mapSession;
     const uniqueBeaches = viewedBeaches.size;
 
     // High: 10+ interactions and 5+ beaches OR 20+ interactions
     if ((interactions >= 10 && uniqueBeaches >= 5) || interactions >= 20) {
-      return 'high';
+      return "high";
     }
 
     // Medium: 5+ interactions and 2+ beaches OR 10+ interactions
     if ((interactions >= 5 && uniqueBeaches >= 2) || interactions >= 10) {
-      return 'medium';
+      return "medium";
     }
 
-    return 'low';
+    return "low";
   }
 
   // Emit map engagement event
@@ -412,7 +416,7 @@ class AnalyticsSDK {
 
     // Only emit if there's been any activity
     if (interactions > 0 || uniqueBeaches > 0) {
-      this.event('map_engagement', {
+      this.event("map_engagement", {
         duration_ms: duration,
         total_interactions: interactions,
         unique_beaches_viewed: uniqueBeaches,
@@ -420,7 +424,7 @@ class AnalyticsSDK {
       });
 
       if (this.debug) {
-        console.log('🗺️ Map engagement emitted', {
+        console.log("🗺️ Map engagement emitted", {
           duration_ms: duration,
           interactions,
           uniqueBeaches,
@@ -446,7 +450,7 @@ class AnalyticsSDK {
     this.sessionState.mapSession = null;
 
     if (this.debug) {
-      console.log('🗺️ Map session ended');
+      console.log("🗺️ Map session ended");
     }
   }
 
@@ -456,41 +460,41 @@ class AnalyticsSDK {
 
   private loadConsentState() {
     if (!isBrowser) return;
-    
-    const stored = localStorage.getItem('analytics_consent');
-    if (stored && ['accepted', 'rejected'].includes(stored)) {
+
+    const stored = localStorage.getItem("analytics_consent");
+    if (stored && ["accepted", "rejected"].includes(stored)) {
       this.consent = stored as ConsentState;
     }
   }
 
   private captureUTMParams() {
     if (!isBrowser) return;
-    
+
     const urlParams = new URLSearchParams(window.location.search);
     const utmParams: Record<string, string> = {};
-    
-    const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'];
-    utmKeys.forEach(key => {
+
+    const utmKeys = ["utm_source", "utm_medium", "utm_campaign", "utm_content"];
+    utmKeys.forEach((key) => {
       const value = urlParams.get(key);
       if (value) {
         utmParams[key] = value;
       }
     });
-    
+
     // Also capture partner parameter
-    const partner = urlParams.get('partner');
+    const partner = urlParams.get("partner");
     if (partner) {
       utmParams.partner = partner;
     }
-    
+
     if (Object.keys(utmParams).length > 0) {
       this.context.utm = utmParams;
-      
+
       // Store in sessionStorage for persistence
-      sessionStorage.setItem('analytics_utm', JSON.stringify(utmParams));
+      sessionStorage.setItem("analytics_utm", JSON.stringify(utmParams));
     } else {
       // Try to load from sessionStorage
-      const stored = sessionStorage.getItem('analytics_utm');
+      const stored = sessionStorage.getItem("analytics_utm");
       if (stored) {
         try {
           this.context.utm = JSON.parse(stored);
@@ -503,10 +507,10 @@ class AnalyticsSDK {
 
   private setupOnlineHandler() {
     if (!isBrowser) return;
-    
-    window.addEventListener('online', () => {
+
+    window.addEventListener("online", () => {
       if (this.debug) {
-        console.log('🌐 Network online - retrying queued events');
+        console.log("🌐 Network online - retrying queued events");
       }
       this.flushEventQueue();
     });
@@ -524,10 +528,10 @@ class AnalyticsSDK {
 
     this.inactivityCheckInterval = setInterval(() => {
       const inactiveTime = Date.now() - this.sessionState.lastActivity;
-      
+
       if (inactiveTime >= SESSION_TIMEOUT) {
         this.emitSessionSummary();
-        
+
         // Reset session state after emitting summary
         this.sessionState = {
           startTime: Date.now(),
@@ -545,46 +549,46 @@ class AnalyticsSDK {
 
   private loadUmamiScript() {
     if (!isBrowser || this.umamiScriptLoaded) return;
-    
+
     this.umamiScriptLoaded = true;
-    
+
     try {
       // Create and load the Umami script
-      const script = document.createElement('script');
-      script.src = 'https://cloud.umami.is/script.js';
-      script.setAttribute('data-website-id', 'b3e6e36a-8334-4086-8a80-d3c894414392');
-      script.setAttribute('data-domains', 'beachesofgreece.com');
-      script.setAttribute('data-auto-track', 'false');
+      const script = document.createElement("script");
+      script.src = "https://cloud.umami.is/script.js";
+      script.setAttribute("data-website-id", "b3e6e36a-8334-4086-8a80-d3c894414392");
+      script.setAttribute("data-domains", "beachesofgreece.com");
+      script.setAttribute("data-auto-track", "false");
       script.defer = true;
-      
+
       // Store script reference for cleanup
       (script as any).__umami_script = true;
-      
+
       script.onload = () => {
         if (this.debug) {
-          console.log('📊 Umami script loaded');
+          console.log("📊 Umami script loaded");
         }
         this.setupUmamiReadyWatcher();
         // Enable tracking if consent is still accepted
-        if (this.consent === 'accepted') {
+        if (this.consent === "accepted") {
           this.enableUmamiTracking();
         }
       };
-      
+
       script.onerror = (error) => {
         if (this.debug) {
-          console.error('❌ Failed to load Umami script:', error);
+          console.error("❌ Failed to load Umami script:", error);
         }
         this.umamiScriptLoaded = false;
         // Reset consent to unknown on script load failure
-        this.consent = 'unknown';
-        localStorage.removeItem('analytics_consent');
+        this.consent = "unknown";
+        localStorage.removeItem("analytics_consent");
       };
-      
+
       document.head.appendChild(script);
     } catch (error) {
       if (this.debug) {
-        console.error('❌ Error creating Umami script:', error);
+        console.error("❌ Error creating Umami script:", error);
       }
       this.umamiScriptLoaded = false;
     }
@@ -592,61 +596,61 @@ class AnalyticsSDK {
 
   private disableUmamiTracking() {
     if (!isBrowser || !window.umami) return;
-    
+
     // Use Umami's built-in disable method
-    if (typeof (window.umami as any).disable === 'function') {
+    if (typeof (window.umami as any).disable === "function") {
       (window.umami as any).disable();
       if (this.debug) {
-        console.log('🚫 Umami tracking disabled');
+        console.log("🚫 Umami tracking disabled");
       }
     }
   }
 
   private enableUmamiTracking() {
     if (!isBrowser || !window.umami) return;
-    
+
     try {
       // Use Umami's built-in enable method
-      if (typeof (window.umami as any).enable === 'function') {
+      if (typeof (window.umami as any).enable === "function") {
         (window.umami as any).enable();
         if (this.debug) {
-          console.log('✅ Umami tracking enabled');
+          console.log("✅ Umami tracking enabled");
         }
       }
     } catch (error) {
       if (this.debug) {
-        console.error('❌ Error enabling Umami tracking:', error);
+        console.error("❌ Error enabling Umami tracking:", error);
       }
     }
   }
 
   private cleanupUmamiScript() {
     if (!isBrowser) return;
-    
+
     try {
       // Remove Umami script from DOM
       const scripts = document.querySelectorAll('script[src*="cloud.umami.is"]');
-      scripts.forEach(script => {
+      scripts.forEach((script) => {
         if ((script as any).__umami_script) {
           script.remove();
         }
       });
-      
+
       // Clear intervals
       if (this.umamiReadyInterval) {
         clearInterval(this.umamiReadyInterval);
         this.umamiReadyInterval = null;
       }
-      
+
       // Reset script loaded flag
       this.umamiScriptLoaded = false;
-      
+
       if (this.debug) {
-        console.log('🧹 Umami script cleaned up');
+        console.log("🧹 Umami script cleaned up");
       }
     } catch (error) {
       if (this.debug) {
-        console.error('❌ Error cleaning up Umami script:', error);
+        console.error("❌ Error cleaning up Umami script:", error);
       }
     }
   }
@@ -654,7 +658,7 @@ class AnalyticsSDK {
   private setupUmamiReadyWatcher() {
     if (!isBrowser) return;
     // Only relevant for production where we actually send events
-    if (typeof import.meta !== 'undefined' && !import.meta.env.PROD) return;
+    if (typeof import.meta !== "undefined" && !import.meta.env.PROD) return;
 
     let attempts = 0;
     const MAX_ATTEMPTS = 40; // ~10s at 250ms
@@ -667,7 +671,7 @@ class AnalyticsSDK {
         if (this.umamiReadyInterval) clearInterval(this.umamiReadyInterval);
         this.umamiReadyInterval = null;
         if (this.debug) {
-          console.log('✅ Umami ready - flushing queued events');
+          console.log("✅ Umami ready - flushing queued events");
         }
         this.flushEventQueue();
       } else if (attempts >= MAX_ATTEMPTS) {
@@ -700,9 +704,9 @@ class AnalyticsSDK {
     };
 
     // pagehide is the most reliable signal for SPA tab close/navigation
-    window.addEventListener('pagehide', handleFinalize);
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'hidden') {
+    window.addEventListener("pagehide", handleFinalize);
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "hidden") {
         handleFinalize();
       }
     });
@@ -710,18 +714,18 @@ class AnalyticsSDK {
 
   private emitSessionSummary() {
     const sessionDuration = Date.now() - this.sessionState.startTime;
-    
+
     // Calculate outcome
-    let outcome: 'converted' | 'browsed' | 'bounced';
+    let outcome: "converted" | "browsed" | "bounced";
     if (this.sessionState.conversionsCount > 0) {
-      outcome = 'converted';
+      outcome = "converted";
     } else if (this.sessionState.engagedBeaches.size > 2) {
-      outcome = 'browsed';
+      outcome = "browsed";
     } else {
-      outcome = 'bounced';
+      outcome = "bounced";
     }
 
-    this.event('session_summary', {
+    this.event("session_summary", {
       searches_count: this.sessionState.searchesCount,
       beaches_engaged: this.sessionState.engagedBeaches.size,
       conversions_count: this.sessionState.conversionsCount,
@@ -730,11 +734,11 @@ class AnalyticsSDK {
     });
 
     if (this.debug) {
-      console.log('📊 Session summary emitted', {
+      console.log("📊 Session summary emitted", {
         searches: this.sessionState.searchesCount,
         engaged: this.sessionState.engagedBeaches.size,
         conversions: this.sessionState.conversionsCount,
-        duration: Math.round(sessionDuration / 1000) + 's',
+        duration: Math.round(sessionDuration / 1000) + "s",
         outcome,
       });
     }
@@ -750,19 +754,19 @@ class AnalyticsSDK {
 
   private sendToUmami(name: string, props: AnalyticsProps) {
     if (!isBrowser) return;
-    
+
     // Double-check consent before sending (defensive programming)
-    if (this.consent !== 'accepted') {
+    if (this.consent !== "accepted") {
       if (this.debug) {
-        console.log('🚫 Analytics event blocked - consent not accepted:', name);
+        console.log("🚫 Analytics event blocked - consent not accepted:", name);
       }
       return;
     }
-    
+
     const umami = window.umami;
     if (!umami?.track) {
       // Umami not ready, queue the event only if consent is still accepted
-      if (this.consent === 'accepted') {
+      if (this.consent === "accepted") {
         this.eventQueue.push({
           name,
           props,
@@ -771,24 +775,24 @@ class AnalyticsSDK {
       }
       return;
     }
-    
+
     try {
       // In development, log the event but don't send to Umami
-      if (typeof import.meta !== 'undefined' && !import.meta.env.PROD) {
+      if (typeof import.meta !== "undefined" && !import.meta.env.PROD) {
         if (this.debug) {
-          console.log('🔍 [DEV] Would send to Umami:', name, props);
+          console.log("🔍 [DEV] Would send to Umami:", name, props);
         }
         return;
       }
-      
+
       // In production, send to Umami
       umami.track(name, props);
     } catch (error) {
       if (this.debug) {
-        console.error('Analytics tracking error:', error);
+        console.error("Analytics tracking error:", error);
       }
       // Queue for retry only if consent is still accepted
-      if (this.consent === 'accepted') {
+      if (this.consent === "accepted") {
         this.eventQueue.push({
           name,
           props,
@@ -800,14 +804,14 @@ class AnalyticsSDK {
 
   private flushEventQueue() {
     if (this.eventQueue.length === 0) return;
-    
+
     if (this.debug) {
       console.log(`📤 Flushing ${this.eventQueue.length} queued events`);
     }
-    
+
     const events = [...this.eventQueue];
     this.eventQueue = [];
-    
+
     events.forEach(({ name, props }) => {
       this.sendToUmami(name, this.enrichProps(props));
     });
@@ -822,21 +826,27 @@ export const analytics = {
   init: (opts?: { enabled?: boolean; debug?: boolean }) => analyticsSDK.init(opts),
   setConsent: (state: ConsentState) => analyticsSDK.setConsent(state),
   getConsent: () => analyticsSDK.getConsent(),
-  onConsentChange: (callback: (state: ConsentState) => void) => analyticsSDK.onConsentChange(callback),
+  onConsentChange: (callback: (state: ConsentState) => void) =>
+    analyticsSDK.onConsentChange(callback),
   setContext: (ctx: Partial<AnalyticsContext>) => analyticsSDK.setContext(ctx),
-  trackPageview: (pagePath?: string, referrer?: string) => analyticsSDK.trackPageview(pagePath, referrer),
+  trackPageview: (pagePath?: string, referrer?: string) =>
+    analyticsSDK.trackPageview(pagePath, referrer),
   event: (name: string, props?: AnalyticsProps) => analyticsSDK.event(name, props),
-  generateQueryHash: (query: string, filters?: Record<string, unknown>) => analyticsSDK.generateQueryHash(query, filters),
-  trackBeachEngagement: (beachId: string, source: 'search' | 'map' | 'browsing' | 'area_explore', queryHash?: string) => 
-    analyticsSDK.trackBeachEngagement(beachId, source, queryHash),
+  generateQueryHash: (query: string, filters?: Record<string, unknown>) =>
+    analyticsSDK.generateQueryHash(query, filters),
+  trackBeachEngagement: (
+    beachId: string,
+    source: "search" | "map" | "browsing" | "area_explore",
+    queryHash?: string
+  ) => analyticsSDK.trackBeachEngagement(beachId, source, queryHash),
   trackSearch: (queryHash: string) => analyticsSDK.trackSearch(queryHash),
-  trackSearchQuality: (outcome: 'success' | 'empty' | 'relaxed' | 'abandoned', data?: { first_engagement_beach_id?: string; time_to_engagement_ms?: number }) => 
-    analyticsSDK.trackSearchQuality(outcome, data),
+  trackSearchQuality: (
+    outcome: "success" | "empty" | "relaxed" | "abandoned",
+    data?: { first_engagement_beach_id?: string; time_to_engagement_ms?: number }
+  ) => analyticsSDK.trackSearchQuality(outcome, data),
   trackConversion: () => analyticsSDK.trackConversion(),
   startMapSession: () => analyticsSDK.startMapSession(),
   trackMapInteraction: () => analyticsSDK.trackMapInteraction(),
   trackMapBeachView: (beachId: string) => analyticsSDK.trackMapBeachView(beachId),
   endMapSession: () => analyticsSDK.endMapSession(),
 };
-
-

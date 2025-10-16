@@ -15,6 +15,7 @@ We track **fewer events, but make each one count**. Every event answers a clear 
 ### Key Features
 
 #### Privacy & Consent
+
 - Explicit consent gating (no tracking until user accepts)
 - No PII collection
 - Cookie-less tracking via Umami
@@ -22,6 +23,7 @@ We track **fewer events, but make each one count**. Every event answers a clear 
 - Admin routes automatically excluded from tracking
 
 #### Session Intelligence
+
 - Automatic session quality calculation (high/medium/low)
 - Beach engagement deduplication (one event per beach per session)
 - Search quality tracking with abandonment detection
@@ -29,6 +31,7 @@ We track **fewer events, but make each one count**. Every event answers a clear 
 - 30-minute inactivity session summaries
 
 #### Developer Experience
+
 - Type-safe event schemas
 - Real-time event inspector (dev mode only)
 - Console debugging with grouped logs
@@ -39,40 +42,44 @@ We track **fewer events, but make each one count**. Every event answers a clear 
 
 ### 7 Core Events
 
-| Event | Description | Key Props | Business Question |
-|-------|-------------|-----------|-------------------|
-| `page_view` | SPA route changes | `page_path`, `referrer`, `previous_path` | Where do users go? |
-| `search_submit` | Search queries | `q`, `extracted`, `context` | What are users looking for? |
-| `results_view` | Search results displayed | `count`, `relaxed`, `query_hash` | How many results do searches return? |
-| `search_quality` | Search outcome | `query_hash`, `outcome`, `time_to_engagement_ms` | Do searches work for users? |
-| `beach_engagement` | First interaction with beach | `beach_id`, `source`, `query_hash` | Which beaches interest users and from what source? |
-| `beach_conversion` | Valuable user action | `beach_id`, `action`, `source` | Do users take action? |
-| `session_summary` | Session-level metrics | `searches_count`, `beaches_engaged`, `conversions_count`, `outcome` | What's the overall user experience quality? |
+| Event              | Description                  | Key Props                                                           | Business Question                                  |
+| ------------------ | ---------------------------- | ------------------------------------------------------------------- | -------------------------------------------------- |
+| `page_view`        | SPA route changes            | `page_path`, `referrer`, `previous_path`                            | Where do users go?                                 |
+| `search_submit`    | Search queries               | `q`, `extracted`, `context`                                         | What are users looking for?                        |
+| `results_view`     | Search results displayed     | `count`, `relaxed`, `query_hash`                                    | How many results do searches return?               |
+| `search_quality`   | Search outcome               | `query_hash`, `outcome`, `time_to_engagement_ms`                    | Do searches work for users?                        |
+| `beach_engagement` | First interaction with beach | `beach_id`, `source`, `query_hash`                                  | Which beaches interest users and from what source? |
+| `beach_conversion` | Valuable user action         | `beach_id`, `action`, `source`                                      | Do users take action?                              |
+| `session_summary`  | Session-level metrics        | `searches_count`, `beaches_engaged`, `conversions_count`, `outcome` | What's the overall user experience quality?        |
 
 ### Supporting Events
 
-| Event | Description | Key Props |
-|-------|-------------|-----------|
-| `filter_apply` | Filter applied | `name`, `value`, `results` |
-| `filter_clear` | Filter cleared | `name` |
-| `map_open` | Map page entered | `entry` |
+| Event            | Description                                       | Key Props                                                                             |
+| ---------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `filter_apply`   | Filter applied                                    | `name`, `value`, `results`                                                            |
+| `filter_clear`   | Filter cleared                                    | `name`                                                                                |
+| `map_open`       | Map page entered                                  | `entry`                                                                               |
 | `map_engagement` | Map usage session (emitted every 30s or on close) | `duration_ms`, `total_interactions`, `unique_beaches_viewed`, `exploration_intensity` |
-| `404` | Page not found | `path` |
+| `404`            | Page not found                                    | `path`                                                                                |
 
 ## Session Management
 
 ### Session Quality
+
 Session quality is calculated and included in the `session_summary` event only (not in individual beach_engagement events):
+
 - **High**: User completed at least one conversion (directions/share)
 - **Medium**: User engaged with 3+ beaches but no conversions
 - **Low**: Limited engagement, no conversions
 
 ### Session Outcomes
+
 - **Converted**: At least one conversion action
 - **Browsed**: Engaged with 3+ beaches but no conversions
 - **Bounced**: Low engagement
 
 ### Session Lifecycle
+
 - Starts on first page load
 - Resets after 30 minutes of inactivity
 - Emits `session_summary` on timeout
@@ -80,6 +87,7 @@ Session quality is calculated and included in the `session_summary` event only (
 ## User Journey Tracking
 
 ### Complete Flow Example
+
 ```
 1. page_view (/)
 2. search_submit (q: "sandy beaches corfu")
@@ -94,16 +102,16 @@ Session quality is calculated and included in the `session_summary` event only (
 ## Usage
 
 ```typescript
-import { analytics } from '@/lib/analytics';
+import { analytics } from "@/lib/analytics";
 
 // Track beach engagement (auto-deduplicates per beach)
-analytics.trackBeachEngagement('beach-123', 'search', queryHash);
+analytics.trackBeachEngagement("beach-123", "search", queryHash);
 
 // Track conversions
-analytics.event('beach_conversion', {
-  beach_id: 'beach-123',
-  action: 'directions',
-  source: 'detail',
+analytics.event("beach_conversion", {
+  beach_id: "beach-123",
+  action: "directions",
+  source: "detail",
 });
 analytics.trackConversion(); // Increments session counter
 
@@ -112,18 +120,18 @@ const queryHash = analytics.generateQueryHash(query, filters);
 analytics.trackSearch(queryHash);
 
 // Track search quality
-analytics.trackSearchQuality('success', {
-  first_engagement_beach_id: 'beach-123',
+analytics.trackSearchQuality("success", {
+  first_engagement_beach_id: "beach-123",
   time_to_engagement_ms: 2500,
 });
 
 // Set context
-analytics.setContext({ area: 'crete' });
+analytics.setContext({ area: "crete" });
 
 // Track map engagement
 analytics.startMapSession(); // Start tracking on map mount
 analytics.trackMapInteraction(); // Track pan/zoom
-analytics.trackMapBeachView('beach-123'); // Track beach popup opens
+analytics.trackMapBeachView("beach-123"); // Track beach popup opens
 analytics.endMapSession(); // End tracking on unmount (auto-emits engagement event)
 ```
 

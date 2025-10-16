@@ -1,4 +1,4 @@
-import { Crumb } from './Breadcrumbs';
+import { Crumb } from "./Breadcrumbs";
 
 function toAbsolute(href: string, baseUrl: string): string {
   // If already absolute, return as-is
@@ -8,16 +8,14 @@ function toAbsolute(href: string, baseUrl: string): string {
   return new URL(rel, baseUrl).toString();
 }
 
-export function breadcrumbJsonLd(
-  items: Crumb[],
-  baseUrl: string,
-  currentPageUrl?: string
-) {
+export function breadcrumbJsonLd(items: Crumb[], baseUrl: string, currentPageUrl?: string) {
   if (!/^https?:\/\//i.test(baseUrl)) {
     throw new Error("breadcrumbJsonLd: baseUrl must be absolute, e.g. https://yourdomain.tld");
   }
   const normalizedCurrent = currentPageUrl
-    ? (/^https?:\/\//i.test(currentPageUrl) ? currentPageUrl : new URL(currentPageUrl, baseUrl).toString())
+    ? /^https?:\/\//i.test(currentPageUrl)
+      ? currentPageUrl
+      : new URL(currentPageUrl, baseUrl).toString()
     : undefined;
 
   return {

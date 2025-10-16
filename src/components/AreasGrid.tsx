@@ -17,7 +17,7 @@ const AreasGrid = ({ maxAreas = 12, showViewAll = true, className = "" }: AreasG
 
   // Get top areas sorted by beach count, then by name
   const topAreas = areas
-    .filter(area => area.beach_count > 0)
+    .filter((area) => area.beach_count > 0)
     .sort((a, b) => {
       // First sort by beach count (descending)
       if (b.beach_count !== a.beach_count) {
@@ -34,15 +34,16 @@ const AreasGrid = ({ maxAreas = 12, showViewAll = true, className = "" }: AreasG
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-foreground">Explore by Area</h2>
-            {showViewAll && (
-              <div className="h-6 w-24 bg-muted animate-pulse rounded"></div>
-            )}
+            {showViewAll && <div className="h-6 w-24 bg-muted animate-pulse rounded"></div>}
           </div>
-          
+
           {/* Loading skeleton - horizontal scroll for all screen sizes */}
           <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2">
             {Array.from({ length: maxAreas }).map((_, i) => (
-              <Card key={i} className="animate-pulse overflow-hidden border-0 bg-card shadow-soft flex-shrink-0 w-32">
+              <Card
+                key={i}
+                className="animate-pulse overflow-hidden border-0 bg-card shadow-soft flex-shrink-0 w-32"
+              >
                 <div className="aspect-[3/2] bg-gradient-ocean relative">
                   <div className="absolute inset-0 bg-gradient-to-br from-muted/50 to-muted animate-pulse" />
                   <div className="absolute top-2 right-2 h-4 w-12 bg-card/50 rounded-full"></div>
@@ -84,7 +85,7 @@ const AreasGrid = ({ maxAreas = 12, showViewAll = true, className = "" }: AreasG
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-foreground">Explore by Area</h2>
           {showViewAll && (
-            <Link 
+            <Link
               to="/areas"
               className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium transition-colors group text-sm"
               aria-label="View all beach areas in Greece"
@@ -106,8 +107,8 @@ const AreasGrid = ({ maxAreas = 12, showViewAll = true, className = "" }: AreasG
             );
 
             return (
-              <Link 
-                key={area.id} 
+              <Link
+                key={area.id}
                 to={`/${area.slug}`}
                 className="group block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-xl flex-shrink-0 w-32"
                 aria-label={`Explore ${area.beach_count} beaches in ${area.name}`}
@@ -130,13 +131,16 @@ const AreasGrid = ({ maxAreas = 12, showViewAll = true, className = "" }: AreasG
                     ) : (
                       fallbackComponent
                     )}
-                    
+
                     {/* Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-                    
+
                     {/* Beach Count Badge */}
                     <div className="absolute top-2 right-2">
-                      <Badge variant="outline" className="bg-card/95 text-foreground border-card/50 shadow-sm backdrop-blur-sm text-xs px-1.5 py-0.5">
+                      <Badge
+                        variant="outline"
+                        className="bg-card/95 text-foreground border-card/50 shadow-sm backdrop-blur-sm text-xs px-1.5 py-0.5"
+                      >
                         <MapPin className="h-2.5 w-2.5 mr-1" />
                         {area.beach_count}
                       </Badge>
@@ -150,7 +154,7 @@ const AreasGrid = ({ maxAreas = 12, showViewAll = true, className = "" }: AreasG
                     </div>
 
                     {/* Photo Attribution - compact mode for area cards */}
-                    <PhotoAttribution 
+                    <PhotoAttribution
                       photoSource={area.hero_photo_source}
                       className="z-10"
                       compact={true}

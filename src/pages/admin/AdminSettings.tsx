@@ -1,8 +1,8 @@
-import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { PasswordChangeForm } from '@/components/admin/PasswordChangeForm';
-import { Shield, User } from 'lucide-react';
-import { useAuth } from '@/contexts/AuthContext';
+import React from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { PasswordChangeForm } from "@/components/admin/PasswordChangeForm";
+import { Shield, User } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const AdminSettings: React.FC = () => {
   const { profile, user } = useAuth();
@@ -11,9 +11,7 @@ const AdminSettings: React.FC = () => {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-foreground">Settings</h1>
-        <p className="text-muted-foreground mt-1">
-          Manage your account settings and preferences
-        </p>
+        <p className="text-muted-foreground mt-1">Manage your account settings and preferences</p>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
@@ -25,9 +23,7 @@ const AdminSettings: React.FC = () => {
                 <Shield className="h-5 w-5" />
                 Account Security
               </CardTitle>
-              <CardDescription>
-                Manage your account security settings and password
-              </CardDescription>
+              <CardDescription>Manage your account security settings and password</CardDescription>
             </CardHeader>
             <CardContent>
               <PasswordChangeForm />
@@ -43,35 +39,27 @@ const AdminSettings: React.FC = () => {
                 <User className="h-5 w-5" />
                 Account Information
               </CardTitle>
-              <CardDescription>
-                View your account details and role information
-              </CardDescription>
+              <CardDescription>View your account details and role information</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <label className="text-sm font-medium text-muted-foreground">
-                  Email Address
-                </label>
+                <label className="text-sm font-medium text-muted-foreground">Email Address</label>
                 <div className="text-sm font-mono bg-muted px-3 py-2 rounded-md">
-                  {profile?.email || user?.email || 'Loading...'}
+                  {profile?.email || user?.email || "Loading..."}
                 </div>
               </div>
-              
+
               <div className="space-y-2">
-                <label className="text-sm font-medium text-muted-foreground">
-                  Account Role
-                </label>
+                <label className="text-sm font-medium text-muted-foreground">Account Role</label>
                 <div className="flex items-center gap-2">
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary text-primary-foreground">
-                    {profile?.role || 'Loading...'}
+                    {profile?.role || "Loading..."}
                   </span>
                 </div>
               </div>
-              
+
               <div className="space-y-2">
-                <label className="text-sm font-medium text-muted-foreground">
-                  Account Status
-                </label>
+                <label className="text-sm font-medium text-muted-foreground">Account Status</label>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                   <span className="text-sm text-green-600">Active</span>

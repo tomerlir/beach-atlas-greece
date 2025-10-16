@@ -86,14 +86,11 @@ const AppContent = () => {
         <Route path="/faq" element={<FAQ />} />
         <Route path="/:areaSlug" element={<Area />} />
         <Route path="/:area/:beach-name" element={<BeachDetail />} />
-        
+
         {/* Admin routes with AuthProvider */}
         <Route path="/admin/accept-invite" element={<AdminAcceptInvite />} />
         <Route path="/admin/login" element={<AdminLoginPage />} />
-        <Route 
-          path="/admin" 
-          element={<AdminDashboardWrapper />}
-        >
+        <Route path="/admin" element={<AdminDashboardWrapper />}>
           <Route index element={<AdminDashboard />} />
           <Route path="areas" element={<AdminAreasList />} />
           <Route path="areas/new" element={<AdminAreaCreate />} />
@@ -104,7 +101,7 @@ const AppContent = () => {
           <Route path="import-export" element={<ImportExport />} />
           <Route path="settings" element={<AdminSettings />} />
         </Route>
-        
+
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>

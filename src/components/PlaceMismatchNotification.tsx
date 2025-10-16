@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { X, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { generateAreaUrl } from '@/lib/utils';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { X, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { generateAreaUrl } from "@/lib/utils";
 
 interface PlaceMismatchNotificationProps {
   searchedPlace: string;
@@ -15,7 +15,7 @@ export default function PlaceMismatchNotification({
   searchedPlace,
   currentArea,
   onDismiss,
-  className = '',
+  className = "",
 }: PlaceMismatchNotificationProps) {
   const [isDismissed, setIsDismissed] = useState(false);
 
@@ -37,13 +37,11 @@ export default function PlaceMismatchNotification({
         <div className="flex-1">
           <div className="flex items-center gap-2 mb-2">
             <div className="w-2 h-2 bg-secondary rounded-full flex-shrink-0 mt-1.5"></div>
-            <p className="text-sm font-medium text-foreground">
-              Different location detected
-            </p>
+            <p className="text-sm font-medium text-foreground">Different location detected</p>
           </div>
           <p className="text-sm text-muted-foreground mb-3">
-            You searched for <span className="font-semibold">{searchedPlace}</span>, but you're viewing{' '}
-            <span className="font-semibold">{currentArea}</span>.
+            You searched for <span className="font-semibold">{searchedPlace}</span>, but you're
+            viewing <span className="font-semibold">{currentArea}</span>.
           </p>
           <Link
             to={areaUrl}
@@ -53,7 +51,7 @@ export default function PlaceMismatchNotification({
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
-        
+
         {onDismiss && (
           <Button
             variant="ghost"

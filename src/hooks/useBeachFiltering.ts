@@ -1,16 +1,13 @@
-import { useMemo } from 'react';
-import { FilterState } from './useUrlState';
-import { Beach } from '@/types/beach';
+import { useMemo } from "react";
+import { FilterState } from "./useUrlState";
+import { Beach } from "@/types/beach";
 
 // Exported pure predicate to enable strict filtering tests without React/hook context
-export function matchesFilters(
-  beach: Beach,
-  filters: FilterState
-): boolean {
+export function matchesFilters(beach: Beach, filters: FilterState): boolean {
   // Location filter - filter by extracted location(s)
   if (filters.locations && filters.locations.length > 0) {
     // Multiple locations: beach must match at least one location
-    const matchesAnyLocation = filters.locations.some(location => {
+    const matchesAnyLocation = filters.locations.some((location) => {
       const locationTerm = location.toLowerCase().trim();
       return beach.area && beach.area.toLowerCase().includes(locationTerm);
     });
@@ -37,7 +34,7 @@ export function matchesFilters(
 
   // Organized filter
   if (filters.organized.length > 0) {
-    const beachOrganizedType = beach.organized ? 'organized' : 'unorganized';
+    const beachOrganizedType = beach.organized ? "organized" : "unorganized";
     if (!filters.organized.includes(beachOrganizedType)) {
       return false;
     }
@@ -55,14 +52,17 @@ export function matchesFilters(
 
   // Amenities filter
   if (filters.amenities.length > 0) {
-    const hasAllAmenities = filters.amenities.every(amenity => 
-      beach.amenities && beach.amenities.includes(amenity)
+    const hasAllAmenities = filters.amenities.every(
+      (amenity) => beach.amenities && beach.amenities.includes(amenity)
     );
     if (!hasAllAmenities) return false;
   }
 
   // Wave conditions filter
-  if (filters.waveConditions.length > 0 && !filters.waveConditions.includes(beach.wave_conditions as any)) {
+  if (
+    filters.waveConditions.length > 0 &&
+    !filters.waveConditions.includes(beach.wave_conditions as any)
+  ) {
     return false;
   }
 
@@ -80,27 +80,29 @@ export const useBeachFiltering = (
   userLocation: GeolocationPosition | null
 ): (Beach & { distance?: number })[] => {
   return useMemo(() => {
-    let filtered = beaches.filter(beach => matchesFilters(beach as Beach, filters));
+    let filtered = beaches.filter((beach) => matchesFilters(beach as Beach, filters));
 
     // Sort beaches based on new sort format
     if (filters.sort) {
-      const [sortKey, sortDir] = filters.sort.split('.');
-      
-      if (sortKey === 'name') {
+      const [sortKey, sortDir] = filters.sort.split(".");
+
+      if (sortKey === "name") {
         // Sort by name
         filtered = [...filtered].sort((a, b) => {
           const comparison = a.name.localeCompare(b.name);
-          return sortDir === 'desc' ? -comparison : comparison;
+          return sortDir === "desc" ? -comparison : comparison;
         });
-      } else if (sortKey === 'distance' && userLocation && filters.nearMe) {
+      } else if (sortKey === "distance" && userLocation && filters.nearMe) {
         // Sort by distance if location is available and nearMe is enabled
-        filtered = filtered.map(beach => ({
-          ...beach,
-          distance: beach.distance || 0
-        })).sort((a, b) => {
-          const comparison = (a.distance || 0) - (b.distance || 0);
-          return sortDir === 'desc' ? -comparison : comparison;
-        });
+        filtered = filtered
+          .map((beach) => ({
+            ...beach,
+            distance: beach.distance || 0,
+          }))
+          .sort((a, b) => {
+            const comparison = (a.distance || 0) - (b.distance || 0);
+            return sortDir === "desc" ? -comparison : comparison;
+          });
       }
     } else {
       // Default sort by name A-Z when no sort is specified

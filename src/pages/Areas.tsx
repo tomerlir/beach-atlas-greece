@@ -17,32 +17,33 @@ const Areas = () => {
 
   // Generate SEO data
   const seoTitle = "Greek Beach Areas | Beach Atlas";
-  const seoDescription = "Explore beaches by area across Greece. Discover the best beaches in Corfu, Mykonos, Crete, and other beautiful Greek destinations.";
+  const seoDescription =
+    "Explore beaches by area across Greece. Discover the best beaches in Corfu, Mykonos, Crete, and other beautiful Greek destinations.";
   const canonicalUrl = "https://beachesofgreece.com/areas";
 
   // Generate JSON-LD structured data
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": seoTitle,
-    "description": seoDescription,
-    "url": canonicalUrl,
-    "mainEntity": {
+    name: seoTitle,
+    description: seoDescription,
+    url: canonicalUrl,
+    mainEntity: {
       "@type": "ItemList",
-      "name": "Greek Beach Areas",
-      "description": "A curated list of beach areas across Greece",
-      "numberOfItems": areas.length,
-      "itemListElement": areas.slice(0, 10).map((area, index) => ({
+      name: "Greek Beach Areas",
+      description: "A curated list of beach areas across Greece",
+      numberOfItems: areas.length,
+      itemListElement: areas.slice(0, 10).map((area, index) => ({
         "@type": "ListItem",
-        "position": index + 1,
-        "item": {
+        position: index + 1,
+        item: {
           "@type": "Place",
-          "name": area.name,
-          "description": area.description || `Discover beaches in ${area.name}, Greece`,
-          "url": `https://beachesofgreece.com/${area.slug}`
-        }
-      }))
-    }
+          name: area.name,
+          description: area.description || `Discover beaches in ${area.name}, Greece`,
+          url: `https://beachesofgreece.com/${area.slug}`,
+        },
+      })),
+    },
   };
 
   return (
@@ -51,41 +52,45 @@ const Areas = () => {
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />
         <link rel="canonical" href={canonicalUrl} />
-        
+
         {/* Open Graph tags */}
         <meta property="og:title" content={seoTitle} />
         <meta property="og:description" content={seoDescription} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content={`${import.meta.env.VITE_SITE_URL || 'https://beachesofgreece.com'}/hero-background.png`} />
+        <meta
+          property="og:image"
+          content={`${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.png`}
+        />
         <meta property="og:site_name" content="Beach Atlas Greece" />
-        
+
         {/* Twitter Card tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDescription} />
-        <meta name="twitter:image" content={`${import.meta.env.VITE_SITE_URL || 'https://beachesofgreece.com'}/hero-background.png`} />
-        
+        <meta
+          name="twitter:image"
+          content={`${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.png`}
+        />
+
         {/* JSON-LD structured data */}
-        <script type="application/ld+json">
-          {JSON.stringify(jsonLd)}
-        </script>
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
-      
+
       {/* Organization Schema for AI engines */}
       <OrganizationSchema />
 
       <div className="min-h-screen bg-background">
         <Header />
-        
+
         {/* Hero Section */}
         <section className="relative h-[35vh] flex items-center justify-center bg-gradient-ocean overflow-hidden">
-          <div 
+          <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: `url(${heroImage})` }}
           />
           <div className="absolute inset-0 bg-black/30" />
-          
+
           <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-6xl font-bold mb-8 drop-shadow-lg">
               Explore Greek Beach Areas
@@ -96,10 +101,12 @@ const Areas = () => {
         {/* Breadcrumb Navigation - under hero image */}
         <div className="bg-background py-2">
           <div className="container mx-auto px-4">
-            <BreadcrumbsWithJsonLd items={[
-              { label: "Home", href: "/" },
-              { label: "Areas" } // current
-            ]} />
+            <BreadcrumbsWithJsonLd
+              items={[
+                { label: "Home", href: "/" },
+                { label: "Areas" }, // current
+              ]}
+            />
           </div>
         </div>
 
@@ -113,7 +120,10 @@ const Areas = () => {
           {isLoading && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {Array.from({ length: 6 }).map((_, i) => (
-                <Card key={i} className="animate-pulse overflow-hidden border-0 bg-card shadow-soft">
+                <Card
+                  key={i}
+                  className="animate-pulse overflow-hidden border-0 bg-card shadow-soft"
+                >
                   {/* Image skeleton */}
                   <div className="aspect-video bg-gradient-ocean relative">
                     <div className="absolute inset-0 bg-gradient-to-br from-muted/50 to-muted animate-pulse" />
@@ -160,8 +170,8 @@ const Areas = () => {
                     );
 
                     return (
-                      <Link 
-                        key={area.id} 
+                      <Link
+                        key={area.id}
                         to={`/${area.slug}`}
                         className="group block focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded-xl"
                         aria-label={`Explore beaches in ${area.name}`}
@@ -184,20 +194,22 @@ const Areas = () => {
                             ) : (
                               fallbackComponent
                             )}
-                            
+
                             {/* Gradient Overlay */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-                            
+
                             {/* Beach Count Badge */}
                             <div className="absolute bottom-3 left-3">
-                              <Badge variant="outline" className="bg-card/95 text-foreground border-card/50 shadow-sm backdrop-blur-sm">
+                              <Badge
+                                variant="outline"
+                                className="bg-card/95 text-foreground border-card/50 shadow-sm backdrop-blur-sm"
+                              >
                                 {area.beach_count} beaches
                               </Badge>
                             </div>
 
-
                             {/* Photo Attribution - compact mode for area cards */}
-                            <PhotoAttribution 
+                            <PhotoAttribution
                               photoSource={area.hero_photo_source}
                               className="z-10"
                               compact={true}
@@ -205,11 +217,10 @@ const Areas = () => {
                           </div>
 
                           <CardContent className="p-4">
-                            <h3 className="text-foreground font-bold text-lg mb-2">
-                              {area.name}
-                            </h3>
+                            <h3 className="text-foreground font-bold text-lg mb-2">{area.name}</h3>
                             <p className="text-muted-foreground text-sm leading-relaxed">
-                              {area.description || `Discover the beautiful beaches of ${area.name}, Greece. From organized resorts to hidden gems waiting to be explored.`}
+                              {area.description ||
+                                `Discover the beautiful beaches of ${area.name}, Greece. From organized resorts to hidden gems waiting to be explored.`}
                             </p>
                           </CardContent>
                         </Card>
@@ -221,7 +232,9 @@ const Areas = () => {
                 <div className="text-center py-16">
                   <div className="bg-muted/50 border border-border rounded-xl p-8 max-w-md mx-auto">
                     <p className="text-muted-foreground font-medium text-lg">No areas found</p>
-                    <p className="text-muted-foreground mt-2">Check back later for new beach areas</p>
+                    <p className="text-muted-foreground mt-2">
+                      Check back later for new beach areas
+                    </p>
                   </div>
                 </div>
               )}

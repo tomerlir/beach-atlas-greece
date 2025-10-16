@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
-import { useDebounce } from './useDebounce';
+import { useState, useEffect, useRef } from "react";
+import { useDebounce } from "./useDebounce";
 
 export const useDebouncedSearch = (
   initialValue: string,
@@ -36,7 +36,7 @@ export const useDebouncedSearch = (
   // Programmatic clear that bypasses user typing flag
   const clearSearchInput = () => {
     isUserTyping.current = false;
-    setSearchInput('');
+    setSearchInput("");
   };
 
   return {

@@ -3,17 +3,17 @@
  * Centralized exports for all NLP functionality
  */
 
-export { TextProcessor } from './TextProcessor';
-export type { Token, ProcessedText } from './TextProcessor';
+export { TextProcessor } from "./TextProcessor";
+export type { Token, ProcessedText } from "./TextProcessor";
 
-export { EntityRecognizer } from './EntityRecognizer';
-export type { BeachEntity, EntityRecognitionResult } from './EntityRecognizer';
+export { EntityRecognizer } from "./EntityRecognizer";
+export type { BeachEntity, EntityRecognitionResult } from "./EntityRecognizer";
 
-export { SentimentAnalyzer } from './SentimentAnalyzer';
-export type { SentimentResult, IntentAnalysis } from './SentimentAnalyzer';
+export { SentimentAnalyzer } from "./SentimentAnalyzer";
+export type { SentimentResult, IntentAnalysis } from "./SentimentAnalyzer";
 
-export { FuzzyMatcher } from './FuzzyMatcher';
-export type { MatchResult, FuzzyMatchOptions } from './FuzzyMatcher';
+export { FuzzyMatcher } from "./FuzzyMatcher";
+export type { MatchResult, FuzzyMatchOptions } from "./FuzzyMatcher";
 
-export { EnhancedNaturalLanguageSearch } from './EnhancedNaturalLanguageSearch';
-export type { EnhancedExtractionResult, SearchContext } from './EnhancedNaturalLanguageSearch';
+export { EnhancedNaturalLanguageSearch } from "./EnhancedNaturalLanguageSearch";
+export type { EnhancedExtractionResult, SearchContext } from "./EnhancedNaturalLanguageSearch";

@@ -1,12 +1,12 @@
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 /**
  * ScrollToTop component that scrolls to the top of the page when the route changes.
  * This is essential for single-page applications to ensure users start at the top
  * of each new page, especially important on mobile Safari where scroll position
  * can be preserved incorrectly.
- * 
+ *
  * Features:
  * - Immediate scroll to top on route change
  * - Handles mobile Safari scroll restoration issues

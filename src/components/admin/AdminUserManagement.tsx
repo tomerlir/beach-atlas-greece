@@ -1,14 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { authSupabase } from '@/integrations/supabase/client';
-import { useAuth } from '@/contexts/AuthContext';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Loader2, Shield, User, UserCheck, UserX, Plus, Link as LinkIcon, RefreshCcw, Mail } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { authSupabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/contexts/AuthContext";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import {
+  Loader2,
+  Shield,
+  User,
+  UserCheck,
+  UserX,
+  Plus,
+  Link as LinkIcon,
+  RefreshCcw,
+  Mail,
+} from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface User {
   user_id: string;
@@ -24,34 +34,42 @@ export const AdminUserManagement: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [promoting, setPromoting] = useState<string | null>(null);
   const [demoting, setDemoting] = useState<string | null>(null);
-  const [bootstrapEmail, setBootstrapEmail] = useState('');
+  const [bootstrapEmail, setBootstrapEmail] = useState("");
   const [bootstrapLoading, setBootstrapLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
-  const [inviteEmail, setInviteEmail] = useState('');
+  const [inviteEmail, setInviteEmail] = useState("");
   const [inviteLoading, setInviteLoading] = useState(false);
   const [inviteToken, setInviteToken] = useState<string | null>(null);
-  const [invites, setInvites] = useState<Array<{ id: string; email: string; invited_by: string; accepted: boolean; created_at: string; expires_at: string; token: string; }>>([]);
+  const [invites, setInvites] = useState<
+    Array<{
+      id: string;
+      email: string;
+      invited_by: string;
+      accepted: boolean;
+      created_at: string;
+      expires_at: string;
+      token: string;
+    }>
+  >([]);
   const [invitesLoading, setInvitesLoading] = useState(false);
-  const [verifyEmail, setVerifyEmail] = useState('');
+  const [verifyEmail, setVerifyEmail] = useState("");
   const [verifyLoading, setVerifyLoading] = useState(false);
 
   // Move useEffect before early return to avoid conditional hook usage
   useEffect(() => {
-    if (profile && profile.role === 'admin') {
+    if (profile && profile.role === "admin") {
       fetchUsers();
       fetchInvites();
     }
   }, [profile]);
 
   // Check if current user is admin
-  if (!profile || profile.role !== 'admin') {
+  if (!profile || profile.role !== "admin") {
     return (
       <Alert>
         <Shield className="h-4 w-4" />
-        <AlertDescription>
-          You must be an admin to access user management.
-        </AlertDescription>
+        <AlertDescription>You must be an admin to access user management.</AlertDescription>
       </Alert>
     );
   }
@@ -59,7 +77,7 @@ export const AdminUserManagement: React.FC = () => {
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const { data, error } = await authSupabase.rpc('get_users_for_admin' as any);
+      const { data, error } = await authSupabase.rpc("get_users_for_admin" as any);
 
       if (error) {
         setError(`Failed to fetch users: ${error.message}`);
@@ -77,7 +95,7 @@ export const AdminUserManagement: React.FC = () => {
   const fetchInvites = async () => {
     try {
       setInvitesLoading(true);
-      const { data, error } = await authSupabase.rpc('list_admin_invites' as any);
+      const { data, error } = await authSupabase.rpc("list_admin_invites" as any);
       if (error) {
         setError(`Failed to fetch invites: ${error.message}`);
         return;
@@ -92,27 +110,29 @@ export const AdminUserManagement: React.FC = () => {
 
   const createInvite = async () => {
     if (!inviteEmail.trim()) {
-      setError('Please enter an email to invite');
+      setError("Please enter an email to invite");
       return;
     }
     try {
       setInviteLoading(true);
       setError(null);
       setInviteToken(null);
-      const { data, error } = await authSupabase.rpc('create_admin_invite' as any, { invitee_email: inviteEmail.trim() });
+      const { data, error } = await authSupabase.rpc("create_admin_invite" as any, {
+        invitee_email: inviteEmail.trim(),
+      });
       if (error) {
         setError(`Failed to create invite: ${error.message}`);
         return;
       }
       const token = data as string;
       setInviteToken(token);
-      setSuccess('Invite created. Share the link below with the invitee.');
-      setInviteEmail('');
+      setSuccess("Invite created. Share the link below with the invitee.");
+      setInviteEmail("");
       await fetchInvites();
       // Audit log
-      await authSupabase.rpc('log_admin_action' as any, {
-        action_type: 'create_admin_invite',
-        action_details: { token }
+      await authSupabase.rpc("log_admin_action" as any, {
+        action_type: "create_admin_invite",
+        action_details: { token },
       });
     } catch (err) {
       setError(`Error creating invite: ${err}`);
@@ -126,8 +146,8 @@ export const AdminUserManagement: React.FC = () => {
       setPromoting(userId);
       setError(null);
 
-      const { error } = await authSupabase.rpc('promote_to_admin' as any, {
-        target_user_id: userId
+      const { error } = await authSupabase.rpc("promote_to_admin" as any, {
+        target_user_id: userId,
       });
 
       if (error) {
@@ -136,13 +156,13 @@ export const AdminUserManagement: React.FC = () => {
       }
 
       // Log the admin action
-      await authSupabase.rpc('log_admin_action' as any, {
-        action_type: 'promote_to_admin',
+      await authSupabase.rpc("log_admin_action" as any, {
+        action_type: "promote_to_admin",
         target_user_id: userId,
-        action_details: { timestamp: new Date().toISOString() }
+        action_details: { timestamp: new Date().toISOString() },
       });
 
-      setSuccess('User promoted to admin successfully');
+      setSuccess("User promoted to admin successfully");
       await fetchUsers();
     } catch (err) {
       setError(`Error promoting user: ${err}`);
@@ -156,8 +176,8 @@ export const AdminUserManagement: React.FC = () => {
       setDemoting(userId);
       setError(null);
 
-      const { error } = await authSupabase.rpc('demote_from_admin' as any, {
-        target_user_id: userId
+      const { error } = await authSupabase.rpc("demote_from_admin" as any, {
+        target_user_id: userId,
       });
 
       if (error) {
@@ -166,13 +186,13 @@ export const AdminUserManagement: React.FC = () => {
       }
 
       // Log the admin action
-      await authSupabase.rpc('log_admin_action' as any, {
-        action_type: 'demote_from_admin',
+      await authSupabase.rpc("log_admin_action" as any, {
+        action_type: "demote_from_admin",
         target_user_id: userId,
-        action_details: { timestamp: new Date().toISOString() }
+        action_details: { timestamp: new Date().toISOString() },
       });
 
-      setSuccess('User demoted from admin successfully');
+      setSuccess("User demoted from admin successfully");
       await fetchUsers();
     } catch (err) {
       setError(`Error demoting user: ${err}`);
@@ -183,7 +203,7 @@ export const AdminUserManagement: React.FC = () => {
 
   const bootstrapFirstAdmin = async () => {
     if (!bootstrapEmail.trim()) {
-      setError('Please enter an email address');
+      setError("Please enter an email address");
       return;
     }
 
@@ -191,8 +211,8 @@ export const AdminUserManagement: React.FC = () => {
       setBootstrapLoading(true);
       setError(null);
 
-      const { error } = await authSupabase.rpc('bootstrap_first_admin' as any, {
-        admin_email: bootstrapEmail.trim()
+      const { error } = await authSupabase.rpc("bootstrap_first_admin" as any, {
+        admin_email: bootstrapEmail.trim(),
       });
 
       if (error) {
@@ -200,8 +220,8 @@ export const AdminUserManagement: React.FC = () => {
         return;
       }
 
-      setSuccess('First admin created successfully');
-      setBootstrapEmail('');
+      setSuccess("First admin created successfully");
+      setBootstrapEmail("");
       await fetchUsers();
     } catch (err) {
       setError(`Error creating admin: ${err}`);
@@ -212,7 +232,7 @@ export const AdminUserManagement: React.FC = () => {
 
   const manualVerifyEmail = async () => {
     if (!verifyEmail.trim()) {
-      setError('Please enter an email address to verify');
+      setError("Please enter an email address to verify");
       return;
     }
 
@@ -220,8 +240,8 @@ export const AdminUserManagement: React.FC = () => {
       setVerifyLoading(true);
       setError(null);
 
-      const { error } = await authSupabase.rpc('manual_verify_user_email' as any, {
-        target_email: verifyEmail.trim()
+      const { error } = await authSupabase.rpc("manual_verify_user_email" as any, {
+        target_email: verifyEmail.trim(),
       });
 
       if (error) {
@@ -230,7 +250,7 @@ export const AdminUserManagement: React.FC = () => {
       }
 
       setSuccess(`Email ${verifyEmail} has been manually verified successfully`);
-      setVerifyEmail('');
+      setVerifyEmail("");
       await fetchUsers();
     } catch (err) {
       setError(`Error verifying email: ${err}`);
@@ -239,18 +259,17 @@ export const AdminUserManagement: React.FC = () => {
     }
   };
 
-
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
-  const hasAdmins = users.some(user => user.role === 'admin');
+  const hasAdmins = users.some((user) => user.role === "admin");
 
   return (
     <div className="space-y-6">
@@ -289,17 +308,41 @@ export const AdminUserManagement: React.FC = () => {
             <CardContent className="space-y-3">
               <div className="space-y-2">
                 <Label htmlFor="invite-email">Email</Label>
-                <Input id="invite-email" type="email" placeholder="person@example.com" value={inviteEmail} onChange={(e) => setInviteEmail(e.target.value)} />
+                <Input
+                  id="invite-email"
+                  type="email"
+                  placeholder="person@example.com"
+                  value={inviteEmail}
+                  onChange={(e) => setInviteEmail(e.target.value)}
+                />
               </div>
               <Button onClick={createInvite} disabled={inviteLoading} className="w-full">
-                {inviteLoading ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" />Creating...</> : 'Create Invite'}
+                {inviteLoading ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Creating...
+                  </>
+                ) : (
+                  "Create Invite"
+                )}
               </Button>
               {inviteToken && (
                 <div className="space-y-2">
                   <Label>Invite Link</Label>
                   <div className="flex items-center gap-2">
-                    <Input readOnly value={`${window.location.origin}/admin/accept-invite?token=${inviteToken}`} />
-                    <Button type="button" variant="outline" onClick={() => navigator.clipboard.writeText(`${window.location.origin}/admin/accept-invite?token=${inviteToken}`)}>
+                    <Input
+                      readOnly
+                      value={`${window.location.origin}/admin/accept-invite?token=${inviteToken}`}
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={() =>
+                        navigator.clipboard.writeText(
+                          `${window.location.origin}/admin/accept-invite?token=${inviteToken}`
+                        )
+                      }
+                    >
                       <LinkIcon className="h-4 w-4" />
                     </Button>
                   </div>
@@ -317,22 +360,37 @@ export const AdminUserManagement: React.FC = () => {
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="flex justify-end">
-                <Button size="sm" variant="outline" onClick={fetchInvites} disabled={invitesLoading}>
-                  {invitesLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Refresh'}
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={fetchInvites}
+                  disabled={invitesLoading}
+                >
+                  {invitesLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Refresh"}
                 </Button>
               </div>
               {invites.length === 0 ? (
                 <div className="text-sm text-muted-foreground">No pending invites.</div>
               ) : (
                 <div className="space-y-2">
-                  {invites.filter(inv => !inv.accepted).map((inv) => (<div key={inv.id} className="flex items-center justify-between text-sm">
-                    <div>
-                      <span className="font-medium">{inv.email}</span>
-                      <span className="text-muted-foreground ml-2">expires {new Date(inv.expires_at).toLocaleDateString()}</span>
-                    </div>
-                    <Link to={`/admin/accept-invite?token=${inv.token}`} className="text-primary hover:underline">Open link</Link>
-                  </div>
-                  ))}
+                  {invites
+                    .filter((inv) => !inv.accepted)
+                    .map((inv) => (
+                      <div key={inv.id} className="flex items-center justify-between text-sm">
+                        <div>
+                          <span className="font-medium">{inv.email}</span>
+                          <span className="text-muted-foreground ml-2">
+                            expires {new Date(inv.expires_at).toLocaleDateString()}
+                          </span>
+                        </div>
+                        <Link
+                          to={`/admin/accept-invite?token=${inv.token}`}
+                          className="text-primary hover:underline"
+                        >
+                          Open link
+                        </Link>
+                      </div>
+                    ))}
                 </div>
               )}
             </CardContent>
@@ -368,7 +426,7 @@ export const AdminUserManagement: React.FC = () => {
                       Creating Admin...
                     </>
                   ) : (
-                    'Create First Admin'
+                    "Create First Admin"
                   )}
                 </Button>
               </CardContent>
@@ -416,21 +474,11 @@ export const AdminUserManagement: React.FC = () => {
             </CardContent>
           </Card>
 
-
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-semibold">All Users</h3>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={fetchUsers}
-                disabled={loading}
-              >
-                {loading ? (
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                ) : (
-                  'Refresh'
-                )}
+              <Button variant="outline" size="sm" onClick={fetchUsers} disabled={loading}>
+                {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Refresh"}
               </Button>
             </div>
 
@@ -447,8 +495,8 @@ export const AdminUserManagement: React.FC = () => {
                         <div className="space-y-1">
                           <div className="flex items-center gap-2">
                             <span className="font-medium">{user.email}</span>
-                            <Badge variant={user.role === 'admin' ? 'default' : 'secondary'}>
-                              {user.role === 'admin' ? (
+                            <Badge variant={user.role === "admin" ? "default" : "secondary"}>
+                              {user.role === "admin" ? (
                                 <>
                                   <Shield className="mr-1 h-3 w-3" />
                                   Admin
@@ -472,12 +520,14 @@ export const AdminUserManagement: React.FC = () => {
                         </div>
 
                         <div className="flex gap-2">
-                          {user.role === 'admin' ? (
+                          {user.role === "admin" ? (
                             <Button
                               variant="outline"
                               size="sm"
                               onClick={() => demoteFromAdmin(user.user_id)}
-                              disabled={demoting === user.user_id || user.user_id === profile?.user_id}
+                              disabled={
+                                demoting === user.user_id || user.user_id === profile?.user_id
+                              }
                             >
                               {demoting === user.user_id ? (
                                 <Loader2 className="mr-1 h-3 w-3 animate-spin" />
@@ -508,9 +558,7 @@ export const AdminUserManagement: React.FC = () => {
                 ))}
 
                 {users.length === 0 && (
-                  <div className="text-center py-8 text-muted-foreground">
-                    No users found.
-                  </div>
+                  <div className="text-center py-8 text-muted-foreground">No users found.</div>
                 )}
               </div>
             )}

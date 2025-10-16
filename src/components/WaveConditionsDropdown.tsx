@@ -1,13 +1,13 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
-import { Waves, Check, ChevronDown } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { useDraftState } from '@/hooks/useDraftState';
-import { useIsMobile } from '@/hooks/use-mobile';
-import { FilterState } from '@/hooks/useUrlState';
-import { analytics } from '@/lib/analytics';
-import { createFilterApplyEvent, createFilterClearEvent } from '@/lib/analyticsEvents';
+import { useState, useRef, useEffect, useCallback } from "react";
+import { Waves, Check, ChevronDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { useDraftState } from "@/hooks/useDraftState";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { FilterState } from "@/hooks/useUrlState";
+import { analytics } from "@/lib/analytics";
+import { createFilterApplyEvent, createFilterClearEvent } from "@/lib/analyticsEvents";
 
 interface WaveConditionsDropdownProps {
   filters: FilterState;
@@ -18,10 +18,10 @@ interface WaveConditionsDropdownProps {
 }
 
 const waveConditionsOptions = [
-  { value: 'CALM', label: 'Calm' },
-  { value: 'MODERATE', label: 'Moderate' },
-  { value: 'WAVY', label: 'Wavy' },
-  { value: 'SURFABLE', label: 'Surfable' },
+  { value: "CALM", label: "Calm" },
+  { value: "MODERATE", label: "Moderate" },
+  { value: "WAVY", label: "Wavy" },
+  { value: "SURFABLE", label: "Surfable" },
 ];
 
 export default function WaveConditionsDropdown({
@@ -46,33 +46,40 @@ export default function WaveConditionsDropdown({
   }, []);
 
   // Toggle wave condition in draft state
-  const toggleWaveConditionDraft = useCallback((waveConditionValue: string) => {
-    const newWaveConditions = draftFilters.waveConditions.includes(waveConditionValue)
-      ? draftFilters.waveConditions.filter(value => value !== waveConditionValue)
-      : [...draftFilters.waveConditions, waveConditionValue];
-    updateDraft({ waveConditions: newWaveConditions });
-  }, [draftFilters.waveConditions, updateDraft]);
+  const toggleWaveConditionDraft = useCallback(
+    (waveConditionValue: string) => {
+      const newWaveConditions = draftFilters.waveConditions.includes(waveConditionValue)
+        ? draftFilters.waveConditions.filter((value) => value !== waveConditionValue)
+        : [...draftFilters.waveConditions, waveConditionValue];
+      updateDraft({ waveConditions: newWaveConditions });
+    },
+    [draftFilters.waveConditions, updateDraft]
+  );
 
   // Apply draft changes and close
   const handleApply = useCallback(() => {
     // Track analytics for filter changes
     const previousWaveConditions = filters.waveConditions;
     const newWaveConditions = draftFilters.waveConditions;
-    
+
     // Track individual wave condition changes
-    const addedWaveConditions = newWaveConditions.filter(wave => !previousWaveConditions.includes(wave));
-    const removedWaveConditions = previousWaveConditions.filter(wave => !newWaveConditions.includes(wave));
-    
+    const addedWaveConditions = newWaveConditions.filter(
+      (wave) => !previousWaveConditions.includes(wave)
+    );
+    const removedWaveConditions = previousWaveConditions.filter(
+      (wave) => !newWaveConditions.includes(wave)
+    );
+
     // Emit filter_apply events for added wave conditions
-    addedWaveConditions.forEach(wave => {
-      analytics.event('filter_apply', createFilterApplyEvent('wave_conditions', wave, resultCount));
+    addedWaveConditions.forEach((wave) => {
+      analytics.event("filter_apply", createFilterApplyEvent("wave_conditions", wave, resultCount));
     });
-    
+
     // Emit filter_clear events for removed wave conditions
-    removedWaveConditions.forEach(wave => {
-      analytics.event('filter_clear', createFilterClearEvent('wave_conditions'));
+    removedWaveConditions.forEach((wave) => {
+      analytics.event("filter_clear", createFilterClearEvent("wave_conditions"));
     });
-    
+
     onFiltersChange(draftFilters);
     setIsOpen(false);
     triggerRef.current?.focus();
@@ -82,46 +89,47 @@ export default function WaveConditionsDropdown({
   const handleReset = useCallback(() => {
     // Track analytics for clearing all wave conditions
     if (draftFilters.waveConditions.length > 0) {
-      analytics.event('filter_clear', createFilterClearEvent('wave_conditions'));
+      analytics.event("filter_clear", createFilterClearEvent("wave_conditions"));
     }
     updateDraft({ waveConditions: [] });
   }, [updateDraft, draftFilters.waveConditions.length]);
 
   // Keyboard navigation
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    if (!isOpen) return;
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (!isOpen) return;
 
-    switch (e.key) {
-      case 'Escape':
-        setIsOpen(false);
-        triggerRef.current?.focus();
-        break;
-      case 'ArrowDown':
-        e.preventDefault();
-        setFocusedIndex(prev => 
-          prev < waveConditionsOptions.length - 1 ? prev + 1 : 0
-        );
-        break;
-      case 'ArrowUp':
-        e.preventDefault();
-        setFocusedIndex(prev => 
-          prev > 0 ? prev - 1 : waveConditionsOptions.length - 1
-        );
-        break;
-      case 'Enter':
-      case ' ':
-        e.preventDefault();
-        if (focusedIndex >= 0 && focusedIndex < waveConditionsOptions.length) {
-          toggleWaveConditionDraft(waveConditionsOptions[focusedIndex].value);
-        }
-        break;
-    }
-  }, [isOpen, focusedIndex, toggleWaveConditionDraft]);
+      switch (e.key) {
+        case "Escape":
+          setIsOpen(false);
+          triggerRef.current?.focus();
+          break;
+        case "ArrowDown":
+          e.preventDefault();
+          setFocusedIndex((prev) => (prev < waveConditionsOptions.length - 1 ? prev + 1 : 0));
+          break;
+        case "ArrowUp":
+          e.preventDefault();
+          setFocusedIndex((prev) => (prev > 0 ? prev - 1 : waveConditionsOptions.length - 1));
+          break;
+        case "Enter":
+        case " ":
+          e.preventDefault();
+          if (focusedIndex >= 0 && focusedIndex < waveConditionsOptions.length) {
+            toggleWaveConditionDraft(waveConditionsOptions[focusedIndex].value);
+          }
+          break;
+      }
+    },
+    [isOpen, focusedIndex, toggleWaveConditionDraft]
+  );
 
   // Focus management
   useEffect(() => {
     if (isOpen && listRef.current) {
-      const focusedElement = listRef.current.querySelector(`[data-index="${focusedIndex}"]`) as HTMLElement;
+      const focusedElement = listRef.current.querySelector(
+        `[data-index="${focusedIndex}"]`
+      ) as HTMLElement;
       focusedElement?.focus();
     }
   }, [isOpen, focusedIndex]);
@@ -145,25 +153,25 @@ export default function WaveConditionsDropdown({
           variant={appliedCount > 0 ? "default" : "ghost"}
           size="sm"
           onClick={handleTriggerClick}
-            className={`px-3 py-2 rounded-xl h-auto min-h-[40px] whitespace-nowrap flex-shrink-0 border-2 shadow-md hover:shadow-lg ${
-              appliedCount > 0 ? 'border-transparent' : 'text-foreground bg-muted/65 border-muted'
-            }`}
+          className={`px-3 py-2 rounded-xl h-auto min-h-[40px] whitespace-nowrap flex-shrink-0 border-2 shadow-md hover:shadow-lg ${
+            appliedCount > 0 ? "border-transparent" : "text-foreground bg-muted/65 border-muted"
+          }`}
           aria-expanded={isOpen}
           aria-haspopup="listbox"
           aria-controls="wave-conditions-listbox"
-          aria-label={appliedCount > 0 ? `Wave conditions, ${appliedCount} selected` : 'Wave conditions'}
+          aria-label={
+            appliedCount > 0 ? `Wave conditions, ${appliedCount} selected` : "Wave conditions"
+          }
           data-testid="wave-conditions-trigger"
           id="wave-conditions-trigger"
         >
-            <Waves className="h-4 w-4 mr-2" />
-            <span className="hidden sm:inline">Wave conditions</span>
-            <span className="sm:hidden">Waves</span>
-            <div className="ml-1 h-4 w-1 flex items-center justify-center">
-              {appliedCount > 0 && (
-                <span className="text-xs">{appliedCount}</span>
-              )}
-            </div>
-            <ChevronDown className="h-4 w-4 ml-2 flex-shrink-0" />
+          <Waves className="h-4 w-4 mr-2" />
+          <span className="hidden sm:inline">Wave conditions</span>
+          <span className="sm:hidden">Waves</span>
+          <div className="ml-1 h-4 w-1 flex items-center justify-center">
+            {appliedCount > 0 && <span className="text-xs">{appliedCount}</span>}
+          </div>
+          <ChevronDown className="h-4 w-4 ml-2 flex-shrink-0" />
         </Button>
       </PopoverTrigger>
       <PopoverContent
@@ -174,7 +182,7 @@ export default function WaveConditionsDropdown({
         id="wave-conditions-panel"
       >
         {/* List */}
-        <div 
+        <div
           ref={listRef}
           className="max-h-80 overflow-y-auto"
           role="listbox"
@@ -184,23 +192,21 @@ export default function WaveConditionsDropdown({
           {waveConditionsOptions.map((option, index) => {
             const isSelected = draftFilters.waveConditions.includes(option.value);
             const isFocused = focusedIndex === index;
-            
+
             return (
               <button
                 key={option.value}
                 data-index={index}
                 onClick={() => toggleWaveConditionDraft(option.value)}
                 className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors min-h-[44px] ${
-                  isSelected ? 'bg-muted/30' : ''
-                } ${isFocused ? 'ring-2 ring-ring ring-offset-1' : ''}`}
+                  isSelected ? "bg-muted/30" : ""
+                } ${isFocused ? "ring-2 ring-ring ring-offset-1" : ""}`}
                 role="option"
                 aria-selected={isSelected}
                 tabIndex={-1}
               >
                 <span className="text-sm font-medium">{option.label}</span>
-                {isSelected && (
-                  <Check className="h-4 w-4 text-secondary" />
-                )}
+                {isSelected && <Check className="h-4 w-4 text-secondary" />}
               </button>
             );
           })}
@@ -209,19 +215,10 @@ export default function WaveConditionsDropdown({
         {/* Sticky Footer */}
         <div className="p-4 pb-8 border-t bg-background sticky bottom-0 rounded-b-md pb-[max(2rem,env(safe-area-inset-bottom))]">
           <div className="flex gap-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleReset}
-              className="flex-1 min-h-[44px]"
-            >
+            <Button variant="ghost" size="sm" onClick={handleReset} className="flex-1 min-h-[44px]">
               Reset
             </Button>
-            <Button
-              size="sm"
-              onClick={handleApply}
-              className="flex-1 min-h-[44px]"
-            >
+            <Button size="sm" onClick={handleApply} className="flex-1 min-h-[44px]">
               Apply
             </Button>
           </div>

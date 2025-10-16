@@ -3,9 +3,9 @@
  * Reusable utilities for testing NLP components
  */
 
-import { describe, it, expect } from 'vitest';
-import { EnhancedExtractionResult, SearchContext } from '@/lib/nlp';
-import { FilterState } from '@/hooks/useUrlState';
+import { describe, it, expect } from "vitest";
+import { EnhancedExtractionResult, SearchContext } from "@/lib/nlp";
+import { FilterState } from "@/hooks/useUrlState";
 
 /**
  * Test assertion helpers for NLP results
@@ -19,18 +19,20 @@ export class NLPTestHelpers {
     expectedFilters: Partial<FilterState>,
     description?: string
   ): void {
-    const context = description ? ` (${description})` : '';
-    
+    const context = description ? ` (${description})` : "";
+
     // Check each expected filter
     Object.entries(expectedFilters).forEach(([key, expectedValue]) => {
       const actualValue = result.filters[key as keyof FilterState];
-      
+
       if (Array.isArray(expectedValue)) {
-        expect(actualValue, `Filter ${key} should match expected array${context}`)
-          .toEqual(expect.arrayContaining(expectedValue));
+        expect(actualValue, `Filter ${key} should match expected array${context}`).toEqual(
+          expect.arrayContaining(expectedValue)
+        );
       } else {
-        expect(actualValue, `Filter ${key} should match expected value${context}`)
-          .toBe(expectedValue);
+        expect(actualValue, `Filter ${key} should match expected value${context}`).toBe(
+          expectedValue
+        );
       }
     });
   }
@@ -43,9 +45,10 @@ export class NLPTestHelpers {
     expectedLocation: string,
     description?: string
   ): void {
-    const context = description ? ` (${description})` : '';
-    expect(result.place, `Should extract location: ${expectedLocation}${context}`)
-      .toBe(expectedLocation);
+    const context = description ? ` (${description})` : "";
+    expect(result.place, `Should extract location: ${expectedLocation}${context}`).toBe(
+      expectedLocation
+    );
   }
 
   /**
@@ -56,12 +59,13 @@ export class NLPTestHelpers {
     expectedEntityTypes: string[],
     description?: string
   ): void {
-    const context = description ? ` (${description})` : '';
-    const actualEntityTypes = result.entities.all.map(e => e.type);
-    
-    expectedEntityTypes.forEach(entityType => {
-      expect(actualEntityTypes, `Should contain entity type: ${entityType}${context}`)
-        .toContain(entityType);
+    const context = description ? ` (${description})` : "";
+    const actualEntityTypes = result.entities.all.map((e) => e.type);
+
+    expectedEntityTypes.forEach((entityType) => {
+      expect(actualEntityTypes, `Should contain entity type: ${entityType}${context}`).toContain(
+        entityType
+      );
     });
   }
 
@@ -70,18 +74,20 @@ export class NLPTestHelpers {
    */
   static assertSentiment(
     result: EnhancedExtractionResult,
-    expectedPolarity: 'positive' | 'negative' | 'neutral',
-    expectedIntent?: 'search' | 'preference' | 'question' | 'complaint' | 'praise',
+    expectedPolarity: "positive" | "negative" | "neutral",
+    expectedIntent?: "search" | "preference" | "question" | "complaint" | "praise",
     description?: string
   ): void {
-    const context = description ? ` (${description})` : '';
-    
-    expect(result.sentiment.polarity, `Should have ${expectedPolarity} sentiment${context}`)
-      .toBe(expectedPolarity);
-    
+    const context = description ? ` (${description})` : "";
+
+    expect(result.sentiment.polarity, `Should have ${expectedPolarity} sentiment${context}`).toBe(
+      expectedPolarity
+    );
+
     if (expectedIntent) {
-      expect(result.sentiment.intent, `Should have ${expectedIntent} intent${context}`)
-        .toBe(expectedIntent);
+      expect(result.sentiment.intent, `Should have ${expectedIntent} intent${context}`).toBe(
+        expectedIntent
+      );
     }
   }
 
@@ -93,9 +99,11 @@ export class NLPTestHelpers {
     minConfidence: number = 0.5,
     description?: string
   ): void {
-    const context = description ? ` (${description})` : '';
-    expect(result.confidence, `Should have confidence >= ${minConfidence}${context}`)
-      .toBeGreaterThanOrEqual(minConfidence);
+    const context = description ? ` (${description})` : "";
+    expect(
+      result.confidence,
+      `Should have confidence >= ${minConfidence}${context}`
+    ).toBeGreaterThanOrEqual(minConfidence);
   }
 
   /**
@@ -106,9 +114,11 @@ export class NLPTestHelpers {
     maxTimeMs: number = 100,
     description?: string
   ): void {
-    const context = description ? ` (${description})` : '';
-    expect(result.processingTime, `Should process within ${maxTimeMs}ms${context}`)
-      .toBeLessThanOrEqual(maxTimeMs);
+    const context = description ? ` (${description})` : "";
+    expect(
+      result.processingTime,
+      `Should process within ${maxTimeMs}ms${context}`
+    ).toBeLessThanOrEqual(maxTimeMs);
   }
 
   /**
@@ -119,16 +129,16 @@ export class NLPTestHelpers {
     shouldHaveSuggestions: boolean = true,
     description?: string
   ): void {
-    const context = description ? ` (${description})` : '';
-    
+    const context = description ? ` (${description})` : "";
+
     if (shouldHaveSuggestions) {
-      expect(result.suggestions, `Should provide suggestions${context}`)
-        .toBeDefined();
-      expect(result.suggestions!.length, `Should have at least one suggestion${context}`)
-        .toBeGreaterThan(0);
+      expect(result.suggestions, `Should provide suggestions${context}`).toBeDefined();
+      expect(
+        result.suggestions!.length,
+        `Should have at least one suggestion${context}`
+      ).toBeGreaterThan(0);
     } else {
-      expect(result.suggestions, `Should not provide suggestions${context}`)
-        .toBeUndefined();
+      expect(result.suggestions, `Should not provide suggestions${context}`).toBeUndefined();
     }
   }
 }
@@ -142,11 +152,11 @@ export class TestDataGenerators {
    */
   static createSearchContext(overrides: Partial<SearchContext> = {}): SearchContext {
     return {
-      userPreferences: ['family-friendly', 'calm waters'],
-      timeOfDay: 'morning',
-      season: 'summer',
-      location: 'crete',
-      ...overrides
+      userPreferences: ["family-friendly", "calm waters"],
+      timeOfDay: "morning",
+      season: "summer",
+      location: "crete",
+      ...overrides,
     };
   }
 
@@ -155,7 +165,7 @@ export class TestDataGenerators {
    */
   static createFilterState(overrides: Partial<FilterState> = {}): FilterState {
     return {
-      search: '',
+      search: "",
       location: undefined,
       locations: undefined,
       organized: [],
@@ -164,34 +174,36 @@ export class TestDataGenerators {
       amenities: [],
       waveConditions: [],
       type: [],
-      sort: 'name.asc',
+      sort: "name.asc",
       page: 1,
       nearMe: false,
-      ...overrides
+      ...overrides,
     };
   }
 
   /**
    * Generate a mock extraction result
    */
-  static createMockExtractionResult(overrides: Partial<EnhancedExtractionResult> = {}): EnhancedExtractionResult {
+  static createMockExtractionResult(
+    overrides: Partial<EnhancedExtractionResult> = {}
+  ): EnhancedExtractionResult {
     return {
       filters: {},
-      originalQuery: 'test query',
-      cleanedSearchTerm: 'test query',
+      originalQuery: "test query",
+      cleanedSearchTerm: "test query",
       confidence: 0.8,
       sentiment: {
-        polarity: 'neutral',
+        polarity: "neutral",
         confidence: 0.7,
-        intent: 'search',
-        intensity: 'low',
-        keywords: []
+        intent: "search",
+        intensity: "low",
+        keywords: [],
       },
       intent: {
-        primaryIntent: 'search',
+        primaryIntent: "search",
         secondaryIntents: [],
         confidence: 0.7,
-        modifiers: []
+        modifiers: [],
       },
       entities: {
         places: [],
@@ -200,19 +212,19 @@ export class TestDataGenerators {
         waveConditions: [],
         parking: [],
         organization: [],
-        all: []
+        all: [],
       },
       locationExtraction: {
         primaryLocation: undefined,
         secondaryLocations: [],
         allLocations: [],
-        locationQuery: 'test query',
+        locationQuery: "test query",
         confidence: 0.7,
-        searchStrategy: 'exact',
-        remainingQuery: 'test query'
+        searchStrategy: "exact",
+        remainingQuery: "test query",
       },
       processingTime: 10,
-      ...overrides
+      ...overrides,
     };
   }
 }
@@ -240,18 +252,18 @@ export class TestExecutionHelpers {
     delayMs: number = 100
   ): Promise<T> {
     let lastError: Error | undefined;
-    
+
     for (let i = 0; i < maxRetries; i++) {
       try {
         return await fn();
       } catch (error) {
         lastError = error as Error;
         if (i < maxRetries - 1) {
-          await new Promise(resolve => setTimeout(resolve, delayMs));
+          await new Promise((resolve) => setTimeout(resolve, delayMs));
         }
       }
     }
-    
+
     throw lastError;
   }
 
@@ -266,55 +278,62 @@ export class TestExecutionHelpers {
       expected: Partial<FilterState>;
       expectedLocation?: string;
       expectedEntities?: string[];
-      expectedSentiment?: 'positive' | 'negative' | 'neutral';
-      expectedIntent?: 'search' | 'preference' | 'question' | 'complaint' | 'praise';
+      expectedSentiment?: "positive" | "negative" | "neutral";
+      expectedIntent?: "search" | "preference" | "question" | "complaint" | "praise";
       minConfidence?: number;
       maxTimeMs?: number;
     }>,
     testFn: (query: string) => Promise<EnhancedExtractionResult>
   ): void {
     describe(categoryName, () => {
-      queries.forEach(({ 
-        query, 
-        description, 
-        expected, 
-        expectedLocation,
-        expectedEntities,
-        expectedSentiment,
-        expectedIntent,
-        minConfidence = 0.5,
-        maxTimeMs = 100
-      }) => {
-        it(`should handle: "${query}" - ${description}`, async () => {
-          const result = await testFn(query);
-          
-          // Assert filters
-          if (Object.keys(expected).length > 0) {
-            NLPTestHelpers.assertFilters(result, expected, description);
-          }
-          
-          // Assert location
-          if (expectedLocation) {
-            NLPTestHelpers.assertLocation(result, expectedLocation, description);
-          }
-          
-          // Assert entities
-          if (expectedEntities && expectedEntities.length > 0) {
-            NLPTestHelpers.assertEntities(result, expectedEntities, description);
-          }
-          
-          // Assert sentiment
-          if (expectedSentiment) {
-            NLPTestHelpers.assertSentiment(result, expectedSentiment, expectedIntent, description);
-          }
-          
-          // Assert confidence
-          NLPTestHelpers.assertConfidence(result, minConfidence, description);
-          
-          // Assert performance
-          NLPTestHelpers.assertPerformance(result, maxTimeMs, description);
-        });
-      });
+      queries.forEach(
+        ({
+          query,
+          description,
+          expected,
+          expectedLocation,
+          expectedEntities,
+          expectedSentiment,
+          expectedIntent,
+          minConfidence = 0.5,
+          maxTimeMs = 100,
+        }) => {
+          it(`should handle: "${query}" - ${description}`, async () => {
+            const result = await testFn(query);
+
+            // Assert filters
+            if (Object.keys(expected).length > 0) {
+              NLPTestHelpers.assertFilters(result, expected, description);
+            }
+
+            // Assert location
+            if (expectedLocation) {
+              NLPTestHelpers.assertLocation(result, expectedLocation, description);
+            }
+
+            // Assert entities
+            if (expectedEntities && expectedEntities.length > 0) {
+              NLPTestHelpers.assertEntities(result, expectedEntities, description);
+            }
+
+            // Assert sentiment
+            if (expectedSentiment) {
+              NLPTestHelpers.assertSentiment(
+                result,
+                expectedSentiment,
+                expectedIntent,
+                description
+              );
+            }
+
+            // Assert confidence
+            NLPTestHelpers.assertConfidence(result, minConfidence, description);
+
+            // Assert performance
+            NLPTestHelpers.assertPerformance(result, maxTimeMs, description);
+          });
+        }
+      );
     });
   }
 }
@@ -327,8 +346,8 @@ export const TestPatterns = {
    * Test that a function handles empty input gracefully
    */
   emptyInput: (fn: (input: string) => Promise<any>) => {
-    it('should handle empty input gracefully', async () => {
-      const result = await fn('');
+    it("should handle empty input gracefully", async () => {
+      const result = await fn("");
       expect(result).toBeDefined();
     });
   },
@@ -337,12 +356,12 @@ export const TestPatterns = {
    * Test that a function handles null/undefined input gracefully
    */
   nullInput: (fn: (input: string | null | undefined) => Promise<any>) => {
-    it('should handle null input gracefully', async () => {
+    it("should handle null input gracefully", async () => {
       const result = await fn(null as any);
       expect(result).toBeDefined();
     });
-    
-    it('should handle undefined input gracefully', async () => {
+
+    it("should handle undefined input gracefully", async () => {
       const result = await fn(undefined as any);
       expect(result).toBeDefined();
     });
@@ -352,8 +371,8 @@ export const TestPatterns = {
    * Test that a function handles very long input
    */
   longInput: (fn: (input: string) => Promise<any>) => {
-    it('should handle very long input', async () => {
-      const longInput = 'beach '.repeat(1000);
+    it("should handle very long input", async () => {
+      const longInput = "beach ".repeat(1000);
       const result = await fn(longInput);
       expect(result).toBeDefined();
     });
@@ -363,12 +382,12 @@ export const TestPatterns = {
    * Test that a function handles special characters
    */
   specialCharacters: (fn: (input: string) => Promise<any>) => {
-    it('should handle special characters', async () => {
-      const specialInput = 'beach!@#$%^&*()_+-=[]{}|;:,.<>?';
+    it("should handle special characters", async () => {
+      const specialInput = "beach!@#$%^&*()_+-=[]{}|;:,.<>?";
       const result = await fn(specialInput);
       expect(result).toBeDefined();
     });
-  }
+  },
 };
 
 /**
@@ -383,17 +402,17 @@ export class PerformanceTestHelpers {
     iterations: number = 10
   ): Promise<{ avgTimeMs: number; minTimeMs: number; maxTimeMs: number }> {
     const times: number[] = [];
-    
+
     for (let i = 0; i < iterations; i++) {
       const start = Date.now();
       await fn();
       times.push(Date.now() - start);
     }
-    
+
     return {
       avgTimeMs: times.reduce((a, b) => a + b, 0) / times.length,
       minTimeMs: Math.min(...times),
-      maxTimeMs: Math.max(...times)
+      maxTimeMs: Math.max(...times),
     };
   }
 
@@ -406,8 +425,10 @@ export class PerformanceTestHelpers {
     iterations: number = 10
   ): Promise<void> {
     return PerformanceTestHelpers.benchmark(fn, iterations).then(({ avgTimeMs }) => {
-      expect(avgTimeMs, `Average execution time should be <= ${maxAvgTimeMs}ms`)
-        .toBeLessThanOrEqual(maxAvgTimeMs);
+      expect(
+        avgTimeMs,
+        `Average execution time should be <= ${maxAvgTimeMs}ms`
+      ).toBeLessThanOrEqual(maxAvgTimeMs);
     });
   }
 }

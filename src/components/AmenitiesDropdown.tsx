@@ -1,13 +1,13 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
-import { Sun, Check, ChevronDown } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { useDraftState } from '@/hooks/useDraftState';
-import { FilterState } from '@/hooks/useUrlState';
-import { getAllAmenities } from '@/lib/amenities';
-import { analytics } from '@/lib/analytics';
-import { createFilterApplyEvent, createFilterClearEvent } from '@/lib/analyticsEvents';
+import { useState, useRef, useEffect, useCallback } from "react";
+import { Sun, Check, ChevronDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { useDraftState } from "@/hooks/useDraftState";
+import { FilterState } from "@/hooks/useUrlState";
+import { getAllAmenities } from "@/lib/amenities";
+import { analytics } from "@/lib/analytics";
+import { createFilterApplyEvent, createFilterClearEvent } from "@/lib/analyticsEvents";
 
 interface AmenitiesDropdownProps {
   filters: FilterState;
@@ -41,36 +41,42 @@ export default function AmenitiesDropdown({
   }, []);
 
   // Toggle amenity in draft state
-  const toggleAmenityDraft = useCallback((amenityId: string) => {
-    const newAmenities = draftFilters.amenities.includes(amenityId)
-      ? draftFilters.amenities.filter(id => id !== amenityId)
-      : [...draftFilters.amenities, amenityId];
-    updateDraft({ amenities: newAmenities });
-  }, [draftFilters.amenities, updateDraft]);
+  const toggleAmenityDraft = useCallback(
+    (amenityId: string) => {
+      const newAmenities = draftFilters.amenities.includes(amenityId)
+        ? draftFilters.amenities.filter((id) => id !== amenityId)
+        : [...draftFilters.amenities, amenityId];
+      updateDraft({ amenities: newAmenities });
+    },
+    [draftFilters.amenities, updateDraft]
+  );
 
   // Apply draft changes and close
   const handleApply = useCallback(() => {
     // Track analytics for filter changes
     const previousAmenities = filters.amenities;
     const newAmenities = draftFilters.amenities;
-    
+
     // Track individual amenity changes
-    const addedAmenities = newAmenities.filter(id => !previousAmenities.includes(id));
-    const removedAmenities = previousAmenities.filter(id => !newAmenities.includes(id));
-    
+    const addedAmenities = newAmenities.filter((id) => !previousAmenities.includes(id));
+    const removedAmenities = previousAmenities.filter((id) => !newAmenities.includes(id));
+
     // Emit filter_apply events for added amenities
-    addedAmenities.forEach(amenityId => {
-      const amenity = allAmenities.find(a => a.id === amenityId);
+    addedAmenities.forEach((amenityId) => {
+      const amenity = allAmenities.find((a) => a.id === amenityId);
       if (amenity) {
-        analytics.event('filter_apply', createFilterApplyEvent('amenities', amenityId, resultCount));
+        analytics.event(
+          "filter_apply",
+          createFilterApplyEvent("amenities", amenityId, resultCount)
+        );
       }
     });
-    
+
     // Emit filter_clear events for removed amenities
-    removedAmenities.forEach(amenityId => {
-      analytics.event('filter_clear', createFilterClearEvent('amenities'));
+    removedAmenities.forEach((amenityId) => {
+      analytics.event("filter_clear", createFilterClearEvent("amenities"));
     });
-    
+
     onFiltersChange(draftFilters);
     setIsOpen(false);
     triggerRef.current?.focus();
@@ -80,46 +86,47 @@ export default function AmenitiesDropdown({
   const handleReset = useCallback(() => {
     // Track analytics for clearing all amenities
     if (draftFilters.amenities.length > 0) {
-      analytics.event('filter_clear', createFilterClearEvent('amenities'));
+      analytics.event("filter_clear", createFilterClearEvent("amenities"));
     }
     updateDraft({ amenities: [] });
   }, [updateDraft, draftFilters.amenities.length]);
 
   // Keyboard navigation
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    if (!isOpen) return;
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (!isOpen) return;
 
-    switch (e.key) {
-      case 'Escape':
-        setIsOpen(false);
-        triggerRef.current?.focus();
-        break;
-      case 'ArrowDown':
-        e.preventDefault();
-        setFocusedIndex(prev => 
-          prev < allAmenities.length - 1 ? prev + 1 : 0
-        );
-        break;
-      case 'ArrowUp':
-        e.preventDefault();
-        setFocusedIndex(prev => 
-          prev > 0 ? prev - 1 : allAmenities.length - 1
-        );
-        break;
-      case 'Enter':
-      case ' ':
-        e.preventDefault();
-        if (focusedIndex >= 0 && focusedIndex < allAmenities.length) {
-          toggleAmenityDraft(allAmenities[focusedIndex].id);
-        }
-        break;
-    }
-  }, [isOpen, focusedIndex, toggleAmenityDraft]);
+      switch (e.key) {
+        case "Escape":
+          setIsOpen(false);
+          triggerRef.current?.focus();
+          break;
+        case "ArrowDown":
+          e.preventDefault();
+          setFocusedIndex((prev) => (prev < allAmenities.length - 1 ? prev + 1 : 0));
+          break;
+        case "ArrowUp":
+          e.preventDefault();
+          setFocusedIndex((prev) => (prev > 0 ? prev - 1 : allAmenities.length - 1));
+          break;
+        case "Enter":
+        case " ":
+          e.preventDefault();
+          if (focusedIndex >= 0 && focusedIndex < allAmenities.length) {
+            toggleAmenityDraft(allAmenities[focusedIndex].id);
+          }
+          break;
+      }
+    },
+    [isOpen, focusedIndex, toggleAmenityDraft]
+  );
 
   // Focus management
   useEffect(() => {
     if (isOpen && listRef.current) {
-      const focusedElement = listRef.current.querySelector(`[data-index="${focusedIndex}"]`) as HTMLElement;
+      const focusedElement = listRef.current.querySelector(
+        `[data-index="${focusedIndex}"]`
+      ) as HTMLElement;
       focusedElement?.focus();
     }
   }, [isOpen, focusedIndex]);
@@ -135,7 +142,6 @@ export default function AmenitiesDropdown({
   const selectedCount = draftFilters.amenities.length;
   const appliedCount = filters.amenities.length;
 
-
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild>
@@ -144,24 +150,22 @@ export default function AmenitiesDropdown({
           variant={appliedCount > 0 ? "default" : "ghost"}
           size="sm"
           onClick={handleTriggerClick}
-            className={`px-3 py-2 rounded-xl h-auto min-h-[40px] whitespace-nowrap flex-shrink-0 border-2 shadow-md hover:shadow-lg ${
-              appliedCount > 0 ? 'border-transparent' : 'text-foreground bg-muted/65 border-muted'
-            }`}
+          className={`px-3 py-2 rounded-xl h-auto min-h-[40px] whitespace-nowrap flex-shrink-0 border-2 shadow-md hover:shadow-lg ${
+            appliedCount > 0 ? "border-transparent" : "text-foreground bg-muted/65 border-muted"
+          }`}
           aria-expanded={isOpen}
           aria-haspopup="listbox"
           aria-controls="amenities-listbox"
-          aria-label={appliedCount > 0 ? `Amenities, ${appliedCount} selected` : 'Amenities'}
+          aria-label={appliedCount > 0 ? `Amenities, ${appliedCount} selected` : "Amenities"}
           data-testid="amenities-trigger"
           id="amenities-trigger"
         >
-            <Sun className="h-4 w-4 mr-2" />
-            Amenities
-            <div className="ml-1 h-4 w-1 flex items-center justify-center">
-              {appliedCount > 0 && (
-                <span className="text-xs">{appliedCount}</span>
-              )}
-            </div>
-            <ChevronDown className="h-4 w-4 ml-2 flex-shrink-0" />
+          <Sun className="h-4 w-4 mr-2" />
+          Amenities
+          <div className="ml-1 h-4 w-1 flex items-center justify-center">
+            {appliedCount > 0 && <span className="text-xs">{appliedCount}</span>}
+          </div>
+          <ChevronDown className="h-4 w-4 ml-2 flex-shrink-0" />
         </Button>
       </PopoverTrigger>
       <PopoverContent
@@ -172,7 +176,7 @@ export default function AmenitiesDropdown({
         id="amenities-panel"
       >
         {/* List */}
-        <div 
+        <div
           ref={listRef}
           className="max-h-80 overflow-y-auto"
           role="listbox"
@@ -182,23 +186,21 @@ export default function AmenitiesDropdown({
           {allAmenities.map((amenity, index) => {
             const isSelected = draftFilters.amenities.includes(amenity.id);
             const isFocused = focusedIndex === index;
-            
+
             return (
               <button
                 key={amenity.id}
                 data-index={index}
                 onClick={() => toggleAmenityDraft(amenity.id)}
                 className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors min-h-[44px] ${
-                  isSelected ? 'bg-muted/30' : ''
-                } ${isFocused ? 'ring-2 ring-ring ring-offset-1' : ''}`}
+                  isSelected ? "bg-muted/30" : ""
+                } ${isFocused ? "ring-2 ring-ring ring-offset-1" : ""}`}
                 role="option"
                 aria-selected={isSelected}
                 tabIndex={-1}
               >
                 <span className="text-sm font-medium">{amenity.label}</span>
-                {isSelected && (
-                  <Check className="h-4 w-4 text-secondary" />
-                )}
+                {isSelected && <Check className="h-4 w-4 text-secondary" />}
               </button>
             );
           })}
@@ -207,19 +209,10 @@ export default function AmenitiesDropdown({
         {/* Sticky Footer */}
         <div className="p-4 pb-8 border-t bg-background sticky bottom-0 rounded-b-md pb-[max(2rem,env(safe-area-inset-bottom))]">
           <div className="flex gap-2">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleReset}
-              className="flex-1 min-h-[44px]"
-            >
+            <Button variant="ghost" size="sm" onClick={handleReset} className="flex-1 min-h-[44px]">
               Reset
             </Button>
-            <Button
-              size="sm"
-              onClick={handleApply}
-              className="flex-1 min-h-[44px]"
-            >
+            <Button size="sm" onClick={handleApply} className="flex-1 min-h-[44px]">
               Apply
             </Button>
           </div>

@@ -1,4 +1,4 @@
-import type { FilterState } from '@/hooks/useUrlState';
+import type { FilterState } from "@/hooks/useUrlState";
 import {
   FacetKey,
   getAmenitiesPart,
@@ -8,7 +8,7 @@ import {
   getParkingPart,
   getTypePart,
   getWavesPart,
-} from './phrasing';
+} from "./phrasing";
 
 export type ExplanationInput = {
   filters: FilterState;
@@ -21,7 +21,7 @@ export type ReasonPart = {
   text: string;
   facet: FacetKey;
   weight: number;
-  trace: { source: 'filter' | 'derived'; keys: string[] };
+  trace: { source: "filter" | "derived"; keys: string[] };
 };
 
 export type Explanation = {
@@ -32,20 +32,20 @@ export type Explanation = {
 };
 
 const PRIORITY: FacetKey[] = [
-  'location',
-  'type',
-  'blue_flag',
-  'waves',
-  'amenities',
-  'parking',
-  'organization',
-  'other',
+  "location",
+  "type",
+  "blue_flag",
+  "waves",
+  "amenities",
+  "parking",
+  "organization",
+  "other",
 ];
 
 function toSentence(parts: string[]): string {
-  if (parts.length === 0) return '';
+  if (parts.length === 0) return "";
   if (parts.length === 1) return parts[0];
-  return parts.slice(0, -1).join(', ') + ', and ' + parts[parts.length - 1];
+  return parts.slice(0, -1).join(", ") + ", and " + parts[parts.length - 1];
 }
 
 export function buildExplanation(input: ExplanationInput): Explanation {
@@ -53,47 +53,107 @@ export function buildExplanation(input: ExplanationInput): Explanation {
 
   const hasActiveFilters = Boolean(
     filters.search ||
-    filters.location ||
-    (filters.locations && filters.locations.length > 0) ||
-    (filters.organized && filters.organized.length > 0) ||
-    filters.blueFlag ||
-    (filters.parking && filters.parking.length > 0) ||
-    (filters.amenities && filters.amenities.length > 0) ||
-    (filters.waveConditions && filters.waveConditions.length > 0) ||
-    (filters.type && filters.type.length > 0)
+      filters.location ||
+      (filters.locations && filters.locations.length > 0) ||
+      (filters.organized && filters.organized.length > 0) ||
+      filters.blueFlag ||
+      (filters.parking && filters.parking.length > 0) ||
+      (filters.amenities && filters.amenities.length > 0) ||
+      (filters.waveConditions && filters.waveConditions.length > 0) ||
+      (filters.type && filters.type.length > 0)
   );
 
   const base: ReasonPart[] = [];
 
   if (!hasActiveFilters && resultCount > 0) {
-    base.push({ id: 'all', text: 'showing all available beaches', facet: 'other', weight: 0, trace: { source: 'derived', keys: [] } });
+    base.push({
+      id: "all",
+      text: "showing all available beaches",
+      facet: "other",
+      weight: 0,
+      trace: { source: "derived", keys: [] },
+    });
   }
   if (!hasActiveFilters && resultCount === 0) {
-    base.push({ id: 'none', text: 'no beaches found', facet: 'other', weight: 0, trace: { source: 'derived', keys: [] } });
+    base.push({
+      id: "none",
+      text: "no beaches found",
+      facet: "other",
+      weight: 0,
+      trace: { source: "derived", keys: [] },
+    });
   }
 
   const loc = getLocationPart(filters, userLocation);
-  if (loc) base.push({ id: 'location', text: loc, facet: 'location', weight: 100, trace: { source: 'filter', keys: ['search', 'nearMe'] } });
+  if (loc)
+    base.push({
+      id: "location",
+      text: loc,
+      facet: "location",
+      weight: 100,
+      trace: { source: "filter", keys: ["search", "nearMe"] },
+    });
 
   const type = getTypePart(filters);
-  if (type) base.push({ id: 'type', text: type, facet: 'type', weight: 90, trace: { source: 'filter', keys: ['type'] } });
+  if (type)
+    base.push({
+      id: "type",
+      text: type,
+      facet: "type",
+      weight: 90,
+      trace: { source: "filter", keys: ["type"] },
+    });
 
   const blue = getBlueFlagPart(filters);
-  if (blue) base.push({ id: 'blue_flag', text: blue, facet: 'blue_flag', weight: 80, trace: { source: 'filter', keys: ['blueFlag'] } });
+  if (blue)
+    base.push({
+      id: "blue_flag",
+      text: blue,
+      facet: "blue_flag",
+      weight: 80,
+      trace: { source: "filter", keys: ["blueFlag"] },
+    });
 
   const waves = getWavesPart(filters);
-  if (waves) base.push({ id: 'waves', text: waves, facet: 'waves', weight: 70, trace: { source: 'filter', keys: ['waveConditions'] } });
+  if (waves)
+    base.push({
+      id: "waves",
+      text: waves,
+      facet: "waves",
+      weight: 70,
+      trace: { source: "filter", keys: ["waveConditions"] },
+    });
 
   const amenities = getAmenitiesPart(filters);
   amenities.forEach((text, idx) =>
-    base.push({ id: `amenities_${idx}`, text, facet: 'amenities', weight: 60 - idx, trace: { source: 'filter', keys: ['amenities'] } })
+    base.push({
+      id: `amenities_${idx}`,
+      text,
+      facet: "amenities",
+      weight: 60 - idx,
+      trace: { source: "filter", keys: ["amenities"] },
+    })
   );
 
   const parking = getParkingPart(filters);
-  if (parking) base.push({ id: 'parking', text: parking, facet: 'parking', weight: 50, trace: { source: 'filter', keys: ['parking'] } });
+  if (parking)
+    base.push({
+      id: "parking",
+      text: parking,
+      facet: "parking",
+      weight: 50,
+      trace: { source: "filter", keys: ["parking"] },
+    });
 
   const org = getOrganizationPart(filters);
-  if (org) base.push({ id: 'organization', text: org, facet: 'organization', weight: 40, trace: { source: 'filter', keys: ['organized'] } });
+  if (org)
+    base.push({
+      id: "organization",
+      text: org,
+      facet: "organization",
+      weight: 40,
+      trace: { source: "filter", keys: ["organized"] },
+    });
 
   // Sort deterministically by facet priority then weight then text
   base.sort((a, b) => {
@@ -109,16 +169,19 @@ export function buildExplanation(input: ExplanationInput): Explanation {
   for (const part of base) {
     if (primary.length >= 3) break;
     // Prefer at most one amenities part in primary (keep variety)
-    if (part.facet === 'amenities' && primary.some(p => p.startsWith('with ') || p.startsWith('offering ') || p.startsWith('perfect for '))) {
+    if (
+      part.facet === "amenities" &&
+      primary.some(
+        (p) => p.startsWith("with ") || p.startsWith("offering ") || p.startsWith("perfect for ")
+      )
+    ) {
       continue;
     }
     primary.push(part.text);
   }
 
   const secondaryCount = Math.max(0, base.length - primary.length);
-  const fullText = toSentence(base.map(p => p.text));
+  const fullText = toSentence(base.map((p) => p.text));
 
   return { reasonParts: base, primary, secondaryCount, fullText };
 }
-
-

@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Button } from '@/components/ui/button';
-import { X, MapPin, RefreshCw } from 'lucide-react';
+import { useState } from "react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { X, MapPin, RefreshCw } from "lucide-react";
 
 interface GeolocationErrorBannerProps {
   onRetry: () => void;
@@ -9,18 +9,16 @@ interface GeolocationErrorBannerProps {
   isRetrying?: boolean;
 }
 
-export const GeolocationErrorBanner = ({ 
-  onRetry, 
-  onDismiss, 
-  isRetrying = false 
+export const GeolocationErrorBanner = ({
+  onRetry,
+  onDismiss,
+  isRetrying = false,
 }: GeolocationErrorBannerProps) => {
   return (
     <Alert className="border-amber-200 bg-amber-50 text-amber-800">
       <MapPin className="h-4 w-4" />
       <AlertDescription className="flex items-center justify-between">
-        <span>
-          Location access failed. Distance sorting and badges are disabled.
-        </span>
+        <span>Location access failed. Distance sorting and badges are disabled.</span>
         <div className="flex items-center gap-2 ml-4">
           <Button
             variant="outline"

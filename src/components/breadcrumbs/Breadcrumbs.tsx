@@ -1,13 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
-export type Crumb = { 
-  label: string; 
-  href?: string; 
+export type Crumb = {
+  label: string;
+  href?: string;
 };
 
-export type BreadcrumbsProps = { 
-  items: Crumb[]; 
+export type BreadcrumbsProps = {
+  items: Crumb[];
 };
 
 export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items }) => {
@@ -20,17 +20,14 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items }) => {
           <li key={index} className="flex items-center gap-1">
             {index > 0 && <span aria-hidden="true">›</span>}
             {crumb.href ? (
-              <Link 
-                to={crumb.href} 
+              <Link
+                to={crumb.href}
                 className="hover:underline hover:text-gray-700 transition-colors"
               >
                 {crumb.label}
               </Link>
             ) : (
-              <span 
-                aria-current="page" 
-                className="text-gray-700 font-medium"
-              >
+              <span aria-current="page" className="text-gray-700 font-medium">
                 {crumb.label}
               </span>
             )}

@@ -1,17 +1,17 @@
-import React, { useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
-import { useAuth } from '@/contexts/AuthContext';
+import React, { useEffect } from "react";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
-  requiredRole?: 'admin';
+  requiredRole?: "admin";
   fallback?: React.ReactNode;
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ 
-  children, 
-  requiredRole = 'admin',
-  fallback 
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({
+  children,
+  requiredRole = "admin",
+  fallback,
 }) => {
   const { user, profile, loading } = useAuth();
 

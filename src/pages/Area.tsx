@@ -33,33 +33,43 @@ const BEACHES_PER_PAGE = 9;
 
 const Area = () => {
   const { areaSlug } = useParams<{ areaSlug: string }>();
-  const { location, isLoading: isLoadingLocation, getCurrentLocation, permission: locationPermission, error: locationError } = useGeolocation();
+  const {
+    location,
+    isLoading: isLoadingLocation,
+    getCurrentLocation,
+    permission: locationPermission,
+    error: locationError,
+  } = useGeolocation();
   const [isAllFiltersOpen, setIsAllFiltersOpen] = useState(false);
   const [showGeolocationError, setShowGeolocationError] = useState(false);
   const [placeMismatch, setPlaceMismatch] = useState<{ place: string; area: string } | null>(null);
   const { preloadVisibleBeachImages } = useImagePreloader();
 
   // Fetch area data by slug
-  const { data: area, isLoading: isLoadingArea, error: areaError } = useAreaBySlug(areaSlug || '');
+  const { data: area, isLoading: isLoadingArea, error: areaError } = useAreaBySlug(areaSlug || "");
   const { nearby } = useNearbyAreas(area?.id);
 
   // Fetch beaches from Supabase filtered by area
-  const { data: beaches = [], isLoading: isLoadingBeaches, error: beachesError } = useQuery({
-    queryKey: ['beaches', area?.id],
+  const {
+    data: beaches = [],
+    isLoading: isLoadingBeaches,
+    error: beachesError,
+  } = useQuery({
+    queryKey: ["beaches", area?.id],
     queryFn: async () => {
       if (!area) return [];
-      
+
       const { data, error } = await supabase
-        .from('beaches')
-        .select('*')
-        .eq('status', 'ACTIVE')
-        .eq('area_id', area.id)
-        .order('name');
-      
+        .from("beaches")
+        .select("*")
+        .eq("status", "ACTIVE")
+        .eq("area_id", area.id)
+        .order("name");
+
       if (error) throw error;
       return data as Beach[];
     },
-    enabled: !!area
+    enabled: !!area,
   });
 
   const isLoading = isLoadingArea || isLoadingBeaches;
@@ -67,14 +77,10 @@ const Area = () => {
   const areaName = area?.name;
 
   // Use area-specific URL state
-  const { filters, updateFilters, resetFilters } = useAreaUrlState(areaName || '');
+  const { filters, updateFilters, resetFilters } = useAreaUrlState(areaName || "");
 
   // Calculate distances for beaches when location is enabled
-  const beachesWithDistance = useDistanceCalculation(
-    beaches,
-    location,
-    filters.nearMe
-  );
+  const beachesWithDistance = useDistanceCalculation(beaches, location, filters.nearMe);
 
   // Filter and sort beaches (including area filter)
   const filteredBeaches = useAreaBeachFiltering(beachesWithDistance, filters, location);
@@ -104,7 +110,7 @@ const Area = () => {
   };
 
   const handleTurnOffNearMe = () => {
-    updateFilters({ nearMe: false, sort: 'name.asc', page: 1 });
+    updateFilters({ nearMe: false, sort: "name.asc", page: 1 });
   };
 
   const handleResetParking = () => {
@@ -138,8 +144,8 @@ const Area = () => {
   useEffect(() => {
     if (filters.nearMe && locationError && !location && !isLoadingLocation) {
       setShowGeolocationError(true);
-      if (filters.sort?.startsWith('distance')) {
-        updateFilters({ sort: 'name.asc', page: 1 });
+      if (filters.sort?.startsWith("distance")) {
+        updateFilters({ sort: "name.asc", page: 1 });
       }
     } else if (location || !filters.nearMe) {
       setShowGeolocationError(false);
@@ -148,8 +154,8 @@ const Area = () => {
 
   // Auto-enable distance sorting when location becomes available and near me is enabled
   useEffect(() => {
-    if (location && filters.nearMe && !filters.sort?.startsWith('distance')) {
-      updateFilters({ sort: 'distance.asc', page: 1 });
+    if (location && filters.nearMe && !filters.sort?.startsWith("distance")) {
+      updateFilters({ sort: "distance.asc", page: 1 });
     }
   }, [location, filters.nearMe, filters.sort, updateFilters]);
 
@@ -189,60 +195,69 @@ const Area = () => {
   }
 
   // Generate SEO data
-  const seoTitle = areaName ? `Beaches in ${areaName}, Greece | Beach Atlas` : 'Area Not Found';
-  const seoDescription = areaName 
+  const seoTitle = areaName ? `Beaches in ${areaName}, Greece | Beach Atlas` : "Area Not Found";
+  const seoDescription = areaName
     ? `Discover the best beaches in ${areaName}, Greece. Find organized and unorganized beaches with detailed information about amenities, parking, and conditions.`
-    : 'The requested area could not be found.';
+    : "The requested area could not be found.";
   const canonicalUrl = areaName ? `https://beachesofgreece.com/${areaSlug}` : undefined;
-  
+
   // Prevent indexing of filtered/paginated URLs (canonical points to clean URL)
   const hasQueryParams = window.location.search.length > 0;
   const shouldNoIndex = hasQueryParams;
 
   // Generate JSON-LD structured data with freshness signals
-  const jsonLd = areaName ? {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": `Beaches in ${areaName}, Greece | Beach Atlas`,
-    "description": area?.description || `Discover the best beaches in ${areaName}, Greece. Find organized and unorganized beaches with detailed information about amenities, parking, and conditions.`,
-    "url": canonicalUrl,
-    "datePublished": area?.created_at ? new Date(area.created_at).toISOString().split('T')[0] : "2024-01-01",
-    "dateModified": area?.updated_at ? new Date(area.updated_at).toISOString().split('T')[0] : new Date().toISOString().split('T')[0],
-    "mainEntity": {
-      "@type": "ItemList",
-      "name": `Beaches in ${areaName}`,
-      "description": area?.description || `A curated list of beaches in ${areaName}, Greece`,
-      "numberOfItems": filteredBeaches.length,
-      "itemListElement": paginatedBeaches.slice(0, 10).map((beach, index) => ({
-        "@type": "ListItem",
-        "position": index + 1,
-        "item": {
-          "@type": "TouristAttraction",
-          "@id": `https://beachesofgreece.com/${areaSlug}/${beach.slug}`,
-          "name": beach.name,
-          "description": beach.description,
-          "url": `https://beachesofgreece.com/${areaSlug}/${beach.slug}`,
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": areaName,
-            "addressCountry": "Greece"
-          },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": beach.latitude,
-            "longitude": beach.longitude
-          },
-          "isAccessibleForFree": true,
-          "image": beach.photo_url ? [beach.photo_url] : undefined,
-          "amenityFeature": beach.amenities?.map(amenity => ({
-            "@type": "LocationFeatureSpecification",
-            "name": amenity,
-            "value": true
-          })) || []
-        }
-      }))
-    },
-  } : null;
+  const jsonLd = areaName
+    ? {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        name: `Beaches in ${areaName}, Greece | Beach Atlas`,
+        description:
+          area?.description ||
+          `Discover the best beaches in ${areaName}, Greece. Find organized and unorganized beaches with detailed information about amenities, parking, and conditions.`,
+        url: canonicalUrl,
+        datePublished: area?.created_at
+          ? new Date(area.created_at).toISOString().split("T")[0]
+          : "2024-01-01",
+        dateModified: area?.updated_at
+          ? new Date(area.updated_at).toISOString().split("T")[0]
+          : new Date().toISOString().split("T")[0],
+        mainEntity: {
+          "@type": "ItemList",
+          name: `Beaches in ${areaName}`,
+          description: area?.description || `A curated list of beaches in ${areaName}, Greece`,
+          numberOfItems: filteredBeaches.length,
+          itemListElement: paginatedBeaches.slice(0, 10).map((beach, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            item: {
+              "@type": "TouristAttraction",
+              "@id": `https://beachesofgreece.com/${areaSlug}/${beach.slug}`,
+              name: beach.name,
+              description: beach.description,
+              url: `https://beachesofgreece.com/${areaSlug}/${beach.slug}`,
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: areaName,
+                addressCountry: "Greece",
+              },
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: beach.latitude,
+                longitude: beach.longitude,
+              },
+              isAccessibleForFree: true,
+              image: beach.photo_url ? [beach.photo_url] : undefined,
+              amenityFeature:
+                beach.amenities?.map((amenity) => ({
+                  "@type": "LocationFeatureSpecification",
+                  name: amenity,
+                  value: true,
+                })) || [],
+            },
+          })),
+        },
+      }
+    : null;
 
   return (
     <>
@@ -250,57 +265,65 @@ const Area = () => {
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />
         {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
-        
+
         {/* Prevent indexing of filtered/paginated URLs */}
         {shouldNoIndex && <meta name="robots" content="noindex, follow" />}
-        
+
         {/* Open Graph tags */}
         <meta property="og:title" content={seoTitle} />
         <meta property="og:description" content={seoDescription} />
         <meta property="og:type" content="website" />
         {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
-        <meta property="og:image" content={area?.hero_photo_url || `${import.meta.env.VITE_SITE_URL || 'https://beachesofgreece.com'}/hero-background.png`} />
+        <meta
+          property="og:image"
+          content={
+            area?.hero_photo_url ||
+            `${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.png`
+          }
+        />
         <meta property="og:site_name" content="Beach Atlas Greece" />
-        
+
         {/* Twitter Card tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDescription} />
-        <meta name="twitter:image" content={area?.hero_photo_url || `${import.meta.env.VITE_SITE_URL || 'https://beachesofgreece.com'}/hero-background.png`} />
-        
+        <meta
+          name="twitter:image"
+          content={
+            area?.hero_photo_url ||
+            `${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.png`
+          }
+        />
+
         {/* JSON-LD structured data */}
-        {jsonLd && (
-          <script type="application/ld+json">
-            {JSON.stringify(jsonLd)}
-          </script>
-        )}
+        {jsonLd && <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>}
       </Helmet>
 
       <div className="min-h-screen bg-background">
         <Header />
-        
+
         {/* Hero Section */}
         <section className="relative h-[35vh] flex items-center justify-center bg-gradient-ocean overflow-hidden">
-          <div 
+          <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: `url(${area?.hero_photo_url || heroImage})` }}
           />
           <div className="absolute inset-0 bg-black/30" />
-          
+
           {/* Photo Attribution for hero image */}
           {area?.hero_photo_source && (
-            <PhotoAttribution 
+            <PhotoAttribution
               photoSource={area.hero_photo_source}
               className="absolute bottom-2 right-2 z-0 pointer-events-none"
               compact={false}
             />
           )}
-          
+
           <div className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-6xl font-bold mb-8 drop-shadow-lg">
               {areaName ? `Find Your Perfect Beach in ${areaName}` : "Area Not Found"}
             </h1>
-            
+
             {/* Hero Search Bar - only show if area exists */}
             {areaName && (
               <div className="max-w-2xl mx-auto">
@@ -320,7 +343,7 @@ const Area = () => {
             {/* Back to directory link if area not found */}
             {!areaName && !isLoading && (
               <div className="mt-8">
-                <Link 
+                <Link
                   to="/"
                   className="inline-flex items-center px-6 py-3 bg-white/20 hover:bg-white/30 text-white font-medium rounded-lg transition-colors backdrop-blur-sm"
                 >
@@ -335,11 +358,13 @@ const Area = () => {
         {areaName && (
           <div className="bg-background pt-2">
             <div className="container mx-auto px-4">
-              <BreadcrumbsWithJsonLd items={[
-                { label: "Home", href: "/" },
-                { label: "Areas", href: "/areas" },
-                { label: areaName } // no href = current
-              ]} />
+              <BreadcrumbsWithJsonLd
+                items={[
+                  { label: "Home", href: "/" },
+                  { label: "Areas", href: "/areas" },
+                  { label: areaName }, // no href = current
+                ]}
+              />
             </div>
           </div>
         )}
@@ -377,7 +402,6 @@ const Area = () => {
           </>
         )}
 
-
         <main className="container mx-auto px-4 py-4 pb-20 md:pb-8">
           {/* Place Mismatch Notification */}
           {placeMismatch && (
@@ -388,10 +412,12 @@ const Area = () => {
             />
           )}
 
-          
           {/* Screen reader announcements */}
           <div aria-live="polite" aria-atomic="true" className="sr-only">
-            {!isLoading && !error && areaName && `${filteredBeaches.length} beaches found in ${areaName}`}
+            {!isLoading &&
+              !error &&
+              areaName &&
+              `${filteredBeaches.length} beaches found in ${areaName}`}
           </div>
 
           {/* Loading State */}
@@ -419,9 +445,9 @@ const Area = () => {
               <ErrorBoundary>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {paginatedBeaches.map((beach) => (
-                    <BeachCard 
-                      key={beach.id} 
-                      beach={beach} 
+                    <BeachCard
+                      key={beach.id}
+                      beach={beach}
                       distance={beach.distance}
                       showDistance={filters.nearMe && !locationError && !!location}
                       engagementSource="area_explore"

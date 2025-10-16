@@ -1,7 +1,7 @@
-import { Tables } from '@/integrations/supabase/types';
-import { Area } from './area';
+import { Tables } from "@/integrations/supabase/types";
+import { Area } from "./area";
 
-export type Beach = Tables<'beaches'>;
+export type Beach = Tables<"beaches">;
 
 export interface BeachWithDistance extends Beach {
   distance?: number;

@@ -5,7 +5,6 @@ import { useBeachSuggestions } from "@/hooks/useBeachSuggestions";
 import BeachCard from "./BeachCard";
 import { Link } from "react-router-dom";
 import { generateAreaUrl } from "@/lib/utils";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 interface EmptyStateProps {
   filters: FilterState;
@@ -40,7 +39,7 @@ export default function EmptyState({
   areaName,
 }: EmptyStateProps) {
   // Check if any filters are active (excluding nearMe as it's not a traditional filter)
-  const hasActiveFilters = 
+  const hasActiveFilters =
     filters.search ||
     filters.location ||
     (filters.locations && filters.locations.length > 0) ||
@@ -57,33 +56,71 @@ export default function EmptyState({
   // Check if parking is filtered
   const isParkingFiltered = filters.parking.length > 0;
 
-  // Get suggestions
-  const { suggestions, isLoading: isLoadingSuggestions, hasSuggestions } = useBeachSuggestions({
+  // Get suggestions (limit to 2 for empty state)
+  const {
+    suggestions: allSuggestions,
+    isLoading: isLoadingSuggestions,
+    hasSuggestions,
+  } = useBeachSuggestions({
     filters,
     userLocation,
     hasResults: false,
-    areaName
+    areaName,
   });
 
+  // Limit to 2 suggestions for cleaner empty state
+  const suggestions = allSuggestions.slice(0, 2);
+
   // Determine subtext based on near me activation
-  const suggestionsSubtext = filters.nearMe && userLocation
-    ? "Based on your location and similar options nearby"
-    : "Based on similar options nearby";
+  const suggestionsSubtext =
+    filters.nearMe && userLocation
+      ? "Based on your location and similar options nearby"
+      : "Based on similar options nearby";
 
   // Humanize enum-like values (e.g., LARGE_LOT -> "large lot")
   const humanize = (value: string) => value.replace(/_/g, " ").toLowerCase();
 
   // Render removable chips for each active filter (value-only labels)
   const chips: Array<{ key: string; label: string; onRemove?: () => void }> = [];
-  if (filters.search) chips.push({ key: `search:${filters.search}`, label: `${filters.search}`.trim(), onRemove: onClearSearch });
-  filters.organized.forEach((v) => chips.push({ key: `org:${v}`, label: humanize(v), onRemove: onRemoveOrganized ? () => onRemoveOrganized(v) : undefined }));
-  if (filters.blueFlag) chips.push({ key: `blueflag`, label: `blue flag`, onRemove: onClearBlueFlag });
-  filters.parking.forEach((v) => chips.push({ key: `parking:${v}`, label: humanize(v), onRemove: onRemoveParking ? () => onRemoveParking(v) : undefined }));
-  filters.waveConditions.forEach((v) => chips.push({ key: `waves:${v}`, label: humanize(v), onRemove: onRemoveWaveCondition ? () => onRemoveWaveCondition(v) : undefined }));
-  filters.amenities.forEach((v) => chips.push({ key: `amenity:${v}`, label: humanize(v), onRemove: onRemoveAmenity ? () => onRemoveAmenity(v) : undefined }));
+  if (filters.search)
+    chips.push({
+      key: `search:${filters.search}`,
+      label: `${filters.search}`.trim(),
+      onRemove: onClearSearch,
+    });
+  filters.organized.forEach((v) =>
+    chips.push({
+      key: `org:${v}`,
+      label: humanize(v),
+      onRemove: onRemoveOrganized ? () => onRemoveOrganized(v) : undefined,
+    })
+  );
+  if (filters.blueFlag)
+    chips.push({ key: `blueflag`, label: `blue flag`, onRemove: onClearBlueFlag });
+  filters.parking.forEach((v) =>
+    chips.push({
+      key: `parking:${v}`,
+      label: humanize(v),
+      onRemove: onRemoveParking ? () => onRemoveParking(v) : undefined,
+    })
+  );
+  filters.waveConditions.forEach((v) =>
+    chips.push({
+      key: `waves:${v}`,
+      label: humanize(v),
+      onRemove: onRemoveWaveCondition ? () => onRemoveWaveCondition(v) : undefined,
+    })
+  );
+  filters.amenities.forEach((v) =>
+    chips.push({
+      key: `amenity:${v}`,
+      label: humanize(v),
+      onRemove: onRemoveAmenity ? () => onRemoveAmenity(v) : undefined,
+    })
+  );
 
   // Limit visible chips and show overflow summary
-  const MAX_CHIPS = 5;
+  const MAX_CHIPS = 2;
   const visibleChips = chips.slice(0, MAX_CHIPS);
   const overflowCount = Math.max(chips.length - MAX_CHIPS, 0);
 
@@ -96,11 +133,9 @@ export default function EmptyState({
             <AlertCircle className="h-5 w-5 text-muted-foreground" />
           </div>
           <div className="flex-1">
-            <p className="text-foreground font-medium">
-              No beaches match your current filters
-            </p>
+            <p className="text-foreground font-medium">No beaches match your current filters</p>
             <p className="text-muted-foreground text-sm">
-              Adjust using the quick toggles or{' '}
+              Adjust using the quick toggles or{" "}
               <button
                 type="button"
                 onClick={onClearAllFilters}
@@ -146,21 +181,13 @@ export default function EmptyState({
         {/* Quick actions */}
         <div className="flex flex-wrap gap-2">
           {isNearMeEnabled && (
-            <Button
-              variant="outline"
-              onClick={onTurnOffNearMe}
-              className="h-9"
-            >
+            <Button variant="outline" onClick={onTurnOffNearMe} className="h-9">
               <MapPin className="h-4 w-4" />
               Turn off Near me
             </Button>
           )}
           {isParkingFiltered && (
-            <Button
-              variant="outline"
-              onClick={onResetParking}
-              className="h-9"
-            >
+            <Button variant="outline" onClick={onResetParking} className="h-9">
               <Car className="h-4 w-4" />
               Reset Parking
             </Button>
@@ -176,51 +203,68 @@ export default function EmptyState({
           </h2>
           <p className="text-muted-foreground text-sm mt-1">{suggestionsSubtext}</p>
 
-          <div className="mt-4">
-            <Carousel className="relative">
-              <CarouselContent>
-                {isLoadingSuggestions
-                  ? Array.from({ length: 3 }).map((_, i) => (
-                      <CarouselItem key={i} className="basis-[85%] sm:basis-1/2 lg:basis-1/3">
-                        <div className="bg-muted rounded-xl h-56 shadow-soft animate-pulse"></div>
-                      </CarouselItem>
-                    ))
-                  : (
-                    <>
-                      {suggestions.map((b) => (
-                        <CarouselItem key={b.slug} className="basis-[85%] sm:basis-1/2 lg:basis-1/3">
-                          <BeachCard beach={b} distance={b.distance} compact engagementSource="browsing" />
-                        </CarouselItem>
-                      ))}
-                      <CarouselItem className="basis-[85%] sm:basis-1/2 lg:basis-1/3">
-                        {areaName ? (
-                          <Link
-                            to={generateAreaUrl(areaName)}
-                            className="block h-full w-full border rounded-lg hover:bg-muted/50 transition-colors"
-                            aria-label={`View all beaches in ${areaName}`}
-                          >
-                            <div className="flex h-full items-center justify-center p-4 text-center">
-                              View all beaches in {areaName} →
-                            </div>
-                          </Link>
-                        ) : (
-                          <Link
-                            to="/"
-                            className="block h-full w-full border rounded-lg hover:bg-muted/50 transition-colors"
-                            aria-label="View all beaches"
-                          >
-                            <div className="flex h-full items-center justify-center p-4 text-center">
-                              View all beaches →
-                            </div>
-                          </Link>
-                        )}
-                      </CarouselItem>
-                    </>
-                  )}
-              </CarouselContent>
-              <CarouselPrevious className="hidden sm:flex" />
-              <CarouselNext className="hidden sm:flex" />
-            </Carousel>
+          <div className="mt-4 -mx-4 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            <div className="flex gap-4 pb-4 pl-4">
+              {isLoadingSuggestions ? (
+                <>
+                  {Array.from({ length: 2 }).map((_, i) => (
+                    <div
+                      key={i}
+                      className="flex-none w-[85%] sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)]"
+                    >
+                      <div className="bg-muted rounded-xl h-56 shadow-soft animate-pulse"></div>
+                    </div>
+                  ))}
+                  {/* "View all" card skeleton */}
+                  <div className="flex-none w-[85%] sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)]">
+                    <div className="bg-muted rounded-xl h-56 shadow-soft animate-pulse"></div>
+                  </div>
+                  {/* Spacer for loading state too */}
+                  <div className="flex-none w-4" aria-hidden="true"></div>
+                </>
+              ) : (
+                <>
+                  {suggestions.map((b) => (
+                    <div
+                      key={b.slug}
+                      className="flex-none w-[85%] sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)]"
+                    >
+                      <BeachCard
+                        beach={b}
+                        distance={b.distance}
+                        compact
+                        engagementSource="browsing"
+                      />
+                    </div>
+                  ))}
+                  <div className="flex-none w-[85%] sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)]">
+                    {areaName ? (
+                      <Link
+                        to={generateAreaUrl(areaName)}
+                        className="block h-full w-full border rounded-lg hover:bg-muted/50 transition-colors"
+                        aria-label={`View all beaches in ${areaName}`}
+                      >
+                        <div className="flex h-full items-center justify-center p-4 text-center">
+                          View all beaches in {areaName} →
+                        </div>
+                      </Link>
+                    ) : (
+                      <Link
+                        to="/"
+                        className="block h-full w-full border rounded-lg hover:bg-muted/50 transition-colors"
+                        aria-label="View all beaches"
+                      >
+                        <div className="flex h-full items-center justify-center p-4 text-center">
+                          View all beaches →
+                        </div>
+                      </Link>
+                    )}
+                  </div>
+                  {/* Spacer for proper right padding on scroll */}
+                  <div className="flex-none w-4" aria-hidden="true"></div>
+                </>
+              )}
+            </div>
           </div>
         </div>
       )}

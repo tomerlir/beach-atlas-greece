@@ -1,5 +1,5 @@
-import { useState, useCallback, useEffect } from 'react';
-import { FilterState } from './useUrlState';
+import { useState, useCallback, useEffect } from "react";
+import { FilterState } from "./useUrlState";
 
 export const useDraftState = (initialFilters: FilterState) => {
   const [draftFilters, setDraftFilters] = useState<FilterState>(initialFilters);
@@ -10,7 +10,7 @@ export const useDraftState = (initialFilters: FilterState) => {
   }, [initialFilters]);
 
   const updateDraft = useCallback((updates: Partial<FilterState>) => {
-    setDraftFilters(prev => ({ ...prev, ...updates }));
+    setDraftFilters((prev) => ({ ...prev, ...updates }));
   }, []);
 
   const resetDraft = useCallback(() => {

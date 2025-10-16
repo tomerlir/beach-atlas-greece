@@ -1,18 +1,34 @@
-import { useEffect, useRef, useCallback } from 'react';
-import { MapPin, Sun, CheckCircle, Car, Flag, X, Search, Check, Waves, Mountain } from 'lucide-react';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from '@/components/ui/sheet';
-import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { useDebounce } from '@/hooks/useDebounce';
-import { useDebouncedSearch } from '@/hooks/useDebouncedSearch';
-import { useBeachCount } from '@/hooks/useBeachCount';
-import { useDraftState } from '@/hooks/useDraftState';
-import { FilterState } from '@/hooks/useUrlState';
-import { getAllAmenities } from '@/lib/amenities';
-import { analytics } from '@/lib/analytics';
-import { createFilterApplyEvent, createFilterClearEvent, BeachType, WaveCondition } from '@/lib/analyticsEvents';
+import { useEffect, useRef, useCallback } from "react";
+import {
+  MapPin,
+  Sun,
+  CheckCircle,
+  Car,
+  Flag,
+  X,
+  Search,
+  Check,
+  Waves,
+  Mountain,
+} from "lucide-react";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { useDebounce } from "@/hooks/useDebounce";
+import { useDebouncedSearch } from "@/hooks/useDebouncedSearch";
+import { useBeachCount } from "@/hooks/useBeachCount";
+import { useDraftState } from "@/hooks/useDraftState";
+import { FilterState } from "@/hooks/useUrlState";
+import { getAllAmenities } from "@/lib/amenities";
+import { analytics } from "@/lib/analytics";
+import {
+  createFilterApplyEvent,
+  createFilterClearEvent,
+  BeachType,
+  WaveCondition,
+} from "@/lib/analyticsEvents";
 
 interface AllFiltersDrawerProps {
   isOpen: boolean;
@@ -22,32 +38,32 @@ interface AllFiltersDrawerProps {
   userLocation: GeolocationPosition | null;
   onLocationRequest: () => void;
   isLoadingLocation: boolean;
-  locationPermission: 'granted' | 'denied' | 'prompt' | null;
+  locationPermission: "granted" | "denied" | "prompt" | null;
 }
 
 // Get all amenities from centralized map
 const allAmenities = getAllAmenities();
 
 const parkingOptions = [
-  { value: 'any', label: 'Any' },
-  { value: 'NONE', label: 'None' },
-  { value: 'ROADSIDE', label: 'Roadside' },
-  { value: 'SMALL_LOT', label: 'Small lot' },
-  { value: 'LARGE_LOT', label: 'Large lot' },
+  { value: "any", label: "Any" },
+  { value: "NONE", label: "None" },
+  { value: "ROADSIDE", label: "Roadside" },
+  { value: "SMALL_LOT", label: "Small lot" },
+  { value: "LARGE_LOT", label: "Large lot" },
 ];
 
 const waveConditionsOptions = [
-  { value: 'CALM', label: 'Calm' },
-  { value: 'MODERATE', label: 'Moderate' },
-  { value: 'WAVY', label: 'Wavy' },
-  { value: 'SURFABLE', label: 'Surfable' },
+  { value: "CALM", label: "Calm" },
+  { value: "MODERATE", label: "Moderate" },
+  { value: "WAVY", label: "Wavy" },
+  { value: "SURFABLE", label: "Surfable" },
 ];
 
 const beachTypeOptions = [
-  { value: 'SANDY', label: 'Sandy' },
-  { value: 'PEBBLY', label: 'Pebbly' },
-  { value: 'MIXED', label: 'Mixed' },
-  { value: 'OTHER', label: 'Rocky/Other' },
+  { value: "SANDY", label: "Sandy" },
+  { value: "PEBBLY", label: "Pebbly" },
+  { value: "MIXED", label: "Mixed" },
+  { value: "OTHER", label: "Rocky/Other" },
 ];
 
 export default function AllFiltersDrawer({
@@ -61,7 +77,7 @@ export default function AllFiltersDrawer({
   locationPermission,
 }: AllFiltersDrawerProps) {
   const firstFocusableRef = useRef<HTMLButtonElement>(null);
-  
+
   // Use draft state hook for proper state management
   const { draftFilters, updateDraft, resetDraft, clearDraft } = useDraftState(filters);
 
@@ -86,29 +102,47 @@ export default function AllFiltersDrawer({
   }, [isOpen]);
 
   // Handle keyboard navigation
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      onClose();
-    }
-  }, [onClose]);
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    },
+    [onClose]
+  );
 
   const handleApply = () => {
     onApplyFilters(draftFilters);
     // Track applied filters with coarse names and values; include live count as results
     if (draftFilters.blueFlag !== filters.blueFlag) {
-      analytics.event('filter_apply', createFilterApplyEvent('blue_flag', String(draftFilters.blueFlag), liveCount as number));
+      analytics.event(
+        "filter_apply",
+        createFilterApplyEvent("blue_flag", String(draftFilters.blueFlag), liveCount as number)
+      );
     }
-    if (draftFilters.organized.join(',') !== filters.organized.join(',')) {
-      analytics.event('filter_apply', createFilterApplyEvent('type', draftFilters.organized.join(','), liveCount as number));
+    if (draftFilters.organized.join(",") !== filters.organized.join(",")) {
+      analytics.event(
+        "filter_apply",
+        createFilterApplyEvent("type", draftFilters.organized.join(","), liveCount as number)
+      );
     }
-    if (draftFilters.parking.join(',') !== filters.parking.join(',')) {
-      analytics.event('filter_apply', createFilterApplyEvent('parking', draftFilters.parking.join(','), liveCount as number));
+    if (draftFilters.parking.join(",") !== filters.parking.join(",")) {
+      analytics.event(
+        "filter_apply",
+        createFilterApplyEvent("parking", draftFilters.parking.join(","), liveCount as number)
+      );
     }
-    if (draftFilters.waveConditions.join(',') !== filters.waveConditions.join(',')) {
-      analytics.event('filter_apply', createFilterApplyEvent('wave', draftFilters.waveConditions.join(','), liveCount as number));
+    if (draftFilters.waveConditions.join(",") !== filters.waveConditions.join(",")) {
+      analytics.event(
+        "filter_apply",
+        createFilterApplyEvent("wave", draftFilters.waveConditions.join(","), liveCount as number)
+      );
     }
-    if (draftFilters.amenities.join(',') !== filters.amenities.join(',')) {
-      analytics.event('filter_apply', createFilterApplyEvent('amenities', draftFilters.amenities.join(','), liveCount as number));
+    if (draftFilters.amenities.join(",") !== filters.amenities.join(",")) {
+      analytics.event(
+        "filter_apply",
+        createFilterApplyEvent("amenities", draftFilters.amenities.join(","), liveCount as number)
+      );
     }
     onClose();
   };
@@ -121,21 +155,21 @@ export default function AllFiltersDrawer({
     clearSearchInput(); // Clear search input immediately
     // Clear all filters including search
     updateDraft({
-      search: '',
+      search: "",
       organized: [],
       blueFlag: false,
       parking: [],
       amenities: [],
-      sort: 'name.asc',
+      sort: "name.asc",
       page: 1,
       nearMe: false,
     });
-    analytics.event('filter_clear', createFilterClearEvent('all'));
+    analytics.event("filter_clear", createFilterClearEvent("all"));
   };
 
   const toggleAmenity = (amenityId: string) => {
     const newAmenities = draftFilters.amenities.includes(amenityId)
-      ? draftFilters.amenities.filter(id => id !== amenityId)
+      ? draftFilters.amenities.filter((id) => id !== amenityId)
       : [...draftFilters.amenities, amenityId];
     updateDraft({ amenities: newAmenities });
   };
@@ -143,10 +177,10 @@ export default function AllFiltersDrawer({
   const handleNearMeToggle = () => {
     if (draftFilters.nearMe) {
       // Turning off near me - revert to A->Z sorting
-      updateDraft({ nearMe: false, sort: 'name.asc' });
+      updateDraft({ nearMe: false, sort: "name.asc" });
     } else {
       // Turning on near me - request location and set distance sorting
-      updateDraft({ nearMe: true, sort: 'distance.asc' });
+      updateDraft({ nearMe: true, sort: "distance.asc" });
       onLocationRequest();
     }
   };
@@ -156,8 +190,8 @@ export default function AllFiltersDrawer({
 
   return (
     <Sheet open={isOpen} onOpenChange={onClose}>
-      <SheetContent 
-        side="right" 
+      <SheetContent
+        side="right"
         className="w-full sm:max-w-lg flex flex-col p-0"
         onKeyDown={handleKeyDown}
       >
@@ -177,7 +211,7 @@ export default function AllFiltersDrawer({
           </div>
           {/* Live result count */}
           <div className="text-sm text-muted-foreground" aria-live="polite">
-            {liveCount !== undefined ? `${liveCount} results` : 'Loading...'}
+            {liveCount !== undefined ? `${liveCount} results` : "Loading..."}
           </div>
         </SheetHeader>
 
@@ -189,7 +223,7 @@ export default function AllFiltersDrawer({
               <Search className="h-4 w-4 text-secondary" />
               Search
             </h3>
-            
+
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
               <Input
@@ -208,7 +242,7 @@ export default function AllFiltersDrawer({
               <MapPin className="h-4 w-4 text-secondary" />
               Near me
             </h3>
-            
+
             <div className="space-y-3">
               <Button
                 variant={draftFilters.nearMe ? "default" : "outline"}
@@ -218,14 +252,20 @@ export default function AllFiltersDrawer({
                 aria-pressed={draftFilters.nearMe}
               >
                 <MapPin className="h-4 w-4 mr-2" />
-                {isLoadingLocation ? "Getting location..." : 
-                 draftFilters.nearMe ? "On" : 
-                 locationPermission === 'denied' ? "Permission denied" : "Off"}
+                {isLoadingLocation
+                  ? "Getting location..."
+                  : draftFilters.nearMe
+                    ? "On"
+                    : locationPermission === "denied"
+                      ? "Permission denied"
+                      : "Off"}
               </Button>
-              
-              {locationPermission === 'denied' && (
+
+              {locationPermission === "denied" && (
                 <div className="text-sm text-muted-foreground">
-                  <p className="mb-2">Location access denied. Enable location services to find nearby beaches.</p>
+                  <p className="mb-2">
+                    Location access denied. Enable location services to find nearby beaches.
+                  </p>
                   <Button
                     variant="outline"
                     size="sm"
@@ -245,7 +285,7 @@ export default function AllFiltersDrawer({
               <Flag className="h-4 w-4 text-secondary" />
               Blue Flag
             </h3>
-            
+
             <div className="flex items-center space-x-3 min-h-[44px]">
               <Checkbox
                 id="blue-flag"
@@ -272,33 +312,31 @@ export default function AllFiltersDrawer({
                 </span>
               )}
             </h3>
-            
+
             <div className="space-y-1">
               {[
-                { value: 'organized', label: 'Organized' },
-                { value: 'unorganized', label: 'Unorganized' },
+                { value: "organized", label: "Organized" },
+                { value: "unorganized", label: "Unorganized" },
               ].map((option) => {
                 const isSelected = draftFilters.organized.includes(option.value);
-                
+
                 return (
                   <button
                     key={option.value}
                     onClick={() => {
                       const newOrganized = isSelected
-                        ? draftFilters.organized.filter(org => org !== option.value)
+                        ? draftFilters.organized.filter((org) => org !== option.value)
                         : [...draftFilters.organized, option.value];
                       updateDraft({ organized: newOrganized });
                     }}
                     className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors min-h-[44px] rounded-md ${
-                      isSelected ? 'bg-muted/30' : ''
+                      isSelected ? "bg-muted/30" : ""
                     }`}
                     role="option"
                     aria-selected={isSelected}
                   >
                     <span className="text-sm font-medium">{option.label}</span>
-                    {isSelected && (
-                      <Check className="h-4 w-4 text-secondary" />
-                    )}
+                    {isSelected && <Check className="h-4 w-4 text-secondary" />}
                   </button>
                 );
               })}
@@ -318,33 +356,33 @@ export default function AllFiltersDrawer({
                 </span>
               )}
             </h3>
-            
+
             <div className="space-y-1">
-              {parkingOptions.filter(option => option.value !== 'any').map((option) => {
-                const isSelected = draftFilters.parking.includes(option.value);
-                
-                return (
-                  <button
-                    key={option.value}
-                    onClick={() => {
-                      const newParking = isSelected
-                        ? draftFilters.parking.filter(p => p !== option.value)
-                        : [...draftFilters.parking, option.value];
-                      updateDraft({ parking: newParking });
-                    }}
-                    className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors min-h-[44px] rounded-md ${
-                      isSelected ? 'bg-muted/30' : ''
-                    }`}
-                    role="option"
-                    aria-selected={isSelected}
-                  >
-                    <span className="text-sm font-medium">{option.label}</span>
-                    {isSelected && (
-                      <Check className="h-4 w-4 text-secondary" />
-                    )}
-                  </button>
-                );
-              })}
+              {parkingOptions
+                .filter((option) => option.value !== "any")
+                .map((option) => {
+                  const isSelected = draftFilters.parking.includes(option.value);
+
+                  return (
+                    <button
+                      key={option.value}
+                      onClick={() => {
+                        const newParking = isSelected
+                          ? draftFilters.parking.filter((p) => p !== option.value)
+                          : [...draftFilters.parking, option.value];
+                        updateDraft({ parking: newParking });
+                      }}
+                      className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors min-h-[44px] rounded-md ${
+                        isSelected ? "bg-muted/30" : ""
+                      }`}
+                      role="option"
+                      aria-selected={isSelected}
+                    >
+                      <span className="text-sm font-medium">{option.label}</span>
+                      {isSelected && <Check className="h-4 w-4 text-secondary" />}
+                    </button>
+                  );
+                })}
             </div>
           </div>
 
@@ -361,30 +399,30 @@ export default function AllFiltersDrawer({
                 </span>
               )}
             </h3>
-            
+
             <div className="space-y-1">
               {waveConditionsOptions.map((option) => {
-                const isSelected = draftFilters.waveConditions.includes(option.value as WaveCondition);
-                
+                const isSelected = draftFilters.waveConditions.includes(
+                  option.value as WaveCondition
+                );
+
                 return (
                   <button
                     key={option.value}
                     onClick={() => {
                       const newWaveConditions = isSelected
-                        ? draftFilters.waveConditions.filter(wc => wc !== option.value)
+                        ? draftFilters.waveConditions.filter((wc) => wc !== option.value)
                         : [...draftFilters.waveConditions, option.value as WaveCondition];
                       updateDraft({ waveConditions: newWaveConditions });
                     }}
                     className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors min-h-[44px] rounded-md ${
-                      isSelected ? 'bg-muted/30' : ''
+                      isSelected ? "bg-muted/30" : ""
                     }`}
                     role="option"
                     aria-selected={isSelected}
                   >
                     <span className="text-sm font-medium">{option.label}</span>
-                    {isSelected && (
-                      <Check className="h-4 w-4 text-secondary" />
-                    )}
+                    {isSelected && <Check className="h-4 w-4 text-secondary" />}
                   </button>
                 );
               })}
@@ -404,30 +442,28 @@ export default function AllFiltersDrawer({
                 </span>
               )}
             </h3>
-            
+
             <div className="space-y-1">
               {beachTypeOptions.map((option) => {
                 const isSelected = draftFilters.type.includes(option.value as BeachType);
-                
+
                 return (
                   <button
                     key={option.value}
                     onClick={() => {
                       const newTypes = isSelected
-                        ? draftFilters.type.filter(type => type !== option.value)
+                        ? draftFilters.type.filter((type) => type !== option.value)
                         : [...draftFilters.type, option.value as BeachType];
                       updateDraft({ type: newTypes });
                     }}
                     className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors min-h-[44px] rounded-md ${
-                      isSelected ? 'bg-muted/30' : ''
+                      isSelected ? "bg-muted/30" : ""
                     }`}
                     role="option"
                     aria-selected={isSelected}
                   >
                     <span className="text-sm font-medium">{option.label}</span>
-                    {isSelected && (
-                      <Check className="h-4 w-4 text-secondary" />
-                    )}
+                    {isSelected && <Check className="h-4 w-4 text-secondary" />}
                   </button>
                 );
               })}
@@ -447,25 +483,23 @@ export default function AllFiltersDrawer({
                 </span>
               )}
             </h3>
-            
+
             <div className="space-y-1">
               {allAmenities.map((amenity) => {
                 const isSelected = draftFilters.amenities.includes(amenity.id);
-                
+
                 return (
                   <button
                     key={amenity.id}
                     onClick={() => toggleAmenity(amenity.id)}
                     className={`w-full flex items-center justify-between px-4 py-3 text-left hover:bg-muted/50 transition-colors min-h-[44px] rounded-md ${
-                      isSelected ? 'bg-muted/30' : ''
+                      isSelected ? "bg-muted/30" : ""
                     }`}
                     role="option"
                     aria-selected={isSelected}
                   >
                     <span className="text-sm font-medium">{amenity.label}</span>
-                    {isSelected && (
-                      <Check className="h-4 w-4 text-secondary" />
-                    )}
+                    {isSelected && <Check className="h-4 w-4 text-secondary" />}
                   </button>
                 );
               })}
@@ -476,24 +510,13 @@ export default function AllFiltersDrawer({
         {/* Sticky Footer */}
         <SheetFooter className="p-6 pt-4 pb-8 border-t sticky bottom-0 bg-background pb-[calc(env(safe-area-inset-bottom)+2rem)]">
           <div className="flex gap-3 w-full">
-            <Button
-              variant="outline"
-              onClick={handleReset}
-              className="flex-1 min-h-[44px]"
-            >
+            <Button variant="outline" onClick={handleReset} className="flex-1 min-h-[44px]">
               Reset
             </Button>
-            <Button
-              variant="outline"
-              onClick={onClose}
-              className="flex-1 min-h-[44px]"
-            >
+            <Button variant="outline" onClick={onClose} className="flex-1 min-h-[44px]">
               Cancel
             </Button>
-            <Button
-              onClick={handleApply}
-              className="flex-1 min-h-[44px]"
-            >
+            <Button onClick={handleApply} className="flex-1 min-h-[44px]">
               Show results ({liveCount || 0})
             </Button>
           </div>

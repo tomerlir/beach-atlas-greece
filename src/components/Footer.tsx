@@ -5,26 +5,20 @@ const Footer = () => {
     <footer className="bg-muted py-8 mt-16">
       <div className="container mx-auto px-4 text-center">
         <div className="flex flex-col items-center justify-center gap-2 md:flex-row md:flex-wrap md:gap-x-6 md:gap-y-2 mb-4">
-          <Link 
-            to="/faq" 
-            className="text-muted-foreground hover:text-primary transition-colors"
-          >
+          <Link to="/faq" className="text-muted-foreground hover:text-primary transition-colors">
             FAQ
           </Link>
-          <Link 
-            to="/guide" 
-            className="text-muted-foreground hover:text-primary transition-colors"
-          >
+          <Link to="/guide" className="text-muted-foreground hover:text-primary transition-colors">
             Guide
           </Link>
-          <Link 
-            to="/ontology" 
+          <Link
+            to="/ontology"
             className="text-muted-foreground hover:text-primary transition-colors"
           >
             Ontology
           </Link>
-          <Link 
-            to="/privacy" 
+          <Link
+            to="/privacy"
             className="text-muted-foreground hover:text-primary transition-colors"
           >
             Privacy policy
@@ -33,7 +27,7 @@ const Footer = () => {
             type="button"
             onClick={() => {
               try {
-                window.dispatchEvent(new CustomEvent('open-privacy-preferences'));
+                window.dispatchEvent(new CustomEvent("open-privacy-preferences"));
               } catch {}
             }}
             className="text-muted-foreground hover:text-primary transition-colors underline-offset-4 hover:underline"

@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from "react";
 
 export interface BeachFormDraft {
   name: string;
@@ -21,28 +21,28 @@ export interface BeachFormDraft {
 }
 
 const DEFAULT_DRAFT: BeachFormDraft = {
-  name: '',
-  area_id: '', // Changed from 'area' to 'area_id'
-  latitude: '',
-  longitude: '',
-  description: '',
-  type: 'OTHER',
-  wave_conditions: 'CALM',
+  name: "",
+  area_id: "", // Changed from 'area' to 'area_id'
+  latitude: "",
+  longitude: "",
+  description: "",
+  type: "OTHER",
+  wave_conditions: "CALM",
   organized: false,
-  parking: 'NONE',
+  parking: "NONE",
   blue_flag: false,
   amenities: [],
-  photo_url: '',
-  photo_source: '',
-  status: 'DRAFT',
-  slug: '',
-  source: '',
+  photo_url: "",
+  photo_source: "",
+  status: "DRAFT",
+  slug: "",
+  source: "",
   markVerified: false,
 };
 
 export const useFormDraftState = (formKey: string, initialData?: Partial<BeachFormDraft>) => {
   const storageKey = `beach-form-draft-${formKey}`;
-  
+
   // Initialize state from localStorage or initial data
   const [draft, setDraft] = useState<BeachFormDraft>(() => {
     try {
@@ -52,7 +52,7 @@ export const useFormDraftState = (formKey: string, initialData?: Partial<BeachFo
         return { ...DEFAULT_DRAFT, ...parsed };
       }
     } catch (error) {
-      console.warn('Failed to parse stored draft:', error);
+      console.warn("Failed to parse stored draft:", error);
     }
     return { ...DEFAULT_DRAFT, ...initialData };
   });
@@ -71,13 +71,13 @@ export const useFormDraftState = (formKey: string, initialData?: Partial<BeachFo
     try {
       localStorage.setItem(storageKey, JSON.stringify(draft));
     } catch (error) {
-      console.warn('Failed to save draft to localStorage:', error);
+      console.warn("Failed to save draft to localStorage:", error);
     }
   }, [draft, storageKey]);
 
   // Update draft with partial data
   const updateDraft = useCallback((updates: Partial<BeachFormDraft>) => {
-    setDraft(prev => ({ ...prev, ...updates }));
+    setDraft((prev) => ({ ...prev, ...updates }));
   }, []);
 
   // Reset draft to initial data or default
@@ -92,7 +92,7 @@ export const useFormDraftState = (formKey: string, initialData?: Partial<BeachFo
     try {
       localStorage.removeItem(storageKey);
     } catch (error) {
-      console.warn('Failed to clear draft from localStorage:', error);
+      console.warn("Failed to clear draft from localStorage:", error);
     }
   }, [storageKey]);
 

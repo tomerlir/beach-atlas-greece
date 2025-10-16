@@ -3,8 +3,8 @@
  * Implements advanced geographic filtering with coordinate-based searches
  */
 
-import { Beach } from '@/types/beach';
-import { LocationMatcher, LocationFilter, LocationMatch } from './LocationMatcher.js';
+import { Beach } from "@/types/beach";
+import { LocationMatcher, LocationFilter, LocationMatch } from "./LocationMatcher.js";
 
 export interface GeographicSearchResult {
   beaches: (Beach & { distance?: number })[];
@@ -54,30 +54,30 @@ export class GeographicFilter {
     } = {}
   ): GeographicSearchResult {
     const { exactMatch = false, includeNearby = false, nearbyRadiusKm = 50 } = options;
-    
+
     // Find location match
     const locationMatch = this.locationMatcher.findLocationMatch(locationQuery);
-    
+
     if (!locationMatch) {
       // Fallback to text-based filtering
       return this.fallbackTextFilter(beaches, locationQuery);
     }
 
     let filteredBeaches: (Beach & { distance?: number })[] = [];
-    const appliedFilters: GeographicSearchResult['appliedFilters'] = {
-      location: locationMatch
+    const appliedFilters: GeographicSearchResult["appliedFilters"] = {
+      location: locationMatch,
     };
 
     // Primary filtering by area
-    const areaBeaches = beaches.filter(beach => 
-      beach.area?.toLowerCase() === locationMatch.area.toLowerCase()
+    const areaBeaches = beaches.filter(
+      (beach) => beach.area?.toLowerCase() === locationMatch.area.toLowerCase()
     );
 
     // Calculate distances if coordinates are available
     if (locationMatch.coordinates) {
-      filteredBeaches = areaBeaches.map(beach => ({
+      filteredBeaches = areaBeaches.map((beach) => ({
         ...beach,
-        distance: this.calculateBeachDistance(beach, locationMatch.coordinates!)
+        distance: this.calculateBeachDistance(beach, locationMatch.coordinates!),
       }));
 
       // Sort by distance
@@ -86,12 +86,12 @@ export class GeographicFilter {
       // Include nearby beaches if requested
       if (includeNearby && !exactMatch) {
         const nearbyBeaches = beaches
-          .filter(beach => beach.area?.toLowerCase() !== locationMatch.area.toLowerCase())
-          .map(beach => ({
+          .filter((beach) => beach.area?.toLowerCase() !== locationMatch.area.toLowerCase())
+          .map((beach) => ({
             ...beach,
-            distance: this.calculateBeachDistance(beach, locationMatch.coordinates!)
+            distance: this.calculateBeachDistance(beach, locationMatch.coordinates!),
           }))
-          .filter(beach => (beach.distance || Infinity) <= nearbyRadiusKm)
+          .filter((beach) => (beach.distance || Infinity) <= nearbyRadiusKm)
           .sort((a, b) => (a.distance || 0) - (b.distance || 0));
 
         filteredBeaches = [...filteredBeaches, ...nearbyBeaches];
@@ -103,7 +103,7 @@ export class GeographicFilter {
     return {
       beaches: filteredBeaches,
       appliedFilters,
-      totalResults: filteredBeaches.length
+      totalResults: filteredBeaches.length,
     };
   }
 
@@ -115,14 +115,14 @@ export class GeographicFilter {
     options: ProximitySearchOptions
   ): GeographicSearchResult {
     const { center, radiusKm, maxResults = 100 } = options;
-    
-    const beachesWithDistance = beaches.map(beach => ({
+
+    const beachesWithDistance = beaches.map((beach) => ({
       ...beach,
-      distance: this.calculateBeachDistance(beach, center)
+      distance: this.calculateBeachDistance(beach, center),
     }));
-    
+
     const filteredBeaches = beachesWithDistance
-      .filter(beach => (beach.distance ?? Infinity) <= radiusKm)
+      .filter((beach) => (beach.distance ?? Infinity) <= radiusKm)
       .sort((a, b) => (a.distance ?? 0) - (b.distance ?? 0))
       .slice(0, maxResults);
 
@@ -131,11 +131,11 @@ export class GeographicFilter {
       appliedFilters: {
         proximity: {
           center,
-          radius: radiusKm
-        }
+          radius: radiusKm,
+        },
       },
       totalResults: filteredBeaches.length,
-      searchRadius: radiusKm
+      searchRadius: radiusKm,
     };
   }
 
@@ -151,61 +151,63 @@ export class GeographicFilter {
     } = {}
   ): GeographicSearchResult {
     const { includeSubAreas = false, includeParentAreas = false } = options;
-    
+
     // Find area match
     const areaMatch = this.locationMatcher.findLocationMatch(areaName);
-    
+
     if (!areaMatch) {
       // Fallback to exact area matching
-      const filteredBeaches = beaches.filter(beach => 
-        beach.area?.toLowerCase() === areaName.toLowerCase()
+      const filteredBeaches = beaches.filter(
+        (beach) => beach.area?.toLowerCase() === areaName.toLowerCase()
       );
-      
+
       return {
         beaches: filteredBeaches,
         appliedFilters: { area: areaName },
-        totalResults: filteredBeaches.length
+        totalResults: filteredBeaches.length,
       };
     }
 
     let filteredBeaches: Beach[] = [];
 
     // Primary area filtering
-    filteredBeaches = beaches.filter(beach => 
-      beach.area?.toLowerCase() === areaMatch.area.toLowerCase()
+    filteredBeaches = beaches.filter(
+      (beach) => beach.area?.toLowerCase() === areaMatch.area.toLowerCase()
     );
 
     // Include sub-areas if requested
     if (includeSubAreas && areaMatch.hierarchy.region) {
-      const subAreaBeaches = beaches.filter(beach => {
-        const beachLocation = this.locationMatcher.findLocationMatch(beach.area || '');
-        return beachLocation?.hierarchy.region === areaMatch.hierarchy.region &&
-               beach.area?.toLowerCase() !== areaMatch.area.toLowerCase();
+      const subAreaBeaches = beaches.filter((beach) => {
+        const beachLocation = this.locationMatcher.findLocationMatch(beach.area || "");
+        return (
+          beachLocation?.hierarchy.region === areaMatch.hierarchy.region &&
+          beach.area?.toLowerCase() !== areaMatch.area.toLowerCase()
+        );
       });
       filteredBeaches = [...filteredBeaches, ...subAreaBeaches];
     }
 
     // Include parent areas if requested
     if (includeParentAreas && areaMatch.hierarchy.region) {
-      const parentAreaBeaches = beaches.filter(beach => {
-        const beachLocation = this.locationMatcher.findLocationMatch(beach.area || '');
+      const parentAreaBeaches = beaches.filter((beach) => {
+        const beachLocation = this.locationMatcher.findLocationMatch(beach.area || "");
         return beachLocation?.hierarchy.region === areaMatch.hierarchy.region;
       });
       filteredBeaches = [...filteredBeaches, ...parentAreaBeaches];
     }
 
     // Remove duplicates
-    const uniqueBeaches = filteredBeaches.filter((beach, index, self) => 
-      index === self.findIndex(b => b.id === beach.id)
+    const uniqueBeaches = filteredBeaches.filter(
+      (beach, index, self) => index === self.findIndex((b) => b.id === beach.id)
     );
 
     return {
       beaches: uniqueBeaches,
-      appliedFilters: { 
+      appliedFilters: {
         location: areaMatch,
-        area: areaMatch.area 
+        area: areaMatch.area,
       },
-      totalResults: uniqueBeaches.length
+      totalResults: uniqueBeaches.length,
     };
   }
 
@@ -221,7 +223,7 @@ export class GeographicFilter {
     } = {}
   ): GeographicSearchResult {
     const { union = true, maxResultsPerLocation = 50 } = options;
-    
+
     const locationResults: GeographicSearchResult[] = [];
     const allMatches: LocationMatch[] = [];
 
@@ -238,11 +240,11 @@ export class GeographicFilter {
       return {
         beaches: [],
         appliedFilters: {},
-        totalResults: 0
+        totalResults: 0,
       };
     }
 
-    let combinedBeaches: (Beach & { distance?: number })[] = [];
+    const combinedBeaches: (Beach & { distance?: number })[] = [];
 
     if (union) {
       // OR logic: combine all results
@@ -263,11 +265,11 @@ export class GeographicFilter {
           beachCounts.set(beach.id, (beachCounts.get(beach.id) || 0) + 1);
         }
       }
-      
+
       const requiredCount = locationResults.length;
       for (const [beachId, count] of beachCounts) {
         if (count === requiredCount) {
-          const beach = beaches.find(b => b.id === beachId);
+          const beach = beaches.find((b) => b.id === beachId);
           if (beach) {
             combinedBeaches.push(beach as Beach & { distance?: number });
           }
@@ -281,9 +283,9 @@ export class GeographicFilter {
     return {
       beaches: combinedBeaches,
       appliedFilters: {
-        location: allMatches[0] // Primary location
+        location: allMatches[0], // Primary location
       },
-      totalResults: combinedBeaches.length
+      totalResults: combinedBeaches.length,
     };
   }
 
@@ -294,8 +296,12 @@ export class GeographicFilter {
     beach: Beach,
     coordinates: { latitude: number; longitude: number }
   ): number {
-    if (beach.latitude === null || beach.latitude === undefined || 
-        beach.longitude === null || beach.longitude === undefined) {
+    if (
+      beach.latitude === null ||
+      beach.latitude === undefined ||
+      beach.longitude === null ||
+      beach.longitude === undefined
+    ) {
       return Infinity; // No coordinates available
     }
 
@@ -308,24 +314,20 @@ export class GeographicFilter {
   /**
    * Fallback text-based filtering when location matching fails
    */
-  private fallbackTextFilter(
-    beaches: Beach[],
-    locationQuery: string
-  ): GeographicSearchResult {
+  private fallbackTextFilter(beaches: Beach[], locationQuery: string): GeographicSearchResult {
     const normalizedQuery = locationQuery.toLowerCase().trim();
-    
-    const filteredBeaches = beaches.filter(beach => {
-      const beachArea = beach.area?.toLowerCase() || '';
-      const beachName = beach.name?.toLowerCase() || '';
-      
-      return beachArea.includes(normalizedQuery) ||
-             beachName.includes(normalizedQuery);
+
+    const filteredBeaches = beaches.filter((beach) => {
+      const beachArea = beach.area?.toLowerCase() || "";
+      const beachName = beach.name?.toLowerCase() || "";
+
+      return beachArea.includes(normalizedQuery) || beachName.includes(normalizedQuery);
     });
 
     return {
       beaches: filteredBeaches,
       appliedFilters: {},
-      totalResults: filteredBeaches.length
+      totalResults: filteredBeaches.length,
     };
   }
 
@@ -349,22 +351,21 @@ export class GeographicFilter {
     matchedLocation?: LocationMatch;
   } {
     const match = this.locationMatcher.findLocationMatch(query);
-    
+
     if (match && match.confidence > 0.8) {
       return {
         isValid: true,
         confidence: match.confidence,
-        matchedLocation: match
+        matchedLocation: match,
       };
     }
 
     // Provide suggestions for invalid queries
-    const suggestions = this.getLocationSuggestions(query, 5)
-      .map(loc => loc.place);
+    const suggestions = this.getLocationSuggestions(query, 5).map((loc) => loc.place);
 
     return {
       isValid: false,
-      suggestions: suggestions.length > 0 ? suggestions : undefined
+      suggestions: suggestions.length > 0 ? suggestions : undefined,
     };
   }
 }

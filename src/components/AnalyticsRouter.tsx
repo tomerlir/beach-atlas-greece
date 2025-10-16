@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
-import { analytics } from '@/lib/analytics';
+import { useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
+import { analytics } from "@/lib/analytics";
 
 export default function AnalyticsRouter() {
   const location = useLocation();
@@ -8,7 +8,7 @@ export default function AnalyticsRouter() {
 
   useEffect(() => {
     // Skip tracking for admin routes
-    if (location.pathname.startsWith('/admin')) {
+    if (location.pathname.startsWith("/admin")) {
       return;
     }
 
