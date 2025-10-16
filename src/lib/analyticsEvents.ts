@@ -7,6 +7,7 @@
 
 export type AnalyticsProps = Record<string, unknown>;
 
+
 // Umami global interface for type safety
 declare global {
   interface Window {
@@ -24,12 +25,13 @@ export type OrganizedType = 'ORGANIZED' | 'UNORGANIZED';
 export type FilterName = 'blue_flag' | 'near_me' | 'organized' | 'beach_type' | 'wave_conditions' | 'parking' | 'amenities' | 'type' | 'wave' | 'all';
 
 // Base event payloads
-export interface PageViewEvent {
-  path: string;
+export interface PageViewEvent extends AnalyticsProps {
+  page_path: string;
   referrer?: string;
+  previous_path?: string;
 }
 
-export interface SearchSubmitEvent {
+export interface SearchSubmitEvent extends AnalyticsProps {
   q: string;
   q_len: number;
   chips_count: number;
@@ -46,7 +48,7 @@ export interface SearchSubmitEvent {
   };
 }
 
-export interface ResultsViewEvent {
+export interface ResultsViewEvent extends AnalyticsProps {
   count: number;
   relaxed: boolean;
   query_hash?: string;
@@ -62,37 +64,38 @@ export interface FilterClearEvent extends AnalyticsProps {
   name: FilterName;
 }
 
-export interface MapOpenEvent {
+export interface MapOpenEvent extends AnalyticsProps {
   entry: 'home' | 'area' | 'nav';
 }
 
-export interface MapEngagementEvent {
+export interface MapEngagementEvent extends AnalyticsProps {
   duration_ms: number;
   total_interactions: number;
   unique_beaches_viewed: number;
   exploration_intensity: 'low' | 'medium' | 'high';
 }
 
-export interface BeachEngagementEvent {
+export interface BeachEngagementEvent extends AnalyticsProps {
   beach_id: string;
   source: 'search' | 'map' | 'browsing' | 'area_explore';
   query_hash?: string;
+  page_path?: string;
 }
 
-export interface BeachConversionEvent {
+export interface BeachConversionEvent extends AnalyticsProps {
   beach_id: string;
   action: 'directions' | 'share' | 'save';
   source: 'detail' | 'card' | 'map';
 }
 
-export interface SearchQualityEvent {
+export interface SearchQualityEvent extends AnalyticsProps {
   query_hash: string;
   outcome: 'success' | 'empty' | 'relaxed' | 'abandoned';
   first_engagement_beach_id?: string;
   time_to_engagement_ms?: number;
 }
 
-export interface SessionSummaryEvent {
+export interface SessionSummaryEvent extends AnalyticsProps {
   searches_count: number;
   beaches_engaged: number;
   conversions_count: number;
@@ -100,8 +103,8 @@ export interface SessionSummaryEvent {
   outcome: 'converted' | 'browsed' | 'bounced';
 }
 
-export interface NotFoundEvent {
-  path: string;
+export interface NotFoundEvent extends AnalyticsProps {
+  page_path: string;
 }
 
 // Event name constants for type safety
@@ -123,9 +126,10 @@ export const ANALYTICS_EVENTS = {
 export type AnalyticsEventName = typeof ANALYTICS_EVENTS[keyof typeof ANALYTICS_EVENTS];
 
 // Helper functions to create properly typed events
-export const createPageViewEvent = (path: string, referrer?: string): PageViewEvent => ({
-  path,
+export const createPageViewEvent = (page_path: string, referrer?: string, previous_path?: string): PageViewEvent => ({
+  page_path,
   referrer,
+  previous_path,
 });
 
 export const createSearchSubmitEvent = (
@@ -141,11 +145,19 @@ export const createSearchSubmitEvent = (
   extracted,
 });
 
-export const createResultsViewEvent = (count: number, relaxed: boolean, query_hash?: string): ResultsViewEvent => ({
-  count,
-  relaxed,
-  query_hash,
-});
+export const createResultsViewEvent = (count: number, relaxed: boolean, query_hash?: string): ResultsViewEvent => {
+  const event: any = {
+    count,
+    relaxed,
+  };
+  
+  // Only include query_hash if it exists
+  if (query_hash) {
+    event.query_hash = query_hash;
+  }
+  
+  return event;
+};
 
 export const createFilterApplyEvent = (name: FilterName, value: string, results: number): FilterApplyEvent => ({
   name,
@@ -176,11 +188,13 @@ export const createMapEngagementEvent = (
 export const createBeachEngagementEvent = (
   beach_id: string, 
   source: BeachEngagementEvent['source'],
-  query_hash?: string
+  query_hash?: string,
+  page_path?: string
 ): BeachEngagementEvent => ({
   beach_id,
   source,
   query_hash,
+  page_path,
 });
 
 export const createBeachConversionEvent = (
@@ -219,6 +233,6 @@ export const createSessionSummaryEvent = (
   outcome,
 });
 
-export const createNotFoundEvent = (path: string): NotFoundEvent => ({
-  path,
+export const createNotFoundEvent = (page_path: string): NotFoundEvent => ({
+  page_path,
 });

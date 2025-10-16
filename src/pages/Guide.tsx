@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Waves, Car, Shield, Star, Sparkles, ListChecks } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Guide = () => {
   const seoTitle = "How to Choose the Perfect Greek Beach | Beaches of Greece";
@@ -248,10 +249,10 @@ const Guide = () => {
               <CardContent className="p-6">
                 <h3 className="font-semibold text-lg mb-3">Continue exploring</h3>
                 <div className="flex flex-wrap gap-3">
-                  <Button asChild size="sm" variant="outline"><a href="/faq">Read the FAQ</a></Button>
-                  <Button asChild size="sm" variant="outline"><a href="/areas">Browse Areas</a></Button>
-                  <Button asChild size="sm" variant="outline"><a href="/map">Open the Map</a></Button>
-                  <Button asChild size="sm" variant="outline"><a href="/ontology">Beach Data Ontology</a></Button>
+                  <Button asChild size="sm" variant="outline"><Link to="/faq">Read the FAQ</Link></Button>
+                  <Button asChild size="sm" variant="outline"><Link to="/areas">Browse Areas</Link></Button>
+                  <Button asChild size="sm" variant="outline"><Link to="/map">Open the Map</Link></Button>
+                  <Button asChild size="sm" variant="outline"><Link to="/ontology">Beach Data Ontology</Link></Button>
                 </div>
               </CardContent>
             </Card>

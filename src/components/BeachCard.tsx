@@ -117,15 +117,6 @@ const BeachCard = ({ beach, distance, showDistance = true, compact = false, enga
 
   // Handle click to store navigation source for better back navigation
   const handleBeachCardClick = () => {
-    // Track engagement if source is provided
-    if (engagementSource) {
-      const queryHash = typeof window !== 'undefined' 
-        ? sessionStorage.getItem('current_query_hash') || undefined
-        : undefined;
-      
-      analytics.trackBeachEngagement(beach.id, engagementSource, queryHash);
-    }
-    
     storeNavigationSource();
   };
 

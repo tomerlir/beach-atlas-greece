@@ -5,6 +5,7 @@ import { Switch } from '@/components/ui/switch';
 import { Label } from '@/components/ui/label';
 import { X, BarChart3 } from 'lucide-react';
 import { analytics, type ConsentState } from '@/lib/analytics';
+import { Link } from 'react-router-dom';
 
 export default function ConsentBanner() {
   const [consent, setConsent] = useState<ConsentState>('unknown');
@@ -129,14 +130,12 @@ export default function ConsentBanner() {
               {/* Description - full width */}
               <p className="text-sm text-muted-foreground leading-relaxed">
                 With your permission, we'd also like to enable privacy-friendly analytics (cookieless) to help us improve Beaches of Greece.
-                <a 
-                  href="/privacy" 
+                <Link 
+                  to="/privacy" 
                   className="text-primary hover:underline ml-1"
-                  target="_blank"
-                  rel="noopener noreferrer"
                 >
                   Privacy policy
-                </a>
+                </Link>
               </p>
 
               {/* Buttons - full width */}

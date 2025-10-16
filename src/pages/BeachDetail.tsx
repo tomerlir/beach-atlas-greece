@@ -112,8 +112,42 @@ const BeachDetail = () => {
     gcTime: 10 * 60 * 1000, // 10 minutes (renamed from cacheTime in newer versions)
   });
 
-  // Note: Beach engagement is tracked at the point of interaction (BeachCard click, Map pin open)
-  // not here in BeachDetail to avoid incorrect source inference
+  // Track beach engagement after page loads to ensure correct page_path context
+  useEffect(() => {
+    if (beach) {
+      // Get query hash if available - this indicates search source
+      const queryHash = sessionStorage.getItem('current_query_hash') || undefined;
+      
+      // Determine engagement source from navigation history and search context
+      const navigationSource = sessionStorage.getItem('beach-navigation-source');
+      let source: 'search' | 'map' | 'browsing' | 'area_explore' = 'browsing';
+      
+      // If there's a query hash, this is definitely from a search
+      if (queryHash) {
+        source = 'search';
+      } else if (navigationSource) {
+        if (navigationSource.includes('/map')) {
+          source = 'map';
+        } else if (navigationSource.includes('/') && navigationSource !== '/') {
+          // Check if coming from another beach page (beach-to-beach navigation)
+          const pathParts = navigationSource.split('/').filter(Boolean);
+          if (pathParts.length >= 2) {
+            // This is a beach URL (e.g., /corfu/beach1), so it's browsing
+            source = 'browsing';
+          } else {
+            // This is an area URL (e.g., /corfu), so it's area exploration
+            source = 'area_explore';
+          }
+        } else {
+          source = 'browsing'; // From homepage without search
+        }
+      }
+      
+      // Track engagement with correct page_path context
+      // Only pass queryHash if it exists (i.e., if this is from a search)
+      analytics.trackBeachEngagement(beach.id, source, queryHash);
+    }
+  }, [beach]);
 
   // Fetch siblings in same area, excluding current beach
   const { data: siblings = [] } = useQuery({

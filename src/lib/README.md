@@ -41,7 +41,7 @@ We track **fewer events, but make each one count**. Every event answers a clear 
 
 | Event | Description | Key Props | Business Question |
 |-------|-------------|-----------|-------------------|
-| `page_view` | SPA route changes | `path`, `referrer` | Where do users go? |
+| `page_view` | SPA route changes | `page_path`, `referrer`, `previous_path` | Where do users go? |
 | `search_submit` | Search queries | `q`, `extracted`, `context` | What are users looking for? |
 | `results_view` | Search results displayed | `count`, `relaxed`, `query_hash` | How many results do searches return? |
 | `search_quality` | Search outcome | `query_hash`, `outcome`, `time_to_engagement_ms` | Do searches work for users? |

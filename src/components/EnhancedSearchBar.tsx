@@ -207,7 +207,7 @@ export default function EnhancedSearchBar({
       
       analytics.event('search_submit', searchEvent);
       
-      // Track the search with abandonment timer
+      // Track search for session management and quality tracking
       analytics.trackSearch(queryHash);
     } catch (error) {
       console.error('Search extraction failed:', error);

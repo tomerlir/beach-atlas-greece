@@ -20,7 +20,7 @@ export function MoreInArea({ area, beaches }: { area: SlimArea; beaches: Beach[]
           <CarouselContent>
             {beaches.map((b) => (
               <CarouselItem key={b.slug} className="basis-[85%] sm:basis-1/2 lg:basis-1/3">
-                <BeachCard beach={b as any} showDistance={false} compact engagementSource="area_explore" />
+                <BeachCard beach={b} showDistance={false} compact engagementSource="browsing" />
               </CarouselItem>
             ))}
             <CarouselItem className="basis-[85%] sm:basis-1/2 lg:basis-1/3">

@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Waves, X, MapPin, Car, AlertCircle } from "lucide-react";
+import { X, MapPin, Car, AlertCircle } from "lucide-react";
 import { FilterState } from "@/hooks/useUrlState";
 import { useBeachSuggestions } from "@/hooks/useBeachSuggestions";
 import BeachCard from "./BeachCard";
@@ -190,7 +189,7 @@ export default function EmptyState({
                     <>
                       {suggestions.map((b) => (
                         <CarouselItem key={b.slug} className="basis-[85%] sm:basis-1/2 lg:basis-1/3">
-                          <BeachCard beach={b as any} distance={b.distance} compact engagementSource="browsing" />
+                          <BeachCard beach={b} distance={b.distance} compact engagementSource="browsing" />
                         </CarouselItem>
                       ))}
                       <CarouselItem className="basis-[85%] sm:basis-1/2 lg:basis-1/3">

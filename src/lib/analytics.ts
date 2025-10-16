@@ -19,10 +19,11 @@ const isBrowser = typeof window !== 'undefined';
 export type ConsentState = 'accepted' | 'rejected' | 'unknown';
 
 interface AnalyticsContext {
-  route?: string;
+  page_path?: string;
   area?: string;
   utm?: Record<string, string>;
   session_id?: string;
+  previous_path?: string;
 }
 
 interface QueuedEvent {
@@ -98,6 +99,20 @@ class AnalyticsSDK {
       console.log('Context:', this.context);
       console.groupEnd();
     }
+    
+    // Track initial page load if in browser
+    if (isBrowser) {
+      this.trackInitialPageLoad();
+    }
+  }
+
+  private trackInitialPageLoad() {
+    // Set initial page path in context
+    const initialPath = window.location.pathname;
+    this.setContext({ page_path: initialPath });
+    
+    // Track the initial page view
+    this.trackPageview(initialPath);
   }
 
   setConsent(state: ConsentState) {
@@ -143,13 +158,22 @@ class AnalyticsSDK {
     }
   }
 
-  trackPageview(path?: string, referrer?: string) {
-    const currentPath = path || (isBrowser ? window.location.pathname : '');
+
+  trackPageview(pagePath?: string, referrer?: string) {
+    const currentPagePath = pagePath || this.context.page_path || (isBrowser ? window.location.pathname : '/');
     const currentReferrer = referrer || (isBrowser ? document.referrer : undefined);
+    const previousPath = this.context.previous_path;
+    
+    // Update context with current page path
+    this.setContext({ 
+      page_path: currentPagePath,
+      previous_path: this.context.page_path 
+    });
     
     this.event('page_view', {
-      path: currentPath,
+      page_path: currentPagePath,
       referrer: currentReferrer,
+      previous_path: previousPath,
     });
   }
 
@@ -231,11 +255,17 @@ class AnalyticsSDK {
     }
 
     // Emit beach engagement event (session_quality removed - it's a session-level metric in session_summary)
-    this.event('beach_engagement', {
+    const eventProps: any = {
       beach_id: beachId,
       source,
-      query_hash: queryHash,
-    });
+    };
+    
+    // Only include query_hash if it exists (i.e., if this is from a search)
+    if (queryHash) {
+      eventProps.query_hash = queryHash;
+    }
+    
+    this.event('beach_engagement', eventProps);
   }
 
   // Track search quality outcomes
@@ -657,7 +687,7 @@ export const analytics = {
   getConsent: () => analyticsSDK.getConsent(),
   onConsentChange: (callback: (state: ConsentState) => void) => analyticsSDK.onConsentChange(callback),
   setContext: (ctx: Partial<AnalyticsContext>) => analyticsSDK.setContext(ctx),
-  trackPageview: (path?: string, referrer?: string) => analyticsSDK.trackPageview(path, referrer),
+  trackPageview: (pagePath?: string, referrer?: string) => analyticsSDK.trackPageview(pagePath, referrer),
   event: (name: string, props?: AnalyticsProps) => analyticsSDK.event(name, props),
   generateQueryHash: (query: string, filters?: Record<string, unknown>) => analyticsSDK.generateQueryHash(query, filters),
   trackBeachEngagement: (beachId: string, source: 'search' | 'map' | 'browsing' | 'area_explore', queryHash?: string) => 

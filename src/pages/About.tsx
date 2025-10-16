@@ -4,6 +4,7 @@ import { CONTACT_EMAIL } from "@/lib/constants";
 import { Helmet } from "react-helmet-async";
 import { BreadcrumbsWithJsonLd } from "@/components/breadcrumbs/BreadcrumbsWithJsonLd";
 import OrganizationSchema from "@/components/OrganizationSchema";
+import { Link } from "react-router-dom";
 
 const About = () => {
   
@@ -173,9 +174,9 @@ const About = () => {
             
             <p className="text-muted-foreground mb-6">
               For complete details on our data model and verification process, visit our {" "}
-              <a href="/ontology" className="text-primary hover:text-primary/80 underline transition-colors"> 
+              <Link to="/ontology" className="text-primary hover:text-primary/80 underline transition-colors"> 
                 Beach Data Ontology
-              </a> page.
+              </Link> page.
             </p>
             
             <h2 className="text-2xl font-semibold text-foreground mb-4">For Partners</h2>
@@ -209,9 +210,9 @@ const About = () => {
             <p className="text-muted-foreground mb-6">
               Every beach entry includes verification dates and quality standards. 
               We strive to keep all information accurate and up-to-date with transparent {" "}
-              <a href="/ontology" className="text-primary hover:text-primary/80 underline transition-colors"> 
+              <Link to="/ontology" className="text-primary hover:text-primary/80 underline transition-colors"> 
                 data quality standards
-              </a>.
+              </Link>.
             </p>
             
             <h2 className="text-2xl font-semibold text-foreground mb-4">Contact Us</h2>
