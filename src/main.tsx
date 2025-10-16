@@ -6,7 +6,7 @@ import { analytics } from "./lib/analytics";
 
 // Initialize analytics
 analytics.init({
-  enabled: import.meta.env.PROD,
+  enabled: true,
   debug: !import.meta.env.PROD,
 });
 

@@ -6,6 +6,11 @@ export default function AnalyticsRouter() {
   const location = useLocation();
 
   useEffect(() => {
+    // Skip tracking for admin routes
+    if (location.pathname.startsWith('/admin')) {
+      return;
+    }
+
     // Track pageview on route change
     analytics.trackPageview(location.pathname);
     

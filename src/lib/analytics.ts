@@ -31,10 +31,22 @@ interface QueuedEvent {
   timestamp: number;
 }
 
-interface CBMDedupeEntry {
-  beach_id: string;
-  method: 'directions' | 'share';
-  timestamp: number;
+interface MapSessionState {
+  startTime: number;
+  interactions: number;
+  viewedBeaches: Set<string>;
+  timer: NodeJS.Timeout | null;
+}
+
+interface SessionState {
+  startTime: number;
+  lastActivity: number;
+  searchesCount: number;
+  engagedBeaches: Set<string>;
+  conversionsCount: number;
+  currentSearch: { query_hash: string; timestamp: number } | null;
+  searchTimer: NodeJS.Timeout | null;
+  mapSession: MapSessionState | null;
 }
 
 class AnalyticsSDK {
@@ -43,18 +55,35 @@ class AnalyticsSDK {
   private consent: ConsentState = 'unknown';
   private context: AnalyticsContext = {};
   private eventQueue: QueuedEvent[] = [];
-  private cbmDedupe: CBMDedupeEntry[] = [];
   private consentCallbacks: ((state: ConsentState) => void)[] = [];
   private sessionId: string;
+  private sessionState: SessionState;
+  private inactivityCheckInterval: NodeJS.Timeout | null = null;
+  private umamiReadyInterval: NodeJS.Timeout | null = null;
 
   constructor() {
     this.sessionId = this.generateSessionId();
     this.context.session_id = this.sessionId;
     
+    // Initialize session state
+    this.sessionState = {
+      startTime: Date.now(),
+      lastActivity: Date.now(),
+      searchesCount: 0,
+      engagedBeaches: new Set<string>(),
+      conversionsCount: 0,
+      currentSearch: null,
+      searchTimer: null,
+      mapSession: null,
+    };
+    
     if (isBrowser) {
       this.loadConsentState();
       this.captureUTMParams();
       this.setupOnlineHandler();
+      this.setupInactivityCheck();
+      this.setupUmamiReadyWatcher();
+      this.setupPageLifecycleHandlers();
     }
   }
 
@@ -137,6 +166,9 @@ class AnalyticsSDK {
       return;
     }
 
+    // Update last activity time for session tracking
+    this.updateActivity();
+
     const enrichedProps = this.enrichProps(props);
     
     if (this.debug) {
@@ -152,41 +184,228 @@ class AnalyticsSDK {
     this.sendToUmami(name, enrichedProps);
   }
 
-  cbm(beachId: string, method: 'directions' | 'share') {
-    // Check for deduplication (12 hours TTL)
-    const now = Date.now();
-    const twelveHours = 12 * 60 * 60 * 1000;
-    
-    const existingEntry = this.cbmDedupe.find(
-      entry => 
-        entry.beach_id === beachId && 
-        entry.method === method && 
-        (now - entry.timestamp) < twelveHours
-    );
-    
-    if (existingEntry) {
+  // Generate a simple hash for query tracking
+  generateQueryHash(query: string, filters: any = {}): string {
+    const data = JSON.stringify({ query, filters, ts: Date.now() });
+    // Simple hash function
+    let hash = 0;
+    for (let i = 0; i < data.length; i++) {
+      const char = data.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash; // Convert to 32-bit integer
+    }
+    return Math.abs(hash).toString(36);
+  }
+
+  // Calculate session quality based on current state
+  calculateSessionQuality(): 'high' | 'medium' | 'low' {
+    if (this.sessionState.conversionsCount > 0) return 'high';
+    if (this.sessionState.engagedBeaches.size > 2) return 'medium';
+    return 'low';
+  }
+
+  // Track beach engagement with deduplication
+  trackBeachEngagement(
+    beachId: string, 
+    source: 'search' | 'map' | 'browsing' | 'area_explore',
+    queryHash?: string
+  ) {
+    // Only track first engagement with each beach
+    if (this.sessionState.engagedBeaches.has(beachId)) {
       if (this.debug) {
-        console.log(`🚫 CBM deduplicated: ${beachId} (${method})`);
+        console.log(`🚫 Beach engagement deduplicated: ${beachId}`);
       }
       return;
     }
-    
-    // Add to dedupe cache
-    this.cbmDedupe.push({
+
+    // Mark beach as engaged
+    this.sessionState.engagedBeaches.add(beachId);
+
+    // If this is from a search, track search quality as success
+    if (queryHash && this.sessionState.currentSearch?.query_hash === queryHash) {
+      const timeToEngagement = Date.now() - this.sessionState.currentSearch.timestamp;
+      this.trackSearchQuality('success', {
+        first_engagement_beach_id: beachId,
+        time_to_engagement_ms: timeToEngagement,
+      });
+    }
+
+    // Emit beach engagement event (session_quality removed - it's a session-level metric in session_summary)
+    this.event('beach_engagement', {
       beach_id: beachId,
-      method,
-      timestamp: now,
+      source,
+      query_hash: queryHash,
     });
-    
-    // Clean old entries
-    this.cbmDedupe = this.cbmDedupe.filter(
-      entry => (now - entry.timestamp) < twelveHours
-    );
-    
-    this.event('cbm', {
-      beach_id: beachId,
-      method,
+  }
+
+  // Track search quality outcomes
+  trackSearchQuality(
+    outcome: 'success' | 'empty' | 'relaxed' | 'abandoned',
+    data?: { first_engagement_beach_id?: string; time_to_engagement_ms?: number }
+  ) {
+    if (!this.sessionState.currentSearch) return;
+
+    // Clear the search timer if it exists
+    if (this.sessionState.searchTimer) {
+      clearTimeout(this.sessionState.searchTimer);
+      this.sessionState.searchTimer = null;
+    }
+
+    // Emit search quality event
+    this.event('search_quality', {
+      query_hash: this.sessionState.currentSearch.query_hash,
+      outcome,
+      first_engagement_beach_id: data?.first_engagement_beach_id,
+      time_to_engagement_ms: data?.time_to_engagement_ms,
     });
+
+    // Clear current search
+    try {
+      if (isBrowser) {
+        sessionStorage.removeItem('current_query_hash');
+      }
+    } catch {}
+    this.sessionState.currentSearch = null;
+  }
+
+  // Track search submission
+  trackSearch(queryHash: string) {
+    // If there's a previous search that wasn't engaged, mark as abandoned
+    if (this.sessionState.currentSearch) {
+      this.trackSearchQuality('abandoned');
+    }
+
+    // Set new current search
+    this.sessionState.currentSearch = {
+      query_hash: queryHash,
+      timestamp: Date.now(),
+    };
+    this.sessionState.searchesCount++;
+
+    // Set 60-second timer for abandonment
+    this.sessionState.searchTimer = setTimeout(() => {
+      this.trackSearchQuality('abandoned');
+    }, 60000); // 60 seconds
+  }
+
+  // Track conversions
+  trackConversion() {
+    this.sessionState.conversionsCount++;
+  }
+
+  // Start a map session
+  startMapSession() {
+    // If there's an existing session, end it first
+    if (this.sessionState.mapSession) {
+      this.endMapSession();
+    }
+
+    this.sessionState.mapSession = {
+      startTime: Date.now(),
+      interactions: 0,
+      viewedBeaches: new Set<string>(),
+      timer: null,
+    };
+
+    // Set up periodic emission every 30 seconds
+    this.sessionState.mapSession.timer = setInterval(() => {
+      this.emitMapEngagement();
+    }, 30000); // 30 seconds
+
+    if (this.debug) {
+      console.log('🗺️ Map session started');
+    }
+  }
+
+  // Track a map interaction (pan/zoom)
+  trackMapInteraction() {
+    if (!this.sessionState.mapSession) return;
+    
+    this.sessionState.mapSession.interactions++;
+    
+    if (this.debug) {
+      console.log(`🗺️ Map interaction tracked (total: ${this.sessionState.mapSession.interactions})`);
+    }
+  }
+
+  // Track when a beach is viewed on the map (popup opened)
+  trackMapBeachView(beachId: string) {
+    if (!this.sessionState.mapSession) return;
+    
+    this.sessionState.mapSession.viewedBeaches.add(beachId);
+    
+    if (this.debug) {
+      console.log(`🗺️ Beach viewed on map: ${beachId} (unique: ${this.sessionState.mapSession.viewedBeaches.size})`);
+    }
+  }
+
+  // Calculate exploration intensity based on interactions and beaches viewed
+  private calculateExplorationIntensity(): 'low' | 'medium' | 'high' {
+    if (!this.sessionState.mapSession) return 'low';
+
+    const { interactions, viewedBeaches } = this.sessionState.mapSession;
+    const uniqueBeaches = viewedBeaches.size;
+
+    // High: 10+ interactions and 5+ beaches OR 20+ interactions
+    if ((interactions >= 10 && uniqueBeaches >= 5) || interactions >= 20) {
+      return 'high';
+    }
+
+    // Medium: 5+ interactions and 2+ beaches OR 10+ interactions
+    if ((interactions >= 5 && uniqueBeaches >= 2) || interactions >= 10) {
+      return 'medium';
+    }
+
+    return 'low';
+  }
+
+  // Emit map engagement event
+  private emitMapEngagement() {
+    if (!this.sessionState.mapSession) return;
+
+    const duration = Date.now() - this.sessionState.mapSession.startTime;
+    const interactions = this.sessionState.mapSession.interactions;
+    const uniqueBeaches = this.sessionState.mapSession.viewedBeaches.size;
+    const intensity = this.calculateExplorationIntensity();
+
+    // Only emit if there's been any activity
+    if (interactions > 0 || uniqueBeaches > 0) {
+      this.event('map_engagement', {
+        duration_ms: duration,
+        total_interactions: interactions,
+        unique_beaches_viewed: uniqueBeaches,
+        exploration_intensity: intensity,
+      });
+
+      if (this.debug) {
+        console.log('🗺️ Map engagement emitted', {
+          duration_ms: duration,
+          interactions,
+          uniqueBeaches,
+          intensity,
+        });
+      }
+    }
+  }
+
+  // End the map session and emit final engagement event
+  endMapSession() {
+    if (!this.sessionState.mapSession) return;
+
+    // Clear the periodic timer
+    if (this.sessionState.mapSession.timer) {
+      clearInterval(this.sessionState.mapSession.timer);
+    }
+
+    // Emit final engagement event
+    this.emitMapEngagement();
+
+    // Clear the map session
+    this.sessionState.mapSession = null;
+
+    if (this.debug) {
+      console.log('🗺️ Map session ended');
+    }
   }
 
   private generateSessionId(): string {
@@ -251,6 +470,126 @@ class AnalyticsSDK {
     });
   }
 
+  private updateActivity() {
+    this.sessionState.lastActivity = Date.now();
+  }
+
+  private setupInactivityCheck() {
+    if (!isBrowser) return;
+
+    const SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes
+    const CHECK_INTERVAL = 5 * 60 * 1000; // Check every 5 minutes
+
+    this.inactivityCheckInterval = setInterval(() => {
+      const inactiveTime = Date.now() - this.sessionState.lastActivity;
+      
+      if (inactiveTime >= SESSION_TIMEOUT) {
+        this.emitSessionSummary();
+        
+        // Reset session state after emitting summary
+        this.sessionState = {
+          startTime: Date.now(),
+          lastActivity: Date.now(),
+          searchesCount: 0,
+          engagedBeaches: new Set<string>(),
+          conversionsCount: 0,
+          currentSearch: null,
+          searchTimer: null,
+          mapSession: null,
+        };
+      }
+    }, CHECK_INTERVAL);
+  }
+
+  private setupUmamiReadyWatcher() {
+    if (!isBrowser) return;
+    // Only relevant for production where we actually send events
+    if (typeof import.meta !== 'undefined' && !import.meta.env.PROD) return;
+
+    let attempts = 0;
+    const MAX_ATTEMPTS = 40; // ~10s at 250ms
+    const CHECK_INTERVAL_MS = 250;
+
+    const checkReady = () => {
+      const umami = (window as any).umami;
+      attempts++;
+      if (umami?.track) {
+        if (this.umamiReadyInterval) clearInterval(this.umamiReadyInterval);
+        this.umamiReadyInterval = null;
+        if (this.debug) {
+          console.log('✅ Umami ready - flushing queued events');
+        }
+        this.flushEventQueue();
+      } else if (attempts >= MAX_ATTEMPTS) {
+        if (this.umamiReadyInterval) clearInterval(this.umamiReadyInterval);
+        this.umamiReadyInterval = null;
+      }
+    };
+
+    this.umamiReadyInterval = setInterval(checkReady, CHECK_INTERVAL_MS);
+  }
+
+  private setupPageLifecycleHandlers() {
+    if (!isBrowser) return;
+
+    const handleFinalize = () => {
+      try {
+        // End any ongoing map session and emit final engagement
+        this.endMapSession();
+      } catch {}
+      try {
+        // Emit a final session summary on page hide
+        this.emitSessionSummary();
+      } catch {}
+      try {
+        if (this.inactivityCheckInterval) {
+          clearInterval(this.inactivityCheckInterval);
+          this.inactivityCheckInterval = null;
+        }
+      } catch {}
+    };
+
+    // pagehide is the most reliable signal for SPA tab close/navigation
+    window.addEventListener('pagehide', handleFinalize);
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'hidden') {
+        handleFinalize();
+      }
+    });
+  }
+
+  private emitSessionSummary() {
+    const sessionDuration = Date.now() - this.sessionState.startTime;
+    
+    // Calculate outcome
+    let outcome: 'converted' | 'browsed' | 'bounced';
+    if (this.sessionState.conversionsCount > 0) {
+      outcome = 'converted';
+    } else if (this.sessionState.engagedBeaches.size > 2) {
+      outcome = 'browsed';
+    } else {
+      outcome = 'bounced';
+    }
+
+    this.event('session_summary', {
+      searches_count: this.sessionState.searchesCount,
+      beaches_engaged: this.sessionState.engagedBeaches.size,
+      conversions_count: this.sessionState.conversionsCount,
+      session_duration_ms: sessionDuration,
+      outcome,
+    });
+
+    if (this.debug) {
+      console.log('📊 Session summary emitted', {
+        searches: this.sessionState.searchesCount,
+        engaged: this.sessionState.engagedBeaches.size,
+        conversions: this.sessionState.conversionsCount,
+        duration: Math.round(sessionDuration / 1000) + 's',
+        outcome,
+      });
+    }
+  }
+
   private enrichProps(props?: AnalyticsProps): AnalyticsProps {
     return {
       ...props,
@@ -261,6 +600,10 @@ class AnalyticsSDK {
 
   private sendToUmami(name: string, props: AnalyticsProps) {
     if (!isBrowser) return;
+    // In development, do not send to Umami and do not queue
+    if (typeof import.meta !== 'undefined' && !import.meta.env.PROD) {
+      return;
+    }
     
     const umami = (window as any).umami;
     if (!umami?.track) {
@@ -316,7 +659,17 @@ export const analytics = {
   setContext: (ctx: Partial<AnalyticsContext>) => analyticsSDK.setContext(ctx),
   trackPageview: (path?: string, referrer?: string) => analyticsSDK.trackPageview(path, referrer),
   event: (name: string, props?: AnalyticsProps) => analyticsSDK.event(name, props),
-  cbm: (beachId: string, method: 'directions' | 'share') => analyticsSDK.cbm(beachId, method),
+  generateQueryHash: (query: string, filters?: any) => analyticsSDK.generateQueryHash(query, filters),
+  trackBeachEngagement: (beachId: string, source: 'search' | 'map' | 'browsing' | 'area_explore', queryHash?: string) => 
+    analyticsSDK.trackBeachEngagement(beachId, source, queryHash),
+  trackSearch: (queryHash: string) => analyticsSDK.trackSearch(queryHash),
+  trackSearchQuality: (outcome: 'success' | 'empty' | 'relaxed' | 'abandoned', data?: any) => 
+    analyticsSDK.trackSearchQuality(outcome, data),
+  trackConversion: () => analyticsSDK.trackConversion(),
+  startMapSession: () => analyticsSDK.startMapSession(),
+  trackMapInteraction: () => analyticsSDK.trackMapInteraction(),
+  trackMapBeachView: (beachId: string) => analyticsSDK.trackMapBeachView(beachId),
+  endMapSession: () => analyticsSDK.endMapSession(),
 };
 
 

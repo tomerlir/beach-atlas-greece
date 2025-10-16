@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import EnhancedSearchBar from "@/components/EnhancedSearchBar";
@@ -17,7 +17,7 @@ import heroImage from "@/assets/hero-background.png";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import ResultsSummary from "@/components/ResultsSummary";
 import { analytics } from "@/lib/analytics";
-import { createMapOpenEvent, createMapInteractEvent, createMapPinOpenEvent } from "@/lib/analyticsEvents";
+import { createMapOpenEvent } from "@/lib/analyticsEvents";
 
 // Leaflet + React-Leaflet
 import "leaflet/dist/leaflet.css";
@@ -106,18 +106,18 @@ function InvalidateSizeOnMount() {
   return null;
 }
 
-function MapEventTracker() {
+function MapEngagementTracker() {
   const map = useMap();
   
   useEffect(() => {
     if (!map) return;
 
     const handleMoveEnd = () => {
-      analytics.event('map_interact', createMapInteractEvent('pan'));
+      analytics.trackMapInteraction();
     };
 
     const handleZoomEnd = () => {
-      analytics.event('map_interact', createMapInteractEvent('zoom'));
+      analytics.trackMapInteraction();
     };
 
     map.on('moveend', handleMoveEnd);
@@ -132,15 +132,34 @@ function MapEventTracker() {
   return null;
 }
 
+// Component to track when a popup's content is shown
+function PopupTracker({ beachId }: { beachId: string }) {
+  const hasTracked = useRef(false);
+  
+  useEffect(() => {
+    if (!hasTracked.current) {
+      analytics.trackMapBeachView(beachId);
+      hasTracked.current = true;
+    }
+  }, [beachId]);
+  
+  return null;
+}
+
 const MapPage = () => {
   const isMobile = useIsMobile();
   const { filters, updateFilters, resetFilters } = useUrlState();
   const { location, isLoading: isLoadingLocation, getCurrentLocation, permission: locationPermission, error: locationError } = useGeolocation();
   // All filters drawer temporarily disabled on Map page
 
-  // Track map open event
+  // Track map open event and start engagement session
   useEffect(() => {
     analytics.event('map_open', createMapOpenEvent('nav'));
+    analytics.startMapSession();
+    
+    return () => {
+      analytics.endMapSession();
+    };
   }, []);
 
   const { data: beaches = [] } = useQuery({
@@ -212,7 +231,7 @@ const MapPage = () => {
         </section>
 
         {/* Filter Bar */}
-        <div className="bg-background border-border/20 py-2 relative z-50">
+        <div className="bg-background border-border/20 py-2 relative z-20">
           <div className="container mx-auto px-4">
             <FilterBar
               filters={filters}
@@ -271,22 +290,20 @@ const MapPage = () => {
                 <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}" />
 
                 <FitBoundsOnData beaches={filteredBeaches as Beach[]} fallbackBounds={GREECE_BOUNDS} />
-                <MapEventTracker />
+                <MapEngagementTracker />
 
                 {filteredBeaches
                   .filter((b) => b.latitude != null && b.longitude != null)
                   .map((b) => (
                   <Marker key={b.id} position={[b.latitude as number, b.longitude as number]}>
-                    <Popup eventHandlers={{
-                      popupopen: () => {
-                        analytics.event('map_pin_open', createMapPinOpenEvent(b.id));
-                      }
-                    }}>
+                    <Popup>
                       <div className="max-w-[340px]">
+                        <PopupTracker beachId={b.id} />
                         <BeachCard
                           beach={b as Beach}
                           distance={(b as any).distance}
                           showDistance={filters.nearMe && !locationError && !!location}
+                          engagementSource="map"
                         />
                       </div>
                     </Popup>

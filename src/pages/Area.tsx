@@ -424,6 +424,7 @@ const Area = () => {
                       beach={beach} 
                       distance={beach.distance}
                       showDistance={filters.nearMe && !locationError && !!location}
+                      engagementSource="area_explore"
                     />
                   ))}
                 </div>

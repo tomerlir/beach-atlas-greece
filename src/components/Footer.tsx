@@ -4,13 +4,7 @@ const Footer = () => {
   return (
     <footer className="bg-muted py-8 mt-16">
       <div className="container mx-auto px-4 text-center">
-        <div className="flex items-center justify-center gap-6 mb-4">
-          <a 
-            href="/about" 
-            className="text-muted-foreground hover:text-primary transition-colors"
-          >
-            About
-          </a>
+        <div className="flex flex-col items-center justify-center gap-2 md:flex-row md:flex-wrap md:gap-x-6 md:gap-y-2 mb-4">
           <a 
             href="/faq" 
             className="text-muted-foreground hover:text-primary transition-colors"

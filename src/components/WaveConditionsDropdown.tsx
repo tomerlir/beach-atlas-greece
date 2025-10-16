@@ -6,12 +6,15 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { useDraftState } from '@/hooks/useDraftState';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { FilterState } from '@/hooks/useUrlState';
+import { analytics } from '@/lib/analytics';
+import { createFilterApplyEvent, createFilterClearEvent } from '@/lib/analyticsEvents';
 
 interface WaveConditionsDropdownProps {
   filters: FilterState;
   onFiltersChange: (updates: Partial<FilterState>) => void;
   onOpenAllFilters: () => void;
   showCountBadge?: boolean;
+  resultCount?: number; // For analytics
 }
 
 const waveConditionsOptions = [
@@ -26,6 +29,7 @@ export default function WaveConditionsDropdown({
   onFiltersChange,
   onOpenAllFilters,
   showCountBadge = false,
+  resultCount = 0,
 }: WaveConditionsDropdownProps) {
   const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = useState(false);
@@ -51,15 +55,37 @@ export default function WaveConditionsDropdown({
 
   // Apply draft changes and close
   const handleApply = useCallback(() => {
+    // Track analytics for filter changes
+    const previousWaveConditions = filters.waveConditions;
+    const newWaveConditions = draftFilters.waveConditions;
+    
+    // Track individual wave condition changes
+    const addedWaveConditions = newWaveConditions.filter(wave => !previousWaveConditions.includes(wave));
+    const removedWaveConditions = previousWaveConditions.filter(wave => !newWaveConditions.includes(wave));
+    
+    // Emit filter_apply events for added wave conditions
+    addedWaveConditions.forEach(wave => {
+      analytics.event('filter_apply', createFilterApplyEvent('wave_conditions', wave, resultCount) as any);
+    });
+    
+    // Emit filter_clear events for removed wave conditions
+    removedWaveConditions.forEach(wave => {
+      analytics.event('filter_clear', createFilterClearEvent('wave_conditions') as any);
+    });
+    
     onFiltersChange(draftFilters);
     setIsOpen(false);
     triggerRef.current?.focus();
-  }, [draftFilters, onFiltersChange]);
+  }, [draftFilters, onFiltersChange, filters.waveConditions, resultCount]);
 
   // Reset wave conditions draft
   const handleReset = useCallback(() => {
+    // Track analytics for clearing all wave conditions
+    if (draftFilters.waveConditions.length > 0) {
+      analytics.event('filter_clear', createFilterClearEvent('wave_conditions') as any);
+    }
     updateDraft({ waveConditions: [] });
-  }, [updateDraft]);
+  }, [updateDraft, draftFilters.waveConditions.length]);
 
   // Keyboard navigation
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => {

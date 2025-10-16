@@ -52,12 +52,12 @@ export default function FilterBar({
 
   const handleBlueFlagToggle = useCallback((checked: boolean) => {
     if (checked) {
-      analytics.event('filter_apply', createFilterApplyEvent('blue_flag', String(checked), 0) as any);
+      analytics.event('filter_apply', createFilterApplyEvent('blue_flag', String(checked), resultCount) as any);
     } else {
       analytics.event('filter_clear', createFilterClearEvent('blue_flag') as any);
     }
     onFiltersChange({ blueFlag: checked, page: 1 });
-  }, [onFiltersChange]);
+  }, [onFiltersChange, resultCount]);
 
   const handleNearMeToggle = useCallback((checked: boolean) => {
     if (checked && !userLocation) {
@@ -68,7 +68,7 @@ export default function FilterBar({
     // When disabling Near me, revert to A->Z sorting
     const updates: Partial<FilterState> = { nearMe: checked, page: 1 };
     if (checked) {
-      analytics.event('filter_apply', createFilterApplyEvent('near_me', 'true', 0) as any);
+      analytics.event('filter_apply', createFilterApplyEvent('near_me', 'true', resultCount) as any);
       updates.sort = 'distance.asc';
     } else {
       // When turning off near me, revert to A->Z sorting
@@ -76,7 +76,7 @@ export default function FilterBar({
     }
 
     onFiltersChange(updates);
-  }, [onFiltersChange, userLocation, onLocationRequest]);
+  }, [onFiltersChange, userLocation, onLocationRequest, resultCount]);
 
 
   // Calculate active filter counts for "All Filters" button
@@ -151,6 +151,7 @@ export default function FilterBar({
                 onFiltersChange={onFiltersChange}
                 onOpenAllFilters={onOpenAllFilters}
                 showCountBadge={showCountBadge}
+                resultCount={resultCount}
               />
 
               {/* Organized Dropdown */}
@@ -159,6 +160,7 @@ export default function FilterBar({
                 onFiltersChange={onFiltersChange}
                 onOpenAllFilters={onOpenAllFilters}
                 showCountBadge={showCountBadge}
+                resultCount={resultCount}
               />
 
               {/* Parking Dropdown */}
@@ -167,6 +169,7 @@ export default function FilterBar({
                 onFiltersChange={onFiltersChange}
                 onOpenAllFilters={onOpenAllFilters}
                 showCountBadge={showCountBadge}
+                resultCount={resultCount}
               />
 
               {/* Wave Conditions Dropdown */}
@@ -175,6 +178,7 @@ export default function FilterBar({
                 onFiltersChange={onFiltersChange}
                 onOpenAllFilters={onOpenAllFilters}
                 showCountBadge={showCountBadge}
+                resultCount={resultCount}
               />
 
               {/* Beach Type Dropdown */}
@@ -183,6 +187,7 @@ export default function FilterBar({
                 onFiltersChange={onFiltersChange}
                 onOpenAllFilters={onOpenAllFilters}
                 showCountBadge={showCountBadge}
+                resultCount={resultCount}
               />
 
               {/* All Filters Button */}
@@ -272,6 +277,7 @@ export default function FilterBar({
                 onFiltersChange={onFiltersChange}
                 onOpenAllFilters={onOpenAllFilters}
                 showCountBadge={showCountBadge}
+                resultCount={resultCount}
               />
 
               {/* Organized Dropdown */}
@@ -280,6 +286,7 @@ export default function FilterBar({
                 onFiltersChange={onFiltersChange}
                 onOpenAllFilters={onOpenAllFilters}
                 showCountBadge={showCountBadge}
+                resultCount={resultCount}
               />
 
               {/* Parking Dropdown */}
@@ -288,6 +295,7 @@ export default function FilterBar({
                 onFiltersChange={onFiltersChange}
                 onOpenAllFilters={onOpenAllFilters}
                 showCountBadge={showCountBadge}
+                resultCount={resultCount}
               />
 
               {/* Wave Conditions Dropdown */}
@@ -296,6 +304,7 @@ export default function FilterBar({
                 onFiltersChange={onFiltersChange}
                 onOpenAllFilters={onOpenAllFilters}
                 showCountBadge={showCountBadge}
+                resultCount={resultCount}
               />
 
               {/* Beach Type Dropdown */}
@@ -304,6 +313,7 @@ export default function FilterBar({
                 onFiltersChange={onFiltersChange}
                 onOpenAllFilters={onOpenAllFilters}
                 showCountBadge={showCountBadge}
+                resultCount={resultCount}
               />
 
               {/* <Button

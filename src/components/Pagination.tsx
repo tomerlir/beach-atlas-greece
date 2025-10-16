@@ -1,7 +1,6 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { analytics } from "@/lib/analytics";
 import { useRef } from "react";
 
 interface PaginationProps {
@@ -33,7 +32,6 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
     };
 
     // Update the page
-    analytics.event('paginate', { page });
     onPageChange(page);
     
     // Scroll to content top after a brief delay to ensure content has rendered

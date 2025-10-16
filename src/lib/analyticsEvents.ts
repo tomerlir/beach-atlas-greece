@@ -33,6 +33,7 @@ export interface SearchSubmitEvent {
 export interface ResultsViewEvent {
   count: number;
   relaxed: boolean;
+  query_hash?: string;
 }
 
 export interface FilterApplyEvent {
@@ -49,31 +50,38 @@ export interface MapOpenEvent {
   entry: 'home' | 'area' | 'nav';
 }
 
-export interface MapInteractEvent {
-  action: 'pan' | 'zoom';
+export interface MapEngagementEvent {
+  duration_ms: number;
+  total_interactions: number;
+  unique_beaches_viewed: number;
+  exploration_intensity: 'low' | 'medium' | 'high';
 }
 
-export interface MapPinOpenEvent {
+export interface BeachEngagementEvent {
   beach_id: string;
+  source: 'search' | 'map' | 'browsing' | 'area_explore';
+  query_hash?: string;
 }
 
-export interface BeachViewEvent {
+export interface BeachConversionEvent {
   beach_id: string;
+  action: 'directions' | 'share' | 'save';
+  source: 'detail' | 'card' | 'map';
 }
 
-export interface StartDirectionsEvent {
-  beach_id: string;
-  from: 'card' | 'detail' | 'map';
+export interface SearchQualityEvent {
+  query_hash: string;
+  outcome: 'success' | 'empty' | 'relaxed' | 'abandoned';
+  first_engagement_beach_id?: string;
+  time_to_engagement_ms?: number;
 }
 
-export interface ShareBeachEvent {
-  beach_id: string;
-  method: 'webshare' | 'copy' | 'dialog';
-}
-
-export interface CBMEvent {
-  beach_id: string;
-  method: 'directions' | 'share';
+export interface SessionSummaryEvent {
+  searches_count: number;
+  beaches_engaged: number;
+  conversions_count: number;
+  session_duration_ms: number;
+  outcome: 'converted' | 'browsed' | 'bounced';
 }
 
 export interface NotFoundEvent {
@@ -85,15 +93,14 @@ export const ANALYTICS_EVENTS = {
   PAGE_VIEW: 'page_view',
   SEARCH_SUBMIT: 'search_submit',
   RESULTS_VIEW: 'results_view',
+  SEARCH_QUALITY: 'search_quality',
+  BEACH_ENGAGEMENT: 'beach_engagement',
+  BEACH_CONVERSION: 'beach_conversion',
+  SESSION_SUMMARY: 'session_summary',
   FILTER_APPLY: 'filter_apply',
   FILTER_CLEAR: 'filter_clear',
   MAP_OPEN: 'map_open',
-  MAP_INTERACT: 'map_interact',
-  MAP_PIN_OPEN: 'map_pin_open',
-  BEACH_VIEW: 'beach_view',
-  START_DIRECTIONS: 'start_directions',
-  SHARE_BEACH: 'share_beach',
-  CBM: 'cbm',
+  MAP_ENGAGEMENT: 'map_engagement',
   NOT_FOUND: '404',
 } as const;
 
@@ -118,9 +125,10 @@ export const createSearchSubmitEvent = (
   extracted,
 });
 
-export const createResultsViewEvent = (count: number, relaxed: boolean): ResultsViewEvent => ({
+export const createResultsViewEvent = (count: number, relaxed: boolean, query_hash?: string): ResultsViewEvent => ({
   count,
   relaxed,
+  query_hash,
 });
 
 export const createFilterApplyEvent = (name: string, value: string, results: number): FilterApplyEvent => ({
@@ -133,35 +141,66 @@ export const createFilterClearEvent = (name: string): FilterClearEvent => ({
   name,
 });
 
-export const createMapOpenEvent = (entry: MapOpenEvent['entry']): MapOpenEvent => ({
+export const createMapOpenEvent = (entry: MapOpenEvent['entry']): AnalyticsProps => ({
   entry,
 });
 
-export const createMapInteractEvent = (action: MapInteractEvent['action']): MapInteractEvent => ({
+export const createMapEngagementEvent = (
+  duration_ms: number,
+  total_interactions: number,
+  unique_beaches_viewed: number,
+  exploration_intensity: MapEngagementEvent['exploration_intensity']
+): MapEngagementEvent => ({
+  duration_ms,
+  total_interactions,
+  unique_beaches_viewed,
+  exploration_intensity,
+});
+
+export const createBeachEngagementEvent = (
+  beach_id: string, 
+  source: BeachEngagementEvent['source'],
+  query_hash?: string
+): BeachEngagementEvent => ({
+  beach_id,
+  source,
+  query_hash,
+});
+
+export const createBeachConversionEvent = (
+  beach_id: string,
+  action: BeachConversionEvent['action'],
+  source: BeachConversionEvent['source']
+): BeachConversionEvent => ({
+  beach_id,
   action,
+  source,
 });
 
-export const createMapPinOpenEvent = (beach_id: string): MapPinOpenEvent => ({
-  beach_id,
+export const createSearchQualityEvent = (
+  query_hash: string,
+  outcome: SearchQualityEvent['outcome'],
+  first_engagement_beach_id?: string,
+  time_to_engagement_ms?: number
+): SearchQualityEvent => ({
+  query_hash,
+  outcome,
+  first_engagement_beach_id,
+  time_to_engagement_ms,
 });
 
-export const createBeachViewEvent = (beach_id: string): BeachViewEvent => ({
-  beach_id,
-});
-
-export const createStartDirectionsEvent = (beach_id: string, from: StartDirectionsEvent['from']): StartDirectionsEvent => ({
-  beach_id,
-  from,
-});
-
-export const createShareBeachEvent = (beach_id: string, method: ShareBeachEvent['method']): ShareBeachEvent => ({
-  beach_id,
-  method,
-});
-
-export const createCBMEvent = (beach_id: string, method: CBMEvent['method']): CBMEvent => ({
-  beach_id,
-  method,
+export const createSessionSummaryEvent = (
+  searches_count: number,
+  beaches_engaged: number,
+  conversions_count: number,
+  session_duration_ms: number,
+  outcome: SessionSummaryEvent['outcome']
+): SessionSummaryEvent => ({
+  searches_count,
+  beaches_engaged,
+  conversions_count,
+  session_duration_ms,
+  outcome,
 });
 
 export const createNotFoundEvent = (path: string): NotFoundEvent => ({

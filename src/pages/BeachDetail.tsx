@@ -39,7 +39,6 @@ import { formatRelativeTime } from "@/lib/utils";
 import { fetchMoreInArea } from "@/lib/fetchMoreInArea";
 import MoreInArea from "@/components/MoreInArea";
 import { analytics } from "@/lib/analytics";
-import { createBeachViewEvent, createStartDirectionsEvent, createShareBeachEvent } from "@/lib/analyticsEvents";
 
 type Beach = Tables<'beaches'>;
 
@@ -113,12 +112,8 @@ const BeachDetail = () => {
     gcTime: 10 * 60 * 1000, // 10 minutes (renamed from cacheTime in newer versions)
   });
 
-  // Track beach view after data is loaded
-  useEffect(() => {
-    if (beach) {
-      analytics.event('beach_view', createBeachViewEvent(beach.id) as any);
-    }
-  }, [beach]);
+  // Note: Beach engagement is tracked at the point of interaction (BeachCard click, Map pin open)
+  // not here in BeachDetail to avoid incorrect source inference
 
   // Fetch siblings in same area, excluding current beach
   const { data: siblings = [] } = useQuery({
@@ -165,9 +160,13 @@ const BeachDetail = () => {
   const handleOpenInMaps = useCallback(() => {
     if (!beach) return;
     
-    // Track directions intent and CBM
-    analytics.event('start_directions', createStartDirectionsEvent(beach.id, 'detail') as any);
-    analytics.cbm(beach.id, 'directions');
+    // Track conversion event
+    analytics.event('beach_conversion', {
+      beach_id: beach.id,
+      action: 'directions',
+      source: 'detail',
+    });
+    analytics.trackConversion();
     
     // Open maps directly based on device (iOS → Apple Maps, Android/Desktop → Google Maps)
     openInMaps({
@@ -181,9 +180,13 @@ const BeachDetail = () => {
   const handleShare = useCallback(async () => {
     if (!beach) return;
     
-    // Track share intent and CBM
-    analytics.event('share_beach', createShareBeachEvent(beach.id, 'webshare') as any);
-    analytics.cbm(beach.id, 'share');
+    // Track conversion event
+    analytics.event('beach_conversion', {
+      beach_id: beach.id,
+      action: 'share',
+      source: 'detail',
+    });
+    analytics.trackConversion();
     
     const shareData = {
       title: beach.name,

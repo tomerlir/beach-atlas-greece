@@ -1,71 +1,140 @@
 # Analytics System
 
-This directory contains the analytics implementation for Beach Atlas Greece, built on top of Umami with privacy-first principles.
+This directory contains the **lean, high-value** analytics implementation for Beach Atlas Greece, built on top of Umami with privacy-first principles.
 
 ## Files
 
-- `analytics.ts` - Main analytics SDK with consent gating, event queuing, and CBM deduplication
+- `analytics.ts` - Main analytics SDK with consent gating, event queuing, and session tracking
 - `analyticsEvents.ts` - TypeScript types and helper functions for all analytics events
 - `AnalyticsInspector.tsx` - Development-only component for inspecting analytics events in real-time
 
-## Key Features
+## Philosophy: Lean & High-Value
 
-### Privacy & Consent
+We track **fewer events, but make each one count**. Every event answers a clear business question about user behavior and product performance.
+
+### Key Features
+
+#### Privacy & Consent
 - Explicit consent gating (no tracking until user accepts)
 - No PII collection
 - Cookie-less tracking via Umami
 - Persistent consent choice in localStorage
+- Admin routes automatically excluded from tracking
 
-### Event Tracking
-- **CBM (Completed Beach Matches)**: Primary NSM - tracks when users click "Get Directions" or "Share"
-- **Search Events**: Full query text + extracted NLP filters
-- **Map Interactions**: Pan, zoom, pin opens
-- **Filter Usage**: Apply/clear events with result counts
-- **Page Views**: SPA route tracking
+#### Session Intelligence
+- Automatic session quality calculation (high/medium/low)
+- Beach engagement deduplication (one event per beach per session)
+- Search quality tracking with abandonment detection
+- Conversion tracking for valuable user actions
+- 30-minute inactivity session summaries
 
-### Developer Experience
+#### Developer Experience
 - Type-safe event schemas
 - Real-time event inspector (dev mode only)
 - Console debugging with grouped logs
 - Single import surface (`analytics`)
+- No complex deduplication logic
 
-## Event Taxonomy
+## Core Event Taxonomy
+
+### 7 Core Events
+
+| Event | Description | Key Props | Business Question |
+|-------|-------------|-----------|-------------------|
+| `page_view` | SPA route changes | `path`, `referrer` | Where do users go? |
+| `search_submit` | Search queries | `q`, `extracted`, `context` | What are users looking for? |
+| `results_view` | Search results displayed | `count`, `relaxed`, `query_hash` | How many results do searches return? |
+| `search_quality` | Search outcome | `query_hash`, `outcome`, `time_to_engagement_ms` | Do searches work for users? |
+| `beach_engagement` | First interaction with beach | `beach_id`, `source`, `query_hash` | Which beaches interest users and from what source? |
+| `beach_conversion` | Valuable user action | `beach_id`, `action`, `source` | Do users take action? |
+| `session_summary` | Session-level metrics | `searches_count`, `beaches_engaged`, `conversions_count`, `outcome` | What's the overall user experience quality? |
+
+### Supporting Events
 
 | Event | Description | Key Props |
 |-------|-------------|-----------|
-| `page_view` | SPA route changes | `path`, `referrer` |
-| `search_submit` | Search queries | `q`, `extracted`, `context` |
-| `results_view` | Search results displayed | `count`, `relaxed` |
 | `filter_apply` | Filter applied | `name`, `value`, `results` |
 | `filter_clear` | Filter cleared | `name` |
 | `map_open` | Map page entered | `entry` |
-| `map_interact` | Map pan/zoom | `action` |
-| `map_pin_open` | Beach pin clicked | `beach_id` |
-| `beach_view` | Beach detail viewed | `beach_id` |
-| `start_directions` | Directions button clicked | `beach_id`, `from` |
-| `share_beach` | Share button clicked | `beach_id`, `method` |
-| `cbm` | **NSM** - Beach match completed | `beach_id`, `method` |
+| `map_engagement` | Map usage session (emitted every 30s or on close) | `duration_ms`, `total_interactions`, `unique_beaches_viewed`, `exploration_intensity` |
 | `404` | Page not found | `path` |
 
-## CBM Deduplication
+## Session Management
 
-CBM events are deduplicated per user×beach×method for 12 hours to prevent spam clicks while allowing users to both share and get directions to the same beach.
+### Session Quality
+Session quality is calculated and included in the `session_summary` event only (not in individual beach_engagement events):
+- **High**: User completed at least one conversion (directions/share)
+- **Medium**: User engaged with 3+ beaches but no conversions
+- **Low**: Limited engagement, no conversions
+
+### Session Outcomes
+- **Converted**: At least one conversion action
+- **Browsed**: Engaged with 3+ beaches but no conversions
+- **Bounced**: Low engagement
+
+### Session Lifecycle
+- Starts on first page load
+- Resets after 30 minutes of inactivity
+- Emits `session_summary` on timeout
+
+## User Journey Tracking
+
+### Complete Flow Example
+```
+1. page_view (/)
+2. search_submit (q: "sandy beaches corfu")
+3. results_view (count: 12, query_hash: "abc123")
+4. [User clicks beach card and views detail page]
+5. beach_engagement (beach_id: "xyz", source: "search", query_hash: "abc123")
+6. search_quality (outcome: "success", time_to_engagement: 2500ms)
+7. beach_conversion (beach_id: "xyz", action: "directions", source: "detail")
+8. [30 min later] session_summary (searches: 1, engaged: 1, conversions: 1, outcome: "converted", session_quality: "high")
+```
 
 ## Usage
 
 ```typescript
 import { analytics } from '@/lib/analytics';
 
-// Track custom events
-analytics.event('custom_event', { prop1: 'value1' });
+// Track beach engagement (auto-deduplicates per beach)
+analytics.trackBeachEngagement('beach-123', 'search', queryHash);
 
-// Track CBM (automatically deduplicated)
-analytics.cbm('beach-123', 'directions');
+// Track conversions
+analytics.event('beach_conversion', {
+  beach_id: 'beach-123',
+  action: 'directions',
+  source: 'detail',
+});
+analytics.trackConversion(); // Increments session counter
+
+// Track search with automatic abandonment timer
+const queryHash = analytics.generateQueryHash(query, filters);
+analytics.trackSearch(queryHash);
+
+// Track search quality
+analytics.trackSearchQuality('success', {
+  first_engagement_beach_id: 'beach-123',
+  time_to_engagement_ms: 2500,
+});
 
 // Set context
 analytics.setContext({ area: 'crete' });
+
+// Track map engagement
+analytics.startMapSession(); // Start tracking on map mount
+analytics.trackMapInteraction(); // Track pan/zoom
+analytics.trackMapBeachView('beach-123'); // Track beach popup opens
+analytics.endMapSession(); // End tracking on unmount (auto-emits engagement event)
 ```
 
 ## Development
 
 In development mode, the Analytics Inspector appears as a floating panel showing recent events. Enable debug mode to see console logs with grouped event data.
+
+## Business Insights Available
+
+- **Search success rate**: % of searches resulting in engagement
+- **Engagement-to-conversion rate**: % of engaged users who convert
+- **Session quality distribution**: Overall user satisfaction
+- **Source effectiveness**: Which paths (search/map/browse) drive conversions
+- **Time-to-engagement**: How quickly users find what they need

@@ -6,7 +6,6 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { FilterState } from '@/hooks/useUrlState';
-import { analytics } from '@/lib/analytics';
 
 interface SortDropdownProps {
   filters: FilterState;
@@ -77,9 +76,6 @@ export default function SortDropdown({
     }
 
     onFiltersChange({ sort: newSort, page: 1 });
-    analytics.event('sort_change', {
-      sort: value.startsWith('distance') ? 'nearest' : (value === 'name.asc' ? 'alphabetical' : 'alphabetical')
-    });
     setIsOpen(false);
   }, [onFiltersChange, isLocationActive, onLocationRequest]);
 

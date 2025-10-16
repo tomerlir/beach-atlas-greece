@@ -6,12 +6,15 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useDraftState } from '@/hooks/useDraftState';
 import { FilterState } from '@/hooks/useUrlState';
+import { analytics } from '@/lib/analytics';
+import { createFilterApplyEvent, createFilterClearEvent } from '@/lib/analyticsEvents';
 
 interface OrganizedDropdownProps {
   filters: FilterState;
   onFiltersChange: (filters: FilterState) => void;
   onOpenAllFilters: () => void;
   showCountBadge?: boolean;
+  resultCount?: number; // For analytics
 }
 
 const organizedOptions = [
@@ -24,6 +27,7 @@ export default function OrganizedDropdown({
   onFiltersChange,
   onOpenAllFilters,
   showCountBadge = false,
+  resultCount = 0,
 }: OrganizedDropdownProps) {
   const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = useState(false);
@@ -49,15 +53,37 @@ export default function OrganizedDropdown({
 
   // Apply draft changes and close
   const handleApply = useCallback(() => {
+    // Track analytics for filter changes
+    const previousOrganized = filters.organized;
+    const newOrganized = draftFilters.organized;
+    
+    // Track individual organized changes
+    const addedOrganized = newOrganized.filter(org => !previousOrganized.includes(org));
+    const removedOrganized = previousOrganized.filter(org => !newOrganized.includes(org));
+    
+    // Emit filter_apply events for added organized options
+    addedOrganized.forEach(org => {
+      analytics.event('filter_apply', createFilterApplyEvent('organized', org, resultCount) as any);
+    });
+    
+    // Emit filter_clear events for removed organized options
+    removedOrganized.forEach(org => {
+      analytics.event('filter_clear', createFilterClearEvent('organized') as any);
+    });
+    
     onFiltersChange(draftFilters);
     setIsOpen(false);
     triggerRef.current?.focus();
-  }, [draftFilters, onFiltersChange]);
+  }, [draftFilters, onFiltersChange, filters.organized, resultCount]);
 
   // Reset organized draft
   const handleReset = useCallback(() => {
+    // Track analytics for clearing all organized options
+    if (draftFilters.organized.length > 0) {
+      analytics.event('filter_clear', createFilterClearEvent('organized') as any);
+    }
     updateDraft({ organized: [] });
-  }, [updateDraft]);
+  }, [updateDraft, draftFilters.organized.length]);
 
   // Keyboard navigation
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => {

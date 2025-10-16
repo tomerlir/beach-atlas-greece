@@ -39,6 +39,7 @@ interface BeachCardProps {
   distance?: number;
   showDistance?: boolean;
   compact?: boolean;
+  engagementSource?: 'search' | 'map' | 'browsing' | 'area_explore';
 }
 
 
@@ -50,7 +51,7 @@ const parkingConfig: Record<string, { label: string; icon: any; color: string }>
   LARGE_LOT: { label: "Large Lot", icon: CheckCircle, color: "text-secondary" }
 };
 
-const BeachCard = ({ beach, distance, showDistance = true, compact = false }: BeachCardProps) => {
+const BeachCard = ({ beach, distance, showDistance = true, compact = false, engagementSource }: BeachCardProps) => {
   const { prefetchWithImage, cancelPrefetch } = useAdvancedPrefetch({ 
     delay: 50, 
     preloadImages: true, 
@@ -116,7 +117,15 @@ const BeachCard = ({ beach, distance, showDistance = true, compact = false }: Be
 
   // Handle click to store navigation source for better back navigation
   const handleBeachCardClick = () => {
-    analytics.event('open_beach', { id: beach.id, name: beach.name, area: beach.area });
+    // Track engagement if source is provided
+    if (engagementSource) {
+      const queryHash = typeof window !== 'undefined' 
+        ? sessionStorage.getItem('current_query_hash') || undefined
+        : undefined;
+      
+      analytics.trackBeachEngagement(beach.id, engagementSource, queryHash);
+    }
+    
     storeNavigationSource();
   };
 
