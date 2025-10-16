@@ -25,14 +25,14 @@ const AdminDashboard = () => {
     const fetchData = async () => {
       try {
         // Fetch all beaches for stats
-        const { data: allBeaches, error: beachesError } = await supabase
+        const { data: allBeaches, error: beachesError } = await authSupabase
           .from('beaches')
           .select('*');
         
         if (beachesError) throw beachesError;
 
         // Fetch recent updates (last 5 beaches updated)
-        const { data: recentBeaches, error: recentError } = await supabase
+        const { data: recentBeaches, error: recentError } = await authSupabase
           .from('beaches')
           .select('*')
           .order('updated_at', { ascending: false })

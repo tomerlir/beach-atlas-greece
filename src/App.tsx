@@ -36,31 +36,24 @@ import ConsentBanner from "@/components/ConsentBanner";
 import AnalyticsInspector from "@/lib/AnalyticsInspector";
 import AnalyticsRouter from "@/components/AnalyticsRouter";
 
-// Admin routes wrapper with AuthProvider
-const AdminRoutes = () => (
+// Admin route wrapper components
+const AdminAcceptInvite = () => (
   <AuthProvider>
-    <Routes>
-      <Route path="/admin/accept-invite" element={<AcceptInvite />} />
-      <Route path="/admin/login" element={<AdminLogin />} />
-      <Route 
-        path="/admin" 
-        element={
-          <ProtectedRoute requiredRole="admin">
-            <AdminLayout />
-          </ProtectedRoute>
-        }
-      >
-        <Route index element={<AdminDashboard />} />
-        <Route path="areas" element={<AdminAreasList />} />
-        <Route path="areas/new" element={<AdminAreaCreate />} />
-        <Route path="areas/:id" element={<AdminAreaEdit />} />
-        <Route path="beaches" element={<AdminBeachesList />} />
-        <Route path="beaches/new" element={<AdminBeachCreate />} />
-        <Route path="beaches/:id" element={<AdminBeachEdit />} />
-        <Route path="import-export" element={<ImportExport />} />
-        <Route path="settings" element={<AdminSettings />} />
-      </Route>
-    </Routes>
+    <AcceptInvite />
+  </AuthProvider>
+);
+
+const AdminLoginPage = () => (
+  <AuthProvider>
+    <AdminLogin />
+  </AuthProvider>
+);
+
+const AdminDashboardWrapper = () => (
+  <AuthProvider>
+    <ProtectedRoute requiredRole="admin">
+      <AdminLayout />
+    </ProtectedRoute>
   </AuthProvider>
 );
 
@@ -93,7 +86,25 @@ const AppContent = () => {
         <Route path="/faq" element={<FAQ />} />
         <Route path="/:areaSlug" element={<Area />} />
         <Route path="/:area/:beach-name" element={<BeachDetail />} />
-        <Route path="/admin/*" element={<AdminRoutes />} />
+        
+        {/* Admin routes with AuthProvider */}
+        <Route path="/admin/accept-invite" element={<AdminAcceptInvite />} />
+        <Route path="/admin/login" element={<AdminLoginPage />} />
+        <Route 
+          path="/admin" 
+          element={<AdminDashboardWrapper />}
+        >
+          <Route index element={<AdminDashboard />} />
+          <Route path="areas" element={<AdminAreasList />} />
+          <Route path="areas/new" element={<AdminAreaCreate />} />
+          <Route path="areas/:id" element={<AdminAreaEdit />} />
+          <Route path="beaches" element={<AdminBeachesList />} />
+          <Route path="beaches/new" element={<AdminBeachCreate />} />
+          <Route path="beaches/:id" element={<AdminBeachEdit />} />
+          <Route path="import-export" element={<ImportExport />} />
+          <Route path="settings" element={<AdminSettings />} />
+        </Route>
+        
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>

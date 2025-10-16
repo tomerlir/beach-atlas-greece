@@ -12,20 +12,13 @@ if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
 // Import the supabase client like this:
 // import { supabase } from "@/integrations/supabase/client";
 
-// Public client for data fetching (STRICT no cookies)
+// Public client for data fetching (no auth, no cookies)
 export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   auth: {
     persistSession: false, // Disable session persistence to avoid cookies
     autoRefreshToken: false, // Disable token refresh
     detectSessionInUrl: false, // Disable session detection
-    storage: undefined, // Force no storage
-    storageKey: undefined, // Prevent any storage key generation
-  },
-  global: {
-    headers: {
-      'x-client-info': 'beach-atlas-public@1.0.0', // Identify as public client
-    },
-  },
+  }
 });
 
 // Authenticated client for admin operations (with cookies)

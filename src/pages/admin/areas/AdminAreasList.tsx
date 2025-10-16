@@ -63,7 +63,7 @@ const AdminAreasList: React.FC = () => {
       let beachCounts: Record<string, number> = {};
       
       if (areaIds.length > 0) {
-        const { data: beachData, error: beachError } = await supabase
+        const { data: beachData, error: beachError } = await authSupabase
           .from('beaches')
           .select('area_id')
           .eq('status', 'ACTIVE')
