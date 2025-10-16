@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
@@ -36,6 +36,34 @@ import ConsentBanner from "@/components/ConsentBanner";
 import AnalyticsInspector from "@/lib/AnalyticsInspector";
 import AnalyticsRouter from "@/components/AnalyticsRouter";
 
+// Admin routes wrapper with AuthProvider
+const AdminRoutes = () => (
+  <AuthProvider>
+    <Routes>
+      <Route path="/admin/accept-invite" element={<AcceptInvite />} />
+      <Route path="/admin/login" element={<AdminLogin />} />
+      <Route 
+        path="/admin" 
+        element={
+          <ProtectedRoute requiredRole="admin">
+            <AdminLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<AdminDashboard />} />
+        <Route path="areas" element={<AdminAreasList />} />
+        <Route path="areas/new" element={<AdminAreaCreate />} />
+        <Route path="areas/:id" element={<AdminAreaEdit />} />
+        <Route path="beaches" element={<AdminBeachesList />} />
+        <Route path="beaches/new" element={<AdminBeachCreate />} />
+        <Route path="beaches/:id" element={<AdminBeachEdit />} />
+        <Route path="import-export" element={<ImportExport />} />
+        <Route path="settings" element={<AdminSettings />} />
+      </Route>
+    </Routes>
+  </AuthProvider>
+);
+
 const queryClient = new QueryClient();
 
 const AppContent = () => {
@@ -65,26 +93,7 @@ const AppContent = () => {
         <Route path="/faq" element={<FAQ />} />
         <Route path="/:areaSlug" element={<Area />} />
         <Route path="/:area/:beach-name" element={<BeachDetail />} />
-        <Route path="/admin/accept-invite" element={<AcceptInvite />} />
-        <Route path="/admin/login" element={<AdminLogin />} />
-        <Route 
-          path="/admin" 
-          element={
-            <ProtectedRoute requiredRole="admin">
-              <AdminLayout />
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={<AdminDashboard />} />
-          <Route path="areas" element={<AdminAreasList />} />
-          <Route path="areas/new" element={<AdminAreaCreate />} />
-          <Route path="areas/:id" element={<AdminAreaEdit />} />
-          <Route path="beaches" element={<AdminBeachesList />} />
-          <Route path="beaches/new" element={<AdminBeachCreate />} />
-          <Route path="beaches/:id" element={<AdminBeachEdit />} />
-          <Route path="import-export" element={<ImportExport />} />
-          <Route path="settings" element={<AdminSettings />} />
-        </Route>
+        <Route path="/admin/*" element={<AdminRoutes />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
@@ -95,13 +104,11 @@ const AppContent = () => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <HelmetProvider>
-      <AuthProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <AppContent />
-        </TooltipProvider>
-      </AuthProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <AppContent />
+      </TooltipProvider>
     </HelmetProvider>
   </QueryClientProvider>
 );
