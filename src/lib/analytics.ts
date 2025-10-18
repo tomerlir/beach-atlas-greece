@@ -306,7 +306,12 @@ class AnalyticsSDK {
       if (isBrowser) {
         sessionStorage.removeItem("current_query_hash");
       }
-    } catch {}
+    } catch (error) {
+      // SessionStorage may not be available in some contexts (private browsing, etc.)
+      if (this.debug) {
+        console.warn("Failed to clear session storage:", error);
+      }
+    }
     this.sessionState.currentSearch = null;
   }
 
@@ -690,17 +695,32 @@ class AnalyticsSDK {
       try {
         // End any ongoing map session and emit final engagement
         this.endMapSession();
-      } catch {}
+      } catch (error) {
+        // Map session cleanup failure should not prevent other cleanup
+        if (this.debug) {
+          console.warn("Failed to end map session during cleanup:", error);
+        }
+      }
       try {
         // Emit a final session summary on page hide
         this.emitSessionSummary();
-      } catch {}
+      } catch (error) {
+        // Session summary failure should not prevent other cleanup
+        if (this.debug) {
+          console.warn("Failed to emit session summary during cleanup:", error);
+        }
+      }
       try {
         if (this.inactivityCheckInterval) {
           clearInterval(this.inactivityCheckInterval);
           this.inactivityCheckInterval = null;
         }
-      } catch {}
+      } catch (error) {
+        // Interval cleanup failure should not prevent other cleanup
+        if (this.debug) {
+          console.warn("Failed to clear inactivity check interval:", error);
+        }
+      }
     };
 
     // pagehide is the most reliable signal for SPA tab close/navigation

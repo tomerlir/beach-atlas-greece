@@ -1,8 +1,8 @@
 import { useParams, Link, useLocation, useNavigate } from "react-router-dom";
-import { generateAreaSlug } from "@/lib/utils";
+import { generateAreaSlug, formatRelativeTime } from "@/lib/utils";
 import { openInMaps } from "@/lib/maps";
 import { useQuery } from "@tanstack/react-query";
-import { useState, useEffect, useCallback, useMemo, useRef } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
 import { CONTACT_EMAIL } from "@/lib/constants";
 import {
@@ -35,7 +35,6 @@ import { useProgressiveLoading } from "@/hooks/useProgressiveLoading";
 import { generateBeachImageAltText } from "@/lib/accessibility";
 import { useNavigationState } from "@/hooks/useNavigationState";
 import { BreadcrumbsWithJsonLd } from "@/components/breadcrumbs/BreadcrumbsWithJsonLd";
-import { formatRelativeTime } from "@/lib/utils";
 import { fetchMoreInArea } from "@/lib/fetchMoreInArea";
 import MoreInArea from "@/components/MoreInArea";
 import { analytics } from "@/lib/analytics";

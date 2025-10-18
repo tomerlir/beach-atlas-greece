@@ -1,10 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Waves, Check, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useDraftState } from "@/hooks/useDraftState";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { FilterState } from "@/hooks/useUrlState";
 import { analytics } from "@/lib/analytics";
 import { createFilterApplyEvent, createFilterClearEvent } from "@/lib/analyticsEvents";
@@ -18,27 +16,24 @@ interface WaveConditionsDropdownProps {
 }
 
 const waveConditionsOptions = [
-  { value: "CALM", label: "Calm" },
-  { value: "MODERATE", label: "Moderate" },
-  { value: "WAVY", label: "Wavy" },
-  { value: "SURFABLE", label: "Surfable" },
+  { value: "CALM" as const, label: "Calm" },
+  { value: "MODERATE" as const, label: "Moderate" },
+  { value: "WAVY" as const, label: "Wavy" },
+  { value: "SURFABLE" as const, label: "Surfable" },
 ];
 
 export default function WaveConditionsDropdown({
   filters,
   onFiltersChange,
-  onOpenAllFilters,
-  showCountBadge = false,
   resultCount = 0,
 }: WaveConditionsDropdownProps) {
-  const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const [focusedIndex, setFocusedIndex] = useState(-1);
 
   // Use draft state for proper state management
-  const { draftFilters, updateDraft, resetDraft } = useDraftState(filters);
+  const { draftFilters, updateDraft } = useDraftState(filters);
 
   // Handle trigger click - open popover on all devices
   const handleTriggerClick = useCallback(() => {
@@ -47,7 +42,7 @@ export default function WaveConditionsDropdown({
 
   // Toggle wave condition in draft state
   const toggleWaveConditionDraft = useCallback(
-    (waveConditionValue: string) => {
+    (waveConditionValue: "CALM" | "MODERATE" | "WAVY" | "SURFABLE") => {
       const newWaveConditions = draftFilters.waveConditions.includes(waveConditionValue)
         ? draftFilters.waveConditions.filter((value) => value !== waveConditionValue)
         : [...draftFilters.waveConditions, waveConditionValue];
@@ -76,7 +71,7 @@ export default function WaveConditionsDropdown({
     });
 
     // Emit filter_clear events for removed wave conditions
-    removedWaveConditions.forEach((wave) => {
+    removedWaveConditions.forEach(() => {
       analytics.event("filter_clear", createFilterClearEvent("wave_conditions"));
     });
 
@@ -142,7 +137,6 @@ export default function WaveConditionsDropdown({
   }, [isOpen]);
 
   // Calculate counts
-  const selectedCount = draftFilters.waveConditions.length;
   const appliedCount = filters.waveConditions.length;
 
   return (

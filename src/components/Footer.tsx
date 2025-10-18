@@ -28,7 +28,10 @@ const Footer = () => {
             onClick={() => {
               try {
                 window.dispatchEvent(new CustomEvent("open-privacy-preferences"));
-              } catch {}
+              } catch (error) {
+                // Custom event dispatch may fail in some environments
+                console.warn("Failed to dispatch privacy preferences event:", error);
+              }
             }}
             className="text-muted-foreground hover:text-primary transition-colors underline-offset-4 hover:underline"
             aria-label="Open privacy preferences"

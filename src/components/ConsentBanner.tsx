@@ -11,11 +11,10 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { X, BarChart3 } from "lucide-react";
-import { analytics, type ConsentState } from "@/lib/analytics";
+import { analytics } from "@/lib/analytics";
 import { Link } from "react-router-dom";
 
 export default function ConsentBanner() {
-  const [consent, setConsent] = useState<ConsentState>("unknown");
   const [isVisible, setIsVisible] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -24,12 +23,10 @@ export default function ConsentBanner() {
 
   useEffect(() => {
     const currentConsent = analytics.getConsent();
-    setConsent(currentConsent);
     setIsVisible(currentConsent === "unknown");
     setAnalyticsAllowed(currentConsent === "accepted");
 
     const unsubscribe = analytics.onConsentChange((newConsent) => {
-      setConsent(newConsent);
       setIsVisible(newConsent === "unknown");
       setAnalyticsAllowed(newConsent === "accepted");
     });
@@ -43,7 +40,10 @@ export default function ConsentBanner() {
       try {
         const current = analytics.getConsent();
         setAnalyticsAllowed(current === "accepted");
-      } catch {}
+      } catch (error) {
+        // Analytics consent check may fail in some environments
+        console.warn("Failed to get analytics consent:", error);
+      }
       setOpen(true);
     };
     window.addEventListener("open-privacy-preferences", handler);
@@ -56,12 +56,6 @@ export default function ConsentBanner() {
 
   const handleReject = () => {
     analytics.setConsent("rejected");
-  };
-
-  // Preferences dialog primary actions handled via Accept/Reject buttons
-  const handleApply = () => {
-    analytics.setConsent(analyticsAllowed ? "accepted" : "rejected");
-    setOpen(false);
   };
 
   return (

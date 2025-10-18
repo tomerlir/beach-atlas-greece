@@ -45,7 +45,7 @@ const defaultMarkerIcon = new L.Icon({
 
 // Ensure all markers use our explicit default icon instance
 // (safer across navigations and bundlers)
- 
+
 (L.Marker as any).prototype.options.icon = defaultMarkerIcon;
 
 const GREECE_BOUNDS: L.LatLngBoundsExpression = [

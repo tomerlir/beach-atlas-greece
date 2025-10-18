@@ -43,7 +43,7 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({ onSucces
       errors.push("Password must contain at least one number");
     }
 
-    if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) {
+    if (!/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password)) {
       errors.push("Password must contain at least one special character");
     }
 
@@ -134,7 +134,7 @@ export const PasswordChangeForm: React.FC<PasswordChangeFormProps> = ({ onSucces
     if (/[A-Z]/.test(password)) score++;
     if (/[a-z]/.test(password)) score++;
     if (/[0-9]/.test(password)) score++;
-    if (/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)) score++;
+    if (/[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password)) score++;
 
     if (score <= 2) return { strength: "weak", score };
     if (score <= 4) return { strength: "medium", score };
