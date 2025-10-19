@@ -32,9 +32,10 @@ interface BeachCardProps {
   showDistance?: boolean;
   compact?: boolean;
   engagementSource?: "search" | "map" | "browsing" | "area_explore";
+  priority?: boolean; // New prop for priority loading
 }
 
-const BeachCard = ({ beach, distance, showDistance = true, compact = false }: BeachCardProps) => {
+const BeachCard = ({ beach, distance, showDistance = true, compact = false, priority = false }: BeachCardProps) => {
   const { prefetchWithImage, cancelPrefetch } = useAdvancedPrefetch({
     delay: 50,
     preloadImages: true,
@@ -127,13 +128,13 @@ const BeachCard = ({ beach, distance, showDistance = true, compact = false }: Be
               width={compact ? 320 : 400}
               height={compact ? 240 : 225}
               className="group-hover:scale-105 transition-transform duration-500"
-              loading="lazy"
+              loading={priority ? "eager" : "lazy"}
+              priority={priority}
               sizes={
                 compact
                   ? "(max-width: 768px) 75vw, (max-width: 1200px) 33vw, 320px"
                   : "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               }
-              quality={85}
               fallbackComponent={fallbackComponent}
             />
           ) : (

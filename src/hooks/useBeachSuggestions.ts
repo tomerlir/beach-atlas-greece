@@ -66,11 +66,11 @@ export const useBeachSuggestions = ({
   // Debounce the suggestions fetch
   const debouncedHasResults = useDebounce(hasResults, 250);
 
-  // Fetch all active beaches for suggestions
+  // Fetch all active beaches for suggestions with selective fields
   const { data: allBeaches = [] } = useQuery({
     queryKey: ["beaches-suggestions", areaName || null],
     queryFn: async () => {
-      const base = supabase.from("beaches").select("*").eq("status", "ACTIVE").order("name");
+      const base = supabase.from("beaches").select("id, name, area, slug, organized, blue_flag, parking, amenities, photo_url, photo_source, latitude, longitude").eq("status", "ACTIVE").order("name");
 
       // If areaName provided, limit suggestions to that area at the source
       // Note: `area` is a string column containing the human-readable area name

@@ -1,26 +1,42 @@
 // Service Worker for Image Caching and Performance
-const CACHE_NAME = 'beach-atlas-v1';
-const IMAGE_CACHE_NAME = 'beach-images-v1';
-const STATIC_CACHE_NAME = 'beach-static-v1';
+const CACHE_NAME = 'beach-atlas-v2';
+const IMAGE_CACHE_NAME = 'beach-images-v2';
+const STATIC_CACHE_NAME = 'beach-static-v2';
+const PRECACHE_CACHE_NAME = 'beach-precache-v2';
 
 // Cache duration for different types of resources
 const CACHE_DURATIONS = {
-  images: 7 * 24 * 60 * 60 * 1000, // 7 days
+  images: 3 * 24 * 60 * 60 * 1000, // 3 days (reduced from 7)
   static: 24 * 60 * 60 * 1000, // 1 day
   api: 5 * 60 * 1000, // 5 minutes
+  precache: 7 * 24 * 60 * 60 * 1000, // 7 days for precached assets
 };
 
-// Install event - cache static assets
+// Install event - cache static assets and precache critical resources
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(STATIC_CACHE_NAME).then((cache) => {
-      return cache.addAll([
-        '/',
-        '/index.html',
-        '/manifest.json',
-        // Add other static assets as needed
-      ]);
-    })
+    Promise.all([
+      // Cache static assets
+      caches.open(STATIC_CACHE_NAME).then((cache) => {
+        return cache.addAll([
+          '/',
+          '/index.html',
+          '/manifest.json',
+          // Add other static assets as needed
+        ]);
+      }),
+      // Precache critical routes and assets
+      caches.open(PRECACHE_CACHE_NAME).then((cache) => {
+        return cache.addAll([
+          '/',
+          '/areas',
+          '/map',
+          '/about',
+          '/guide',
+          // Precache core UI chunks (these will be populated by build process)
+        ]);
+      })
+    ])
   );
   self.skipWaiting();
 });
@@ -33,7 +49,8 @@ self.addEventListener('activate', (event) => {
         cacheNames.map((cacheName) => {
           if (cacheName !== CACHE_NAME && 
               cacheName !== IMAGE_CACHE_NAME && 
-              cacheName !== STATIC_CACHE_NAME) {
+              cacheName !== STATIC_CACHE_NAME &&
+              cacheName !== PRECACHE_CACHE_NAME) {
             return caches.delete(cacheName);
           }
         })
@@ -152,12 +169,23 @@ async function handleApiRequest(request) {
   }
 }
 
-// Static asset caching strategy - cache first
+// Static asset caching strategy - cache first with stale-while-revalidate
 async function handleStaticRequest(request) {
   const cache = await caches.open(STATIC_CACHE_NAME);
   const cachedResponse = await cache.match(request);
 
   if (cachedResponse) {
+    // For HTML documents, implement stale-while-revalidate
+    if (request.destination === 'document') {
+      // Return cached version immediately
+      fetch(request).then(async (networkResponse) => {
+        if (networkResponse.ok) {
+          await cache.put(request, networkResponse.clone());
+        }
+      }).catch(() => {
+        // Ignore network errors for background updates
+      });
+    }
     return cachedResponse;
   }
 

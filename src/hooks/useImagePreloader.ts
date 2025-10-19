@@ -28,6 +28,37 @@ export const useImagePreloader = () => {
   const activeRequests = useRef<Map<string, AbortController>>(new Map());
   const concurrencyLimit = useRef(3);
   const activeLoads = useRef(0);
+  const networkInfo = useRef<{ effectiveType?: string; downlink?: number } | null>(null);
+
+  // Adaptive concurrency based on network conditions
+  useEffect(() => {
+    const updateConcurrency = () => {
+      if ('connection' in navigator) {
+        const connection = (navigator as any).connection;
+        networkInfo.current = {
+          effectiveType: connection.effectiveType,
+          downlink: connection.downlink
+        };
+
+        // Adjust concurrency based on network speed
+        if (connection.effectiveType === '4g' && connection.downlink > 2) {
+          concurrencyLimit.current = 6; // Fast connection
+        } else if (connection.effectiveType === '3g' || connection.downlink < 1) {
+          concurrencyLimit.current = 2; // Slow connection
+        } else {
+          concurrencyLimit.current = 3; // Default
+        }
+      }
+    };
+
+    updateConcurrency();
+    
+    if ('connection' in navigator) {
+      const connection = (navigator as any).connection;
+      connection.addEventListener('change', updateConcurrency);
+      return () => connection.removeEventListener('change', updateConcurrency);
+    }
+  }, []);
 
   // Generate optimized image URL (same logic as OptimizedImage)
   const getOptimizedImageUrl = useCallback(

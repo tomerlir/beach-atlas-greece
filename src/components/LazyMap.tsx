@@ -138,10 +138,18 @@ const LazyMap = ({ beaches, selectedBeach, onBeachSelect, userLocation }: LazyMa
         className="h-full w-full"
         scrollWheelZoom={true}
         bounds={GREECE_BOUNDS}
+        maxZoom={18}
+        updateWhenIdle={true}
+        updateWhenZooming={false}
+        zoomControl={true}
+        attributionControl={true}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          maxZoom={18}
+          updateWhenIdle={true}
+          updateWhenZooming={false}
         />
 
         <FitBoundsOnData beaches={beaches} fallbackBounds={GREECE_BOUNDS} />
