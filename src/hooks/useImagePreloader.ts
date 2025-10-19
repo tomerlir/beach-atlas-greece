@@ -7,6 +7,19 @@ interface ImagePreloadOptions {
   height?: number;
 }
 
+// NetworkInformation API interface based on actual usage
+interface NetworkInformation {
+  effectiveType: string;
+  downlink: number;
+  addEventListener: (event: string, listener: () => void) => void;
+  removeEventListener: (event: string, listener: () => void) => void;
+}
+
+// Extended Navigator interface to include connection property
+interface NavigatorWithConnection extends Navigator {
+  connection?: NetworkInformation;
+}
+
 interface PreloadResult {
   success: boolean;
   url: string;
@@ -33,8 +46,9 @@ export const useImagePreloader = () => {
   // Adaptive concurrency based on network conditions
   useEffect(() => {
     const updateConcurrency = () => {
-      if ("connection" in navigator) {
-        const connection = (navigator as any).connection;
+      const navigatorWithConnection = navigator as NavigatorWithConnection;
+      if (navigatorWithConnection.connection) {
+        const connection = navigatorWithConnection.connection;
         networkInfo.current = {
           effectiveType: connection.effectiveType,
           downlink: connection.downlink,
@@ -53,8 +67,9 @@ export const useImagePreloader = () => {
 
     updateConcurrency();
 
-    if ("connection" in navigator) {
-      const connection = (navigator as any).connection;
+    const navigatorWithConnection = navigator as NavigatorWithConnection;
+    if (navigatorWithConnection.connection) {
+      const connection = navigatorWithConnection.connection;
       connection.addEventListener("change", updateConcurrency);
       return () => connection.removeEventListener("change", updateConcurrency);
     }

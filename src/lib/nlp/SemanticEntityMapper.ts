@@ -452,7 +452,7 @@ export class SemanticEntityMapper {
         /perfect\s+for\s+(my\s+)?(grandma|grandmother|grandpa|grandfather|grandparents|family|children|kids)/i,
         /ideal\s+for\s+(my\s+)?(grandma|grandmother|grandpa|grandfather|grandparents|family|children|kids)/i,
       ];
-      
+
       for (const pattern of familyPatterns) {
         if (pattern.test(query)) {
           return true;
