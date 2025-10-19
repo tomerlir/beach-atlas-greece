@@ -1,5 +1,6 @@
 import { useCallback, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
+import { WaveCondition, BeachType, WAVE_CONDITIONS, BEACH_TYPES } from "@/types/common";
 
 export interface AreaFilterState {
   search: string;
@@ -8,8 +9,8 @@ export interface AreaFilterState {
   blueFlag: boolean;
   parking: string[];
   amenities: string[];
-  waveConditions: ("CALM" | "MODERATE" | "WAVY" | "SURFABLE")[];
-  type: ("SANDY" | "PEBBLY" | "MIXED" | "OTHER")[]; // Beach surface type
+  waveConditions: WaveCondition[];
+  type: BeachType[]; // Beach surface type
   sort: string | null;
   page: number;
   nearMe: boolean;
@@ -69,25 +70,20 @@ export function useAreaUrlState(areaName: string) {
     // Parse wave conditions
     const waveConditions = searchParams.get("waveConditions");
     if (waveConditions) {
-      const validWaveConditions = ["CALM", "MODERATE", "WAVY", "SURFABLE"] as const;
       state.waveConditions = waveConditions
         .split(",")
         .filter(
-          (condition): condition is "CALM" | "MODERATE" | "WAVY" | "SURFABLE" =>
-            Boolean(condition) && validWaveConditions.includes(condition as any)
+          (condition): condition is WaveCondition =>
+            Boolean(condition) && WAVE_CONDITIONS.includes(condition as WaveCondition)
         );
     }
 
     // Parse type (beach surface)
     const type = searchParams.get("type");
     if (type) {
-      const validTypes = ["SANDY", "PEBBLY", "MIXED", "OTHER"] as const;
       state.type = type
         .split(",")
-        .filter(
-          (t): t is "SANDY" | "PEBBLY" | "MIXED" | "OTHER" =>
-            Boolean(t) && validTypes.includes(t as any)
-        );
+        .filter((t): t is BeachType => Boolean(t) && BEACH_TYPES.includes(t as BeachType));
     }
 
     // Parse sort

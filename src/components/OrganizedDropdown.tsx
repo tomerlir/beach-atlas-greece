@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Check, ChevronDown, Waves } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useDraftState } from "@/hooks/useDraftState";
@@ -25,8 +24,6 @@ const organizedOptions = [
 export default function OrganizedDropdown({
   filters,
   onFiltersChange,
-  onOpenAllFilters,
-  showCountBadge = false,
   resultCount = 0,
 }: OrganizedDropdownProps) {
   const isMobile = useIsMobile();
@@ -36,7 +33,7 @@ export default function OrganizedDropdown({
   const [focusedIndex, setFocusedIndex] = useState(-1);
 
   // Use draft state for proper state management
-  const { draftFilters, updateDraft, resetDraft } = useDraftState(filters);
+  const { draftFilters, updateDraft } = useDraftState(filters);
 
   // Handle trigger click - open popover on all devices
   const handleTriggerClick = useCallback(() => {
@@ -70,7 +67,7 @@ export default function OrganizedDropdown({
     });
 
     // Emit filter_clear events for removed organized options
-    removedOrganized.forEach((org) => {
+    removedOrganized.forEach(() => {
       analytics.event("filter_clear", createFilterClearEvent("organized"));
     });
 
@@ -134,7 +131,6 @@ export default function OrganizedDropdown({
   }, [isOpen]);
 
   // Calculate counts
-  const selectedCount = draftFilters.organized.length;
   const appliedCount = filters.organized.length;
 
   return (

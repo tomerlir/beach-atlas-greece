@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from "react";
-import { MapPin, Waves, Car, Flag, CheckCircle, XCircle, AlertCircle } from "lucide-react";
+import { useEffect } from "react";
+import { MapPin, Waves, Car, Flag, CheckCircle, AlertCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
@@ -10,7 +10,7 @@ import PhotoAttribution from "@/components/PhotoAttribution";
 import { generateBeachImageAltText } from "@/lib/accessibility";
 import { generateBeachUrl } from "@/lib/utils";
 import { useNavigationState } from "@/hooks/useNavigationState";
-import { analytics } from "@/lib/analytics";
+import { getParkingConfig, ParkingType } from "@/types/common";
 
 interface Beach {
   id: string;
@@ -34,21 +34,7 @@ interface BeachCardProps {
   engagementSource?: "search" | "map" | "browsing" | "area_explore";
 }
 
-// Map parking types to icons and colors
-const parkingConfig: Record<string, { label: string; icon: any; color: string }> = {
-  NONE: { label: "No Parking", icon: XCircle, color: "text-secondary" },
-  ROADSIDE: { label: "Roadside Parking", icon: AlertCircle, color: "text-secondary" },
-  SMALL_LOT: { label: "Small Lot", icon: AlertCircle, color: "text-secondary" },
-  LARGE_LOT: { label: "Large Lot", icon: CheckCircle, color: "text-secondary" },
-};
-
-const BeachCard = ({
-  beach,
-  distance,
-  showDistance = true,
-  compact = false,
-  engagementSource,
-}: BeachCardProps) => {
+const BeachCard = ({ beach, distance, showDistance = true, compact = false }: BeachCardProps) => {
   const { prefetchWithImage, cancelPrefetch } = useAdvancedPrefetch({
     delay: 50,
     preloadImages: true,
@@ -56,7 +42,7 @@ const BeachCard = ({
   });
   const { storeNavigationSource } = useNavigationState();
 
-  const parkingInfo = parkingConfig[beach.parking] || {
+  const parkingInfo = getParkingConfig(beach.parking as ParkingType) || {
     label: "Parking Unknown",
     icon: AlertCircle,
     color: "text-muted-foreground",

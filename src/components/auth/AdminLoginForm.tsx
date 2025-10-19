@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 
 // Rate limiting configuration
 const RATE_LIMIT_KEY = "admin_login_attempts";
@@ -27,7 +27,7 @@ const AdminLoginForm = () => {
   const [isLockedOut, setIsLockedOut] = useState(false);
   const [lockoutTimeRemaining, setLockoutTimeRemaining] = useState(0);
 
-  const { signIn, user, profile, loading } = useAuth();
+  const { signIn, profile, loading } = useAuth();
   const navigate = useNavigate();
 
   // Check for existing lockout on mount and set up timer
@@ -39,7 +39,7 @@ const AdminLoginForm = () => {
       const emailInput = document.getElementById("email");
       emailInput?.focus();
     }
-  }, []);
+  }, [isLockedOut]);
 
   // Update lockout timer every second
   useEffect(() => {
@@ -172,7 +172,7 @@ const AdminLoginForm = () => {
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") {
-      handleSubmit(e as any);
+      handleSubmit(e);
     }
   };
 

@@ -1,4 +1,3 @@
-import { Skeleton } from "@/components/ui/skeleton";
 import { Waves } from "lucide-react";
 
 interface DetailImageSkeletonProps {

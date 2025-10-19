@@ -1,35 +1,8 @@
-import React, { createContext, useContext, useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { User, Session } from "@supabase/supabase-js";
 import { authSupabase } from "@/integrations/supabase/client";
 import { useLocation } from "react-router-dom";
-
-interface Profile {
-  id: string;
-  user_id: string;
-  email: string;
-  role: string;
-  created_at: string;
-  updated_at: string;
-}
-
-interface AuthContextType {
-  user: User | null;
-  session: Session | null;
-  profile: Profile | null;
-  loading: boolean;
-  signIn: (email: string, password: string) => Promise<{ error: any }>;
-  signOut: () => Promise<void>;
-}
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
-};
+import { AuthContext, type Profile } from "./AuthContextDefinition";
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const location = useLocation();
@@ -77,7 +50,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setProfile(data);
       } else {
         // Create a default user profile for new users
-        const email = userEmail || session?.user?.email;
+        const email = userEmail;
         if (email) {
           const { data: newProfile, error: insertError } = await authSupabase
             .from("profiles")
@@ -173,7 +146,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         fetchProfileAbortController.current.abort();
       }
     };
-  }, [hasExplicitlySignedOut, isAdminRoute]); // Add isAdminRoute dependency
+  }, [hasExplicitlySignedOut, isAdminRoute, fetchProfile]); // Add fetchProfile dependency
 
   // Separate effect to handle explicit sign out flag
   useEffect(() => {

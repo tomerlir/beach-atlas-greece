@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { X, MapPin, RefreshCw } from "lucide-react";

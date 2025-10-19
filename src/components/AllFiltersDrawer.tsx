@@ -1,16 +1,5 @@
 import { useEffect, useRef, useCallback } from "react";
-import {
-  MapPin,
-  Sun,
-  CheckCircle,
-  Car,
-  Flag,
-  X,
-  Search,
-  Check,
-  Waves,
-  Mountain,
-} from "lucide-react";
+import { MapPin, Sun, CheckCircle, Car, Flag, Search, Check, Waves, Mountain } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetFooter } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -23,12 +12,8 @@ import { useDraftState } from "@/hooks/useDraftState";
 import { FilterState } from "@/hooks/useUrlState";
 import { getAllAmenities } from "@/lib/amenities";
 import { analytics } from "@/lib/analytics";
-import {
-  createFilterApplyEvent,
-  createFilterClearEvent,
-  BeachType,
-  WaveCondition,
-} from "@/lib/analyticsEvents";
+import { createFilterApplyEvent, createFilterClearEvent } from "@/lib/analyticsEvents";
+import { BeachType, WaveCondition } from "@/types/common";
 
 interface AllFiltersDrawerProps {
   isOpen: boolean;
@@ -71,7 +56,6 @@ export default function AllFiltersDrawer({
   onClose,
   filters,
   onApplyFilters,
-  userLocation,
   onLocationRequest,
   isLoadingLocation,
   locationPermission,
@@ -79,7 +63,7 @@ export default function AllFiltersDrawer({
   const firstFocusableRef = useRef<HTMLButtonElement>(null);
 
   // Use draft state hook for proper state management
-  const { draftFilters, updateDraft, resetDraft, clearDraft } = useDraftState(filters);
+  const { draftFilters, updateDraft, resetDraft } = useDraftState(filters);
 
   // Debounced search with 250ms delay - synchronized with FilterBar
   const { searchInput, setSearchInput, clearSearchInput } = useDebouncedSearch(

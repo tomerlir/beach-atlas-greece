@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useMemo } from "react";
 
 interface PerformanceMetrics {
   imageLoadTimes: Map<string, number>;
@@ -7,13 +7,22 @@ interface PerformanceMetrics {
   averageLoadTime: number;
 }
 
+// Interface for layout shift entries with specific properties
+interface LayoutShiftEntry extends PerformanceEntry {
+  value: number;
+  hadRecentInput: boolean;
+}
+
 export const usePerformanceMonitoring = () => {
-  const metrics: PerformanceMetrics = {
-    imageLoadTimes: new Map(),
-    totalImagesLoaded: 0,
-    failedImageLoads: 0,
-    averageLoadTime: 0,
-  };
+  const metrics: PerformanceMetrics = useMemo(
+    () => ({
+      imageLoadTimes: new Map(),
+      totalImagesLoaded: 0,
+      failedImageLoads: 0,
+      averageLoadTime: 0,
+    }),
+    []
+  );
 
   // Track image load performance
   const trackImageLoad = useCallback(
@@ -27,8 +36,8 @@ export const usePerformanceMonitoring = () => {
 
       // Log performance data in development
       if (process.env.NODE_ENV === "development") {
-        console.log(`Image loaded: ${src} in ${loadTime}ms`);
-        console.log(`Average load time: ${metrics.averageLoadTime.toFixed(2)}ms`);
+        console.warn(`Image loaded: ${src} in ${loadTime}ms`);
+        console.warn(`Average load time: ${metrics.averageLoadTime.toFixed(2)}ms`);
       }
     },
     [metrics]
@@ -56,34 +65,44 @@ export const usePerformanceMonitoring = () => {
       const lastEntry = entries[entries.length - 1];
 
       if (process.env.NODE_ENV === "development") {
-        console.log("LCP:", lastEntry.startTime);
+        console.warn("LCP:", lastEntry.startTime);
       }
     });
 
     try {
       observer.observe({ entryTypes: ["largest-contentful-paint"] });
-    } catch (e) {
+    } catch (error) {
       // LCP not supported in this browser
+      if (process.env.NODE_ENV === "development") {
+        console.warn("LCP monitoring not supported:", error);
+      }
     }
 
     // Monitor Cumulative Layout Shift (CLS)
     let clsValue = 0;
     const clsObserver = new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
-        if (!(entry as any).hadRecentInput) {
-          clsValue += (entry as any).value;
+        // Type guard to check if entry is a layout shift entry
+        if (entry.entryType === "layout-shift" && "hadRecentInput" in entry && "value" in entry) {
+          const layoutShiftEntry = entry as LayoutShiftEntry;
+          if (!layoutShiftEntry.hadRecentInput) {
+            clsValue += layoutShiftEntry.value;
+          }
         }
       }
 
       if (process.env.NODE_ENV === "development") {
-        console.log("CLS:", clsValue);
+        console.warn("CLS:", clsValue);
       }
     });
 
     try {
       clsObserver.observe({ entryTypes: ["layout-shift"] });
-    } catch (e) {
+    } catch (error) {
       // CLS not supported in this browser
+      if (process.env.NODE_ENV === "development") {
+        console.warn("CLS monitoring not supported:", error);
+      }
     }
 
     return () => {

@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { Plus, Search, Pencil, Trash2, CheckCircle2, Circle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,12 +8,8 @@ import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { authSupabase } from "@/integrations/supabase/client";
 import type { Tables } from "@/integrations/supabase/types";
-import {
-  AMENITY_OPTIONS,
-  PARKING_OPTIONS,
-  STATUS_OPTIONS,
-  formatRelativeUpdatedAt,
-} from "@/lib/utils";
+import { StatusType } from "@/types/common";
+import { formatRelativeUpdatedAt } from "@/lib/utils";
 
 type Beach = Tables<"beaches">;
 
@@ -24,8 +20,6 @@ const PAGE_SIZE = 20;
 const AdminBeachesList: React.FC = () => {
   const { toast } = useToast();
   const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
-  const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState<Beach[]>([]);
   const [total, setTotal] = useState(0);
@@ -58,7 +52,7 @@ const AdminBeachesList: React.FC = () => {
         query = query.or(`name.ilike.%${q}%,area.ilike.%${q}%`);
       }
       if (status && status !== "ALL") {
-        query = query.eq("status", status as "ACTIVE" | "HIDDEN" | "DRAFT");
+        query = query.eq("status", status as StatusType);
       }
       if (organized !== "ALL") {
         query = query.eq("organized", organized === "YES");
@@ -73,8 +67,9 @@ const AdminBeachesList: React.FC = () => {
       setLiveMsg(
         `Loaded ${data?.length || 0} beaches. Page ${page} of ${Math.max(1, Math.ceil((count || 0) / PAGE_SIZE))}.`
       );
-    } catch (err: any) {
-      toast({ title: "Error loading beaches", description: err.message, variant: "destructive" });
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : "An unknown error occurred";
+      toast({ title: "Error loading beaches", description: errorMessage, variant: "destructive" });
     } finally {
       setLoading(false);
     }
@@ -101,8 +96,9 @@ const AdminBeachesList: React.FC = () => {
       toast({ title: "Deleted", description: `${name} removed.` });
       await fetchBeaches();
       setTimeout(() => lastFocusedRef.current?.focus(), 0);
-    } catch (err: any) {
-      toast({ title: "Delete failed", description: err.message, variant: "destructive" });
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : "An unknown error occurred";
+      toast({ title: "Delete failed", description: errorMessage, variant: "destructive" });
     }
   };
 

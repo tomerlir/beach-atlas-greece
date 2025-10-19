@@ -3,13 +3,13 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
-import { CONTACT_EMAIL } from "@/lib/constants";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FilterBar from "@/components/FilterBar";
 import AllFiltersDrawer from "@/components/AllFiltersDrawer";
 import BeachCard from "@/components/BeachCard";
 import BeachCardSkeleton from "@/components/BeachCardSkeleton";
+import AreaHeroSkeleton from "@/components/AreaHeroSkeleton";
 import Pagination from "@/components/Pagination";
 import { GeolocationErrorBanner } from "@/components/GeolocationErrorBanner";
 import EnhancedSearchBar from "@/components/EnhancedSearchBar";
@@ -18,7 +18,7 @@ import { useAreaUrlState } from "@/hooks/useAreaUrlState";
 import { useAreaBeachFiltering } from "@/hooks/useAreaBeachFiltering";
 import { useDistanceCalculation } from "@/hooks/useDistanceCalculation";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
-import { useAreaBySlug, useNearbyAreas } from "@/hooks/useAreas";
+import { useAreaBySlugOptimistic, useNearbyAreas } from "@/hooks/useAreas";
 import { Beach } from "@/types/beach";
 import type { Area } from "@/types/area";
 import heroImage from "@/assets/hero-background.png";
@@ -45,8 +45,12 @@ const Area = () => {
   const [placeMismatch, setPlaceMismatch] = useState<{ place: string; area: string } | null>(null);
   const { preloadVisibleBeachImages } = useImagePreloader();
 
-  // Fetch area data by slug
-  const { data: area, isLoading: isLoadingArea, error: areaError } = useAreaBySlug(areaSlug || "");
+  // Fetch area data by slug with optimistic loading
+  const {
+    data: area,
+    isLoading: isLoadingArea,
+    error: areaError,
+  } = useAreaBySlugOptimistic(areaSlug || "");
   const { nearby } = useNearbyAreas(area?.id);
 
   // Fetch beaches from Supabase filtered by area
@@ -84,8 +88,6 @@ const Area = () => {
 
   // Filter and sort beaches (including area filter)
   const filteredBeaches = useAreaBeachFiltering(beachesWithDistance, filters, location);
-
-  // Filter relaxation for natural language searches
 
   // Pagination
   const totalPages = Math.ceil(filteredBeaches.length / BEACHES_PER_PAGE);
@@ -179,15 +181,34 @@ const Area = () => {
     setPlaceMismatch(null);
   };
 
-  // Handle natural language search usage tracking (no longer needed since we always use NL search)
-  const handleNaturalLanguageSearch = (wasUsed: boolean) => {
-    // No longer needed since we always use natural language search
-  };
-
   // Clear place mismatch notification when navigating to a different area
   useEffect(() => {
     setPlaceMismatch(null);
   }, [areaSlug]);
+
+  // Show loading skeleton during initial area load
+  if (isLoadingArea && !areaName) {
+    return (
+      <>
+        <Helmet>
+          <title>Loading Area | Beach Atlas</title>
+          <meta name="description" content="Loading beach area information..." />
+        </Helmet>
+        <div className="min-h-screen bg-background">
+          <Header />
+          <AreaHeroSkeleton />
+          <main className="container mx-auto px-4 py-4 pb-20 md:pb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <BeachCardSkeleton key={i} />
+              ))}
+            </div>
+          </main>
+          <Footer />
+        </div>
+      </>
+    );
+  }
 
   // If area not found, show 404
   if (!isLoading && !error && areaSlug && !areaName) {
@@ -335,7 +356,6 @@ const Area = () => {
                   placeholder={`Search beaches in ${areaName}...`}
                   areaName={areaName}
                   onPlaceMismatch={handlePlaceMismatch}
-                  onNaturalLanguageSearch={handleNaturalLanguageSearch}
                 />
               </div>
             )}

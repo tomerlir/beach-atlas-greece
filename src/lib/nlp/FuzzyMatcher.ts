@@ -217,7 +217,7 @@ export class FuzzyMatcher {
    */
   private calculateSemanticScore(query: string, candidate: string): number {
     // Check if query and candidate are in the same semantic group
-    for (const [group, words] of this.semanticGroups) {
+    for (const [, words] of this.semanticGroups) {
       const queryInGroup = words.some((word) => word === query || query.includes(word));
       const candidateInGroup = words.some((word) => word === candidate || candidate.includes(word));
 
@@ -227,7 +227,7 @@ export class FuzzyMatcher {
     }
 
     // Check for partial semantic matches
-    for (const [group, words] of this.semanticGroups) {
+    for (const [, words] of this.semanticGroups) {
       const queryMatch = words.find((word) => query.includes(word));
       const candidateMatch = words.find((word) => candidate.includes(word));
 

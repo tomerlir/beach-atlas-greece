@@ -1,4 +1,4 @@
-import { useParams, Link, useLocation, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { generateAreaSlug, formatRelativeTime } from "@/lib/utils";
 import { openInMaps } from "@/lib/maps";
 import { useQuery } from "@tanstack/react-query";
@@ -22,7 +22,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/hooks/use-toast";
-import { useIsMobile } from "@/hooks/use-mobile";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Tables } from "@/integrations/supabase/types";
@@ -30,7 +29,6 @@ import { getAmenityConfig } from "@/lib/amenities";
 import OptimizedImage from "@/components/OptimizedImage";
 import PhotoAttribution from "@/components/PhotoAttribution";
 import { ShareDialog } from "@/components/ShareDialog";
-import { useImagePreloader } from "@/hooks/useImagePreloader";
 import { useProgressiveLoading } from "@/hooks/useProgressiveLoading";
 import { generateBeachImageAltText } from "@/lib/accessibility";
 import { useNavigationState } from "@/hooks/useNavigationState";
@@ -38,6 +36,22 @@ import { BreadcrumbsWithJsonLd } from "@/components/breadcrumbs/BreadcrumbsWithJ
 import { fetchMoreInArea } from "@/lib/fetchMoreInArea";
 import MoreInArea from "@/components/MoreInArea";
 import { analytics } from "@/lib/analytics";
+
+interface AmenityItem {
+  key: string;
+  label: string;
+  icon: React.ComponentType<{
+    className?: string;
+    "aria-hidden"?: boolean | string;
+    size?: number | string;
+    color?: string;
+  }>;
+  category: string;
+}
+
+interface AmenitiesByCategory {
+  [category: string]: AmenityItem[];
+}
 
 type Beach = Tables<"beaches">;
 
@@ -67,18 +81,12 @@ const parkingLabels: Record<string, string> = {
 
 const BeachDetail = () => {
   const { area, "beach-name": beachName } = useParams<{ area: string; "beach-name": string }>();
-  const location = useLocation();
-  const navigate = useNavigate();
   const { toast } = useToast();
-  const isMobile = useIsMobile();
-  const { isPreloaded, getPreloadResult } = useImagePreloader();
   const { navigateBack } = useNavigationState();
 
   // State management
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
-
-  // Note: Geolocation removed to prevent unwanted permission prompts
 
   // Fetch beach data with optimized caching
   const {
@@ -163,17 +171,15 @@ const BeachDetail = () => {
   });
 
   // Progressive loading state - now that beach data is available
-  const {
-    shouldShowContent,
-    shouldShowImage,
-    shouldShowImageSkeleton,
-    handleImageLoad,
-    handleImageError,
-  } = useProgressiveLoading(isLoading, !!beach?.photo_url, {
-    contentDelay: 0, // Show content immediately
-    imageDelay: 0, // Start image loading immediately to prevent layout shift
-    enableProgressiveMode: false, // Disable progressive mode to always show image container
-  });
+  const { shouldShowContent, handleImageLoad, handleImageError } = useProgressiveLoading(
+    isLoading,
+    !!beach?.photo_url,
+    {
+      contentDelay: 0, // Show content immediately
+      imageDelay: 0, // Start image loading immediately to prevent layout shift
+      enableProgressiveMode: false, // Disable progressive mode to always show image container
+    }
+  );
 
   // Ensure page scrolls to top when component mounts
   useEffect(() => {
@@ -251,7 +257,7 @@ const BeachDetail = () => {
         title: "Link copied!",
         description: "Beach URL copied to clipboard",
       });
-    } catch (error) {
+    } catch {
       // Final fallback: show simple dialog
       setIsShareDialogOpen(true);
     }
@@ -273,27 +279,24 @@ const BeachDetail = () => {
   }, [navigateBack, area]);
 
   // Group amenities by category
-  const amenitiesByCategory = useMemo(() => {
+  const amenitiesByCategory = useMemo((): AmenitiesByCategory => {
     if (!beach?.amenities) return {};
 
-    return beach.amenities.reduce(
-      (acc, amenity) => {
-        const config = getAmenityConfig(amenity) || {
-          label: amenity,
-          icon: Users,
-          color: "text-gray-600",
-          category: "activities" as const,
-        };
+    return beach.amenities.reduce((acc, amenity) => {
+      const config = getAmenityConfig(amenity) || {
+        label: amenity,
+        icon: Users,
+        color: "text-gray-600",
+        category: "activities" as const,
+      };
 
-        if (!acc[config.category]) {
-          acc[config.category] = [];
-        }
-        acc[config.category].push({ key: amenity, ...config, category: config.category });
+      if (!acc[config.category]) {
+        acc[config.category] = [];
+      }
+      acc[config.category].push({ key: amenity, ...config, category: config.category });
 
-        return acc;
-      },
-      {} as Record<string, Array<{ key: string; label: string; icon: any; category: string }>>
-    );
+      return acc;
+    }, {} as AmenitiesByCategory);
   }, [beach?.amenities]);
 
   // Progressive loading - show content immediately, image loads separately
@@ -500,7 +503,6 @@ const BeachDetail = () => {
                   placeholder="blur" // Use blur placeholder to prevent layout shift
                   placeholderPalette="default" // Use default beach-themed placeholder
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
-                  quality={90}
                   useDetailSkeleton={false} // Use blur placeholder instead of skeleton
                   onLoad={handleImageLoad}
                   onError={handleImageError}
@@ -690,7 +692,7 @@ const BeachDetail = () => {
                             >
                               <IconComponent
                                 className="h-4 w-4 text-secondary"
-                                aria-hidden="true"
+                                aria-hidden={true}
                               />
                               <span className="text-sm font-medium">{label}</span>
                             </div>
@@ -708,10 +710,11 @@ const BeachDetail = () => {
         {/* More in Area Section */}
         {beach && siblings.length > 0 && (
           <MoreInArea
-            area={
-              { ...(beach as any), name: beach.area, slug: generateAreaSlug(beach.area) } as any
-            }
-            beaches={siblings as any}
+            area={{
+              name: beach.area,
+              slug: generateAreaSlug(beach.area),
+            }}
+            beaches={siblings}
           />
         )}
 

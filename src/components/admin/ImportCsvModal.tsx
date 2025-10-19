@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from "react";
-import { Upload, X, AlertCircle, CheckCircle, Loader2, FileText } from "lucide-react";
+import { Upload, AlertCircle, CheckCircle, Loader2, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -32,8 +32,11 @@ import {
   ClassificationResult,
   csvRowToDbInsert,
   csvRowToDbUpdate,
-  BeachCsvRow,
 } from "@/utils/csv/beachCsvSchema";
+import { CsvRowData } from "@/utils/csv/download";
+
+// Type for Papa Parse results that matches our CSV structure
+type ParsedCsvRow = CsvRowData & Record<string, string>;
 
 interface ImportSummary {
   totalRows: number;
@@ -52,11 +55,11 @@ interface ImportCsvModalProps {
 
 const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
   const [step, setStep] = useState<"upload" | "preview" | "importing" | "complete">("upload");
-  const [file, setFile] = useState<File | null>(null);
-  const [parsedData, setParsedData] = useState<any[]>([]);
+  const [_file, setFile] = useState<File | null>(null);
+  const [parsedData, setParsedData] = useState<ParsedCsvRow[]>([]);
   const [summary, setSummary] = useState<ImportSummary | null>(null);
   const [previewRows, setPreviewRows] = useState<ClassificationResult[]>([]);
-  const [existingSlugs, setExistingSlugs] = useState<Set<string>>(new Set());
+  const [_existingSlugs, setExistingSlugs] = useState<Set<string>>(new Set());
   const [importProgress, setImportProgress] = useState(0);
   const [importResults, setImportResults] = useState<{
     created: number;
@@ -170,8 +173,9 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
             return;
           }
 
-          setParsedData(results.data);
-          await performDryRun(results.data);
+          const csvData = results.data as ParsedCsvRow[];
+          setParsedData(csvData);
+          await performDryRun(csvData);
         },
         error: (error) => {
           toast({
@@ -190,10 +194,10 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
     }
   };
 
-  const performDryRun = async (data: any[]) => {
+  const performDryRun = async (data: ParsedCsvRow[]) => {
     try {
       // Fetch existing slugs
-      const { data: existingBeaches, error } = await supabase.from("beaches").select("slug");
+      const { data: existingBeaches, error } = await authSupabase.from("beaches").select("slug");
 
       if (error) throw error;
 
@@ -331,7 +335,7 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
           );
 
           const createData = creates.map((r) => csvRowToDbInsert(r.normalizedRow!, areaIdMap));
-          const { error: createError } = await supabase.from("beaches").insert(createData);
+          const { error: createError } = await authSupabase.from("beaches").insert(createData);
 
           if (createError) {
             console.error("Create error:", createError);
@@ -353,7 +357,7 @@ const ImportCsvModal: React.FC<ImportCsvModalProps> = ({ isOpen, onClose }) => {
           );
 
           const updateData = csvRowToDbUpdate(update.normalizedRow!, areaIdMap);
-          const { error: updateError } = await supabase
+          const { error: updateError } = await authSupabase
             .from("beaches")
             .update(updateData)
             .eq("slug", update.normalizedRow!.slug);

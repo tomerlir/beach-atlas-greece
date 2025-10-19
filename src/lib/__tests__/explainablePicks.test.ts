@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { generateResultsExplanation } from "@/components/ResultsSummary";
+import { generateResultsExplanation } from "@/lib/resultsUtils";
 import type { FilterState } from "@/hooks/useUrlState";
 
 const baseFilters: FilterState = {

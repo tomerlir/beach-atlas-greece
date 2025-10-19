@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NavLink, useNavigate, Outlet } from "react-router-dom";
 import { Menu, X, MapPin, Upload, Settings, LogOut, LayoutDashboard } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 
 const AdminLayout: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);

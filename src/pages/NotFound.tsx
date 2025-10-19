@@ -9,7 +9,7 @@ const NotFound = () => {
 
   useEffect(() => {
     console.error("404 Error: User attempted to access non-existent route:", location.pathname);
-    analytics.event("404", createNotFoundEvent(location.pathname) as any);
+    analytics.event("404", createNotFoundEvent(location.pathname));
   }, [location.pathname]);
 
   return (

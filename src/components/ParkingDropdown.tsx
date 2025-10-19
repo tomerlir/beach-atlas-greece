@@ -1,13 +1,12 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Car, Check, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useDraftState } from "@/hooks/useDraftState";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { FilterState } from "@/hooks/useUrlState";
 import { analytics } from "@/lib/analytics";
 import { createFilterApplyEvent, createFilterClearEvent } from "@/lib/analyticsEvents";
+import { PARKING_TYPES, PARKING_CONFIG } from "@/types/common";
 
 interface ParkingDropdownProps {
   filters: FilterState;
@@ -17,28 +16,24 @@ interface ParkingDropdownProps {
   resultCount?: number; // For analytics
 }
 
-const parkingOptions = [
-  { value: "NONE", label: "None" },
-  { value: "ROADSIDE", label: "Roadside" },
-  { value: "SMALL_LOT", label: "Small lot" },
-  { value: "LARGE_LOT", label: "Large lot" },
-];
+// Generate parking options from centralized config
+const parkingOptions = PARKING_TYPES.map((type) => ({
+  value: type,
+  label: PARKING_CONFIG[type].label,
+}));
 
 export default function ParkingDropdown({
   filters,
   onFiltersChange,
-  onOpenAllFilters,
-  showCountBadge = false,
   resultCount = 0,
 }: ParkingDropdownProps) {
-  const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const [focusedIndex, setFocusedIndex] = useState(-1);
 
   // Use draft state for proper state management
-  const { draftFilters, updateDraft, resetDraft } = useDraftState(filters);
+  const { draftFilters, updateDraft } = useDraftState(filters);
 
   // Handle trigger click - open popover on all devices
   const handleTriggerClick = useCallback(() => {
@@ -72,7 +67,7 @@ export default function ParkingDropdown({
     });
 
     // Emit filter_clear events for removed parking options
-    removedParking.forEach((parking) => {
+    removedParking.forEach(() => {
       analytics.event("filter_clear", createFilterClearEvent("parking"));
     });
 
@@ -138,7 +133,6 @@ export default function ParkingDropdown({
   }, [isOpen]);
 
   // Calculate counts
-  const selectedCount = draftFilters.parking.length;
   const appliedCount = filters.parking.length;
 
   return (

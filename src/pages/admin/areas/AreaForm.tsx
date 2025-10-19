@@ -27,6 +27,16 @@ const schema = z.object({
   status: z.enum(["DRAFT", "HIDDEN", "ACTIVE"]).default("DRAFT"),
 });
 
+// Ensure required fields are properly typed for database operations
+type AreaFormDataForInsert = {
+  name: string;
+  slug: string;
+  description?: string | null;
+  hero_photo_url?: string | null;
+  hero_photo_source?: string | null;
+  status?: "DRAFT" | "HIDDEN" | "ACTIVE";
+};
+
 const AreaForm: React.FC = () => {
   const navigate = useNavigate();
   const params = useParams();
@@ -154,7 +164,7 @@ const AreaForm: React.FC = () => {
       const firstField = Object.keys(fieldErrors)[0];
       setErrorSummary(
         `Please fix: ${Object.entries(fieldErrors)
-          .map(([k, v]) => `${k}`)
+          .map(([k]) => `${k}`)
           .join(", ")}`
       );
       toast({
@@ -176,9 +186,16 @@ const AreaForm: React.FC = () => {
 
     try {
       if (mode === "create") {
-        const uniqueSlug = await ensureUniqueSlug(parsed.data.slug as string);
-        (parsed.data as any).slug = uniqueSlug;
-        const payload: AreaInsert = parsed.data as AreaInsert;
+        const uniqueSlug = await ensureUniqueSlug(parsed.data.slug);
+        const formData: AreaFormDataForInsert = {
+          name: parsed.data.name,
+          slug: uniqueSlug,
+          description: parsed.data.description || null,
+          hero_photo_url: parsed.data.hero_photo_url || null,
+          hero_photo_source: parsed.data.hero_photo_source || null,
+          status: parsed.data.status,
+        };
+        const payload: AreaInsert = formData;
         const { data, error } = await authSupabase
           .from("areas")
           .insert(payload)
@@ -187,10 +204,17 @@ const AreaForm: React.FC = () => {
         if (error || !data) throw error || new Error("Insert returned no row");
         toast({ title: "Saved", description: "Area created." });
       } else if (mode === "edit" && id) {
-        const uniqueSlug = await ensureUniqueSlug(parsed.data.slug as string, id);
-        (parsed.data as any).slug = uniqueSlug;
+        const uniqueSlug = await ensureUniqueSlug(parsed.data.slug, id);
+        const formData: AreaFormDataForInsert = {
+          name: parsed.data.name,
+          slug: uniqueSlug,
+          description: parsed.data.description || null,
+          hero_photo_url: parsed.data.hero_photo_url || null,
+          hero_photo_source: parsed.data.hero_photo_source || null,
+          status: parsed.data.status,
+        };
         const payload: AreaUpdate = {
-          ...(parsed.data as AreaUpdate),
+          ...formData,
           id,
         };
         const { data, error } = await authSupabase
@@ -205,8 +229,8 @@ const AreaForm: React.FC = () => {
       setDirty(false);
       clearDraft();
       navigate("/admin/areas");
-    } catch (err: any) {
-      const msg = err?.message || "Server error";
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Server error";
       if (/slug.*unique/i.test(msg)) {
         setErrors((e) => ({ ...e, slug: "This slug already exists. Use a unique slug." }));
         setTimeout(() => firstInvalidRef.current?.focus(), 0);

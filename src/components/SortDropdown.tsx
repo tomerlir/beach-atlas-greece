@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { ChevronDown, ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -57,12 +57,6 @@ export default function SortDropdown({
 
   // Get current sort value, defaulting to name.asc if none set
   const currentSort = filters.sort || "name.asc";
-
-  // Get display label for current sort
-  const getCurrentSortLabel = useCallback(() => {
-    const option = sortOptions.find((opt) => opt.value === currentSort);
-    return option?.label || "Name: A → Z";
-  }, [currentSort, sortOptions]);
 
   // Handle sort change
   const handleSortChange = useCallback(

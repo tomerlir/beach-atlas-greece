@@ -202,7 +202,7 @@ function generateSitemap(beaches: Beach[], areas: Area[]): string {
 
 async function main() {
   try {
-    console.log('🚀 Generating sitemap for Greek Beaches Directory...');
+    console.warn('🚀 Generating sitemap for Greek Beaches Directory...');
     
     // Fetch all active areas from Supabase
     const { data: areas, error: areasError } = await supabase
@@ -236,7 +236,7 @@ async function main() {
       return;
     }
 
-    console.log(`📊 Found ${areas.length} areas and ${beaches.length} active beaches`);
+    console.warn(`📊 Found ${areas.length} areas and ${beaches.length} active beaches`);
 
     // Generate sitemap XML
     const sitemapXml = generateSitemap(beaches, areas);
@@ -245,14 +245,14 @@ async function main() {
     const sitemapPath = join(process.cwd(), 'public', 'sitemap.xml');
     writeFileSync(sitemapPath, sitemapXml, 'utf8');
 
-    console.log(`✅ Sitemap generated successfully!`);
-    console.log(`📁 Location: ${sitemapPath}`);
-    console.log(`🔗 URL: ${SITE_URL}/sitemap.xml`);
-    console.log(`📄 Contains ${beaches.length + areas.length + 5} URLs (${beaches.length} beaches + ${areas.length} areas + 5 main pages)`);
+    console.warn(`✅ Sitemap generated successfully!`);
+    console.warn(`📁 Location: ${sitemapPath}`);
+    console.warn(`🔗 URL: ${SITE_URL}/sitemap.xml`);
+    console.warn(`📄 Contains ${beaches.length + areas.length + 5} URLs (${beaches.length} beaches + ${areas.length} areas + 5 main pages)`);
 
     // Validate XML structure
     const urlCount = (sitemapXml.match(/<url>/g) || []).length;
-    console.log(`✅ Validation: Found ${urlCount} URL entries in sitemap`);
+    console.warn(`✅ Validation: Found ${urlCount} URL entries in sitemap`);
 
   } catch (error) {
     console.error('❌ Error generating sitemap:', error);

@@ -1,14 +1,38 @@
 import { CSV_HEADER_ORDER } from "./beachCsvSchema";
 
 /**
+ * Interface for CSV row data with fixed field names
+ * All values are strings as they come from CSV export/import
+ */
+export interface CsvRowData {
+  slug: string;
+  name: string;
+  area: string;
+  latitude: string;
+  longitude: string;
+  type: string;
+  wave_conditions: string;
+  organized: string;
+  parking: string;
+  blue_flag: string;
+  amenities: string;
+  photo_url: string;
+  photo_source: string;
+  description: string;
+  source: string;
+  verified_at: string;
+  status: string;
+}
+
+/**
  * Downloads CSV data as a file
  * @param filename - The name of the file to download
- * @param rows - Array of data rows
+ * @param rows - Array of data rows with fixed CSV structure
  * @param headers - Array of header names (optional, defaults to CSV_HEADER_ORDER)
  */
 export function downloadCsv(
   filename: string,
-  rows: Record<string, any>[],
+  rows: CsvRowData[],
   headers: readonly string[] = CSV_HEADER_ORDER
 ): void {
   try {
@@ -47,13 +71,13 @@ export function downloadCsv(
 
 /**
  * Creates CSV content from rows and headers
- * @param rows - Array of data rows
+ * @param rows - Array of data rows with fixed CSV structure
  * @param headers - Array of header names
  * @returns CSV string
  */
-function createCsvContent(rows: Record<string, any>[], headers: readonly string[]): string {
+function createCsvContent(rows: CsvRowData[], headers: readonly string[]): string {
   // Escape CSV field value
-  function escapeCsvField(field: any): string {
+  function escapeCsvField(field: string | number | boolean | null | undefined): string {
     if (field === null || field === undefined) {
       return "";
     }
@@ -73,7 +97,7 @@ function createCsvContent(rows: Record<string, any>[], headers: readonly string[
 
   // Create data rows
   const dataRows = rows.map((row) =>
-    headers.map((header) => escapeCsvField(row[header])).join(",")
+    headers.map((header) => escapeCsvField(row[header as keyof CsvRowData])).join(",")
   );
 
   // Combine header and data rows

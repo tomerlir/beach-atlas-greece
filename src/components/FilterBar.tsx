@@ -78,16 +78,6 @@ export default function FilterBar({
     [onFiltersChange, userLocation, onLocationRequest, resultCount]
   );
 
-  // Calculate active filter counts for "All Filters" button
-  const activeFiltersCount = [
-    filters.blueFlag,
-    filters.organized.length > 0,
-    filters.parking.length > 0,
-    filters.amenities.length > 0,
-    filters.waveConditions.length > 0,
-    filters.type.length > 0,
-  ].filter(Boolean).length;
-
   return (
     <div className="relative z-20">
       {/* Main Filter Bar */}

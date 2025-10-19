@@ -1,9 +1,8 @@
 /**
  * Named Entity Recognition Module
  * Specialized for beach and location entities
+ * Updated to work without TextProcessor dependency
  */
-
-import { TextProcessor, ProcessedText } from "./TextProcessor";
 
 export interface BeachEntity {
   text: string;
@@ -24,7 +23,6 @@ export interface EntityRecognitionResult {
 
 export class EntityRecognizer {
   private static instance: EntityRecognizer;
-  private textProcessor: TextProcessor;
 
   // Enhanced entity patterns
   private placePatterns = new Map<string, RegExp>();
@@ -35,7 +33,6 @@ export class EntityRecognizer {
   private organizationPatterns = new Map<string, RegExp>();
 
   private constructor() {
-    this.textProcessor = TextProcessor.getInstance();
     this.initializePatterns();
   }
 
@@ -284,8 +281,6 @@ export class EntityRecognizer {
     if (!text || typeof text !== "string") {
       text = "";
     }
-
-    const processedText = await this.textProcessor.processText(text);
 
     const result: EntityRecognitionResult = {
       places: [],

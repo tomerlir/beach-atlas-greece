@@ -3,7 +3,6 @@
  * Centralized exports for all NLP functionality
  */
 
-export { TextProcessor } from "./TextProcessor";
 export type { Token, ProcessedText } from "./TextProcessor";
 
 export { EntityRecognizer } from "./EntityRecognizer";

@@ -99,7 +99,5 @@ export const formatRelativeUpdatedAt = (isoDate: string | Date): string => {
 
 export const AMENITY_OPTIONS = ["umbrellas", "showers", "toilets", "food", "lifeguard"] as const;
 
-export const TYPE_OPTIONS = ["SANDY", "PEBBLY", "MIXED", "OTHER"] as const;
-export const WAVE_OPTIONS = ["CALM", "MODERATE", "WAVY", "SURFABLE"] as const;
-export const PARKING_OPTIONS = ["NONE", "ROADSIDE", "SMALL_LOT", "LARGE_LOT"] as const;
-export const STATUS_OPTIONS = ["DRAFT", "HIDDEN", "ACTIVE"] as const;
+// Re-export common constants for backward compatibility
+export { TYPE_OPTIONS, WAVE_OPTIONS, PARKING_OPTIONS, STATUS_OPTIONS } from "@/types/common";

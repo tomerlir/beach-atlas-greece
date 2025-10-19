@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Area, AreaWithBeachCount } from "@/types/area";
 import { calculateDistance } from "./useGeolocation";
@@ -79,7 +79,37 @@ export const useAreaBySlug = (slug: string) => {
       return data as Area;
     },
     enabled: !!slug,
+    staleTime: 5 * 60 * 1000, // 5 minutes
+    gcTime: 10 * 60 * 1000, // 10 minutes
+    retry: (failureCount, error: unknown) => {
+      // Don't retry for "not found" errors
+      if (error && typeof error === "object" && "code" in error && error.code === "PGRST116") {
+        return false;
+      }
+      // Retry up to 2 times for other errors
+      return failureCount < 2;
+    },
+    retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
   });
+};
+
+// Hook that provides optimistic loading by checking cached data first
+export const useAreaBySlugOptimistic = (slug: string) => {
+  const queryClient = useQueryClient();
+
+  // Check if we have cached data for this area
+  const cachedData = queryClient.getQueryData<Area>(["area", slug]);
+
+  const query = useAreaBySlug(slug);
+
+  return {
+    ...query,
+    // If we have cached data, show it immediately and don't show loading
+    data: cachedData || query.data,
+    isLoading: cachedData ? false : query.isLoading,
+    // Only show error if we don't have cached data
+    error: cachedData ? null : query.error,
+  };
 };
 
 export interface AreaCentroid extends Area {
@@ -152,7 +182,7 @@ export const useNearbyAreas = (currentAreaId: string | undefined, maxResults: nu
       }))
       .sort((a, b) => a.distanceKm - b.distanceKm)
       .slice(0, maxResults);
-  }, [centroids, currentAreaId]);
+  }, [centroids, currentAreaId, maxResults]);
 
   return { nearby, isLoading, error };
 };

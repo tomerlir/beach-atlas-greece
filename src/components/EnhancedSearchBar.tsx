@@ -36,7 +36,6 @@ export default function EnhancedSearchBar({
   onFiltersChange,
   onClearAll,
   className = "",
-  placeholder = "Search beaches...",
   areaName,
   onPlaceMismatch,
   onNaturalLanguageSearch,

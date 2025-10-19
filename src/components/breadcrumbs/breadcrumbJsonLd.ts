@@ -1,5 +1,18 @@
 import { Crumb } from "./Breadcrumbs";
 
+interface BreadcrumbListItem {
+  "@type": "ListItem";
+  position: number;
+  name: string;
+  item?: string;
+}
+
+interface BreadcrumbJsonLd {
+  "@context": "https://schema.org";
+  "@type": "BreadcrumbList";
+  itemListElement: BreadcrumbListItem[];
+}
+
 function toAbsolute(href: string, baseUrl: string): string {
   // If already absolute, return as-is
   if (/^https?:\/\//i.test(href)) return href;
@@ -8,7 +21,11 @@ function toAbsolute(href: string, baseUrl: string): string {
   return new URL(rel, baseUrl).toString();
 }
 
-export function breadcrumbJsonLd(items: Crumb[], baseUrl: string, currentPageUrl?: string) {
+export function breadcrumbJsonLd(
+  items: Crumb[],
+  baseUrl: string,
+  currentPageUrl?: string
+): BreadcrumbJsonLd {
   if (!/^https?:\/\//i.test(baseUrl)) {
     throw new Error("breadcrumbJsonLd: baseUrl must be absolute, e.g. https://yourdomain.tld");
   }
@@ -35,7 +52,7 @@ export function breadcrumbJsonLd(items: Crumb[], baseUrl: string, currentPageUrl
         itemUrl = normalizedCurrent ?? baseUrl;
       }
 
-      const listItem: any = {
+      const listItem: BreadcrumbListItem = {
         "@type": "ListItem",
         position: index + 1,
         name: crumb.label,

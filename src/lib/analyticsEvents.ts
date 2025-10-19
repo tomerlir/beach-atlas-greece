@@ -12,15 +12,13 @@ declare global {
   interface Window {
     umami?: {
       track: (eventName: string, eventData?: Record<string, unknown>) => void;
+      enable?: () => void;
+      disable?: () => void;
     };
   }
 }
 
-// Filter type definitions for type safety
-export type BeachType = "SANDY" | "PEBBLY" | "MIXED" | "OTHER";
-export type WaveCondition = "CALM" | "MODERATE" | "WAVY" | "SURFABLE";
-export type ParkingType = "NONE" | "ROADSIDE" | "SMALL_LOT" | "LARGE_LOT";
-export type OrganizedType = "ORGANIZED" | "UNORGANIZED";
+// Import common types from centralized location
 export type FilterName =
   | "blue_flag"
   | "near_me"
@@ -163,7 +161,7 @@ export const createResultsViewEvent = (
   relaxed: boolean,
   query_hash?: string
 ): ResultsViewEvent => {
-  const event: any = {
+  const event: ResultsViewEvent = {
     count,
     relaxed,
   };

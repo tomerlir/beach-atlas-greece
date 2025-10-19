@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { authSupabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -16,16 +16,24 @@ import {
   Plus,
   Link as LinkIcon,
   RefreshCcw,
-  Mail,
 } from "lucide-react";
-import { Link } from "react-router-dom";
 
+// Define specific interfaces based on actual Supabase function return types
 interface User {
   user_id: string;
   email: string;
   role: string;
   created_at: string;
   last_sign_in: string | null;
+}
+
+interface AdminInvite {
+  id: string;
+  email: string;
+  invited_by: string;
+  accepted: boolean;
+  created_at: string;
+  expires_at: string;
 }
 
 export const AdminUserManagement: React.FC = () => {
@@ -41,20 +49,8 @@ export const AdminUserManagement: React.FC = () => {
   const [inviteEmail, setInviteEmail] = useState("");
   const [inviteLoading, setInviteLoading] = useState(false);
   const [inviteToken, setInviteToken] = useState<string | null>(null);
-  const [invites, setInvites] = useState<
-    Array<{
-      id: string;
-      email: string;
-      invited_by: string;
-      accepted: boolean;
-      created_at: string;
-      expires_at: string;
-      token: string;
-    }>
-  >([]);
+  const [invites, setInvites] = useState<AdminInvite[]>([]);
   const [invitesLoading, setInvitesLoading] = useState(false);
-  const [verifyEmail, setVerifyEmail] = useState("");
-  const [verifyLoading, setVerifyLoading] = useState(false);
 
   // Move useEffect before early return to avoid conditional hook usage
   useEffect(() => {
@@ -77,14 +73,14 @@ export const AdminUserManagement: React.FC = () => {
   const fetchUsers = async () => {
     try {
       setLoading(true);
-      const { data, error } = await authSupabase.rpc("get_users_for_admin" as any);
+      const { data, error } = await authSupabase.rpc("get_users_for_admin");
 
       if (error) {
         setError(`Failed to fetch users: ${error.message}`);
         return;
       }
 
-      setUsers((data as User[]) || []);
+      setUsers(data || []);
     } catch (err) {
       setError(`Error fetching users: ${err}`);
     } finally {
@@ -95,12 +91,12 @@ export const AdminUserManagement: React.FC = () => {
   const fetchInvites = async () => {
     try {
       setInvitesLoading(true);
-      const { data, error } = await authSupabase.rpc("list_admin_invites" as any);
+      const { data, error } = await authSupabase.rpc("list_admin_invites");
       if (error) {
         setError(`Failed to fetch invites: ${error.message}`);
         return;
       }
-      setInvites((data as any[]) || []);
+      setInvites(data || []);
     } catch (err) {
       setError(`Error fetching invites: ${err}`);
     } finally {
@@ -117,20 +113,20 @@ export const AdminUserManagement: React.FC = () => {
       setInviteLoading(true);
       setError(null);
       setInviteToken(null);
-      const { data, error } = await authSupabase.rpc("create_admin_invite" as any, {
+      const { data, error } = await authSupabase.rpc("create_admin_invite", {
         invitee_email: inviteEmail.trim(),
       });
       if (error) {
         setError(`Failed to create invite: ${error.message}`);
         return;
       }
-      const token = data as string;
+      const token = data;
       setInviteToken(token);
       setSuccess("Invite created. Share the link below with the invitee.");
       setInviteEmail("");
       await fetchInvites();
       // Audit log
-      await authSupabase.rpc("log_admin_action" as any, {
+      await authSupabase.rpc("log_admin_action", {
         action_type: "create_admin_invite",
         action_details: { token },
       });
@@ -146,7 +142,7 @@ export const AdminUserManagement: React.FC = () => {
       setPromoting(userId);
       setError(null);
 
-      const { error } = await authSupabase.rpc("promote_to_admin" as any, {
+      const { error } = await authSupabase.rpc("promote_to_admin", {
         target_user_id: userId,
       });
 
@@ -156,7 +152,7 @@ export const AdminUserManagement: React.FC = () => {
       }
 
       // Log the admin action
-      await authSupabase.rpc("log_admin_action" as any, {
+      await authSupabase.rpc("log_admin_action", {
         action_type: "promote_to_admin",
         target_user_id: userId,
         action_details: { timestamp: new Date().toISOString() },
@@ -176,7 +172,7 @@ export const AdminUserManagement: React.FC = () => {
       setDemoting(userId);
       setError(null);
 
-      const { error } = await authSupabase.rpc("demote_from_admin" as any, {
+      const { error } = await authSupabase.rpc("demote_from_admin", {
         target_user_id: userId,
       });
 
@@ -186,7 +182,7 @@ export const AdminUserManagement: React.FC = () => {
       }
 
       // Log the admin action
-      await authSupabase.rpc("log_admin_action" as any, {
+      await authSupabase.rpc("log_admin_action", {
         action_type: "demote_from_admin",
         target_user_id: userId,
         action_details: { timestamp: new Date().toISOString() },
@@ -211,7 +207,7 @@ export const AdminUserManagement: React.FC = () => {
       setBootstrapLoading(true);
       setError(null);
 
-      const { error } = await authSupabase.rpc("bootstrap_first_admin" as any, {
+      const { error } = await authSupabase.rpc("bootstrap_first_admin", {
         admin_email: bootstrapEmail.trim(),
       });
 
@@ -227,35 +223,6 @@ export const AdminUserManagement: React.FC = () => {
       setError(`Error creating admin: ${err}`);
     } finally {
       setBootstrapLoading(false);
-    }
-  };
-
-  const manualVerifyEmail = async () => {
-    if (!verifyEmail.trim()) {
-      setError("Please enter an email address to verify");
-      return;
-    }
-
-    try {
-      setVerifyLoading(true);
-      setError(null);
-
-      const { error } = await authSupabase.rpc("manual_verify_user_email" as any, {
-        target_email: verifyEmail.trim(),
-      });
-
-      if (error) {
-        setError(`Failed to verify email: ${error.message}`);
-        return;
-      }
-
-      setSuccess(`Email ${verifyEmail} has been manually verified successfully`);
-      setVerifyEmail("");
-      await fetchUsers();
-    } catch (err) {
-      setError(`Error verifying email: ${err}`);
-    } finally {
-      setVerifyLoading(false);
     }
   };
 
@@ -383,12 +350,7 @@ export const AdminUserManagement: React.FC = () => {
                             expires {new Date(inv.expires_at).toLocaleDateString()}
                           </span>
                         </div>
-                        <Link
-                          to={`/admin/accept-invite?token=${inv.token}`}
-                          className="text-primary hover:underline"
-                        >
-                          Open link
-                        </Link>
+                        <span className="text-muted-foreground">Invite created</span>
                       </div>
                     ))}
                 </div>
@@ -432,47 +394,6 @@ export const AdminUserManagement: React.FC = () => {
               </CardContent>
             </Card>
           )}
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg flex items-center gap-2">
-                <Mail className="h-4 w-4" /> Manual Email Verification
-              </CardTitle>
-              <CardDescription>
-                Manually verify a user's email if they're stuck waiting for verification emails.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="verify-email">Email to Verify</Label>
-                <Input
-                  id="verify-email"
-                  type="email"
-                  placeholder="user@example.com"
-                  value={verifyEmail}
-                  onChange={(e) => setVerifyEmail(e.target.value)}
-                />
-              </div>
-              <Button
-                onClick={manualVerifyEmail}
-                disabled={verifyLoading}
-                className="w-full"
-                variant="outline"
-              >
-                {verifyLoading ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Verifying...
-                  </>
-                ) : (
-                  <>
-                    <Mail className="mr-2 h-4 w-4" />
-                    Verify Email
-                  </>
-                )}
-              </Button>
-            </CardContent>
-          </Card>
 
           <div className="space-y-4">
             <div className="flex items-center justify-between">

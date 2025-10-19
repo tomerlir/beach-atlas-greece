@@ -17,7 +17,7 @@ interface ShareDialogProps {
   description?: string;
 }
 
-export function ShareDialog({ isOpen, onClose, url, title, description }: ShareDialogProps) {
+export function ShareDialog({ isOpen, onClose, url }: ShareDialogProps) {
   const { toast } = useToast();
 
   const handleCopyLink = async () => {

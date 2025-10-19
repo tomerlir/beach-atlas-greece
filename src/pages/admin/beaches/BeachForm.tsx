@@ -14,14 +14,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { authSupabase } from "@/integrations/supabase/client";
 import type { Tables, TablesInsert, TablesUpdate } from "@/integrations/supabase/types";
-import {
-  AMENITY_OPTIONS,
-  PARKING_OPTIONS,
-  STATUS_OPTIONS,
-  TYPE_OPTIONS,
-  WAVE_OPTIONS,
-  slugify,
-} from "@/lib/utils";
+import { PARKING_OPTIONS, STATUS_OPTIONS, TYPE_OPTIONS, WAVE_OPTIONS, slugify } from "@/lib/utils";
 import AmenitiesMultiselect from "@/components/admin/AmenitiesMultiselect";
 import { useFormDraftState } from "@/hooks/useFormDraftState";
 import { useAreas } from "@/hooks/useAreas";
@@ -29,6 +22,27 @@ import { useAreas } from "@/hooks/useAreas";
 type Beach = Tables<"beaches">;
 type BeachInsert = TablesInsert<"beaches">;
 type BeachUpdate = TablesUpdate<"beaches"> & { id: string };
+
+// Interface for the candidate object used in form validation
+interface BeachCandidate {
+  name: string;
+  area: string;
+  area_id: string;
+  latitude: number;
+  longitude: number;
+  description: string;
+  type: string;
+  wave_conditions: string;
+  organized: boolean;
+  parking: string;
+  blue_flag: boolean;
+  amenities: string[];
+  photo_url: string;
+  photo_source: string;
+  status: string;
+  slug: string;
+  source: string;
+}
 
 const schema = z.object({
   name: z.string().min(3).max(80),
@@ -95,7 +109,6 @@ const BeachForm: React.FC = () => {
           setInitial(data as Beach);
           // Only update draft state with loaded data if there's no existing stored draft
           // This preserves any user changes that were already in the draft
-          console.log("Loading beach data, hasStoredDraft:", hasStoredDraftData());
           if (!hasStoredDraftData()) {
             updateDraft({
               name: data.name || "",
@@ -123,7 +136,7 @@ const BeachForm: React.FC = () => {
       }
     };
     load();
-  }, [mode, id]);
+  }, [mode, id, hasStoredDraftData, updateDraft]);
 
   // Auto-generate slug from name on create, or when slug is empty and not manually edited
   useEffect(() => {
@@ -206,7 +219,7 @@ const BeachForm: React.FC = () => {
     const selectedArea = areas.find((area) => area.id === draft.area_id);
     const areaName = selectedArea?.name || "";
 
-    const candidate = {
+    const candidate: BeachCandidate = {
       name: draft.name,
       area: areaName, // Legacy area column (text)
       area_id: draft.area_id, // New area_id column (foreign key)
@@ -224,7 +237,7 @@ const BeachForm: React.FC = () => {
       status: statusNorm,
       slug: slugValue,
       source: draft.source,
-    } as Record<string, unknown>;
+    };
     const parsed = schema.safeParse(candidate);
     if (!parsed.success) {
       const fieldErrors: Record<string, string> = {};
@@ -235,7 +248,7 @@ const BeachForm: React.FC = () => {
       const firstField = Object.keys(fieldErrors)[0];
       setErrorSummary(
         `Please fix: ${Object.entries(fieldErrors)
-          .map(([k, v]) => `${k}`)
+          .map(([k]) => `${k}`)
           .join(", ")}`
       );
       toast({
@@ -259,9 +272,8 @@ const BeachForm: React.FC = () => {
     try {
       if (mode === "create") {
         // Ensure uniqueness before insert
-        const uniqueSlug = await ensureUniqueSlug(parsed.data.slug as string);
-        (parsed.data as any).slug = uniqueSlug;
-        const payload: BeachInsert = parsed.data as BeachInsert;
+        const uniqueSlug = await ensureUniqueSlug(parsed.data.slug);
+        const payload: BeachInsert = { ...parsed.data, slug: uniqueSlug } as BeachInsert;
         const { data, error } = await authSupabase
           .from("beaches")
           .insert(payload)
@@ -271,10 +283,10 @@ const BeachForm: React.FC = () => {
         toast({ title: "Saved", description: "Beach created." });
       } else if (mode === "edit" && id) {
         // Keep slug unique, excluding current record
-        const uniqueSlug = await ensureUniqueSlug(parsed.data.slug as string, id);
-        (parsed.data as any).slug = uniqueSlug;
+        const uniqueSlug = await ensureUniqueSlug(parsed.data.slug, id);
         const payload: BeachUpdate = {
-          ...(parsed.data as BeachUpdate),
+          ...parsed.data,
+          slug: uniqueSlug,
           id,
           // Add verified_at if markVerified is true
           ...(draft.markVerified ? { verified_at: new Date().toISOString() } : {}),
@@ -291,27 +303,26 @@ const BeachForm: React.FC = () => {
       setDirty(false);
       clearDraft(); // Clear draft state after successful save
       navigate("/admin/beaches");
-    } catch (err: any) {
-      const msg = err?.message || "Server error";
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Server error";
       if (/slug.*unique/i.test(msg)) {
         setErrors((e) => ({ ...e, slug: "This slug already exists. Use a unique slug." }));
         setTimeout(() => firstInvalidRef.current?.focus(), 0);
       } else if (/Could not find the 'slug' column of 'beaches' in the schema cache/i.test(msg)) {
         // Fallback: retry without slug field to unblock saving when schema cache/column isn't ready yet
         try {
-          const payloadBase = { ...(parsed.data as any) };
-          delete (payloadBase as any).slug;
+          const { slug: _slug, ...payloadBase } = parsed.data;
           if (mode === "create") {
             const { data, error } = await authSupabase
               .from("beaches")
-              .insert(payloadBase)
+              .insert(payloadBase as BeachInsert)
               .select()
               .single();
             if (error || !data) throw error || new Error("Insert returned no row");
           } else if (mode === "edit" && id) {
             const { data, error } = await authSupabase
               .from("beaches")
-              .update(payloadBase)
+              .update({ ...payloadBase, id } as BeachUpdate)
               .eq("id", id)
               .select()
               .single();
@@ -325,8 +336,8 @@ const BeachForm: React.FC = () => {
           setDirty(false);
           clearDraft(); // Clear draft state after successful save
           navigate("/admin/beaches");
-        } catch (fallbackErr: any) {
-          const fbMsg = fallbackErr?.message || msg;
+        } catch (fallbackErr: unknown) {
+          const fbMsg = fallbackErr instanceof Error ? fallbackErr.message : msg;
           setServerError(fbMsg);
           toast({ title: "Save failed", description: fbMsg, variant: "destructive" });
         }
