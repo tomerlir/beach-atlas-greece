@@ -5,7 +5,7 @@ import { preloadCommonPlaceholders } from "./utils/imagePlaceholder";
 import { analytics } from "./lib/analytics";
 
 // Defer analytics initialization to avoid blocking main thread
-if ('requestIdleCallback' in window) {
+if ("requestIdleCallback" in window) {
   requestIdleCallback(() => {
     analytics.init({
       enabled: true,

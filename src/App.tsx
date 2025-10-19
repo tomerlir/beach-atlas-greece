@@ -69,12 +69,12 @@ const queryClient = new QueryClient({
       retry: 1, // Reduce retry attempts
       refetchOnWindowFocus: false, // Prevent unnecessary refetches
       refetchOnMount: false, // Use cached data when available
-      refetchOnReconnect: 'always', // Refetch when reconnecting
-      networkMode: 'offlineFirst', // Support offline mode
+      refetchOnReconnect: "always", // Refetch when reconnecting
+      networkMode: "offlineFirst", // Support offline mode
     },
     mutations: {
       retry: 1,
-      networkMode: 'offlineFirst',
+      networkMode: "offlineFirst",
     },
   },
 });

@@ -40,7 +40,12 @@ const generateBlurDataURL = (
 };
 
 // Image optimization service with WebP support and quality tuning
-const getOptimizedImageUrl = (src: string, width: number, height: number, quality: number = 75): string => {
+const getOptimizedImageUrl = (
+  src: string,
+  width: number,
+  height: number,
+  quality: number = 75
+): string => {
   // If it's already a placeholder, return as is
   if (src.includes("placehold.co")) {
     return src;

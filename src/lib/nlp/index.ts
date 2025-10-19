@@ -5,8 +5,10 @@
 
 export type { Token, ProcessedText } from "./TextProcessor";
 
-export { EntityRecognizer } from "./EntityRecognizer";
-export type { BeachEntity, EntityRecognitionResult } from "./EntityRecognizer";
+// Smart NLP exports (new approach)
+export { SmartEntityRecognizer } from "./SmartEntityRecognizer";
+export { SemanticEntityMapper } from "./SemanticEntityMapper";
+export type { BeachEntity, EntityRecognitionResult } from "./SmartEntityRecognizer";
 
 export { SentimentAnalyzer } from "./SentimentAnalyzer";
 export type { SentimentResult, IntentAnalysis } from "./SentimentAnalyzer";
