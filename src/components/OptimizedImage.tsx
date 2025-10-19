@@ -39,18 +39,22 @@ const generateBlurDataURL = (
   }
 };
 
-// Image optimization service (you can replace with your preferred service)
-const getOptimizedImageUrl = (src: string): string => {
-  // For now, we'll use a simple approach
-  // In production, you might want to use services like:
-  // - Cloudinary
-  // - ImageKit
-  // - Vercel's Image Optimization
-  // - Or implement your own image proxy
-
+// Image optimization service with WebP support and quality tuning
+const getOptimizedImageUrl = (src: string, width: number, height: number, quality: number = 75): string => {
   // If it's already a placeholder, return as is
   if (src.includes("placehold.co")) {
     return src;
+  }
+
+  // For Unsplash images, use their optimization API with WebP support
+  if (src.includes("unsplash.com")) {
+    const url = new URL(src);
+    url.searchParams.set("w", width.toString());
+    url.searchParams.set("h", height.toString());
+    url.searchParams.set("q", quality.toString());
+    url.searchParams.set("fm", "webp"); // Force WebP format
+    url.searchParams.set("auto", "format"); // Auto-optimize
+    return url.toString();
   }
 
   // For other URLs, you could implement your own optimization
@@ -144,7 +148,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   const optimizedSrc = isInView
     ? isImagePreloaded && preloadResult?.success
       ? preloadResult.url
-      : getOptimizedImageUrl(src)
+      : getOptimizedImageUrl(src, width, height, priority ? 85 : 75)
     : "";
 
   // If image is preloaded, mark as loaded immediately
@@ -207,6 +211,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
           sizes={sizes}
           loading={priority ? "eager" : loading}
           fetchPriority={priority ? "high" : "auto"}
+          decoding={priority ? "sync" : "async"}
           onLoad={handleLoad}
           onError={handleError}
           onLoadStart={() => {

@@ -21,16 +21,26 @@ export default defineConfig(({ mode }) => ({
           // Core React and routing
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
           
-          // UI and styling
-          'ui-vendor': [
+          // UI and styling - split into common and rare components
+          'ui-common': [
             '@radix-ui/react-dialog',
             '@radix-ui/react-dropdown-menu',
             '@radix-ui/react-select',
-            '@radix-ui/react-tabs',
             '@radix-ui/react-toast',
             '@radix-ui/react-tooltip',
             'lucide-react',
             'sonner'
+          ],
+          
+          // Rarely used UI components
+          'ui-rare': [
+            '@radix-ui/react-tabs',
+            '@radix-ui/react-radio-group',
+            '@radix-ui/react-collapsible',
+            '@radix-ui/react-progress',
+            '@radix-ui/react-scroll-area',
+            '@radix-ui/react-separator',
+            '@radix-ui/react-switch'
           ],
           
           // Data fetching and state
@@ -59,7 +69,9 @@ export default defineConfig(({ mode }) => ({
           
           // Admin functionality (separate chunk)
           'admin-vendor': [
-            'papaparse'
+            'papaparse',
+            '@radix-ui/react-checkbox',
+            '@radix-ui/react-label'
           ],
           
           // Utilities

@@ -53,7 +53,7 @@ const Area = () => {
   } = useAreaBySlugOptimistic(areaSlug || "");
   const { nearby } = useNearbyAreas(area?.id);
 
-  // Fetch beaches from Supabase filtered by area
+  // Fetch beaches from Supabase filtered by area with selective fields
   const {
     data: beaches = [],
     isLoading: isLoadingBeaches,
@@ -65,7 +65,7 @@ const Area = () => {
 
       const { data, error } = await supabase
         .from("beaches")
-        .select("*")
+        .select("id, name, area, slug, organized, blue_flag, parking, amenities, photo_url, photo_source, latitude, longitude")
         .eq("status", "ACTIVE")
         .eq("area_id", area.id)
         .order("name");

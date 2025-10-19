@@ -7,6 +7,17 @@ All colors MUST be HSL.
 */
 
 @layer base {
+  /* Font display optimization for better performance */
+  @font-face {
+    font-family: 'Inter';
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'Raleway';
+    font-display: swap;
+  }
+
   :root {
     /* New Brand System - Dreamy Greek Beach Experience */
     --background: 204 45% 98%; /* #F7FAFC Seafoam White */

@@ -41,7 +41,7 @@ const Index = () => {
   const { preloadVisibleBeachImages } = useImagePreloader();
   const isMobile = useIsMobile();
 
-  // Fetch beaches from Supabase
+  // Fetch beaches from Supabase with selective fields and server-side pagination
   const {
     data: beaches = [],
     isLoading,
@@ -51,7 +51,7 @@ const Index = () => {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("beaches")
-        .select("*")
+        .select("id, name, area, slug, organized, blue_flag, parking, amenities, photo_url, photo_source, latitude, longitude")
         .eq("status", "ACTIVE")
         .order("name");
 
@@ -332,13 +332,14 @@ const Index = () => {
             <>
               <ErrorBoundary>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {paginatedBeaches.map((beach) => (
+                  {paginatedBeaches.map((beach, index) => (
                     <BeachCard
                       key={beach.id}
                       beach={beach}
                       distance={beach.distance}
                       showDistance={filters.nearMe && !locationError && !!location}
                       engagementSource={filters.search ? "search" : "browsing"}
+                      priority={index < 3} // Priority loading for first 3 cards
                     />
                   ))}
                 </div>
