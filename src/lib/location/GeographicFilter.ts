@@ -4,7 +4,7 @@
  */
 
 import { Beach } from "@/types/beach";
-import { LocationMatcher, LocationFilter, LocationMatch } from "./LocationMatcher.js";
+import { LocationMatcher, LocationMatch } from "./LocationMatcher.js";
 
 export interface GeographicSearchResult {
   beaches: (Beach & { distance?: number })[];

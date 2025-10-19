@@ -1,40 +1,44 @@
 import { Toaster } from "@/components/ui/toaster";
-import { useState } from "react";
+import { useState, Suspense, lazy } from "react";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
-import AdminLayout from "@/components/admin/AdminLayout";
-import Index from "./pages/Index";
-import About from "./pages/About";
-import Areas from "./pages/Areas";
-import Ontology from "./pages/Ontology";
-import Guide from "./pages/Guide";
-import Privacy from "./pages/Privacy";
-import FAQ from "./pages/FAQ";
-import AdminLogin from "./pages/admin/AdminLogin";
-import AdminDashboard from "./pages/admin/AdminDashboard";
-import AdminAreasList from "./pages/admin/areas/AdminAreasList";
-import AdminAreaCreate from "./pages/admin/areas/AdminAreaCreate";
-import AdminAreaEdit from "./pages/admin/areas/AdminAreaEdit";
-import AdminBeachesList from "./pages/admin/beaches/AdminBeachesList";
-import AdminBeachCreate from "./pages/admin/beaches/AdminBeachCreate";
-import AdminBeachEdit from "./pages/admin/beaches/AdminBeachEdit";
-import ImportExport from "./pages/admin/ImportExport";
-import AdminSettings from "./pages/admin/AdminSettings";
-import BeachDetail from "./pages/BeachDetail";
-import Area from "./pages/Area";
-import NotFound from "./pages/NotFound";
-import MapPage from "./pages/Map";
 import { useServiceWorker } from "@/hooks/useServiceWorker";
 import ScrollToTop from "@/components/ScrollToTop";
-import AcceptInvite from "./pages/admin/AcceptInvite";
 import ConsentBanner from "@/components/ConsentBanner";
 import AnalyticsInspector from "@/lib/AnalyticsInspector";
 import AnalyticsRouter from "@/components/AnalyticsRouter";
+
+// Lazy load all pages for better code splitting
+const Index = lazy(() => import("./pages/Index"));
+const About = lazy(() => import("./pages/About"));
+const Areas = lazy(() => import("./pages/Areas"));
+const Ontology = lazy(() => import("./pages/Ontology"));
+const Guide = lazy(() => import("./pages/Guide"));
+const Privacy = lazy(() => import("./pages/Privacy"));
+const FAQ = lazy(() => import("./pages/FAQ"));
+const BeachDetail = lazy(() => import("./pages/BeachDetail"));
+const Area = lazy(() => import("./pages/Area"));
+const NotFound = lazy(() => import("./pages/NotFound"));
+const MapPage = lazy(() => import("./pages/Map"));
+
+// Lazy load admin components
+const AdminLayout = lazy(() => import("@/components/admin/AdminLayout"));
+const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
+const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
+const AdminAreasList = lazy(() => import("./pages/admin/areas/AdminAreasList"));
+const AdminAreaCreate = lazy(() => import("./pages/admin/areas/AdminAreaCreate"));
+const AdminAreaEdit = lazy(() => import("./pages/admin/areas/AdminAreaEdit"));
+const AdminBeachesList = lazy(() => import("./pages/admin/beaches/AdminBeachesList"));
+const AdminBeachCreate = lazy(() => import("./pages/admin/beaches/AdminBeachCreate"));
+const AdminBeachEdit = lazy(() => import("./pages/admin/beaches/AdminBeachEdit"));
+const ImportExport = lazy(() => import("./pages/admin/ImportExport"));
+const AdminSettings = lazy(() => import("./pages/admin/AdminSettings"));
+const AcceptInvite = lazy(() => import("./pages/admin/AcceptInvite"));
 
 // Admin route wrapper components
 const AdminAcceptInvite = () => (
@@ -59,6 +63,13 @@ const AdminDashboardWrapper = () => (
 
 const queryClient = new QueryClient();
 
+// Loading fallback component
+const PageLoadingFallback = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+  </div>
+);
+
 const AppContent = () => {
   // Register service worker for caching and offline support
   useServiceWorker();
@@ -75,36 +86,38 @@ const AppContent = () => {
           onToggle={() => setInspectorVisible((v) => !v)}
         />
       )}
-      <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/areas" element={<Areas />} />
-        <Route path="/map" element={<MapPage />} />
-        <Route path="/ontology" element={<Ontology />} />
-        <Route path="/guide" element={<Guide />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/faq" element={<FAQ />} />
-        <Route path="/:areaSlug" element={<Area />} />
-        <Route path="/:area/:beach-name" element={<BeachDetail />} />
+      <Suspense fallback={<PageLoadingFallback />}>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/areas" element={<Areas />} />
+          <Route path="/map" element={<MapPage />} />
+          <Route path="/ontology" element={<Ontology />} />
+          <Route path="/guide" element={<Guide />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/:areaSlug" element={<Area />} />
+          <Route path="/:area/:beach-name" element={<BeachDetail />} />
 
-        {/* Admin routes with AuthProvider */}
-        <Route path="/admin/accept-invite" element={<AdminAcceptInvite />} />
-        <Route path="/admin/login" element={<AdminLoginPage />} />
-        <Route path="/admin" element={<AdminDashboardWrapper />}>
-          <Route index element={<AdminDashboard />} />
-          <Route path="areas" element={<AdminAreasList />} />
-          <Route path="areas/new" element={<AdminAreaCreate />} />
-          <Route path="areas/:id" element={<AdminAreaEdit />} />
-          <Route path="beaches" element={<AdminBeachesList />} />
-          <Route path="beaches/new" element={<AdminBeachCreate />} />
-          <Route path="beaches/:id" element={<AdminBeachEdit />} />
-          <Route path="import-export" element={<ImportExport />} />
-          <Route path="settings" element={<AdminSettings />} />
-        </Route>
+          {/* Admin routes with AuthProvider */}
+          <Route path="/admin/accept-invite" element={<AdminAcceptInvite />} />
+          <Route path="/admin/login" element={<AdminLoginPage />} />
+          <Route path="/admin" element={<AdminDashboardWrapper />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="areas" element={<AdminAreasList />} />
+            <Route path="areas/new" element={<AdminAreaCreate />} />
+            <Route path="areas/:id" element={<AdminAreaEdit />} />
+            <Route path="beaches" element={<AdminBeachesList />} />
+            <Route path="beaches/new" element={<AdminBeachCreate />} />
+            <Route path="beaches/:id" element={<AdminBeachEdit />} />
+            <Route path="import-export" element={<ImportExport />} />
+            <Route path="settings" element={<AdminSettings />} />
+          </Route>
 
-        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 };

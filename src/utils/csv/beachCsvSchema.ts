@@ -1,5 +1,7 @@
 import { z } from "zod";
 import { AMENITY_MAP } from "@/lib/amenities";
+import { CsvRowData } from "./download";
+import { Tables, TablesInsert, TablesUpdate } from "@/integrations/supabase/types";
 
 // Fixed CSV header order as specified
 export const CSV_HEADER_ORDER = [
@@ -25,11 +27,51 @@ export const CSV_HEADER_ORDER = [
 // Allowed amenity keys extracted from the single source of truth
 export const ALLOWED_AMENITIES = Object.keys(AMENITY_MAP) as readonly string[];
 
-// Enum values
-export const BEACH_TYPES = ["SANDY", "PEBBLY", "MIXED", "OTHER"] as const;
-export const WAVE_CONDITIONS = ["CALM", "MODERATE", "WAVY", "SURFABLE"] as const;
-export const PARKING_TYPES = ["NONE", "ROADSIDE", "SMALL_LOT", "LARGE_LOT"] as const;
-export const STATUS_TYPES = ["ACTIVE", "HIDDEN", "DRAFT"] as const;
+// Import common types and constants from centralized location
+import {
+  BEACH_TYPES,
+  WAVE_CONDITIONS,
+  PARKING_TYPES,
+  STATUS_TYPES,
+  BeachType,
+  WaveCondition,
+  ParkingType,
+  StatusType,
+  isValidBeachType,
+  isValidWaveCondition,
+  isValidParkingType,
+  isValidStatusType,
+} from "@/types/common";
+
+// Re-export for backward compatibility
+export { BEACH_TYPES, WAVE_CONDITIONS, PARKING_TYPES, STATUS_TYPES };
+export type { BeachType, WaveCondition, ParkingType, StatusType };
+
+// Database row types based on Supabase schema
+export type BeachDbRow = Tables<"beaches">;
+export type BeachDbInsert = TablesInsert<"beaches">;
+export type BeachDbUpdate = TablesUpdate<"beaches">;
+
+// Raw CSV input interface with all string values
+export interface RawCsvRow {
+  slug: string;
+  name: string;
+  area: string;
+  latitude: string;
+  longitude: string;
+  type: string;
+  wave_conditions: string;
+  organized: string;
+  parking: string;
+  blue_flag: string;
+  amenities: string;
+  photo_url: string;
+  photo_source: string;
+  description: string;
+  source: string;
+  verified_at: string;
+  status: string;
+}
 
 // Zod schema for normalized row
 export const BeachCsvRowSchema = z.object({
@@ -86,6 +128,8 @@ function slugify(text: string): string {
     .substring(0, 80); // Limit to 80 characters
 }
 
+// Validation functions are now imported from @/types/common
+
 // Normalize boolean values
 function normalizeBoolean(value: string): boolean | undefined {
   if (!value || value.trim() === "") return undefined;
@@ -123,11 +167,26 @@ export function normalizeRow(raw: Record<string, string>, rowIndex: number): Cla
   const errors: ValidationError[] = [];
 
   try {
-    // Trim all string values
-    const trimmed: Record<string, string> = {};
-    for (const [key, value] of Object.entries(raw)) {
-      trimmed[key] = value?.trim() || "";
-    }
+    // Trim all string values and create typed interface
+    const trimmed: RawCsvRow = {
+      slug: raw.slug?.trim() || "",
+      name: raw.name?.trim() || "",
+      area: raw.area?.trim() || "",
+      latitude: raw.latitude?.trim() || "",
+      longitude: raw.longitude?.trim() || "",
+      type: raw.type?.trim() || "",
+      wave_conditions: raw.wave_conditions?.trim() || "",
+      organized: raw.organized?.trim() || "",
+      parking: raw.parking?.trim() || "",
+      blue_flag: raw.blue_flag?.trim() || "",
+      amenities: raw.amenities?.trim() || "",
+      photo_url: raw.photo_url?.trim() || "",
+      photo_source: raw.photo_source?.trim() || "",
+      description: raw.description?.trim() || "",
+      source: raw.source?.trim() || "",
+      verified_at: raw.verified_at?.trim() || "",
+      status: raw.status?.trim() || "",
+    };
 
     // Handle slug - generate from name if missing
     let slug = trimmed.slug;
@@ -169,47 +228,62 @@ export function normalizeRow(raw: Record<string, string>, rowIndex: number): Cla
     const organized = normalizeBoolean(trimmed.organized);
     const blueFlag = normalizeBoolean(trimmed.blue_flag);
 
-    // Normalize enums
-    const type = trimmed.type?.toUpperCase() as any;
-    const waveConditions = trimmed.wave_conditions?.toUpperCase() as any;
-    const parking = trimmed.parking?.toUpperCase() as any;
-    const status = trimmed.status?.toUpperCase() as any;
+    // Validate and normalize enums with type safety
+    let type: BeachType | undefined;
+    let waveConditions: WaveCondition | undefined;
+    let parking: ParkingType | undefined;
+    let status: StatusType | undefined;
 
-    // Validate enums
-    if (!BEACH_TYPES.includes(type)) {
-      errors.push({
-        row: rowIndex,
-        column: "type",
-        message: `Invalid type. Must be one of: ${BEACH_TYPES.join(", ")}`,
-        value: trimmed.type,
-      });
+    if (trimmed.type) {
+      if (isValidBeachType(trimmed.type)) {
+        type = trimmed.type.toUpperCase() as BeachType;
+      } else {
+        errors.push({
+          row: rowIndex,
+          column: "type",
+          message: `Invalid type. Must be one of: ${BEACH_TYPES.join(", ")}`,
+          value: trimmed.type,
+        });
+      }
     }
 
-    if (waveConditions && !WAVE_CONDITIONS.includes(waveConditions)) {
-      errors.push({
-        row: rowIndex,
-        column: "wave_conditions",
-        message: `Invalid wave_conditions. Must be one of: ${WAVE_CONDITIONS.join(", ")}`,
-        value: trimmed.wave_conditions,
-      });
+    if (trimmed.wave_conditions) {
+      if (isValidWaveCondition(trimmed.wave_conditions)) {
+        waveConditions = trimmed.wave_conditions.toUpperCase() as WaveCondition;
+      } else {
+        errors.push({
+          row: rowIndex,
+          column: "wave_conditions",
+          message: `Invalid wave_conditions. Must be one of: ${WAVE_CONDITIONS.join(", ")}`,
+          value: trimmed.wave_conditions,
+        });
+      }
     }
 
-    if (!PARKING_TYPES.includes(parking)) {
-      errors.push({
-        row: rowIndex,
-        column: "parking",
-        message: `Invalid parking. Must be one of: ${PARKING_TYPES.join(", ")}`,
-        value: trimmed.parking,
-      });
+    if (trimmed.parking) {
+      if (isValidParkingType(trimmed.parking)) {
+        parking = trimmed.parking.toUpperCase() as ParkingType;
+      } else {
+        errors.push({
+          row: rowIndex,
+          column: "parking",
+          message: `Invalid parking. Must be one of: ${PARKING_TYPES.join(", ")}`,
+          value: trimmed.parking,
+        });
+      }
     }
 
-    if (status && !STATUS_TYPES.includes(status)) {
-      errors.push({
-        row: rowIndex,
-        column: "status",
-        message: `Invalid status. Must be one of: ${STATUS_TYPES.join(", ")}`,
-        value: trimmed.status,
-      });
+    if (trimmed.status) {
+      if (isValidStatusType(trimmed.status)) {
+        status = trimmed.status.toUpperCase() as StatusType;
+      } else {
+        errors.push({
+          row: rowIndex,
+          column: "status",
+          message: `Invalid status. Must be one of: ${STATUS_TYPES.join(", ")}`,
+          value: trimmed.status,
+        });
+      }
     }
 
     // Normalize amenities
@@ -326,7 +400,7 @@ export function classify(
 }
 
 // Convert database row to CSV row
-export function dbRowToCsvRow(dbRow: any): Record<string, string> {
+export function dbRowToCsvRow(dbRow: BeachDbRow): CsvRowData {
   return {
     slug: dbRow.slug || "",
     name: dbRow.name || "",
@@ -349,8 +423,11 @@ export function dbRowToCsvRow(dbRow: any): Record<string, string> {
 }
 
 // Convert CSV row to database insert/update object
-export function csvRowToDbInsert(csvRow: BeachCsvRow, areaIdMap?: Record<string, string>): any {
-  const dbRow: any = {
+export function csvRowToDbInsert(
+  csvRow: BeachCsvRow,
+  areaIdMap?: Record<string, string>
+): BeachDbInsert {
+  const dbRow: BeachDbInsert = {
     slug: csvRow.slug,
     name: csvRow.name,
     area: csvRow.area,
@@ -364,10 +441,11 @@ export function csvRowToDbInsert(csvRow: BeachCsvRow, areaIdMap?: Record<string,
     blue_flag: csvRow.blue_flag,
     amenities: csvRow.amenities,
     status: csvRow.status,
+    // wave_conditions is required in the database schema
+    wave_conditions: csvRow.wave_conditions || "CALM",
   };
 
   // Only include optional fields if they have values
-  if (csvRow.wave_conditions) dbRow.wave_conditions = csvRow.wave_conditions;
   if (csvRow.photo_url) dbRow.photo_url = csvRow.photo_url;
   if (csvRow.photo_source) dbRow.photo_source = csvRow.photo_source;
   if (csvRow.description) dbRow.description = csvRow.description;
@@ -378,8 +456,11 @@ export function csvRowToDbInsert(csvRow: BeachCsvRow, areaIdMap?: Record<string,
 }
 
 // Convert CSV row to database update object (only non-undefined fields)
-export function csvRowToDbUpdate(csvRow: BeachCsvRow, areaIdMap?: Record<string, string>): any {
-  const dbRow: any = {};
+export function csvRowToDbUpdate(
+  csvRow: BeachCsvRow,
+  areaIdMap?: Record<string, string>
+): BeachDbUpdate {
+  const dbRow: BeachDbUpdate = {};
 
   // Always include these fields for updates
   if (csvRow.name !== undefined) dbRow.name = csvRow.name;

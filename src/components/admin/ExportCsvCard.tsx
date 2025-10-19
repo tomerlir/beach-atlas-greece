@@ -16,7 +16,7 @@ const ExportCsvCard: React.FC = () => {
 
     try {
       // Fetch all beaches from Supabase
-      const { data: beaches, error } = await supabase.from("beaches").select("*").order("name");
+      const { data: beaches, error } = await authSupabase.from("beaches").select("*").order("name");
 
       if (error) {
         throw error;

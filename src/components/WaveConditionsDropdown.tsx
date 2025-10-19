@@ -6,6 +6,7 @@ import { useDraftState } from "@/hooks/useDraftState";
 import { FilterState } from "@/hooks/useUrlState";
 import { analytics } from "@/lib/analytics";
 import { createFilterApplyEvent, createFilterClearEvent } from "@/lib/analyticsEvents";
+import { WaveCondition } from "@/types/common";
 
 interface WaveConditionsDropdownProps {
   filters: FilterState;
@@ -42,7 +43,7 @@ export default function WaveConditionsDropdown({
 
   // Toggle wave condition in draft state
   const toggleWaveConditionDraft = useCallback(
-    (waveConditionValue: "CALM" | "MODERATE" | "WAVY" | "SURFABLE") => {
+    (waveConditionValue: WaveCondition) => {
       const newWaveConditions = draftFilters.waveConditions.includes(waveConditionValue)
         ? draftFilters.waveConditions.filter((value) => value !== waveConditionValue)
         : [...draftFilters.waveConditions, waveConditionValue];

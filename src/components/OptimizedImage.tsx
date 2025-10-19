@@ -15,7 +15,6 @@ interface OptimizedImageProps {
   placeholder?: "blur" | "empty";
   blurDataURL?: string;
   sizes?: string;
-  quality?: number;
   loading?: "lazy" | "eager";
   onLoad?: () => void;
   onError?: () => void;
@@ -41,12 +40,7 @@ const generateBlurDataURL = (
 };
 
 // Image optimization service (you can replace with your preferred service)
-const getOptimizedImageUrl = (
-  src: string,
-  width: number,
-  height: number,
-  quality: number = 80
-): string => {
+const getOptimizedImageUrl = (src: string): string => {
   // For now, we'll use a simple approach
   // In production, you might want to use services like:
   // - Cloudinary
@@ -74,7 +68,6 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   placeholder = "blur",
   blurDataURL,
   sizes = "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw",
-  quality = 80,
   loading = "lazy",
   onLoad,
   onError,
@@ -151,7 +144,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   const optimizedSrc = isInView
     ? isImagePreloaded && preloadResult?.success
       ? preloadResult.url
-      : getOptimizedImageUrl(src, width, height, quality)
+      : getOptimizedImageUrl(src)
     : "";
 
   // If image is preloaded, mark as loaded immediately
@@ -213,7 +206,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
           height={height}
           sizes={sizes}
           loading={priority ? "eager" : loading}
-          {...({ fetchpriority: priority ? "high" : "auto" } as any)}
+          fetchPriority={priority ? "high" : "auto"}
           onLoad={handleLoad}
           onError={handleError}
           onLoadStart={() => {

@@ -11,12 +11,12 @@
  * - Developer-friendly debugging
  */
 
-import type { AnalyticsProps } from "./analyticsEvents";
-import { addAnalyticsEvent } from "./AnalyticsInspector";
+import type { AnalyticsProps, BeachEngagementEvent } from "./analyticsEvents";
+import { addAnalyticsEvent } from "./analyticsBuffer";
 
 const isBrowser = typeof window !== "undefined";
 
-export type ConsentState = "accepted" | "rejected" | "unknown";
+type ConsentState = "accepted" | "rejected" | "unknown";
 
 interface AnalyticsContext {
   page_path?: string;
@@ -98,11 +98,10 @@ class AnalyticsSDK {
     this.debug = opts.debug ?? false;
 
     if (this.debug) {
-      console.group("🔍 Analytics SDK Initialized");
-      console.log("Enabled:", this.enabled);
-      console.log("Consent:", this.consent);
-      console.log("Context:", this.context);
-      console.groupEnd();
+      console.warn("🔍 Analytics SDK Initialized");
+      console.warn("Enabled:", this.enabled);
+      console.warn("Consent:", this.consent);
+      console.warn("Context:", this.context);
     }
 
     // Don't track initial page load here - let setConsent handle it
@@ -144,7 +143,7 @@ class AnalyticsSDK {
     }
 
     if (this.debug) {
-      console.log("🔒 Analytics consent changed:", state);
+      console.warn("🔒 Analytics consent changed:", state);
     }
   }
 
@@ -166,7 +165,7 @@ class AnalyticsSDK {
     this.context = { ...this.context, ...ctx };
 
     if (this.debug) {
-      console.log("📊 Analytics context updated:", this.context);
+      console.warn("📊 Analytics context updated:", this.context);
     }
   }
 
@@ -208,10 +207,9 @@ class AnalyticsSDK {
     const enrichedProps = this.enrichProps(props);
 
     if (this.debug) {
-      console.group(`📈 Analytics Event: ${name}`);
-      console.log("Props:", enrichedProps);
-      console.log("Context:", this.context);
-      console.groupEnd();
+      console.warn(`📈 Analytics Event: ${name}`);
+      console.warn("Props:", enrichedProps);
+      console.warn("Context:", this.context);
     }
 
     // Add to inspector buffer for development
@@ -249,7 +247,7 @@ class AnalyticsSDK {
     // Only track first engagement with each beach
     if (this.sessionState.engagedBeaches.has(beachId)) {
       if (this.debug) {
-        console.log(`🚫 Beach engagement deduplicated: ${beachId}`);
+        console.warn(`🚫 Beach engagement deduplicated: ${beachId}`);
       }
       return;
     }
@@ -267,7 +265,7 @@ class AnalyticsSDK {
     }
 
     // Emit beach engagement event (session_quality removed - it's a session-level metric in session_summary)
-    const eventProps: any = {
+    const eventProps: BeachEngagementEvent = {
       beach_id: beachId,
       source,
     };
@@ -360,7 +358,7 @@ class AnalyticsSDK {
     }, 30000); // 30 seconds
 
     if (this.debug) {
-      console.log("🗺️ Map session started");
+      console.warn("🗺️ Map session started");
     }
   }
 
@@ -371,7 +369,7 @@ class AnalyticsSDK {
     this.sessionState.mapSession.interactions++;
 
     if (this.debug) {
-      console.log(
+      console.warn(
         `🗺️ Map interaction tracked (total: ${this.sessionState.mapSession.interactions})`
       );
     }
@@ -384,7 +382,7 @@ class AnalyticsSDK {
     this.sessionState.mapSession.viewedBeaches.add(beachId);
 
     if (this.debug) {
-      console.log(
+      console.warn(
         `🗺️ Beach viewed on map: ${beachId} (unique: ${this.sessionState.mapSession.viewedBeaches.size})`
       );
     }
@@ -429,7 +427,7 @@ class AnalyticsSDK {
       });
 
       if (this.debug) {
-        console.log("🗺️ Map engagement emitted", {
+        console.warn("🗺️ Map engagement emitted", {
           duration_ms: duration,
           interactions,
           uniqueBeaches,
@@ -455,7 +453,7 @@ class AnalyticsSDK {
     this.sessionState.mapSession = null;
 
     if (this.debug) {
-      console.log("🗺️ Map session ended");
+      console.warn("🗺️ Map session ended");
     }
   }
 
@@ -515,7 +513,7 @@ class AnalyticsSDK {
 
     window.addEventListener("online", () => {
       if (this.debug) {
-        console.log("🌐 Network online - retrying queued events");
+        console.warn("🌐 Network online - retrying queued events");
       }
       this.flushEventQueue();
     });
@@ -567,11 +565,11 @@ class AnalyticsSDK {
       script.defer = true;
 
       // Store script reference for cleanup
-      (script as any).__umami_script = true;
+      (script as HTMLScriptElement & { __umami_script?: boolean }).__umami_script = true;
 
       script.onload = () => {
         if (this.debug) {
-          console.log("📊 Umami script loaded");
+          console.warn("📊 Umami script loaded");
         }
         this.setupUmamiReadyWatcher();
         // Enable tracking if consent is still accepted
@@ -603,10 +601,10 @@ class AnalyticsSDK {
     if (!isBrowser || !window.umami) return;
 
     // Use Umami's built-in disable method
-    if (typeof (window.umami as any).disable === "function") {
-      (window.umami as any).disable();
+    if (window.umami?.disable) {
+      window.umami.disable();
       if (this.debug) {
-        console.log("🚫 Umami tracking disabled");
+        console.warn("🚫 Umami tracking disabled");
       }
     }
   }
@@ -616,10 +614,10 @@ class AnalyticsSDK {
 
     try {
       // Use Umami's built-in enable method
-      if (typeof (window.umami as any).enable === "function") {
-        (window.umami as any).enable();
+      if (window.umami?.enable) {
+        window.umami.enable();
         if (this.debug) {
-          console.log("✅ Umami tracking enabled");
+          console.warn("✅ Umami tracking enabled");
         }
       }
     } catch (error) {
@@ -636,7 +634,7 @@ class AnalyticsSDK {
       // Remove Umami script from DOM
       const scripts = document.querySelectorAll('script[src*="cloud.umami.is"]');
       scripts.forEach((script) => {
-        if ((script as any).__umami_script) {
+        if ((script as HTMLScriptElement & { __umami_script?: boolean }).__umami_script) {
           script.remove();
         }
       });
@@ -651,7 +649,7 @@ class AnalyticsSDK {
       this.umamiScriptLoaded = false;
 
       if (this.debug) {
-        console.log("🧹 Umami script cleaned up");
+        console.warn("🧹 Umami script cleaned up");
       }
     } catch (error) {
       if (this.debug) {
@@ -676,7 +674,7 @@ class AnalyticsSDK {
         if (this.umamiReadyInterval) clearInterval(this.umamiReadyInterval);
         this.umamiReadyInterval = null;
         if (this.debug) {
-          console.log("✅ Umami ready - flushing queued events");
+          console.warn("✅ Umami ready - flushing queued events");
         }
         this.flushEventQueue();
       } else if (attempts >= MAX_ATTEMPTS) {
@@ -754,7 +752,7 @@ class AnalyticsSDK {
     });
 
     if (this.debug) {
-      console.log("📊 Session summary emitted", {
+      console.warn("📊 Session summary emitted", {
         searches: this.sessionState.searchesCount,
         engaged: this.sessionState.engagedBeaches.size,
         conversions: this.sessionState.conversionsCount,
@@ -778,7 +776,7 @@ class AnalyticsSDK {
     // Double-check consent before sending (defensive programming)
     if (this.consent !== "accepted") {
       if (this.debug) {
-        console.log("🚫 Analytics event blocked - consent not accepted:", name);
+        console.warn("🚫 Analytics event blocked - consent not accepted:", name);
       }
       return;
     }
@@ -800,7 +798,7 @@ class AnalyticsSDK {
       // In development, log the event but don't send to Umami
       if (typeof import.meta !== "undefined" && !import.meta.env.PROD) {
         if (this.debug) {
-          console.log("🔍 [DEV] Would send to Umami:", name, props);
+          console.warn("🔍 [DEV] Would send to Umami:", name, props);
         }
         return;
       }
@@ -826,7 +824,7 @@ class AnalyticsSDK {
     if (this.eventQueue.length === 0) return;
 
     if (this.debug) {
-      console.log(`📤 Flushing ${this.eventQueue.length} queued events`);
+      console.warn(`📤 Flushing ${this.eventQueue.length} queued events`);
     }
 
     const events = [...this.eventQueue];
@@ -844,9 +842,9 @@ const analyticsSDK = new AnalyticsSDK();
 // Export the public API
 export const analytics = {
   init: (opts?: { enabled?: boolean; debug?: boolean }) => analyticsSDK.init(opts),
-  setConsent: (state: ConsentState) => analyticsSDK.setConsent(state),
+  setConsent: (state: "accepted" | "rejected" | "unknown") => analyticsSDK.setConsent(state),
   getConsent: () => analyticsSDK.getConsent(),
-  onConsentChange: (callback: (state: ConsentState) => void) =>
+  onConsentChange: (callback: (state: "accepted" | "rejected" | "unknown") => void) =>
     analyticsSDK.onConsentChange(callback),
   setContext: (ctx: Partial<AnalyticsContext>) => analyticsSDK.setContext(ctx),
   trackPageview: (pagePath?: string, referrer?: string) =>

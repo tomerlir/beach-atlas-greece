@@ -11,10 +11,19 @@ interface MapLocation {
 }
 
 /**
+ * Extended Window interface to include MSStream property for Internet Explorer detection
+ * MSStream is a property that exists on the window object in Internet Explorer
+ * Used to detect if the browser is actually IE (not just spoofing the user agent)
+ */
+interface WindowWithMSStream extends Window {
+  MSStream?: unknown;
+}
+
+/**
  * Detects if the user is on an iOS device
  */
 export const isIOS = (): boolean => {
-  return /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as WindowWithMSStream).MSStream;
 };
 
 /**

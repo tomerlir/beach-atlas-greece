@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { Plus, Search, Pencil, Trash2, CheckCircle2, Circle } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import { Plus, Search, Pencil, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -8,6 +8,7 @@ import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { authSupabase } from "@/integrations/supabase/client";
 import type { Tables } from "@/integrations/supabase/types";
+import { StatusType } from "@/types/common";
 import { formatRelativeUpdatedAt } from "@/lib/utils";
 
 type Area = Tables<"areas">;
@@ -19,8 +20,6 @@ const PAGE_SIZE = 20;
 const AdminAreasList: React.FC = () => {
   const { toast } = useToast();
   const [searchParams, setSearchParams] = useSearchParams();
-  const navigate = useNavigate();
-  const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [items, setItems] = useState<(Area & { beach_count: number })[]>([]);
   const [total, setTotal] = useState(0);
@@ -52,7 +51,7 @@ const AdminAreasList: React.FC = () => {
         query = query.or(`name.ilike.%${q}%,description.ilike.%${q}%`);
       }
       if (status && status !== "ALL") {
-        query = query.eq("status", status as "ACTIVE" | "HIDDEN" | "DRAFT");
+        query = query.eq("status", status as StatusType);
       }
       query = query.order(sort, { ascending: dir === "asc" });
       const from = (page - 1) * PAGE_SIZE;
@@ -95,8 +94,9 @@ const AdminAreasList: React.FC = () => {
       setLiveMsg(
         `Loaded ${areasWithCounts.length || 0} areas. Page ${page} of ${Math.max(1, Math.ceil((count || 0) / PAGE_SIZE))}.`
       );
-    } catch (err: any) {
-      toast({ title: "Error loading areas", description: err.message, variant: "destructive" });
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "An unknown error occurred";
+      toast({ title: "Error loading areas", description: errorMessage, variant: "destructive" });
     } finally {
       setLoading(false);
     }
@@ -132,8 +132,9 @@ const AdminAreasList: React.FC = () => {
       toast({ title: "Deleted", description: `${name} removed.` });
       await fetchAreas();
       setTimeout(() => lastFocusedRef.current?.focus(), 0);
-    } catch (err: any) {
-      toast({ title: "Delete failed", description: err.message, variant: "destructive" });
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "An unknown error occurred";
+      toast({ title: "Delete failed", description: errorMessage, variant: "destructive" });
     }
   };
 

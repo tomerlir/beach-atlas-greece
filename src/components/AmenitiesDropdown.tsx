@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Sun, Check, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useDraftState } from "@/hooks/useDraftState";
 import { FilterState } from "@/hooks/useUrlState";
@@ -23,8 +22,6 @@ const allAmenities = getAllAmenities();
 export default function AmenitiesDropdown({
   filters,
   onFiltersChange,
-  onOpenAllFilters,
-  showCountBadge = false,
   resultCount = 0,
 }: AmenitiesDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,7 +30,7 @@ export default function AmenitiesDropdown({
   const [focusedIndex, setFocusedIndex] = useState(-1);
 
   // Use draft state for proper state management
-  const { draftFilters, updateDraft, resetDraft } = useDraftState(filters);
+  const { draftFilters, updateDraft } = useDraftState(filters);
 
   // Handle trigger click - open popover on all devices
   const handleTriggerClick = useCallback(() => {
@@ -73,7 +70,7 @@ export default function AmenitiesDropdown({
     });
 
     // Emit filter_clear events for removed amenities
-    removedAmenities.forEach((amenityId) => {
+    removedAmenities.forEach(() => {
       analytics.event("filter_clear", createFilterClearEvent("amenities"));
     });
 
@@ -139,7 +136,6 @@ export default function AmenitiesDropdown({
   }, [isOpen]);
 
   // Calculate counts
-  const selectedCount = draftFilters.amenities.length;
   const appliedCount = filters.amenities.length;
 
   return (

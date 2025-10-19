@@ -137,16 +137,20 @@ export const useAdvancedPrefetch = (options: PrefetchOptions = {}) => {
 
   // Cleanup on unmount
   useEffect(() => {
+    // Capture ref values at effect time to avoid stale closure issues
+    const currentPrefetchedUrls = prefetchedUrls.current;
+    const currentPrefetchedImages = prefetchedImages.current;
+    const currentPrefetchTimeout = prefetchTimeoutRef.current;
+
     return () => {
       // Clear any active prefetch timeout
-      if (prefetchTimeoutRef.current) {
-        clearTimeout(prefetchTimeoutRef.current);
-        prefetchTimeoutRef.current = null;
+      if (currentPrefetchTimeout) {
+        clearTimeout(currentPrefetchTimeout);
       }
 
       // Clear all prefetched data to prevent memory leaks
-      prefetchedUrls.current.clear();
-      prefetchedImages.current.clear();
+      currentPrefetchedUrls.clear();
+      currentPrefetchedImages.clear();
     };
   }, []);
 

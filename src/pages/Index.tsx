@@ -149,11 +149,6 @@ const Index = () => {
     setShowGeolocationError(false);
   };
 
-  // Handle natural language search usage tracking (no longer needed since we always use NL search)
-  const handleNaturalLanguageSearch = (wasUsed: boolean) => {
-    // No longer needed since we always use natural language search
-  };
-
   // Generate SEO data
   const seoTitle = "Greek Beaches Directory - Find Your Perfect Beach in Greece";
   const seoDescription =
@@ -264,7 +259,6 @@ const Index = () => {
                 onFiltersChange={updateFilters}
                 onClearAll={resetFilters}
                 className="w-full"
-                onNaturalLanguageSearch={handleNaturalLanguageSearch}
               />
             </div>
           </div>

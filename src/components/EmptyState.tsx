@@ -38,18 +38,6 @@ export default function EmptyState({
   onClearBlueFlag,
   areaName,
 }: EmptyStateProps) {
-  // Check if any filters are active (excluding nearMe as it's not a traditional filter)
-  const hasActiveFilters =
-    filters.search ||
-    filters.location ||
-    (filters.locations && filters.locations.length > 0) ||
-    filters.organized.length > 0 ||
-    filters.blueFlag ||
-    filters.parking.length > 0 ||
-    filters.amenities.length > 0 ||
-    filters.waveConditions.length > 0 ||
-    filters.type.length > 0;
-
   // Check if near me is enabled
   const isNearMeEnabled = filters.nearMe;
 
@@ -109,6 +97,13 @@ export default function EmptyState({
       key: `waves:${v}`,
       label: humanize(v),
       onRemove: onRemoveWaveCondition ? () => onRemoveWaveCondition(v) : undefined,
+    })
+  );
+  filters.type.forEach((v) =>
+    chips.push({
+      key: `type:${v}`,
+      label: humanize(v),
+      onRemove: onRemoveBeachType ? () => onRemoveBeachType(v) : undefined,
     })
   );
   filters.amenities.forEach((v) =>

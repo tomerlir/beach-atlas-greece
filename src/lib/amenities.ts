@@ -1,6 +1,4 @@
 import {
-  Sun,
-  Umbrella,
   Utensils,
   Waves,
   Eye,
@@ -8,31 +6,47 @@ import {
   Wine,
   Music,
   Mountain,
-  Binoculars,
-  Ship,
-  Heart,
-  Fish,
-  ParkingCircle,
   Palmtree,
   Clock,
   Droplets,
   Shield,
-  Car,
   LifeBuoy,
   Anchor,
   Users,
+  type LucideIcon,
 } from "lucide-react";
 
 export interface AmenityConfig {
   label: string;
-  icon: any;
+  icon: LucideIcon;
   color: string;
   category?: "facilities" | "safety" | "services" | "activities";
 }
 
+// Define the exact amenity keys based on actual usage
+export type AmenityKey =
+  | "sunbeds"
+  | "umbrellas"
+  | "showers"
+  | "toilets"
+  | "lifeguard"
+  | "beach_bar"
+  | "taverna"
+  | "food"
+  | "music"
+  | "snorkeling"
+  | "water_sports"
+  | "family_friendly"
+  | "boat_trips"
+  | "fishing"
+  | "photography"
+  | "hiking"
+  | "birdwatching"
+  | "cliff_jumping";
+
 // Centralized amenity map with consistent order, labels, and icons
 // Order is based on popularity and user experience
-export const AMENITY_MAP: Record<string, AmenityConfig> = {
+export const AMENITY_MAP: Record<AmenityKey, AmenityConfig> = {
   // Facilities
   sunbeds: {
     label: "Sunbeds",
@@ -152,7 +166,7 @@ export const AMENITY_MAP: Record<string, AmenityConfig> = {
 
 // Helper function to get amenity config
 export const getAmenityConfig = (amenityId: string): AmenityConfig | null => {
-  return AMENITY_MAP[amenityId] || null;
+  return AMENITY_MAP[amenityId as AmenityKey] || null;
 };
 
 // Helper function to get all amenities in consistent order
@@ -165,7 +179,7 @@ export const getAllAmenities = () => {
 
 // Helper function to get amenity label
 export const getAmenityLabel = (amenityId: string): string => {
-  return AMENITY_MAP[amenityId]?.label || amenityId;
+  return AMENITY_MAP[amenityId as AmenityKey]?.label || amenityId;
 };
 
 // Helper function to get amenities by category

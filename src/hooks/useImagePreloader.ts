@@ -13,6 +13,11 @@ interface PreloadResult {
   loadTime: number;
 }
 
+// Interface for objects that have a photo_url property (used by preloadVisibleBeachImages)
+interface BeachWithPhoto {
+  photo_url: string | null;
+}
+
 export const useImagePreloader = () => {
   const preloadedImages = useRef<Map<string, PreloadResult>>(new Map());
   const loadingImages = useRef<Set<string>>(new Set());
@@ -143,7 +148,7 @@ export const useImagePreloader = () => {
           activeRequests.current.delete(src);
 
           if (process.env.NODE_ENV === "development") {
-            console.log(`Image preloaded: ${src} in ${loadTime}ms`);
+            console.warn(`Image preloaded: ${src} in ${loadTime}ms`);
           }
 
           resolve(result);
@@ -210,7 +215,7 @@ export const useImagePreloader = () => {
 
   // Add images to preload queue
   const queueImages = useCallback(
-    (urls: string[], options: ImagePreloadOptions = {}) => {
+    (urls: string[]) => {
       const newUrls = urls.filter(
         (url) =>
           !preloadedImages.current.has(url) &&
@@ -226,8 +231,8 @@ export const useImagePreloader = () => {
 
   // Preload multiple images with priority
   const preloadImages = useCallback(
-    async (urls: string[], options: ImagePreloadOptions = {}): Promise<PreloadResult[]> => {
-      const results = await Promise.allSettled(urls.map((url) => preloadImage(url, options)));
+    async (urls: string[], _options: ImagePreloadOptions = {}): Promise<PreloadResult[]> => {
+      const results = await Promise.allSettled(urls.map((url) => preloadImage(url, _options)));
 
       return results.map((result) =>
         result.status === "fulfilled"
@@ -244,11 +249,11 @@ export const useImagePreloader = () => {
 
   // Preload images for visible beach cards
   const preloadVisibleBeachImages = useCallback(
-    (beaches: any[]) => {
-      const imageUrls = beaches.filter((beach) => beach.photo_url).map((beach) => beach.photo_url);
+    (beaches: BeachWithPhoto[]) => {
+      const imageUrls = beaches.filter((beach) => beach.photo_url).map((beach) => beach.photo_url!);
 
       if (imageUrls.length > 0) {
-        queueImages(imageUrls, { quality: 85 });
+        queueImages(imageUrls);
       }
     },
     [queueImages]
@@ -288,11 +293,8 @@ export const useImagePreloader = () => {
   // Periodic cleanup to prevent memory leaks
   const performPeriodicCleanup = useCallback(() => {
     // Clean up stale intervals and timeouts
-    const now = Date.now();
-    const staleThreshold = 30000; // 30 seconds
-
     // Clean up intervals that have been running too long
-    const staleIntervals = Array.from(activeIntervals.current).filter((interval) => {
+    const staleIntervals = Array.from(activeIntervals.current).filter((_interval) => {
       // This is a simplified check - in a real implementation, you'd track creation time
       return true; // For now, clean up all intervals periodically
     });
@@ -303,7 +305,7 @@ export const useImagePreloader = () => {
     });
 
     // Clean up timeouts that have been running too long
-    const staleTimeouts = Array.from(activeTimeouts.current).filter((timeout) => {
+    const staleTimeouts = Array.from(activeTimeouts.current).filter((_timeout) => {
       return true; // For now, clean up all timeouts periodically
     });
 
@@ -336,20 +338,25 @@ export const useImagePreloader = () => {
 
   // Cleanup on unmount
   useEffect(() => {
+    // Capture current refs to avoid stale closure issues
+    const currentRequests = activeRequests.current;
+    const currentIntervals = activeIntervals.current;
+    const currentTimeouts = activeTimeouts.current;
+
     return () => {
       // Abort all active requests
-      activeRequests.current.forEach((controller) => controller.abort());
-      activeRequests.current.clear();
+      currentRequests.forEach((controller) => controller.abort());
+      currentRequests.clear();
 
       // Clear all active intervals and timeouts immediately
-      activeIntervals.current.forEach((interval) => {
+      currentIntervals.forEach((interval) => {
         clearInterval(interval);
       });
-      activeTimeouts.current.forEach((timeout) => {
+      currentTimeouts.forEach((timeout) => {
         clearTimeout(timeout);
       });
-      activeIntervals.current.clear();
-      activeTimeouts.current.clear();
+      currentIntervals.clear();
+      currentTimeouts.clear();
 
       // Reset concurrency tracking
       activeLoads.current = 0;

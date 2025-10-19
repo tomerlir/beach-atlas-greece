@@ -222,7 +222,16 @@ export const useBeachSuggestions = ({
     } finally {
       setIsLoading(false);
     }
-  }, [allBeaches, hasResults, cacheKey]);
+  }, [
+    allBeaches,
+    hasResults,
+    cacheKey,
+    filters.amenities,
+    filters.blueFlag,
+    filters.nearMe,
+    filters.organized,
+    userLocation,
+  ]);
 
   // Trigger suggestions when no results
   useEffect(() => {

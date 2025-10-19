@@ -5,8 +5,13 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { ChevronDown, ChevronRight, Search, X } from "lucide-react";
-import { AMENITY_MAP, getAmenitiesByCategory, getAmenityLabel } from "@/lib/amenities";
+import { AMENITY_MAP, getAmenitiesByCategory, AmenityConfig } from "@/lib/amenities";
 import { cn } from "@/lib/utils";
+
+// Define the exact type for amenities with ID - matches what getAmenitiesByCategory returns
+type AmenityWithId = {
+  id: string;
+} & AmenityConfig;
 
 interface AmenitiesMultiselectProps {
   value: string[];
@@ -85,7 +90,7 @@ const AmenitiesMultiselect: React.FC<AmenitiesMultiselectProps> = ({
     activities: "Activities",
   };
 
-  const renderCategory = (category: keyof typeof categoryLabels, amenities: any[]) => {
+  const renderCategory = (category: keyof typeof categoryLabels, amenities: AmenityWithId[]) => {
     if (amenities.length === 0) return null;
 
     const isExpanded = expandedCategories.has(category);

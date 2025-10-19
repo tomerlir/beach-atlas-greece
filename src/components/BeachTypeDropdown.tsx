@@ -1,13 +1,12 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Mountain, Check, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useDraftState } from "@/hooks/useDraftState";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { FilterState } from "@/hooks/useUrlState";
 import { analytics } from "@/lib/analytics";
 import { createFilterApplyEvent, createFilterClearEvent } from "@/lib/analyticsEvents";
+import { BeachType } from "@/types/common";
 
 interface BeachTypeDropdownProps {
   filters: FilterState;
@@ -27,18 +26,15 @@ const beachTypeOptions = [
 export default function BeachTypeDropdown({
   filters,
   onFiltersChange,
-  onOpenAllFilters,
-  showCountBadge = false,
   resultCount = 0,
 }: BeachTypeDropdownProps) {
-  const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
   const [focusedIndex, setFocusedIndex] = useState(-1);
 
   // Use draft state for proper state management
-  const { draftFilters, updateDraft, resetDraft } = useDraftState(filters);
+  const { draftFilters, updateDraft } = useDraftState(filters);
 
   // Handle trigger click - open popover on all devices
   const handleTriggerClick = useCallback(() => {
@@ -48,11 +44,9 @@ export default function BeachTypeDropdown({
   // Toggle beach type in draft state
   const toggleBeachTypeDraft = useCallback(
     (typeValue: string) => {
-      const newTypes = draftFilters.type.includes(
-        typeValue as "SANDY" | "PEBBLY" | "MIXED" | "OTHER"
-      )
+      const newTypes = draftFilters.type.includes(typeValue as BeachType)
         ? draftFilters.type.filter((value) => value !== typeValue)
-        : [...draftFilters.type, typeValue as "SANDY" | "PEBBLY" | "MIXED" | "OTHER"];
+        : [...draftFilters.type, typeValue as BeachType];
       updateDraft({ type: newTypes });
     },
     [draftFilters.type, updateDraft]
@@ -74,7 +68,7 @@ export default function BeachTypeDropdown({
     });
 
     // Emit filter_clear events for removed types
-    removedTypes.forEach((type) => {
+    removedTypes.forEach(() => {
       analytics.event("filter_clear", createFilterClearEvent("beach_type"));
     });
 
@@ -140,7 +134,6 @@ export default function BeachTypeDropdown({
   }, [isOpen]);
 
   // Calculate counts
-  const selectedCount = draftFilters.type.length;
   const appliedCount = filters.type.length;
 
   return (
@@ -186,9 +179,7 @@ export default function BeachTypeDropdown({
           id="beach-type-listbox"
         >
           {beachTypeOptions.map((option, index) => {
-            const isSelected = draftFilters.type.includes(
-              option.value as "SANDY" | "PEBBLY" | "MIXED" | "OTHER"
-            );
+            const isSelected = draftFilters.type.includes(option.value as BeachType);
             const isFocused = focusedIndex === index;
 
             return (

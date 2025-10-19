@@ -2,6 +2,9 @@ import { useMemo } from "react";
 import { AreaFilterState } from "./useAreaUrlState";
 import { Beach } from "@/types/beach";
 
+// Define exact types based on actual database schema and usage patterns
+import { BeachType, WaveCondition, ParkingType } from "@/types/common";
+
 // Exported pure predicate to enable strict filtering tests for area-scoped pages
 export function matchesAreaFilters(beach: Beach, filters: AreaFilterState): boolean {
   // Area filter (always applied and locked)
@@ -107,7 +110,7 @@ export function matchesAreaFilters(beach: Beach, filters: AreaFilterState): bool
   }
 
   // Parking filter
-  if (filters.parking.length > 0 && !(filters.parking as any).includes(beach.parking as any)) {
+  if (filters.parking.length > 0 && !filters.parking.includes(beach.parking as ParkingType)) {
     return false;
   }
 
@@ -122,13 +125,13 @@ export function matchesAreaFilters(beach: Beach, filters: AreaFilterState): bool
   // Wave conditions filter
   if (
     filters.waveConditions.length > 0 &&
-    !(filters.waveConditions as any).includes(beach.wave_conditions as any)
+    !filters.waveConditions.includes(beach.wave_conditions as WaveCondition)
   ) {
     return false;
   }
 
   // Type filter (beach surface)
-  if (filters.type.length > 0 && !(filters.type as any).includes(beach.type as any)) {
+  if (filters.type.length > 0 && !filters.type.includes(beach.type as BeachType)) {
     return false;
   }
 

@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { FilterState } from "./useUrlState";
 import { Beach } from "@/types/beach";
+import { WaveCondition, BeachType } from "@/types/common";
 
 // Exported pure predicate to enable strict filtering tests without React/hook context
 export function matchesFilters(beach: Beach, filters: FilterState): boolean {
@@ -61,13 +62,13 @@ export function matchesFilters(beach: Beach, filters: FilterState): boolean {
   // Wave conditions filter
   if (
     filters.waveConditions.length > 0 &&
-    !filters.waveConditions.includes(beach.wave_conditions as any)
+    !filters.waveConditions.includes(beach.wave_conditions as WaveCondition)
   ) {
     return false;
   }
 
   // Type filter (beach surface)
-  if (filters.type.length > 0 && !filters.type.includes(beach.type as any)) {
+  if (filters.type.length > 0 && !filters.type.includes(beach.type as BeachType)) {
     return false;
   }
 

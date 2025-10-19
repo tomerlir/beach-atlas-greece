@@ -1,9 +1,8 @@
 /**
  * Sentiment Analysis Module
  * Analyzes user intent and sentiment in beach search queries
+ * Updated to work without TextProcessor dependency
  */
-
-import { TextProcessor, ProcessedText } from "./TextProcessor";
 
 export interface SentimentResult {
   polarity: "positive" | "negative" | "neutral";
@@ -22,7 +21,6 @@ export interface IntentAnalysis {
 
 export class SentimentAnalyzer {
   private static instance: SentimentAnalyzer;
-  private textProcessor: TextProcessor;
 
   // Sentiment lexicons
   private positiveWords = new Set([
@@ -86,7 +84,10 @@ export class SentimentAnalyzer {
     "skip",
   ]);
 
-  private intentKeywords = {
+  private intentKeywords: Record<
+    "search" | "preference" | "question" | "complaint" | "praise",
+    string[]
+  > = {
     search: ["find", "show", "get", "search", "looking", "want", "need"],
     preference: ["prefer", "like", "favorite", "best", "top", "recommend", "suggest", "quiet"],
     question: ["what", "which", "where", "when", "how", "who", "why", "?"],
@@ -94,14 +95,14 @@ export class SentimentAnalyzer {
     praise: ["amazing", "fantastic", "wonderful", "perfect", "excellent", "beautiful", "stunning"],
   };
 
-  private intensityModifiers = {
+  private intensityModifiers: Record<"high" | "medium" | "low", string[]> = {
     high: ["extremely", "incredibly", "absolutely", "totally", "completely", "very", "most"],
     medium: ["quite", "rather", "pretty", "fairly", "somewhat"],
     low: ["slightly", "a bit", "kind of", "sort of"],
   };
 
   private constructor() {
-    this.textProcessor = TextProcessor.getInstance();
+    // Initialize sentiment analyzer
   }
 
   public static getInstance(): SentimentAnalyzer {
@@ -120,8 +121,8 @@ export class SentimentAnalyzer {
       text = "";
     }
 
-    const processedText = await this.textProcessor.processText(text);
-    const normalizedText = processedText.normalized.toLowerCase();
+    // Simple text normalization without TextProcessor
+    const normalizedText = text.toLowerCase().trim();
 
     const words = normalizedText.split(/\s+/);
     let positiveScore = 0;
@@ -144,7 +145,7 @@ export class SentimentAnalyzer {
     for (const [level, modifiers] of Object.entries(this.intensityModifiers)) {
       if (modifiers.some((modifier) => normalizedText.includes(modifier))) {
         if (level === "high" || level === "medium" || level === "low") {
-          intensity = level;
+          intensity = level as "high" | "medium" | "low";
         }
         break;
       }
@@ -190,7 +191,10 @@ export class SentimentAnalyzer {
     }
 
     const normalizedText = text.toLowerCase();
-    const intentScores: Record<string, number> = {
+    const intentScores: Record<
+      "search" | "preference" | "question" | "complaint" | "praise",
+      number
+    > = {
       search: 0,
       preference: 0,
       question: 0,
@@ -207,15 +211,15 @@ export class SentimentAnalyzer {
             intent === "search" &&
             ["find", "show", "get", "search", "looking", "want", "need"].includes(keyword)
           ) {
-            intentScores[intent] += 2; // Higher weight for clear search intent
+            intentScores[intent as keyof typeof intentScores] += 2; // Higher weight for clear search intent
           } else if (
             intent === "question" &&
             keyword === "where" &&
             normalizedText.includes("are")
           ) {
-            intentScores[intent] += 1; // Standard weight for "where are" questions
+            intentScores[intent as keyof typeof intentScores] += 1; // Standard weight for "where are" questions
           } else {
-            intentScores[intent]++;
+            intentScores[intent as keyof typeof intentScores]++;
           }
         }
       }
@@ -243,7 +247,7 @@ export class SentimentAnalyzer {
 
     // Extract modifiers
     const modifiers: string[] = [];
-    for (const [level, mods] of Object.entries(this.intensityModifiers)) {
+    for (const [, mods] of Object.entries(this.intensityModifiers)) {
       for (const mod of mods) {
         if (normalizedText.includes(mod)) {
           modifiers.push(mod);
@@ -252,7 +256,12 @@ export class SentimentAnalyzer {
     }
 
     return {
-      primaryIntent: primaryIntent.intent as any,
+      primaryIntent: primaryIntent.intent as
+        | "search"
+        | "preference"
+        | "question"
+        | "complaint"
+        | "praise",
       secondaryIntents,
       confidence: Math.min(0.95, Math.max(0.6, primaryIntent.score / 1.2)), // Higher base confidence
       modifiers,
@@ -331,7 +340,7 @@ export class SentimentAnalyzer {
    * Get sentiment summary for display
    */
   public getSentimentSummary(result: SentimentResult): string {
-    const { polarity, intent, intensity } = result;
+    const { polarity, intent } = result;
 
     const summaries = {
       positive: {

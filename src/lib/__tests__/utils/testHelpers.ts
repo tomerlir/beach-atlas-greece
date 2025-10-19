@@ -339,13 +339,13 @@ export class TestExecutionHelpers {
 }
 
 /**
- * Common test patterns
+ * Common test patterns for NLP functions
  */
 export const TestPatterns = {
   /**
    * Test that a function handles empty input gracefully
    */
-  emptyInput: (fn: (input: string) => Promise<any>) => {
+  emptyInput: (fn: (input: string) => Promise<EnhancedExtractionResult>) => {
     it("should handle empty input gracefully", async () => {
       const result = await fn("");
       expect(result).toBeDefined();
@@ -355,14 +355,14 @@ export const TestPatterns = {
   /**
    * Test that a function handles null/undefined input gracefully
    */
-  nullInput: (fn: (input: string | null | undefined) => Promise<any>) => {
+  nullInput: (fn: (input: string | null | undefined) => Promise<EnhancedExtractionResult>) => {
     it("should handle null input gracefully", async () => {
-      const result = await fn(null as any);
+      const result = await fn(null);
       expect(result).toBeDefined();
     });
 
     it("should handle undefined input gracefully", async () => {
-      const result = await fn(undefined as any);
+      const result = await fn(undefined);
       expect(result).toBeDefined();
     });
   },
@@ -370,7 +370,7 @@ export const TestPatterns = {
   /**
    * Test that a function handles very long input
    */
-  longInput: (fn: (input: string) => Promise<any>) => {
+  longInput: (fn: (input: string) => Promise<EnhancedExtractionResult>) => {
     it("should handle very long input", async () => {
       const longInput = "beach ".repeat(1000);
       const result = await fn(longInput);
@@ -381,7 +381,7 @@ export const TestPatterns = {
   /**
    * Test that a function handles special characters
    */
-  specialCharacters: (fn: (input: string) => Promise<any>) => {
+  specialCharacters: (fn: (input: string) => Promise<EnhancedExtractionResult>) => {
     it("should handle special characters", async () => {
       const specialInput = "beach!@#$%^&*()_+-=[]{}|;:,.<>?";
       const result = await fn(specialInput);
@@ -397,8 +397,8 @@ export class PerformanceTestHelpers {
   /**
    * Benchmark a function with multiple iterations
    */
-  static async benchmark(
-    fn: () => Promise<any>,
+  static async benchmark<T>(
+    fn: () => Promise<T>,
     iterations: number = 10
   ): Promise<{ avgTimeMs: number; minTimeMs: number; maxTimeMs: number }> {
     const times: number[] = [];
@@ -419,8 +419,8 @@ export class PerformanceTestHelpers {
   /**
    * Assert that a function meets performance requirements
    */
-  static assertPerformance(
-    fn: () => Promise<any>,
+  static assertPerformance<T>(
+    fn: () => Promise<T>,
     maxAvgTimeMs: number,
     iterations: number = 10
   ): Promise<void> {

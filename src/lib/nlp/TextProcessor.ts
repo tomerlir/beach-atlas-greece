@@ -1,19 +1,10 @@
 /**
  * Advanced Text Processing Module
  * Provides tokenization, lemmatization, and text normalization capabilities
+ * Uses lazy loading to prevent large NLP libraries from being included in main bundle
  */
 
-import nlp from "compromise";
-import winkNLP from "wink-nlp";
-import model from "wink-eng-lite-web-model";
-
-// Initialize wink-nlp with the English model
-let wink: any = null;
-try {
-  wink = winkNLP(model);
-} catch (error) {
-  console.warn("Failed to initialize wink-nlp:", error);
-}
+import { useLazyNLP } from "@/hooks/useLazyNLP";
 
 export interface Token {
   text: string;
@@ -34,23 +25,17 @@ export interface ProcessedText {
   }>;
 }
 
-export class TextProcessor {
-  private static instance: TextProcessor;
-  private cache = new Map<string, ProcessedText>();
-
-  private constructor() {}
-
-  public static getInstance(): TextProcessor {
-    if (!TextProcessor.instance) {
-      TextProcessor.instance = new TextProcessor();
-    }
-    return TextProcessor.instance;
-  }
+/**
+ * Hook-based TextProcessor that uses lazy loading for NLP dependencies
+ */
+export const useTextProcessor = () => {
+  const { nlp, isLoading, error } = useLazyNLP();
+  const cache = new Map<string, ProcessedText>();
 
   /**
    * Process text with advanced NLP techniques
    */
-  public async processText(text: string): Promise<ProcessedText> {
+  const processText = async (text: string): Promise<ProcessedText> => {
     // Validate input
     if (!text || typeof text !== "string") {
       text = "";
@@ -58,8 +43,8 @@ export class TextProcessor {
 
     // Check cache first
     const cacheKey = text.toLowerCase().trim();
-    if (this.cache.has(cacheKey)) {
-      return this.cache.get(cacheKey)!;
+    if (cache.has(cacheKey)) {
+      return cache.get(cacheKey)!;
     }
 
     const result: ProcessedText = {
@@ -71,34 +56,49 @@ export class TextProcessor {
     };
 
     try {
-      // Use compromise for basic processing
-      const doc = nlp(text);
+      if (nlp) {
+        // Use compromise for basic processing
+        const doc = nlp.compromise(text);
 
-      // Extract basic text information - simplified approach
-      result.tokens = text.split(/\s+/).map((word, index) => ({
-        text: word,
-        lemma: word.toLowerCase(),
-        pos: "word", // Simplified POS tag as string
-        confidence: 0.8,
-      }));
+        // Extract basic text information - simplified approach
+        result.tokens = text.split(/\s+/).map((word) => ({
+          text: word,
+          lemma: word.toLowerCase(),
+          pos: "word", // Simplified POS tag as string
+          confidence: 0.8,
+        }));
 
-      // Get lemmatized text - safe compromise.js API usage
-      try {
-        result.lemmatized = (doc as any).lemma().text();
-      } catch (error) {
-        result.lemmatized = text.toLowerCase();
-      }
-
-      // Use wink-nlp for advanced processing if available
-      if (wink) {
+        // Get lemmatized text - safe compromise.js API usage
         try {
-          const winkDoc = wink.readDoc(text);
+          // Type assertion for compromise.js API - we know it has lemma().text() method
+          const docWithLemma = doc as unknown as { lemma(): { text(): string } };
+          result.lemmatized = docWithLemma.lemma().text();
+        } catch {
+          result.lemmatized = text.toLowerCase();
+        }
+
+        // Use wink-nlp for advanced processing if available
+        try {
+          // Type assertion for wink-nlp API - we know it has readDoc method
+          const winkInstance = nlp.winkNLP(nlp.model) as {
+            readDoc(text: string): {
+              entities(): Array<{
+                out(selector: string): string;
+              }>;
+            };
+            its: {
+              text: string;
+              type: string;
+            };
+          };
+
+          const winkDoc = winkInstance.readDoc(text);
 
           // Extract named entities - correct wink-nlp API usage
           const entities = winkDoc.entities();
-          result.entities = entities.map((entity: any) => ({
-            text: entity.out(wink.its.text),
-            type: entity.out(wink.its.type),
+          result.entities = entities.map((entity) => ({
+            text: entity.out(winkInstance.its.text),
+            type: entity.out(winkInstance.its.type),
             confidence: 0.9, // Wink-nlp doesn't provide confidence scores
           }));
         } catch (winkError) {
@@ -106,14 +106,22 @@ export class TextProcessor {
           result.entities = [];
         }
       } else {
+        // Fallback to basic processing when NLP modules aren't loaded yet
+        result.tokens = text.split(/\s+/).map((word) => ({
+          text: word,
+          lemma: word.toLowerCase(),
+          pos: "unknown",
+          confidence: 0.5,
+        }));
+        result.lemmatized = text.toLowerCase();
         result.entities = [];
       }
 
       // Normalize text
-      result.normalized = this.normalizeText(text);
+      result.normalized = normalizeText(text);
 
       // Cache the result
-      this.cache.set(cacheKey, result);
+      cache.set(cacheKey, result);
     } catch (error) {
       console.warn("NLP processing failed, falling back to basic processing:", error);
       // Fallback to basic processing
@@ -124,16 +132,16 @@ export class TextProcessor {
         confidence: 0.5,
       }));
       result.lemmatized = text.toLowerCase();
-      result.normalized = this.normalizeText(text);
+      result.normalized = normalizeText(text);
     }
 
     return result;
-  }
+  };
 
   /**
    * Advanced text normalization
    */
-  private normalizeText(text: string): string {
+  const normalizeText = (text: string): string => {
     return text
       .toLowerCase()
       .normalize("NFKD")
@@ -141,48 +149,61 @@ export class TextProcessor {
       .replace(/[^\w\s-]/g, " ") // Keep only word characters, spaces, and hyphens
       .replace(/\s+/g, " ")
       .trim();
-  }
+  };
 
   /**
    * Extract key phrases from text
    */
-  public extractKeyPhrases(text: string): string[] {
+  const extractKeyPhrases = (text: string): string[] => {
     try {
-      const doc = nlp(text);
-      const phrases = doc.match("#Noun+").out("array");
-      return phrases.filter((phrase: string) => phrase.length > 2);
+      if (nlp) {
+        const doc = nlp.compromise(text);
+        const phrases = doc.match("#Noun+").out("array");
+        return phrases.filter((phrase: string) => phrase.length > 2);
+      }
+      return [];
     } catch (error) {
       console.warn("Key phrase extraction failed:", error);
       return [];
     }
-  }
+  };
 
   /**
    * Detect language of text
    */
-  public detectLanguage(text: string): string {
+  const detectLanguage = (text: string): string => {
     // Simple heuristic - in a real implementation, you'd use a proper language detection library
     const greekPattern = /[α-ωΑ-Ω]/;
     if (greekPattern.test(text)) {
       return "greek";
     }
     return "english";
-  }
+  };
 
   /**
    * Clear cache to free memory
    */
-  public clearCache(): void {
-    this.cache.clear();
-  }
+  const clearCache = (): void => {
+    cache.clear();
+  };
 
   /**
    * Get cache statistics
    */
-  public getCacheStats(): { size: number; keys: string[] } {
+  const getCacheStats = (): { size: number; keys: string[] } => {
     return {
-      size: this.cache.size,
-      keys: Array.from(this.cache.keys()),
+      size: cache.size,
+      keys: Array.from(cache.keys()),
     };
-  }
-}
+  };
+
+  return {
+    processText,
+    extractKeyPhrases,
+    detectLanguage,
+    clearCache,
+    getCacheStats,
+    isLoading,
+    error,
+  };
+};

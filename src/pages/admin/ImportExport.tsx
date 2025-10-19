@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Upload, Download, Copy, Check } from "lucide-react";
+import { Upload, Copy, Check } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -24,10 +24,11 @@ const ImportExport: React.FC = () => {
         description: "Column order copied to clipboard",
       });
       setTimeout(() => setCopiedColumnOrder(false), 2000);
-    } catch (error) {
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : "Failed to copy to clipboard";
       toast({
         title: "Copy Failed",
-        description: "Failed to copy to clipboard",
+        description: errorMessage,
         variant: "destructive",
       });
     }

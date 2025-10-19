@@ -415,7 +415,7 @@ export class LocationMatcher {
     const locations: LocationMatch[] = [];
     const normalizedRegion = region.toLowerCase().trim();
 
-    for (const [place, location] of this.locationDatabase) {
+    for (const [, location] of this.locationDatabase) {
       if (location.hierarchy.region === normalizedRegion || location.area === normalizedRegion) {
         locations.push(location);
       }

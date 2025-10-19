@@ -69,7 +69,7 @@ const AcceptInvite: React.FC = () => {
         return;
       }
       setStep("accepting");
-      const { error: acceptError } = await authSupabase.rpc("accept_admin_invite" as any, {
+      const { error: acceptError } = await authSupabase.rpc("accept_admin_invite", {
         invite_token: token,
       });
       if (acceptError) {

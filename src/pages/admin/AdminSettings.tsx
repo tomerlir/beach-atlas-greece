@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { PasswordChangeForm } from "@/components/admin/PasswordChangeForm";
 import { Shield, User } from "lucide-react";
-import { useAuth } from "@/contexts/AuthContext";
+import { useAuth } from "@/hooks/useAuth";
 
 const AdminSettings: React.FC = () => {
   const { profile, user } = useAuth();

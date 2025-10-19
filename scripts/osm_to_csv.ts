@@ -8,18 +8,158 @@
 // Useful for testing or processing beaches in smaller batches.
 
 import fs from 'node:fs/promises';
+import { BeachType, WaveCondition, ParkingType } from '../src/types/common';
 import path from 'node:path';
 
-type Argv = { bbox?: string; country?: string; place?: string; limit?: string; out: string };
+// ============================================================================
+// TYPE DEFINITIONS
+// ============================================================================
+
+interface Argv {
+  bbox?: string;
+  country?: string;
+  place?: string;
+  limit?: string;
+  out: string;
+}
+
+// OSM Tags interface based on actual usage patterns in the code
+interface OsmTags {
+  // Name fields
+  name?: string;
+  'name:en'?: string;
+  'name:el'?: string;
+  
+  // Description fields
+  description?: string;
+  note?: string;
+  
+  // Beach-specific tags
+  natural?: string;
+  surface?: string;
+  'beach:surface'?: string;
+  'beach:material'?: string;
+  material?: string;
+  beach?: string;
+  organized?: string;
+  
+  // Facility tags
+  sunbed?: string;
+  umbrella?: string;
+  sun_shade?: string;
+  shower?: string;
+  showers?: string;
+  toilet?: string;
+  toilets?: string;
+  lifeguard?: string;
+  lifeguards?: string;
+  
+  // Service/amenity tags
+  amenity?: string;
+  bar?: string;
+  beach_bar?: string;
+  taverna?: string;
+  food?: string;
+  music?: string;
+  live_music?: string;
+  cuisine?: string;
+  
+  // Activity tags
+  snorkeling?: string;
+  snorkel?: string;
+  water_sports?: string;
+  sport?: string;
+  family_friendly?: string;
+  nudism?: string;
+  children?: string;
+  boat_rental?: string;
+  boat?: string;
+  ferry?: string;
+  boat_trips?: string;
+  fishing?: string;
+  fish?: string;
+  photography?: string;
+  photo?: string;
+  hiking?: string;
+  trail?: string;
+  birdwatching?: string;
+  birds?: string;
+  cliff_jumping?: string;
+  cliff?: string;
+  jumping?: string;
+  
+  // Parking tags
+  parking?: string;
+  'parking:lane'?: string;
+  'parking:capacity'?: string;
+  'parking:lane:both'?: string;
+  'parking:lane:left'?: string;
+  'parking:lane:right'?: string;
+  
+  // Access and fee tags
+  access?: string;
+  fee?: string;
+  
+  // Wave/water condition tags
+  wave?: string;
+  surf?: string;
+  sea_conditions?: string;
+  water?: string;
+  
+  // Blue flag and awards
+  blue_flag?: string;
+  blueflag?: string;
+  award?: string;
+  
+  // Other common tags
+  seats?: string;
+  resort?: string;
+  restaurant?: string;
+  fast_food?: string;
+  snack?: string;
+  
+  // Additional dynamic tags (for truly dynamic access)
+  [key: string]: string | undefined;
+}
+
+// OSM Element interface
+interface OsmElement {
+  id: number;
+  type: 'node' | 'way' | 'relation';
+  lat?: number;
+  lon?: number;
+  center?: {
+    lat: number;
+    lon: number;
+  };
+  tags?: OsmTags;
+}
+
+// OSM API Response interface
+interface OsmResponse {
+  elements: OsmElement[];
+}
+
+// ============================================================================
+// ARGUMENT PARSING
+// ============================================================================
+
 const args: Partial<Argv> = {};
 for (let i = 2; i < process.argv.length; i += 2) {
   const key = process.argv[i]?.replace(/^--/, '');
   const value = process.argv[i + 1];
   if (key && value) {
-    args[key as keyof Argv] = value;
+    const validKey = key as keyof Argv;
+    if (validKey in { bbox: true, country: true, place: true, limit: true, out: true }) {
+      args[validKey] = value;
+    }
   }
 }
-if (!args.out) { console.error('Missing --out filename'); process.exit(1); }
+
+if (!args.out) {
+  process.stderr.write('Missing --out filename\n');
+  process.exit(1);
+}
 
 const OVERPASS_ENDPOINT = 'https://overpass-api.de/api/interpreter';
 
@@ -47,10 +187,9 @@ const ALLOWED_AMENITIES = new Set([
 ]);
 
 // Extract amenity keys from OSM tags heuristically
-const inferAmenities = (tags: Record<string,string|undefined>) => {
+const inferAmenities = (tags: OsmTags) => {
   const out = new Set<string>();
   const description = (tags['description'] || tags['note'] || '').toLowerCase();
-  const name = (tags['name'] || '').toLowerCase();
   
   // Facilities
   if (tags['sunbed'] === 'yes' || tags['seats'] === 'sunbeds' || tags['beach'] === 'resort' ||
@@ -105,11 +244,10 @@ const inferAmenities = (tags: Record<string,string|undefined>) => {
   return Array.from(out).filter(k => ALLOWED_AMENITIES.has(k));
 };
 
-const inferParking = (tags: Record<string,string|undefined>): 'NONE'|'ROADSIDE'|'SMALL_LOT'|'LARGE_LOT' => {
+const inferParking = (tags: OsmTags): 'NONE'|'ROADSIDE'|'SMALL_LOT'|'LARGE_LOT' => {
   // Check parking tags first
   const parking = (tags['parking'] || tags['parking:lane'] || '').toLowerCase();
   const parkingCapacity = tags['parking:capacity'] || '';
-  const parkingFee = (tags['parking:fee'] || '').toLowerCase();
   
   // Explicit parking indicators
   if (parking.includes('no') || parking.includes('private') || parking.includes('customers_only')) return 'NONE';
@@ -163,7 +301,7 @@ const inferParking = (tags: Record<string,string|undefined>): 'NONE'|'ROADSIDE'|
   return 'ROADSIDE';
 };
 
-const inferType = (tags: Record<string,string|undefined>): 'SANDY'|'PEBBLY'|'MIXED'|'OTHER' => {
+const inferType = (tags: OsmTags): 'SANDY'|'PEBBLY'|'MIXED'|'OTHER' => {
   // Check surface tags first
   const surf = (tags['surface'] || tags['beach:surface'] || tags['natural'] || '').toLowerCase();
   if (surf.includes('sand') || surf.includes('sandy')) return 'SANDY';
@@ -198,7 +336,7 @@ const inferType = (tags: Record<string,string|undefined>): 'SANDY'|'PEBBLY'|'MIX
   return 'OTHER';
 };
 
-const inferWaveConditions = (tags: Record<string,string|undefined>): 'CALM'|'MODERATE'|'WAVY'|'SURFABLE' => {
+const inferWaveConditions = (tags: OsmTags): WaveCondition => {
   const wave = (tags['wave'] || tags['surf'] || tags['sea_conditions'] || tags['water'] || '').toLowerCase();
   
   // Direct wave condition indicators
@@ -225,7 +363,7 @@ const inferWaveConditions = (tags: Record<string,string|undefined>): 'CALM'|'MOD
   return 'MODERATE';
 };
 
-const inferOrganized = (tags: Record<string,string|undefined>) => {
+const inferOrganized = (tags: OsmTags) => {
   const description = (tags['description'] || tags['note'] || '').toLowerCase();
   
   // Direct organized beach indicators
@@ -247,7 +385,7 @@ const inferOrganized = (tags: Record<string,string|undefined>) => {
   return false;
 };
 
-const inferBlueFlag = (tags: Record<string,string|undefined>) => {
+const inferBlueFlag = (tags: OsmTags) => {
   return tags['blue_flag'] === 'yes' || tags['blueflag'] === 'yes' || tags['award'] === 'blue_flag';
 };
 
@@ -272,23 +410,15 @@ const buildOverpassQL = () => {
     ${outClause}`;
 };
 
-type OsmEl = { 
-  id: number; 
-  type: 'node'|'way'|'relation'; 
-  lat?: number; 
-  lon?: number; 
-  center?: {lat:number; lon:number}; 
-  tags?: Record<string,string>; 
-};
 
 (async () => {
-  console.log('🌊 Fetching beach data from OpenStreetMap...');
+  process.stdout.write('🌊 Fetching beach data from OpenStreetMap...\n');
   if (args.limit) {
-    console.log(`📊 Limiting results to ${args.limit} beaches`);
+    process.stdout.write(`📊 Limiting results to ${args.limit} beaches\n`);
   }
   
   const ql = buildOverpassQL();
-  console.log('Query:', ql);
+  process.stdout.write(`Query: ${ql}\n`);
   
   const res = await fetch(OVERPASS_ENDPOINT, {
     method: 'POST',
@@ -296,21 +426,22 @@ type OsmEl = {
     body: new URLSearchParams({ data: ql })
   });
   
-  if (!res.ok) { 
-    console.error('❌ Overpass error:', await res.text()); 
-    process.exit(1); 
+  if (!res.ok) {
+    const errorText = await res.text();
+    process.stderr.write(`❌ Overpass error: ${errorText}\n`);
+    process.exit(1);
   }
   
-  const json = await res.json() as { elements: OsmEl[] };
-  console.log(`📊 Found ${json.elements.length} beach features`);
+  const json = await res.json() as OsmResponse;
+  process.stdout.write(`📊 Found ${json.elements.length} beach features\n`);
 
   // Map OSM → our schema rows
   type Row = {
     slug:string; name:string; area:string; latitude:number; longitude:number;
-    type:'SANDY'|'PEBBLY'|'MIXED'|'OTHER';
-    wave_conditions:'CALM'|'MODERATE'|'WAVY'|'SURFABLE';
-    organized:boolean;
-    parking:'NONE'|'ROADSIDE'|'SMALL_LOT'|'LARGE_LOT';
+    type: BeachType;
+    wave_conditions: WaveCondition;
+    organized: boolean;
+    parking: ParkingType;
     blue_flag:boolean;
     amenities:string[];
     photo_url:string;
@@ -369,7 +500,7 @@ type OsmEl = {
     rows.push(row);
   }
 
-  console.log(`🔄 Processing ${rows.length} beaches...`);
+  process.stdout.write(`🔄 Processing ${rows.length} beaches...\n`);
 
   // De-duplication: same slug within 0.3 km → keep the one with more amenities
   const deduped: Row[] = [];
@@ -388,7 +519,7 @@ type OsmEl = {
     }
   }
 
-  console.log(`✨ Deduplicated to ${deduped.length} unique beaches`);
+  process.stdout.write(`✨ Deduplicated to ${deduped.length} unique beaches\n`);
 
   // CSV serialize with your exact header order
   const header = [
@@ -422,11 +553,11 @@ type OsmEl = {
     lines.push(csvRow);
   }
 
-  const outPath = path.resolve(process.cwd(), args.out as string);
+  const outPath = path.resolve(process.cwd(), args.out!);
   await fs.writeFile(outPath, lines.join('\n'), 'utf8');
   
-  console.log(`✅ Wrote ${deduped.length} beaches to ${outPath}`);
-  console.log(`📁 File saved at: ${outPath}`);
+  process.stdout.write(`✅ Wrote ${deduped.length} beaches to ${outPath}\n`);
+  process.stdout.write(`📁 File saved at: ${outPath}\n`);
   
   // Show some stats
   const stats = {
@@ -439,12 +570,12 @@ type OsmEl = {
     withAmenities: deduped.filter(r => r.amenities.length > 0).length
   };
   
-  console.log('\n📈 Beach Statistics:');
-  console.log(`  🏖️  Sandy: ${stats.sandy}`);
-  console.log(`  🪨 Pebbly: ${stats.pebbly}`);
-  console.log(`  🔀 Mixed: ${stats.mixed}`);
-  console.log(`  ❓ Other: ${stats.other}`);
-  console.log(`  🏢 Organized: ${stats.organized}`);
-  console.log(`  🏆 Blue Flag: ${stats.blueFlag}`);
-  console.log(`  🎯 With Amenities: ${stats.withAmenities}`);
+  process.stdout.write('\n📈 Beach Statistics:\n');
+  process.stdout.write(`  🏖️  Sandy: ${stats.sandy}\n`);
+  process.stdout.write(`  🪨 Pebbly: ${stats.pebbly}\n`);
+  process.stdout.write(`  🔀 Mixed: ${stats.mixed}\n`);
+  process.stdout.write(`  ❓ Other: ${stats.other}\n`);
+  process.stdout.write(`  🏢 Organized: ${stats.organized}\n`);
+  process.stdout.write(`  🏆 Blue Flag: ${stats.blueFlag}\n`);
+  process.stdout.write(`  🎯 With Amenities: ${stats.withAmenities}\n`);
 })();

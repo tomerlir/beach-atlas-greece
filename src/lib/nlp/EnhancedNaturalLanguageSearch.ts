@@ -4,11 +4,11 @@
  */
 
 import { FilterState } from "@/hooks/useUrlState";
-import { TextProcessor } from "./TextProcessor";
 import { EntityRecognizer, EntityRecognitionResult } from "./EntityRecognizer";
 import { SentimentAnalyzer, SentimentResult, IntentAnalysis } from "./SentimentAnalyzer";
-import { FuzzyMatcher, MatchResult } from "./FuzzyMatcher";
+import { FuzzyMatcher } from "./FuzzyMatcher";
 import { EnhancedLocationExtractor, LocationExtractionResult } from "./EnhancedLocationExtractor";
+import { BeachType, WaveCondition, BEACH_TYPES, WAVE_CONDITIONS } from "@/types/common";
 
 export interface EnhancedExtractionResult {
   filters: Partial<FilterState>;
@@ -34,7 +34,6 @@ export interface SearchContext {
 
 export class EnhancedNaturalLanguageSearch {
   private static instance: EnhancedNaturalLanguageSearch;
-  private textProcessor: TextProcessor;
   private entityRecognizer: EntityRecognizer;
   private sentimentAnalyzer: SentimentAnalyzer;
   private fuzzyMatcher: FuzzyMatcher;
@@ -165,7 +164,6 @@ export class EnhancedNaturalLanguageSearch {
   ];
 
   private constructor() {
-    this.textProcessor = TextProcessor.getInstance();
     this.entityRecognizer = EntityRecognizer.getInstance();
     this.sentimentAnalyzer = SentimentAnalyzer.getInstance();
     this.fuzzyMatcher = FuzzyMatcher.getInstance();
@@ -189,9 +187,6 @@ export class EnhancedNaturalLanguageSearch {
     const startTime = Date.now();
 
     try {
-      // Process text with advanced NLP
-      const processedText = await this.textProcessor.processText(query);
-
       // Recognize entities
       const entities = await this.entityRecognizer.recognizeEntities(query);
 
@@ -260,11 +255,11 @@ export class EnhancedNaturalLanguageSearch {
 
     // Extract beach types - map to exact FilterBar values
     if (entities.beachTypes.length > 0) {
-      const validTypes: ("SANDY" | "PEBBLY" | "MIXED" | "OTHER")[] = [];
+      const validTypes: BeachType[] = [];
       entities.beachTypes.forEach((entity) => {
         const normalized = entity.normalized.toUpperCase();
-        if (["SANDY", "PEBBLY", "MIXED", "OTHER"].includes(normalized)) {
-          validTypes.push(normalized as "SANDY" | "PEBBLY" | "MIXED" | "OTHER");
+        if (BEACH_TYPES.includes(normalized as BeachType)) {
+          validTypes.push(normalized as BeachType);
         }
       });
       if (validTypes.length > 0) {
@@ -274,11 +269,11 @@ export class EnhancedNaturalLanguageSearch {
 
     // Extract wave conditions - map to exact FilterBar values
     if (entities.waveConditions.length > 0) {
-      const validWaveConditions: ("CALM" | "MODERATE" | "WAVY" | "SURFABLE")[] = [];
+      const validWaveConditions: WaveCondition[] = [];
       entities.waveConditions.forEach((entity) => {
         const normalized = entity.normalized.toUpperCase();
-        if (["CALM", "MODERATE", "WAVY", "SURFABLE"].includes(normalized)) {
-          validWaveConditions.push(normalized as "CALM" | "MODERATE" | "WAVY" | "SURFABLE");
+        if (WAVE_CONDITIONS.includes(normalized as WaveCondition)) {
+          validWaveConditions.push(normalized as WaveCondition);
         }
       });
       if (validWaveConditions.length > 0) {
@@ -354,7 +349,7 @@ export class EnhancedNaturalLanguageSearch {
     filters.blueFlag = this.detectBlueFlag(query);
 
     // Check for "near me" intent
-    filters.nearMe = this.detectNearMeIntent(query, entities, sentiment);
+    filters.nearMe = this.detectNearMeIntent(query);
 
     // Apply sentiment-based adjustments
     this.applySentimentAdjustments(filters, sentiment, intent);
@@ -537,11 +532,7 @@ export class EnhancedNaturalLanguageSearch {
   /**
    * Detect "near me" intent from query
    */
-  private detectNearMeIntent(
-    query: string,
-    entities: EntityRecognitionResult,
-    sentiment: SentimentResult
-  ): boolean {
+  private detectNearMeIntent(query: string): boolean {
     const nearMePatterns = [
       /\bnear\s+me\b/i,
       /\bclose\s+to\s+me\b/i,
@@ -604,7 +595,7 @@ export class EnhancedNaturalLanguageSearch {
 
     // User preference adjustments
     if (context.userPreferences) {
-      context.userPreferences.forEach((preference) => {
+      context.userPreferences.forEach((_preference) => {
         // Map user preferences to filter categories
         // This would need to be customized based on your preference system
       });
@@ -743,12 +734,10 @@ export class EnhancedNaturalLanguageSearch {
    * Get processing statistics
    */
   public getStats(): {
-    textProcessor: any;
-    entityRecognizer: any;
-    fuzzyMatcher: any;
+    entityRecognizer: Record<string, never>;
+    fuzzyMatcher: Record<string, never>;
   } {
     return {
-      textProcessor: this.textProcessor.getCacheStats(),
       entityRecognizer: {}, // Could add stats here
       fuzzyMatcher: {}, // Could add stats here
     };
@@ -758,6 +747,6 @@ export class EnhancedNaturalLanguageSearch {
    * Clear all caches
    */
   public clearCaches(): void {
-    this.textProcessor.clearCache();
+    // Cache clearing functionality removed with TextProcessor
   }
 }

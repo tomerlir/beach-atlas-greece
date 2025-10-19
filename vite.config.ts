@@ -14,6 +14,70 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Core React and routing
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          
+          // UI and styling
+          'ui-vendor': [
+            '@radix-ui/react-dialog',
+            '@radix-ui/react-dropdown-menu',
+            '@radix-ui/react-select',
+            '@radix-ui/react-tabs',
+            '@radix-ui/react-toast',
+            '@radix-ui/react-tooltip',
+            'lucide-react',
+            'sonner'
+          ],
+          
+          // Data fetching and state
+          'data-vendor': [
+            '@tanstack/react-query',
+            '@supabase/supabase-js',
+            'react-hook-form',
+            '@hookform/resolvers',
+            'zod'
+          ],
+          
+          // Maps and location (only loaded when needed)
+          'map-vendor': [
+            'leaflet',
+            'react-leaflet'
+          ],
+          
+          // NLP dependencies (only loaded when needed)
+          'nlp-vendor': [
+            'wink-nlp',
+            'wink-eng-lite-web-model',
+            'wink-distance',
+            'wink-nlp-utils',
+            'compromise'
+          ],
+          
+          // Admin functionality (separate chunk)
+          'admin-vendor': [
+            'papaparse'
+          ],
+          
+          // Utilities
+          'utils-vendor': [
+            'clsx',
+            'tailwind-merge',
+            'class-variance-authority',
+            'cmdk',
+            'react-helmet-async'
+          ]
+        }
+      }
+    },
+    // Increase chunk size warning limit to 1000kb since we're splitting properly
+    chunkSizeWarningLimit: 1000,
+    // Enable source maps for better debugging in production
+    sourcemap: mode === 'development'
+  },
   test: {
     globals: true,
     environment: 'happy-dom',

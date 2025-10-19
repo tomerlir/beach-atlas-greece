@@ -5,39 +5,12 @@ import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Eye, EyeOff, Trash2, Copy, Clock, BarChart3 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-
-interface AnalyticsEvent {
-  name: string;
-  props: Record<string, unknown>;
-  timestamp: number;
-  id: string;
-}
+import { getAnalyticsEvents, clearAnalyticsEvents, type AnalyticsEvent } from "./analyticsBuffer";
 
 interface AnalyticsInspectorProps {
   isVisible: boolean;
   onToggle: () => void;
 }
-
-// Global event buffer (shared across inspector instances)
-const eventBuffer: AnalyticsEvent[] = [];
-const maxEvents = 50;
-
-// Function to add events to the buffer (called by analytics SDK)
-export const addAnalyticsEvent = (name: string, props: Record<string, unknown>) => {
-  const event: AnalyticsEvent = {
-    name,
-    props,
-    timestamp: Date.now(),
-    id: `${name}_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
-  };
-
-  eventBuffer.unshift(event);
-
-  // Keep only the most recent events
-  if (eventBuffer.length > maxEvents) {
-    eventBuffer.splice(maxEvents);
-  }
-};
 
 export default function AnalyticsInspector({ isVisible, onToggle }: AnalyticsInspectorProps) {
   const [events, setEvents] = useState<AnalyticsEvent[]>([]);
@@ -48,7 +21,7 @@ export default function AnalyticsInspector({ isVisible, onToggle }: AnalyticsIns
     if (!isVisible) return;
 
     const updateEvents = () => {
-      setEvents([...eventBuffer]);
+      setEvents(getAnalyticsEvents());
     };
 
     // Update events immediately
@@ -61,7 +34,7 @@ export default function AnalyticsInspector({ isVisible, onToggle }: AnalyticsIns
   }, [isVisible]);
 
   const clearEvents = () => {
-    eventBuffer.length = 0;
+    clearAnalyticsEvents();
     setEvents([]);
   };
 
