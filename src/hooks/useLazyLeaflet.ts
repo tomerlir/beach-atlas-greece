@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 // Leaflet Icon interface based on actual usage
 interface LeafletIcon {
@@ -30,16 +30,60 @@ interface LeafletL {
   Icon: LeafletIcon;
 }
 
-// React-Leaflet component types - using proper typing for React components
-// Using React.ComponentType with any props since these are external components
-// with complex prop interfaces that we don't need to fully type here
+// Map instance interface based on Leaflet Map type
+interface LeafletMap {
+  // This represents the actual Leaflet Map instance
+  // We don't need to define all methods since it's not directly used in this hook
+  [key: string]: unknown;
+}
+
+// MapContainer props based on actual usage in LazyMap component
+interface MapContainerProps {
+  center: [number, number];
+  zoom: number;
+  className?: string;
+  scrollWheelZoom?: boolean;
+  bounds?: [number, number][];
+  maxZoom?: number;
+  updateWhenIdle?: boolean;
+  updateWhenZooming?: boolean;
+  zoomControl?: boolean;
+  attributionControl?: boolean;
+  children?: React.ReactNode;
+}
+
+// TileLayer props based on actual usage
+interface TileLayerProps {
+  attribution: string;
+  url: string;
+  maxZoom?: number;
+  updateWhenIdle?: boolean;
+  updateWhenZooming?: boolean;
+}
+
+// Marker props based on actual usage
+interface MarkerProps {
+  position: [number, number];
+  icon?: LeafletIcon;
+  eventHandlers?: {
+    click?: () => void;
+  };
+  children?: React.ReactNode;
+}
+
+// Popup props based on actual usage
+interface PopupProps {
+  children?: React.ReactNode;
+}
+
+// React-Leaflet component types with proper interfaces
 interface LeafletModules {
   L: LeafletL;
-  MapContainer: React.ComponentType<any>;
-  TileLayer: React.ComponentType<any>;
-  Marker: React.ComponentType<any>;
-  Popup: React.ComponentType<any>;
-  useMap: () => any; // Map instance - keeping as any since it's not directly used in the component
+  MapContainer: React.ComponentType<MapContainerProps>;
+  TileLayer: React.ComponentType<TileLayerProps>;
+  Marker: React.ComponentType<MarkerProps>;
+  Popup: React.ComponentType<PopupProps>;
+  useMap: () => LeafletMap;
 }
 
 interface UseLazyLeafletReturn {
@@ -56,13 +100,15 @@ export const useLazyLeaflet = (): UseLazyLeafletReturn => {
   const [leaflet, setLeaflet] = useState<LeafletModules | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
+  const isLoadingRef = useRef(false);
 
   useEffect(() => {
     let isMounted = true;
 
     const loadLeaflet = async () => {
-      if (leaflet || isLoading) return;
+      if (leaflet || isLoadingRef.current) return;
 
+      isLoadingRef.current = true;
       setIsLoading(true);
       setError(null);
 
@@ -92,6 +138,7 @@ export const useLazyLeaflet = (): UseLazyLeafletReturn => {
         }
       } finally {
         if (isMounted) {
+          isLoadingRef.current = false;
           setIsLoading(false);
         }
       }
@@ -102,7 +149,7 @@ export const useLazyLeaflet = (): UseLazyLeafletReturn => {
     return () => {
       isMounted = false;
     };
-  }, []); // Remove leaflet and isLoading from dependencies to prevent infinite loop
+  }, [leaflet]); // Only include leaflet in dependencies
 
   return { leaflet, isLoading, error };
 };
