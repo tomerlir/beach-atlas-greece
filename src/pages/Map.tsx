@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import EnhancedSearchBar from "@/components/EnhancedSearchBar";
 import FilterBar from "@/components/FilterBar";
+import BeachCard from "@/components/BeachCard";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useUrlState } from "@/hooks/useUrlState";
 import { useGeolocation } from "@/hooks/useGeolocation";
@@ -17,9 +18,138 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 import ResultsSummary from "@/components/ResultsSummary";
 import { analytics } from "@/lib/analytics";
 import { createMapOpenEvent } from "@/lib/analyticsEvents";
-import LazyMap from "@/components/LazyMap";
 
-// Map page component with lazy loading
+// Leaflet + React-Leaflet
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+
+// Fix default icon paths for Vite builds
+import iconUrl from "leaflet/dist/images/marker-icon.png";
+import iconRetinaUrl from "leaflet/dist/images/marker-icon-2x.png";
+import shadowUrl from "leaflet/dist/images/marker-shadow.png";
+
+L.Icon.Default.mergeOptions({ iconRetinaUrl, iconUrl, shadowUrl });
+
+// Explicit icon instance ensures assets resolve correctly in Vite
+const defaultMarkerIcon = new L.Icon({
+  iconUrl,
+  iconRetinaUrl,
+  shadowUrl,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  tooltipAnchor: [16, -28],
+  shadowSize: [41, 41],
+});
+
+// Ensure all markers use our explicit default icon instance
+// (safer across navigations and bundlers)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+(L.Marker as any).prototype.options.icon = defaultMarkerIcon;
+
+const GREECE_BOUNDS: L.LatLngBoundsExpression = [
+  [34.6, 19.0],
+  [41.8, 29.6],
+];
+
+function FitBoundsOnData({
+  beaches,
+  fallbackBounds,
+}: {
+  beaches: Beach[];
+  fallbackBounds: L.LatLngBoundsExpression;
+}) {
+  const map = useMap();
+  useEffect(() => {
+    if (!map) return;
+    if (!beaches || beaches.length === 0) {
+      if (fallbackBounds) map.fitBounds(fallbackBounds, { padding: [24, 24] });
+      return;
+    }
+    const bounds = new L.LatLngBounds([]);
+    beaches.forEach((b) => {
+      if (b.latitude != null && b.longitude != null) {
+        bounds.extend([b.latitude, b.longitude]);
+      }
+    });
+    if (bounds.isValid()) {
+      map.fitBounds(bounds, { padding: [24, 24] });
+    } else if (fallbackBounds) {
+      map.fitBounds(fallbackBounds, { padding: [24, 24] });
+    }
+  }, [map, beaches, fallbackBounds]);
+  return null;
+}
+
+function InvalidateSizeOnMount() {
+  const map = useMap();
+  useEffect(() => {
+    if (!map) return;
+    const invalidate = () => {
+      try {
+        map.invalidateSize();
+      } catch {
+        // no-op; safeguard for sporadic lifecycle timing
+      }
+    };
+    const onResize = () => invalidate();
+    const onVisibility = () => {
+      if (!document.hidden) {
+        setTimeout(invalidate, 50);
+      }
+    };
+    const timeoutId = setTimeout(invalidate, 50);
+    window.addEventListener("resize", onResize);
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("resize", onResize);
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
+  }, [map]);
+  return null;
+}
+
+function MapEngagementTracker() {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!map) return;
+
+    const handleMoveEnd = () => {
+      analytics.trackMapInteraction();
+    };
+
+    const handleZoomEnd = () => {
+      analytics.trackMapInteraction();
+    };
+
+    map.on("moveend", handleMoveEnd);
+    map.on("zoomend", handleZoomEnd);
+
+    return () => {
+      map.off("moveend", handleMoveEnd);
+      map.off("zoomend", handleZoomEnd);
+    };
+  }, [map]);
+
+  return null;
+}
+
+// Component to track when a popup's content is shown
+function PopupTracker({ beachId }: { beachId: string }) {
+  const hasTracked = useRef(false);
+
+  useEffect(() => {
+    if (!hasTracked.current) {
+      analytics.trackMapBeachView(beachId);
+      hasTracked.current = true;
+    }
+  }, [beachId]);
+
+  return null;
+}
 
 const MapPage = () => {
   const isMobile = useIsMobile();
@@ -29,6 +159,7 @@ const MapPage = () => {
     isLoading: isLoadingLocation,
     getCurrentLocation,
     permission: locationPermission,
+    error: locationError,
   } = useGeolocation();
   // All filters drawer temporarily disabled on Map page
 
@@ -165,22 +296,39 @@ const MapPage = () => {
                 }
                 `}
               </style>
-              <LazyMap
-                beaches={filteredBeaches as Beach[]}
-                selectedBeach={null}
-                onBeachSelect={(_beach) => {
-                  // Handle beach selection - could navigate to beach detail page
-                  // navigate(`/${beach.area}/${beach.slug}`);
-                }}
-                userLocation={
-                  location
-                    ? {
-                        latitude: location.coords.latitude,
-                        longitude: location.coords.longitude,
-                      }
-                    : null
-                }
-              />
+              <MapContainer className="w-full h-full" bounds={GREECE_BOUNDS}>
+                <InvalidateSizeOnMount />
+                {/* Satellite imagery base layer */}
+                <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}" />
+                {/* Roads and transportation overlay */}
+                {/* <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer/tile/{z}/{y}/{x}" /> */}
+                {/* Borders, place names, and labels overlay */}
+                <TileLayer url="https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}" />
+
+                <FitBoundsOnData
+                  beaches={filteredBeaches as Beach[]}
+                  fallbackBounds={GREECE_BOUNDS}
+                />
+                <MapEngagementTracker />
+
+                {filteredBeaches
+                  .filter((b) => b.latitude != null && b.longitude != null)
+                  .map((b) => (
+                    <Marker key={b.id} position={[b.latitude as number, b.longitude as number]}>
+                      <Popup>
+                        <div className="max-w-[340px]">
+                          <PopupTracker beachId={b.id} />
+                          <BeachCard
+                            beach={b as Beach}
+                            distance={(b as Beach & { distance?: number }).distance}
+                            showDistance={filters.nearMe && !locationError && !!location}
+                            engagementSource="map"
+                          />
+                        </div>
+                      </Popup>
+                    </Marker>
+                  ))}
+              </MapContainer>
             </div>
           </ErrorBoundary>
 
