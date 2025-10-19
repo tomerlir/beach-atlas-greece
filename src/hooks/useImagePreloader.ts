@@ -33,17 +33,17 @@ export const useImagePreloader = () => {
   // Adaptive concurrency based on network conditions
   useEffect(() => {
     const updateConcurrency = () => {
-      if ('connection' in navigator) {
+      if ("connection" in navigator) {
         const connection = (navigator as any).connection;
         networkInfo.current = {
           effectiveType: connection.effectiveType,
-          downlink: connection.downlink
+          downlink: connection.downlink,
         };
 
         // Adjust concurrency based on network speed
-        if (connection.effectiveType === '4g' && connection.downlink > 2) {
+        if (connection.effectiveType === "4g" && connection.downlink > 2) {
           concurrencyLimit.current = 6; // Fast connection
-        } else if (connection.effectiveType === '3g' || connection.downlink < 1) {
+        } else if (connection.effectiveType === "3g" || connection.downlink < 1) {
           concurrencyLimit.current = 2; // Slow connection
         } else {
           concurrencyLimit.current = 3; // Default
@@ -52,11 +52,11 @@ export const useImagePreloader = () => {
     };
 
     updateConcurrency();
-    
-    if ('connection' in navigator) {
+
+    if ("connection" in navigator) {
       const connection = (navigator as any).connection;
-      connection.addEventListener('change', updateConcurrency);
-      return () => connection.removeEventListener('change', updateConcurrency);
+      connection.addEventListener("change", updateConcurrency);
+      return () => connection.removeEventListener("change", updateConcurrency);
     }
   }, []);
 

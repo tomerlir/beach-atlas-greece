@@ -4,7 +4,7 @@
  */
 
 import { LocationMatcher, LocationMatch } from "../location/LocationMatcher.js";
-import { EntityRecognitionResult } from "./EntityRecognizer";
+import { EntityRecognitionResult } from "./SmartEntityRecognizer";
 
 export interface LocationExtractionResult {
   primaryLocation?: LocationMatch;

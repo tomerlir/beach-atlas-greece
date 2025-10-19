@@ -9,12 +9,12 @@ All colors MUST be HSL.
 @layer base {
   /* Font display optimization for better performance */
   @font-face {
-    font-family: 'Inter';
+    font-family: "Inter";
     font-display: swap;
   }
-  
+
   @font-face {
-    font-family: 'Raleway';
+    font-family: "Raleway";
     font-display: swap;
   }
 

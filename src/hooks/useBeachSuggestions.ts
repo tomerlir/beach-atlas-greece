@@ -70,7 +70,13 @@ export const useBeachSuggestions = ({
   const { data: allBeaches = [] } = useQuery({
     queryKey: ["beaches-suggestions", areaName || null],
     queryFn: async () => {
-      const base = supabase.from("beaches").select("id, name, area, slug, organized, blue_flag, parking, amenities, photo_url, photo_source, latitude, longitude").eq("status", "ACTIVE").order("name");
+      const base = supabase
+        .from("beaches")
+        .select(
+          "id, name, area, slug, organized, blue_flag, parking, amenities, photo_url, photo_source, latitude, longitude"
+        )
+        .eq("status", "ACTIVE")
+        .order("name");
 
       // If areaName provided, limit suggestions to that area at the source
       // Note: `area` is a string column containing the human-readable area name

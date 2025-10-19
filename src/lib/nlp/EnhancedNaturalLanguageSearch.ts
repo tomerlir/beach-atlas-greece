@@ -4,7 +4,7 @@
  */
 
 import { FilterState } from "@/hooks/useUrlState";
-import { EntityRecognizer, EntityRecognitionResult } from "./EntityRecognizer";
+import { SmartEntityRecognizer, EntityRecognitionResult } from "./SmartEntityRecognizer";
 import { SentimentAnalyzer, SentimentResult, IntentAnalysis } from "./SentimentAnalyzer";
 import { FuzzyMatcher } from "./FuzzyMatcher";
 import { EnhancedLocationExtractor, LocationExtractionResult } from "./EnhancedLocationExtractor";
@@ -34,7 +34,7 @@ export interface SearchContext {
 
 export class EnhancedNaturalLanguageSearch {
   private static instance: EnhancedNaturalLanguageSearch;
-  private entityRecognizer: EntityRecognizer;
+  private entityRecognizer: SmartEntityRecognizer;
   private sentimentAnalyzer: SentimentAnalyzer;
   private fuzzyMatcher: FuzzyMatcher;
   private locationExtractor: EnhancedLocationExtractor;
@@ -164,7 +164,7 @@ export class EnhancedNaturalLanguageSearch {
   ];
 
   private constructor() {
-    this.entityRecognizer = EntityRecognizer.getInstance();
+    this.entityRecognizer = SmartEntityRecognizer.getInstance();
     this.sentimentAnalyzer = SentimentAnalyzer.getInstance();
     this.fuzzyMatcher = FuzzyMatcher.getInstance();
     this.locationExtractor = EnhancedLocationExtractor.getInstance();

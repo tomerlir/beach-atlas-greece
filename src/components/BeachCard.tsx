@@ -35,7 +35,13 @@ interface BeachCardProps {
   priority?: boolean; // New prop for priority loading
 }
 
-const BeachCard = ({ beach, distance, showDistance = true, compact = false, priority = false }: BeachCardProps) => {
+const BeachCard = ({
+  beach,
+  distance,
+  showDistance = true,
+  compact = false,
+  priority = false,
+}: BeachCardProps) => {
   const { prefetchWithImage, cancelPrefetch } = useAdvancedPrefetch({
     delay: 50,
     preloadImages: true,

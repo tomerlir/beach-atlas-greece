@@ -65,7 +65,9 @@ const Area = () => {
 
       const { data, error } = await supabase
         .from("beaches")
-        .select("id, name, area, slug, organized, blue_flag, parking, amenities, photo_url, photo_source, latitude, longitude")
+        .select(
+          "id, name, area, slug, organized, blue_flag, parking, amenities, photo_url, photo_source, latitude, longitude"
+        )
         .eq("status", "ACTIVE")
         .eq("area_id", area.id)
         .order("name");
