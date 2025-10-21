@@ -45,7 +45,6 @@ This module provides advanced NLP capabilities for the Beach Atlas Greece applic
 
 ```
 src/lib/nlp/
-├── TextProcessor.ts           # Core text processing
 ├── SmartEntityRecognizer.ts   # Smart entity recognition (semantic)
 ├── SemanticEntityMapper.ts    # Semantic concept mapping
 ├── SentimentAnalyzer.ts       # Sentiment and intent analysis
