@@ -185,7 +185,6 @@ npm run build
 ```
 
 ### Deployment Options
-- **Lovable Platform**: Automatic deployment via Lovable
 - **Vercel**: Static site deployment
 - **Netlify**: Static site deployment
 - **Custom Server**: Serve the `dist` folder

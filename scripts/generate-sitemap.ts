@@ -55,9 +55,8 @@ import { join } from 'path';
 
 // Configuration
 const SITE_URL = 'https://beachesofgreece.com';
-const SUPABASE_URL = process.env.VITE_SUPABASE_URL || "https://xnkyfxvncpawqpqccdby.supabase.co";
-const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_PUBLISHABLE_KEY || "sb_publishable_epB4aWmCm1xwnJgnnwvVZQ_8umvX3v2";
-
+const SUPABASE_URL = process.env.VITE_SUPABASE_URL  || ""
+const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_PUBLISHABLE_KEY || "";
 // Initialize Supabase client
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
