@@ -98,5 +98,3 @@ export function useEntityFormDraftState<TDraft>(options: UseEntityFormDraftState
     [draft, updateDraft, resetDraft, clearDraft, hasUnsavedChanges, hasStoredDraftData]
   );
 }
-
-

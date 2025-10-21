@@ -3,8 +3,6 @@
  * Centralized exports for all NLP functionality
  */
 
-export type { Token, ProcessedText } from "./TextProcessor";
-
 // Smart NLP exports (new approach)
 export { SmartEntityRecognizer } from "./SmartEntityRecognizer";
 export { SemanticEntityMapper } from "./SemanticEntityMapper";

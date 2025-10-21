@@ -493,6 +493,8 @@ export class SemanticEntityMapper {
         }
       } catch (error) {
         // Fallback to simple matching
+        console.error("Semantic Entity Mapper NLP processing failed:", error);
+
         for (const concept of concepts) {
           if (query.toLowerCase().includes(concept.toLowerCase())) {
             bestScore = 0.5;
