@@ -8,7 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { authSupabase } from "@/integrations/supabase/client";
 import type { Tables, TablesInsert, TablesUpdate } from "@/integrations/supabase/types";
 import { slugify } from "@/lib/utils";
-import { useAreaFormDraftState } from "@/hooks/useAreaFormDraftState";
+import { useEntityFormDraftState } from "@/hooks/useEntityFormDraftState";
 
 type Area = Tables<"areas">;
 type AreaInsert = TablesInsert<"areas">;
@@ -59,7 +59,19 @@ const AreaForm: React.FC = () => {
   const formKey = mode === "edit" && id ? `edit-area-${id}` : "create-area";
 
   const { draft, updateDraft, clearDraft, hasUnsavedChanges, hasStoredDraftData } =
-    useAreaFormDraftState(formKey);
+    useEntityFormDraftState({
+      entity: "area",
+      formKey,
+      defaultDraft: {
+        name: "",
+        slug: "",
+        description: "",
+        hero_photo_url: "",
+        hero_photo_source: "",
+        status: "DRAFT",
+      },
+      debounceMs: 500,
+    });
 
   useEffect(() => {
     const load = async () => {

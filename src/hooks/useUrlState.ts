@@ -1,257 +1,144 @@
 import { useCallback, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
-import { WaveCondition, BeachType, isValidWaveCondition, isValidBeachType } from "@/types/common";
+import { FilterState, AreaFilterState, UnifiedFilterState } from "./useUrlState/types";
+import {
+  parseStringParam,
+  parseArrayParam,
+  parseBooleanParam,
+  parseIntParam,
+  parseWaveConditions,
+  parseBeachTypes,
+  parseSortParam,
+} from "./useUrlState/parsers";
+import { createURLParamsBuilder } from "./useUrlState/updaters";
+import { DEFAULT_BASE_FILTERS, URL_KEYS } from "./useUrlState/constants";
 
-export interface FilterState {
-  search: string;
-  originalQuery?: string; // User's raw input for NLQ - preserved for display
-  location?: string; // Primary extracted location from natural language queries
-  locations?: string[]; // All extracted locations for multi-location queries
-  organized: string[];
-  blueFlag: boolean;
-  parking: string[];
-  amenities: string[];
-  waveConditions: WaveCondition[];
-  type: BeachType[]; // Beach surface type
-  sort: string | null;
-  page: number;
-  nearMe: boolean; // New field to track if "Near me" is enabled
-}
+// Re-export types for backward compatibility
+export type { FilterState, AreaFilterState, UnifiedFilterState };
 
 const defaultFilters: FilterState = {
-  search: "",
-  originalQuery: undefined,
+  ...DEFAULT_BASE_FILTERS,
   location: undefined,
   locations: undefined,
-  organized: [],
-  blueFlag: false,
-  parking: [],
-  amenities: [],
-  waveConditions: [],
-  type: [],
-  sort: "name.asc",
-  page: 1,
-  nearMe: false,
 };
 
-export function useUrlState() {
+// Function overloads for type safety
+export function useUrlState(): {
+  filters: FilterState;
+  updateFilters: (updates: Partial<FilterState>) => void;
+  resetFilters: () => void;
+};
+
+export function useUrlState(areaName: string): {
+  filters: AreaFilterState;
+  updateFilters: (updates: Partial<Omit<AreaFilterState, "area">>) => void;
+  resetFilters: () => void;
+};
+
+export function useUrlState(areaName?: string) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const filters = useMemo(() => {
-    const state: FilterState = { ...defaultFilters };
+    if (areaName) {
+      // Area-specific state
+      const state: AreaFilterState = {
+        ...DEFAULT_BASE_FILTERS,
+        area: areaName,
+      };
 
-    // Parse search
-    const search = searchParams.get("search");
-    if (search) state.search = search;
+      // Parse all parameters using utility functions
+      state.search = parseStringParam(searchParams, URL_KEYS.SEARCH) || "";
+      state.originalQuery = parseStringParam(searchParams, URL_KEYS.ORIGINAL_QUERY);
+      state.organized = parseArrayParam(searchParams, URL_KEYS.ORGANIZED);
+      state.blueFlag = parseBooleanParam(searchParams, URL_KEYS.BLUE_FLAG);
+      state.parking = parseArrayParam(searchParams, URL_KEYS.PARKING);
+      state.amenities = parseArrayParam(searchParams, URL_KEYS.AMENITIES);
+      state.waveConditions = parseWaveConditions(searchParams);
+      state.type = parseBeachTypes(searchParams);
+      state.sort = parseSortParam(searchParams);
+      state.nearMe = parseBooleanParam(searchParams, URL_KEYS.NEAR_ME);
+      state.page = parseIntParam(searchParams, URL_KEYS.PAGE, 1);
 
-    // Parse originalQuery (user's raw NLQ input)
-    const originalQuery = searchParams.get("originalQuery");
-    if (originalQuery) state.originalQuery = originalQuery;
+      return state;
+    } else {
+      // Global state
+      const state: FilterState = { ...defaultFilters };
 
-    // Parse location
-    const location = searchParams.get("location");
-    if (location) state.location = location;
+      // Parse all parameters using utility functions
+      state.search = parseStringParam(searchParams, URL_KEYS.SEARCH) || "";
+      state.originalQuery = parseStringParam(searchParams, URL_KEYS.ORIGINAL_QUERY);
+      state.location = parseStringParam(searchParams, URL_KEYS.LOCATION);
+      state.locations = parseArrayParam(searchParams, URL_KEYS.LOCATIONS);
+      state.organized = parseArrayParam(searchParams, URL_KEYS.ORGANIZED);
+      state.blueFlag = parseBooleanParam(searchParams, URL_KEYS.BLUE_FLAG);
+      state.parking = parseArrayParam(searchParams, URL_KEYS.PARKING);
+      state.amenities = parseArrayParam(searchParams, URL_KEYS.AMENITIES);
+      state.waveConditions = parseWaveConditions(searchParams);
+      state.type = parseBeachTypes(searchParams);
+      state.sort = parseSortParam(searchParams);
+      state.nearMe = parseBooleanParam(searchParams, URL_KEYS.NEAR_ME);
+      state.page = parseIntParam(searchParams, URL_KEYS.PAGE, 1);
 
-    // Parse locations (multiple locations)
-    const locations = searchParams.get("locations");
-    if (locations) {
-      state.locations = locations.split(",").filter(Boolean);
+      return state;
     }
-
-    // Parse organized
-    const organized = searchParams.get("organized");
-    if (organized) {
-      state.organized = organized.split(",").filter(Boolean);
-    }
-
-    // Parse blueFlag
-    const blueFlag = searchParams.get("blueFlag");
-    if (blueFlag === "true") state.blueFlag = true;
-
-    // Parse parking
-    const parking = searchParams.get("parking");
-    if (parking) {
-      state.parking = parking.split(",").filter(Boolean);
-    }
-
-    // Parse amenities
-    const amenities = searchParams.get("amenities");
-    if (amenities) {
-      state.amenities = amenities.split(",").filter(Boolean);
-    }
-
-    // Parse wave conditions
-    const waveConditions = searchParams.get("waveConditions");
-    if (waveConditions) {
-      state.waveConditions = waveConditions
-        .split(",")
-        .filter(
-          (condition): condition is "CALM" | "MODERATE" | "WAVY" | "SURFABLE" =>
-            Boolean(condition) && isValidWaveCondition(condition)
-        );
-    }
-
-    // Parse type (beach surface)
-    const type = searchParams.get("type");
-    if (type) {
-      state.type = type
-        .split(",")
-        .filter(
-          (t): t is "SANDY" | "PEBBLY" | "MIXED" | "OTHER" => Boolean(t) && isValidBeachType(t)
-        );
-    }
-
-    // Parse sort
-    const sort = searchParams.get("sort");
-    if (sort && ["name.asc", "name.desc", "distance.asc", "distance.desc"].includes(sort)) {
-      state.sort = sort;
-    }
-
-    // Parse nearMe
-    const nearMe = searchParams.get("nearMe");
-    if (nearMe === "true") state.nearMe = true;
-
-    // Parse page
-    const page = searchParams.get("page");
-    if (page) {
-      const parsedPage = parseInt(page, 10);
-      if (!isNaN(parsedPage) && parsedPage > 0) state.page = parsedPage;
-    }
-
-    return state;
-  }, [searchParams]);
+  }, [searchParams, areaName]);
 
   const updateFilters = useCallback(
-    (updates: Partial<FilterState>) => {
+    (updates: Partial<FilterState> | Partial<Omit<AreaFilterState, "area">>) => {
       setSearchParams((prev) => {
-        const newParams = new URLSearchParams(prev);
+        const builder = createURLParamsBuilder(prev);
 
-        // Update search
+        // Update all parameters using builder pattern
         if (updates.search !== undefined) {
-          if (updates.search) {
-            newParams.set("search", updates.search);
-          } else {
-            newParams.delete("search");
-          }
+          builder.setString(URL_KEYS.SEARCH, updates.search);
         }
-
-        // Update originalQuery
         if (updates.originalQuery !== undefined) {
-          if (updates.originalQuery) {
-            newParams.set("originalQuery", updates.originalQuery);
-          } else {
-            newParams.delete("originalQuery");
+          builder.setString(URL_KEYS.ORIGINAL_QUERY, updates.originalQuery);
+        }
+
+        // Only update location fields for global state
+        if (!areaName) {
+          const globalUpdates = updates as Partial<FilterState>;
+          if (globalUpdates.location !== undefined) {
+            builder.setString(URL_KEYS.LOCATION, globalUpdates.location);
+          }
+          if (globalUpdates.locations !== undefined) {
+            builder.setArray(URL_KEYS.LOCATIONS, globalUpdates.locations);
           }
         }
 
-        // Update location
-        if (updates.location !== undefined) {
-          if (updates.location) {
-            newParams.set("location", updates.location);
-          } else {
-            newParams.delete("location");
-          }
-        }
-
-        // Update locations (multiple locations)
-        if (updates.locations !== undefined) {
-          if (updates.locations && updates.locations.length > 0) {
-            newParams.set("locations", updates.locations.join(","));
-          } else {
-            newParams.delete("locations");
-          }
-        }
-
-        // Update organized
         if (updates.organized !== undefined) {
-          if (updates.organized.length > 0) {
-            newParams.set("organized", updates.organized.join(","));
-          } else {
-            newParams.delete("organized");
-          }
+          builder.setArray(URL_KEYS.ORGANIZED, updates.organized);
         }
-
-        // Update blueFlag
         if (updates.blueFlag !== undefined) {
-          if (updates.blueFlag) {
-            newParams.set("blueFlag", "true");
-          } else {
-            newParams.delete("blueFlag");
-          }
+          builder.setBoolean(URL_KEYS.BLUE_FLAG, updates.blueFlag);
         }
-
-        // Update parking
         if (updates.parking !== undefined) {
-          if (updates.parking.length > 0) {
-            newParams.set("parking", updates.parking.join(","));
-          } else {
-            newParams.delete("parking");
-          }
+          builder.setArray(URL_KEYS.PARKING, updates.parking);
         }
-
-        // Update amenities
         if (updates.amenities !== undefined) {
-          if (updates.amenities.length > 0) {
-            newParams.set("amenities", updates.amenities.join(","));
-          } else {
-            newParams.delete("amenities");
-          }
+          builder.setArray(URL_KEYS.AMENITIES, updates.amenities);
         }
-
-        // Update wave conditions
         if (updates.waveConditions !== undefined) {
-          if (updates.waveConditions.length > 0) {
-            newParams.set("waveConditions", updates.waveConditions.join(","));
-          } else {
-            newParams.delete("waveConditions");
-          }
+          builder.setArray(URL_KEYS.WAVE_CONDITIONS, updates.waveConditions);
         }
-
-        // Update type
         if (updates.type !== undefined) {
-          if (updates.type.length > 0) {
-            newParams.set("type", updates.type.join(","));
-          } else {
-            newParams.delete("type");
-          }
+          builder.setArray(URL_KEYS.TYPE, updates.type);
         }
-
-        // Update sort
         if (updates.sort !== undefined) {
-          if (updates.sort === null) {
-            // Explicitly turned off - remove from URL
-            newParams.delete("sort");
-          } else if (updates.sort !== defaultFilters.sort) {
-            // Not the default - add to URL
-            newParams.set("sort", updates.sort);
-          } else {
-            // Set to default - remove from URL to keep it clean
-            newParams.delete("sort");
-          }
+          builder.setSort(URL_KEYS.SORT, updates.sort, defaultFilters.sort || "name.asc");
         }
-
-        // Update nearMe
         if (updates.nearMe !== undefined) {
-          if (updates.nearMe) {
-            newParams.set("nearMe", "true");
-          } else {
-            newParams.delete("nearMe");
-          }
+          builder.setBoolean(URL_KEYS.NEAR_ME, updates.nearMe);
         }
-
-        // Update page
         if (updates.page !== undefined) {
-          if (updates.page > 1) {
-            newParams.set("page", updates.page.toString());
-          } else {
-            newParams.delete("page");
-          }
+          builder.setInteger(URL_KEYS.PAGE, updates.page);
         }
 
-        return newParams;
+        return builder.build();
       });
     },
-    [setSearchParams]
+    [setSearchParams, areaName]
   );
 
   const resetFilters = useCallback(() => {

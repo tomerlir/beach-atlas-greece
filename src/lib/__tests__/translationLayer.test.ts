@@ -46,7 +46,7 @@ describe("Translation layer: NLQ → structured filters", () => {
     const query = "organized beach with parking and a bar";
     const { filters } = await extractFromNaturalLanguageWithContext(query);
     expect(filters.organized?.includes("organized")).toBe(true);
+    expect(filters.amenities?.includes("beach_bar")).toBe(true);
     expect((filters.parking || []).length).toBeGreaterThan(0);
-    // Bar extraction may or may not map; skip strict assertion for now
   });
 });
