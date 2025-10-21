@@ -16,7 +16,7 @@ import { authSupabase } from "@/integrations/supabase/client";
 import type { Tables, TablesInsert, TablesUpdate } from "@/integrations/supabase/types";
 import { PARKING_OPTIONS, STATUS_OPTIONS, TYPE_OPTIONS, WAVE_OPTIONS, slugify } from "@/lib/utils";
 import AmenitiesMultiselect from "@/components/admin/AmenitiesMultiselect";
-import { useFormDraftState } from "@/hooks/useFormDraftState";
+import { useEntityFormDraftState } from "@/hooks/useEntityFormDraftState";
 import { useAreas } from "@/hooks/useAreas";
 
 type Beach = Tables<"beaches">;
@@ -90,7 +90,30 @@ const BeachForm: React.FC = () => {
 
   // Initialize draft state - don't pass initial data here to avoid overwriting existing drafts
   const { draft, updateDraft, clearDraft, hasUnsavedChanges, hasStoredDraftData } =
-    useFormDraftState(formKey);
+    useEntityFormDraftState({
+      entity: "beach",
+      formKey,
+      defaultDraft: {
+        name: "",
+        area_id: "",
+        latitude: "",
+        longitude: "",
+        description: "",
+        type: "OTHER",
+        wave_conditions: "CALM",
+        organized: false,
+        parking: "NONE",
+        blue_flag: false,
+        amenities: [],
+        photo_url: "",
+        photo_source: "",
+        status: "DRAFT",
+        slug: "",
+        source: "",
+        markVerified: false,
+      },
+      debounceMs: 0,
+    });
 
   // Fetch areas for the dropdown
   const { data: areas = [], isLoading: areasLoading } = useAreas();

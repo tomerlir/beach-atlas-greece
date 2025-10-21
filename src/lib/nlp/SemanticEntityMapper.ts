@@ -276,14 +276,31 @@ export class SemanticEntityMapper {
   private readonly PARKING_CONCEPTS = {
     NONE: ["no parking", "no park", "no car", "walking only", "pedestrian only"],
     ROADSIDE: ["roadside", "road side", "street parking", "side of road", "along road"],
-    SMALL_LOT: ["small lot", "small parking", "limited parking", "few spaces", "small car park"],
+    SMALL_LOT: [
+      "small lot",
+      "small parking",
+      "limited parking",
+      "few spaces",
+      "small car park",
+      "small park",
+      "limited spaces",
+      "parking",
+    ],
     LARGE_LOT: [
       "large lot",
+      "large parking",
       "big parking",
       "plenty parking",
       "large car park",
       "big car park",
       "parking lot",
+      "ample parking",
+      "extensive parking",
+      "big lot",
+      "plenty of parking",
+      "lots of parking",
+      "spacious parking",
+      "parking",
     ],
   };
 
@@ -399,17 +416,29 @@ export class SemanticEntityMapper {
   }
 
   /**
-   * Detect parking types using semantic matching
+   * Detect parking types using semantic matching with priority
    */
   private detectParking(query: string): ParkingType[] {
     const detectedParking: ParkingType[] = [];
+    const matchScores: { [key: string]: number } = {};
 
+    // Score each parking type based on match quality
     for (const [parkingKey, concepts] of Object.entries(this.PARKING_CONCEPTS)) {
-      if (this.hasSemanticMatch(query, concepts)) {
-        const parkingType = parkingKey as ParkingType;
-        if (PARKING_TYPES.includes(parkingType)) {
-          detectedParking.push(parkingType);
-        }
+      const score = this.getSemanticMatchScore(query, concepts);
+      if (score > 0) {
+        matchScores[parkingKey] = score;
+      }
+    }
+
+    // Sort by score and take the highest scoring matches
+    const sortedMatches = Object.entries(matchScores)
+      .sort(([, a], [, b]) => b - a)
+      .filter(([, score]) => score >= 0.7); // Minimum threshold
+
+    for (const [parkingKey] of sortedMatches) {
+      const parkingType = parkingKey as ParkingType;
+      if (PARKING_TYPES.includes(parkingType)) {
+        detectedParking.push(parkingType);
       }
     }
 
@@ -429,6 +458,51 @@ export class SemanticEntityMapper {
     }
 
     return detectedOrganization;
+  }
+
+  /**
+   * Get semantic match score with priority for more specific matches
+   */
+  private getSemanticMatchScore(query: string, concepts: string[]): number {
+    let bestScore = 0;
+    const normalizedQuery = query.toLowerCase();
+
+    for (const concept of concepts) {
+      const normalizedConcept = concept.toLowerCase();
+
+      // Exact match gets highest score
+      if (normalizedQuery.includes(normalizedConcept)) {
+        // Longer, more specific concepts get higher scores
+        const specificity = normalizedConcept.length / 10; // Bonus for longer concepts
+        const score = 1.0 + specificity;
+        bestScore = Math.max(bestScore, score);
+      }
+    }
+
+    // Try fuzzy matching for partial matches
+    if (bestScore === 0) {
+      try {
+        const matches = this.fuzzyMatcher.findMatches(query, concepts, {
+          threshold: 0.6,
+          maxResults: 1,
+          methods: ["fuzzy", "phonetic"],
+        });
+
+        if (matches.length > 0) {
+          bestScore = matches[0].confidence;
+        }
+      } catch (error) {
+        // Fallback to simple matching
+        for (const concept of concepts) {
+          if (query.toLowerCase().includes(concept.toLowerCase())) {
+            bestScore = 0.5;
+            break;
+          }
+        }
+      }
+    }
+
+    return bestScore;
   }
 
   /**
@@ -463,7 +537,7 @@ export class SemanticEntityMapper {
     // Then try fuzzy matching with a simpler approach
     try {
       const matches = this.fuzzyMatcher.findMatches(query, concepts, {
-        threshold: 0.7,
+        threshold: 0.7, // Balanced threshold for precision vs recall
         maxResults: 1,
         methods: ["exact", "fuzzy"], // Remove semantic to avoid stack overflow
       });

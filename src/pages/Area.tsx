@@ -14,8 +14,8 @@ import Pagination from "@/components/Pagination";
 import { GeolocationErrorBanner } from "@/components/GeolocationErrorBanner";
 import EnhancedSearchBar from "@/components/EnhancedSearchBar";
 import { useGeolocation } from "@/hooks/useGeolocation";
-import { useAreaUrlState } from "@/hooks/useAreaUrlState";
-import { useAreaBeachFiltering } from "@/hooks/useAreaBeachFiltering";
+import { useUrlState } from "@/hooks/useUrlState";
+import { useBeachFiltering } from "@/hooks/useBeachFiltering";
 import { useDistanceCalculation } from "@/hooks/useDistanceCalculation";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
 import { useAreaBySlugOptimistic, useNearbyAreas } from "@/hooks/useAreas";
@@ -83,13 +83,13 @@ const Area = () => {
   const areaName = area?.name;
 
   // Use area-specific URL state
-  const { filters, updateFilters, resetFilters } = useAreaUrlState(areaName || "");
+  const { filters, updateFilters, resetFilters } = useUrlState(areaName || "");
 
   // Calculate distances for beaches when location is enabled
   const beachesWithDistance = useDistanceCalculation(beaches, location, filters.nearMe);
 
   // Filter and sort beaches (including area filter)
-  const filteredBeaches = useAreaBeachFiltering(beachesWithDistance, filters, location);
+  const filteredBeaches = useBeachFiltering(beachesWithDistance, filters, location, areaName);
 
   // Pagination
   const totalPages = Math.ceil(filteredBeaches.length / BEACHES_PER_PAGE);

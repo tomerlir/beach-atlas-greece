@@ -7,8 +7,37 @@ import { FilterState } from "@/hooks/useUrlState";
 import { SmartEntityRecognizer, EntityRecognitionResult } from "./SmartEntityRecognizer";
 import { SentimentAnalyzer, SentimentResult, IntentAnalysis } from "./SentimentAnalyzer";
 import { FuzzyMatcher } from "./FuzzyMatcher";
-import { EnhancedLocationExtractor, LocationExtractionResult } from "./EnhancedLocationExtractor";
 import { BeachType, WaveCondition, BEACH_TYPES, WAVE_CONDITIONS } from "@/types/common";
+
+// Location extraction result interface (moved from EnhancedLocationExtractor)
+export interface LocationExtractionResult {
+  primaryLocation?: {
+    place: string;
+    confidence: number;
+    matchType: string;
+  };
+  secondaryLocations: Array<{
+    place: string;
+    confidence: number;
+    matchType: string;
+  }>;
+  allLocations: Array<{
+    place: string;
+    confidence: number;
+    matchType: string;
+  }>;
+  locationQuery: string;
+  confidence: number;
+  searchStrategy:
+    | "exact"
+    | "fuzzy"
+    | "word-level"
+    | "multi"
+    | "proximity"
+    | "hierarchical"
+    | "none";
+  remainingQuery: string;
+}
 
 export interface EnhancedExtractionResult {
   filters: Partial<FilterState>;
@@ -37,7 +66,6 @@ export class EnhancedNaturalLanguageSearch {
   private entityRecognizer: SmartEntityRecognizer;
   private sentimentAnalyzer: SentimentAnalyzer;
   private fuzzyMatcher: FuzzyMatcher;
-  private locationExtractor: EnhancedLocationExtractor;
 
   // Known places for enhanced matching
   private knownPlaces: string[] = [
@@ -167,7 +195,6 @@ export class EnhancedNaturalLanguageSearch {
     this.entityRecognizer = SmartEntityRecognizer.getInstance();
     this.sentimentAnalyzer = SentimentAnalyzer.getInstance();
     this.fuzzyMatcher = FuzzyMatcher.getInstance();
-    this.locationExtractor = EnhancedLocationExtractor.getInstance();
   }
 
   public static getInstance(): EnhancedNaturalLanguageSearch {
@@ -178,7 +205,7 @@ export class EnhancedNaturalLanguageSearch {
   }
 
   /**
-   * Enhanced natural language processing with advanced NLP techniques
+   * Enhanced natural language processing with unified intelligent location detection
    */
   public async processQuery(
     query: string,
@@ -187,20 +214,20 @@ export class EnhancedNaturalLanguageSearch {
     const startTime = Date.now();
 
     try {
-      // Recognize entities
+      // Step 1: Unified intelligent location detection (replaces competing systems)
+      const locationExtraction = this.extractLocationsIntelligently(query);
+
+      // Step 2: Recognize entities (excluding places - handled by unified location detection)
       const entities = await this.entityRecognizer.recognizeEntities(query);
 
-      // Extract locations using enhanced location matching
-      const locationExtraction = this.locationExtractor.extractLocations(query, entities);
-
-      // Analyze sentiment and intent
+      // Step 3: Analyze sentiment and intent
       const sentiment = await this.sentimentAnalyzer.analyzeSentiment(query);
       const intent = this.sentimentAnalyzer.analyzeIntent(query, sentiment.polarity);
 
-      // Extract filters using enhanced techniques
+      // Step 4: Extract filters using enhanced techniques
       const filters = await this.extractFilters(query, entities, sentiment, intent, context);
 
-      // Determine place from location extraction
+      // Determine place from unified location extraction
       const place = locationExtraction.primaryLocation?.place;
 
       // Clean search term using location extraction results
@@ -239,6 +266,135 @@ export class EnhancedNaturalLanguageSearch {
       // Fallback to basic processing
       return this.fallbackProcessing(query, Date.now() - startTime);
     }
+  }
+
+  /**
+   * Unified intelligent location detection that replaces competing systems
+   * Uses context-aware matching and advanced NLP techniques
+   */
+  private extractLocationsIntelligently(query: string): LocationExtractionResult {
+    const normalizedQuery = query.toLowerCase().trim();
+
+    // Strategy 1: Direct exact matching (highest confidence)
+    const exactMatch = this.knownPlaces.find((place) =>
+      normalizedQuery.includes(place.toLowerCase())
+    );
+
+    if (exactMatch) {
+      return {
+        primaryLocation: {
+          place: exactMatch,
+          confidence: 0.95,
+          matchType: "exact",
+        },
+        secondaryLocations: [],
+        allLocations: [
+          {
+            place: exactMatch,
+            confidence: 0.95,
+            matchType: "exact",
+          },
+        ],
+        locationQuery: normalizedQuery,
+        confidence: 0.95,
+        searchStrategy: "exact",
+        remainingQuery: this.removeLocationFromQuery(query, exactMatch),
+      };
+    }
+
+    // Strategy 2: Fuzzy matching with context awareness
+    const fuzzyMatches = this.fuzzyMatcher.findMatches(normalizedQuery, this.knownPlaces, {
+      threshold: 0.7,
+      maxResults: 3,
+      methods: ["fuzzy", "phonetic", "semantic"],
+    });
+
+    if (fuzzyMatches.length > 0) {
+      const bestMatch = fuzzyMatches[0];
+      return {
+        primaryLocation: {
+          place: bestMatch.text,
+          confidence: bestMatch.confidence,
+          matchType: "fuzzy",
+        },
+        secondaryLocations: fuzzyMatches.slice(1).map((match) => ({
+          place: match.text,
+          confidence: match.confidence,
+          matchType: "fuzzy",
+        })),
+        allLocations: fuzzyMatches.map((match) => ({
+          place: match.text,
+          confidence: match.confidence,
+          matchType: "fuzzy",
+        })),
+        locationQuery: normalizedQuery,
+        confidence: bestMatch.confidence,
+        searchStrategy: "fuzzy",
+        remainingQuery: this.removeLocationFromQuery(query, bestMatch.text),
+      };
+    }
+
+    // Strategy 3: Word-level intelligent matching
+    const words = normalizedQuery.split(/\s+/);
+    const locationWords = words.filter(
+      (word) =>
+        word.length >= 4 &&
+        !["beach", "beaches", "for", "with", "and", "the", "good", "near", "beautiful"].includes(
+          word
+        )
+    );
+
+    for (const word of locationWords) {
+      const wordMatches = this.fuzzyMatcher.findMatches(word, this.knownPlaces, {
+        threshold: 0.8,
+        maxResults: 1,
+        methods: ["exact", "fuzzy", "phonetic"],
+      });
+
+      if (wordMatches.length > 0) {
+        const match = wordMatches[0];
+        return {
+          primaryLocation: {
+            place: match.text,
+            confidence: match.confidence,
+            matchType: "word-level",
+          },
+          secondaryLocations: [],
+          allLocations: [
+            {
+              place: match.text,
+              confidence: match.confidence,
+              matchType: "word-level",
+            },
+          ],
+          locationQuery: normalizedQuery,
+          confidence: match.confidence,
+          searchStrategy: "word-level",
+          remainingQuery: this.removeLocationFromQuery(query, match.text),
+        };
+      }
+    }
+
+    // No location found
+    return {
+      primaryLocation: undefined,
+      secondaryLocations: [],
+      allLocations: [],
+      locationQuery: normalizedQuery,
+      confidence: 0,
+      searchStrategy: "none",
+      remainingQuery: query,
+    };
+  }
+
+  /**
+   * Remove detected location from query to get remaining search terms
+   */
+  private removeLocationFromQuery(query: string, location: string): string {
+    return query
+      .replace(new RegExp(`\\b${location}\\b`, "gi"), "")
+      .replace(/\s+/g, " ")
+      .trim();
   }
 
   /**

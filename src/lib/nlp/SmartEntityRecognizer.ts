@@ -4,7 +4,6 @@
  */
 
 import { SemanticEntityMapper, SemanticMappingResult } from "./SemanticEntityMapper";
-import { FuzzyMatcher } from "./FuzzyMatcher";
 
 export interface BeachEntity {
   text: string;
@@ -26,108 +25,9 @@ export interface EntityRecognitionResult {
 export class SmartEntityRecognizer {
   private static instance: SmartEntityRecognizer;
   private semanticMapper: SemanticEntityMapper;
-  private fuzzyMatcher: FuzzyMatcher;
-
-  // Known places for smart location detection
-  private readonly knownPlaces = [
-    "crete",
-    "corfu",
-    "mykonos",
-    "santorini",
-    "rhodes",
-    "zakynthos",
-    "kefalonia",
-    "paros",
-    "naxos",
-    "ios",
-    "milos",
-    "sifnos",
-    "folegandros",
-    "amorgos",
-    "skiathos",
-    "skopelos",
-    "alonissos",
-    "lesbos",
-    "chios",
-    "samos",
-    "kos",
-    "patmos",
-    "syros",
-    "tinos",
-    "andros",
-    "kea",
-    "kythnos",
-    "paleokastritsa",
-    "oia",
-    "fira",
-    "lindos",
-    "myrtos",
-    "navagio",
-    "balos",
-    "elafonisi",
-    "falassarna",
-    "gramvousa",
-    "attica",
-    "chalkidiki",
-    "patras",
-    "heraklion",
-    "larissa",
-    "volos",
-    "ioannina",
-    "kavala",
-    "serres",
-    "drama",
-    "alexandroupoli",
-    "komotini",
-    "xanthi",
-    "katerini",
-    "trikala",
-    "lamia",
-    "agrinio",
-    "kalamata",
-    "sparti",
-    "tripoli",
-    "corinth",
-    "argos",
-    "nafplio",
-    "mycenae",
-    "epidaurus",
-    "olympia",
-    "delphi",
-    "meteora",
-    "mount athos",
-    "lefkada",
-    "ithaca",
-    "kythira",
-    "antikythera",
-    "hydra",
-    "spetses",
-    "poros",
-    "aegina",
-    "salamis",
-    "evia",
-    "skyros",
-    "limnos",
-    "thasos",
-    "samothrace",
-    "lesvos",
-    "psara",
-    "ikaria",
-    "fourni",
-    "lipsi",
-    "kalymnos",
-    "nissyros",
-    "tilos",
-    "symi",
-    "karpathos",
-    "kasos",
-    "kastellorizo",
-    "gavdos",
-  ];
 
   private constructor() {
     this.semanticMapper = SemanticEntityMapper.getInstance();
-    this.fuzzyMatcher = FuzzyMatcher.getInstance();
   }
 
   public static getInstance(): SmartEntityRecognizer {
@@ -203,16 +103,8 @@ export class SmartEntityRecognizer {
       });
     });
 
-    // Add places using smart location detection
-    const places = this.detectPlaces(normalizedQuery);
-    places.forEach((place) => {
-      entities.push({
-        text: place,
-        type: "place",
-        confidence: 0.95,
-        normalized: place,
-      });
-    });
+    // Places are now handled by unified location detection in EnhancedNaturalLanguageSearch
+    // No longer detect places here to avoid competing systems
 
     // Group entities by type
     const result: EntityRecognitionResult = {
@@ -226,28 +118,6 @@ export class SmartEntityRecognizer {
     };
 
     return result;
-  }
-
-  /**
-   * Detect places using smart fuzzy matching
-   */
-  private detectPlaces(query: string): string[] {
-    const detectedPlaces: string[] = [];
-
-    // Use fuzzy matching to find places
-    const matches = this.fuzzyMatcher.findMatches(query, this.knownPlaces, {
-      threshold: 0.8,
-      maxResults: 3,
-      methods: ["exact", "fuzzy", "phonetic"],
-    });
-
-    matches.forEach((match) => {
-      if (match.confidence >= 0.8) {
-        detectedPlaces.push(match.text);
-      }
-    });
-
-    return detectedPlaces;
   }
 
   /**
