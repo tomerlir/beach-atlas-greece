@@ -215,7 +215,6 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
           height={height}
           sizes={sizes}
           loading={priority ? "eager" : loading}
-          fetchPriority={priority ? "high" : "auto"}
           decoding={priority ? "sync" : "async"}
           onLoad={handleLoad}
           onError={handleError}

@@ -102,7 +102,7 @@ export const useImagePreloader = () => {
   const preloadImage = useCallback(
     (src: string, options: ImagePreloadOptions = {}): Promise<PreloadResult> => {
       return new Promise((resolve) => {
-        const { priority = false, quality = 80, width = 400, height = 225 } = options;
+        const { quality = 80, width = 400, height = 225 } = options;
 
         // Check if already preloaded
         if (preloadedImages.current.has(src)) {
@@ -225,10 +225,7 @@ export const useImagePreloader = () => {
           resolve(result);
         };
 
-        // Set priority loading
-        if (priority) {
-          img.fetchPriority = "high";
-        }
+        // Priority loading is handled by loading="eager" and decoding="sync" in the component
 
         img.src = optimizedSrc;
       });
