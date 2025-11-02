@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "build:dev": "vite build --mode development",
+    "build": "vite build && npm run postbuild",
+    "build:dev": "vite build --mode development && npm run postbuild",
+    "postbuild": "sed -i '' 's/ crossorigin//g' dist/index.html",
     "build:analyze": "vite-bundle-visualizer",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
