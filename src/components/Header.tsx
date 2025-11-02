@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import logo from "@/assets/logo.png";
 import { CONTACT_EMAIL } from "@/lib/constants";
 
 const Header = () => {
@@ -7,9 +6,20 @@ const Header = () => {
     <header className="bg-card border-b border-border shadow-md">
       <div className="container mx-auto px-4 py-5">
         <div className="relative flex items-center justify-between md:justify-start">
-          {/* Logo */}
+          {/* Logo - Optimized with correct aspect ratio (112:126 = 0.889) */}
           <Link to="/" className="flex items-center hover:opacity-90 transition-opacity z-10">
-            <img src={logo} alt="Greek Beaches" className="h-12 w-10" />
+            <picture>
+              <source type="image/avif" srcSet="/logo-43w.avif 1x, /logo.avif 2x" />
+              <source type="image/webp" srcSet="/logo-43w.webp 1x, /logo.webp 2x" />
+              <img
+                src="/logo.png"
+                alt="Greek Beaches"
+                width={43}
+                height={48}
+                className="h-12 w-[43px]"
+                loading="eager"
+              />
+            </picture>
           </Link>
 
           {/* Navigation - Centered on mobile, normal position on desktop */}

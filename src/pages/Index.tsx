@@ -17,7 +17,7 @@ import { useBeachFiltering } from "@/hooks/useBeachFiltering";
 import { useDistanceCalculation } from "@/hooks/useDistanceCalculation";
 import { useImagePreloader } from "@/hooks/useImagePreloader";
 import { Beach } from "@/types/beach";
-import heroImage from "@/assets/hero-background.png";
+import ResponsivePicture from "@/components/ResponsivePicture";
 import EmptyState from "@/components/EmptyState";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Helmet } from "react-helmet-async";
@@ -241,11 +241,18 @@ const Index = () => {
 
         {/* Hero Section */}
         <section className="relative h-[35vh] flex flex-col justify-center bg-gradient-ocean overflow-hidden">
-          <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          {/* Responsive hero background image with modern formats */}
+          <ResponsivePicture
+            baseName="hero-background"
+            fallbackExt="png"
+            widths={[640, 828, 1024, 1280, 1920, 2560]}
+            alt=""
+            sizes="100vw"
+            fetchpriority="high"
+            loading="eager"
+            className="absolute inset-0 w-full h-full object-cover"
             style={{
-              backgroundImage: `url(${heroImage})`,
-              backgroundPosition: isMobile ? "center left" : "center top",
+              objectPosition: isMobile ? "center left" : "center top",
             }}
           />
 

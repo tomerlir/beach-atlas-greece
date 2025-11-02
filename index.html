@@ -44,7 +44,18 @@
   <!-- Critical resource hints for performance -->
   <link rel="preconnect" href="https://xnkyfxvncpawqpqccdby.supabase.co">
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-  <link rel="preload" as="image" href="/hero-background.png">
+  
+  <!-- Preload LCP hero image in modern formats with responsive hints -->
+  <link rel="preload" as="image" href="/hero-background-1024.avif" 
+        type="image/avif" 
+        fetchpriority="high"
+        imagesrcset="/hero-background-640.avif 640w, /hero-background-1024.avif 1024w, /hero-background-1920.avif 1920w"
+        imagesizes="100vw">
+  <link rel="preload" as="image" href="/hero-background-1024.webp" 
+        type="image/webp"
+        fetchpriority="high"
+        imagesrcset="/hero-background-640.webp 640w, /hero-background-1024.webp 1024w, /hero-background-1920.webp 1920w"
+        imagesizes="100vw">
 
   <!-- Umami script loaded dynamically after consent is given -->
 </head>

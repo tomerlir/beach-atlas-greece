@@ -8,7 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import OptimizedImage from "@/components/OptimizedImage";
 import PhotoAttribution from "@/components/PhotoAttribution";
-import heroImage from "@/assets/area-hero.png";
+import ResponsivePicture from "@/components/ResponsivePicture";
 import { BreadcrumbsWithJsonLd } from "@/components/breadcrumbs/BreadcrumbsWithJsonLd";
 import OrganizationSchema from "@/components/OrganizationSchema";
 
@@ -85,9 +85,15 @@ const Areas = () => {
 
         {/* Hero Section */}
         <section className="relative h-[35vh] flex items-center justify-center bg-gradient-ocean overflow-hidden">
-          <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${heroImage})` }}
+          {/* Responsive hero background image */}
+          <ResponsivePicture
+            baseName="area-hero"
+            fallbackExt="png"
+            widths={[640, 828, 1024, 1280, 1920]}
+            alt=""
+            sizes="100vw"
+            loading="eager"
+            className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/30" />
 
