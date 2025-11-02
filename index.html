@@ -36,10 +36,17 @@
   <!-- Analytics: GA removed to enforce privacy-first, consent-gated tracking via Umami SDK -->
 
   <!-- Google Fonts: Raleway for headings, Inter for body/UI -->
+  <!-- Non-blocking font loading for better performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700&family=Inter:wght@400;500;600&display=swap"
-    rel="stylesheet">
+  <link rel="preload" 
+    href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700&family=Inter:wght@400;500;600&display=swap" 
+    as="style" 
+    onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet">
+  </noscript>
   
   <!-- Critical resource hints for performance -->
   <link rel="preconnect" href="https://xnkyfxvncpawqpqccdby.supabase.co">
