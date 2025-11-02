@@ -5,13 +5,17 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import { AuthProvider } from "@/contexts/AuthContext";
-import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import { useServiceWorker } from "@/hooks/useServiceWorker";
 import ScrollToTop from "@/components/ScrollToTop";
-import ConsentBanner from "@/components/ConsentBanner";
-import AnalyticsInspector from "@/lib/AnalyticsInspector";
 import AnalyticsRouter from "@/components/AnalyticsRouter";
+
+// Lazy load non-critical components
+const ConsentBanner = lazy(() => import("@/components/ConsentBanner"));
+const AnalyticsInspector = lazy(() => import("@/lib/AnalyticsInspector"));
+const AuthProvider = lazy(() =>
+  import("@/contexts/AuthContext").then((m) => ({ default: m.AuthProvider }))
+);
+const ProtectedRoute = lazy(() => import("@/components/auth/ProtectedRoute"));
 
 // Lazy load all pages for better code splitting
 const Index = lazy(() => import("./pages/Index"));
@@ -40,25 +44,31 @@ const ImportExport = lazy(() => import("./pages/admin/ImportExport"));
 const AdminSettings = lazy(() => import("./pages/admin/AdminSettings"));
 const AcceptInvite = lazy(() => import("./pages/admin/AcceptInvite"));
 
-// Admin route wrapper components
+// Admin route wrapper components - Wrapped in Suspense since AuthProvider is lazy
 const AdminAcceptInvite = () => (
-  <AuthProvider>
-    <AcceptInvite />
-  </AuthProvider>
+  <Suspense fallback={<PageLoadingFallback />}>
+    <AuthProvider>
+      <AcceptInvite />
+    </AuthProvider>
+  </Suspense>
 );
 
 const AdminLoginPage = () => (
-  <AuthProvider>
-    <AdminLogin />
-  </AuthProvider>
+  <Suspense fallback={<PageLoadingFallback />}>
+    <AuthProvider>
+      <AdminLogin />
+    </AuthProvider>
+  </Suspense>
 );
 
 const AdminDashboardWrapper = () => (
-  <AuthProvider>
-    <ProtectedRoute requiredRole="admin">
-      <AdminLayout />
-    </ProtectedRoute>
-  </AuthProvider>
+  <Suspense fallback={<PageLoadingFallback />}>
+    <AuthProvider>
+      <ProtectedRoute requiredRole="admin">
+        <AdminLayout />
+      </ProtectedRoute>
+    </AuthProvider>
+  </Suspense>
 );
 
 const queryClient = new QueryClient({
@@ -95,13 +105,22 @@ const AppContent = () => {
     <BrowserRouter>
       <ScrollToTop />
       <AnalyticsRouter />
-      <ConsentBanner />
+
+      {/* Lazy load ConsentBanner since it's not critical for FCP */}
+      <Suspense fallback={null}>
+        <ConsentBanner />
+      </Suspense>
+
+      {/* Dev-only inspector - lazy loaded */}
       {!import.meta.env.PROD && (
-        <AnalyticsInspector
-          isVisible={inspectorVisible}
-          onToggle={() => setInspectorVisible((v) => !v)}
-        />
+        <Suspense fallback={null}>
+          <AnalyticsInspector
+            isVisible={inspectorVisible}
+            onToggle={() => setInspectorVisible((v) => !v)}
+          />
+        </Suspense>
       )}
+
       <Suspense fallback={<PageLoadingFallback />}>
         <Routes>
           <Route path="/" element={<Index />} />

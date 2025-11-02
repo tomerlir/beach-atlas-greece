@@ -35,14 +35,16 @@
 
   <!-- Analytics: GA removed to enforce privacy-first, consent-gated tracking via Umami SDK -->
 
-  <!-- Google Fonts: Raleway for headings, Inter for body/UI -->
-  <!-- Non-blocking font loading for better performance -->
+  <!-- Google Fonts: Optimized for fastest FCP -->
+  <!-- Strategy: Preconnect early, defer actual font loading until after FCP -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" 
+  
+  <!-- Load fonts asynchronously to not block FCP -->
+  <link rel="stylesheet" 
     href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700&family=Inter:wght@400;500;600&display=swap" 
-    as="style" 
-    onload="this.onload=null;this.rel='stylesheet'">
+    media="print" 
+    onload="this.media='all'">
   <noscript>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700&family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet">
@@ -52,17 +54,19 @@
   <link rel="preconnect" href="https://xnkyfxvncpawqpqccdby.supabase.co">
   <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
   
-  <!-- Preload LCP hero image in modern formats with responsive hints -->
+  <!-- Preload LCP hero image - AVIF only for modern browsers (fallback handled by <picture>) -->
+  <!-- Only preload one format to avoid wasting bandwidth on duplicate downloads -->
   <link rel="preload" as="image" href="/hero-background-1024.avif" 
         type="image/avif" 
         fetchpriority="high"
         imagesrcset="/hero-background-640.avif 640w, /hero-background-1024.avif 1024w, /hero-background-1920.avif 1920w"
         imagesizes="100vw">
-  <link rel="preload" as="image" href="/hero-background-1024.webp" 
-        type="image/webp"
-        fetchpriority="high"
-        imagesrcset="/hero-background-640.webp 640w, /hero-background-1024.webp 1024w, /hero-background-1920.webp 1920w"
-        imagesizes="100vw">
+  
+  <!-- Inline critical CSS for above-the-fold content (prevents FOUC and speeds up FCP) -->
+  <style>
+    /* Critical CSS - Minified version of critical.css */
+    :root{--background:204 45% 98%;--foreground:218 17% 35%;--card:0 0% 100%;--card-foreground:218 17% 35%;--primary:201 100% 42%;--primary-foreground:0 0% 100%;--secondary:180 82% 33%;--secondary-foreground:0 0% 100%;--muted:204 30% 94%;--muted-foreground:218 17% 50%;--border:218 17% 88%;--ocean:201 100% 42%;--gradient-ocean:linear-gradient(135deg,hsl(var(--ocean)),hsl(var(--secondary)))}*,::before,::after{box-sizing:border-box;border-width:0;border-style:solid;border-color:hsl(var(--border))}html{line-height:1.5;-webkit-text-size-adjust:100%;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif}body{margin:0;line-height:inherit;background-color:hsl(var(--background));color:hsl(var(--foreground));font-family:"Inter",sans-serif}header{background-color:hsl(var(--card));border-bottom-width:1px;border-color:hsl(var(--border))}.min-h-screen{min-height:100vh}.flex{display:flex}.items-center{align-items:center}.justify-center{justify-content:center}.animate-spin{animation:spin 1s linear infinite}.rounded-full{border-radius:9999px}.h-8{height:2rem}.w-8{width:2rem}.border-b-2{border-bottom-width:2px}.border-primary{border-color:hsl(var(--primary))}@keyframes spin{to{transform:rotate(360deg)}}
+  </style>
 
   <!-- Umami script loaded dynamically after consent is given -->
 </head>

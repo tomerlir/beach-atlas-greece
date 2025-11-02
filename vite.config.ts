@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import { asyncCssPlugin } from "./vite-plugin-async-css";
+import { performancePlugin } from "./vite-plugin-performance";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -9,7 +10,7 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
-  plugins: [react(), asyncCssPlugin()],
+  plugins: [react(), asyncCssPlugin(), performancePlugin()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -89,7 +90,15 @@ export default defineConfig(({ mode }) => ({
     // Increase chunk size warning limit to 1000kb since we're splitting properly
     chunkSizeWarningLimit: 1000,
     // Enable source maps for better debugging in production
-    sourcemap: mode === 'development'
+    sourcemap: mode === 'development',
+    // CSS optimization
+    cssMinify: true,
+    // Minify output for smaller bundle sizes
+    minify: 'esbuild',
+    // Target modern browsers for smaller output
+    target: 'es2020',
+    // Inline small assets as base64 to reduce HTTP requests
+    assetsInlineLimit: 4096
   },
   test: {
     globals: true,

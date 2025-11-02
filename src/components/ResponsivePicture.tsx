@@ -11,8 +11,6 @@ interface ResponsivePictureProps extends Omit<ImgHTMLAttributes<HTMLImageElement
   alt: string;
   /** Sizes attribute for responsive images */
   sizes?: string;
-  /** Fetch priority for LCP images */
-  fetchpriority?: "high" | "low" | "auto";
   /** Loading strategy */
   loading?: "lazy" | "eager";
   /** Additional CSS classes */
@@ -31,7 +29,6 @@ export const ResponsivePicture: React.FC<ResponsivePictureProps> = ({
   widths,
   alt,
   sizes = "100vw",
-  fetchpriority,
   loading = "lazy",
   className,
   ...imgProps
@@ -60,9 +57,8 @@ export const ResponsivePicture: React.FC<ResponsivePictureProps> = ({
         sizes={sizes}
         alt={alt}
         loading={loading}
-        fetchPriority={fetchpriority}
         className={className}
-        decoding={fetchpriority === "high" ? "sync" : "async"}
+        decoding={loading === "eager" ? "sync" : "async"}
         {...imgProps}
       />
     </picture>

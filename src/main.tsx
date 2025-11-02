@@ -4,13 +4,19 @@ import "./index.css";
 import { preloadCommonPlaceholders } from "./utils/imagePlaceholder";
 import { analytics } from "./lib/analytics";
 
+// Render app IMMEDIATELY for fastest FCP
+createRoot(document.getElementById("root")!).render(<App />);
+
 // Defer analytics initialization to avoid blocking main thread
+// Moved AFTER render to not delay FCP
 if ("requestIdleCallback" in window) {
   requestIdleCallback(() => {
     analytics.init({
       enabled: true,
       debug: !import.meta.env.PROD,
     });
+    // Preload placeholders during idle time, not during critical path
+    preloadCommonPlaceholders();
   });
 } else {
   // Fallback for browsers without requestIdleCallback
@@ -19,10 +25,6 @@ if ("requestIdleCallback" in window) {
       enabled: true,
       debug: !import.meta.env.PROD,
     });
-  }, 0);
+    preloadCommonPlaceholders();
+  }, 100); // Small delay to allow initial render
 }
-
-// Preload common placeholder sizes for better performance
-preloadCommonPlaceholders();
-
-createRoot(document.getElementById("root")!).render(<App />);

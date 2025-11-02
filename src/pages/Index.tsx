@@ -248,7 +248,6 @@ const Index = () => {
             widths={[640, 828, 1024, 1280, 1920, 2560]}
             alt=""
             sizes="100vw"
-            fetchpriority="high"
             loading="eager"
             className="absolute inset-0 w-full h-full object-cover"
             style={{
