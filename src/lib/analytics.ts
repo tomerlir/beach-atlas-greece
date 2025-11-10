@@ -1,14 +1,47 @@
 /**
- * Analytics SDK for Umami
+ * Analytics SDK for Umami + Google Analytics 4
  *
- * Provides a comprehensive analytics solution with:
- * - Consent gating
- * - Event queuing until Umami is ready
- * - SPA pageview tracking
- * - UTM/session context
- * - CBM deduplication (12h TTL)
- * - Offline resilience
+ * Provides a comprehensive, GDPR-compliant analytics solution with:
+ * - Consent Mode v2 for Google Analytics (GDPR/CCPA compliant)
+ * - Dual tracking: Umami (privacy-first) + GA4 (industry standard)
+ * - Event queuing until analytics providers are ready
+ * - SPA pageview tracking with React Router integration
+ * - UTM parameter tracking and session context
+ * - Beach engagement deduplication (per session)
+ * - Offline resilience with automatic retry
  * - Developer-friendly debugging
+ *
+ * ## Google Analytics Consent Mode v2 Flow
+ *
+ * The consent flow follows Google's best practices for optimal GDPR compliance:
+ *
+ * 1. **Early Consent Default** (index.html):
+ *    - gtag consent 'default' set in HTML <head> BEFORE any script loads
+ *    - Sets all consent to 'denied' with wait_for_update: 500ms
+ *    - Includes url_passthrough and ads_data_redaction for full v2 compliance
+ *
+ * 2. **User Action** (ConsentBanner.tsx):
+ *    - User accepts/rejects consent via banner or preferences dialog
+ *    - Calls analytics.setConsent('accepted' | 'rejected')
+ *
+ * 3. **Consent Update** (this file - setConsent method):
+ *    - Updates gtag consent mode with 'update' command
+ *    - Loads GA4 script only after consent is granted
+ *    - Tracks initial pageview and flushes queued events
+ *
+ * 4. **Event Tracking** (throughout app):
+ *    - All events check consent before sending
+ *    - Events are queued if consent is unknown
+ *    - Queue is flushed when consent is accepted
+ *
+ * ## Why This Timing Matters
+ *
+ * Google's Consent Mode requires 'default' to be set BEFORE any GA script loads.
+ * This ensures:
+ * - Proper consent signals are sent with all events
+ * - No data collection before user consent
+ * - Conversion modeling works correctly for denied consent
+ * - Full compliance with GDPR, CCPA, and other privacy regulations
  */
 
 import type { AnalyticsProps, BeachEngagementEvent } from "./analyticsEvents";
@@ -29,6 +62,8 @@ const GA_CONSENT_DENIED_STATE = {
   personalization_storage: "denied",
   security_storage: "granted",
   wait_for_update: 500,
+  url_passthrough: true,
+  ads_data_redaction: true,
 } as const;
 const GA_CONSENT_GRANTED_STATE = {
   ad_storage: "denied",
@@ -38,6 +73,8 @@ const GA_CONSENT_GRANTED_STATE = {
   functionality_storage: "denied",
   personalization_storage: "denied",
   security_storage: "granted",
+  url_passthrough: true,
+  ads_data_redaction: true,
 } as const;
 const GA_QUEUE_LIMIT = 50;
 
@@ -150,6 +187,17 @@ class AnalyticsSDK {
     this.trackPageview(initialPath);
   }
 
+  /**
+   * Update user consent state and propagate changes to analytics providers
+   * 
+   * This method handles the consent mode flow according to Google's best practices:
+   * 1. Update consent mode FIRST (before loading scripts)
+   * 2. Load analytics scripts
+   * 3. Track initial pageview
+   * 4. Flush queued events
+   * 
+   * @param state - The new consent state (accepted, rejected, or unknown)
+   */
   setConsent(state: ConsentState) {
     const previousState = this.consent;
     this.consent = state;
@@ -161,20 +209,41 @@ class AnalyticsSDK {
     // Notify callbacks
     this.consentCallbacks.forEach((cb) => cb(state));
 
-    // If consent was just accepted, load Umami script and enable tracking
+    // If consent was just accepted, update consent mode and enable tracking
     if (previousState !== "accepted" && state === "accepted") {
+      // Step 1: Update GA consent mode FIRST (before loading any scripts)
+      // This ensures proper consent signal is sent with all subsequent events
+      if (isBrowser && window.gtag) {
+        window.gtag("consent", "update", { ...GA_CONSENT_GRANTED_STATE });
+        if (this.debug) {
+          console.warn("✅ GA consent mode updated to GRANTED");
+        }
+      }
+
+      // Step 2: Load analytics scripts (they will respect the updated consent mode)
       this.loadUmamiScript();
       this.loadGAScript();
-      this.enableGATracking();
-      // Track the initial pageview now that consent is given
+
+      // Step 3: Track the initial pageview now that consent is given
       this.trackInitialPageLoad();
+
+      // Step 4: Flush all queued events
       this.flushEventQueue();
       this.flushUmamiEventQueue();
       this.flushGAPendingEvents();
     }
 
-    // If consent was just revoked, disable Umami tracking and clean up
+    // If consent was just revoked, update consent mode to denied and clean up
     if (previousState === "accepted" && state === "rejected") {
+      // Update GA consent mode to denied
+      if (isBrowser && window.gtag) {
+        window.gtag("consent", "update", { ...GA_CONSENT_DENIED_STATE });
+        if (this.debug) {
+          console.warn("🚫 GA consent mode updated to DENIED");
+        }
+      }
+
+      // Disable tracking and clean up scripts
       this.disableUmamiTracking();
       this.cleanupUmamiScript();
       this.disableGATracking();
@@ -1013,6 +1082,14 @@ class AnalyticsSDK {
     return true;
   }
 
+  /**
+   * Load the Google Analytics script tag
+   * 
+   * This method should only be called after user consent is accepted.
+   * The consent default state is already set in index.html before any script loads.
+   * 
+   * @private
+   */
   private loadGAScript() {
     if (!isBrowser || this.gaScriptLoaded || !this.gaMeasurementId) return;
     if (!isProdEnvironment) {
@@ -1022,28 +1099,22 @@ class AnalyticsSDK {
       return;
     }
 
-    this.ensureGtagBase();
-
-    try {
-      // Set default consent state (with wait_for_update to give banner time to load)
-      window.gtag?.("consent", "default", { ...GA_CONSENT_DENIED_STATE });
-
-      // Since loadGAScript is only called after consent is accepted,
-      // immediately update to granted state
-      window.gtag?.("consent", "update", { ...GA_CONSENT_GRANTED_STATE });
-
-      window.gtag?.("js", new Date());
-      window.gtag?.("config", this.gaMeasurementId, {
-        send_page_view: false,
-        anonymize_ip: true,
-        cookie_flags: "SameSite=None;Secure",
-      });
-    } catch (error) {
-      if (this.debug) {
-        console.error("❌ Error configuring GA before script load:", error);
-      }
+    // Ensure dataLayer exists (consent default already called in HTML head)
+    if (!window.dataLayer) {
+      window.dataLayer = [];
     }
 
+    // Ensure gtag stub exists (should already be set in HTML head)
+    if (!window.gtag) {
+      window.gtag = function gtag(...args: unknown[]) {
+        window.dataLayer!.push(args);
+      } as Window["gtag"];
+    }
+
+    // DO NOT call consent default here - already done in HTML head
+    // DO NOT call consent update here - handled in setConsent() method
+
+    // Create and load the GA script
     const script = document.createElement("script");
     script.src = `https://www.googletagmanager.com/gtag/js?id=${this.gaMeasurementId}`;
     script.async = true;
@@ -1052,9 +1123,22 @@ class AnalyticsSDK {
     script.onload = () => {
       this.gaScriptLoaded = true;
       this.gtagInitialized = true;
+
+      // Initialize GA with configuration (but don't send pageview yet if no consent)
+      window.gtag("js", new Date());
+      window.gtag("config", this.gaMeasurementId!, {
+        send_page_view: false,
+        anonymize_ip: true,
+        cookie_flags: "SameSite=None;Secure",
+        allow_google_signals: this.consent === "accepted",
+        allow_ad_personalization_signals: this.consent === "accepted",
+      });
+
       if (this.debug) {
         console.warn("📊 Google Analytics script loaded");
       }
+
+      // Only enable tracking and flush events if consent is accepted
       if (this.consent === "accepted") {
         this.enableGATracking();
         this.flushGAPendingEvents();
@@ -1072,17 +1156,33 @@ class AnalyticsSDK {
     document.head.appendChild(script);
   }
 
+  /**
+   * Enable Google Analytics tracking with proper consent mode
+   * 
+   * This is called after the GA script loads and consent has been accepted.
+   * It reconfigures GA to ensure all settings are applied correctly.
+   * 
+   * @private
+   */
   private enableGATracking() {
     if (!isBrowser || !this.gaMeasurementId) return;
 
     this.ensureGtagBase();
 
     try {
-      window.gtag?.("consent", "update", { ...GA_CONSENT_GRANTED_STATE });
-      window.gtag?.("config", this.gaMeasurementId, {
+      // Consent update is now handled in setConsent() method
+      // Just reconfigure GA with proper settings
+      window.gtag("config", this.gaMeasurementId, {
         send_page_view: false,
         anonymize_ip: true,
+        cookie_flags: "SameSite=None;Secure",
+        allow_google_signals: true,
+        allow_ad_personalization_signals: true,
       });
+
+      if (this.debug) {
+        console.warn("✅ Google Analytics tracking enabled");
+      }
     } catch (error) {
       if (this.debug) {
         console.error("❌ Error enabling Google Analytics tracking:", error);
@@ -1090,11 +1190,26 @@ class AnalyticsSDK {
     }
   }
 
+  /**
+   * Disable Google Analytics tracking
+   * 
+   * Updates consent mode to denied. The actual consent update is handled
+   * in setConsent() method, but this provides an additional safety check.
+   * 
+   * @private
+   */
   private disableGATracking() {
     if (!isBrowser || !this.gaMeasurementId) return;
 
     try {
-      window.gtag?.("consent", "update", { ...GA_CONSENT_DENIED_STATE });
+      // Consent update is handled in setConsent(), but double-check here for safety
+      if (window.gtag) {
+        window.gtag("consent", "update", { ...GA_CONSENT_DENIED_STATE });
+      }
+
+      if (this.debug) {
+        console.warn("🚫 Google Analytics tracking disabled");
+      }
     } catch (error) {
       if (this.debug) {
         console.error("❌ Error disabling Google Analytics tracking:", error);

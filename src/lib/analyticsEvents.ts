@@ -8,6 +8,7 @@
 export type AnalyticsProps = Record<string, unknown>;
 
 // Umami global interface for type safety
+// Note: gtag and dataLayer types are defined in src/types/gtag.d.ts
 declare global {
   interface Window {
     umami?: {
@@ -15,8 +16,6 @@ declare global {
       enable?: () => void;
       disable?: () => void;
     };
-    dataLayer?: unknown[];
-    gtag?: (...args: unknown[]) => void;
   }
 }
 

@@ -33,6 +33,27 @@
     content="Find Greek beaches near you or by area—filter Blue Flag, parking, beach bars, toilets, wave conditions, and sand type. Plan your day in minutes.">
   <meta property="og:url" content="https://beachesofgreece.com" />
 
+  <!-- Google Analytics Consent Mode v2 - Must load BEFORE any GA script -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    
+    // Set default consent state BEFORE any GA script loads
+    // This ensures GDPR compliance and proper consent mode v2 behavior
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'denied',
+      personalization_storage: 'denied',
+      security_storage: 'granted',
+      wait_for_update: 500,
+      url_passthrough: true,
+      ads_data_redaction: true
+    });
+  </script>
+
   <!-- Analytics scripts (Umami + GA4) are injected dynamically after consent via the analytics SDK -->
 
   <!-- Google Fonts: Optimized for fastest FCP -->
