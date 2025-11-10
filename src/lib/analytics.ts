@@ -21,15 +21,23 @@ const GA_MEASUREMENT_ID =
     : undefined;
 const isProdEnvironment = typeof import.meta !== "undefined" ? import.meta.env.PROD : false;
 const GA_CONSENT_DENIED_STATE = {
-  analytics_storage: "denied",
   ad_storage: "denied",
+  ad_user_data: "denied",
+  ad_personalization: "denied",
+  analytics_storage: "denied",
   functionality_storage: "denied",
   personalization_storage: "denied",
   security_storage: "granted",
+  wait_for_update: 500,
 } as const;
 const GA_CONSENT_GRANTED_STATE = {
-  ...GA_CONSENT_DENIED_STATE,
+  ad_storage: "denied",
+  ad_user_data: "granted",
+  ad_personalization: "granted",
   analytics_storage: "granted",
+  functionality_storage: "denied",
+  personalization_storage: "denied",
+  security_storage: "granted",
 } as const;
 const GA_QUEUE_LIMIT = 50;
 
@@ -1017,7 +1025,13 @@ class AnalyticsSDK {
     this.ensureGtagBase();
 
     try {
+      // Set default consent state (with wait_for_update to give banner time to load)
       window.gtag?.("consent", "default", { ...GA_CONSENT_DENIED_STATE });
+      
+      // Since loadGAScript is only called after consent is accepted, 
+      // immediately update to granted state
+      window.gtag?.("consent", "update", { ...GA_CONSENT_GRANTED_STATE });
+      
       window.gtag?.("js", new Date());
       window.gtag?.("config", this.gaMeasurementId, {
         send_page_view: false,
