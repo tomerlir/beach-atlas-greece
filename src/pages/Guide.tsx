@@ -10,9 +10,9 @@ import { MapPin, Waves, Car, Shield, Star, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Guide = () => {
-  const seoTitle = "How to Choose the Perfect Greek Beach | Beaches of Greece";
+  const seoTitle = "Greek Beach Selection Guide | Find Your Perfect Beach";
   const seoDescription =
-    "Step-by-step guide to selecting the right Greek beach based on waves, sand type, amenities, parking, and accessibility. Includes examples and pro tips.";
+    "Learn how to choose the perfect Greek beach based on waves, sand type, amenities, parking & accessibility. Expert tips with real examples.";
   const canonicalUrl = "https://beachesofgreece.com/guide";
 
   const howToSchema = {

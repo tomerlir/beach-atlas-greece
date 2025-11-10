@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { generateHomeMetaTitle, generateHomeMetaDescription } from "@/lib/seo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FilterBar from "@/components/FilterBar";
@@ -151,10 +152,9 @@ const Index = () => {
     setShowGeolocationError(false);
   };
 
-  // Generate SEO data
-  const seoTitle = "Greek Beaches Directory - Find Your Perfect Beach in Greece";
-  const seoDescription =
-    "Discover the most beautiful beaches in Greece. Search by location, amenities, and Blue Flag certification. Complete directory of Greek island and mainland beaches.";
+  // Generate SEO data with platform USPs
+  const seoTitle = generateHomeMetaTitle();
+  const seoDescription = generateHomeMetaDescription(beaches.length);
   const canonicalUrl = "https://beachesofgreece.com";
 
   // Prevent indexing of filtered/paginated URLs (canonical points to clean URL)

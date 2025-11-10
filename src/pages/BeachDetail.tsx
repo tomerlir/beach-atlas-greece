@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { generateAreaSlug, formatRelativeTime } from "@/lib/utils";
 import { openInMaps } from "@/lib/maps";
+import { generateBeachMetaTitle, generateBeachMetaDescription } from "@/lib/seo";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
@@ -351,11 +352,9 @@ const BeachDetail = () => {
       ? beach.description.slice(0, 200) + "..."
       : beach.description;
 
-  // Generate SEO data
-  const seoTitle = `${beach.name} - ${beach.area} | Beach Atlas`;
-  const seoDescription =
-    beach.description ||
-    `Discover ${beach.name} in ${beach.area}, Greece. ${beach.organized ? "Organized" : "Unorganized"} beach with ${beach.type.toLowerCase()} sand and ${beach.wave_conditions.toLowerCase()} conditions.`;
+  // Generate SEO data with benefit-focused meta tags
+  const seoTitle = generateBeachMetaTitle(beach);
+  const seoDescription = generateBeachMetaDescription(beach);
   const canonicalUrl = `https://beachesofgreece.com/${generateAreaSlug(beach.area)}/${beach.slug}`;
 
   // Generate JSON-LD structured data with freshness signals

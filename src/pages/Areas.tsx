@@ -16,9 +16,9 @@ const Areas = () => {
   const { data: areas = [], isLoading, error } = useAreasWithBeachCount();
 
   // Generate SEO data
-  const seoTitle = "Greek Beach Areas | Beach Atlas";
+  const seoTitle = "Explore Greek Beach Areas | Verified Info by Region";
   const seoDescription =
-    "Explore beaches by area across Greece. Discover the best beaches in Corfu, Mykonos, Crete, and other beautiful Greek destinations.";
+    "Browse verified beaches by area across Greece. Find detailed info on beaches in Corfu, Mykonos, Crete, Santorini & more Greek destinations.";
   const canonicalUrl = "https://beachesofgreece.com/areas";
 
   // Generate JSON-LD structured data

@@ -8,9 +8,9 @@ import { Link } from "react-router-dom";
 
 const About = () => {
   // Generate SEO data
-  const seoTitle = "About Beaches of Greece - AI-Concierge for Greek Beaches";
+  const seoTitle = "About Us | Verified Greek Beach Data & Smart Search";
   const seoDescription =
-    "AI-Concierge of Greek beaches with natural language search, verified data, and explainable matches. Find your perfect beach with plain language descriptions and transparent verification.";
+    "Discover how Beaches of Greece uses AI-powered natural language search, verified data & transparent matching to help you find perfect beaches across Greece.";
   const canonicalUrl = "https://beachesofgreece.com/about";
 
   // Generate JSON-LD structured data

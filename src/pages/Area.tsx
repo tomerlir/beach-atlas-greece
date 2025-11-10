@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
+import { generateAreaMetaTitle, generateAreaMetaDescription } from "@/lib/seo";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FilterBar from "@/components/FilterBar";
@@ -217,11 +218,13 @@ const Area = () => {
     return <NotFound />;
   }
 
-  // Generate SEO data
-  const seoTitle = areaName ? `Beaches in ${areaName}, Greece | Beach Atlas` : "Area Not Found";
-  const seoDescription = areaName
-    ? `Discover the best beaches in ${areaName}, Greece. Find organized and unorganized beaches with detailed information about amenities, parking, and conditions.`
-    : "The requested area could not be found.";
+  // Generate SEO data with benefit-focused content
+  const seoTitle =
+    areaName && area ? generateAreaMetaTitle(area, beaches.length) : "Area Not Found";
+  const seoDescription =
+    areaName && area
+      ? generateAreaMetaDescription(area, beaches.length)
+      : "The requested area could not be found.";
   const canonicalUrl = areaName ? `https://beachesofgreece.com/${areaSlug}` : undefined;
 
   // Prevent indexing of filtered/paginated URLs (canonical points to clean URL)

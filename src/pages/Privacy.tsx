@@ -5,9 +5,9 @@ import { Helmet } from "react-helmet-async";
 import { BreadcrumbsWithJsonLd } from "@/components/breadcrumbs/BreadcrumbsWithJsonLd";
 
 const Privacy = () => {
-  const seoTitle = "Privacy Policy - Beaches of Greece";
+  const seoTitle = "Privacy Policy | Beaches of Greece";
   const seoDescription =
-    "Privacy policy describing strictly necessary technologies, optional analytics via Umami Cloud (cookieless) and Google Analytics 4 (cookies after consent), collected data, GDPR rights, retention, and how to change consent.";
+    "Our privacy policy: cookieless analytics, GDPR compliance, minimal data collection & your rights. Learn how we protect your data when using our beach directory.";
   const canonicalUrl = "https://beachesofgreece.com/privacy";
 
   const jsonLd = {
