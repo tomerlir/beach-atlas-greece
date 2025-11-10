@@ -189,13 +189,13 @@ class AnalyticsSDK {
 
   /**
    * Update user consent state and propagate changes to analytics providers
-   * 
+   *
    * This method handles the consent mode flow according to Google's best practices:
    * 1. Update consent mode FIRST (before loading scripts)
    * 2. Load analytics scripts
    * 3. Track initial pageview
    * 4. Flush queued events
-   * 
+   *
    * @param state - The new consent state (accepted, rejected, or unknown)
    */
   setConsent(state: ConsentState) {
@@ -1084,10 +1084,10 @@ class AnalyticsSDK {
 
   /**
    * Load the Google Analytics script tag
-   * 
+   *
    * This method should only be called after user consent is accepted.
    * The consent default state is already set in index.html before any script loads.
-   * 
+   *
    * @private
    */
   private loadGAScript() {
@@ -1158,10 +1158,10 @@ class AnalyticsSDK {
 
   /**
    * Enable Google Analytics tracking with proper consent mode
-   * 
+   *
    * This is called after the GA script loads and consent has been accepted.
    * It reconfigures GA to ensure all settings are applied correctly.
-   * 
+   *
    * @private
    */
   private enableGATracking() {
@@ -1192,10 +1192,10 @@ class AnalyticsSDK {
 
   /**
    * Disable Google Analytics tracking
-   * 
+   *
    * Updates consent mode to denied. The actual consent update is handled
    * in setConsent() method, but this provides an additional safety check.
-   * 
+   *
    * @private
    */
   private disableGATracking() {

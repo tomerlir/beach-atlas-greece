@@ -63,10 +63,10 @@ declare global {
   interface Window {
     /** Google Analytics data layer array */
     dataLayer: unknown[];
-    
+
     /**
      * Google Analytics gtag function
-     * 
+     *
      * @param command - The gtag command to execute
      * @param targetOrAction - The target measurement ID or action
      * @param params - Optional parameters for the command
@@ -77,10 +77,14 @@ declare global {
       (command: "js", date: Date): void;
       (command: "consent", action: "default" | "update", params: ConsentParams): void;
       (command: "set", params: Record<string, unknown>): void;
-      (command: "get", targetId: string, fieldName: string, callback?: (value: unknown) => void): void;
+      (
+        command: "get",
+        targetId: string,
+        fieldName: string,
+        callback?: (value: unknown) => void
+      ): void;
     };
   }
 }
 
 export {};
-

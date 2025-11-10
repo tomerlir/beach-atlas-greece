@@ -1,6 +1,6 @@
 /**
  * Analytics Consent Mode Tests
- * 
+ *
  * Tests for Google Analytics Consent Mode v2 implementation
  * Ensures proper timing, state management, and GDPR compliance
  */
@@ -15,7 +15,7 @@ describe("Analytics Consent Mode v2", () => {
     // Reset DOM
     document.head.innerHTML = "";
     document.body.innerHTML = "";
-    
+
     // Mock window.gtag and window.dataLayer
     mockDataLayer = [];
     mockGtag = vi.fn((...args: unknown[]) => {
@@ -91,7 +91,7 @@ describe("Analytics Consent Mode v2", () => {
       const consentCall = window.dataLayer[0] as [string, string, Record<string, unknown>];
       expect(consentCall[0]).toBe("consent");
       expect(consentCall[1]).toBe("default");
-      
+
       // Verify all v2 parameters are present
       const params = consentCall[2];
       expect(params.ad_storage).toBe("denied");
@@ -221,7 +221,7 @@ describe("Analytics Consent Mode v2", () => {
   describe("Event Queuing", () => {
     it("should queue events when consent is unknown", () => {
       const queue: Array<{ name: string; props?: Record<string, unknown> }> = [];
-      
+
       // Simulate queuing events
       queue.push({ name: "page_view", props: { page_path: "/" } });
       queue.push({ name: "search_submit", props: { q: "beach" } });
@@ -249,11 +249,11 @@ describe("Analytics Consent Mode v2", () => {
 
     it("should not send events when consent is rejected", () => {
       localStorage.setItem("analytics_consent", "rejected");
-      
+
       // Event should not be sent
       const consent = localStorage.getItem("analytics_consent");
       expect(consent).toBe("rejected");
-      
+
       // Verify gtag is not called for events when rejected
       if (consent === "rejected") {
         // Don't call gtag
@@ -412,4 +412,3 @@ describe("Analytics Consent Mode v2", () => {
     });
   });
 });
-
