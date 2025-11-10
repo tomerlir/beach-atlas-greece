@@ -312,15 +312,14 @@ export function generateAreaMetaDescription(area: Area, beachCount?: number): st
  * Generate meta title for homepage
  */
 export function generateHomeMetaTitle(): string {
-  return "Find Your Perfect Greek Beach | Verified & Smart Search";
+  return "Find Your Perfect Greek Beach - Verified Data & Smart Search";
 }
 
 /**
  * Generate meta description for homepage
  */
 export function generateHomeMetaDescription(beachCount?: number): string {
-  const countStr = beachCount ? `${beachCount}+ ` : "";
-  return `Search ${countStr}verified Greek beaches with our smart AI search. Filter by location, amenities, Blue Flag & more. Updated info from trusted sources.`;
+  return "Tired of beach disappointment? Our verified data & AI search finds beaches matching YOUR needs - calm waters, parking, facilities. No more guesswork.";
 }
 
 /**
