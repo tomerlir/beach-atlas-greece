@@ -318,7 +318,7 @@ export function generateHomeMetaTitle(): string {
 /**
  * Generate meta description for homepage
  */
-export function generateHomeMetaDescription(beachCount?: number): string {
+export function generateHomeMetaDescription(): string {
   return "Tired of beach disappointment? Our verified data & AI search finds beaches matching YOUR needs - calm waters, parking, facilities. No more guesswork.";
 }
 
