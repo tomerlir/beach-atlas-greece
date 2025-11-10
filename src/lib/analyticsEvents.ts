@@ -15,6 +15,8 @@ declare global {
       enable?: () => void;
       disable?: () => void;
     };
+    dataLayer?: unknown[];
+    gtag?: (...args: unknown[]) => void;
   }
 }
 

@@ -15,6 +15,23 @@ import type { AnalyticsProps, BeachEngagementEvent } from "./analyticsEvents";
 import { addAnalyticsEvent } from "./analyticsBuffer";
 
 const isBrowser = typeof window !== "undefined";
+const GA_MEASUREMENT_ID =
+  typeof import.meta !== "undefined"
+    ? (import.meta.env.VITE_GA_MEASUREMENT_ID as string | undefined)
+    : undefined;
+const isProdEnvironment = typeof import.meta !== "undefined" ? import.meta.env.PROD : false;
+const GA_CONSENT_DENIED_STATE = {
+  analytics_storage: "denied",
+  ad_storage: "denied",
+  functionality_storage: "denied",
+  personalization_storage: "denied",
+  security_storage: "granted",
+} as const;
+const GA_CONSENT_GRANTED_STATE = {
+  ...GA_CONSENT_DENIED_STATE,
+  analytics_storage: "granted",
+} as const;
+const GA_QUEUE_LIMIT = 50;
 
 type ConsentState = "accepted" | "rejected" | "unknown";
 
@@ -56,16 +73,22 @@ class AnalyticsSDK {
   private consent: ConsentState = "unknown";
   private context: AnalyticsContext = {};
   private eventQueue: QueuedEvent[] = [];
+  private umamiEventQueue: QueuedEvent[] = [];
   private consentCallbacks: ((state: ConsentState) => void)[] = [];
   private sessionId: string;
   private sessionState: SessionState;
   private inactivityCheckInterval: NodeJS.Timeout | null = null;
   private umamiReadyInterval: NodeJS.Timeout | null = null;
   private umamiScriptLoaded = false;
+  private gaScriptLoaded = false;
+  private gtagInitialized = false;
+  private gaEventQueue: QueuedEvent[] = [];
+  private gaMeasurementId?: string;
 
   constructor() {
     this.sessionId = this.generateSessionId();
     this.context.session_id = this.sessionId;
+    this.gaMeasurementId = GA_MEASUREMENT_ID?.trim() || undefined;
 
     // Initialize session state
     this.sessionState = {
@@ -89,6 +112,7 @@ class AnalyticsSDK {
       // Only setup Umami watcher if consent is already accepted
       if (this.consent === "accepted") {
         this.loadUmamiScript();
+        this.loadGAScript();
       }
     }
   }
@@ -102,6 +126,7 @@ class AnalyticsSDK {
       console.warn("Enabled:", this.enabled);
       console.warn("Consent:", this.consent);
       console.warn("Context:", this.context);
+      console.warn("GA Measurement ID:", this.gaMeasurementId ?? "not configured");
     }
 
     // Don't track initial page load here - let setConsent handle it
@@ -131,15 +156,21 @@ class AnalyticsSDK {
     // If consent was just accepted, load Umami script and enable tracking
     if (previousState !== "accepted" && state === "accepted") {
       this.loadUmamiScript();
+      this.loadGAScript();
+      this.enableGATracking();
       // Track the initial pageview now that consent is given
       this.trackInitialPageLoad();
       this.flushEventQueue();
+      this.flushUmamiEventQueue();
+      this.flushGAPendingEvents();
     }
 
     // If consent was just revoked, disable Umami tracking and clean up
     if (previousState === "accepted" && state === "rejected") {
       this.disableUmamiTracking();
       this.cleanupUmamiScript();
+      this.disableGATracking();
+      this.cleanupGAScript();
     }
 
     if (this.debug) {
@@ -215,7 +246,7 @@ class AnalyticsSDK {
     // Add to inspector buffer for development
     addAnalyticsEvent(name, enrichedProps);
 
-    this.sendToUmami(name, enrichedProps);
+    this.dispatchEvent(name, enrichedProps);
   }
 
   // Generate a simple hash for query tracking
@@ -677,6 +708,7 @@ class AnalyticsSDK {
           console.warn("✅ Umami ready - flushing queued events");
         }
         this.flushEventQueue();
+        this.flushUmamiEventQueue();
       } else if (attempts >= MAX_ATTEMPTS) {
         if (this.umamiReadyInterval) clearInterval(this.umamiReadyInterval);
         this.umamiReadyInterval = null;
@@ -770,6 +802,11 @@ class AnalyticsSDK {
     };
   }
 
+  private dispatchEvent(name: string, props: AnalyticsProps) {
+    this.sendToUmami(name, props);
+    this.sendToGA(name, props);
+  }
+
   private sendToUmami(name: string, props: AnalyticsProps) {
     if (!isBrowser) return;
 
@@ -785,7 +822,7 @@ class AnalyticsSDK {
     if (!umami?.track) {
       // Umami not ready, queue the event only if consent is still accepted
       if (this.consent === "accepted") {
-        this.eventQueue.push({
+        this.umamiEventQueue.push({
           name,
           props,
           timestamp: Date.now(),
@@ -811,13 +848,286 @@ class AnalyticsSDK {
       }
       // Queue for retry only if consent is still accepted
       if (this.consent === "accepted") {
-        this.eventQueue.push({
+        this.umamiEventQueue.push({
           name,
           props,
           timestamp: Date.now(),
         });
       }
     }
+  }
+
+  private sendToGA(name: string, props: AnalyticsProps, allowQueue = true) {
+    if (!isBrowser || !this.gaMeasurementId) return;
+
+    if (this.consent !== "accepted") {
+      if (this.debug) {
+        console.warn("🚫 GA event blocked - consent not accepted:", name);
+      }
+      return;
+    }
+
+    if (!isProdEnvironment) {
+      if (this.debug) {
+        console.warn("🔍 [DEV] Would send to GA:", name, props);
+      }
+      return;
+    }
+
+    if (!this.gtagInitialized || typeof window.gtag !== "function") {
+      if (allowQueue) {
+        this.gaEventQueue.push({
+          name,
+          props,
+          timestamp: Date.now(),
+        });
+        if (this.gaEventQueue.length > GA_QUEUE_LIMIT) {
+          this.gaEventQueue.shift();
+        }
+      }
+      return;
+    }
+
+    try {
+      if (name === "page_view") {
+        window.gtag("event", "page_view", this.buildGaPageViewPayload(props));
+        return;
+      }
+
+      window.gtag("event", name, this.normalizeGaPayload(props));
+    } catch (error) {
+      if (this.debug) {
+        console.error("GA tracking error:", error);
+      }
+      if (allowQueue) {
+        this.gaEventQueue.push({
+          name,
+          props,
+          timestamp: Date.now(),
+        });
+        if (this.gaEventQueue.length > GA_QUEUE_LIMIT) {
+          this.gaEventQueue.shift();
+        }
+      }
+    }
+  }
+
+  private normalizeGaPayload(props: AnalyticsProps): Record<string, unknown> {
+    const normalized: Record<string, unknown> = {};
+
+    Object.entries(props).forEach(([key, value]) => {
+      const sanitized = this.sanitizeForGA(value);
+      if (sanitized !== undefined) {
+        normalized[key] = sanitized;
+      }
+    });
+
+    return normalized;
+  }
+
+  private sanitizeForGA(value: unknown): unknown {
+    if (value === null || value === undefined) {
+      return value;
+    }
+
+    const valueType = typeof value;
+
+    if (valueType === "string" || valueType === "number" || valueType === "boolean") {
+      return value;
+    }
+
+    if (Array.isArray(value)) {
+      return value.map((item) => this.sanitizeForGA(item)).filter((item) => item !== undefined);
+    }
+
+    if (value instanceof Date) {
+      return value.toISOString();
+    }
+
+    if (valueType === "object") {
+      const result: Record<string, unknown> = {};
+      Object.entries(value as Record<string, unknown>).forEach(([key, nestedValue]) => {
+        const sanitizedNested = this.sanitizeForGA(nestedValue);
+        if (sanitizedNested !== undefined) {
+          result[key] = sanitizedNested;
+        }
+      });
+      return result;
+    }
+
+    return undefined;
+  }
+
+  private buildGaPageViewPayload(props: AnalyticsProps): Record<string, unknown> {
+    const pagePath =
+      typeof props.page_path === "string"
+        ? props.page_path
+        : isBrowser
+          ? window.location.pathname
+          : "/";
+
+    const payload: Record<string, unknown> = {
+      page_path: pagePath,
+    };
+
+    if (isBrowser) {
+      payload.page_title = document.title;
+      payload.page_location = window.location.href;
+      if (document.referrer) {
+        payload.page_referrer = document.referrer;
+      }
+    }
+
+    if (typeof props.previous_path === "string") {
+      payload.previous_path = props.previous_path;
+    }
+
+    if (typeof props.referrer === "string") {
+      payload.page_referrer = props.referrer;
+    }
+
+    return payload;
+  }
+
+  private ensureGtagBase(): boolean {
+    if (!isBrowser || !this.gaMeasurementId) return false;
+
+    if (!window.dataLayer) {
+      window.dataLayer = [];
+    }
+
+    if (!window.gtag) {
+      window.gtag = function gtag(...args: unknown[]) {
+        window.dataLayer!.push(args);
+      };
+    }
+
+    return true;
+  }
+
+  private loadGAScript() {
+    if (!isBrowser || this.gaScriptLoaded || !this.gaMeasurementId) return;
+    if (!isProdEnvironment) {
+      if (this.debug) {
+        console.warn("⚙️ Skipping GA script load in non-production environment");
+      }
+      return;
+    }
+
+    this.ensureGtagBase();
+
+    try {
+      window.gtag?.("consent", "default", { ...GA_CONSENT_DENIED_STATE });
+      window.gtag?.("js", new Date());
+      window.gtag?.("config", this.gaMeasurementId, {
+        send_page_view: false,
+        anonymize_ip: true,
+        cookie_flags: "SameSite=None;Secure",
+      });
+    } catch (error) {
+      if (this.debug) {
+        console.error("❌ Error configuring GA before script load:", error);
+      }
+    }
+
+    const script = document.createElement("script");
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${this.gaMeasurementId}`;
+    script.async = true;
+    script.setAttribute("data-ga-provider", "gtag");
+
+    script.onload = () => {
+      this.gaScriptLoaded = true;
+      this.gtagInitialized = true;
+      if (this.debug) {
+        console.warn("📊 Google Analytics script loaded");
+      }
+      if (this.consent === "accepted") {
+        this.enableGATracking();
+        this.flushGAPendingEvents();
+      }
+    };
+
+    script.onerror = (error) => {
+      if (this.debug) {
+        console.error("❌ Failed to load Google Analytics script:", error);
+      }
+      this.gaScriptLoaded = false;
+      this.gtagInitialized = false;
+    };
+
+    document.head.appendChild(script);
+  }
+
+  private enableGATracking() {
+    if (!isBrowser || !this.gaMeasurementId) return;
+
+    this.ensureGtagBase();
+
+    try {
+      window.gtag?.("consent", "update", { ...GA_CONSENT_GRANTED_STATE });
+      window.gtag?.("config", this.gaMeasurementId, {
+        send_page_view: false,
+        anonymize_ip: true,
+      });
+    } catch (error) {
+      if (this.debug) {
+        console.error("❌ Error enabling Google Analytics tracking:", error);
+      }
+    }
+  }
+
+  private disableGATracking() {
+    if (!isBrowser || !this.gaMeasurementId) return;
+
+    try {
+      window.gtag?.("consent", "update", { ...GA_CONSENT_DENIED_STATE });
+    } catch (error) {
+      if (this.debug) {
+        console.error("❌ Error disabling Google Analytics tracking:", error);
+      }
+    }
+  }
+
+  private cleanupGAScript() {
+    if (!isBrowser) return;
+
+    try {
+      const scripts = document.querySelectorAll('script[data-ga-provider="gtag"]');
+      scripts.forEach((script) => script.remove());
+      this.gaScriptLoaded = false;
+      this.gtagInitialized = false;
+      this.gaEventQueue = [];
+      if (window.dataLayer) {
+        Reflect.deleteProperty(window, "dataLayer");
+      }
+      if (window.gtag) {
+        Reflect.deleteProperty(window, "gtag");
+      }
+    } catch (error) {
+      if (this.debug) {
+        console.error("❌ Error cleaning up Google Analytics script:", error);
+      }
+    }
+  }
+
+  private flushGAPendingEvents() {
+    if (this.gaEventQueue.length === 0) return;
+
+    if (!this.gtagInitialized || typeof window.gtag !== "function") {
+      return;
+    }
+
+    if (this.debug) {
+      console.warn(`📤 Flushing ${this.gaEventQueue.length} queued GA events`);
+    }
+
+    const events = [...this.gaEventQueue];
+    this.gaEventQueue = [];
+
+    events.forEach(({ name, props }) => {
+      const payload = (props as AnalyticsProps) ?? {};
+      this.sendToGA(name, payload, false);
+    });
   }
 
   private flushEventQueue() {
@@ -831,7 +1141,24 @@ class AnalyticsSDK {
     this.eventQueue = [];
 
     events.forEach(({ name, props }) => {
-      this.sendToUmami(name, this.enrichProps(props));
+      const enrichedProps = this.enrichProps(props);
+      this.dispatchEvent(name, enrichedProps);
+    });
+  }
+
+  private flushUmamiEventQueue() {
+    if (this.umamiEventQueue.length === 0) return;
+
+    if (this.debug) {
+      console.warn(`📤 Flushing ${this.umamiEventQueue.length} queued Umami events`);
+    }
+
+    const events = [...this.umamiEventQueue];
+    this.umamiEventQueue = [];
+
+    events.forEach(({ name, props }) => {
+      const payload = (props as AnalyticsProps) ?? {};
+      this.sendToUmami(name, payload);
     });
   }
 }

@@ -7,7 +7,7 @@ import { BreadcrumbsWithJsonLd } from "@/components/breadcrumbs/BreadcrumbsWithJ
 const Privacy = () => {
   const seoTitle = "Privacy Policy - Beaches of Greece";
   const seoDescription =
-    "Privacy policy describing strictly necessary technologies, cookieless analytics via Umami Cloud, data collected (page views, referrers, events), purposes, GDPR rights, retention, and how to change consent.";
+    "Privacy policy describing strictly necessary technologies, optional analytics via Umami Cloud (cookieless) and Google Analytics 4 (cookies after consent), collected data, GDPR rights, retention, and how to change consent.";
   const canonicalUrl = "https://beachesofgreece.com/privacy";
 
   const jsonLd = {
@@ -102,13 +102,26 @@ const Privacy = () => {
               <li>Security headers and HTTPS to protect data in transit</li>
             </ul>
 
-            <h2>Analytics (optional, cookieless)</h2>
+            <h2>Analytics (optional)</h2>
             <p>
-              We use privacy-friendly, cookieless analytics provided by <strong>Umami Cloud</strong>{" "}
+              We use privacy-friendly analytics provided by <strong>Umami Cloud</strong>{" "}
+              (cookieless) and <strong>Google Analytics 4</strong> (cookies only after you opt in)
               to understand how the site is used and to improve features. Analytics only runs if you
               explicitly opt in from the consent banner or the <em>Privacy preferences</em> link in
               the footer.
             </p>
+
+            <h3>Providers</h3>
+            <ul>
+              <li>
+                <strong>Umami Cloud</strong> – cookieless analytics hosted in the EU, focused on
+                aggregated usage metrics.
+              </li>
+              <li>
+                <strong>Google Analytics 4</strong> – cookies are set only after you grant consent;
+                IP addresses are anonymized before storage using GA4&apos;s built-in controls.
+              </li>
+            </ul>
 
             <h3>What we track</h3>
             <p>
@@ -118,7 +131,7 @@ const Privacy = () => {
               interactions, map engagement, session summaries).
             </p>
 
-            <h3>Data collected by Umami</h3>
+            <h3>Data collected by Umami Cloud</h3>
             <ul>
               <li>Page views (URL path) and navigation paths</li>
               <li>Referrer URL (the page you came from), where available</li>
@@ -135,10 +148,30 @@ const Privacy = () => {
               </li>
             </ul>
 
+            <h3>Data collected by Google Analytics 4</h3>
+            <ul>
+              <li>Page views, navigation flows, and engaged sessions</li>
+              <li>
+                Event data (searches, map interactions, filter usage) with the same payloads noted
+                above
+              </li>
+              <li>
+                Technical metadata such as browser, operating system, device category, and screen
+                size
+              </li>
+              <li>
+                Approximate geolocation (country/region) derived from IP; IP anonymization is
+                enforced prior to storage
+              </li>
+              <li>UTM parameters and campaign metadata when present</li>
+              <li>Consent status so we can demonstrate opt-in tracing</li>
+            </ul>
+
             <h3>What we do not collect</h3>
             <ul>
               <li>No personal identifiers (no names, emails, precise location)</li>
               <li>No marketing cookies and no cross-site tracking</li>
+              <li>No Google Analytics advertising features (ad_storage remains denied)</li>
               <li>No third-party advertising or profiling</li>
             </ul>
 
@@ -146,14 +179,17 @@ const Privacy = () => {
             <p>
               The purpose is to understand website traffic and content performance so we can improve
               features and reliability. The legal basis under the GDPR is your{" "}
-              <strong>consent</strong> (Article 6(1)(a)), which you may withdraw at any time.
+              <strong>consent</strong> (Article 6(1)(a)), which you may withdraw at any time. Google
+              Analytics cookies are only created when you grant consent; advertising storage remains
+              disabled.
             </p>
 
             <h3>Data retention</h3>
             <p>
-              We retain analytics data for up to <strong>12 months</strong> in Umami. Retention is
-              configurable; if we change this window, we will update this page. We do not sell or
-              share analytics data for advertising.
+              We retain analytics data for up to <strong>12 months</strong> in Umami and{" "}
+              <strong>14 months</strong> in Google Analytics 4 (current GA minimum for aggregated
+              reporting). Retention is configurable; if we change these windows, we will update this
+              page. We do not sell or share analytics data for advertising.
             </p>
 
             <h2>Change or withdraw your consent</h2>

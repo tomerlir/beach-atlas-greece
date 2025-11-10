@@ -74,21 +74,12 @@ export default function ConsentBanner() {
           <div className="space-y-4 py-2">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <div className="text-sm font-medium text-foreground">Strictly necessary</div>
-                <div className="text-sm text-muted-foreground">
-                  Required for core site functionality. Always on.
-                </div>
-              </div>
-              <Switch checked disabled aria-readonly aria-label="Strictly necessary" />
-            </div>
-
-            <div className="flex items-start justify-between gap-4">
-              <div>
                 <Label htmlFor="analytics-switch" className="text-sm font-medium">
-                  Analytics
+                  Site analytics
                 </Label>
                 <div className="text-sm text-muted-foreground">
-                  Cookieless analytics to help us understand usage and improve features.
+                  Allow us to measure visits and usage patterns so we can keep improving Beaches of
+                  Greece. Analytics turns on only after you opt in.
                 </div>
               </div>
               <Switch
@@ -113,7 +104,7 @@ export default function ConsentBanner() {
                 }}
                 className="w-full sm:w-auto"
               >
-                Reject all
+                Decline analytics
               </Button>
               <Button
                 onClick={() => {
@@ -122,7 +113,7 @@ export default function ConsentBanner() {
                 }}
                 className="w-full sm:w-auto"
               >
-                Accept all
+                Allow analytics
               </Button>
             </div>
           </DialogFooter>
@@ -153,8 +144,8 @@ export default function ConsentBanner() {
 
               {/* Description - full width */}
               <p className="text-sm text-muted-foreground leading-relaxed">
-                With your permission, we'd also like to enable privacy-friendly analytics
-                (cookieless) to help us improve Beaches of Greece.
+                With your permission, we'll collect anonymized usage stats so we can understand what
+                works and improve Beaches of Greece. Analytics runs only after you say yes.
                 <Link to="/privacy" className="text-primary hover:underline ml-1">
                   Privacy policy
                 </Link>
@@ -163,7 +154,7 @@ export default function ConsentBanner() {
               {/* Buttons - full width */}
               <div className="flex flex-col sm:flex-row gap-2 w-full">
                 <Button onClick={handleAccept} size="default" className="w-full sm:flex-1">
-                  Accept all
+                  Allow
                 </Button>
                 <Button
                   onClick={handleReject}
@@ -171,7 +162,7 @@ export default function ConsentBanner() {
                   size="default"
                   className="w-full sm:flex-1"
                 >
-                  Reject all
+                  Decline
                 </Button>
                 <Button
                   onClick={() => setOpen(true)}
@@ -179,7 +170,7 @@ export default function ConsentBanner() {
                   size="default"
                   className="w-full sm:flex-1"
                 >
-                  Customize
+                  Manage choices
                 </Button>
               </div>
             </div>

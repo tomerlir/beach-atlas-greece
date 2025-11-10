@@ -152,6 +152,7 @@ The application uses Supabase (PostgreSQL) with the following main tables:
 - `VITE_SUPABASE_URL` - Supabase project URL
 - `VITE_SUPABASE_ANON_KEY` - Supabase anonymous key
 - `VITE_GOOGLE_MAPS_API_KEY` - Google Maps API key (optional)
+- `VITE_GA_MEASUREMENT_ID` - Google Analytics 4 measurement ID (optional; enables consent-gated GA tracking)
 
 ### Supabase Setup
 1. Create a new Supabase project

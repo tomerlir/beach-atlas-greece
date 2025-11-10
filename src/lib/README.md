@@ -1,6 +1,6 @@
 # Analytics System
 
-This directory contains the **lean, high-value** analytics implementation for Beach Atlas Greece, built on top of Umami with privacy-first principles.
+This directory contains the **lean, high-value** analytics implementation for Beach Atlas Greece, built on top of Umami and consent-gated Google Analytics 4 with privacy-first principles.
 
 ## Files
 
@@ -18,7 +18,7 @@ We track **fewer events, but make each one count**. Every event answers a clear 
 
 - Explicit consent gating (no tracking until user accepts)
 - No PII collection
-- Cookie-less tracking via Umami
+- Consent-gated tracking via Umami (cookieless) and Google Analytics 4 (cookies only after opt-in, ad_storage denied)
 - Persistent consent choice in localStorage
 - Admin routes automatically excluded from tracking
 
