@@ -1027,11 +1027,11 @@ class AnalyticsSDK {
     try {
       // Set default consent state (with wait_for_update to give banner time to load)
       window.gtag?.("consent", "default", { ...GA_CONSENT_DENIED_STATE });
-      
-      // Since loadGAScript is only called after consent is accepted, 
+
+      // Since loadGAScript is only called after consent is accepted,
       // immediately update to granted state
       window.gtag?.("consent", "update", { ...GA_CONSENT_GRANTED_STATE });
-      
+
       window.gtag?.("js", new Date());
       window.gtag?.("config", this.gaMeasurementId, {
         send_page_view: false,
