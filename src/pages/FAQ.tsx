@@ -51,7 +51,7 @@ const FAQ = () => {
     {
       question: "How do wave condition ratings work?",
       answer:
-        "Wave conditions are categorized as: Calm (minimal waves, ideal for families with young children), Moderate (gentle waves, suitable for most swimmers), Wavy (stronger waves, fun for more experienced swimmers), and Surfable (consistent waves suitable for surfing or bodyboarding). Keep in mind that conditions can vary by season and weather - these ratings represent typical conditions during summer months.",
+        "Wave conditions are categorized as: Calm (minimal waves, ideal for families with young children), Moderate (some waves, suitable for most swimmers), Wavy (stronger waves, fun for more experienced swimmers), and Surfable (consistent waves suitable for surfing or bodyboarding). Keep in mind that conditions can vary by season and weather - these ratings represent typical conditions during summer months.",
     },
     {
       question: "Which areas/regions do you cover?",
