@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import { generateAreaMetaTitle, generateAreaMetaDescription } from "@/lib/seo";
+import { generateAreaWebPageSchema } from "@/lib/structured-data";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FilterBar from "@/components/FilterBar";
@@ -231,59 +232,9 @@ const Area = () => {
   const hasQueryParams = window.location.search.length > 0;
   const shouldNoIndex = hasQueryParams;
 
-  // Generate JSON-LD structured data with freshness signals
-  const jsonLd = areaName
-    ? {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        name: `Beaches in ${areaName}, Greece | Greek Beaches`,
-        description:
-          area?.description ||
-          `Discover the best beaches in ${areaName}, Greece. Find organized and unorganized beaches with detailed information about amenities, parking, and conditions.`,
-        url: canonicalUrl,
-        datePublished: area?.created_at
-          ? new Date(area.created_at).toISOString().split("T")[0]
-          : "2024-01-01",
-        dateModified: area?.updated_at
-          ? new Date(area.updated_at).toISOString().split("T")[0]
-          : new Date().toISOString().split("T")[0],
-        mainEntity: {
-          "@type": "ItemList",
-          name: `Beaches in ${areaName}`,
-          description: area?.description || `A curated list of beaches in ${areaName}, Greece`,
-          numberOfItems: filteredBeaches.length,
-          itemListElement: paginatedBeaches.slice(0, 10).map((beach, index) => ({
-            "@type": "ListItem",
-            position: index + 1,
-            item: {
-              "@type": "TouristAttraction",
-              "@id": `https://beachesofgreece.com/${areaSlug}/${beach.slug}`,
-              name: beach.name,
-              description: beach.description,
-              url: `https://beachesofgreece.com/${areaSlug}/${beach.slug}`,
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: areaName,
-                addressCountry: "Greece",
-              },
-              geo: {
-                "@type": "GeoCoordinates",
-                latitude: beach.latitude,
-                longitude: beach.longitude,
-              },
-              isAccessibleForFree: true,
-              image: beach.photo_url ? [beach.photo_url] : undefined,
-              amenityFeature:
-                beach.amenities?.map((amenity) => ({
-                  "@type": "LocationFeatureSpecification",
-                  name: amenity,
-                  value: true,
-                })) || [],
-            },
-          })),
-        },
-      }
-    : null;
+  // Generate optimized JSON-LD structured data - use all beaches, not paginated
+  const jsonLd =
+    area && areaName ? generateAreaWebPageSchema(area, beaches, canonicalUrl) : null;
 
   return (
     <>

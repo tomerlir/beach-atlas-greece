@@ -231,7 +231,6 @@ function generateSitemap(beaches: Beach[], areas: Area[]): string {
     </image:image>`;
     }
 
-
     sitemap += `
   </url>
   `;

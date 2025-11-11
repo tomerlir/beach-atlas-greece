@@ -115,31 +115,16 @@ const FAQ = () => {
     })),
   };
 
-  // WebPage schema
+  // WebPage schema - breadcrumb removed since BreadcrumbsWithJsonLd component handles it
   const webPageSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
+    "@id": canonicalUrl,
     name: seoTitle,
     description: seoDescription,
     url: canonicalUrl,
     datePublished: "2024-01-01",
     dateModified: new Date().toISOString().split("T")[0],
-    breadcrumb: {
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: "https://beachesofgreece.com",
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "FAQ",
-        },
-      ],
-    },
   };
 
   return (

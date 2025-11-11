@@ -18,6 +18,8 @@ import ErrorBoundary from "@/components/ErrorBoundary";
 import ResultsSummary from "@/components/ResultsSummary";
 import { analytics } from "@/lib/analytics";
 import { createMapOpenEvent } from "@/lib/analyticsEvents";
+import { generateMapWebPageSchema } from "@/lib/structured-data";
+import OrganizationSchema from "@/components/OrganizationSchema";
 
 // Leaflet + React-Leaflet
 import "leaflet/dist/leaflet.css";
@@ -206,6 +208,9 @@ const MapPage = () => {
   const hasQueryParams = window.location.search.length > 0;
   const shouldNoIndex = hasQueryParams;
 
+  // Generate optimized JSON-LD structured data
+  const jsonLd = generateMapWebPageSchema(beaches, canonicalUrl);
+
   const mapHeightClass = "h-[60vh] md:h-[70vh] lg:h-[75vh]";
 
   return (
@@ -217,7 +222,13 @@ const MapPage = () => {
 
         {/* Prevent indexing of filtered URLs */}
         {shouldNoIndex && <meta name="robots" content="noindex, follow" />}
+
+        {/* JSON-LD structured data */}
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
+
+      {/* Organization Schema for AI engines */}
+      <OrganizationSchema />
 
       <div className="min-h-screen bg-background">
         <Header />

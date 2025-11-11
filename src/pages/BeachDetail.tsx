@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { generateAreaSlug, formatRelativeTime } from "@/lib/utils";
 import { openInMaps } from "@/lib/maps";
 import { generateBeachMetaTitle, generateBeachMetaDescription } from "@/lib/seo";
+import { generateBeachWebPageSchema } from "@/lib/structured-data";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
@@ -357,79 +358,8 @@ const BeachDetail = () => {
   const seoDescription = generateBeachMetaDescription(beach);
   const canonicalUrl = `https://beachesofgreece.com/${generateAreaSlug(beach.area)}/${beach.slug}`;
 
-  // Generate JSON-LD structured data with freshness signals
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    name: `${beach.name} - ${beach.area} | Greek Beaches`,
-    description: beach.description || `Discover ${beach.name} in ${beach.area}, Greece`,
-    url: canonicalUrl,
-    datePublished: beach.created_at
-      ? new Date(beach.created_at).toISOString().split("T")[0]
-      : "2024-01-01",
-    dateModified: beach.updated_at
-      ? new Date(beach.updated_at).toISOString().split("T")[0]
-      : new Date().toISOString().split("T")[0],
-    mainEntity: {
-      "@type": "TouristAttraction",
-      "@id": canonicalUrl,
-      name: beach.name,
-      description: beach.description,
-      url: canonicalUrl,
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: beach.area,
-        addressCountry: "Greece",
-      },
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: beach.latitude,
-        longitude: beach.longitude,
-      },
-      isAccessibleForFree: true,
-      image: beach.photo_url ? [beach.photo_url] : undefined,
-      dateModified: beach.updated_at
-        ? new Date(beach.updated_at).toISOString().split("T")[0]
-        : new Date().toISOString().split("T")[0],
-      amenityFeature:
-        beach.amenities?.map((amenity) => ({
-          "@type": "LocationFeatureSpecification",
-          name: amenity,
-          value: true,
-        })) || [],
-      additionalProperty: [
-        {
-          "@type": "PropertyValue",
-          name: "Beach Type",
-          value: beach.type,
-        },
-        {
-          "@type": "PropertyValue",
-          name: "Wave Conditions",
-          value: beach.wave_conditions,
-        },
-        {
-          "@type": "PropertyValue",
-          name: "Organization",
-          value: beach.organized ? "Organized" : "Unorganized",
-        },
-        {
-          "@type": "PropertyValue",
-          name: "Parking",
-          value: beach.parking,
-        },
-        ...(beach.blue_flag
-          ? [
-              {
-                "@type": "PropertyValue",
-                name: "Blue Flag Certified",
-                value: "Yes",
-              },
-            ]
-          : []),
-      ],
-    },
-  };
+  // Generate optimized JSON-LD structured data
+  const jsonLd = generateBeachWebPageSchema(beach, canonicalUrl);
 
   return (
     <>

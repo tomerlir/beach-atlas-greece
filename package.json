@@ -15,6 +15,7 @@
     "preview": "vite preview",
     "generate-sitemap": "tsx scripts/generate-sitemap.ts",
     "generate-routes": "tsx scripts/generate-routes.ts",
+    "validate:schemas": "tsx scripts/validate-schemas.ts",
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
@@ -23,7 +24,7 @@
     "deps:check": "depcheck",
     "deps:update": "ncu -u",
     "deps:audit": "npm audit",
-    "prebuild": "npm run lint && npm run format:check && npm run generate-routes"
+    "prebuild": "npm run lint && npm run format:check && npm run generate-routes && npm run validate:schemas"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

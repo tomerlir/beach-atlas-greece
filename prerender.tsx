@@ -1,5 +1,6 @@
 // Import your actual SEO generators
 import { generateBeachMetaTitle, generateBeachMetaDescription, generateAreaMetaTitle, generateAreaMetaDescription } from './src/lib/seo';
+import { generateBeachWebPageSchema, generateAreaWebPageSchema, generateHomeWebPageSchema } from './src/lib/structured-data';
 import type { Tables } from './src/integrations/supabase/types';
 import type { Area } from './src/types/area';
 
@@ -70,6 +71,7 @@ export async function prerender(data: { url: string }) {
     const headElements = new Set();
     let title = 'Beaches of Greece';
     let description = 'Discover the best beaches in Greece with verified data and smart search.';
+    let jsonLdData: Record<string, any> | null = null;
 
     // Load prerender data
     const prerenderData = await loadPrerenderData();
@@ -86,6 +88,10 @@ export async function prerender(data: { url: string }) {
 
         title = generateBeachMetaTitle(beach as Tables<'beaches'>);
         description = generateBeachMetaDescription(beach as Tables<'beaches'>);
+
+        // Generate structured data
+        const canonicalUrl = `https://beachesofgreece.com${url}`;
+        jsonLdData = generateBeachWebPageSchema(beach as Tables<'beaches'>, canonicalUrl);
 
       } else if (areaData) {
         // Area page - use your area SEO generator!
@@ -104,6 +110,13 @@ export async function prerender(data: { url: string }) {
         title = generateAreaMetaTitle(area, areaData.beachCount);
         description = areaData.description || generateAreaMetaDescription(area, areaData.beachCount);
 
+        // Generate structured data for area pages
+        const canonicalUrl = `https://beachesofgreece.com${url}`;
+        const areaBeaches = Object.values(prerenderData.beachMetadata)
+          .filter((beach: BeachMetadata) => beach.area === area.name)
+          .map((beach: BeachMetadata) => beach as Tables<'beaches'>);
+        jsonLdData = generateAreaWebPageSchema(area, areaBeaches, canonicalUrl);
+
       } else {
         // Static pages - use generators where available
         if (url === '/') {
@@ -111,6 +124,10 @@ export async function prerender(data: { url: string }) {
           const { generateHomeMetaTitle, generateHomeMetaDescription } = await import('./src/lib/seo');
           title = generateHomeMetaTitle();
           description = generateHomeMetaDescription();
+
+          // Generate structured data for homepage
+          const allBeaches = Object.values(prerenderData.beachMetadata).map((beach: BeachMetadata) => beach as Tables<'beaches'>);
+          jsonLdData = generateHomeWebPageSchema(allBeaches);
         } else if (url === '/about') {
           title = 'About Us | Verified Greek Beach Data & Smart Search';
           description = 'Beaches of Greece is a comprehensive platform that helps travelers find the perfect Greek beach through natural language search and verified data.';
@@ -175,10 +192,21 @@ export async function prerender(data: { url: string }) {
       props: { name: 'twitter:description', content: description } 
     });
     
-    headElements.add({ 
-      type: 'link', 
-      props: { rel: 'canonical', href: `https://beachesofgreece.com${url}` } 
+    headElements.add({
+      type: 'link',
+      props: { rel: 'canonical', href: `https://beachesofgreece.com${url}` }
     });
+
+    // Add JSON-LD structured data if available
+    if (jsonLdData) {
+      headElements.add({
+        type: 'script',
+        props: {
+          type: 'application/ld+json',
+          innerHTML: JSON.stringify(jsonLdData)
+        }
+      });
+    }
 
     return {
       html,
