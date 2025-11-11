@@ -9,17 +9,17 @@ function getTopAmenities(amenities: string[] | null): string[] {
   if (!amenities) return [];
 
   const priorityOrder = [
-    'lifeguard',
-    'beach_bar',
-    'taverna',
-    'sunbeds',
-    'umbrellas',
-    'water_sports',
-    'snorkeling',
-    'family_friendly'
+    "lifeguard",
+    "beach_bar",
+    "taverna",
+    "sunbeds",
+    "umbrellas",
+    "water_sports",
+    "snorkeling",
+    "family_friendly",
   ];
 
-  return priorityOrder.filter(amenity => amenities.includes(amenity));
+  return priorityOrder.filter((amenity) => amenities.includes(amenity));
 }
 
 /**
@@ -27,14 +27,14 @@ function getTopAmenities(amenities: string[] | null): string[] {
  */
 function getAmenityDisplayName(amenity: string): string {
   const displayNames: Record<string, string> = {
-    lifeguard: 'Lifeguard',
-    beach_bar: 'Beach Bar',
-    taverna: 'Taverna',
-    sunbeds: 'Sunbeds',
-    umbrellas: 'Umbrellas',
-    water_sports: 'Water Sports',
-    snorkeling: 'Snorkeling',
-    family_friendly: 'Family-Friendly'
+    lifeguard: "Lifeguard",
+    beach_bar: "Beach Bar",
+    taverna: "Taverna",
+    sunbeds: "Sunbeds",
+    umbrellas: "Umbrellas",
+    water_sports: "Water Sports",
+    snorkeling: "Snorkeling",
+    family_friendly: "Family-Friendly",
   };
 
   return displayNames[amenity] || amenity;
