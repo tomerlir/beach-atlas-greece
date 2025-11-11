@@ -9,7 +9,7 @@ import { MapPin, Waves, Car, Shield, Clock, CheckCircle, AlertCircle, Info } fro
 
 const Ontology = () => {
   // Generate SEO data
-  const seoTitle = "Beach Data Ontology - Beach Atlas Greece";
+  const seoTitle = "Beach Data Ontology - Greek Beaches";
   const seoDescription =
     "Official definitions for beach data fields tracked by Beach Atlas Greece. Understand how we model beaches as structured data for explainable matches.";
   const canonicalUrl = "https://beachesofgreece.com/ontology";

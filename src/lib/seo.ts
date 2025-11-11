@@ -14,6 +14,7 @@
 
 import { Tables } from "@/integrations/supabase/types";
 import type { Area } from "@/types/area";
+import { generateBeachMetaTitle as _generateBeachMetaTitle } from "./seo-utils";
 
 type Beach = Tables<"beaches">;
 
@@ -93,78 +94,8 @@ function getAmenityDisplayName(amenity: string): string {
  * Generate benefit-focused meta title for a beach
  * Target: 50-60 characters
  */
-export function generateBeachMetaTitle(beach: Beach): string {
-  const parts: string[] = [];
-  const maxLength = 60;
-
-  // Always start with beach name (trim to remove any leading/trailing spaces)
-  const beachName = beach.name.trim();
-  parts.push(beachName);
-
-  // Build benefit descriptors based on priority
-  const benefits: string[] = [];
-
-  // Priority 1: Blue Flag
-  if (beach.blue_flag) {
-    benefits.push("Blue Flag");
-  }
-
-  // Priority 2: Family Friendly
-  if (beach.amenities?.includes("family_friendly")) {
-    benefits.push("Family Beach");
-  }
-
-  // Priority 3: Beach Type (if sandy or interesting)
-  if (beach.type === "SANDY" && !benefits.length) {
-    benefits.push("Sandy Beach");
-  }
-
-  // Priority 4: Wave Conditions (if notable) - using simple search terms
-  if (beach.wave_conditions === "CALM" && !benefits.includes("Family Beach")) {
-    benefits.push("Calm Water");
-  } else if (beach.wave_conditions === "SURFABLE") {
-    benefits.push("Good for Surfing");
-  }
-
-  // Priority 5: Organization status (if organized and space allows)
-  if (beach.organized && benefits.length < 2) {
-    benefits.push("Organized");
-  }
-
-  // Priority 6: Top amenity (if space allows)
-  if (benefits.length < 2) {
-    const topAmenities = getTopAmenities(beach.amenities);
-    if (topAmenities.length > 0 && !benefits.includes("Family Beach")) {
-      const amenity = getAmenityDisplayName(topAmenities[0]);
-      if (amenity !== "Family-Friendly") {
-        benefits.push(amenity);
-      }
-    }
-  }
-
-  // Construct title with area
-  let title = beachName;
-
-  if (benefits.length > 0) {
-    const benefitStr = benefits.slice(0, 2).join(" · ");
-    title = `${beachName}: ${benefitStr}`;
-  }
-
-  // Add location context if space allows (trim area too)
-  const areaName = beach.area.trim();
-  const withArea = `${title} | ${areaName}`;
-  if (withArea.length <= maxLength) {
-    title = withArea;
-  } else {
-    // Try shorter version with just area
-    const shortArea = `${beachName} | ${areaName}`;
-    if (shortArea.length <= maxLength) {
-      title = shortArea;
-    }
-  }
-
-  return title;
-}
+// Re-export the shared meta title generator
+export const generateBeachMetaTitle = _generateBeachMetaTitle;
 
 /**
  * Select contextual action verb based on beach attributes

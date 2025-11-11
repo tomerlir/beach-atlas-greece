@@ -194,7 +194,7 @@ const Area = () => {
     return (
       <>
         <Helmet>
-          <title>Loading Area | Beach Atlas</title>
+          <title>Loading Area | Greek Beaches</title>
           <meta name="description" content="Loading beach area information..." />
         </Helmet>
         <div className="min-h-screen bg-background">
@@ -236,7 +236,7 @@ const Area = () => {
     ? {
         "@context": "https://schema.org",
         "@type": "WebPage",
-        name: `Beaches in ${areaName}, Greece | Beach Atlas`,
+        name: `Beaches in ${areaName}, Greece | Greek Beaches`,
         description:
           area?.description ||
           `Discover the best beaches in ${areaName}, Greece. Find organized and unorganized beaches with detailed information about amenities, parking, and conditions.`,

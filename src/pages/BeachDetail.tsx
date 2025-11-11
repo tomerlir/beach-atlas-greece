@@ -361,7 +361,7 @@ const BeachDetail = () => {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: `${beach.name} - ${beach.area} | Beach Atlas`,
+    name: `${beach.name} - ${beach.area} | Greek Beaches`,
     description: beach.description || `Discover ${beach.name} in ${beach.area}, Greece`,
     url: canonicalUrl,
     datePublished: beach.created_at
