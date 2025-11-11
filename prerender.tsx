@@ -62,8 +62,9 @@ export async function prerender(data: { url: string }) {
   const { url } = data;
 
   try {
-    // Simple HTML shell - the React app will hydrate on the client side
-    const html = '<div id="root"></div>';
+    // Return empty string - the #root div already exists in index.html
+    // Prerender plugin will inject our meta tags into <head>, not replace <body>
+    const html = '';
 
     // Initialize head elements
     const headElements = new Set();
@@ -189,9 +190,9 @@ export async function prerender(data: { url: string }) {
     };
   } catch (error) {
     console.error(`Error prerendering ${url}:`, error);
-    // Return minimal HTML on error to prevent build failure
+    // Return empty HTML on error to prevent build failure
     return {
-      html: '<div id="root"></div>',
+      html: '',
       head: {
         lang: 'en',
         title: 'Beaches of Greece',
