@@ -43,6 +43,12 @@ const OrganizationSchema = () => {
       description:
         "Comprehensive database of beaches across Greece including location, amenities, conditions, and accessibility information",
       url: "https://beachesofgreece.com/ontology",
+      creator: {
+        "@type": "Organization",
+        name: "Beaches of Greece",
+        url: "https://beachesofgreece.com",
+      },
+      license: "https://creativecommons.org/licenses/by-nc/4.0/",
     },
   };
 
