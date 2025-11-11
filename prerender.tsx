@@ -71,7 +71,7 @@ export async function prerender(data: { url: string }) {
     const headElements = new Set();
     let title = 'Beaches of Greece';
     let description = 'Discover the best beaches in Greece with verified data and smart search.';
-    let jsonLdData: Record<string, any> | null = null;
+    let jsonLdData: Record<string, unknown> | null = null;
 
     // Load prerender data
     const prerenderData = await loadPrerenderData();

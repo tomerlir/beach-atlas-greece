@@ -58,13 +58,14 @@ export function generateBeachPlaceSchema(beach: Beach, canonicalUrl: string) {
       // Could add streetAddress if available
     },
     // Geo coordinates - only include if both are available
-    ...(beach.latitude && beach.longitude && {
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: beach.latitude,
-        longitude: beach.longitude,
-      },
-    }),
+    ...(beach.latitude &&
+      beach.longitude && {
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: beach.latitude,
+          longitude: beach.longitude,
+        },
+      }),
     // For LocalBusiness type beaches
     ...(schemaType === "LocalBusiness" && {
       priceRange: "$$", // Beach amenities are typically affordable

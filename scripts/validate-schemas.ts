@@ -19,8 +19,7 @@
  *   tsx scripts/validate-schemas.ts
  */
 
-import { readFileSync, existsSync } from 'fs';
-import { join } from 'path';
+// File system imports removed - not used in this script
 
 interface ValidationError {
   field: string;
@@ -195,7 +194,7 @@ function validateSchema(schema: unknown, schemaName: string, isTopLevel = true):
  * Test schema generation functions
  */
 async function testSchemaGeneration() {
-  console.log('🔍 Validating structured data schemas...\n');
+  console.warn('🔍 Validating structured data schemas...\n');
 
   try {
     // Import the structured-data module
@@ -238,7 +237,7 @@ async function testSchemaGeneration() {
     const canonicalUrl = 'https://beachesofgreece.com/crete/test-beach';
 
     // Test Beach Place Schema (nested schema, doesn't need @context)
-    console.log('Testing generateBeachPlaceSchema...');
+    console.warn('Testing generateBeachPlaceSchema...');
     const beachPlaceSchema = structuredDataModule.generateBeachPlaceSchema(mockBeach, canonicalUrl);
     const beachPlaceResult = validateSchema(beachPlaceSchema, 'BeachPlace', false);
     if (!beachPlaceResult.isValid) {
@@ -247,11 +246,11 @@ async function testSchemaGeneration() {
         console.error(`   - ${error.field}: ${error.message}`);
       });
     } else {
-      console.log('✅ Beach Place Schema is valid');
+      console.warn('✅ Beach Place Schema is valid');
     }
 
     // Test Beach WebPage Schema
-    console.log('\nTesting generateBeachWebPageSchema...');
+    console.warn('\nTesting generateBeachWebPageSchema...');
     const beachWebPageSchema = structuredDataModule.generateBeachWebPageSchema(mockBeach, canonicalUrl);
     const beachWebPageResult = validateSchema(beachWebPageSchema, 'BeachWebPage');
     if (!beachWebPageResult.isValid) {
@@ -260,11 +259,11 @@ async function testSchemaGeneration() {
         console.error(`   - ${error.field}: ${error.message}`);
       });
     } else {
-      console.log('✅ Beach WebPage Schema is valid');
+      console.warn('✅ Beach WebPage Schema is valid');
     }
 
     // Test Area WebPage Schema
-    console.log('\nTesting generateAreaWebPageSchema...');
+    console.warn('\nTesting generateAreaWebPageSchema...');
     const areaWebPageSchema = structuredDataModule.generateAreaWebPageSchema(
       mockArea,
       [mockBeach],
@@ -277,11 +276,11 @@ async function testSchemaGeneration() {
         console.error(`   - ${error.field}: ${error.message}`);
       });
     } else {
-      console.log('✅ Area WebPage Schema is valid');
+      console.warn('✅ Area WebPage Schema is valid');
     }
 
     // Test Home WebPage Schema
-    console.log('\nTesting generateHomeWebPageSchema...');
+    console.warn('\nTesting generateHomeWebPageSchema...');
     const homeWebPageSchema = structuredDataModule.generateHomeWebPageSchema([mockBeach]);
     const homeWebPageResult = validateSchema(homeWebPageSchema, 'HomeWebPage');
     if (!homeWebPageResult.isValid) {
@@ -290,11 +289,11 @@ async function testSchemaGeneration() {
         console.error(`   - ${error.field}: ${error.message}`);
       });
     } else {
-      console.log('✅ Home WebPage Schema is valid');
+      console.warn('✅ Home WebPage Schema is valid');
     }
 
     // Test Map WebPage Schema
-    console.log('\nTesting generateMapWebPageSchema...');
+    console.warn('\nTesting generateMapWebPageSchema...');
     const mapWebPageSchema = structuredDataModule.generateMapWebPageSchema(
       [mockBeach],
       'https://beachesofgreece.com/map'
@@ -306,7 +305,7 @@ async function testSchemaGeneration() {
         console.error(`   - ${error.field}: ${error.message}`);
       });
     } else {
-      console.log('✅ Map WebPage Schema is valid');
+      console.warn('✅ Map WebPage Schema is valid');
     }
 
     // Summary
@@ -320,9 +319,9 @@ async function testSchemaGeneration() {
     const totalErrors = allResults.reduce((sum, result) => sum + result.errors.length, 0);
     const allValid = allResults.every((result) => result.isValid);
 
-    console.log('\n' + '='.repeat(50));
+    console.warn('\n' + '='.repeat(50));
     if (allValid) {
-      console.log('✅ All schemas are valid!');
+      console.warn('✅ All schemas are valid!');
       process.exit(0);
     } else {
       console.error(`❌ Validation failed with ${totalErrors} error(s)`);

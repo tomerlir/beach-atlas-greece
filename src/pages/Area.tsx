@@ -233,8 +233,7 @@ const Area = () => {
   const shouldNoIndex = hasQueryParams;
 
   // Generate optimized JSON-LD structured data - use all beaches, not paginated
-  const jsonLd =
-    area && areaName ? generateAreaWebPageSchema(area, beaches, canonicalUrl) : null;
+  const jsonLd = area && areaName ? generateAreaWebPageSchema(area, beaches, canonicalUrl) : null;
 
   return (
     <>
