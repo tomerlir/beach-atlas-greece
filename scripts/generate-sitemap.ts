@@ -6,7 +6,7 @@
  * This script generates a complete sitemap.xml file that includes:
  * - Main pages and content sections
  * - All area overview pages
- * - All beach detail pages with rich metadata
+ * - All beach detail pages
  * - Image sitemap extensions
  * - Proper priority and change frequency settings
  * - Last modified dates from database
@@ -140,11 +140,7 @@ function generateSitemap(beaches: Beach[], areas: Area[]): string {
 
   let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
-        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
-        xmlns:beach="https://beachesofgreece.com/schemas/beach/1.0"
-        xmlns:area="https://beachesofgreece.com/schemas/area/1.0">
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <!-- HIGH PRIORITY: Core Pages -->
   <url>
@@ -235,22 +231,6 @@ function generateSitemap(beaches: Beach[], areas: Area[]): string {
     </image:image>`;
     }
 
-    // Add custom area metadata for enhanced SEO
-    sitemap += `
-    <!-- Area-specific metadata for search engines -->
-    <area:metadata>
-      <area:name>${escapeXml(area.name)}</area:name>
-      <area:slug>${escapeXml(area.slug)}</area:slug>
-      <area:description>${escapeXml(area.description || `${area.name} features beautiful beaches and coastal destinations in Greece`)}</area:description>
-      <area:beach_count>${beaches.filter(b => b.area_id === area.id).length}</area:beach_count>`;
-
-    if (area.hero_photo_source) {
-      sitemap += `
-      <area:photo_source>${escapeXml(area.hero_photo_source)}</area:photo_source>`;
-    }
-
-    sitemap += `
-    </area:metadata>`;
 
     sitemap += `
   </url>
@@ -318,27 +298,6 @@ function generateSitemap(beaches: Beach[], areas: Area[]): string {
     </image:image>`;
     }
 
-    // Add custom beach metadata elements for enhanced SEO
-    sitemap += `
-    <!-- Beach-specific metadata for search engines -->
-    <beach:metadata>
-      <beach:name>${escapeXml(beach.name)}</beach:name>
-      <beach:area>${escapeXml(beach.area)}</beach:area>
-      <beach:type>${escapeXml(beach.type || 'UNKNOWN')}</beach:type>
-      <beach:wave_conditions>${escapeXml(beach.wave_conditions || 'UNKNOWN')}</beach:wave_conditions>
-      <beach:blue_flag>${beach.blue_flag || false}</beach:blue_flag>
-      <beach:organized>${beach.organized || false}</beach:organized>
-      <beach:amenities>${beach.amenities?.length || 0}</beach:amenities>
-      <beach:description>${escapeXml(beach.description || beachDescription)}</beach:description>`;
-
-    if (beach.latitude && beach.longitude) {
-      sitemap += `
-      <beach:latitude>${beach.latitude}</beach:latitude>
-      <beach:longitude>${beach.longitude}</beach:longitude>`;
-    }
-
-    sitemap += `
-    </beach:metadata>`;
 
     sitemap += `
   </url>
@@ -399,26 +358,22 @@ async function main() {
     console.warn(`📁 Location: ${sitemapPath}`);
     console.warn(`🔗 URL: ${SITE_URL}/sitemap.xml`);
     console.warn(`📊 Contains ${beaches.length + areas.length + 7} URLs:`);
-    console.warn(`   • ${beaches.length} beach detail pages (with comprehensive beach metadata)`);
+    console.warn(`   • ${beaches.length} beach detail pages`);
     console.warn(`   • ${areas.length} area overview pages`);
     console.warn(`   • 7 main content pages (homepage, about, map, etc.)`);
 
     // Enhanced validation
     const urlCount = (sitemapXml.match(/<url>/g) || []).length;
     const imageCount = (sitemapXml.match(/<image:image>/g) || []).length;
-    const beachMetadataCount = (sitemapXml.match(/<beach:metadata>/g) || []).length;
-    const areaMetadataCount = (sitemapXml.match(/<area:metadata>/g) || []).length;
     const highPriorityCount = (sitemapXml.match(/<priority>0\.[89]<\/priority>/g) || []).length;
     const mediumPriorityCount = (sitemapXml.match(/<priority>0\.[67]<\/priority>/g) || []).length;
 
     console.warn(`✅ Validation Results:`);
     console.warn(`   • Total URLs: ${urlCount}`);
     console.warn(`   • URLs with images: ${imageCount}`);
-    console.warn(`   • URLs with rich beach metadata: ${beachMetadataCount}`);
-    console.warn(`   • URLs with rich area metadata: ${areaMetadataCount}`);
     console.warn(`   • High priority URLs (0.8-0.9): ${highPriorityCount}`);
     console.warn(`   • Medium priority URLs (0.6-0.7): ${mediumPriorityCount}`);
-    console.warn(`   • XML namespaces: sitemap, image, video, news, beach, area`);
+    console.warn(`   • XML namespaces: sitemap, image`);
 
     // Performance metrics
     const sizeKB = (sitemapXml.length / 1024).toFixed(1);
