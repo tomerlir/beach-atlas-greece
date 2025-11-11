@@ -11,40 +11,22 @@ import type { Area } from "@/types/area";
 type Beach = Tables<"beaches">;
 
 /**
- * Generate comprehensive Place schema for a beach
- * Uses Place as base type with tourism-specific extensions
+ * Generate comprehensive Beach schema
+ * Uses Beach as primary type (subtype of Place) with TouristAttraction as secondary type
+ * This is more specific and semantically accurate than using Place as the base type
  */
 export function generateBeachPlaceSchema(beach: Beach, canonicalUrl: string) {
-  // Determine the most appropriate schema type based on beach characteristics
-  const isCommercial =
-    beach.organized &&
-    (beach.amenities?.includes("beach_bar") || beach.amenities?.includes("taverna"));
-  const hasActivities = beach.amenities?.some((amenity) =>
-    ["water_sports", "snorkeling", "cliff_jumping"].includes(amenity)
-  );
-
-  let schemaType = "Place";
-  const additionalTypes: string[] = [];
-
-  if (isCommercial) {
-    schemaType = "LocalBusiness";
-    additionalTypes.push("https://schema.org/TouristAttraction");
-  } else if (hasActivities) {
-    schemaType = "SportsActivityLocation";
-    additionalTypes.push("https://schema.org/TouristAttraction");
-  } else {
-    additionalTypes.push("https://schema.org/TouristAttraction");
-  }
-
-  // Add beach-specific type
-  additionalTypes.push("https://schema.org/Beach");
+  // Use Beach as the primary type - it's a subtype of Place, so it inherits all Place properties
+  // Add TouristAttraction as a secondary type since beaches are tourist destinations
+  // This is more specific and semantically accurate than using Place as the base type
+  const schemaTypes = ["Beach", "TouristAttraction"];
 
   // Convert amenities to structured format
   const amenityFeatures = generateAmenityFeatures(beach.amenities || []);
 
   // Generate comprehensive place schema
   const placeSchema = {
-    "@type": schemaType,
+    "@type": schemaTypes,
     "@id": canonicalUrl,
     name: beach.name,
     alternateName: beach.name, // Could be expanded with local names
@@ -55,7 +37,6 @@ export function generateBeachPlaceSchema(beach: Beach, canonicalUrl: string) {
       addressLocality: beach.area,
       addressRegion: beach.area,
       addressCountry: "GR",
-      // Could add streetAddress if available
     },
     // Geo coordinates - only include if both are available
     ...(beach.latitude &&
@@ -66,12 +47,6 @@ export function generateBeachPlaceSchema(beach: Beach, canonicalUrl: string) {
           longitude: beach.longitude,
         },
       }),
-    // For LocalBusiness type beaches
-    ...(schemaType === "LocalBusiness" && {
-      priceRange: "$$", // Beach amenities are typically affordable
-      paymentAccepted: ["Cash", "Credit Card"],
-      currenciesAccepted: "EUR",
-    }),
     // Tourism-specific properties
     touristType: "Beach Goer",
     isAccessibleForFree: !beach.amenities?.some((amenity) =>
@@ -100,8 +75,6 @@ export function generateBeachPlaceSchema(beach: Beach, canonicalUrl: string) {
     }),
     // Keywords for better categorization
     keywords: generateBeachKeywords(beach),
-    // Add additional types
-    additionalType: additionalTypes,
   };
 
   return placeSchema;
