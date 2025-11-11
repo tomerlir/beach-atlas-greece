@@ -53,7 +53,7 @@ const Index = () => {
       const { data, error } = await supabase
         .from("beaches")
         .select(
-          "id, name, area, slug, organized, blue_flag, parking, amenities, photo_url, photo_source, latitude, longitude"
+          "id, name, area, slug, organized, blue_flag, parking, amenities, photo_url, photo_source, latitude, longitude, wave_conditions, type"
         )
         .eq("status", "ACTIVE")
         .order("name");
