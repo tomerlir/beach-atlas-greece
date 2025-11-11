@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Generated files
+prerender-routes.json
+prerender-data.json
+
 # Environment variables
 .env
 .env.local
@@ -29,3 +33,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+/src/prerender-data.json

@@ -3,14 +3,43 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 import { asyncCssPlugin } from "./vite-plugin-async-css";
 import { performancePlugin } from "./vite-plugin-performance";
+import { vitePrerenderPlugin } from "vite-prerender-plugin";
+import { readFileSync, existsSync } from "fs";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
+export default defineConfig(({ mode }) => {
+  // Load prerender routes if in production build
+  let prerenderRoutes: string[] = [];
+  if (mode === 'production') {
+    const routesFile = path.resolve(__dirname, 'prerender-routes.json');
+    if (existsSync(routesFile)) {
+      try {
+        prerenderRoutes = JSON.parse(readFileSync(routesFile, 'utf-8'));
+        console.warn(`✅ Loaded ${prerenderRoutes.length} routes for prerendering`);
+      } catch (error) {
+        console.warn('⚠️  Could not load prerender-routes.json:', error);
+      }
+    } else {
+      console.warn('⚠️  prerender-routes.json not found. Run `npm run generate-routes` first.');
+    }
+  }
+
+  return {
   server: {
     host: "::",
     port: 8080,
   },
-  plugins: [react(), asyncCssPlugin(), performancePlugin()],
+  plugins: [
+    react(),
+    asyncCssPlugin(),
+    performancePlugin(),
+    // Only enable prerendering in production builds
+    mode === 'production' && vitePrerenderPlugin({
+      renderTarget: '#root',
+      prerenderScript: path.resolve(__dirname, 'prerender.tsx'),
+      additionalPrerenderRoutes: prerenderRoutes,
+    }),
+  ].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -127,4 +156,4 @@ export default defineConfig(({ mode }) => ({
       }
     }
   }
-}));
+}});

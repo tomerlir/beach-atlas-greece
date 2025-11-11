@@ -154,7 +154,7 @@ const Index = () => {
 
   // Generate SEO data with platform USPs
   const seoTitle = generateHomeMetaTitle();
-  const seoDescription = generateHomeMetaDescription(beaches.length);
+  const seoDescription = generateHomeMetaDescription();
   const canonicalUrl = "https://beachesofgreece.com";
 
   // Prevent indexing of filtered/paginated URLs (canonical points to clean URL)

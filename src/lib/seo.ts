@@ -167,6 +167,43 @@ export function generateBeachMetaTitle(beach: Beach): string {
 }
 
 /**
+ * Select contextual action verb based on beach attributes
+ * This creates natural variety in search results and matches user intent
+ */
+function selectActionVerb(beach: Beach): string {
+  // Family-friendly beaches → "Discover" (welcoming, safe)
+  if (beach.amenities?.includes("family_friendly")) {
+    return "Discover";
+  }
+
+  // Blue Flag certified → "Visit" (credible, trustworthy)
+  if (beach.blue_flag) {
+    return "Visit";
+  }
+
+  // Organized with amenities → "Experience" (luxury, full-service)
+  if (beach.organized && beach.amenities && beach.amenities.length >= 3) {
+    return "Experience";
+  }
+
+  // Remote/unorganized → "Explore" (adventure, discovery)
+  if (!beach.organized) {
+    return "Explore";
+  }
+
+  // Unique features (snorkeling, cliff jumping, surfable) → "Find" (specific activity)
+  if (
+    beach.amenities?.some((a) => ["snorkeling", "cliff_jumping", "water_sports"].includes(a)) ||
+    beach.wave_conditions === "SURFABLE"
+  ) {
+    return "Find";
+  }
+
+  // Default fallback → "Discover" (neutral, positive)
+  return "Discover";
+}
+
+/**
  * Generate benefit-focused meta description for a beach
  * Target: 150-160 characters
  */
@@ -174,10 +211,11 @@ export function generateBeachMetaDescription(beach: Beach): string {
   const maxLength = 160;
   const parts: string[] = [];
 
-  // Start with action verb + beach name + location (trim spaces)
+  // Start with contextual action verb + beach name + location (trim spaces)
+  const actionVerb = selectActionVerb(beach);
   const beachName = beach.name.trim();
   const areaName = beach.area.trim();
-  parts.push(`Discover ${beachName} in ${areaName}`);
+  parts.push(`${actionVerb} ${beachName} in ${areaName}`);
 
   // Build attribute list based on priority
   const attributes: string[] = [];
@@ -310,9 +348,10 @@ export function generateAreaMetaDescription(area: Area, beachCount?: number): st
 
 /**
  * Generate meta title for homepage
+ * Target: 50-60 characters
  */
 export function generateHomeMetaTitle(): string {
-  return "Find Your Perfect Greek Beach - Verified Data & Smart Search";
+  return "Find Greek Beaches by Area & Amenities | Smart Search";
 }
 
 /**

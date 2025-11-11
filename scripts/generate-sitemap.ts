@@ -15,22 +15,20 @@
 
 import { createClient } from '@supabase/supabase-js';
 
-// Utility function to generate area slug (same as in utils.ts)
+// Utility function to generate area slug (shared with generate-routes.ts and utils.ts)
+// Note: Keeping local copy to avoid ESM/CommonJS issues in build scripts
 const slugify = (input: string | undefined | null): string => {
   if (!input) return 'unknown';
   
   const base = input
     .normalize('NFKD')
-    // remove diacritic marks
     .replace(/[\u0300-\u036f]/g, '')
-    // keep only ascii letters, numbers, spaces, hyphens, underscores
     .replace(/[^A-Za-z0-9\s_-]/g, ' ')
     .trim()
     .toLowerCase()
     .replace(/[\s_-]+/g, '-')
     .replace(/^-+|-+$/g, '');
   if (base) return base;
-  // Fallback for non-latin names (e.g., Greek-only) → deterministic short id
   const rand = Math.random().toString(36).slice(2, 8);
   return `beach-${rand}`;
 };
