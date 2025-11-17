@@ -38,6 +38,7 @@ import { BreadcrumbsWithJsonLd } from "@/components/breadcrumbs/BreadcrumbsWithJ
 import { fetchMoreInArea } from "@/lib/fetchMoreInArea";
 import MoreInArea from "@/components/MoreInArea";
 import { analytics } from "@/lib/analytics";
+import JsonLdScript from "@/components/seo/JsonLdScript";
 
 interface AmenityItem {
   key: string;
@@ -381,10 +382,10 @@ const BeachDetail = () => {
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDescription} />
         {beach.photo_url && <meta name="twitter:image" content={beach.photo_url} />}
-
-        {/* JSON-LD structured data */}
-        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
+
+      {/* JSON-LD structured data */}
+      <JsonLdScript schema={jsonLd} id="beach-schema" />
 
       <div className="min-h-screen bg-background">
         <Header />

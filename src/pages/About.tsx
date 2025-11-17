@@ -5,6 +5,7 @@ import { Helmet } from "react-helmet-async";
 import { BreadcrumbsWithJsonLd } from "@/components/breadcrumbs/BreadcrumbsWithJsonLd";
 import OrganizationSchema from "@/components/OrganizationSchema";
 import { Link } from "react-router-dom";
+import JsonLdScript from "@/components/seo/JsonLdScript";
 
 const About = () => {
   // Generate SEO data
@@ -48,10 +49,9 @@ const About = () => {
           name="twitter:image"
           content={`${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.png`}
         />
-
-        {/* JSON-LD structured data */}
-        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
+
+      <JsonLdScript schema={jsonLd} id="about-schema" />
 
       {/* Organization Schema for AI engines */}
       <OrganizationSchema />

@@ -7,8 +7,31 @@
 
 import { Tables } from "@/integrations/supabase/types";
 import type { Area } from "@/types/area";
+import { generateAreaSlug, slugify } from "@/lib/utils";
 
 type Beach = Tables<"beaches">;
+
+const BASE_URL = "https://beachesofgreece.com";
+
+function cleanText(value: string | null | undefined, fallback = "") {
+  const trimmed = value?.trim() ?? "";
+  return trimmed.length > 0 ? trimmed : fallback;
+}
+
+function getBeachSlug(beach: Beach) {
+  const slug = typeof beach.slug === "string" ? beach.slug.trim() : "";
+  if (slug.length > 0) {
+    return slug;
+  }
+  return slugify(cleanText(beach.name, "beach"));
+}
+
+function buildBeachCanonicalUrl(beach: Beach, areaOverride?: string) {
+  const areaInput = cleanText(areaOverride || beach.area, "unknown-area");
+  const areaSlug = generateAreaSlug(areaInput);
+  const beachSlug = getBeachSlug(beach);
+  return `${BASE_URL}/${areaSlug}/${beachSlug}`;
+}
 
 /**
  * Generate comprehensive Beach schema
@@ -20,6 +43,8 @@ export function generateBeachPlaceSchema(beach: Beach, canonicalUrl: string) {
   // Add TouristAttraction as a secondary type since beaches are tourist destinations
   // This is more specific and semantically accurate than using Place as the base type
   const schemaTypes = ["Beach", "TouristAttraction"];
+  const beachName = cleanText(beach.name, "Unnamed Beach");
+  const beachArea = cleanText(beach.area, "Greece");
 
   // Convert amenities to structured format
   const amenityFeatures = generateAmenityFeatures(beach.amenities || []);
@@ -28,14 +53,14 @@ export function generateBeachPlaceSchema(beach: Beach, canonicalUrl: string) {
   const placeSchema = {
     "@type": schemaTypes,
     "@id": canonicalUrl,
-    name: beach.name,
-    alternateName: beach.name, // Could be expanded with local names
+    name: beachName,
+    alternateName: beachName, // Could be expanded with local names
     description: beach.description || generateBeachDescription(beach),
     url: canonicalUrl,
     address: {
       "@type": "PostalAddress",
-      addressLocality: beach.area,
-      addressRegion: beach.area,
+      addressLocality: beachArea,
+      addressRegion: beachArea,
       addressCountry: "GR",
     },
     // Geo coordinates - only include if both are available
@@ -98,22 +123,35 @@ function generateAmenityFeatures(amenities: string[]) {
     parking: { name: "Parking", category: "Access" },
   };
 
-  return amenities.map((amenity) => {
-    const mapping = amenityMapping[amenity];
-    return {
-      "@type": "LocationFeatureSpecification",
-      name: mapping?.name || amenity,
-      category: mapping?.category || "Facility",
-      value: true,
-    };
-  });
+  return amenities
+    .map((amenity) => {
+      const mapping = amenityMapping[amenity];
+      if (!mapping) return null;
+      return {
+        "@type": "LocationFeatureSpecification",
+        name: mapping.name,
+        category: mapping.category,
+        value: true,
+      };
+    })
+    .filter(
+      (feature): feature is { "@type": string; name: string; category: string; value: boolean } => {
+        return feature !== null;
+      }
+    );
 }
 
 /**
  * Generate beach-specific properties
  */
+type PropertyValueSchema = {
+  "@type": "PropertyValue";
+  name: string;
+  value: string | boolean;
+};
+
 function generateBeachProperties(beach: Beach) {
-  const properties = [
+  const properties: PropertyValueSchema[] = [
     {
       "@type": "PropertyValue",
       name: "Beach Type",
@@ -143,7 +181,7 @@ function generateBeachProperties(beach: Beach) {
     properties.push({
       "@type": "PropertyValue",
       name: "Blue Flag Certified",
-      value: "Yes",
+      value: true,
     });
   }
 
@@ -226,11 +264,14 @@ function generateBeachImageCaption(beach: Beach) {
  * Generate complete WebPage schema with Place as main entity
  */
 export function generateBeachWebPageSchema(beach: Beach, canonicalUrl: string) {
+  const beachName = cleanText(beach.name, "Unnamed Beach");
+  const beachArea = cleanText(beach.area, "Greece");
+
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "@id": canonicalUrl,
-    name: `${beach.name} - ${beach.area} | Greek Beaches`,
+    name: `${beachName} - ${beachArea} | Greek Beaches`,
     description: generateBeachDescription(beach),
     url: canonicalUrl,
     datePublished: beach.created_at
@@ -259,8 +300,8 @@ export function generateBeachWebPageSchema(beach: Beach, canonicalUrl: string) {
         {
           "@type": "ListItem",
           position: 3,
-          name: beach.area,
-          item: `https://beachesofgreece.com/${beach.area.toLowerCase().replace(/\s+/g, "-")}`,
+          name: beachArea,
+          item: `https://beachesofgreece.com/${generateAreaSlug(beachArea)}`,
         },
         {
           "@type": "ListItem",
@@ -277,6 +318,8 @@ export function generateBeachWebPageSchema(beach: Beach, canonicalUrl: string) {
  * Generate area/collection page schema
  */
 export function generateAreaWebPageSchema(area: Area, beaches: Beach[], canonicalUrl: string) {
+  const areaSlugOverride = area.slug || area.name;
+
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -296,11 +339,14 @@ export function generateAreaWebPageSchema(area: Area, beaches: Beach[], canonica
       description: `Curated collection of ${beaches.length} beaches in ${area.name}, Greece`,
       numberOfItems: beaches.length,
       itemListOrder: "https://schema.org/ItemListOrderAscending",
-      itemListElement: beaches.slice(0, 20).map((beach, index) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        item: generateBeachPlaceSchema(beach, `${canonicalUrl}/${beach.slug}`),
-      })),
+      itemListElement: beaches.slice(0, 20).map((beach, index) => {
+        const beachCanonical = buildBeachCanonicalUrl(beach, areaSlugOverride || beach.area);
+        return {
+          "@type": "ListItem",
+          position: index + 1,
+          item: generateBeachPlaceSchema(beach, beachCanonical),
+        };
+      }),
     },
     // Breadcrumb structured data
     breadcrumb: {
@@ -333,7 +379,7 @@ export function generateAreaWebPageSchema(area: Area, beaches: Beach[], canonica
  * Generate homepage schema with collection overview
  */
 export function generateHomeWebPageSchema(beaches: Beach[]) {
-  const canonicalUrl = "https://beachesofgreece.com";
+  const canonicalUrl = BASE_URL;
 
   return {
     "@context": "https://schema.org",
@@ -354,10 +400,7 @@ export function generateHomeWebPageSchema(beaches: Beach[]) {
       itemListElement: beaches.slice(0, 20).map((beach, index) => ({
         "@type": "ListItem",
         position: index + 1,
-        item: generateBeachPlaceSchema(
-          beach,
-          `https://beachesofgreece.com/${beach.area.toLowerCase().replace(/\s+/g, "-")}/${beach.slug}`
-        ),
+        item: generateBeachPlaceSchema(beach, buildBeachCanonicalUrl(beach)),
       })),
     },
   };
@@ -386,10 +429,7 @@ export function generateMapWebPageSchema(beaches: Beach[], canonicalUrl: string)
       itemListElement: beaches.slice(0, 20).map((beach, index) => ({
         "@type": "ListItem",
         position: index + 1,
-        item: generateBeachPlaceSchema(
-          beach,
-          `https://beachesofgreece.com/${beach.area.toLowerCase().replace(/\s+/g, "-")}/${beach.slug}`
-        ),
+        item: generateBeachPlaceSchema(beach, buildBeachCanonicalUrl(beach)),
       })),
     },
   };

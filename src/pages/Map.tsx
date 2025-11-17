@@ -20,6 +20,7 @@ import { analytics } from "@/lib/analytics";
 import { createMapOpenEvent } from "@/lib/analyticsEvents";
 import { generateMapWebPageSchema } from "@/lib/structured-data";
 import OrganizationSchema from "@/components/OrganizationSchema";
+import JsonLdScript from "@/components/seo/JsonLdScript";
 
 // Leaflet + React-Leaflet
 import "leaflet/dist/leaflet.css";
@@ -222,10 +223,10 @@ const MapPage = () => {
 
         {/* Prevent indexing of filtered URLs */}
         {shouldNoIndex && <meta name="robots" content="noindex, follow" />}
-
-        {/* JSON-LD structured data */}
-        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
+
+      {/* JSON-LD structured data */}
+      <JsonLdScript schema={jsonLd} id="map-schema" />
 
       {/* Organization Schema for AI engines */}
       <OrganizationSchema />

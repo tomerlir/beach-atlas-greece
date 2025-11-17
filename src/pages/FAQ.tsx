@@ -9,6 +9,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 import { ChevronDown } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import JsonLdScript from "@/components/seo/JsonLdScript";
 
 const FAQ = () => {
   // FAQ data structured for both UI and Schema.org
@@ -153,13 +154,11 @@ const FAQ = () => {
           name="twitter:image"
           content={`${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.png`}
         />
-
-        {/* JSON-LD structured data - FAQPage Schema */}
-        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
-
-        {/* JSON-LD structured data - WebPage Schema */}
-        <script type="application/ld+json">{JSON.stringify(webPageSchema)}</script>
       </Helmet>
+
+      {/* JSON-LD structured data */}
+      <JsonLdScript schema={faqSchema} id="faq-schema" />
+      <JsonLdScript schema={webPageSchema} id="faq-webpage-schema" />
 
       {/* Organization Schema for AI engines */}
       <OrganizationSchema />

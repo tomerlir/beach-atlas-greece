@@ -7,6 +7,7 @@ import type { Area } from './src/types/area';
 // Metadata structure matches what's in generate-routes.ts
 // Using subset of Tables<"beaches"> fields needed for SEO
 interface BeachMetadata {
+  slug: string;
   name: string;
   area: string;
   blue_flag: boolean;
@@ -199,11 +200,12 @@ export async function prerender(data: { url: string }) {
 
     // Add JSON-LD structured data if available
     if (jsonLdData) {
+      const jsonLdString = JSON.stringify(jsonLdData, null, 2);
       headElements.add({
         type: 'script',
         props: {
           type: 'application/ld+json',
-          innerHTML: JSON.stringify(jsonLdData)
+          children: jsonLdString
         }
       });
     }

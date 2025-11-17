@@ -1,7 +1,7 @@
 import React from "react";
-import { Helmet } from "react-helmet-async";
 import { Breadcrumbs, Crumb } from "./Breadcrumbs";
 import { breadcrumbJsonLd } from "./breadcrumbJsonLd";
+import JsonLdScript from "../seo/JsonLdScript";
 
 export type BreadcrumbsWithJsonLdProps = {
   items: Crumb[];
@@ -18,9 +18,7 @@ export const BreadcrumbsWithJsonLd: React.FC<BreadcrumbsWithJsonLdProps> = ({
   return (
     <>
       <Breadcrumbs items={items} />
-      <Helmet>
-        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
-      </Helmet>
+      <JsonLdScript schema={jsonLd} />
     </>
   );
 };

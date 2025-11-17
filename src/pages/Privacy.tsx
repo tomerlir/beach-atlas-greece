@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { CONTACT_EMAIL } from "@/lib/constants";
 import { Helmet } from "react-helmet-async";
 import { BreadcrumbsWithJsonLd } from "@/components/breadcrumbs/BreadcrumbsWithJsonLd";
+import JsonLdScript from "@/components/seo/JsonLdScript";
 
 const Privacy = () => {
   const seoTitle = "Privacy Policy | Beaches of Greece";
@@ -24,7 +25,6 @@ const Privacy = () => {
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />
         <link rel="canonical" href={canonicalUrl} />
-        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
 
         {/* Open Graph tags */}
         <meta property="og:title" content={seoTitle} />
@@ -46,6 +46,8 @@ const Privacy = () => {
           content={`${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.png`}
         />
       </Helmet>
+
+      <JsonLdScript schema={jsonLd} id="privacy-schema" />
 
       <div className="min-h-screen bg-background">
         <Header />

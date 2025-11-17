@@ -11,6 +11,7 @@ import PhotoAttribution from "@/components/PhotoAttribution";
 import ResponsivePicture from "@/components/ResponsivePicture";
 import { BreadcrumbsWithJsonLd } from "@/components/breadcrumbs/BreadcrumbsWithJsonLd";
 import OrganizationSchema from "@/components/OrganizationSchema";
+import JsonLdScript from "@/components/seo/JsonLdScript";
 
 const Areas = () => {
   const { data: areas = [], isLoading, error } = useAreasWithBeachCount();
@@ -72,10 +73,10 @@ const Areas = () => {
           name="twitter:image"
           content={`${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.png`}
         />
-
-        {/* JSON-LD structured data */}
-        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
+
+      {/* JSON-LD structured data */}
+      <JsonLdScript schema={jsonLd} id="areas-schema" />
 
       {/* Organization Schema for AI engines */}
       <OrganizationSchema />

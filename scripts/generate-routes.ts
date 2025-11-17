@@ -70,6 +70,7 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Metadata structure for prerendering (subset of Tables<"beaches"> fields needed for SEO)
 interface BeachMetadata {
+  slug: string;
   name: string;
   area: string;
   blue_flag: boolean;
@@ -154,12 +155,14 @@ async function generateRoutes(): Promise<RouteData> {
     beaches.forEach(beach => {
       const area = areas?.find(a => a.id === beach.area_id);
       const areaSlug = area?.slug || generateAreaSlug(beach.area);
-      const routePath = `/${areaSlug}/${beach.slug}`;
+      const beachSlug = beach.slug || slugify(beach.name);
+      const routePath = `/${areaSlug}/${beachSlug}`;
       
       routes.push(routePath);
       
       // Store metadata for SEO generation
       beachMetadata[routePath] = {
+        slug: beachSlug,
         name: beach.name,
         area: beach.area,
         blue_flag: beach.blue_flag || false,

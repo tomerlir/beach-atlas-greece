@@ -30,6 +30,7 @@ import PhotoAttribution from "@/components/PhotoAttribution";
 import { BreadcrumbsWithJsonLd } from "@/components/breadcrumbs/BreadcrumbsWithJsonLd";
 import PlaceMismatchNotification from "@/components/PlaceMismatchNotification";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import JsonLdScript from "@/components/seo/JsonLdScript";
 
 const BEACHES_PER_PAGE = 9;
 
@@ -270,10 +271,8 @@ const Area = () => {
             `${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.png`
           }
         />
-
-        {/* JSON-LD structured data */}
-        {jsonLd && <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>}
       </Helmet>
+      {jsonLd && <JsonLdScript schema={jsonLd} id="area-schema" />}
 
       <div className="min-h-screen bg-background">
         <Header />

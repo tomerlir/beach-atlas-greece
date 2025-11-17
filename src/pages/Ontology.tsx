@@ -6,6 +6,7 @@ import { BreadcrumbsWithJsonLd } from "@/components/breadcrumbs/BreadcrumbsWithJ
 import OrganizationSchema from "@/components/OrganizationSchema";
 import { getAmenitiesByCategory } from "@/lib/amenities";
 import { MapPin, Waves, Car, Shield, Clock, CheckCircle, AlertCircle, Info } from "lucide-react";
+import JsonLdScript from "@/components/seo/JsonLdScript";
 
 const Ontology = () => {
   // Generate SEO data
@@ -174,13 +175,11 @@ const Ontology = () => {
           name="twitter:image"
           content={`${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.png`}
         />
-
-        {/* JSON-LD structured data - WebPage */}
-        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
-
-        {/* JSON-LD structured data - Dataset for AI engines */}
-        <script type="application/ld+json">{JSON.stringify(datasetSchema)}</script>
       </Helmet>
+
+      {/* JSON-LD structured data */}
+      <JsonLdScript schema={jsonLd} id="ontology-webpage-schema" />
+      <JsonLdScript schema={datasetSchema} id="ontology-dataset-schema" />
 
       {/* Organization Schema for AI engines */}
       <OrganizationSchema />

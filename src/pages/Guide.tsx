@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Waves, Car, Shield, Star, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
+import JsonLdScript from "@/components/seo/JsonLdScript";
 
 const Guide = () => {
   const seoTitle = "Greek Beach Selection Guide | Find Your Perfect Beach";
@@ -103,9 +104,10 @@ const Guide = () => {
           name="twitter:image"
           content={`${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.png`}
         />
-        <script type="application/ld+json">{JSON.stringify(howToSchema)}</script>
-        <script type="application/ld+json">{JSON.stringify(webPageSchema)}</script>
       </Helmet>
+
+      <JsonLdScript schema={howToSchema} id="guide-howto-schema" />
+      <JsonLdScript schema={webPageSchema} id="guide-webpage-schema" />
 
       {/* Organization Schema for AI engines */}
       <OrganizationSchema />

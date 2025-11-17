@@ -25,6 +25,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { Helmet } from "react-helmet-async";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import OrganizationSchema from "@/components/OrganizationSchema";
+import JsonLdScript from "@/components/seo/JsonLdScript";
 
 const BEACHES_PER_PAGE = 9;
 
@@ -185,10 +186,10 @@ const Index = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDescription} />
-
-        {/* JSON-LD structured data */}
-        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
+
+      {/* JSON-LD structured data */}
+      <JsonLdScript schema={jsonLd} id="home-schema" />
 
       {/* Organization Schema for AI engines */}
       <OrganizationSchema />

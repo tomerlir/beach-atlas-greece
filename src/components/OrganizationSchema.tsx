@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+import JsonLdScript from "./seo/JsonLdScript";
 
 /**
  * Organization Schema Component
@@ -75,10 +75,10 @@ const OrganizationSchema = () => {
   };
 
   return (
-    <Helmet>
-      <script type="application/ld+json">{JSON.stringify(organizationSchema)}</script>
-      <script type="application/ld+json">{JSON.stringify(websiteSchema)}</script>
-    </Helmet>
+    <>
+      <JsonLdScript schema={organizationSchema} id="organization-schema" />
+      <JsonLdScript schema={websiteSchema} id="website-schema" />
+    </>
   );
 };
 
