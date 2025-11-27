@@ -59,7 +59,7 @@ export const useServiceWorker = (): ServiceWorkerState => {
             newWorker.removeEventListener("statechange", stateChangeHandler);
 
             if (navigator.serviceWorker.controller) {
-              console.info(
+              console.warn(
                 "[ServiceWorker] Update installed; the refreshed content will load on the next navigation."
               );
             }
