@@ -44,20 +44,28 @@ export const useServiceWorker = (): ServiceWorkerState => {
           registration,
         }));
 
-        // Handle updates
+        // Handle updates without interrupting the user
         updateHandler = () => {
           const newWorker = registration?.installing;
-          if (newWorker) {
-            const stateChangeHandler = () => {
-              if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
-                // New content is available, prompt user to refresh
-                if (confirm("New version available! Refresh to update?")) {
-                  window.location.reload();
-                }
-              }
-            };
-            newWorker.addEventListener("statechange", stateChangeHandler);
+          if (!newWorker) {
+            return;
           }
+
+          const stateChangeHandler = () => {
+            if (newWorker.state !== "installed") {
+              return;
+            }
+
+            newWorker.removeEventListener("statechange", stateChangeHandler);
+
+            if (navigator.serviceWorker.controller) {
+              console.info(
+                "[ServiceWorker] Update installed; the refreshed content will load on the next navigation."
+              );
+            }
+          };
+
+          newWorker.addEventListener("statechange", stateChangeHandler);
         };
 
         registration.addEventListener("updatefound", updateHandler);
