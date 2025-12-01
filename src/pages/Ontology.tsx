@@ -12,7 +12,7 @@ const Ontology = () => {
   // Generate SEO data
   const seoTitle = "Beach Data Ontology - Greek Beaches";
   const seoDescription =
-    "Official definitions for beach data fields tracked by Beach Atlas Greece. Understand how we model beaches as structured data for explainable matches.";
+    "Official definitions for beach data fields tracked by Beaches of Greece. Understand how we model beaches as structured data for explainable matches.";
   const canonicalUrl = "https://beachesofgreece.com/ontology";
   const today = new Date().toLocaleDateString("en-US", {
     year: "numeric",
@@ -165,7 +165,7 @@ const Ontology = () => {
           property="og:image"
           content={`${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.png`}
         />
-        <meta property="og:site_name" content="Beach Atlas Greece" />
+        <meta property="og:site_name" content="Beaches of Greece" />
 
         {/* Twitter Card tags */}
         <meta name="twitter:card" content="summary_large_image" />

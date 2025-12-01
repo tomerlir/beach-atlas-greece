@@ -1,6 +1,6 @@
 # Analytics System
 
-This directory contains the **lean, high-value** analytics implementation for Beach Atlas Greece, built on top of Umami and consent-gated Google Analytics 4 with privacy-first principles.
+This directory contains the **lean, high-value** analytics implementation for Beaches of Greece, built on top of Umami and consent-gated Google Analytics 4 with privacy-first principles.
 
 ## Files
 

@@ -35,7 +35,7 @@ const Privacy = () => {
           property="og:image"
           content={`${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.png`}
         />
-        <meta property="og:site_name" content="Beach Atlas Greece" />
+        <meta property="og:site_name" content="Beaches of Greece" />
 
         {/* Twitter Card tags */}
         <meta name="twitter:card" content="summary_large_image" />

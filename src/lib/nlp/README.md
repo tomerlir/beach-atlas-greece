@@ -1,6 +1,6 @@
-# Enhanced Natural Language Processing for Beach Atlas
+# Enhanced Natural Language Processing for Beaches of Greece
 
-This module provides advanced NLP capabilities for the Beach Atlas Greece application, significantly improving the understanding and processing of natural language search queries.
+This module provides advanced NLP capabilities for the Beaches of Greece application, significantly improving the understanding and processing of natural language search queries.
 
 ## 🚀 Features
 
@@ -305,4 +305,4 @@ console.log("NLP Debug:", await extractFromNaturalLanguage(query));
 
 ## 📄 License
 
-This module is part of the Beach Atlas Greece project and follows the same licensing terms.
+This module is part of the Beaches of Greece project and follows the same licensing terms.

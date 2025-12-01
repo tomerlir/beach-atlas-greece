@@ -375,7 +375,7 @@ const BeachDetail = () => {
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
         {beach.photo_url && <meta property="og:image" content={beach.photo_url} />}
-        <meta property="og:site_name" content="Beach Atlas Greece" />
+        <meta property="og:site_name" content="Beaches of Greece" />
 
         {/* Twitter Card tags */}
         <meta name="twitter:card" content="summary_large_image" />

@@ -125,7 +125,6 @@ const AreasGrid = ({ maxAreas = 12, showViewAll = true, className = "" }: AreasG
                         className="group-hover:scale-105 transition-transform duration-500"
                         loading="lazy"
                         sizes="(max-width: 768px) 128px, (max-width: 1200px) 150px, 200px"
-                        quality={85}
                         fallbackComponent={fallbackComponent}
                       />
                     ) : (

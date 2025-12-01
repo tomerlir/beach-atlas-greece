@@ -63,7 +63,7 @@ const Areas = () => {
           property="og:image"
           content={`${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.png`}
         />
-        <meta property="og:site_name" content="Beach Atlas Greece" />
+        <meta property="og:site_name" content="Beaches of Greece" />
 
         {/* Twitter Card tags */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -195,7 +195,6 @@ const Areas = () => {
                                 className="group-hover:scale-105 transition-transform duration-500"
                                 loading="lazy"
                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                quality={85}
                                 fallbackComponent={fallbackComponent}
                               />
                             ) : (

@@ -96,7 +96,7 @@ const Guide = () => {
           property="og:image"
           content={`${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.png`}
         />
-        <meta property="og:site_name" content="Beach Atlas Greece" />
+        <meta property="og:site_name" content="Beaches of Greece" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={seoTitle} />
         <meta name="twitter:description" content={seoDescription} />

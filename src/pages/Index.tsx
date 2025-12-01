@@ -180,7 +180,7 @@ const Index = () => {
         <meta property="og:description" content={seoDescription} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:site_name" content="Beach Atlas Greece" />
+        <meta property="og:site_name" content="Beaches of Greece" />
 
         {/* Twitter Card tags */}
         <meta name="twitter:card" content="summary_large_image" />

@@ -1,6 +1,6 @@
 # Breadcrumb Components
 
-This directory contains standardized breadcrumb components for the Beach Atlas application.
+This directory contains standardized breadcrumb components for the Beaches of Greece application.
 
 ## Components
 

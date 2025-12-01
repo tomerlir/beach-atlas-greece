@@ -1,5 +1,5 @@
 /**
- * Structured Data Utilities for Beach Atlas Greece
+ * Structured Data Utilities for Beaches of Greece
  *
  * Provides optimized schema.org markup for beaches, areas, and tourism content
  * following Google's guidelines for rich results and AI understanding.
