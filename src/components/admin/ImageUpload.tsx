@@ -254,9 +254,7 @@ export default function ImageUpload({
       )}
 
       {/* Error */}
-      {(uploadError || error) && (
-        <p className="text-sm text-destructive">{uploadError || error}</p>
-      )}
+      {(uploadError || error) && <p className="text-sm text-destructive">{uploadError || error}</p>}
 
       {/* Toggle to manual URL */}
       <button
