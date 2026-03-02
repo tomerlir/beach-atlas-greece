@@ -19,9 +19,8 @@
  */
 
 import { createClient } from "@supabase/supabase-js";
-import { existsSync, readFileSync, writeFileSync } from "fs";
+import { existsSync, readFileSync, writeFileSync, readdirSync } from "fs";
 import { join, extname, basename } from "path";
-import { readdirSync } from "fs";
 
 // ---------------------------------------------------------------------------
 // Bootstrap .env
@@ -188,12 +187,8 @@ function collectWorkItems(downloadProgress: DownloadProgress): WorkItem[] {
 async function main() {
   // Verify download progress file exists
   if (!existsSync(DOWNLOAD_PROGRESS_FILE)) {
-    console.error(
-      "❌  No download progress file found at:\n   " + DOWNLOAD_PROGRESS_FILE
-    );
-    console.error(
-      "   Run scripts/download-wikimedia-images.ts first."
-    );
+    console.error("❌  No download progress file found at:\n   " + DOWNLOAD_PROGRESS_FILE);
+    console.error("   Run scripts/download-wikimedia-images.ts first.");
     process.exit(1);
   }
 
@@ -307,12 +302,8 @@ async function main() {
   console.log("=".repeat(60));
 
   if (errors > 0) {
-    console.log(
-      `\n💡  Re-run the script to retry the ${errors} failed item(s).`
-    );
-    console.log(
-      `   (Delete their entries from upload-progress.json first to force a retry)`
-    );
+    console.log(`\n💡  Re-run the script to retry the ${errors} failed item(s).`);
+    console.log(`   (Delete their entries from upload-progress.json first to force a retry)`);
   }
 }
 
