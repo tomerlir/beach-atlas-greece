@@ -4,10 +4,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import { useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import { authSupabase } from "@/integrations/supabase/client";
 import type { Tables, TablesInsert, TablesUpdate } from "@/integrations/supabase/types";
 import { slugify } from "@/lib/utils";
+import ImageUpload from "@/components/admin/ImageUpload";
 import { useEntityFormDraftState } from "@/hooks/useEntityFormDraftState";
 
 type Area = Tables<"areas">;
@@ -53,6 +55,7 @@ const AreaForm: React.FC = () => {
   const [slugTouched, setSlugTouched] = useState(false);
   const lastGeneratedSlugRef = useRef<string>("");
 
+  const queryClient = useQueryClient();
   const id = params.id as string | undefined;
 
   const mode = id ? "edit" : "create";
@@ -214,6 +217,7 @@ const AreaForm: React.FC = () => {
           .select()
           .maybeSingle();
         if (error || !data) throw error || new Error("Insert returned no row");
+        queryClient.invalidateQueries({ queryKey: ["areas"] });
         toast({ title: "Saved", description: "Area created." });
       } else if (mode === "edit" && id) {
         const uniqueSlug = await ensureUniqueSlug(parsed.data.slug, id);
@@ -236,6 +240,8 @@ const AreaForm: React.FC = () => {
           .select()
           .maybeSingle();
         if (error || !data) throw error || new Error("Update matched no rows");
+        queryClient.invalidateQueries({ queryKey: ["areas"] });
+        queryClient.invalidateQueries({ queryKey: ["area", parsed.data.slug] });
         toast({ title: "Saved", description: "Area updated." });
       }
       setDirty(false);
@@ -362,20 +368,15 @@ const AreaForm: React.FC = () => {
           )}
         </div>
         <div>
-          <label className="block text-sm font-medium">Hero Photo URL</label>
-          <Input
+          <ImageUpload
+            label="Hero Photo"
             name="hero_photo_url"
             value={draft.hero_photo_url}
-            onChange={(e) => updateDraft({ hero_photo_url: e.target.value })}
-            aria-invalid={!!errors.hero_photo_url}
-            aria-describedby={errors.hero_photo_url ? "hero-err" : undefined}
-            placeholder="https://example.com/photo.jpg"
+            onChange={(url) => updateDraft({ hero_photo_url: url })}
+            bucket="beach-photos"
+            storagePath={id ? `areas/${id}` : "areas/unsaved"}
+            error={errors.hero_photo_url}
           />
-          {errors.hero_photo_url && (
-            <p id="hero-err" className="text-sm text-destructive">
-              {errors.hero_photo_url}
-            </p>
-          )}
         </div>
         <div>
           <label className="block text-sm font-medium">Hero Photo Source</label>

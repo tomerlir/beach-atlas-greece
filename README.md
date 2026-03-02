@@ -1,4 +1,4 @@
-# Beach Atlas Greece 🇬🇷
+# Beaches of Greece 🇬🇷
 
 A comprehensive web application for discovering and exploring the most beautiful beaches in Greece. Built with modern web technologies, this platform provides an intuitive way to search, filter, and explore Greek beaches with detailed information about amenities, locations, and Blue Flag certifications.
 

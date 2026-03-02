@@ -11,11 +11,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
 import { authSupabase } from "@/integrations/supabase/client";
 import type { Tables, TablesInsert, TablesUpdate } from "@/integrations/supabase/types";
 import { PARKING_OPTIONS, STATUS_OPTIONS, TYPE_OPTIONS, WAVE_OPTIONS, slugify } from "@/lib/utils";
 import AmenitiesMultiselect from "@/components/admin/AmenitiesMultiselect";
+import ImageUpload from "@/components/admin/ImageUpload";
 import { useEntityFormDraftState } from "@/hooks/useEntityFormDraftState";
 import { useAreas } from "@/hooks/useAreas";
 
@@ -80,6 +82,7 @@ const BeachForm: React.FC = () => {
   const [slugTouched, setSlugTouched] = useState(false);
   const lastGeneratedSlugRef = useRef<string>("");
 
+  const queryClient = useQueryClient();
   const id = params.id as string | undefined;
 
   // Determine mode based on whether we have an ID
@@ -303,6 +306,9 @@ const BeachForm: React.FC = () => {
           .select()
           .single();
         if (error || !data) throw error || new Error("Insert returned no row");
+        // Invalidate public cache so the new beach appears immediately
+        queryClient.invalidateQueries({ queryKey: ["beaches"] });
+        queryClient.invalidateQueries({ queryKey: ["areas"] });
         toast({ title: "Saved", description: "Beach created." });
       } else if (mode === "edit" && id) {
         // Keep slug unique, excluding current record
@@ -321,6 +327,9 @@ const BeachForm: React.FC = () => {
           .select()
           .single();
         if (error || !data) throw error || new Error("Update matched no rows");
+        // Invalidate public cache so the updated photo_url is visible immediately
+        queryClient.invalidateQueries({ queryKey: ["beaches"] });
+        queryClient.invalidateQueries({ queryKey: ["beach", parsed.data.slug] });
         toast({ title: "Saved", description: "Beach updated." });
       }
       setDirty(false);
@@ -611,12 +620,14 @@ const BeachForm: React.FC = () => {
           />
         </div>
         <div className="md:col-span-2">
-          <label className="block text-sm font-medium">Photo URL</label>
-          <Input
+          <ImageUpload
+            label="Photo"
             name="photo_url"
             value={draft.photo_url}
-            onChange={(e) => updateDraft({ photo_url: e.target.value })}
-            placeholder="https://..."
+            onChange={(url) => updateDraft({ photo_url: url })}
+            bucket="beach-photos"
+            storagePath={id ? `beaches/${id}` : "beaches/unsaved"}
+            error={errors.photo_url}
           />
         </div>
         <div className="md:col-span-2">

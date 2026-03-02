@@ -1,0 +1,988 @@
+{
+  "startedAt": "2026-03-02T16:26:55.306Z",
+  "lastUpdatedAt": "2026-03-02T16:45:47.109Z",
+  "total": 196,
+  "completed": 196,
+  "entries": {
+    "0e184487-a026-4761-b8e6-97eb61cd1e23": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/0e184487-a026-4761-b8e6-97eb61cd1e23.jpg",
+      "timestamp": "2026-03-02T16:26:56.299Z"
+    },
+    "a686bfb3-64d6-42d2-b557-c6fcb8d538ab": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/a686bfb3-64d6-42d2-b557-c6fcb8d538ab.jpg",
+      "timestamp": "2026-03-02T16:27:01.141Z"
+    },
+    "70c36042-235a-4f3d-bac6-33f8126db4b1": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/70c36042-235a-4f3d-bac6-33f8126db4b1.jpg",
+      "timestamp": "2026-03-02T16:27:04.601Z"
+    },
+    "2f230ef6-cc33-4b63-a226-bffeb2d4eafb": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/2f230ef6-cc33-4b63-a226-bffeb2d4eafb.jpg",
+      "timestamp": "2026-03-02T16:27:08.248Z"
+    },
+    "3b46111a-67a6-461a-86e6-41496ded61b4": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/3b46111a-67a6-461a-86e6-41496ded61b4.jpg",
+      "timestamp": "2026-03-02T16:27:12.224Z"
+    },
+    "f477630a-d09b-4d18-9742-3afe5eed166b": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/f477630a-d09b-4d18-9742-3afe5eed166b.jpg",
+      "timestamp": "2026-03-02T16:27:17.540Z"
+    },
+    "706548a4-9c51-402f-a96d-6466eb96b31c": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/706548a4-9c51-402f-a96d-6466eb96b31c.jpg",
+      "timestamp": "2026-03-02T16:27:22.438Z"
+    },
+    "6de73963-416b-4d9d-9f95-2902fc9dc230": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/6de73963-416b-4d9d-9f95-2902fc9dc230.jpg",
+      "timestamp": "2026-03-02T16:27:26.562Z"
+    },
+    "d0dba3d9-5ba8-475d-aad8-9c0155dda2a9": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/d0dba3d9-5ba8-475d-aad8-9c0155dda2a9.jpg",
+      "timestamp": "2026-03-02T16:27:31.259Z"
+    },
+    "2e74e392-f239-4bdc-96c2-bfbba53f6748": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/2e74e392-f239-4bdc-96c2-bfbba53f6748.jpg",
+      "timestamp": "2026-03-02T16:27:36.353Z"
+    },
+    "0f6e1dba-d92d-4f9d-9c05-a99b20de6051": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/0f6e1dba-d92d-4f9d-9c05-a99b20de6051.jpg",
+      "timestamp": "2026-03-02T16:27:40.100Z"
+    },
+    "12bc3e54-0d72-479e-84e6-7eb32e9befd0": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/12bc3e54-0d72-479e-84e6-7eb32e9befd0.jpg",
+      "timestamp": "2026-03-02T16:27:43.665Z"
+    },
+    "c300582c-25ab-4261-a62d-62fe4051775c": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/c300582c-25ab-4261-a62d-62fe4051775c.jpg",
+      "timestamp": "2026-03-02T16:27:48.529Z"
+    },
+    "63329a98-f0d1-41dd-bb8d-25d50392c93d": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/63329a98-f0d1-41dd-bb8d-25d50392c93d.jpg",
+      "timestamp": "2026-03-02T16:27:53.905Z"
+    },
+    "3e236279-d4fe-487a-93f3-dc185a27cafd": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/3e236279-d4fe-487a-93f3-dc185a27cafd.jpg",
+      "timestamp": "2026-03-02T16:27:57.392Z"
+    },
+    "5bfd5d37-fb6a-4b33-a7dd-448890ec5e74": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/5bfd5d37-fb6a-4b33-a7dd-448890ec5e74.jpg",
+      "timestamp": "2026-03-02T16:28:02.041Z"
+    },
+    "279d787d-140e-4828-ade3-cb9c44f030e1": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/279d787d-140e-4828-ade3-cb9c44f030e1.jpg",
+      "timestamp": "2026-03-02T16:28:07.886Z"
+    },
+    "d8b6b2ef-eae5-4da8-85b0-b9c8f44fe720": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/d8b6b2ef-eae5-4da8-85b0-b9c8f44fe720.jpg",
+      "timestamp": "2026-03-02T16:28:11.897Z"
+    },
+    "bd2b8084-cb53-4279-b4dc-3f6dabd5cfec": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/bd2b8084-cb53-4279-b4dc-3f6dabd5cfec.jpg",
+      "timestamp": "2026-03-02T16:28:15.703Z"
+    },
+    "77a36709-32dc-418a-9137-284016ee3608": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/77a36709-32dc-418a-9137-284016ee3608.jpg",
+      "timestamp": "2026-03-02T16:28:21.395Z"
+    },
+    "35a254ae-3acd-42fb-b3e6-0448336dcb7a": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/35a254ae-3acd-42fb-b3e6-0448336dcb7a.jpg",
+      "timestamp": "2026-03-02T16:28:26.857Z"
+    },
+    "4aae2c91-5317-4b94-a21f-840b548178b3": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/4aae2c91-5317-4b94-a21f-840b548178b3.jpg",
+      "timestamp": "2026-03-02T16:28:32.328Z"
+    },
+    "bfed8eb3-ba2d-4409-9c27-445c3e3e5e7b": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/bfed8eb3-ba2d-4409-9c27-445c3e3e5e7b.jpg",
+      "timestamp": "2026-03-02T16:28:37.181Z"
+    },
+    "1917d5f7-fda2-47b1-8689-1959ddf70f7c": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/1917d5f7-fda2-47b1-8689-1959ddf70f7c.jpg",
+      "timestamp": "2026-03-02T16:28:41.083Z"
+    },
+    "435fc748-0b34-4a1e-8ceb-d0b706594c9f": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/435fc748-0b34-4a1e-8ceb-d0b706594c9f.jpg",
+      "timestamp": "2026-03-02T16:28:46.051Z"
+    },
+    "e87f8f84-0033-46a8-b68b-81f0bd9c0447": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/e87f8f84-0033-46a8-b68b-81f0bd9c0447.jpg",
+      "timestamp": "2026-03-02T16:28:50.481Z"
+    },
+    "c66ee6d1-1ff7-47d3-b3aa-cb5a56eefd75": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/c66ee6d1-1ff7-47d3-b3aa-cb5a56eefd75.jpg",
+      "timestamp": "2026-03-02T16:28:55.461Z"
+    },
+    "4d777f33-e172-42b5-84ed-b6b5a3180775": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/4d777f33-e172-42b5-84ed-b6b5a3180775.jpg",
+      "timestamp": "2026-03-02T16:29:00.785Z"
+    },
+    "c143139a-8cc6-48a8-82e8-2318f52e5139": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/c143139a-8cc6-48a8-82e8-2318f52e5139.jpg",
+      "timestamp": "2026-03-02T16:29:06.928Z"
+    },
+    "e30e3d50-2edb-452b-957f-293e548af00d": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/e30e3d50-2edb-452b-957f-293e548af00d.jpg",
+      "timestamp": "2026-03-02T16:29:11.186Z"
+    },
+    "b589922e-5e8f-4856-844c-30c358e5bac9": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/b589922e-5e8f-4856-844c-30c358e5bac9.jpg",
+      "timestamp": "2026-03-02T16:29:15.947Z"
+    },
+    "7387ae41-ab07-46be-be93-bb2558e37e19": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/7387ae41-ab07-46be-be93-bb2558e37e19.jpeg",
+      "timestamp": "2026-03-02T16:29:20.288Z"
+    },
+    "c5a6fb72-cf84-4125-aea5-ed907b7934fc": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/c5a6fb72-cf84-4125-aea5-ed907b7934fc.jpg",
+      "timestamp": "2026-03-02T16:29:24.526Z"
+    },
+    "faaceeb6-2750-42bc-9e9d-9f368ebd602d": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/faaceeb6-2750-42bc-9e9d-9f368ebd602d.jpg",
+      "timestamp": "2026-03-02T16:29:31.658Z"
+    },
+    "e58e4a70-6a6d-468a-9cfd-4c2d0671e37a": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/e58e4a70-6a6d-468a-9cfd-4c2d0671e37a.jpeg",
+      "timestamp": "2026-03-02T16:29:36.989Z"
+    },
+    "d8d216ed-e760-472c-9214-60cf36df3aaa": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/d8d216ed-e760-472c-9214-60cf36df3aaa.jpg",
+      "timestamp": "2026-03-02T16:29:41.621Z"
+    },
+    "13eae1d4-75aa-4db0-a946-ea1a56ee7967": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/13eae1d4-75aa-4db0-a946-ea1a56ee7967.jpg",
+      "timestamp": "2026-03-02T16:29:46.456Z"
+    },
+    "86abdaf2-aa02-4d1c-93ca-23a333c7e433": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/86abdaf2-aa02-4d1c-93ca-23a333c7e433.jpg",
+      "timestamp": "2026-03-02T16:29:51.416Z"
+    },
+    "dda8a816-410d-48d1-9bdc-18d42c36481f": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/dda8a816-410d-48d1-9bdc-18d42c36481f.jpg",
+      "timestamp": "2026-03-02T16:29:56.627Z"
+    },
+    "70951ea9-9ca1-40f5-8efc-5805ae7e64b9": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/70951ea9-9ca1-40f5-8efc-5805ae7e64b9.jpg",
+      "timestamp": "2026-03-02T16:30:01.359Z"
+    },
+    "f5ee6051-d659-4401-8f03-bf4345b4ae6c": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/f5ee6051-d659-4401-8f03-bf4345b4ae6c.jpg",
+      "timestamp": "2026-03-02T16:30:06.579Z"
+    },
+    "455ba964-a5af-4715-ac52-616dfce29a57": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/455ba964-a5af-4715-ac52-616dfce29a57.jpg",
+      "timestamp": "2026-03-02T16:30:10.512Z"
+    },
+    "5a00d8da-3d76-4774-abcf-795eae305293": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/5a00d8da-3d76-4774-abcf-795eae305293.jpg",
+      "timestamp": "2026-03-02T16:30:15.007Z"
+    },
+    "ffcf6ee5-45d3-4a1b-9f8a-337caa1cea41": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/ffcf6ee5-45d3-4a1b-9f8a-337caa1cea41.jpg",
+      "timestamp": "2026-03-02T16:30:19.465Z"
+    },
+    "d2641036-6609-421a-9d47-c114a5476956": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/d2641036-6609-421a-9d47-c114a5476956.jpg",
+      "timestamp": "2026-03-02T16:30:26.401Z"
+    },
+    "1f58b9a4-01d3-44bf-bd76-30e3e2101b48": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/1f58b9a4-01d3-44bf-bd76-30e3e2101b48.jpg",
+      "timestamp": "2026-03-02T16:30:30.503Z"
+    },
+    "01c84eab-5e50-4b7d-95a4-55a454774206": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/01c84eab-5e50-4b7d-95a4-55a454774206.jpg",
+      "timestamp": "2026-03-02T16:30:35.455Z"
+    },
+    "c9de564d-dc8f-43f2-9d42-56d4b07a78ca": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/c9de564d-dc8f-43f2-9d42-56d4b07a78ca.jpg",
+      "timestamp": "2026-03-02T16:30:40.678Z"
+    },
+    "049325cf-0acc-4198-8ef6-bd4f3659104c": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/049325cf-0acc-4198-8ef6-bd4f3659104c.jpg",
+      "timestamp": "2026-03-02T16:30:45.910Z"
+    },
+    "5d01d367-3580-4f96-bdbf-acfcf7b11d3a": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/5d01d367-3580-4f96-bdbf-acfcf7b11d3a.jpg",
+      "timestamp": "2026-03-02T16:30:50.102Z"
+    },
+    "9e55fff3-0b3a-4243-85c1-ff65ca39e8af": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/9e55fff3-0b3a-4243-85c1-ff65ca39e8af.jpg",
+      "timestamp": "2026-03-02T16:30:55.170Z"
+    },
+    "214681e7-e2c7-4d86-938d-e063cdbe41c9": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/214681e7-e2c7-4d86-938d-e063cdbe41c9.jpg",
+      "timestamp": "2026-03-02T16:30:59.833Z"
+    },
+    "9e5eed0b-df35-4538-9327-ba81a4e4dd1a": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/9e5eed0b-df35-4538-9327-ba81a4e4dd1a.jpg",
+      "timestamp": "2026-03-02T16:31:04.755Z"
+    },
+    "be790dde-2701-4777-b447-03ee072d904c": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/be790dde-2701-4777-b447-03ee072d904c.jpg",
+      "timestamp": "2026-03-02T16:31:09.390Z"
+    },
+    "d727aec2-e149-49c6-8df5-f64b93d1aed9": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/d727aec2-e149-49c6-8df5-f64b93d1aed9.jpg",
+      "timestamp": "2026-03-02T16:31:13.602Z"
+    },
+    "c3c43eea-0cbc-412a-b56b-79a71399b518": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/c3c43eea-0cbc-412a-b56b-79a71399b518.jpg",
+      "timestamp": "2026-03-02T16:31:18.412Z"
+    },
+    "5b03862b-532b-47aa-ac41-47332d0e725c": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/5b03862b-532b-47aa-ac41-47332d0e725c.jpg",
+      "timestamp": "2026-03-02T16:31:23.749Z"
+    },
+    "cdde041b-e34f-449d-9323-e486b699c0bf": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/cdde041b-e34f-449d-9323-e486b699c0bf.jpg",
+      "timestamp": "2026-03-02T16:31:29.025Z"
+    },
+    "58eb67aa-627e-47fb-b0ed-7a8d467198a3": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/58eb67aa-627e-47fb-b0ed-7a8d467198a3.jpg",
+      "timestamp": "2026-03-02T16:31:32.990Z"
+    },
+    "48759a47-f78c-400c-b03a-6533f4b81d33": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/48759a47-f78c-400c-b03a-6533f4b81d33.jpg",
+      "timestamp": "2026-03-02T16:31:37.900Z"
+    },
+    "c6a757fa-5e49-4638-bde4-b97b83c840b5": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/c6a757fa-5e49-4638-bde4-b97b83c840b5.jpg",
+      "timestamp": "2026-03-02T16:31:41.822Z"
+    },
+    "00273109-b88e-4076-ada3-a63704b69085": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/00273109-b88e-4076-ada3-a63704b69085.jpg",
+      "timestamp": "2026-03-02T16:31:46.937Z"
+    },
+    "dc07d3ed-314c-4ea4-802f-e77644fe853c": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/dc07d3ed-314c-4ea4-802f-e77644fe853c.jpg",
+      "timestamp": "2026-03-02T16:31:50.719Z"
+    },
+    "6a7a3694-099c-4d6a-86ca-eccee86db00c": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/6a7a3694-099c-4d6a-86ca-eccee86db00c.jpg",
+      "timestamp": "2026-03-02T16:31:56.044Z"
+    },
+    "bde02f10-6615-4bda-aab9-cb4bd9031e24": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/bde02f10-6615-4bda-aab9-cb4bd9031e24.jpg",
+      "timestamp": "2026-03-02T16:32:01.502Z"
+    },
+    "9938360d-0b88-4abc-a70b-f31c02e08d52": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/9938360d-0b88-4abc-a70b-f31c02e08d52.jpg",
+      "timestamp": "2026-03-02T16:32:36.817Z"
+    },
+    "8c152f93-1879-4985-a71b-c215b5abcf99": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/8c152f93-1879-4985-a71b-c215b5abcf99.jpg",
+      "timestamp": "2026-03-02T16:32:42.497Z"
+    },
+    "15a84af0-249f-4132-a36f-a4cb78fe696d": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/15a84af0-249f-4132-a36f-a4cb78fe696d.jpg",
+      "timestamp": "2026-03-02T16:32:46.207Z"
+    },
+    "d8941758-a5fa-4e4e-a238-42746ce3e3d4": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/d8941758-a5fa-4e4e-a238-42746ce3e3d4.jpg",
+      "timestamp": "2026-03-02T16:32:51.469Z"
+    },
+    "37088f16-7b50-4781-be99-69561066eafa": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/37088f16-7b50-4781-be99-69561066eafa.jpg",
+      "timestamp": "2026-03-02T16:32:56.888Z"
+    },
+    "a81fe00e-eb4d-4bb2-9ed2-b23d697d632b": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/a81fe00e-eb4d-4bb2-9ed2-b23d697d632b.jpg",
+      "timestamp": "2026-03-02T16:33:01.979Z"
+    },
+    "45cf3152-74e5-4c74-a1b2-ed623e9724d0": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/45cf3152-74e5-4c74-a1b2-ed623e9724d0.jpg",
+      "timestamp": "2026-03-02T16:33:05.423Z"
+    },
+    "ff8816bc-a4c7-493d-b0e7-f0c06fcd728e": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/ff8816bc-a4c7-493d-b0e7-f0c06fcd728e.jpg",
+      "timestamp": "2026-03-02T16:33:11.897Z"
+    },
+    "5c6bb096-cde7-414f-b082-1f67db0f4a9b": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/5c6bb096-cde7-414f-b082-1f67db0f4a9b.jpg",
+      "timestamp": "2026-03-02T16:33:16.898Z"
+    },
+    "f6237a16-f272-4408-851f-a0a5974d0c09": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/f6237a16-f272-4408-851f-a0a5974d0c09.jpg",
+      "timestamp": "2026-03-02T16:33:22.041Z"
+    },
+    "54da883c-5ff2-44cb-8c93-b9d05101cd2b": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/54da883c-5ff2-44cb-8c93-b9d05101cd2b.jpg",
+      "timestamp": "2026-03-02T16:33:29.441Z"
+    },
+    "8786916e-e9ba-422f-addb-bc107858a299": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/8786916e-e9ba-422f-addb-bc107858a299.jpg",
+      "timestamp": "2026-03-02T16:33:33.156Z"
+    },
+    "c11394dc-55fe-403d-b811-3c0d3a3c4ed2": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/c11394dc-55fe-403d-b811-3c0d3a3c4ed2.jpg",
+      "timestamp": "2026-03-02T16:33:37.473Z"
+    },
+    "6ae45563-b079-4a02-adca-cd367e7ce9f9": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/6ae45563-b079-4a02-adca-cd367e7ce9f9.jpg",
+      "timestamp": "2026-03-02T16:34:11.635Z"
+    },
+    "81f5e499-4b38-455a-9ecf-6d6556835735": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/81f5e499-4b38-455a-9ecf-6d6556835735.jpg",
+      "timestamp": "2026-03-02T16:34:15.250Z"
+    },
+    "13e75b4c-6b87-4e99-bd39-d2df255287d1": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/13e75b4c-6b87-4e99-bd39-d2df255287d1.jpg",
+      "timestamp": "2026-03-02T16:34:19.946Z"
+    },
+    "81c219ca-f7c6-441e-ba9e-a6020940716e": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/81c219ca-f7c6-441e-ba9e-a6020940716e.jpg",
+      "timestamp": "2026-03-02T16:34:25.367Z"
+    },
+    "d829483a-c3a4-42dc-8759-9ec20d4eee8d": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/d829483a-c3a4-42dc-8759-9ec20d4eee8d.jpg",
+      "timestamp": "2026-03-02T16:34:28.936Z"
+    },
+    "c2bb9118-a1a0-4ec8-9142-655a67945f4d": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/c2bb9118-a1a0-4ec8-9142-655a67945f4d.jpg",
+      "timestamp": "2026-03-02T16:34:33.318Z"
+    },
+    "7ab1c4fd-b42e-4019-b830-639a2be03c65": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/7ab1c4fd-b42e-4019-b830-639a2be03c65.jpg",
+      "timestamp": "2026-03-02T16:34:38.846Z"
+    },
+    "bd8bf47e-6dcd-4131-b024-35d683991001": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/bd8bf47e-6dcd-4131-b024-35d683991001.jpg",
+      "timestamp": "2026-03-02T16:35:14.167Z"
+    },
+    "da087e76-6c5f-4df5-9b61-738fd30ee99b": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/da087e76-6c5f-4df5-9b61-738fd30ee99b.jpg",
+      "timestamp": "2026-03-02T16:35:19.757Z"
+    },
+    "d9759f1e-de45-4b9e-ae97-88526e642f7f": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/d9759f1e-de45-4b9e-ae97-88526e642f7f.jpg",
+      "timestamp": "2026-03-02T16:35:26.080Z"
+    },
+    "9321e9b7-7822-4426-ad46-f92186b1b610": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/9321e9b7-7822-4426-ad46-f92186b1b610.jpg",
+      "timestamp": "2026-03-02T16:35:30.597Z"
+    },
+    "35da20ea-d2f8-4f00-a45d-b4ec0e44a24c": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/35da20ea-d2f8-4f00-a45d-b4ec0e44a24c.jpg",
+      "timestamp": "2026-03-02T16:35:34.583Z"
+    },
+    "5cc963e1-d798-46d0-8e75-1ad84e45df25": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/5cc963e1-d798-46d0-8e75-1ad84e45df25.jpg",
+      "timestamp": "2026-03-02T16:36:09.801Z"
+    },
+    "324976f2-2620-4d76-8613-1e1b8a648aee": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/324976f2-2620-4d76-8613-1e1b8a648aee.jpg",
+      "timestamp": "2026-03-02T16:36:15.581Z"
+    },
+    "b46e82e4-9ccc-424b-bb0a-a6bc9fb0806f": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/b46e82e4-9ccc-424b-bb0a-a6bc9fb0806f.jpg",
+      "timestamp": "2026-03-02T16:36:20.019Z"
+    },
+    "ed72f07b-78de-47ab-9a4e-e0aaa653b303": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/ed72f07b-78de-47ab-9a4e-e0aaa653b303.jpg",
+      "timestamp": "2026-03-02T16:36:24.647Z"
+    },
+    "32b88748-357d-4fe9-9b40-d057f0ccd436": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/32b88748-357d-4fe9-9b40-d057f0ccd436.jpg",
+      "timestamp": "2026-03-02T16:36:28.433Z"
+    },
+    "76b5a590-973b-4aeb-8425-943bb85798fb": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/76b5a590-973b-4aeb-8425-943bb85798fb.jpg",
+      "timestamp": "2026-03-02T16:36:33.532Z"
+    },
+    "21c47887-cb57-485a-b173-f646e4420ca2": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/21c47887-cb57-485a-b173-f646e4420ca2.jpg",
+      "timestamp": "2026-03-02T16:36:37.861Z"
+    },
+    "229e43f7-632f-4a33-83bb-5e4d6c29d8c4": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/229e43f7-632f-4a33-83bb-5e4d6c29d8c4.jpg",
+      "timestamp": "2026-03-02T16:36:43.548Z"
+    },
+    "6e67dc58-dfcf-4d57-8b65-1de9f2a5accf": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/6e67dc58-dfcf-4d57-8b65-1de9f2a5accf.jpg",
+      "timestamp": "2026-03-02T16:36:47.872Z"
+    },
+    "ea924948-2d6f-444f-9edc-ea6bc59b9257": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/ea924948-2d6f-444f-9edc-ea6bc59b9257.jpg",
+      "timestamp": "2026-03-02T16:36:53.923Z"
+    },
+    "a2fd0973-507a-45cd-899d-18266a00627b": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/a2fd0973-507a-45cd-899d-18266a00627b.jpg",
+      "timestamp": "2026-03-02T16:36:59.128Z"
+    },
+    "a6d9a0ac-f804-4cf2-9f90-08f6f9fc5629": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/a6d9a0ac-f804-4cf2-9f90-08f6f9fc5629.jpg",
+      "timestamp": "2026-03-02T16:37:03.759Z"
+    },
+    "658b64b1-889d-4432-a254-46f8b53bb52f": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/658b64b1-889d-4432-a254-46f8b53bb52f.jpg",
+      "timestamp": "2026-03-02T16:37:08.064Z"
+    },
+    "d01512b9-08e8-4f3e-b196-e953671cbab8": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/d01512b9-08e8-4f3e-b196-e953671cbab8.jpg",
+      "timestamp": "2026-03-02T16:37:11.792Z"
+    },
+    "f2525b7f-b454-4398-9354-6ffb348b2565": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/f2525b7f-b454-4398-9354-6ffb348b2565.jpg",
+      "timestamp": "2026-03-02T16:37:16.432Z"
+    },
+    "df2e38c3-747b-4930-9a3a-4372b19af68d": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/df2e38c3-747b-4930-9a3a-4372b19af68d.jpg",
+      "timestamp": "2026-03-02T16:37:21.179Z"
+    },
+    "c1fbf709-50b2-4b35-bedb-9b59992dbff6": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/c1fbf709-50b2-4b35-bedb-9b59992dbff6.jpg",
+      "timestamp": "2026-03-02T16:37:25.420Z"
+    },
+    "3b86d296-f027-470c-8afe-5d4e94d7c2e7": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/3b86d296-f027-470c-8afe-5d4e94d7c2e7.jpg",
+      "timestamp": "2026-03-02T16:37:30.377Z"
+    },
+    "33785c60-c7fa-4366-9505-1407b2a4f765": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/33785c60-c7fa-4366-9505-1407b2a4f765.jpg",
+      "timestamp": "2026-03-02T16:37:35.004Z"
+    },
+    "adbf9219-1c5c-42ae-bfd1-96d7338f535c": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/adbf9219-1c5c-42ae-bfd1-96d7338f535c.jpg",
+      "timestamp": "2026-03-02T16:37:38.856Z"
+    },
+    "fa33ab43-5f43-45d8-a861-f4f7b3413fda": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/fa33ab43-5f43-45d8-a861-f4f7b3413fda.jpg",
+      "timestamp": "2026-03-02T16:37:43.482Z"
+    },
+    "a65a5513-688d-49ca-af8e-a703773041d8": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/a65a5513-688d-49ca-af8e-a703773041d8.jpg",
+      "timestamp": "2026-03-02T16:37:48.813Z"
+    },
+    "e1e8a08c-3f91-4f4a-9a33-d98f444a6a23": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/e1e8a08c-3f91-4f4a-9a33-d98f444a6a23.jpg",
+      "timestamp": "2026-03-02T16:37:54.006Z"
+    },
+    "d5a684eb-9a54-4350-8b34-2cc8c9ae34d7": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/d5a684eb-9a54-4350-8b34-2cc8c9ae34d7.jpg",
+      "timestamp": "2026-03-02T16:37:58.904Z"
+    },
+    "ddb56f77-2736-425f-88de-b71f588f497c": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/ddb56f77-2736-425f-88de-b71f588f497c.jpg",
+      "timestamp": "2026-03-02T16:38:04.049Z"
+    },
+    "4a058503-f10a-47ba-bf94-98c84d3c4680": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/4a058503-f10a-47ba-bf94-98c84d3c4680.jpg",
+      "timestamp": "2026-03-02T16:38:08.875Z"
+    },
+    "ccae44d1-8f47-4949-8538-f1d282259c42": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/ccae44d1-8f47-4949-8538-f1d282259c42.jpg",
+      "timestamp": "2026-03-02T16:38:13.739Z"
+    },
+    "2a346125-f027-472d-ac1e-9ae7507276e6": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/2a346125-f027-472d-ac1e-9ae7507276e6.jpg",
+      "timestamp": "2026-03-02T16:38:21.211Z"
+    },
+    "73d42d48-c552-44bb-b566-05a0d8d43326": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/73d42d48-c552-44bb-b566-05a0d8d43326.jpg",
+      "timestamp": "2026-03-02T16:38:26.545Z"
+    },
+    "cd204ec1-f631-4256-b2d6-1a882f3bb256": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/cd204ec1-f631-4256-b2d6-1a882f3bb256.jpg",
+      "timestamp": "2026-03-02T16:38:31.228Z"
+    },
+    "e7feb3b0-41e3-4f79-b0b9-6d9114dd3803": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/e7feb3b0-41e3-4f79-b0b9-6d9114dd3803.jpg",
+      "timestamp": "2026-03-02T16:38:36.233Z"
+    },
+    "92d01f38-b6c2-4243-83e6-65c9352508dd": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/92d01f38-b6c2-4243-83e6-65c9352508dd.jpg",
+      "timestamp": "2026-03-02T16:38:40.758Z"
+    },
+    "407d2017-23ab-451d-9bfa-3e81f555053c": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/407d2017-23ab-451d-9bfa-3e81f555053c.jpg",
+      "timestamp": "2026-03-02T16:38:44.387Z"
+    },
+    "16771493-ea8f-4899-84b1-cddf416d6a72": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/16771493-ea8f-4899-84b1-cddf416d6a72.jpg",
+      "timestamp": "2026-03-02T16:38:48.671Z"
+    },
+    "fb7d4233-175f-4b12-ae13-ea3787a6c722": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/fb7d4233-175f-4b12-ae13-ea3787a6c722.jpg",
+      "timestamp": "2026-03-02T16:38:53.901Z"
+    },
+    "3d0e0042-9d9c-4cb1-9059-77e1b55f6f80": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/3d0e0042-9d9c-4cb1-9059-77e1b55f6f80.jpg",
+      "timestamp": "2026-03-02T16:38:59.630Z"
+    },
+    "7bb25652-3d03-4329-a984-9a92f62b4649": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/7bb25652-3d03-4329-a984-9a92f62b4649.jpg",
+      "timestamp": "2026-03-02T16:39:05.709Z"
+    },
+    "399a9546-957c-498e-9b29-abb4d2a6d70d": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/399a9546-957c-498e-9b29-abb4d2a6d70d.jpg",
+      "timestamp": "2026-03-02T16:39:10.950Z"
+    },
+    "89749bd9-d4aa-4867-91e3-16cafa2aef45": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/89749bd9-d4aa-4867-91e3-16cafa2aef45.jpg",
+      "timestamp": "2026-03-02T16:39:16.736Z"
+    },
+    "24f03ef7-a733-47bd-a4f9-aeb3dd2eb279": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/24f03ef7-a733-47bd-a4f9-aeb3dd2eb279.jpg",
+      "timestamp": "2026-03-02T16:39:21.833Z"
+    },
+    "5e60309f-06d8-481f-aa60-a237df57b818": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/5e60309f-06d8-481f-aa60-a237df57b818.jpg",
+      "timestamp": "2026-03-02T16:39:25.577Z"
+    },
+    "d4eb9dbe-ac5a-4d09-85ae-e3e7c7824834": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/d4eb9dbe-ac5a-4d09-85ae-e3e7c7824834.jpg",
+      "timestamp": "2026-03-02T16:39:30.417Z"
+    },
+    "fc453144-20b0-4422-a578-da880b037bee": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/fc453144-20b0-4422-a578-da880b037bee.jpg",
+      "timestamp": "2026-03-02T16:39:34.480Z"
+    },
+    "d93b34d8-ee7b-498a-8b75-ffa1ab25f76a": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/d93b34d8-ee7b-498a-8b75-ffa1ab25f76a.jpg",
+      "timestamp": "2026-03-02T16:39:39.318Z"
+    },
+    "d5feb480-f032-4cca-8fac-7a4f6df9c39a": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/d5feb480-f032-4cca-8fac-7a4f6df9c39a.jpg",
+      "timestamp": "2026-03-02T16:39:43.551Z"
+    },
+    "0565c78f-f5fe-44b8-bc58-36cef4cfb706": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/0565c78f-f5fe-44b8-bc58-36cef4cfb706.jpg",
+      "timestamp": "2026-03-02T16:39:47.697Z"
+    },
+    "46dcf523-7bbf-41e2-9975-38dc2d8b2c58": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/46dcf523-7bbf-41e2-9975-38dc2d8b2c58.jpg",
+      "timestamp": "2026-03-02T16:39:52.961Z"
+    },
+    "5fd4c11a-7a05-432f-a11a-9fbcb33cfba0": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/5fd4c11a-7a05-432f-a11a-9fbcb33cfba0.jpg",
+      "timestamp": "2026-03-02T16:39:57.036Z"
+    },
+    "7a0d79c6-7b63-4319-b63e-d51588314b21": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/7a0d79c6-7b63-4319-b63e-d51588314b21.jpg",
+      "timestamp": "2026-03-02T16:40:01.283Z"
+    },
+    "f1b21c22-a4e8-4428-9c4e-557853319b84": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/f1b21c22-a4e8-4428-9c4e-557853319b84.jpg",
+      "timestamp": "2026-03-02T16:40:06.528Z"
+    },
+    "ce5f3931-96cb-405b-9545-63cfe6de62d2": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/ce5f3931-96cb-405b-9545-63cfe6de62d2.jpg",
+      "timestamp": "2026-03-02T16:40:11.963Z"
+    },
+    "e3e2e45a-1b8c-44a7-bd20-6db938165c32": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/e3e2e45a-1b8c-44a7-bd20-6db938165c32.jpg",
+      "timestamp": "2026-03-02T16:40:16.974Z"
+    },
+    "1bc2dc49-b02e-4758-b0fa-532b5f9d31c8": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/1bc2dc49-b02e-4758-b0fa-532b5f9d31c8.jpg",
+      "timestamp": "2026-03-02T16:40:21.178Z"
+    },
+    "53b0e0fc-a5d2-4ab1-960b-f8f96d01056b": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/53b0e0fc-a5d2-4ab1-960b-f8f96d01056b.jpg",
+      "timestamp": "2026-03-02T16:40:26.010Z"
+    },
+    "62a0c6b5-4345-41d5-a96c-1eb7c4279aef": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/62a0c6b5-4345-41d5-a96c-1eb7c4279aef.jpg",
+      "timestamp": "2026-03-02T16:40:31.449Z"
+    },
+    "ec6f72ce-6214-4294-9ed4-577c3aa9acc2": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/ec6f72ce-6214-4294-9ed4-577c3aa9acc2.jpg",
+      "timestamp": "2026-03-02T16:40:36.376Z"
+    },
+    "0a3eb2ab-3b2c-4744-92c6-a66779b323b0": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/0a3eb2ab-3b2c-4744-92c6-a66779b323b0.jpg",
+      "timestamp": "2026-03-02T16:40:43.082Z"
+    },
+    "213f9cf9-9113-49e8-822f-a784f6820317": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/213f9cf9-9113-49e8-822f-a784f6820317.jpg",
+      "timestamp": "2026-03-02T16:40:48.035Z"
+    },
+    "b66af734-fb6b-4d4f-a9ba-e0d716b6f3b0": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/b66af734-fb6b-4d4f-a9ba-e0d716b6f3b0.jpg",
+      "timestamp": "2026-03-02T16:40:53.874Z"
+    },
+    "1412cee5-dfc4-4da6-b2ba-26d5873a4434": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/1412cee5-dfc4-4da6-b2ba-26d5873a4434.jpg",
+      "timestamp": "2026-03-02T16:40:57.811Z"
+    },
+    "e5be7b9f-b2da-459e-8391-a864da412a0e": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/e5be7b9f-b2da-459e-8391-a864da412a0e.jpg",
+      "timestamp": "2026-03-02T16:41:02.930Z"
+    },
+    "44862029-c521-4dfd-9346-e1ff293d55b2": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/44862029-c521-4dfd-9346-e1ff293d55b2.jpg",
+      "timestamp": "2026-03-02T16:41:06.909Z"
+    },
+    "bce07683-94f8-4ec7-892e-d041c4d3416e": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/bce07683-94f8-4ec7-892e-d041c4d3416e.jpg",
+      "timestamp": "2026-03-02T16:41:11.416Z"
+    },
+    "92c8ce37-6ccb-4807-847e-1bed0a701343": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/92c8ce37-6ccb-4807-847e-1bed0a701343.jpg",
+      "timestamp": "2026-03-02T16:41:15.173Z"
+    },
+    "5d9edbdc-7b71-493c-a427-63ecd7401b9a": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/5d9edbdc-7b71-493c-a427-63ecd7401b9a.jpg",
+      "timestamp": "2026-03-02T16:41:21.553Z"
+    },
+    "60bc1a43-5edc-4519-86c3-2afddba44fdf": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/60bc1a43-5edc-4519-86c3-2afddba44fdf.jpg",
+      "timestamp": "2026-03-02T16:41:26.287Z"
+    },
+    "b6b96745-6fe0-4bf2-8705-1bca18e2646d": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/b6b96745-6fe0-4bf2-8705-1bca18e2646d.jpg",
+      "timestamp": "2026-03-02T16:41:31.300Z"
+    },
+    "bb73a552-f4a1-400b-bf80-2056966416f7": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/bb73a552-f4a1-400b-bf80-2056966416f7.jpg",
+      "timestamp": "2026-03-02T16:41:36.534Z"
+    },
+    "0d8635cf-eb73-4c8f-9448-710b38173c2a": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/0d8635cf-eb73-4c8f-9448-710b38173c2a.jpg",
+      "timestamp": "2026-03-02T16:41:41.979Z"
+    },
+    "f0d9892c-5832-4188-880d-e2698dbabb7d": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/f0d9892c-5832-4188-880d-e2698dbabb7d.jpg",
+      "timestamp": "2026-03-02T16:41:46.260Z"
+    },
+    "f23be0b6-b37d-47c8-8cf8-a4277a03aafa": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/f23be0b6-b37d-47c8-8cf8-a4277a03aafa.jpg",
+      "timestamp": "2026-03-02T16:41:52.459Z"
+    },
+    "1a14800c-4bcd-4c9c-b4c6-dc72dddd5fcf": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/1a14800c-4bcd-4c9c-b4c6-dc72dddd5fcf.jpg",
+      "timestamp": "2026-03-02T16:41:56.764Z"
+    },
+    "3e1ed0d4-5aaf-45ae-94f1-582661b4aee2": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/3e1ed0d4-5aaf-45ae-94f1-582661b4aee2.jpg",
+      "timestamp": "2026-03-02T16:42:32.520Z"
+    },
+    "92335ccf-dd8a-4d0e-94ce-5e7e5afc9455": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/92335ccf-dd8a-4d0e-94ce-5e7e5afc9455.jpg",
+      "timestamp": "2026-03-02T16:42:38.265Z"
+    },
+    "85f73e51-ad1e-45ed-911f-75abbd3b2816": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/85f73e51-ad1e-45ed-911f-75abbd3b2816.jpg",
+      "timestamp": "2026-03-02T16:42:42.083Z"
+    },
+    "80205b7b-b48d-4873-9f15-135d5ed49ea1": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/80205b7b-b48d-4873-9f15-135d5ed49ea1.jpg",
+      "timestamp": "2026-03-02T16:42:46.126Z"
+    },
+    "6c920d1f-f9cc-475f-982b-c70bf1b8c0af": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/6c920d1f-f9cc-475f-982b-c70bf1b8c0af.jpg",
+      "timestamp": "2026-03-02T16:42:53.222Z"
+    },
+    "eb8a082a-3ba7-43e0-bb19-34169a11ea07": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/eb8a082a-3ba7-43e0-bb19-34169a11ea07.jpg",
+      "timestamp": "2026-03-02T16:42:57.825Z"
+    },
+    "8d98aa88-31f9-4625-aefd-a0c6bebaa160": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/8d98aa88-31f9-4625-aefd-a0c6bebaa160.jpg",
+      "timestamp": "2026-03-02T16:43:02.700Z"
+    },
+    "69789407-9736-45bd-8bde-e4af6215840e": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/69789407-9736-45bd-8bde-e4af6215840e.jpg",
+      "timestamp": "2026-03-02T16:43:06.555Z"
+    },
+    "e05a4b31-4f85-4776-a0ab-4d776204b163": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/e05a4b31-4f85-4776-a0ab-4d776204b163.jpg",
+      "timestamp": "2026-03-02T16:43:10.451Z"
+    },
+    "2b198d56-b412-449e-9e86-174f34b1256a": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/2b198d56-b412-449e-9e86-174f34b1256a.jpg",
+      "timestamp": "2026-03-02T16:43:45.481Z"
+    },
+    "6fee82ef-0507-477e-93b3-f94c9cfe6578": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/6fee82ef-0507-477e-93b3-f94c9cfe6578.jpg",
+      "timestamp": "2026-03-02T16:43:50.812Z"
+    },
+    "4afc1100-e0c5-4552-8a9c-7992dfb5f613": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/4afc1100-e0c5-4552-8a9c-7992dfb5f613.jpg",
+      "timestamp": "2026-03-02T16:43:55.094Z"
+    },
+    "c8dfe4ef-585b-451b-ab09-44f982cd468f": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/c8dfe4ef-585b-451b-ab09-44f982cd468f.jpg",
+      "timestamp": "2026-03-02T16:43:59.914Z"
+    },
+    "a4f7d29f-d98f-431b-8d0b-8ac58ca6df0d": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/a4f7d29f-d98f-431b-8d0b-8ac58ca6df0d.jpg",
+      "timestamp": "2026-03-02T16:44:05.368Z"
+    },
+    "7c10bb0c-0d50-4b9b-9f99-ac6efe3e4e3e": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/7c10bb0c-0d50-4b9b-9f99-ac6efe3e4e3e.jpg",
+      "timestamp": "2026-03-02T16:44:09.202Z"
+    },
+    "107626e7-6168-4f32-ba9f-949b07629328": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/107626e7-6168-4f32-ba9f-949b07629328.jpg",
+      "timestamp": "2026-03-02T16:44:13.277Z"
+    },
+    "982a651a-09c0-4f51-9a08-71ab4681be95": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/982a651a-09c0-4f51-9a08-71ab4681be95.jpg",
+      "timestamp": "2026-03-02T16:44:18.113Z"
+    },
+    "ed372ffa-b5be-4d28-8fd4-c19733789711": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/ed372ffa-b5be-4d28-8fd4-c19733789711.jpg",
+      "timestamp": "2026-03-02T16:44:25.081Z"
+    },
+    "b297bcc3-f2e7-414b-9d89-7659a5ceba1a": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/b297bcc3-f2e7-414b-9d89-7659a5ceba1a.jpg",
+      "timestamp": "2026-03-02T16:44:29.103Z"
+    },
+    "cff6922f-e51c-418c-b930-14de0d9d5218": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/cff6922f-e51c-418c-b930-14de0d9d5218.jpg",
+      "timestamp": "2026-03-02T16:44:33.081Z"
+    },
+    "677c9373-41eb-443d-bd03-87d3d7f2db9c": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/677c9373-41eb-443d-bd03-87d3d7f2db9c.jpg",
+      "timestamp": "2026-03-02T16:44:38.238Z"
+    },
+    "273645bb-be11-476e-b2b9-e5ddd04a107e": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/273645bb-be11-476e-b2b9-e5ddd04a107e.jpg",
+      "timestamp": "2026-03-02T16:44:43.788Z"
+    },
+    "9d959d5f-c1cb-4b83-b46a-1193083a192f": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/9d959d5f-c1cb-4b83-b46a-1193083a192f.jpg",
+      "timestamp": "2026-03-02T16:44:48.936Z"
+    },
+    "29f275e6-d911-4ebb-8089-280b57befe69": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/29f275e6-d911-4ebb-8089-280b57befe69.jpg",
+      "timestamp": "2026-03-02T16:44:52.609Z"
+    },
+    "35ca2940-c664-4b68-a079-3c2f93847318": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/35ca2940-c664-4b68-a079-3c2f93847318.jpg",
+      "timestamp": "2026-03-02T16:44:59.515Z"
+    },
+    "1f9f7b59-6434-4550-b284-c3db56da1c46": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/1f9f7b59-6434-4550-b284-c3db56da1c46.jpg",
+      "timestamp": "2026-03-02T16:45:04.647Z"
+    },
+    "095c15ab-dd37-4768-9998-e3eb3eed28bf": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/095c15ab-dd37-4768-9998-e3eb3eed28bf.jpg",
+      "timestamp": "2026-03-02T16:45:08.272Z"
+    },
+    "61666d33-affa-4e6e-a449-b5b259b1393e": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/61666d33-affa-4e6e-a449-b5b259b1393e.jpg",
+      "timestamp": "2026-03-02T16:45:17.148Z"
+    },
+    "a2988c01-2060-4365-944a-76e3c4d9804e": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/a2988c01-2060-4365-944a-76e3c4d9804e.jpg",
+      "timestamp": "2026-03-02T16:45:20.904Z"
+    },
+    "d8abec37-1a7e-4ec2-8827-8ee19147ea27": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/d8abec37-1a7e-4ec2-8827-8ee19147ea27.jpg",
+      "timestamp": "2026-03-02T16:45:26.142Z"
+    },
+    "87ba02ac-b17f-4302-a52f-937a37b3c441": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/87ba02ac-b17f-4302-a52f-937a37b3c441.jpg",
+      "timestamp": "2026-03-02T16:45:31.672Z"
+    },
+    "5d82a902-7e73-48de-888e-144565b74a98": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/5d82a902-7e73-48de-888e-144565b74a98.jpg",
+      "timestamp": "2026-03-02T16:45:36.700Z"
+    },
+    "15377bd1-cb8f-44ea-86c3-ad86ed65e1e2": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/15377bd1-cb8f-44ea-86c3-ad86ed65e1e2.jpg",
+      "timestamp": "2026-03-02T16:45:42.579Z"
+    },
+    "25aa0d75-f420-4e25-9645-2400e6c8d4ec": {
+      "status": "done",
+      "localPath": "/Users/tomerliran/Development/Projects/beach-atlas-greece/downloaded-images/beaches/25aa0d75-f420-4e25-9645-2400e6c8d4ec.jpg",
+      "timestamp": "2026-03-02T16:45:47.109Z"
+    }
+  }
+}

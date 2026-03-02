@@ -1,0 +1,1185 @@
+{
+  "startedAt": "2026-03-02T16:47:50.011Z",
+  "lastUpdatedAt": "2026-03-02T16:52:11.884Z",
+  "total": 196,
+  "uploaded": 196,
+  "errors": 0,
+  "entries": {
+    "0e184487-a026-4761-b8e6-97eb61cd1e23": {
+      "status": "done",
+      "storagePath": "beaches/0e184487-a026-4761-b8e6-97eb61cd1e23/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/0e184487-a026-4761-b8e6-97eb61cd1e23/photo.jpg",
+      "timestamp": "2026-03-02T16:47:51.950Z"
+    },
+    "a686bfb3-64d6-42d2-b557-c6fcb8d538ab": {
+      "status": "done",
+      "storagePath": "beaches/a686bfb3-64d6-42d2-b557-c6fcb8d538ab/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/a686bfb3-64d6-42d2-b557-c6fcb8d538ab/photo.jpg",
+      "timestamp": "2026-03-02T16:47:53.127Z"
+    },
+    "70c36042-235a-4f3d-bac6-33f8126db4b1": {
+      "status": "done",
+      "storagePath": "beaches/70c36042-235a-4f3d-bac6-33f8126db4b1/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/70c36042-235a-4f3d-bac6-33f8126db4b1/photo.jpg",
+      "timestamp": "2026-03-02T16:47:54.236Z"
+    },
+    "2f230ef6-cc33-4b63-a226-bffeb2d4eafb": {
+      "status": "done",
+      "storagePath": "beaches/2f230ef6-cc33-4b63-a226-bffeb2d4eafb/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/2f230ef6-cc33-4b63-a226-bffeb2d4eafb/photo.jpg",
+      "timestamp": "2026-03-02T16:47:55.339Z"
+    },
+    "3b46111a-67a6-461a-86e6-41496ded61b4": {
+      "status": "done",
+      "storagePath": "beaches/3b46111a-67a6-461a-86e6-41496ded61b4/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/3b46111a-67a6-461a-86e6-41496ded61b4/photo.jpg",
+      "timestamp": "2026-03-02T16:47:56.408Z"
+    },
+    "f477630a-d09b-4d18-9742-3afe5eed166b": {
+      "status": "done",
+      "storagePath": "beaches/f477630a-d09b-4d18-9742-3afe5eed166b/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/f477630a-d09b-4d18-9742-3afe5eed166b/photo.jpg",
+      "timestamp": "2026-03-02T16:47:57.266Z"
+    },
+    "706548a4-9c51-402f-a96d-6466eb96b31c": {
+      "status": "done",
+      "storagePath": "beaches/706548a4-9c51-402f-a96d-6466eb96b31c/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/706548a4-9c51-402f-a96d-6466eb96b31c/photo.jpg",
+      "timestamp": "2026-03-02T16:47:58.335Z"
+    },
+    "6de73963-416b-4d9d-9f95-2902fc9dc230": {
+      "status": "done",
+      "storagePath": "beaches/6de73963-416b-4d9d-9f95-2902fc9dc230/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/6de73963-416b-4d9d-9f95-2902fc9dc230/photo.jpg",
+      "timestamp": "2026-03-02T16:47:59.308Z"
+    },
+    "d0dba3d9-5ba8-475d-aad8-9c0155dda2a9": {
+      "status": "done",
+      "storagePath": "beaches/d0dba3d9-5ba8-475d-aad8-9c0155dda2a9/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d0dba3d9-5ba8-475d-aad8-9c0155dda2a9/photo.jpg",
+      "timestamp": "2026-03-02T16:48:00.126Z"
+    },
+    "2e74e392-f239-4bdc-96c2-bfbba53f6748": {
+      "status": "done",
+      "storagePath": "beaches/2e74e392-f239-4bdc-96c2-bfbba53f6748/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/2e74e392-f239-4bdc-96c2-bfbba53f6748/photo.jpg",
+      "timestamp": "2026-03-02T16:48:01.343Z"
+    },
+    "0f6e1dba-d92d-4f9d-9c05-a99b20de6051": {
+      "status": "done",
+      "storagePath": "beaches/0f6e1dba-d92d-4f9d-9c05-a99b20de6051/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/0f6e1dba-d92d-4f9d-9c05-a99b20de6051/photo.jpg",
+      "timestamp": "2026-03-02T16:48:03.326Z"
+    },
+    "12bc3e54-0d72-479e-84e6-7eb32e9befd0": {
+      "status": "done",
+      "storagePath": "beaches/12bc3e54-0d72-479e-84e6-7eb32e9befd0/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/12bc3e54-0d72-479e-84e6-7eb32e9befd0/photo.jpg",
+      "timestamp": "2026-03-02T16:48:04.519Z"
+    },
+    "c300582c-25ab-4261-a62d-62fe4051775c": {
+      "status": "done",
+      "storagePath": "beaches/c300582c-25ab-4261-a62d-62fe4051775c/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/c300582c-25ab-4261-a62d-62fe4051775c/photo.jpg",
+      "timestamp": "2026-03-02T16:48:05.338Z"
+    },
+    "63329a98-f0d1-41dd-bb8d-25d50392c93d": {
+      "status": "done",
+      "storagePath": "beaches/63329a98-f0d1-41dd-bb8d-25d50392c93d/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/63329a98-f0d1-41dd-bb8d-25d50392c93d/photo.jpg",
+      "timestamp": "2026-03-02T16:48:06.177Z"
+    },
+    "3e236279-d4fe-487a-93f3-dc185a27cafd": {
+      "status": "done",
+      "storagePath": "beaches/3e236279-d4fe-487a-93f3-dc185a27cafd/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/3e236279-d4fe-487a-93f3-dc185a27cafd/photo.jpg",
+      "timestamp": "2026-03-02T16:48:07.322Z"
+    },
+    "5bfd5d37-fb6a-4b33-a7dd-448890ec5e74": {
+      "status": "done",
+      "storagePath": "beaches/5bfd5d37-fb6a-4b33-a7dd-448890ec5e74/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/5bfd5d37-fb6a-4b33-a7dd-448890ec5e74/photo.jpg",
+      "timestamp": "2026-03-02T16:48:08.172Z"
+    },
+    "279d787d-140e-4828-ade3-cb9c44f030e1": {
+      "status": "done",
+      "storagePath": "beaches/279d787d-140e-4828-ade3-cb9c44f030e1/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/279d787d-140e-4828-ade3-cb9c44f030e1/photo.jpg",
+      "timestamp": "2026-03-02T16:48:09.439Z"
+    },
+    "d8b6b2ef-eae5-4da8-85b0-b9c8f44fe720": {
+      "status": "done",
+      "storagePath": "beaches/d8b6b2ef-eae5-4da8-85b0-b9c8f44fe720/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d8b6b2ef-eae5-4da8-85b0-b9c8f44fe720/photo.jpg",
+      "timestamp": "2026-03-02T16:48:10.109Z"
+    },
+    "bd2b8084-cb53-4279-b4dc-3f6dabd5cfec": {
+      "status": "done",
+      "storagePath": "beaches/bd2b8084-cb53-4279-b4dc-3f6dabd5cfec/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/bd2b8084-cb53-4279-b4dc-3f6dabd5cfec/photo.jpg",
+      "timestamp": "2026-03-02T16:48:10.826Z"
+    },
+    "77a36709-32dc-418a-9137-284016ee3608": {
+      "status": "done",
+      "storagePath": "beaches/77a36709-32dc-418a-9137-284016ee3608/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/77a36709-32dc-418a-9137-284016ee3608/photo.jpg",
+      "timestamp": "2026-03-02T16:48:11.738Z"
+    },
+    "35a254ae-3acd-42fb-b3e6-0448336dcb7a": {
+      "status": "done",
+      "storagePath": "beaches/35a254ae-3acd-42fb-b3e6-0448336dcb7a/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/35a254ae-3acd-42fb-b3e6-0448336dcb7a/photo.jpg",
+      "timestamp": "2026-03-02T16:48:12.562Z"
+    },
+    "4aae2c91-5317-4b94-a21f-840b548178b3": {
+      "status": "done",
+      "storagePath": "beaches/4aae2c91-5317-4b94-a21f-840b548178b3/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/4aae2c91-5317-4b94-a21f-840b548178b3/photo.jpg",
+      "timestamp": "2026-03-02T16:48:16.600Z"
+    },
+    "bfed8eb3-ba2d-4409-9c27-445c3e3e5e7b": {
+      "status": "done",
+      "storagePath": "beaches/bfed8eb3-ba2d-4409-9c27-445c3e3e5e7b/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/bfed8eb3-ba2d-4409-9c27-445c3e3e5e7b/photo.jpg",
+      "timestamp": "2026-03-02T16:48:17.426Z"
+    },
+    "1917d5f7-fda2-47b1-8689-1959ddf70f7c": {
+      "status": "done",
+      "storagePath": "beaches/1917d5f7-fda2-47b1-8689-1959ddf70f7c/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/1917d5f7-fda2-47b1-8689-1959ddf70f7c/photo.jpg",
+      "timestamp": "2026-03-02T16:48:18.311Z"
+    },
+    "435fc748-0b34-4a1e-8ceb-d0b706594c9f": {
+      "status": "done",
+      "storagePath": "beaches/435fc748-0b34-4a1e-8ceb-d0b706594c9f/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/435fc748-0b34-4a1e-8ceb-d0b706594c9f/photo.jpg",
+      "timestamp": "2026-03-02T16:48:20.146Z"
+    },
+    "e87f8f84-0033-46a8-b68b-81f0bd9c0447": {
+      "status": "done",
+      "storagePath": "beaches/e87f8f84-0033-46a8-b68b-81f0bd9c0447/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/e87f8f84-0033-46a8-b68b-81f0bd9c0447/photo.jpg",
+      "timestamp": "2026-03-02T16:48:21.884Z"
+    },
+    "c66ee6d1-1ff7-47d3-b3aa-cb5a56eefd75": {
+      "status": "done",
+      "storagePath": "beaches/c66ee6d1-1ff7-47d3-b3aa-cb5a56eefd75/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/c66ee6d1-1ff7-47d3-b3aa-cb5a56eefd75/photo.jpg",
+      "timestamp": "2026-03-02T16:48:22.715Z"
+    },
+    "4d777f33-e172-42b5-84ed-b6b5a3180775": {
+      "status": "done",
+      "storagePath": "beaches/4d777f33-e172-42b5-84ed-b6b5a3180775/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/4d777f33-e172-42b5-84ed-b6b5a3180775/photo.jpg",
+      "timestamp": "2026-03-02T16:48:23.605Z"
+    },
+    "c143139a-8cc6-48a8-82e8-2318f52e5139": {
+      "status": "done",
+      "storagePath": "beaches/c143139a-8cc6-48a8-82e8-2318f52e5139/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/c143139a-8cc6-48a8-82e8-2318f52e5139/photo.jpg",
+      "timestamp": "2026-03-02T16:48:24.454Z"
+    },
+    "e30e3d50-2edb-452b-957f-293e548af00d": {
+      "status": "done",
+      "storagePath": "beaches/e30e3d50-2edb-452b-957f-293e548af00d/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/e30e3d50-2edb-452b-957f-293e548af00d/photo.jpg",
+      "timestamp": "2026-03-02T16:48:25.440Z"
+    },
+    "b589922e-5e8f-4856-844c-30c358e5bac9": {
+      "status": "done",
+      "storagePath": "beaches/b589922e-5e8f-4856-844c-30c358e5bac9/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/b589922e-5e8f-4856-844c-30c358e5bac9/photo.jpg",
+      "timestamp": "2026-03-02T16:48:26.224Z"
+    },
+    "7387ae41-ab07-46be-be93-bb2558e37e19": {
+      "status": "done",
+      "storagePath": "beaches/7387ae41-ab07-46be-be93-bb2558e37e19/photo.jpeg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/7387ae41-ab07-46be-be93-bb2558e37e19/photo.jpeg",
+      "timestamp": "2026-03-02T16:48:27.117Z"
+    },
+    "c5a6fb72-cf84-4125-aea5-ed907b7934fc": {
+      "status": "done",
+      "storagePath": "beaches/c5a6fb72-cf84-4125-aea5-ed907b7934fc/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/c5a6fb72-cf84-4125-aea5-ed907b7934fc/photo.jpg",
+      "timestamp": "2026-03-02T16:48:27.865Z"
+    },
+    "faaceeb6-2750-42bc-9e9d-9f368ebd602d": {
+      "status": "done",
+      "storagePath": "beaches/faaceeb6-2750-42bc-9e9d-9f368ebd602d/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/faaceeb6-2750-42bc-9e9d-9f368ebd602d/photo.jpg",
+      "timestamp": "2026-03-02T16:48:28.668Z"
+    },
+    "e58e4a70-6a6d-468a-9cfd-4c2d0671e37a": {
+      "status": "done",
+      "storagePath": "beaches/e58e4a70-6a6d-468a-9cfd-4c2d0671e37a/photo.jpeg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/e58e4a70-6a6d-468a-9cfd-4c2d0671e37a/photo.jpeg",
+      "timestamp": "2026-03-02T16:48:29.880Z"
+    },
+    "d8d216ed-e760-472c-9214-60cf36df3aaa": {
+      "status": "done",
+      "storagePath": "beaches/d8d216ed-e760-472c-9214-60cf36df3aaa/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d8d216ed-e760-472c-9214-60cf36df3aaa/photo.jpg",
+      "timestamp": "2026-03-02T16:48:31.124Z"
+    },
+    "13eae1d4-75aa-4db0-a946-ea1a56ee7967": {
+      "status": "done",
+      "storagePath": "beaches/13eae1d4-75aa-4db0-a946-ea1a56ee7967/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/13eae1d4-75aa-4db0-a946-ea1a56ee7967/photo.jpg",
+      "timestamp": "2026-03-02T16:48:32.029Z"
+    },
+    "86abdaf2-aa02-4d1c-93ca-23a333c7e433": {
+      "status": "done",
+      "storagePath": "beaches/86abdaf2-aa02-4d1c-93ca-23a333c7e433/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/86abdaf2-aa02-4d1c-93ca-23a333c7e433/photo.jpg",
+      "timestamp": "2026-03-02T16:48:34.085Z"
+    },
+    "dda8a816-410d-48d1-9bdc-18d42c36481f": {
+      "status": "done",
+      "storagePath": "beaches/dda8a816-410d-48d1-9bdc-18d42c36481f/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/dda8a816-410d-48d1-9bdc-18d42c36481f/photo.jpg",
+      "timestamp": "2026-03-02T16:48:34.888Z"
+    },
+    "70951ea9-9ca1-40f5-8efc-5805ae7e64b9": {
+      "status": "done",
+      "storagePath": "beaches/70951ea9-9ca1-40f5-8efc-5805ae7e64b9/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/70951ea9-9ca1-40f5-8efc-5805ae7e64b9/photo.jpg",
+      "timestamp": "2026-03-02T16:48:35.443Z"
+    },
+    "f5ee6051-d659-4401-8f03-bf4345b4ae6c": {
+      "status": "done",
+      "storagePath": "beaches/f5ee6051-d659-4401-8f03-bf4345b4ae6c/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/f5ee6051-d659-4401-8f03-bf4345b4ae6c/photo.jpg",
+      "timestamp": "2026-03-02T16:48:36.321Z"
+    },
+    "455ba964-a5af-4715-ac52-616dfce29a57": {
+      "status": "done",
+      "storagePath": "beaches/455ba964-a5af-4715-ac52-616dfce29a57/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/455ba964-a5af-4715-ac52-616dfce29a57/photo.jpg",
+      "timestamp": "2026-03-02T16:48:37.106Z"
+    },
+    "5a00d8da-3d76-4774-abcf-795eae305293": {
+      "status": "done",
+      "storagePath": "beaches/5a00d8da-3d76-4774-abcf-795eae305293/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/5a00d8da-3d76-4774-abcf-795eae305293/photo.jpg",
+      "timestamp": "2026-03-02T16:48:37.966Z"
+    },
+    "ffcf6ee5-45d3-4a1b-9f8a-337caa1cea41": {
+      "status": "done",
+      "storagePath": "beaches/ffcf6ee5-45d3-4a1b-9f8a-337caa1cea41/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/ffcf6ee5-45d3-4a1b-9f8a-337caa1cea41/photo.jpg",
+      "timestamp": "2026-03-02T16:48:38.782Z"
+    },
+    "d2641036-6609-421a-9d47-c114a5476956": {
+      "status": "done",
+      "storagePath": "beaches/d2641036-6609-421a-9d47-c114a5476956/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d2641036-6609-421a-9d47-c114a5476956/photo.jpg",
+      "timestamp": "2026-03-02T16:48:39.509Z"
+    },
+    "1f58b9a4-01d3-44bf-bd76-30e3e2101b48": {
+      "status": "done",
+      "storagePath": "beaches/1f58b9a4-01d3-44bf-bd76-30e3e2101b48/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/1f58b9a4-01d3-44bf-bd76-30e3e2101b48/photo.jpg",
+      "timestamp": "2026-03-02T16:48:40.311Z"
+    },
+    "01c84eab-5e50-4b7d-95a4-55a454774206": {
+      "status": "done",
+      "storagePath": "beaches/01c84eab-5e50-4b7d-95a4-55a454774206/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/01c84eab-5e50-4b7d-95a4-55a454774206/photo.jpg",
+      "timestamp": "2026-03-02T16:48:41.348Z"
+    },
+    "c9de564d-dc8f-43f2-9d42-56d4b07a78ca": {
+      "status": "done",
+      "storagePath": "beaches/c9de564d-dc8f-43f2-9d42-56d4b07a78ca/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/c9de564d-dc8f-43f2-9d42-56d4b07a78ca/photo.jpg",
+      "timestamp": "2026-03-02T16:48:42.404Z"
+    },
+    "049325cf-0acc-4198-8ef6-bd4f3659104c": {
+      "status": "done",
+      "storagePath": "beaches/049325cf-0acc-4198-8ef6-bd4f3659104c/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/049325cf-0acc-4198-8ef6-bd4f3659104c/photo.jpg",
+      "timestamp": "2026-03-02T16:48:43.427Z"
+    },
+    "5d01d367-3580-4f96-bdbf-acfcf7b11d3a": {
+      "status": "done",
+      "storagePath": "beaches/5d01d367-3580-4f96-bdbf-acfcf7b11d3a/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/5d01d367-3580-4f96-bdbf-acfcf7b11d3a/photo.jpg",
+      "timestamp": "2026-03-02T16:48:44.306Z"
+    },
+    "9e55fff3-0b3a-4243-85c1-ff65ca39e8af": {
+      "status": "done",
+      "storagePath": "beaches/9e55fff3-0b3a-4243-85c1-ff65ca39e8af/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/9e55fff3-0b3a-4243-85c1-ff65ca39e8af/photo.jpg",
+      "timestamp": "2026-03-02T16:48:45.551Z"
+    },
+    "214681e7-e2c7-4d86-938d-e063cdbe41c9": {
+      "status": "done",
+      "storagePath": "beaches/214681e7-e2c7-4d86-938d-e063cdbe41c9/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/214681e7-e2c7-4d86-938d-e063cdbe41c9/photo.jpg",
+      "timestamp": "2026-03-02T16:48:46.487Z"
+    },
+    "9e5eed0b-df35-4538-9327-ba81a4e4dd1a": {
+      "status": "done",
+      "storagePath": "beaches/9e5eed0b-df35-4538-9327-ba81a4e4dd1a/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/9e5eed0b-df35-4538-9327-ba81a4e4dd1a/photo.jpg",
+      "timestamp": "2026-03-02T16:48:47.280Z"
+    },
+    "be790dde-2701-4777-b447-03ee072d904c": {
+      "status": "done",
+      "storagePath": "beaches/be790dde-2701-4777-b447-03ee072d904c/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/be790dde-2701-4777-b447-03ee072d904c/photo.jpg",
+      "timestamp": "2026-03-02T16:48:48.099Z"
+    },
+    "d727aec2-e149-49c6-8df5-f64b93d1aed9": {
+      "status": "done",
+      "storagePath": "beaches/d727aec2-e149-49c6-8df5-f64b93d1aed9/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d727aec2-e149-49c6-8df5-f64b93d1aed9/photo.jpg",
+      "timestamp": "2026-03-02T16:48:49.025Z"
+    },
+    "c3c43eea-0cbc-412a-b56b-79a71399b518": {
+      "status": "done",
+      "storagePath": "beaches/c3c43eea-0cbc-412a-b56b-79a71399b518/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/c3c43eea-0cbc-412a-b56b-79a71399b518/photo.jpg",
+      "timestamp": "2026-03-02T16:48:49.841Z"
+    },
+    "5b03862b-532b-47aa-ac41-47332d0e725c": {
+      "status": "done",
+      "storagePath": "beaches/5b03862b-532b-47aa-ac41-47332d0e725c/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/5b03862b-532b-47aa-ac41-47332d0e725c/photo.jpg",
+      "timestamp": "2026-03-02T16:48:50.672Z"
+    },
+    "cdde041b-e34f-449d-9323-e486b699c0bf": {
+      "status": "done",
+      "storagePath": "beaches/cdde041b-e34f-449d-9323-e486b699c0bf/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/cdde041b-e34f-449d-9323-e486b699c0bf/photo.jpg",
+      "timestamp": "2026-03-02T16:48:51.996Z"
+    },
+    "58eb67aa-627e-47fb-b0ed-7a8d467198a3": {
+      "status": "done",
+      "storagePath": "beaches/58eb67aa-627e-47fb-b0ed-7a8d467198a3/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/58eb67aa-627e-47fb-b0ed-7a8d467198a3/photo.jpg",
+      "timestamp": "2026-03-02T16:48:53.017Z"
+    },
+    "48759a47-f78c-400c-b03a-6533f4b81d33": {
+      "status": "done",
+      "storagePath": "beaches/48759a47-f78c-400c-b03a-6533f4b81d33/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/48759a47-f78c-400c-b03a-6533f4b81d33/photo.jpg",
+      "timestamp": "2026-03-02T16:48:53.720Z"
+    },
+    "c6a757fa-5e49-4638-bde4-b97b83c840b5": {
+      "status": "done",
+      "storagePath": "beaches/c6a757fa-5e49-4638-bde4-b97b83c840b5/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/c6a757fa-5e49-4638-bde4-b97b83c840b5/photo.jpg",
+      "timestamp": "2026-03-02T16:48:54.518Z"
+    },
+    "00273109-b88e-4076-ada3-a63704b69085": {
+      "status": "done",
+      "storagePath": "beaches/00273109-b88e-4076-ada3-a63704b69085/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/00273109-b88e-4076-ada3-a63704b69085/photo.jpg",
+      "timestamp": "2026-03-02T16:48:55.573Z"
+    },
+    "dc07d3ed-314c-4ea4-802f-e77644fe853c": {
+      "status": "done",
+      "storagePath": "beaches/dc07d3ed-314c-4ea4-802f-e77644fe853c/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/dc07d3ed-314c-4ea4-802f-e77644fe853c/photo.jpg",
+      "timestamp": "2026-03-02T16:48:56.260Z"
+    },
+    "6a7a3694-099c-4d6a-86ca-eccee86db00c": {
+      "status": "done",
+      "storagePath": "beaches/6a7a3694-099c-4d6a-86ca-eccee86db00c/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/6a7a3694-099c-4d6a-86ca-eccee86db00c/photo.jpg",
+      "timestamp": "2026-03-02T16:48:57.141Z"
+    },
+    "bde02f10-6615-4bda-aab9-cb4bd9031e24": {
+      "status": "done",
+      "storagePath": "beaches/bde02f10-6615-4bda-aab9-cb4bd9031e24/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/bde02f10-6615-4bda-aab9-cb4bd9031e24/photo.jpg",
+      "timestamp": "2026-03-02T16:48:57.906Z"
+    },
+    "9938360d-0b88-4abc-a70b-f31c02e08d52": {
+      "status": "done",
+      "storagePath": "beaches/9938360d-0b88-4abc-a70b-f31c02e08d52/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/9938360d-0b88-4abc-a70b-f31c02e08d52/photo.jpg",
+      "timestamp": "2026-03-02T16:48:58.852Z"
+    },
+    "8c152f93-1879-4985-a71b-c215b5abcf99": {
+      "status": "done",
+      "storagePath": "beaches/8c152f93-1879-4985-a71b-c215b5abcf99/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/8c152f93-1879-4985-a71b-c215b5abcf99/photo.jpg",
+      "timestamp": "2026-03-02T16:48:59.849Z"
+    },
+    "15a84af0-249f-4132-a36f-a4cb78fe696d": {
+      "status": "done",
+      "storagePath": "beaches/15a84af0-249f-4132-a36f-a4cb78fe696d/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/15a84af0-249f-4132-a36f-a4cb78fe696d/photo.jpg",
+      "timestamp": "2026-03-02T16:49:00.739Z"
+    },
+    "d8941758-a5fa-4e4e-a238-42746ce3e3d4": {
+      "status": "done",
+      "storagePath": "beaches/d8941758-a5fa-4e4e-a238-42746ce3e3d4/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d8941758-a5fa-4e4e-a238-42746ce3e3d4/photo.jpg",
+      "timestamp": "2026-03-02T16:49:01.618Z"
+    },
+    "37088f16-7b50-4781-be99-69561066eafa": {
+      "status": "done",
+      "storagePath": "beaches/37088f16-7b50-4781-be99-69561066eafa/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/37088f16-7b50-4781-be99-69561066eafa/photo.jpg",
+      "timestamp": "2026-03-02T16:49:02.652Z"
+    },
+    "a81fe00e-eb4d-4bb2-9ed2-b23d697d632b": {
+      "status": "done",
+      "storagePath": "beaches/a81fe00e-eb4d-4bb2-9ed2-b23d697d632b/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/a81fe00e-eb4d-4bb2-9ed2-b23d697d632b/photo.jpg",
+      "timestamp": "2026-03-02T16:49:03.901Z"
+    },
+    "45cf3152-74e5-4c74-a1b2-ed623e9724d0": {
+      "status": "done",
+      "storagePath": "beaches/45cf3152-74e5-4c74-a1b2-ed623e9724d0/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/45cf3152-74e5-4c74-a1b2-ed623e9724d0/photo.jpg",
+      "timestamp": "2026-03-02T16:49:04.803Z"
+    },
+    "ff8816bc-a4c7-493d-b0e7-f0c06fcd728e": {
+      "status": "done",
+      "storagePath": "beaches/ff8816bc-a4c7-493d-b0e7-f0c06fcd728e/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/ff8816bc-a4c7-493d-b0e7-f0c06fcd728e/photo.jpg",
+      "timestamp": "2026-03-02T16:49:05.943Z"
+    },
+    "5c6bb096-cde7-414f-b082-1f67db0f4a9b": {
+      "status": "done",
+      "storagePath": "beaches/5c6bb096-cde7-414f-b082-1f67db0f4a9b/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/5c6bb096-cde7-414f-b082-1f67db0f4a9b/photo.jpg",
+      "timestamp": "2026-03-02T16:49:06.951Z"
+    },
+    "f6237a16-f272-4408-851f-a0a5974d0c09": {
+      "status": "done",
+      "storagePath": "beaches/f6237a16-f272-4408-851f-a0a5974d0c09/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/f6237a16-f272-4408-851f-a0a5974d0c09/photo.jpg",
+      "timestamp": "2026-03-02T16:49:08.171Z"
+    },
+    "54da883c-5ff2-44cb-8c93-b9d05101cd2b": {
+      "status": "done",
+      "storagePath": "beaches/54da883c-5ff2-44cb-8c93-b9d05101cd2b/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/54da883c-5ff2-44cb-8c93-b9d05101cd2b/photo.jpg",
+      "timestamp": "2026-03-02T16:49:20.463Z"
+    },
+    "8786916e-e9ba-422f-addb-bc107858a299": {
+      "status": "done",
+      "storagePath": "beaches/8786916e-e9ba-422f-addb-bc107858a299/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/8786916e-e9ba-422f-addb-bc107858a299/photo.jpg",
+      "timestamp": "2026-03-02T16:49:21.295Z"
+    },
+    "c11394dc-55fe-403d-b811-3c0d3a3c4ed2": {
+      "status": "done",
+      "storagePath": "beaches/c11394dc-55fe-403d-b811-3c0d3a3c4ed2/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/c11394dc-55fe-403d-b811-3c0d3a3c4ed2/photo.jpg",
+      "timestamp": "2026-03-02T16:49:22.106Z"
+    },
+    "6ae45563-b079-4a02-adca-cd367e7ce9f9": {
+      "status": "done",
+      "storagePath": "beaches/6ae45563-b079-4a02-adca-cd367e7ce9f9/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/6ae45563-b079-4a02-adca-cd367e7ce9f9/photo.jpg",
+      "timestamp": "2026-03-02T16:49:23.177Z"
+    },
+    "81f5e499-4b38-455a-9ecf-6d6556835735": {
+      "status": "done",
+      "storagePath": "beaches/81f5e499-4b38-455a-9ecf-6d6556835735/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/81f5e499-4b38-455a-9ecf-6d6556835735/photo.jpg",
+      "timestamp": "2026-03-02T16:49:23.746Z"
+    },
+    "13e75b4c-6b87-4e99-bd39-d2df255287d1": {
+      "status": "done",
+      "storagePath": "beaches/13e75b4c-6b87-4e99-bd39-d2df255287d1/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/13e75b4c-6b87-4e99-bd39-d2df255287d1/photo.jpg",
+      "timestamp": "2026-03-02T16:49:24.638Z"
+    },
+    "81c219ca-f7c6-441e-ba9e-a6020940716e": {
+      "status": "done",
+      "storagePath": "beaches/81c219ca-f7c6-441e-ba9e-a6020940716e/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/81c219ca-f7c6-441e-ba9e-a6020940716e/photo.jpg",
+      "timestamp": "2026-03-02T16:49:25.472Z"
+    },
+    "d829483a-c3a4-42dc-8759-9ec20d4eee8d": {
+      "status": "done",
+      "storagePath": "beaches/d829483a-c3a4-42dc-8759-9ec20d4eee8d/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d829483a-c3a4-42dc-8759-9ec20d4eee8d/photo.jpg",
+      "timestamp": "2026-03-02T16:49:26.295Z"
+    },
+    "c2bb9118-a1a0-4ec8-9142-655a67945f4d": {
+      "status": "done",
+      "storagePath": "beaches/c2bb9118-a1a0-4ec8-9142-655a67945f4d/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/c2bb9118-a1a0-4ec8-9142-655a67945f4d/photo.jpg",
+      "timestamp": "2026-03-02T16:49:27.120Z"
+    },
+    "7ab1c4fd-b42e-4019-b830-639a2be03c65": {
+      "status": "done",
+      "storagePath": "beaches/7ab1c4fd-b42e-4019-b830-639a2be03c65/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/7ab1c4fd-b42e-4019-b830-639a2be03c65/photo.jpg",
+      "timestamp": "2026-03-02T16:49:27.891Z"
+    },
+    "bd8bf47e-6dcd-4131-b024-35d683991001": {
+      "status": "done",
+      "storagePath": "beaches/bd8bf47e-6dcd-4131-b024-35d683991001/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/bd8bf47e-6dcd-4131-b024-35d683991001/photo.jpg",
+      "timestamp": "2026-03-02T16:49:30.190Z"
+    },
+    "da087e76-6c5f-4df5-9b61-738fd30ee99b": {
+      "status": "done",
+      "storagePath": "beaches/da087e76-6c5f-4df5-9b61-738fd30ee99b/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/da087e76-6c5f-4df5-9b61-738fd30ee99b/photo.jpg",
+      "timestamp": "2026-03-02T16:49:30.939Z"
+    },
+    "d9759f1e-de45-4b9e-ae97-88526e642f7f": {
+      "status": "done",
+      "storagePath": "beaches/d9759f1e-de45-4b9e-ae97-88526e642f7f/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d9759f1e-de45-4b9e-ae97-88526e642f7f/photo.jpg",
+      "timestamp": "2026-03-02T16:49:41.195Z"
+    },
+    "9321e9b7-7822-4426-ad46-f92186b1b610": {
+      "status": "done",
+      "storagePath": "beaches/9321e9b7-7822-4426-ad46-f92186b1b610/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/9321e9b7-7822-4426-ad46-f92186b1b610/photo.jpg",
+      "timestamp": "2026-03-02T16:49:42.164Z"
+    },
+    "35da20ea-d2f8-4f00-a45d-b4ec0e44a24c": {
+      "status": "done",
+      "storagePath": "beaches/35da20ea-d2f8-4f00-a45d-b4ec0e44a24c/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/35da20ea-d2f8-4f00-a45d-b4ec0e44a24c/photo.jpg",
+      "timestamp": "2026-03-02T16:49:43.088Z"
+    },
+    "5cc963e1-d798-46d0-8e75-1ad84e45df25": {
+      "status": "done",
+      "storagePath": "beaches/5cc963e1-d798-46d0-8e75-1ad84e45df25/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/5cc963e1-d798-46d0-8e75-1ad84e45df25/photo.jpg",
+      "timestamp": "2026-03-02T16:49:44.139Z"
+    },
+    "324976f2-2620-4d76-8613-1e1b8a648aee": {
+      "status": "done",
+      "storagePath": "beaches/324976f2-2620-4d76-8613-1e1b8a648aee/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/324976f2-2620-4d76-8613-1e1b8a648aee/photo.jpg",
+      "timestamp": "2026-03-02T16:49:45.040Z"
+    },
+    "b46e82e4-9ccc-424b-bb0a-a6bc9fb0806f": {
+      "status": "done",
+      "storagePath": "beaches/b46e82e4-9ccc-424b-bb0a-a6bc9fb0806f/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/b46e82e4-9ccc-424b-bb0a-a6bc9fb0806f/photo.jpg",
+      "timestamp": "2026-03-02T16:49:45.888Z"
+    },
+    "ed72f07b-78de-47ab-9a4e-e0aaa653b303": {
+      "status": "done",
+      "storagePath": "beaches/ed72f07b-78de-47ab-9a4e-e0aaa653b303/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/ed72f07b-78de-47ab-9a4e-e0aaa653b303/photo.jpg",
+      "timestamp": "2026-03-02T16:49:46.772Z"
+    },
+    "32b88748-357d-4fe9-9b40-d057f0ccd436": {
+      "status": "done",
+      "storagePath": "beaches/32b88748-357d-4fe9-9b40-d057f0ccd436/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/32b88748-357d-4fe9-9b40-d057f0ccd436/photo.jpg",
+      "timestamp": "2026-03-02T16:49:47.490Z"
+    },
+    "76b5a590-973b-4aeb-8425-943bb85798fb": {
+      "status": "done",
+      "storagePath": "beaches/76b5a590-973b-4aeb-8425-943bb85798fb/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/76b5a590-973b-4aeb-8425-943bb85798fb/photo.jpg",
+      "timestamp": "2026-03-02T16:49:48.365Z"
+    },
+    "21c47887-cb57-485a-b173-f646e4420ca2": {
+      "status": "done",
+      "storagePath": "beaches/21c47887-cb57-485a-b173-f646e4420ca2/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/21c47887-cb57-485a-b173-f646e4420ca2/photo.jpg",
+      "timestamp": "2026-03-02T16:49:49.221Z"
+    },
+    "229e43f7-632f-4a33-83bb-5e4d6c29d8c4": {
+      "status": "done",
+      "storagePath": "beaches/229e43f7-632f-4a33-83bb-5e4d6c29d8c4/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/229e43f7-632f-4a33-83bb-5e4d6c29d8c4/photo.jpg",
+      "timestamp": "2026-03-02T16:49:50.151Z"
+    },
+    "6e67dc58-dfcf-4d57-8b65-1de9f2a5accf": {
+      "status": "done",
+      "storagePath": "beaches/6e67dc58-dfcf-4d57-8b65-1de9f2a5accf/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/6e67dc58-dfcf-4d57-8b65-1de9f2a5accf/photo.jpg",
+      "timestamp": "2026-03-02T16:49:51.074Z"
+    },
+    "ea924948-2d6f-444f-9edc-ea6bc59b9257": {
+      "status": "done",
+      "storagePath": "beaches/ea924948-2d6f-444f-9edc-ea6bc59b9257/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/ea924948-2d6f-444f-9edc-ea6bc59b9257/photo.jpg",
+      "timestamp": "2026-03-02T16:49:55.068Z"
+    },
+    "a2fd0973-507a-45cd-899d-18266a00627b": {
+      "status": "done",
+      "storagePath": "beaches/a2fd0973-507a-45cd-899d-18266a00627b/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/a2fd0973-507a-45cd-899d-18266a00627b/photo.jpg",
+      "timestamp": "2026-03-02T16:49:55.919Z"
+    },
+    "a6d9a0ac-f804-4cf2-9f90-08f6f9fc5629": {
+      "status": "done",
+      "storagePath": "beaches/a6d9a0ac-f804-4cf2-9f90-08f6f9fc5629/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/a6d9a0ac-f804-4cf2-9f90-08f6f9fc5629/photo.jpg",
+      "timestamp": "2026-03-02T16:49:56.643Z"
+    },
+    "658b64b1-889d-4432-a254-46f8b53bb52f": {
+      "status": "done",
+      "storagePath": "beaches/658b64b1-889d-4432-a254-46f8b53bb52f/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/658b64b1-889d-4432-a254-46f8b53bb52f/photo.jpg",
+      "timestamp": "2026-03-02T16:49:57.408Z"
+    },
+    "d01512b9-08e8-4f3e-b196-e953671cbab8": {
+      "status": "done",
+      "storagePath": "beaches/d01512b9-08e8-4f3e-b196-e953671cbab8/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d01512b9-08e8-4f3e-b196-e953671cbab8/photo.jpg",
+      "timestamp": "2026-03-02T16:49:58.235Z"
+    },
+    "f2525b7f-b454-4398-9354-6ffb348b2565": {
+      "status": "done",
+      "storagePath": "beaches/f2525b7f-b454-4398-9354-6ffb348b2565/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/f2525b7f-b454-4398-9354-6ffb348b2565/photo.jpg",
+      "timestamp": "2026-03-02T16:49:59.066Z"
+    },
+    "df2e38c3-747b-4930-9a3a-4372b19af68d": {
+      "status": "done",
+      "storagePath": "beaches/df2e38c3-747b-4930-9a3a-4372b19af68d/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/df2e38c3-747b-4930-9a3a-4372b19af68d/photo.jpg",
+      "timestamp": "2026-03-02T16:50:00.086Z"
+    },
+    "c1fbf709-50b2-4b35-bedb-9b59992dbff6": {
+      "status": "done",
+      "storagePath": "beaches/c1fbf709-50b2-4b35-bedb-9b59992dbff6/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/c1fbf709-50b2-4b35-bedb-9b59992dbff6/photo.jpg",
+      "timestamp": "2026-03-02T16:50:00.828Z"
+    },
+    "3b86d296-f027-470c-8afe-5d4e94d7c2e7": {
+      "status": "done",
+      "storagePath": "beaches/3b86d296-f027-470c-8afe-5d4e94d7c2e7/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/3b86d296-f027-470c-8afe-5d4e94d7c2e7/photo.jpg",
+      "timestamp": "2026-03-02T16:50:01.836Z"
+    },
+    "33785c60-c7fa-4366-9505-1407b2a4f765": {
+      "status": "done",
+      "storagePath": "beaches/33785c60-c7fa-4366-9505-1407b2a4f765/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/33785c60-c7fa-4366-9505-1407b2a4f765/photo.jpg",
+      "timestamp": "2026-03-02T16:50:02.829Z"
+    },
+    "adbf9219-1c5c-42ae-bfd1-96d7338f535c": {
+      "status": "done",
+      "storagePath": "beaches/adbf9219-1c5c-42ae-bfd1-96d7338f535c/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/adbf9219-1c5c-42ae-bfd1-96d7338f535c/photo.jpg",
+      "timestamp": "2026-03-02T16:50:03.736Z"
+    },
+    "fa33ab43-5f43-45d8-a861-f4f7b3413fda": {
+      "status": "done",
+      "storagePath": "beaches/fa33ab43-5f43-45d8-a861-f4f7b3413fda/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/fa33ab43-5f43-45d8-a861-f4f7b3413fda/photo.jpg",
+      "timestamp": "2026-03-02T16:50:04.434Z"
+    },
+    "a65a5513-688d-49ca-af8e-a703773041d8": {
+      "status": "done",
+      "storagePath": "beaches/a65a5513-688d-49ca-af8e-a703773041d8/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/a65a5513-688d-49ca-af8e-a703773041d8/photo.jpg",
+      "timestamp": "2026-03-02T16:50:05.254Z"
+    },
+    "e1e8a08c-3f91-4f4a-9a33-d98f444a6a23": {
+      "status": "done",
+      "storagePath": "beaches/e1e8a08c-3f91-4f4a-9a33-d98f444a6a23/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/e1e8a08c-3f91-4f4a-9a33-d98f444a6a23/photo.jpg",
+      "timestamp": "2026-03-02T16:50:06.143Z"
+    },
+    "d5a684eb-9a54-4350-8b34-2cc8c9ae34d7": {
+      "status": "done",
+      "storagePath": "beaches/d5a684eb-9a54-4350-8b34-2cc8c9ae34d7/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d5a684eb-9a54-4350-8b34-2cc8c9ae34d7/photo.jpg",
+      "timestamp": "2026-03-02T16:50:07.866Z"
+    },
+    "ddb56f77-2736-425f-88de-b71f588f497c": {
+      "status": "done",
+      "storagePath": "beaches/ddb56f77-2736-425f-88de-b71f588f497c/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/ddb56f77-2736-425f-88de-b71f588f497c/photo.jpg",
+      "timestamp": "2026-03-02T16:50:09.184Z"
+    },
+    "4a058503-f10a-47ba-bf94-98c84d3c4680": {
+      "status": "done",
+      "storagePath": "beaches/4a058503-f10a-47ba-bf94-98c84d3c4680/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/4a058503-f10a-47ba-bf94-98c84d3c4680/photo.jpg",
+      "timestamp": "2026-03-02T16:50:09.959Z"
+    },
+    "ccae44d1-8f47-4949-8538-f1d282259c42": {
+      "status": "done",
+      "storagePath": "beaches/ccae44d1-8f47-4949-8538-f1d282259c42/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/ccae44d1-8f47-4949-8538-f1d282259c42/photo.jpg",
+      "timestamp": "2026-03-02T16:50:10.844Z"
+    },
+    "2a346125-f027-472d-ac1e-9ae7507276e6": {
+      "status": "done",
+      "storagePath": "beaches/2a346125-f027-472d-ac1e-9ae7507276e6/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/2a346125-f027-472d-ac1e-9ae7507276e6/photo.jpg",
+      "timestamp": "2026-03-02T16:50:22.414Z"
+    },
+    "73d42d48-c552-44bb-b566-05a0d8d43326": {
+      "status": "done",
+      "storagePath": "beaches/73d42d48-c552-44bb-b566-05a0d8d43326/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/73d42d48-c552-44bb-b566-05a0d8d43326/photo.jpg",
+      "timestamp": "2026-03-02T16:50:23.845Z"
+    },
+    "cd204ec1-f631-4256-b2d6-1a882f3bb256": {
+      "status": "done",
+      "storagePath": "beaches/cd204ec1-f631-4256-b2d6-1a882f3bb256/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/cd204ec1-f631-4256-b2d6-1a882f3bb256/photo.jpg",
+      "timestamp": "2026-03-02T16:50:24.666Z"
+    },
+    "e7feb3b0-41e3-4f79-b0b9-6d9114dd3803": {
+      "status": "done",
+      "storagePath": "beaches/e7feb3b0-41e3-4f79-b0b9-6d9114dd3803/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/e7feb3b0-41e3-4f79-b0b9-6d9114dd3803/photo.jpg",
+      "timestamp": "2026-03-02T16:50:25.696Z"
+    },
+    "92d01f38-b6c2-4243-83e6-65c9352508dd": {
+      "status": "done",
+      "storagePath": "beaches/92d01f38-b6c2-4243-83e6-65c9352508dd/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/92d01f38-b6c2-4243-83e6-65c9352508dd/photo.jpg",
+      "timestamp": "2026-03-02T16:50:26.701Z"
+    },
+    "407d2017-23ab-451d-9bfa-3e81f555053c": {
+      "status": "done",
+      "storagePath": "beaches/407d2017-23ab-451d-9bfa-3e81f555053c/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/407d2017-23ab-451d-9bfa-3e81f555053c/photo.jpg",
+      "timestamp": "2026-03-02T16:50:27.530Z"
+    },
+    "16771493-ea8f-4899-84b1-cddf416d6a72": {
+      "status": "done",
+      "storagePath": "beaches/16771493-ea8f-4899-84b1-cddf416d6a72/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/16771493-ea8f-4899-84b1-cddf416d6a72/photo.jpg",
+      "timestamp": "2026-03-02T16:50:28.645Z"
+    },
+    "fb7d4233-175f-4b12-ae13-ea3787a6c722": {
+      "status": "done",
+      "storagePath": "beaches/fb7d4233-175f-4b12-ae13-ea3787a6c722/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/fb7d4233-175f-4b12-ae13-ea3787a6c722/photo.jpg",
+      "timestamp": "2026-03-02T16:50:29.784Z"
+    },
+    "3d0e0042-9d9c-4cb1-9059-77e1b55f6f80": {
+      "status": "done",
+      "storagePath": "beaches/3d0e0042-9d9c-4cb1-9059-77e1b55f6f80/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/3d0e0042-9d9c-4cb1-9059-77e1b55f6f80/photo.jpg",
+      "timestamp": "2026-03-02T16:50:30.544Z"
+    },
+    "7bb25652-3d03-4329-a984-9a92f62b4649": {
+      "status": "done",
+      "storagePath": "beaches/7bb25652-3d03-4329-a984-9a92f62b4649/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/7bb25652-3d03-4329-a984-9a92f62b4649/photo.jpg",
+      "timestamp": "2026-03-02T16:50:31.323Z"
+    },
+    "399a9546-957c-498e-9b29-abb4d2a6d70d": {
+      "status": "done",
+      "storagePath": "beaches/399a9546-957c-498e-9b29-abb4d2a6d70d/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/399a9546-957c-498e-9b29-abb4d2a6d70d/photo.jpg",
+      "timestamp": "2026-03-02T16:50:32.204Z"
+    },
+    "89749bd9-d4aa-4867-91e3-16cafa2aef45": {
+      "status": "done",
+      "storagePath": "beaches/89749bd9-d4aa-4867-91e3-16cafa2aef45/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/89749bd9-d4aa-4867-91e3-16cafa2aef45/photo.jpg",
+      "timestamp": "2026-03-02T16:50:32.918Z"
+    },
+    "24f03ef7-a733-47bd-a4f9-aeb3dd2eb279": {
+      "status": "done",
+      "storagePath": "beaches/24f03ef7-a733-47bd-a4f9-aeb3dd2eb279/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/24f03ef7-a733-47bd-a4f9-aeb3dd2eb279/photo.jpg",
+      "timestamp": "2026-03-02T16:50:33.885Z"
+    },
+    "5e60309f-06d8-481f-aa60-a237df57b818": {
+      "status": "done",
+      "storagePath": "beaches/5e60309f-06d8-481f-aa60-a237df57b818/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/5e60309f-06d8-481f-aa60-a237df57b818/photo.jpg",
+      "timestamp": "2026-03-02T16:50:34.909Z"
+    },
+    "d4eb9dbe-ac5a-4d09-85ae-e3e7c7824834": {
+      "status": "done",
+      "storagePath": "beaches/d4eb9dbe-ac5a-4d09-85ae-e3e7c7824834/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d4eb9dbe-ac5a-4d09-85ae-e3e7c7824834/photo.jpg",
+      "timestamp": "2026-03-02T16:50:36.329Z"
+    },
+    "fc453144-20b0-4422-a578-da880b037bee": {
+      "status": "done",
+      "storagePath": "beaches/fc453144-20b0-4422-a578-da880b037bee/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/fc453144-20b0-4422-a578-da880b037bee/photo.jpg",
+      "timestamp": "2026-03-02T16:50:36.906Z"
+    },
+    "d93b34d8-ee7b-498a-8b75-ffa1ab25f76a": {
+      "status": "done",
+      "storagePath": "beaches/d93b34d8-ee7b-498a-8b75-ffa1ab25f76a/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d93b34d8-ee7b-498a-8b75-ffa1ab25f76a/photo.jpg",
+      "timestamp": "2026-03-02T16:50:38.322Z"
+    },
+    "d5feb480-f032-4cca-8fac-7a4f6df9c39a": {
+      "status": "done",
+      "storagePath": "beaches/d5feb480-f032-4cca-8fac-7a4f6df9c39a/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d5feb480-f032-4cca-8fac-7a4f6df9c39a/photo.jpg",
+      "timestamp": "2026-03-02T16:50:39.058Z"
+    },
+    "0565c78f-f5fe-44b8-bc58-36cef4cfb706": {
+      "status": "done",
+      "storagePath": "beaches/0565c78f-f5fe-44b8-bc58-36cef4cfb706/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/0565c78f-f5fe-44b8-bc58-36cef4cfb706/photo.jpg",
+      "timestamp": "2026-03-02T16:50:39.833Z"
+    },
+    "46dcf523-7bbf-41e2-9975-38dc2d8b2c58": {
+      "status": "done",
+      "storagePath": "beaches/46dcf523-7bbf-41e2-9975-38dc2d8b2c58/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/46dcf523-7bbf-41e2-9975-38dc2d8b2c58/photo.jpg",
+      "timestamp": "2026-03-02T16:50:40.950Z"
+    },
+    "5fd4c11a-7a05-432f-a11a-9fbcb33cfba0": {
+      "status": "done",
+      "storagePath": "beaches/5fd4c11a-7a05-432f-a11a-9fbcb33cfba0/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/5fd4c11a-7a05-432f-a11a-9fbcb33cfba0/photo.jpg",
+      "timestamp": "2026-03-02T16:50:41.767Z"
+    },
+    "7a0d79c6-7b63-4319-b63e-d51588314b21": {
+      "status": "done",
+      "storagePath": "beaches/7a0d79c6-7b63-4319-b63e-d51588314b21/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/7a0d79c6-7b63-4319-b63e-d51588314b21/photo.jpg",
+      "timestamp": "2026-03-02T16:50:44.218Z"
+    },
+    "f1b21c22-a4e8-4428-9c4e-557853319b84": {
+      "status": "done",
+      "storagePath": "beaches/f1b21c22-a4e8-4428-9c4e-557853319b84/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/f1b21c22-a4e8-4428-9c4e-557853319b84/photo.jpg",
+      "timestamp": "2026-03-02T16:50:45.566Z"
+    },
+    "ce5f3931-96cb-405b-9545-63cfe6de62d2": {
+      "status": "done",
+      "storagePath": "beaches/ce5f3931-96cb-405b-9545-63cfe6de62d2/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/ce5f3931-96cb-405b-9545-63cfe6de62d2/photo.jpg",
+      "timestamp": "2026-03-02T16:50:47.526Z"
+    },
+    "e3e2e45a-1b8c-44a7-bd20-6db938165c32": {
+      "status": "done",
+      "storagePath": "beaches/e3e2e45a-1b8c-44a7-bd20-6db938165c32/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/e3e2e45a-1b8c-44a7-bd20-6db938165c32/photo.jpg",
+      "timestamp": "2026-03-02T16:50:49.230Z"
+    },
+    "1bc2dc49-b02e-4758-b0fa-532b5f9d31c8": {
+      "status": "done",
+      "storagePath": "beaches/1bc2dc49-b02e-4758-b0fa-532b5f9d31c8/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/1bc2dc49-b02e-4758-b0fa-532b5f9d31c8/photo.jpg",
+      "timestamp": "2026-03-02T16:50:50.110Z"
+    },
+    "53b0e0fc-a5d2-4ab1-960b-f8f96d01056b": {
+      "status": "done",
+      "storagePath": "beaches/53b0e0fc-a5d2-4ab1-960b-f8f96d01056b/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/53b0e0fc-a5d2-4ab1-960b-f8f96d01056b/photo.jpg",
+      "timestamp": "2026-03-02T16:50:51.495Z"
+    },
+    "62a0c6b5-4345-41d5-a96c-1eb7c4279aef": {
+      "status": "done",
+      "storagePath": "beaches/62a0c6b5-4345-41d5-a96c-1eb7c4279aef/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/62a0c6b5-4345-41d5-a96c-1eb7c4279aef/photo.jpg",
+      "timestamp": "2026-03-02T16:50:52.350Z"
+    },
+    "ec6f72ce-6214-4294-9ed4-577c3aa9acc2": {
+      "status": "done",
+      "storagePath": "beaches/ec6f72ce-6214-4294-9ed4-577c3aa9acc2/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/ec6f72ce-6214-4294-9ed4-577c3aa9acc2/photo.jpg",
+      "timestamp": "2026-03-02T16:50:53.246Z"
+    },
+    "0a3eb2ab-3b2c-4744-92c6-a66779b323b0": {
+      "status": "done",
+      "storagePath": "beaches/0a3eb2ab-3b2c-4744-92c6-a66779b323b0/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/0a3eb2ab-3b2c-4744-92c6-a66779b323b0/photo.jpg",
+      "timestamp": "2026-03-02T16:50:54.084Z"
+    },
+    "213f9cf9-9113-49e8-822f-a784f6820317": {
+      "status": "done",
+      "storagePath": "beaches/213f9cf9-9113-49e8-822f-a784f6820317/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/213f9cf9-9113-49e8-822f-a784f6820317/photo.jpg",
+      "timestamp": "2026-03-02T16:50:54.930Z"
+    },
+    "b66af734-fb6b-4d4f-a9ba-e0d716b6f3b0": {
+      "status": "done",
+      "storagePath": "beaches/b66af734-fb6b-4d4f-a9ba-e0d716b6f3b0/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/b66af734-fb6b-4d4f-a9ba-e0d716b6f3b0/photo.jpg",
+      "timestamp": "2026-03-02T16:50:56.302Z"
+    },
+    "1412cee5-dfc4-4da6-b2ba-26d5873a4434": {
+      "status": "done",
+      "storagePath": "beaches/1412cee5-dfc4-4da6-b2ba-26d5873a4434/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/1412cee5-dfc4-4da6-b2ba-26d5873a4434/photo.jpg",
+      "timestamp": "2026-03-02T16:50:57.256Z"
+    },
+    "e5be7b9f-b2da-459e-8391-a864da412a0e": {
+      "status": "done",
+      "storagePath": "beaches/e5be7b9f-b2da-459e-8391-a864da412a0e/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/e5be7b9f-b2da-459e-8391-a864da412a0e/photo.jpg",
+      "timestamp": "2026-03-02T16:50:58.054Z"
+    },
+    "44862029-c521-4dfd-9346-e1ff293d55b2": {
+      "status": "done",
+      "storagePath": "beaches/44862029-c521-4dfd-9346-e1ff293d55b2/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/44862029-c521-4dfd-9346-e1ff293d55b2/photo.jpg",
+      "timestamp": "2026-03-02T16:50:58.858Z"
+    },
+    "bce07683-94f8-4ec7-892e-d041c4d3416e": {
+      "status": "done",
+      "storagePath": "beaches/bce07683-94f8-4ec7-892e-d041c4d3416e/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/bce07683-94f8-4ec7-892e-d041c4d3416e/photo.jpg",
+      "timestamp": "2026-03-02T16:50:59.683Z"
+    },
+    "92c8ce37-6ccb-4807-847e-1bed0a701343": {
+      "status": "done",
+      "storagePath": "beaches/92c8ce37-6ccb-4807-847e-1bed0a701343/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/92c8ce37-6ccb-4807-847e-1bed0a701343/photo.jpg",
+      "timestamp": "2026-03-02T16:51:00.373Z"
+    },
+    "5d9edbdc-7b71-493c-a427-63ecd7401b9a": {
+      "status": "done",
+      "storagePath": "beaches/5d9edbdc-7b71-493c-a427-63ecd7401b9a/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/5d9edbdc-7b71-493c-a427-63ecd7401b9a/photo.jpg",
+      "timestamp": "2026-03-02T16:51:01.121Z"
+    },
+    "60bc1a43-5edc-4519-86c3-2afddba44fdf": {
+      "status": "done",
+      "storagePath": "beaches/60bc1a43-5edc-4519-86c3-2afddba44fdf/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/60bc1a43-5edc-4519-86c3-2afddba44fdf/photo.jpg",
+      "timestamp": "2026-03-02T16:51:02.923Z"
+    },
+    "b6b96745-6fe0-4bf2-8705-1bca18e2646d": {
+      "status": "done",
+      "storagePath": "beaches/b6b96745-6fe0-4bf2-8705-1bca18e2646d/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/b6b96745-6fe0-4bf2-8705-1bca18e2646d/photo.jpg",
+      "timestamp": "2026-03-02T16:51:05.657Z"
+    },
+    "bb73a552-f4a1-400b-bf80-2056966416f7": {
+      "status": "done",
+      "storagePath": "beaches/bb73a552-f4a1-400b-bf80-2056966416f7/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/bb73a552-f4a1-400b-bf80-2056966416f7/photo.jpg",
+      "timestamp": "2026-03-02T16:51:06.909Z"
+    },
+    "0d8635cf-eb73-4c8f-9448-710b38173c2a": {
+      "status": "done",
+      "storagePath": "beaches/0d8635cf-eb73-4c8f-9448-710b38173c2a/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/0d8635cf-eb73-4c8f-9448-710b38173c2a/photo.jpg",
+      "timestamp": "2026-03-02T16:51:07.996Z"
+    },
+    "f0d9892c-5832-4188-880d-e2698dbabb7d": {
+      "status": "done",
+      "storagePath": "beaches/f0d9892c-5832-4188-880d-e2698dbabb7d/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/f0d9892c-5832-4188-880d-e2698dbabb7d/photo.jpg",
+      "timestamp": "2026-03-02T16:51:08.930Z"
+    },
+    "f23be0b6-b37d-47c8-8cf8-a4277a03aafa": {
+      "status": "done",
+      "storagePath": "beaches/f23be0b6-b37d-47c8-8cf8-a4277a03aafa/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/f23be0b6-b37d-47c8-8cf8-a4277a03aafa/photo.jpg",
+      "timestamp": "2026-03-02T16:51:09.667Z"
+    },
+    "1a14800c-4bcd-4c9c-b4c6-dc72dddd5fcf": {
+      "status": "done",
+      "storagePath": "beaches/1a14800c-4bcd-4c9c-b4c6-dc72dddd5fcf/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/1a14800c-4bcd-4c9c-b4c6-dc72dddd5fcf/photo.jpg",
+      "timestamp": "2026-03-02T16:51:10.546Z"
+    },
+    "3e1ed0d4-5aaf-45ae-94f1-582661b4aee2": {
+      "status": "done",
+      "storagePath": "beaches/3e1ed0d4-5aaf-45ae-94f1-582661b4aee2/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/3e1ed0d4-5aaf-45ae-94f1-582661b4aee2/photo.jpg",
+      "timestamp": "2026-03-02T16:51:11.662Z"
+    },
+    "92335ccf-dd8a-4d0e-94ce-5e7e5afc9455": {
+      "status": "done",
+      "storagePath": "beaches/92335ccf-dd8a-4d0e-94ce-5e7e5afc9455/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/92335ccf-dd8a-4d0e-94ce-5e7e5afc9455/photo.jpg",
+      "timestamp": "2026-03-02T16:51:13.126Z"
+    },
+    "85f73e51-ad1e-45ed-911f-75abbd3b2816": {
+      "status": "done",
+      "storagePath": "beaches/85f73e51-ad1e-45ed-911f-75abbd3b2816/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/85f73e51-ad1e-45ed-911f-75abbd3b2816/photo.jpg",
+      "timestamp": "2026-03-02T16:51:13.932Z"
+    },
+    "80205b7b-b48d-4873-9f15-135d5ed49ea1": {
+      "status": "done",
+      "storagePath": "beaches/80205b7b-b48d-4873-9f15-135d5ed49ea1/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/80205b7b-b48d-4873-9f15-135d5ed49ea1/photo.jpg",
+      "timestamp": "2026-03-02T16:51:15.063Z"
+    },
+    "6c920d1f-f9cc-475f-982b-c70bf1b8c0af": {
+      "status": "done",
+      "storagePath": "beaches/6c920d1f-f9cc-475f-982b-c70bf1b8c0af/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/6c920d1f-f9cc-475f-982b-c70bf1b8c0af/photo.jpg",
+      "timestamp": "2026-03-02T16:51:28.689Z"
+    },
+    "eb8a082a-3ba7-43e0-bb19-34169a11ea07": {
+      "status": "done",
+      "storagePath": "beaches/eb8a082a-3ba7-43e0-bb19-34169a11ea07/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/eb8a082a-3ba7-43e0-bb19-34169a11ea07/photo.jpg",
+      "timestamp": "2026-03-02T16:51:29.999Z"
+    },
+    "8d98aa88-31f9-4625-aefd-a0c6bebaa160": {
+      "status": "done",
+      "storagePath": "beaches/8d98aa88-31f9-4625-aefd-a0c6bebaa160/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/8d98aa88-31f9-4625-aefd-a0c6bebaa160/photo.jpg",
+      "timestamp": "2026-03-02T16:51:31.183Z"
+    },
+    "69789407-9736-45bd-8bde-e4af6215840e": {
+      "status": "done",
+      "storagePath": "beaches/69789407-9736-45bd-8bde-e4af6215840e/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/69789407-9736-45bd-8bde-e4af6215840e/photo.jpg",
+      "timestamp": "2026-03-02T16:51:31.865Z"
+    },
+    "e05a4b31-4f85-4776-a0ab-4d776204b163": {
+      "status": "done",
+      "storagePath": "beaches/e05a4b31-4f85-4776-a0ab-4d776204b163/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/e05a4b31-4f85-4776-a0ab-4d776204b163/photo.jpg",
+      "timestamp": "2026-03-02T16:51:32.675Z"
+    },
+    "2b198d56-b412-449e-9e86-174f34b1256a": {
+      "status": "done",
+      "storagePath": "beaches/2b198d56-b412-449e-9e86-174f34b1256a/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/2b198d56-b412-449e-9e86-174f34b1256a/photo.jpg",
+      "timestamp": "2026-03-02T16:51:33.484Z"
+    },
+    "6fee82ef-0507-477e-93b3-f94c9cfe6578": {
+      "status": "done",
+      "storagePath": "beaches/6fee82ef-0507-477e-93b3-f94c9cfe6578/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/6fee82ef-0507-477e-93b3-f94c9cfe6578/photo.jpg",
+      "timestamp": "2026-03-02T16:51:34.299Z"
+    },
+    "4afc1100-e0c5-4552-8a9c-7992dfb5f613": {
+      "status": "done",
+      "storagePath": "beaches/4afc1100-e0c5-4552-8a9c-7992dfb5f613/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/4afc1100-e0c5-4552-8a9c-7992dfb5f613/photo.jpg",
+      "timestamp": "2026-03-02T16:51:35.118Z"
+    },
+    "c8dfe4ef-585b-451b-ab09-44f982cd468f": {
+      "status": "done",
+      "storagePath": "beaches/c8dfe4ef-585b-451b-ab09-44f982cd468f/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/c8dfe4ef-585b-451b-ab09-44f982cd468f/photo.jpg",
+      "timestamp": "2026-03-02T16:51:35.989Z"
+    },
+    "a4f7d29f-d98f-431b-8d0b-8ac58ca6df0d": {
+      "status": "done",
+      "storagePath": "beaches/a4f7d29f-d98f-431b-8d0b-8ac58ca6df0d/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/a4f7d29f-d98f-431b-8d0b-8ac58ca6df0d/photo.jpg",
+      "timestamp": "2026-03-02T16:51:36.967Z"
+    },
+    "7c10bb0c-0d50-4b9b-9f99-ac6efe3e4e3e": {
+      "status": "done",
+      "storagePath": "beaches/7c10bb0c-0d50-4b9b-9f99-ac6efe3e4e3e/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/7c10bb0c-0d50-4b9b-9f99-ac6efe3e4e3e/photo.jpg",
+      "timestamp": "2026-03-02T16:51:38.083Z"
+    },
+    "107626e7-6168-4f32-ba9f-949b07629328": {
+      "status": "done",
+      "storagePath": "beaches/107626e7-6168-4f32-ba9f-949b07629328/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/107626e7-6168-4f32-ba9f-949b07629328/photo.jpg",
+      "timestamp": "2026-03-02T16:51:39.178Z"
+    },
+    "982a651a-09c0-4f51-9a08-71ab4681be95": {
+      "status": "done",
+      "storagePath": "beaches/982a651a-09c0-4f51-9a08-71ab4681be95/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/982a651a-09c0-4f51-9a08-71ab4681be95/photo.jpg",
+      "timestamp": "2026-03-02T16:51:40.299Z"
+    },
+    "ed372ffa-b5be-4d28-8fd4-c19733789711": {
+      "status": "done",
+      "storagePath": "beaches/ed372ffa-b5be-4d28-8fd4-c19733789711/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/ed372ffa-b5be-4d28-8fd4-c19733789711/photo.jpg",
+      "timestamp": "2026-03-02T16:51:42.181Z"
+    },
+    "b297bcc3-f2e7-414b-9d89-7659a5ceba1a": {
+      "status": "done",
+      "storagePath": "beaches/b297bcc3-f2e7-414b-9d89-7659a5ceba1a/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/b297bcc3-f2e7-414b-9d89-7659a5ceba1a/photo.jpg",
+      "timestamp": "2026-03-02T16:51:43.238Z"
+    },
+    "cff6922f-e51c-418c-b930-14de0d9d5218": {
+      "status": "done",
+      "storagePath": "beaches/cff6922f-e51c-418c-b930-14de0d9d5218/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/cff6922f-e51c-418c-b930-14de0d9d5218/photo.jpg",
+      "timestamp": "2026-03-02T16:51:44.054Z"
+    },
+    "677c9373-41eb-443d-bd03-87d3d7f2db9c": {
+      "status": "done",
+      "storagePath": "beaches/677c9373-41eb-443d-bd03-87d3d7f2db9c/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/677c9373-41eb-443d-bd03-87d3d7f2db9c/photo.jpg",
+      "timestamp": "2026-03-02T16:51:44.765Z"
+    },
+    "273645bb-be11-476e-b2b9-e5ddd04a107e": {
+      "status": "done",
+      "storagePath": "beaches/273645bb-be11-476e-b2b9-e5ddd04a107e/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/273645bb-be11-476e-b2b9-e5ddd04a107e/photo.jpg",
+      "timestamp": "2026-03-02T16:51:45.585Z"
+    },
+    "9d959d5f-c1cb-4b83-b46a-1193083a192f": {
+      "status": "done",
+      "storagePath": "beaches/9d959d5f-c1cb-4b83-b46a-1193083a192f/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/9d959d5f-c1cb-4b83-b46a-1193083a192f/photo.jpg",
+      "timestamp": "2026-03-02T16:51:46.358Z"
+    },
+    "29f275e6-d911-4ebb-8089-280b57befe69": {
+      "status": "done",
+      "storagePath": "beaches/29f275e6-d911-4ebb-8089-280b57befe69/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/29f275e6-d911-4ebb-8089-280b57befe69/photo.jpg",
+      "timestamp": "2026-03-02T16:51:47.247Z"
+    },
+    "35ca2940-c664-4b68-a079-3c2f93847318": {
+      "status": "done",
+      "storagePath": "beaches/35ca2940-c664-4b68-a079-3c2f93847318/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/35ca2940-c664-4b68-a079-3c2f93847318/photo.jpg",
+      "timestamp": "2026-03-02T16:52:03.215Z"
+    },
+    "1f9f7b59-6434-4550-b284-c3db56da1c46": {
+      "status": "done",
+      "storagePath": "beaches/1f9f7b59-6434-4550-b284-c3db56da1c46/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/1f9f7b59-6434-4550-b284-c3db56da1c46/photo.jpg",
+      "timestamp": "2026-03-02T16:52:04.454Z"
+    },
+    "095c15ab-dd37-4768-9998-e3eb3eed28bf": {
+      "status": "done",
+      "storagePath": "beaches/095c15ab-dd37-4768-9998-e3eb3eed28bf/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/095c15ab-dd37-4768-9998-e3eb3eed28bf/photo.jpg",
+      "timestamp": "2026-03-02T16:52:05.112Z"
+    },
+    "61666d33-affa-4e6e-a449-b5b259b1393e": {
+      "status": "done",
+      "storagePath": "beaches/61666d33-affa-4e6e-a449-b5b259b1393e/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/61666d33-affa-4e6e-a449-b5b259b1393e/photo.jpg",
+      "timestamp": "2026-03-02T16:52:06.064Z"
+    },
+    "a2988c01-2060-4365-944a-76e3c4d9804e": {
+      "status": "done",
+      "storagePath": "beaches/a2988c01-2060-4365-944a-76e3c4d9804e/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/a2988c01-2060-4365-944a-76e3c4d9804e/photo.jpg",
+      "timestamp": "2026-03-02T16:52:06.985Z"
+    },
+    "d8abec37-1a7e-4ec2-8827-8ee19147ea27": {
+      "status": "done",
+      "storagePath": "beaches/d8abec37-1a7e-4ec2-8827-8ee19147ea27/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d8abec37-1a7e-4ec2-8827-8ee19147ea27/photo.jpg",
+      "timestamp": "2026-03-02T16:52:07.579Z"
+    },
+    "87ba02ac-b17f-4302-a52f-937a37b3c441": {
+      "status": "done",
+      "storagePath": "beaches/87ba02ac-b17f-4302-a52f-937a37b3c441/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/87ba02ac-b17f-4302-a52f-937a37b3c441/photo.jpg",
+      "timestamp": "2026-03-02T16:52:09.339Z"
+    },
+    "5d82a902-7e73-48de-888e-144565b74a98": {
+      "status": "done",
+      "storagePath": "beaches/5d82a902-7e73-48de-888e-144565b74a98/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/5d82a902-7e73-48de-888e-144565b74a98/photo.jpg",
+      "timestamp": "2026-03-02T16:52:10.245Z"
+    },
+    "15377bd1-cb8f-44ea-86c3-ad86ed65e1e2": {
+      "status": "done",
+      "storagePath": "beaches/15377bd1-cb8f-44ea-86c3-ad86ed65e1e2/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/15377bd1-cb8f-44ea-86c3-ad86ed65e1e2/photo.jpg",
+      "timestamp": "2026-03-02T16:52:10.942Z"
+    },
+    "25aa0d75-f420-4e25-9645-2400e6c8d4ec": {
+      "status": "done",
+      "storagePath": "beaches/25aa0d75-f420-4e25-9645-2400e6c8d4ec/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/25aa0d75-f420-4e25-9645-2400e6c8d4ec/photo.jpg",
+      "timestamp": "2026-03-02T16:52:11.884Z"
+    }
+  }
+}
