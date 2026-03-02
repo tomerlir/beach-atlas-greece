@@ -1,0 +1,69 @@
+{
+  "startedAt": "2026-03-02T17:35:12.363Z",
+  "lastUpdatedAt": "2026-03-02T17:35:22.556Z",
+  "total": 10,
+  "uploaded": 10,
+  "errors": 0,
+  "entries": {
+    "b0428003-6643-432e-87cf-b83160037148": {
+      "status": "done",
+      "storagePath": "areas/b0428003-6643-432e-87cf-b83160037148/photo.jpeg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/areas/b0428003-6643-432e-87cf-b83160037148/photo.jpeg",
+      "timestamp": "2026-03-02T17:35:13.936Z"
+    },
+    "765a0042-5cf3-4df7-82f9-7d2540c898bb": {
+      "status": "done",
+      "storagePath": "areas/765a0042-5cf3-4df7-82f9-7d2540c898bb/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/areas/765a0042-5cf3-4df7-82f9-7d2540c898bb/photo.jpg",
+      "timestamp": "2026-03-02T17:35:15.267Z"
+    },
+    "37302669-f2a2-4a78-a9f1-491d74cbb5d1": {
+      "status": "done",
+      "storagePath": "areas/37302669-f2a2-4a78-a9f1-491d74cbb5d1/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/areas/37302669-f2a2-4a78-a9f1-491d74cbb5d1/photo.jpg",
+      "timestamp": "2026-03-02T17:35:16.254Z"
+    },
+    "ee9a4d24-c0f8-42ff-ab70-78234f74052d": {
+      "status": "done",
+      "storagePath": "areas/ee9a4d24-c0f8-42ff-ab70-78234f74052d/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/areas/ee9a4d24-c0f8-42ff-ab70-78234f74052d/photo.jpg",
+      "timestamp": "2026-03-02T17:35:17.399Z"
+    },
+    "0a028bac-5534-4613-8ee7-f3482f276eb6": {
+      "status": "done",
+      "storagePath": "areas/0a028bac-5534-4613-8ee7-f3482f276eb6/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/areas/0a028bac-5534-4613-8ee7-f3482f276eb6/photo.jpg",
+      "timestamp": "2026-03-02T17:35:18.501Z"
+    },
+    "017f3063-9e26-4c9c-8fd2-ad20c21014f5": {
+      "status": "done",
+      "storagePath": "areas/017f3063-9e26-4c9c-8fd2-ad20c21014f5/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/areas/017f3063-9e26-4c9c-8fd2-ad20c21014f5/photo.jpg",
+      "timestamp": "2026-03-02T17:35:19.329Z"
+    },
+    "49c55a87-1876-4602-a7f4-75a93d5920de": {
+      "status": "done",
+      "storagePath": "areas/49c55a87-1876-4602-a7f4-75a93d5920de/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/areas/49c55a87-1876-4602-a7f4-75a93d5920de/photo.jpg",
+      "timestamp": "2026-03-02T17:35:20.412Z"
+    },
+    "9ebc90df-934a-4ab3-84fc-f2882a7f9ae2": {
+      "status": "done",
+      "storagePath": "areas/9ebc90df-934a-4ab3-84fc-f2882a7f9ae2/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/areas/9ebc90df-934a-4ab3-84fc-f2882a7f9ae2/photo.jpg",
+      "timestamp": "2026-03-02T17:35:21.153Z"
+    },
+    "599126e2-6d11-45e0-8d1f-a3168e68df9d": {
+      "status": "done",
+      "storagePath": "areas/599126e2-6d11-45e0-8d1f-a3168e68df9d/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/areas/599126e2-6d11-45e0-8d1f-a3168e68df9d/photo.jpg",
+      "timestamp": "2026-03-02T17:35:21.823Z"
+    },
+    "cf5e6ce7-9dec-41ff-8d6c-f53608dc275b": {
+      "status": "done",
+      "storagePath": "areas/cf5e6ce7-9dec-41ff-8d6c-f53608dc275b/photo.jpg",
+      "publicUrl": "https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/areas/cf5e6ce7-9dec-41ff-8d6c-f53608dc275b/photo.jpg",
+      "timestamp": "2026-03-02T17:35:22.556Z"
+    }
+  }
+}
