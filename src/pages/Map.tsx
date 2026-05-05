@@ -223,6 +223,18 @@ const MapPage = () => {
 
         {/* Prevent indexing of filtered URLs */}
         {shouldNoIndex && <meta name="robots" content="noindex, follow" />}
+
+        {/* Open Graph tags */}
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDescription} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:site_name" content="Beaches of Greece" />
+
+        {/* Twitter Card tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={seoTitle} />
+        <meta name="twitter:description" content={seoDescription} />
       </Helmet>
 
       {/* JSON-LD structured data */}

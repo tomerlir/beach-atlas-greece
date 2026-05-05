@@ -1,155 +1,129 @@
-# Robots.txt for Greek Beaches Directory
+# Robots.txt for Beaches of Greece
 # https://beachesofgreece.com
 
-# Allow all search engines to crawl the public content
+# Default: allow all crawlers
 User-agent: *
 Allow: /
-Allow: /about
-Allow: /*/
-Allow: /sitemap.xml
 
 # Block URLs with query parameters (filters, pagination, search)
-# These should only use canonical tags to point to the clean URL
+# Canonical tags point to the clean URL
 Disallow: /*?*
 
-# Disallow admin and private areas
+# Admin and private areas
+Disallow: /admin
 Disallow: /admin/
-Disallow: /admin/login
-Disallow: /admin/beaches/
-Disallow: /admin/import-export
-Disallow: /admin/settings
 
-# Disallow API endpoints and internal files
+# Internal files
 Disallow: /api/
 Disallow: /_next/
 Disallow: /node_modules/
-Disallow: /*.json$
-Disallow: /*.xml$
+Disallow: /prerender-routes.json
+Disallow: /prerender-data.json
 Disallow: /sw.js
 
-# Allow specific bots for social media and search
+# Major search engines
 User-agent: Googlebot
 Allow: /
-Allow: /about
-Allow: /*/
+Disallow: /*?*
+Disallow: /admin
+Disallow: /admin/
 Crawl-delay: 1
 
 User-agent: Bingbot
 Allow: /
-Allow: /about
-Allow: /*/
+Disallow: /*?*
+Disallow: /admin
+Disallow: /admin/
 Crawl-delay: 1
 
 User-agent: Slurp
 Allow: /
-Allow: /about
-Allow: /*/
+Disallow: /*?*
+Disallow: /admin
+Disallow: /admin/
 Crawl-delay: 1
 
 # Social media bots
 User-agent: Twitterbot
 Allow: /
-Allow: /about
-Allow: /*/
 
 User-agent: facebookexternalhit
 Allow: /
-Allow: /about
-Allow: /*/
 
 User-agent: LinkedInBot
 Allow: /
-Allow: /about
-Allow: /*/
 
 User-agent: WhatsApp
 Allow: /
-Allow: /about
-Allow: /*/
 
-# AI Search Engines & LLM Crawlers
-# These bots power AI assistants and need access to provide accurate answers
+# AI search engines & LLM crawlers
 User-agent: GPTBot
 Allow: /
-Allow: /about
-Allow: /areas
-Allow: /*/
+Disallow: /admin
+Disallow: /admin/
 Crawl-delay: 1
 
 User-agent: ChatGPT-User
 Allow: /
-Allow: /about
-Allow: /areas
-Allow: /*/
+Disallow: /admin
+Disallow: /admin/
 Crawl-delay: 1
 
 User-agent: CCBot
 Allow: /
-Allow: /about
-Allow: /areas
-Allow: /*/
+Disallow: /admin
+Disallow: /admin/
 Crawl-delay: 1
 
 User-agent: Claude-Web
 Allow: /
-Allow: /about
-Allow: /areas
-Allow: /*/
+Disallow: /admin
+Disallow: /admin/
 Crawl-delay: 1
 
 User-agent: anthropic-ai
 Allow: /
-Allow: /about
-Allow: /areas
-Allow: /*/
+Disallow: /admin
+Disallow: /admin/
 Crawl-delay: 1
 
 User-agent: PerplexityBot
 Allow: /
-Allow: /about
-Allow: /areas
-Allow: /*/
+Disallow: /admin
+Disallow: /admin/
 Crawl-delay: 1
 
 User-agent: Amazonbot
 Allow: /
-Allow: /about
-Allow: /areas
-Allow: /*/
+Disallow: /admin
+Disallow: /admin/
 Crawl-delay: 1
 
 User-agent: Applebot-Extended
 Allow: /
-Allow: /about
-Allow: /areas
-Allow: /*/
+Disallow: /admin
+Disallow: /admin/
 Crawl-delay: 1
 
 User-agent: Omgilibot
 Allow: /
-Allow: /about
-Allow: /areas
-Allow: /*/
+Disallow: /admin
+Disallow: /admin/
 Crawl-delay: 1
 
 User-agent: FacebookBot
 Allow: /
-Allow: /about
-Allow: /areas
-Allow: /*/
+Disallow: /admin
+Disallow: /admin/
 Crawl-delay: 1
 
 User-agent: Google-Extended
 Allow: /
-Allow: /about
-Allow: /areas
-Allow: /*/
+Disallow: /admin
+Disallow: /admin/
 Crawl-delay: 1
 
 # Block aggressive crawlers
-User-agent: AhrefsBot
-Disallow: /
-
 User-agent: SemrushBot
 Disallow: /
 
@@ -159,8 +133,5 @@ Disallow: /
 User-agent: DotBot
 Disallow: /
 
-# Sitemap location
+# Sitemap
 Sitemap: https://beachesofgreece.com/sitemap.xml
-
-# Host declaration (helps with canonical URLs)
-Host: https://beachesofgreece.com

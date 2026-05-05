@@ -52,8 +52,11 @@ const slugify = (input: string | undefined | null): string => {
     .replace(/[\s_-]+/g, '-')
     .replace(/^-+|-+$/g, '');
   if (base) return base;
-  const rand = Math.random().toString(36).slice(2, 8);
-  return `beach-${rand}`;
+  let hash = 0;
+  for (let i = 0; i < input.length; i++) {
+    hash = ((hash << 5) - hash + input.charCodeAt(i)) | 0;
+  }
+  return `beach-${Math.abs(hash).toString(36)}`;
 };
 
 const generateAreaSlug = (area: string): string => {

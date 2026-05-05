@@ -17,9 +17,12 @@ export const slugify = (input: string): string => {
     .replace(/[\s_-]+/g, "-")
     .replace(/^-+|-+$/g, "");
   if (base) return base;
-  // Fallback for non-latin names (e.g., Greek-only) → deterministic short id
-  const rand = Math.random().toString(36).slice(2, 8);
-  return `beach-${rand}`;
+  // Fallback for non-latin names (e.g., Greek-only) → deterministic hash
+  let hash = 0;
+  for (let i = 0; i < input.length; i++) {
+    hash = ((hash << 5) - hash + input.charCodeAt(i)) | 0;
+  }
+  return `beach-${Math.abs(hash).toString(36)}`;
 };
 
 export const generateAreaSlug = (area: string): string => {
