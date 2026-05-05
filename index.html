@@ -1,90 +1,175 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Favicon and basic meta - won't be overridden -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    <meta name="author" content="Greek Beaches Directory" />
 
-  <!-- Favicon and basic meta - won't be overridden -->
-  <link rel="icon" href="/favicon.png" type="image/png">
-  <meta name="author" content="Greek Beaches Directory" />
-  
-  <!-- Default fallback tags for JS-disabled browsers - prerender will replace these -->
-  <title>Beaches of Greece</title>
-  
-  <!-- Default Open Graph tags - will be replaced during prerendering -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Beaches of Greece" />
-  <meta property="og:image" content="https://beachesofgreece.com/hero-background.png" />
-  
-  <!-- Default Twitter Card tags - will be replaced during prerendering -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://beachesofgreece.com/hero-background.png" />
-  
-  <!-- Prerender will inject dynamic title, description, canonical, and OG tags here -->
+    <!-- Default fallback tags for JS-disabled browsers - prerender will replace these -->
+    <title>Beaches of Greece</title>
 
-  <!-- Google Analytics Consent Mode v2 - Must load BEFORE any GA script -->
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    
-    // Set default consent state BEFORE any GA script loads
-    // This ensures GDPR compliance and proper consent mode v2 behavior
-    gtag('consent', 'default', {
-      ad_storage: 'denied',
-      ad_user_data: 'denied',
-      ad_personalization: 'denied',
-      analytics_storage: 'denied',
-      functionality_storage: 'denied',
-      personalization_storage: 'denied',
-      security_storage: 'granted',
-      wait_for_update: 500,
-      url_passthrough: true,
-      ads_data_redaction: true
-    });
-  </script>
+    <!-- Default Open Graph tags - will be replaced during prerendering -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Beaches of Greece" />
+    <meta property="og:image" content="https://beachesofgreece.com/hero-background.png" />
 
-  <!-- Analytics scripts (Umami + GA4) are injected dynamically after consent via the analytics SDK -->
+    <!-- Default Twitter Card tags - will be replaced during prerendering -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://beachesofgreece.com/hero-background.png" />
 
-  <!-- Google Fonts: Optimized for fastest FCP -->
-  <!-- Strategy: Preconnect early, defer actual font loading until after FCP -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  
-  <!-- Load fonts asynchronously to not block FCP -->
-  <link rel="stylesheet" 
-    href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700&family=Inter:wght@400;500;600&display=swap" 
-    media="print" 
-    onload="this.media='all'">
-  <noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700&family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet">
-  </noscript>
-  
-  <!-- Critical resource hints for performance -->
-  <link rel="preconnect" href="https://xnkyfxvncpawqpqccdby.supabase.co">
-  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-  
-  <!-- Preload LCP hero image - AVIF only for modern browsers (fallback handled by <picture>) -->
-  <!-- Only preload one format to avoid wasting bandwidth on duplicate downloads -->
-  <link rel="preload" as="image" href="/hero-background-1024.avif" 
-        type="image/avif" 
-        fetchpriority="high"
-        imagesrcset="/hero-background-640.avif 640w, /hero-background-1024.avif 1024w, /hero-background-1920.avif 1920w"
-        imagesizes="100vw">
-  
-  <!-- Inline critical CSS for above-the-fold content (prevents FOUC and speeds up FCP) -->
-  <style>
-    /* Critical CSS - Minified version of critical.css */
-    :root{--background:204 45% 98%;--foreground:218 17% 35%;--card:0 0% 100%;--card-foreground:218 17% 35%;--primary:201 100% 42%;--primary-foreground:0 0% 100%;--secondary:180 82% 33%;--secondary-foreground:0 0% 100%;--muted:204 30% 94%;--muted-foreground:218 17% 50%;--border:218 17% 88%;--ocean:201 100% 42%;--gradient-ocean:linear-gradient(135deg,hsl(var(--ocean)),hsl(var(--secondary)))}*,::before,::after{box-sizing:border-box;border-width:0;border-style:solid;border-color:hsl(var(--border))}html{line-height:1.5;-webkit-text-size-adjust:100%;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif}body{margin:0;line-height:inherit;background-color:hsl(var(--background));color:hsl(var(--foreground));font-family:"Inter",sans-serif}header{background-color:hsl(var(--card));border-bottom-width:1px;border-color:hsl(var(--border))}.min-h-screen{min-height:100vh}.flex{display:flex}.items-center{align-items:center}.justify-center{justify-content:center}.animate-spin{animation:spin 1s linear infinite}.rounded-full{border-radius:9999px}.h-8{height:2rem}.w-8{width:2rem}.border-b-2{border-bottom-width:2px}.border-primary{border-color:hsl(var(--primary))}@keyframes spin{to{transform:rotate(360deg)}}
-  </style>
+    <!-- Prerender will inject dynamic title, description, canonical, and OG tags here -->
 
-  <!-- Umami script loaded dynamically after consent is given -->
-</head>
+    <!-- Google Analytics Consent Mode v2 - Must load BEFORE any GA script -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
 
-<body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.tsx"></script>
-</body>
+      // Set default consent state BEFORE any GA script loads
+      // This ensures GDPR compliance and proper consent mode v2 behavior
+      gtag("consent", "default", {
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        analytics_storage: "denied",
+        functionality_storage: "denied",
+        personalization_storage: "denied",
+        security_storage: "granted",
+        wait_for_update: 500,
+        url_passthrough: true,
+        ads_data_redaction: true,
+      });
+    </script>
 
+    <!-- Analytics scripts (Umami + GA4) are injected dynamically after consent via the analytics SDK -->
+
+    <!-- Google Fonts: Optimized for fastest FCP -->
+    <!-- Strategy: Preconnect early, defer actual font loading until after FCP -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Load fonts asynchronously to not block FCP -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700&family=Inter:wght@400;500;600&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:wght@600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+
+    <!-- Critical resource hints for performance -->
+    <link rel="preconnect" href="https://xnkyfxvncpawqpqccdby.supabase.co" />
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+
+    <!-- Preload LCP hero image - AVIF only for modern browsers (fallback handled by <picture>) -->
+    <!-- Only preload one format to avoid wasting bandwidth on duplicate downloads -->
+    <link
+      rel="preload"
+      as="image"
+      href="/hero-background-1024.avif"
+      type="image/avif"
+      fetchpriority="high"
+      imagesrcset="/hero-background-640.avif 640w, /hero-background-1024.avif 1024w, /hero-background-1920.avif 1920w"
+      imagesizes="100vw"
+    />
+
+    <!-- Inline critical CSS for above-the-fold content (prevents FOUC and speeds up FCP) -->
+    <style>
+      /* Critical CSS - Minified version of critical.css */
+      :root {
+        --background: 204 45% 98%;
+        --foreground: 218 17% 35%;
+        --card: 0 0% 100%;
+        --card-foreground: 218 17% 35%;
+        --primary: 201 100% 42%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 180 82% 33%;
+        --secondary-foreground: 0 0% 100%;
+        --muted: 204 30% 94%;
+        --muted-foreground: 218 17% 50%;
+        --border: 218 17% 88%;
+        --ocean: 201 100% 42%;
+        --gradient-ocean: linear-gradient(135deg, hsl(var(--ocean)), hsl(var(--secondary)));
+      }
+      *,
+      ::before,
+      ::after {
+        box-sizing: border-box;
+        border-width: 0;
+        border-style: solid;
+        border-color: hsl(var(--border));
+      }
+      html {
+        line-height: 1.5;
+        -webkit-text-size-adjust: 100%;
+        tab-size: 4;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+      }
+      body {
+        margin: 0;
+        line-height: inherit;
+        background-color: hsl(var(--background));
+        color: hsl(var(--foreground));
+        font-family: "Inter", sans-serif;
+      }
+      header {
+        background-color: hsl(var(--card));
+        border-bottom-width: 1px;
+        border-color: hsl(var(--border));
+      }
+      .min-h-screen {
+        min-height: 100vh;
+      }
+      .flex {
+        display: flex;
+      }
+      .items-center {
+        align-items: center;
+      }
+      .justify-center {
+        justify-content: center;
+      }
+      .animate-spin {
+        animation: spin 1s linear infinite;
+      }
+      .rounded-full {
+        border-radius: 9999px;
+      }
+      .h-8 {
+        height: 2rem;
+      }
+      .w-8 {
+        width: 2rem;
+      }
+      .border-b-2 {
+        border-bottom-width: 2px;
+      }
+      .border-primary {
+        border-color: hsl(var(--primary));
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+
+    <!-- Umami script loaded dynamically after consent is given -->
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
