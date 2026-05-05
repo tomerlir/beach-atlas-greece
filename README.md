@@ -1,6 +1,8 @@
 # Beaches of Greece 🇬🇷
 
-A comprehensive web application for discovering and exploring the most beautiful beaches in Greece. Built with modern web technologies, this platform provides an intuitive way to search, filter, and explore Greek beaches with detailed information about amenities, locations, and Blue Flag certifications.
+> **Built by [Tomer Liran](https://github.com/tomerlir)** — solo founder project. Presented at **Google Frankfurt's AI Founders Connect** to an audience of founders and product leaders. CTO & Co-Founder at [Bridge](https://usebridge.ai).
+
+AI-powered beach discovery. Natural language search across 200+ Greek beaches with detailed amenities, photos, location data, and Blue Flag certifications. Built to answer: "find me a quiet sandy beach with a taverna near Heraklion."
 
 ## 🌊 Live Application
 
@@ -221,7 +223,7 @@ To connect a custom domain:
 
 ## 📝 License
 
-This project is private and proprietary. All rights reserved.
+MIT — see [LICENSE](LICENSE)
 
 ## 🆘 Support
 
