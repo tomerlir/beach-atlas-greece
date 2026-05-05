@@ -5,14 +5,14 @@
   <!-- HIGH PRIORITY: Core Pages -->
   <url>
     <loc>https://beachesofgreece.com</loc>
-    <lastmod>2025-11-11</lastmod>
+    <lastmod>2026-05-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
     <loc>https://beachesofgreece.com/areas</loc>
-    <lastmod>2025-11-11</lastmod>
+    <lastmod>2026-05-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -20,14 +20,14 @@
   <!-- MEDIUM-HIGH PRIORITY: Main Content Sections -->
   <url>
     <loc>https://beachesofgreece.com/map</loc>
-    <lastmod>2025-11-11</lastmod>
+    <lastmod>2026-05-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://beachesofgreece.com/about</loc>
-    <lastmod>2025-11-11</lastmod>
+    <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -35,21 +35,21 @@
   <!-- MEDIUM PRIORITY: Content Pages -->
   <url>
     <loc>https://beachesofgreece.com/guide</loc>
-    <lastmod>2025-11-11</lastmod>
+    <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://beachesofgreece.com/faq</loc>
-    <lastmod>2025-11-11</lastmod>
+    <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://beachesofgreece.com/ontology</loc>
-    <lastmod>2025-11-11</lastmod>
+    <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -57,7 +57,7 @@
   <!-- LOW PRIORITY: Utility Pages -->
   <url>
     <loc>https://beachesofgreece.com/privacy</loc>
-    <lastmod>2025-11-11</lastmod>
+    <lastmod>2026-05-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -65,121 +65,121 @@
   <!-- AREA PAGES: Geographic Content Hubs -->
   <url>
     <loc>https://beachesofgreece.com/attica</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/The_Parthenon_in_Athens.jpg/1024px-The_Parthenon_in_Athens.jpg?20111021205003</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/areas/81c5803f-8f6d-4b8d-9b92-00667341d21c/photo.jpg</image:loc>
       <image:title>Attica - Greek Beaches</image:title>
       <image:caption>Attica, Greece - The Attica coastline is surprisingly diverse, offering everything from organized city beaches to secluded coves. The water is generally clear and deep, typical of the Aegean Sea. Attica is the historical and administrative region of Greece that houses the capital city, Athens. It&apos;s a peninsula jutting into the Aegean Sea, defined by its dramatic landscape.</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Athos_Chalkidiki_2016_%28215380329%29.jpeg/1024px-Athos_Chalkidiki_2016_%28215380329%29.jpeg?20180806222844</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/areas/b0428003-6643-432e-87cf-b83160037148/photo.jpeg</image:loc>
       <image:title>Chalkidiki - Greek Beaches</image:title>
       <image:caption>Chalkidiki, Greece - Famous for its three peninsulas stretching into the Aegean—Kassandra, Sithonia, and Mount Athos—Chalkidiki blends pine forests with turquoise waters and golden beaches. Known for both lively resorts and hidden coves, it offers a mix of family-friendly coastlines, unspoiled natural escapes, and cultural heritage rooted in ancient Greece and Byzantine monasteries.</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu</loc>
-    <lastmod>2025-09-25</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/The_Old_Fortress_and_the_Old_Town_of_Corfu_-_September_2017.jpg/1024px-The_Old_Fortress_and_the_Old_Town_of_Corfu_-_September_2017.jpg?20170930094213</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/areas/765a0042-5cf3-4df7-82f9-7d2540c898bb/photo.jpg</image:loc>
       <image:title>Corfu - Greek Beaches</image:title>
       <image:caption>Corfu, Greece - Corfu, or Kérkyra, is a lush Greek island in the Ionian Sea, known for its stunning natural beauty with green landscapes and beaches, as well as a unique culture shaped by centuries of Venetian, French, and British rule. The island features the historic, cosmopolitan Corfu Old Town (a UNESCO site), with its fortress architecture, alongside traditional villages, olive groves, and popular tourist resorts.</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete</loc>
-    <lastmod>2025-09-25</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Venetian_Fortress_of_Koules_in_Heraklion%2C_Crete_003.jpg/1024px-Venetian_Fortress_of_Koules_in_Heraklion%2C_Crete_003.jpg?20130518061032</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/areas/37302669-f2a2-4a78-a9f1-491d74cbb5d1/photo.jpg</image:loc>
       <image:title>Crete - Greek Beaches</image:title>
       <image:caption>Crete, Greece - Crete is Greece&apos;s largest island and a major Mediterranean destination, famed for its rich history, including the ancient Minoan civilization centered at Knossos, its stunning diverse landscapes of mountains and beaches, and its unique culinary traditions.</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada</loc>
-    <lastmod>2025-09-25</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Vasiliki_Lefkada_Greece_2022.jpg/1024px-Vasiliki_Lefkada_Greece_2022.jpg?20240103203551</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/areas/ee9a4d24-c0f8-42ff-ab70-78234f74052d/photo.jpg</image:loc>
       <image:title>Lefkada - Greek Beaches</image:title>
       <image:caption>Lefkada, Greece - Lefkada is a Greek island in the Ionian Sea, known for its dramatic landscapes with towering white cliffs and stunning turquoise beaches like Porto Katsiki and Egremni, making it a popular vacation spot. Unlike most other Greek islands, it&apos;s connected to the mainland by a floating bridge, providing easy road access for visitors. </image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos</loc>
-    <lastmod>2025-09-25</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Klima_on_Milos%2C_syrmata%2C_152735.jpg/1024px-Klima_on_Milos%2C_syrmata%2C_152735.jpg?20151026110030</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/areas/0a028bac-5534-4613-8ee7-f3482f276eb6/photo.jpg</image:loc>
       <image:title>Milos - Greek Beaches</image:title>
       <image:caption>Milos, Greece - Milos is a volcanic Greek island in the Cyclades group, famous for its unique volcanic landscape with colorful cliffs, caves, and over 70 diverse beaches like the famous Sarakiniko.</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos</loc>
-    <lastmod>2025-09-25</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Mykonos%2C_little_venice_02.JPG/1024px-Mykonos%2C_little_venice_02.JPG?20080624121103</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/areas/017f3063-9e26-4c9c-8fd2-ad20c21014f5/photo.jpg</image:loc>
       <image:title>Mykonos - Greek Beaches</image:title>
       <image:caption>Mykonos, Greece - Mykonos is a glamorous Greek island known for its iconic white-washed architecture, famous windmills, and stunning beaches, offering a mix of vibrant nightlife and a more serene, traditional side with picturesque alleys and ancient sites nearby. </image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos</loc>
-    <lastmod>2025-09-25</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Naxos_%CE%9D%CE%AC%CE%BE%CE%BF%CF%82_2020-08-20_02_Chora_Grotta_and_Vintzi_beaches.jpg/1024px-Naxos_%CE%9D%CE%AC%CE%BE%CE%BF%CF%82_2020-08-20_02_Chora_Grotta_and_Vintzi_beaches.jpg?20201025173712</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/areas/49c55a87-1876-4602-a7f4-75a93d5920de/photo.jpg</image:loc>
       <image:title>Naxos - Greek Beaches</image:title>
       <image:caption>Naxos, Greece - Naxos is a large, green island in Greece&apos;s Cyclades group, known for its beautiful sandy beaches, charming mountain villages, fertile agricultural land, and ancient ruins like the Portara. As the largest Cycladic island, Naxos offers a varied experience, from relaxing on the coast and enjoying delicious local food to exploring archaeological sites and hiking mountainous trails.</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros</loc>
-    <lastmod>2025-09-25</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Paros%2C_Greece_%28Unsplash%29.jpg/1024px-Paros%2C_Greece_%28Unsplash%29.jpg?20170824220602</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/areas/9ebc90df-934a-4ab3-84fc-f2882a7f9ae2/photo.jpg</image:loc>
       <image:title>Paros - Greek Beaches</image:title>
       <image:caption>Paros, Greece - Paros is a popular Greek island in the central Aegean Sea, known for its picturesque Cycladic villages, golden beaches, vibrant nightlife, and mix of traditional and modern attractions, offering a balanced experience for relaxation and adventure.</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/santorini</loc>
-    <lastmod>2025-09-25</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Chapel_in_Akrotiri_-_Santorini_-_Greece_-_02.jpg/1024px-Chapel_in_Akrotiri_-_Santorini_-_Greece_-_02.jpg?20121004193837</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/areas/599126e2-6d11-45e0-8d1f-a3168e68df9d/photo.jpg</image:loc>
       <image:title>Santorini - Greek Beaches</image:title>
       <image:caption>Santorini, Greece - Santorini is a world-famous Greek island in the Aegean Sea, known for its breathtaking caldera views, picturesque villages with whitewashed buildings, and stunning sunsets. Formed by a massive volcanic eruption thousands of years ago, it features dramatic cliffs, unique volcanic beaches, and historical sites like the ruins of Akrotiri. </image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos</loc>
-    <lastmod>2025-09-25</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Zakyntos_city_view.jpg/1024px-Zakyntos_city_view.jpg?20140217190445</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/areas/cf5e6ce7-9dec-41ff-8d6c-f53608dc275b/photo.jpg</image:loc>
       <image:title>Zakynthos - Greek Beaches</image:title>
       <image:caption>Zakynthos, Greece - Zakynthos (also known as Zante) is a verdant Greek island in the Ionian Sea, famous for its diverse landscapes, from dramatic cliffs and rocky western coasts to sandy eastern beaches.</image:caption>
     </image:image>
@@ -187,759 +187,759 @@
   <!-- BEACH DETAIL PAGES: Core Content with Rich Metadata -->
   <url>
     <loc>https://beachesofgreece.com/corfu/boukari-beach-corfu</loc>
-    <lastmod>2025-10-01</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Boukaris%2C_Korfu_02.jpg/1024px-Boukaris%2C_Korfu_02.jpg?20170717050909</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/004ab2f6-62b4-438a-b990-03b6a8886d04/photo.jpg</image:loc>
       <image:title>Boukari beach: Family Beach | Corfu</image:title>
       <image:caption> Boukari beach Pebble beach in Corfu, Greece Calm waters with Family-friendly and 3 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/firiplaka-beach-milos</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Aerial_view_of_Paralia_Firiplaka_on_Milos_Island%2C_Greece.jpg/1024px-Aerial_view_of_Paralia_Firiplaka_on_Milos_Island%2C_Greece.jpg?20210317192618</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/0e184487-a026-4761-b8e6-97eb61cd1e23/photo.jpg</image:loc>
       <image:title>Firiplaka beach: Family Beach · Organized | Milos</image:title>
       <image:caption> Firiplaka beach Mixed sand and pebble beach in Milos, Greece Moderate waves with Organized beach, Family-friendly and 6 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/firopotamos-beach-milos</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Firopotamos_%CE%A6%CF%85%CF%81%CE%BF%CF%80%CF%8C%CF%84%CE%B1%CE%BC%CE%BF%CF%82_Milos_%CE%9C%CE%AE%CE%BB%CE%BF%CF%82_2021-11-12_2528.jpg/1024px-Firopotamos_%CE%A6%CF%85%CF%81%CE%BF%CF%80%CF%8C%CF%84%CE%B1%CE%BC%CE%BF%CF%82_Milos_%CE%9C%CE%AE%CE%BB%CE%BF%CF%82_2021-11-12_2528.jpg?20220228233936</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/a686bfb3-64d6-42d2-b557-c6fcb8d538ab/photo.jpg</image:loc>
       <image:title>Firopotamos beach: Family Beach · Organized | Milos</image:title>
       <image:caption> Firopotamos beach Mixed sand and pebble beach in Milos, Greece Moderate waves with Organized beach, Family-friendly and 9 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/maragkas-beach-naxos</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Maragkas_beach.jpg/1024px-Maragkas_beach.jpg?20210922150600</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/70c36042-235a-4f3d-bac6-33f8126db4b1/photo.jpg</image:loc>
       <image:title>Maragkas beach: Family Beach · Organized | Naxos</image:title>
       <image:caption> Maragkas beach Sandy beach in Naxos, Greece Moderate waves with Organized beach, Family-friendly and 8 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/polychrono-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Polychrono_4788.jpg/1024px-Polychrono_4788.jpg?20191006163446</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/2f230ef6-cc33-4b63-a226-bffeb2d4eafb/photo.jpg</image:loc>
       <image:title>Polychrono beach: Blue Flag · Family Beach | Chalkidiki</image:title>
       <image:caption> Polychrono beach Sandy beach in Chalkidiki, Greece Calm waters with Blue Flag certified, Organized beach, Family-friendly and 11 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/acharavi-beach-corfu</loc>
-    <lastmod>2025-10-13</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Acharavi.jpg/1024px-Acharavi.jpg?20080825152316</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/3b46111a-67a6-461a-86e6-41496ded61b4/photo.jpg</image:loc>
       <image:title>Acharavi beach: Family Beach · Organized | Corfu</image:title>
       <image:caption>Acharavi beach Mixed sand and pebble beach in Corfu, Greece Calm waters with Organized beach, Lifeguard on duty, Family-friendly and 12 amenities</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://beachesofgreece.com/naxos/agia-anna-beach-naxos</loc>
-    <lastmod>2025-10-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Naxos_Agia_Anna_2025-06-27_1592.jpg/1024px-Naxos_Agia_Anna_2025-06-27_1592.jpg?20250717203858</image:loc>
-      <image:title>Agia Anna beach: Family Beach · Organized | Naxos</image:title>
-      <image:caption>Agia Anna beach Sandy beach in Naxos, Greece Moderate waves with Organized beach, Family-friendly and 10 amenities</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://beachesofgreece.com/mykonos/agia-anna-beach-mykonos</loc>
-    <lastmod>2025-10-13</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Mykonos_Agia_Anna_01.jpg/2048px-Mykonos_Agia_Anna_01.jpg?20140827220912</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/efccc3a2-0aca-446a-a3b8-bafd662fce74/photo.jpg</image:loc>
       <image:title>Agia Anna beach: Family Beach · Organized | Mykonos</image:title>
       <image:caption>Agia Anna beach Sandy beach in Mykonos, Greece Calm waters with Organized beach, Family-friendly and 9 amenities</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://beachesofgreece.com/paros/agia-irini-beach-paros</loc>
-    <lastmod>2025-10-05</lastmod>
+    <loc>https://beachesofgreece.com/naxos/agia-anna-beach-naxos</loc>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Cyclades_Paros_Palm_Beach_-_panoramio.jpg/1024px-Cyclades_Paros_Palm_Beach_-_panoramio.jpg?20170512083216</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/f477630a-d09b-4d18-9742-3afe5eed166b/photo.jpg</image:loc>
+      <image:title>Agia Anna beach: Family Beach · Organized | Naxos</image:title>
+      <image:caption>Agia Anna beach Sandy beach in Naxos, Greece Moderate waves with Organized beach, Family-friendly and 10 amenities</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/paros/agia-irini-beach-paros</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/706548a4-9c51-402f-a96d-6466eb96b31c/photo.jpg</image:loc>
       <image:title>Agia Irini beach: Family Beach · Organized | Paros</image:title>
       <image:caption>Agia Irini beach Sandy beach in Paros, Greece Calm waters with Organized beach, Family-friendly and 9 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/agia-marina-beach-aegina-attica</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/%CE%91%CE%B3%CE%AF%CE%B1_%CE%9C%CE%B1%CF%81%CE%AF%CE%BD%CE%B1_%CE%91%CE%AF%CE%B3%CE%B9%CE%BD%CE%B1%CF%82_1334.jpg/1024px-%CE%91%CE%B3%CE%AF%CE%B1_%CE%9C%CE%B1%CF%81%CE%AF%CE%BD%CE%B1_%CE%91%CE%AF%CE%B3%CE%B9%CE%BD%CE%B1%CF%82_1334.jpg?20220306104613</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/6de73963-416b-4d9d-9f95-2902fc9dc230/photo.jpg</image:loc>
       <image:title>Agia Marina: Blue Flag · Family Beach | Attica</image:title>
       <image:caption>Agia Marina Sandy beach in Attica, Greece Calm waters with Blue Flag certified, Organized beach, Lifeguard on duty, Family-friendly and 11 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/agia-marina-beach-crete</loc>
-    <lastmod>2025-09-26</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Agia_Marina_-_Cabana_Mare_beach.jpg/1024px-Agia_Marina_-_Cabana_Mare_beach.jpg?20210904192930</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d0dba3d9-5ba8-475d-aad8-9c0155dda2a9/photo.jpg</image:loc>
       <image:title>Agia Marina Beach: Family Beach · Organized | Crete</image:title>
       <image:caption>Agia Marina Beach Sandy beach in Crete, Greece Calm waters with Organized beach, Lifeguard on duty, Family-friendly and 7 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/agiassos-beach-naxos</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Agiassos.jpg/1024px-Agiassos.jpg?20210219105731</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/2e74e392-f239-4bdc-96c2-bfbba53f6748/photo.jpg</image:loc>
       <image:title>Agiassos beach: Family Beach | Naxos</image:title>
       <image:caption>Agiassos beach Sandy beach in Naxos, Greece Calm waters with Family-friendly and 3 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/agiofaraggo-beach-crete</loc>
-    <lastmod>2025-09-26</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/M%C3%BCndung_der_Agiofarango-Schlucht.jpg/1024px-M%C3%BCndung_der_Agiofarango-Schlucht.jpg?20241025183651</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/0f6e1dba-d92d-4f9d-9c05-a99b20de6051/photo.jpg</image:loc>
       <image:title>Agiofaraggo beach: Calm Water · Snorkeling | Crete</image:title>
       <image:caption>Agiofaraggo beach Mixed sand and pebble beach in Crete, Greece Calm waters and 3 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada/agiofili-beach-lefkada</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Agiofili_Beach_%2825419587704%29.jpg/1024px-Agiofili_Beach_%2825419587704%29.jpg?20161014012319</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/12bc3e54-0d72-479e-84e6-7eb32e9befd0/photo.jpg</image:loc>
       <image:title>Agiofili beach: Calm Water · Organized | Lefkada</image:title>
       <image:caption>Agiofili beach Pebble beach in Lefkada, Greece Calm waters with Organized beach and 1 amenities</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://beachesofgreece.com/naxos/agios-georgios-beach-naxos</loc>
-    <lastmod>2025-10-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Naxos3.jpg/1024px-Naxos3.jpg?20060917142042</image:loc>
-      <image:title>Agios Georgios beach: Family Beach · Organized | Naxos</image:title>
-      <image:caption>Agios Georgios beach Sandy beach in Naxos, Greece Calm waters with Organized beach, Family-friendly and 9 amenities</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://beachesofgreece.com/corfu/agios-georgios-beach-corfu</loc>
-    <lastmod>2025-09-26</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/AgiosGeorgios125.JPG/1024px-AgiosGeorgios125.JPG?20150531221436</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/3e236279-d4fe-487a-93f3-dc185a27cafd/photo.jpg</image:loc>
       <image:title>Agios Georgios beach: Family Beach · Organized | Corfu</image:title>
       <image:caption>Agios Georgios beach Sandy beach in Corfu, Greece Calm waters with Organized beach, Family-friendly and 10 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/agios-georgios-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Ammouliani_%283%29.jpg/1024px-Ammouliani_%283%29.jpg?20120531203125</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/63329a98-f0d1-41dd-bb8d-25d50392c93d/photo.jpg</image:loc>
       <image:title>Agios Georgios beach: Family Beach · Organized | Chalkidiki</image:title>
       <image:caption>Agios Georgios beach Sandy beach in Chalkidiki, Greece Calm waters with Organized beach, Family-friendly and 9 amenities</image:caption>
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/naxos/agios-georgios-beach-naxos</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/c300582c-25ab-4261-a62d-62fe4051775c/photo.jpg</image:loc>
+      <image:title>Agios Georgios beach: Family Beach · Organized | Naxos</image:title>
+      <image:caption>Agios Georgios beach Sandy beach in Naxos, Greece Calm waters with Organized beach, Family-friendly and 9 amenities</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/corfu/agios-gordios-beach-corfu</loc>
-    <lastmod>2025-10-13</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Strand_von_Agios_Gordios_01.jpg/1024px-Strand_von_Agios_Gordios_01.jpg?20170509055759</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/5bfd5d37-fb6a-4b33-a7dd-448890ec5e74/photo.jpg</image:loc>
       <image:title>Agios Gordios beach: Family Beach · Organized | Corfu</image:title>
       <image:caption>Agios Gordios beach Mixed sand and pebble beach in Corfu, Greece Calm waters with Organized beach, Lifeguard on duty, Family-friendly and 11 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada/agios-ioannis-beach-lefkada</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/1/19/The_beach_of_agios_ioannis.jpg?20121201204704</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d8b6b2ef-eae5-4da8-85b0-b9c8f44fe720/photo.jpg</image:loc>
       <image:title>Agios Ioannis beach: Blue Flag · Organized | Lefkada</image:title>
       <image:caption>Agios Ioannis beach Mixed sand and pebble beach in Lefkada, Greece Moderate waves with Blue Flag certified, Organized beach, Lifeguard on duty and 7 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/agios-ioannis-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Chalkidiki_-_Nikiti%2C_Agios_Ioannis_-_panoramio.jpg/1024px-Chalkidiki_-_Nikiti%2C_Agios_Ioannis_-_panoramio.jpg?20160224040634</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/279d787d-140e-4828-ade3-cb9c44f030e1/photo.jpg</image:loc>
       <image:title>Agios Ioannis beach: Sandy Beach · Calm Water | Chalkidiki</image:title>
       <image:caption>Agios Ioannis beach Sandy beach in Chalkidiki, Greece Calm waters with Organized beach, Lifeguard on duty and 3 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/agios-mamas-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Agios_Mamas_Beach_Halkidiki_Greece.jpg/1024px-Agios_Mamas_Beach_Halkidiki_Greece.jpg?20210815182243</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/bd2b8084-cb53-4279-b4dc-3f6dabd5cfec/photo.jpg</image:loc>
       <image:title>Agios Mamas beach: Family Beach · Organized | Chalkidiki</image:title>
       <image:caption>Agios Mamas beach Sandy beach in Chalkidiki, Greece Calm waters with Organized beach, Family-friendly and 9 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada/agios-nikitas-beach-lefkada</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/60.Agios_Nikitas_-_Plaja_-_panoramio.jpg/1024px-60.Agios_Nikitas_-_Plaja_-_panoramio.jpg?20170108152740</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/77a36709-32dc-418a-9137-284016ee3608/photo.jpg</image:loc>
       <image:title>Agios Nikitas beach: Taverna | Lefkada</image:title>
       <image:caption>Agios Nikitas beach Mixed sand and pebble beach in Lefkada, Greece Moderate waves and 5 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/agios-nikolaos-beach-zakynthos</loc>
-    <lastmod>2025-10-01</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Agios_Nikolaos_%2821634362446%29.jpg/1024px-Agios_Nikolaos_%2821634362446%29.jpg?20171118133045</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/35a254ae-3acd-42fb-b3e6-0448336dcb7a/photo.jpg</image:loc>
       <image:title>Agios Nikolaos beach: Organized · Beach Bar | Zakynthos</image:title>
       <image:caption>Agios Nikolaos beach Mixed sand and pebble beach in Zakynthos, Greece Moderate waves with Organized beach and 7 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/agios-prokopios-naxos</loc>
-    <lastmod>2025-10-13</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/3/31/Agios_Prokopios_Beach_at_sunset%2C_Naxos%2C_Greece_julesvernex2.jpg</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/4aae2c91-5317-4b94-a21f-840b548178b3/photo.jpg</image:loc>
       <image:title>Agios Prokopios: Family Beach | Naxos</image:title>
       <image:caption>Agios Prokopios Sandy beach in Naxos, Greece Calm waters with Family-friendly and 8 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/agios-sostis-beach-mykonos</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Mykonos_Agios_Sostis_01.jpg/1024px-Mykonos_Agios_Sostis_01.jpg?20140820193255</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/bfed8eb3-ba2d-4409-9c27-445c3e3e5e7b/photo.jpg</image:loc>
       <image:title>Agios Sostis beach: Sandy Beach · Calm Water | Mykonos</image:title>
       <image:caption>Agios Sostis beach Sandy beach in Mykonos, Greece Calm waters and 4 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/agios-spyridon-palaiokastritsa-beach-corfu</loc>
-    <lastmod>2025-10-01</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Corfu_Paleokastritsa_Beach_R01.jpg/1024px-Corfu_Paleokastritsa_Beach_R01.jpg?20130202214440</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/1917d5f7-fda2-47b1-8689-1959ddf70f7c/photo.jpg</image:loc>
       <image:title>Agios Spyridon Palaiokastritsa beach | Corfu</image:title>
       <image:caption>Agios Spyridon Palaiokastritsa beach Mixed sand and pebble beach in Corfu, Greece Calm waters with Organized beach, Lifeguard on duty, Family-friendly and 13 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/agios-spyridon-beach-peritheia-corfu</loc>
-    <lastmod>2025-10-01</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Corfu_September_2009_-_Agios_Spiridon_-_panoramio.jpg/1024px-Corfu_September_2009_-_Agios_Spiridon_-_panoramio.jpg?20161107200023</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/435fc748-0b34-4a1e-8ceb-d0b706594c9f/photo.jpg</image:loc>
       <image:title>Agios Spyridon Peritheia beach | Corfu</image:title>
       <image:caption>Agios Spyridon Peritheia beach Sandy beach in Corfu, Greece Calm waters with Organized beach, Family-friendly and 10 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/agios-stefanos-mykonos</loc>
-    <lastmod>2025-10-13</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/Agios_Stefanos_Mykonos.jpg/2048px-Agios_Stefanos_Mykonos.jpg?20190608171654</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/e87f8f84-0033-46a8-b68b-81f0bd9c0447/photo.jpg</image:loc>
       <image:title>Agios Stefanos: Family Beach · Organized | Mykonos</image:title>
       <image:caption>Agios Stefanos Sandy beach in Mykonos, Greece Calm waters with Organized beach, Lifeguard on duty, Family-friendly and 8 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/agios-stefanos-beach-corfu</loc>
-    <lastmod>2025-09-27</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Agios_Stefanos%2C_Korfu.jpg/1024px-Agios_Stefanos%2C_Korfu.jpg?20170422135453</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/c66ee6d1-1ff7-47d3-b3aa-cb5a56eefd75/photo.jpg</image:loc>
       <image:title>Agios Stefanos beach: Family Beach · Organized | Corfu</image:title>
       <image:caption>Agios Stefanos beach Sandy beach in Corfu, Greece Calm waters with Organized beach, Family-friendly and 10 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/agkali-beach-milos</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/View_of_Agali_Beach.jpg/1024px-View_of_Agali_Beach.jpg?20170529021640</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/4d777f33-e172-42b5-84ed-b6b5a3180775/photo.jpg</image:loc>
       <image:title>Agkali beach: Snorkeling | Milos</image:title>
       <image:caption>Agkali beach Pebble beach in Milos, Greece Moderate waves and 4 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/agrari-beach-mykonos</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Agrari_beach_in_April_-_panoramio.jpg/1024px-Agrari_beach_in_April_-_panoramio.jpg?20160310040010</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/c143139a-8cc6-48a8-82e8-2318f52e5139/photo.jpg</image:loc>
       <image:title>Agrari beach: Family Beach · Organized | Mykonos</image:title>
       <image:caption>Agrari beach Mixed sand and pebble beach in Mykonos, Greece Calm waters with Organized beach, Family-friendly and 10 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/aliki-beach-paros</loc>
-    <lastmod>2025-10-13</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/4/48/Paros_Alyki2_tango7174.jpg</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/e30e3d50-2edb-452b-957f-293e548af00d/photo.jpg</image:loc>
       <image:title>Aliki Beach: Family Beach · Organized | Paros</image:title>
       <image:caption>Aliki Beach Mixed sand and pebble beach in Paros, Greece Calm waters with Organized beach, Family-friendly and 9 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/alogomandra-beach-milos</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Alogomandra_beach%2C_Milos%2C_15M6140.jpg/1024px-Alogomandra_beach%2C_Milos%2C_15M6140.jpg?20151106121902</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/b589922e-5e8f-4856-844c-30c358e5bac9/photo.jpg</image:loc>
       <image:title>Alogomandra beach: Sandy Beach · Snorkeling | Milos</image:title>
       <image:caption>Alogomandra beach Sandy beach in Milos, Greece Moderate waves and 2 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/alykanas-beach-zakynthos</loc>
-    <lastmod>2025-10-02</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Alykanas_Beach_Zakynthos_%28233823075%29.jpeg/1024px-Alykanas_Beach_Zakynthos_%28233823075%29.jpeg?20180804195157</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/7387ae41-ab07-46be-be93-bb2558e37e19/photo.jpeg</image:loc>
       <image:title>Alykanas beach: Blue Flag · Family Beach | Zakynthos</image:title>
       <image:caption>Alykanas beach Sandy beach in Zakynthos, Greece Calm waters with Blue Flag certified, Organized beach, Lifeguard on duty, Family-friendly and 12 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/alykes-beach-zakynthos</loc>
-    <lastmod>2025-10-02</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Alikes%2C_Greece_-_panoramio_%285%29.jpg/1024px-Alikes%2C_Greece_-_panoramio_%285%29.jpg?20170328080137</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/c5a6fb72-cf84-4125-aea5-ed907b7934fc/photo.jpg</image:loc>
       <image:title>Alykes beach: Blue Flag · Family Beach | Zakynthos</image:title>
       <image:caption>Alykes beach Mixed sand and pebble beach in Zakynthos, Greece Calm waters with Blue Flag certified, Organized beach, Family-friendly and 10 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/alyko-beach-naxos</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Strand_beach_Aliko_Naxos_%2823719985739%29.jpg/1024px-Strand_beach_Aliko_Naxos_%2823719985739%29.jpg?20160227234020</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/faaceeb6-2750-42bc-9e9d-9f368ebd602d/photo.jpg</image:loc>
       <image:title>Alyko beach: Sandy Beach · Snorkeling | Naxos</image:title>
       <image:caption>Alyko beach Sandy beach in Naxos, Greece Moderate waves and 3 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/anavissos-beach-attica</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Anavissos_Beach_%28223585763%29.jpeg/1024px-Anavissos_Beach_%28223585763%29.jpeg?20180806185358</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/e58e4a70-6a6d-468a-9cfd-4c2d0671e37a/photo.jpeg</image:loc>
       <image:title>Anavissos beach: Family Beach · Organized | Attica</image:title>
       <image:caption>Anavissos beach Sandy beach in Attica, Greece Calm waters with Organized beach, Lifeguard on duty, Family-friendly and 11 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/anemomylos-beach-corfu</loc>
-    <lastmod>2025-10-01</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Corfu_Anemomilos_R01.jpg/1024px-Corfu_Anemomilos_R01.jpg?20130131205603</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d8d216ed-e760-472c-9214-60cf36df3aaa/photo.jpg</image:loc>
       <image:title>Anemomylos beach: Calm Water · Snorkeling | Corfu</image:title>
       <image:caption>Anemomylos beach Beach in Corfu, Greece Calm waters and 5 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/anidri-beach-crete</loc>
-    <lastmod>2025-10-13</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Beach_of_Ghialiskari_in_winter.JPG/1024px-Beach_of_Ghialiskari_in_winter.JPG?20140531173314</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/13eae1d4-75aa-4db0-a946-ea1a56ee7967/photo.jpg</image:loc>
       <image:title>Anidri Beach: Calm Water · Organized | Crete</image:title>
       <image:caption>Anidri Beach Mixed sand and pebble beach in Crete, Greece Calm waters with Organized beach and 5 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/apollonas-beach-naxos</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/9/99/Apollonas_Naxos_Greece_2003082013280NP1549.jpg</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/86abdaf2-aa02-4d1c-93ca-23a333c7e433/photo.jpg</image:loc>
       <image:title>Apollonas Beach: Taverna | Naxos</image:title>
       <image:caption>Apollonas Beach Mixed sand and pebble beach in Naxos, Greece Moderate waves and 2 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/argassi-beach-zakynthos</loc>
-    <lastmod>2025-10-02</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Argasi_-_panoramio.jpg/1024px-Argasi_-_panoramio.jpg?20170308154233</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/dda8a816-410d-48d1-9bdc-18d42c36481f/photo.jpg</image:loc>
       <image:title>Argassi beach: Family Beach · Organized | Zakynthos</image:title>
       <image:caption>Argassi beach Sandy beach in Zakynthos, Greece Calm waters with Organized beach, Family-friendly and 9 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/arillas-beach-corfu</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Arillas_beach_and_village.jpg/512px-Arillas_beach_and_village.jpg?20141115152201</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/70951ea9-9ca1-40f5-8efc-5805ae7e64b9/photo.jpg</image:loc>
       <image:title>Arillas beach: Family Beach · Organized | Corfu</image:title>
       <image:caption>Arillas beach Sandy beach in Corfu, Greece Calm waters with Organized beach, Family-friendly and 9 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/artemida-beach-attica</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Plage_Artemida.jpg/1024px-Plage_Artemida.jpg?20190731184402</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/f5ee6051-d659-4401-8f03-bf4345b4ae6c/photo.jpg</image:loc>
       <image:title>Artemida beach: Family Beach · Organized | Attica</image:title>
       <image:caption>Artemida beach Sandy beach in Attica, Greece Calm waters with Organized beach, Lifeguard on duty, Family-friendly and 11 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/asteras-glyfada-beach-attica</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Asteras_Beach_Glyfada_Athens%2C_Greece_%2844869108691%29.jpg/1024px-Asteras_Beach_Glyfada_Athens%2C_Greece_%2844869108691%29.jpg?20190105180713</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/455ba964-a5af-4715-ac52-616dfce29a57/photo.jpg</image:loc>
       <image:title>Asteras beach: Family Beach · Organized | Attica</image:title>
       <image:caption>Asteras beach Sandy beach in Attica, Greece Calm waters with Organized beach, Lifeguard on duty, Family-friendly and 10 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/avlaki-beach-attica</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Porto_Rafti_-_Avlaki.JPG/1024px-Porto_Rafti_-_Avlaki.JPG?20160401093344</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/5a00d8da-3d76-4774-abcf-795eae305293/photo.jpg</image:loc>
       <image:title>Avlaki beach: Blue Flag · Family Beach | Attica</image:title>
       <image:caption>Avlaki beach Sandy beach in Attica, Greece Calm waters with Blue Flag certified, Organized beach, Lifeguard on duty, Family-friendly and 10 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/azalas-beach-naxos</loc>
-    <lastmod>2025-10-06</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Azalas_-_panoramio.jpg/1024px-Azalas_-_panoramio.jpg?20170223140542</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/ffcf6ee5-45d3-4a1b-9f8a-337caa1cea41/photo.jpg</image:loc>
       <image:title>Azalas Beach: Snorkeling | Naxos</image:title>
       <image:caption>Azalas Beach Mixed sand and pebble beach in Naxos, Greece and 2 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/balos-beach-crete</loc>
-    <lastmod>2025-09-26</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Balos_9.jpg/1024px-Balos_9.jpg?20151207212642</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d2641036-6609-421a-9d47-c114a5476956/photo.jpg</image:loc>
       <image:title>Balos beach: Calm Water | Crete</image:title>
       <image:caption>Balos beach Mixed sand and pebble beach in Crete, Greece Calm waters and 2 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/banana-beach-zakynthos</loc>
-    <lastmod>2025-10-01</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/1_banana_beach_july_23_%281%29.jpg/1024px-1_banana_beach_july_23_%281%29.jpg?20230901161010</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/1f58b9a4-01d3-44bf-bd76-30e3e2101b48/photo.jpg</image:loc>
       <image:title>Banana beach: Blue Flag · Family Beach | Zakynthos</image:title>
       <image:caption>Banana beach Sandy beach in Zakynthos, Greece Moderate waves with Blue Flag certified, Organized beach, Lifeguard on duty, Family-friendly and 11 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/barbati-beach-corfu</loc>
-    <lastmod>2025-09-27</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/%CE%A0%CE%B1%CF%81%CE%B1%CE%BB%CE%AF%CE%B1_%CE%9C%CF%80%CE%B1%CF%81%CE%BC%CF%80%CE%AC%CF%84%CE%B9_-_panoramio.jpg/1024px-%CE%A0%CE%B1%CF%81%CE%B1%CE%BB%CE%AF%CE%B1_%CE%9C%CF%80%CE%B1%CF%81%CE%BC%CF%80%CE%AC%CF%84%CE%B9_-_panoramio.jpg?20170221140046</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/01c84eab-5e50-4b7d-95a4-55a454774206/photo.jpg</image:loc>
       <image:title>Barbati beach: Calm Water · Organized | Corfu</image:title>
       <image:caption>Barbati beach Pebble beach in Corfu, Greece Calm waters with Organized beach, Lifeguard on duty and 10 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/bataria-beach-kassiopi-corfu</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Corfu_September_2009_-_Kassiopi%2C_Bataria_Beach_-_panoramio_-_maczopikczu_%288%29.jpg/1024px-Corfu_September_2009_-_Kassiopi%2C_Bataria_Beach_-_panoramio_-_maczopikczu_%288%29.jpg?20161107195843</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/c9de564d-dc8f-43f2-9d42-56d4b07a78ca/photo.jpg</image:loc>
       <image:title>Bataria Kassiopi beach: Calm Water · Organized | Corfu</image:title>
       <image:caption>Bataria Kassiopi beach Pebble beach in Corfu, Greece Calm waters with Organized beach and 9 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/santorini/baxedes-beach-santorini</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Cyclades_Santorin_Baxedes_Plage_15062013_-_panoramio.jpg/1024px-Cyclades_Santorin_Baxedes_Plage_15062013_-_panoramio.jpg?20170303161307</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/049325cf-0acc-4198-8ef6-bd4f3659104c/photo.jpg</image:loc>
       <image:title>Baxedes beach: Organized · Beach Bar | Santorini</image:title>
       <image:caption>Baxedes beach Mixed sand and pebble beach in Santorini, Greece Moderate waves with Organized beach and 6 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/benitses-beach-corfu</loc>
-    <lastmod>2025-10-01</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/GRC_%E2%80%94_Region_Ionische_Inseln_%E2%80%94_Regionalbezirk_Kerkyra_%E2%80%94_Gemeinde_Kendriki_Kerkyra_ke_Diapondia_Nisia_%E2%80%94_Benitses_%28Strand%29_Mattes_2021.jpg/1024px-GRC_%E2%80%94_Region_Ionische_Inseln_%E2%80%94_Regionalbezirk_Kerkyra_%E2%80%94_Gemeinde_Kendriki_Kerkyra_ke_Diapondia_Nisia_%E2%80%94_Benitses_%28Strand%29_Mattes_2021.jpg?20210926083117</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/5d01d367-3580-4f96-bdbf-acfcf7b11d3a/photo.jpg</image:loc>
       <image:title>Benitses beach: Blue Flag · Family Beach | Corfu</image:title>
       <image:caption>Benitses beach Mixed sand and pebble beach in Corfu, Greece Calm waters with Blue Flag certified, Organized beach, Family-friendly and 11 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/santorini/black-beach-santorini</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/7/7f/Black_beach_in_Kamari_Santorini.jpg</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/9e55fff3-0b3a-4243-85c1-ff65ca39e8af/photo.jpg</image:loc>
       <image:title>Black Beach: Family Beach · Organized | Santorini</image:title>
       <image:caption>Black Beach Mixed sand and pebble beach in Santorini, Greece Moderate waves with Organized beach, Family-friendly and 5 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/canal-damour-corfu</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/2018-06-21_Canal_d%27amour_at_Sidari.jpg/1024px-2018-06-21_Canal_d%27amour_at_Sidari.jpg?20180903032156</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/214681e7-e2c7-4d86-938d-e063cdbe41c9/photo.jpg</image:loc>
       <image:title>Canal d&apos;Amour: Calm Water · Organized | Corfu</image:title>
       <image:caption>Canal d&apos;Amour Mixed sand and pebble beach in Corfu, Greece Calm waters with Organized beach and 7 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/sounio-beach-attica</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/At_Cape_Sounio_%28Attiki%2C_Greece%29_%283734132499%29.jpg/1024px-At_Cape_Sounio_%28Attiki%2C_Greece%29_%283734132499%29.jpg?20131215223012</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/9e5eed0b-df35-4538-9327-ba81a4e4dd1a/photo.jpg</image:loc>
       <image:title>Cape Sounion beach: Family Beach · Organized | Attica</image:title>
       <image:caption>Cape Sounion beach Mixed sand and pebble beach in Attica, Greece Calm waters with Organized beach, Family-friendly and 9 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/chalikounas-beach-corfu</loc>
-    <lastmod>2025-09-27</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Chalikounas_Beach_in_Corfu_%281%29.jpg/1024px-Chalikounas_Beach_in_Corfu_%281%29.jpg?20220309085923</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/be790dde-2701-4777-b447-03ee072d904c/photo.jpg</image:loc>
       <image:title>Chalikounas beach: Sandy Beach · Beach Bar | Corfu</image:title>
       <image:caption>Chalikounas beach Sandy beach in Corfu, Greece Moderate waves and 4 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/chora-beach-mykonos</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Cyclades_Mykonos_Petite_Venise_-_panoramio.jpg/1024px-Cyclades_Mykonos_Petite_Venise_-_panoramio.jpg?20170306221353</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d727aec2-e149-49c6-8df5-f64b93d1aed9/photo.jpg</image:loc>
       <image:title>Chora beach: Calm Water | Mykonos</image:title>
       <image:caption>Chora beach Mixed sand and pebble beach in Mykonos, Greece Calm waters and 2 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/dafni-beach-zakynthos</loc>
-    <lastmod>2025-10-02</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Dafni_Beach_-_panoramio.jpg/1024px-Dafni_Beach_-_panoramio.jpg?20170308153941</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/c3c43eea-0cbc-412a-b56b-79a71399b518/photo.jpg</image:loc>
       <image:title>Dafni beach: Calm Water · Organized | Zakynthos</image:title>
       <image:caption>Dafni beach Mixed sand and pebble beach in Zakynthos, Greece Calm waters with Organized beach and 6 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/dassia-beach-corfu</loc>
-    <lastmod>2025-10-13</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Dassia_Kerkyra.jpg/1024px-Dassia_Kerkyra.jpg?20180422111112</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/5b03862b-532b-47aa-ac41-47332d0e725c/photo.jpg</image:loc>
       <image:title>Dassia beach: Blue Flag · Family Beach | Corfu</image:title>
       <image:caption>Dassia beach Mixed sand and pebble beach in Corfu, Greece Calm waters with Blue Flag certified, Organized beach, Lifeguard on duty, Family-friendly and 10 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada/desimi-beach-lefkada</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/%CE%94%CE%B5%CF%83%CE%AF%CE%BC%CE%B9.JPG/1024px-%CE%94%CE%B5%CF%83%CE%AF%CE%BC%CE%B9.JPG?20210212151828</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/cdde041b-e34f-449d-9323-e486b699c0bf/photo.jpg</image:loc>
       <image:title>Desimi beach: Calm Water · Taverna | Lefkada</image:title>
       <image:caption>Desimi beach Mixed sand and pebble beach in Lefkada, Greece Calm waters and 6 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/divounia-beach-mykonos</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Divounia_Beach%2C_Mykonos%2C_Greece.jpg/1024px-Divounia_Beach%2C_Mykonos%2C_Greece.jpg?20240206221043</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/58eb67aa-627e-47fb-b0ed-7a8d467198a3/photo.jpg</image:loc>
       <image:title>Divounia beach: Calm Water · Taverna | Mykonos</image:title>
       <image:caption>Divounia beach Pebble beach in Mykonos, Greece Calm waters and 2 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada/egremni-beach-lefkada</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Egremni%2C_Lefkada_5_-_panoramio.jpg/1024px-Egremni%2C_Lefkada_5_-_panoramio.jpg?20161029161148</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/48759a47-f78c-400c-b03a-6533f4b81d33/photo.jpg</image:loc>
       <image:title>Egremni beach | Lefkada</image:title>
       <image:caption>Egremni beach Mixed sand and pebble beach in Lefkada, Greece Moderate waves and 2 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/elafonissi-beach-crete</loc>
-    <lastmod>2025-09-26</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Elafonissi.jpg/1024px-Elafonissi.jpg?20110928185813</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/c6a757fa-5e49-4638-bde4-b97b83c840b5/photo.jpg</image:loc>
       <image:title>Elafonissi beach: Calm Water · Beach Bar | Crete</image:title>
       <image:caption>Elafonissi beach Mixed sand and pebble beach in Crete, Greece Calm waters and 5 amenities</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://beachesofgreece.com/mykonos/elia-beach-mykonos</loc>
-    <lastmod>2025-10-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Elias_Beach_on_Mykonos.JPG/1024px-Elias_Beach_on_Mykonos.JPG?20090430002643</image:loc>
-      <image:title>Elia beach: Family Beach · Organized | Mykonos</image:title>
-      <image:caption>Elia beach Sandy beach in Mykonos, Greece Calm waters with Organized beach, Lifeguard on duty, Family-friendly and 10 amenities</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://beachesofgreece.com/chalkidiki/elia-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/EliaBeach.jpg/512px-EliaBeach.jpg?20100406225518</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/dc07d3ed-314c-4ea4-802f-e77644fe853c/photo.jpg</image:loc>
       <image:title>Elia beach: Family Beach · Organized | Chalkidiki</image:title>
       <image:caption>Elia beach Mixed sand and pebble beach in Chalkidiki, Greece Calm waters with Organized beach, Family-friendly and 8 amenities</image:caption>
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/mykonos/elia-beach-mykonos</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/00273109-b88e-4076-ada3-a63704b69085/photo.jpg</image:loc>
+      <image:title>Elia beach: Family Beach · Organized | Mykonos</image:title>
+      <image:caption>Elia beach Sandy beach in Mykonos, Greece Calm waters with Organized beach, Lifeguard on duty, Family-friendly and 10 amenities</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/corfu/ermones-beach-corfu</loc>
-    <lastmod>2025-10-01</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Ermones%2C_Korfu.jpg/1024px-Ermones%2C_Korfu.jpg?20170517194137</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/6a7a3694-099c-4d6a-86ca-eccee86db00c/photo.jpg</image:loc>
       <image:title>Ermones beach: Organized · Beach Bar | Corfu</image:title>
       <image:caption>Ermones beach Mixed sand and pebble beach in Corfu, Greece Moderate waves with Organized beach and 12 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/santorini/exomitis-beach-santorini</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Santorin_%28GR%29%2C_Exomytis%2C_Vlychada_Beach_--_2017_--_2802.jpg/1024px-Santorin_%28GR%29%2C_Exomytis%2C_Vlychada_Beach_--_2017_--_2802.jpg?20171007055615</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/bde02f10-6615-4bda-aab9-cb4bd9031e24/photo.jpg</image:loc>
       <image:title>Exomitis beach: Calm Water | Santorini</image:title>
       <image:caption>Exomitis beach Mixed sand and pebble beach in Santorini, Greece Calm waters and 2 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/falasarna-beach-crete</loc>
-    <lastmod>2025-09-26</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Greece_Crete_Chania_FalasarnaBeach_Aerial_Summer_ISymeonidis-4-S.jpg/1024px-Greece_Crete_Chania_FalasarnaBeach_Aerial_Summer_ISymeonidis-4-S.jpg?20241017183652</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/9938360d-0b88-4abc-a70b-f31c02e08d52/photo.jpg</image:loc>
       <image:title>Falasarna Beach: Family Beach · Organized | Crete</image:title>
       <image:caption>Falasarna Beach Sandy beach in Crete, Greece Moderate waves with Organized beach, Family-friendly and 7 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/faliraki-beach-corfu</loc>
-    <lastmod>2025-10-03</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Corfu_Faliraki_R01.jpg/1024px-Corfu_Faliraki_R01.jpg?20120618193041</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/8c152f93-1879-4985-a71b-c215b5abcf99/photo.jpg</image:loc>
       <image:title>Faliraki beach: Calm Water · Organized | Corfu</image:title>
       <image:caption>Faliraki beach Beach in Corfu, Greece Calm waters with Organized beach and 5 amenities</image:caption>
     </image:image>
@@ -957,44 +957,44 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/fava-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Blue_ocean_by_the_sand_beach_%28Unsplash%29.jpg/1024px-Blue_ocean_by_the_sand_beach_%28Unsplash%29.jpg?20170901022055</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/15a84af0-249f-4132-a36f-a4cb78fe696d/photo.jpg</image:loc>
       <image:title>Fava beach: Snorkeling | Chalkidiki</image:title>
       <image:caption>Fava beach Mixed sand and pebble beach in Chalkidiki, Greece Moderate waves and 5 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/flogita-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Promenade%2C_Nea_Flogita%2C_Halkidiki%2C_Greece_%282741742658%29.jpg/1024px-Promenade%2C_Nea_Flogita%2C_Halkidiki%2C_Greece_%282741742658%29.jpg?20190907151048</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d8941758-a5fa-4e4e-a238-42746ce3e3d4/photo.jpg</image:loc>
       <image:title>Flogita beach: Blue Flag · Family Beach | Chalkidiki</image:title>
       <image:caption>Flogita beach Sandy beach in Chalkidiki, Greece Calm waters with Blue Flag certified, Organized beach, Family-friendly and 12 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/ftelia-beach-mykonos</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Ftelia_Bay%2C_Mykonos%2C_060363.jpg/1024px-Ftelia_Bay%2C_Mykonos%2C_060363.jpg?20151202200214</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/37088f16-7b50-4781-be99-69561066eafa/photo.jpg</image:loc>
       <image:title>Ftelia beach: Organized · Beach Bar | Mykonos</image:title>
       <image:caption>Ftelia beach Mixed sand and pebble beach in Mykonos, Greece with Organized beach and 9 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/gardeno-beach-corfu</loc>
-    <lastmod>2025-10-01</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Gardeno_Sandstrand.jpg/1024px-Gardeno_Sandstrand.jpg?20230122150523</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/a81fe00e-eb4d-4bb2-9ed2-b23d697d632b/photo.jpg</image:loc>
       <image:title>Gardeno beach: Family Beach · Organized | Corfu</image:title>
       <image:caption>Gardeno beach Sandy beach in Corfu, Greece Calm waters with Organized beach, Family-friendly and 10 amenities</image:caption>
     </image:image>
@@ -1007,418 +1007,418 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/gerakas-beach-milos</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Gerekas_001.jpg/1024px-Gerekas_001.jpg?20131008180541</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/45cf3152-74e5-4c74-a1b2-ed623e9724d0/photo.jpg</image:loc>
       <image:title>Gerakas beach: Sandy Beach · Calm Water | Milos</image:title>
       <image:caption>Gerakas beach Sandy beach in Milos, Greece Calm waters and 3 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/gerakini-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Yerakini_seaside_pedestrian_walk%2C_Jun_2014.jpg/1024px-Yerakini_seaside_pedestrian_walk%2C_Jun_2014.jpg?20140730140912</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/ff8816bc-a4c7-493d-b0e7-f0c06fcd728e/photo.jpg</image:loc>
       <image:title>Gerakini beach: Blue Flag · Family Beach | Chalkidiki</image:title>
       <image:caption>Gerakini beach Sandy beach in Chalkidiki, Greece Calm waters with Blue Flag certified, Organized beach, Lifeguard on duty, Family-friendly and 11 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/gialiskari-beach-corfu</loc>
-    <lastmod>2025-10-01</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Aerial_view_of_Gialiskari_Beach_in_Corfu%2C_Greece_%2853698157374%29.jpg/1024px-Aerial_view_of_Gialiskari_Beach_in_Corfu%2C_Greece_%2853698157374%29.jpg?20240504155602</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/5c6bb096-cde7-414f-b082-1f67db0f4a9b/photo.jpg</image:loc>
       <image:title>Gialiskari beach: Organized · Taverna | Corfu</image:title>
       <image:caption>Gialiskari beach Mixed sand and pebble beach in Corfu, Greece Moderate waves with Organized beach and 6 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/santorini/gialos-beach-santorini</loc>
-    <lastmod>2025-10-13</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/6/64/Cyclades_Santorin_Akrotiri_Red_Beach_-_panoramio.jpg</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/f6237a16-f272-4408-851f-a0a5974d0c09/photo.jpg</image:loc>
       <image:title>Gialos Beach: Taverna | Santorini</image:title>
       <image:caption>Gialos Beach Beach in Santorini, Greece Moderate waves and 3 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/glyfa-beach-paros</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/4/4e/Paros_Glyfa_01.jpg</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/54da883c-5ff2-44cb-8c93-b9d05101cd2b/photo.jpg</image:loc>
       <image:title>Glyfa Beach: Sandy Beach · Beach Bar | Paros</image:title>
       <image:caption>Glyfa Beach Sandy beach in Paros, Greece Moderate waves and 4 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/glyfada-beach-corfu</loc>
-    <lastmod>2025-10-13</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Glyfada_Beach_on_the_island_of_Corfu%2C_Greece_%2847818444242%29.jpg/1024px-Glyfada_Beach_on_the_island_of_Corfu%2C_Greece_%2847818444242%29.jpg?20190519140547</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/8786916e-e9ba-422f-addb-bc107858a299/photo.jpg</image:loc>
       <image:title>Glyfada beach: Blue Flag · Family Beach | Corfu</image:title>
       <image:caption>Glyfada beach Sandy beach in Corfu, Greece Calm waters with Blue Flag certified, Organized beach, Lifeguard on duty, Family-friendly and 11 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/hanioti-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Plaja_Hanioti%2C_Kassandra%2C_Halkidiki_-_panoramio_%281%29.jpg/1024px-Plaja_Hanioti%2C_Kassandra%2C_Halkidiki_-_panoramio_%281%29.jpg?20170304000815</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/c11394dc-55fe-403d-b811-3c0d3a3c4ed2/photo.jpg</image:loc>
       <image:title>Hanioti beach: Blue Flag · Family Beach | Chalkidiki</image:title>
       <image:caption>Hanioti beach Mixed sand and pebble beach in Chalkidiki, Greece Calm waters with Blue Flag certified, Organized beach, Lifeguard on duty, Family-friendly and 11 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/ipsos-beach-corfu</loc>
-    <lastmod>2025-10-01</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Ypsos_2017_02.jpg/1024px-Ypsos_2017_02.jpg?20170724183707</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/6ae45563-b079-4a02-adca-cd367e7ce9f9/photo.jpg</image:loc>
       <image:title>Ipsos beach: Calm Water · Organized | Corfu</image:title>
       <image:caption>Ipsos beach Mixed sand and pebble beach in Corfu, Greece Calm waters with Organized beach and 9 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/issos-beach-corfu</loc>
-    <lastmod>2025-10-13</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Issos_kerkyra.jpg/512px-Issos_kerkyra.jpg?20180211095816</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/81f5e499-4b38-455a-9ecf-6d6556835735/photo.jpg</image:loc>
       <image:title>Issos beach: Blue Flag · Calm Water | Corfu</image:title>
       <image:caption>Issos beach Sandy beach in Corfu, Greece Calm waters with Blue Flag certified, Organized beach and 4 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/istro-beach-crete</loc>
-    <lastmod>2025-09-26</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Istro_Strand_Agios_Pandeleimon_10.jpg/1024px-Istro_Strand_Agios_Pandeleimon_10.jpg?20181218100457</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/13e75b4c-6b87-4e99-bd39-d2df255287d1/photo.jpg</image:loc>
       <image:title>Istro beach: Blue Flag · Calm Water | Crete</image:title>
       <image:caption>Istro beach Mixed sand and pebble beach in Crete, Greece Calm waters with Blue Flag certified, Organized beach and 7 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/kalafatis-beach-mykonos</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/GR-mykonos-strand-kalafatis.jpg/1024px-GR-mykonos-strand-kalafatis.jpg?20121114004040</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/81c219ca-f7c6-441e-ba9e-a6020940716e/photo.jpg</image:loc>
       <image:title>Kalafatis beach: Family Beach · Organized | Mykonos</image:title>
       <image:caption>Kalafatis beach Mixed sand and pebble beach in Mykonos, Greece Calm waters with Organized beach, Family-friendly and 10 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/kalamaki-beach-zakynthos</loc>
-    <lastmod>2025-10-01</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Kalamaki_beach_-_panoramio.jpg/1024px-Kalamaki_beach_-_panoramio.jpg?20160613081009</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d829483a-c3a4-42dc-8759-9ec20d4eee8d/photo.jpg</image:loc>
       <image:title>Kalamaki beach: Family Beach · Organized | Zakynthos</image:title>
       <image:caption>Kalamaki beach Sandy beach in Zakynthos, Greece Calm waters with Organized beach, Family-friendly and 6 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/kalami-beach-corfu</loc>
-    <lastmod>2025-09-26</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Widok-z_bia%C5%82ej_willi_kalami.jpg/1024px-Widok-z_bia%C5%82ej_willi_kalami.jpg?20220524174427</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/c2bb9118-a1a0-4ec8-9142-655a67945f4d/photo.jpg</image:loc>
       <image:title>Kalami beach: Family Beach · Organized | Corfu</image:title>
       <image:caption>Kalami beach Pebble beach in Corfu, Greece Calm waters with Organized beach, Family-friendly and 11 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/kalamitsi-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Eastern_beach_of_Kalamitsi%2C_Sithonia_%28%CE%9A%CE%B1%CE%BB%CE%B1%CE%BC%CE%AF%CF%84%CF%83%CE%B9_630_72%2C_Greece%29.jpg/1024px-Eastern_beach_of_Kalamitsi%2C_Sithonia_%28%CE%9A%CE%B1%CE%BB%CE%B1%CE%BC%CE%AF%CF%84%CF%83%CE%B9_630_72%2C_Greece%29.jpg?20240909194535</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/7ab1c4fd-b42e-4019-b830-639a2be03c65/photo.jpg</image:loc>
       <image:title>Kalamitsi beach: Family Beach · Organized | Chalkidiki</image:title>
       <image:caption>Kalamitsi beach Sandy beach in Chalkidiki, Greece Calm waters with Organized beach, Family-friendly and 9 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/kalantos-beach-naxos</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/8/89/Kalantos_Naxos_Greece_2005082216150N00410_01.jpg</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/bd8bf47e-6dcd-4131-b024-35d683991001/photo.jpg</image:loc>
       <image:title>Kalantos Beach: Sandy Beach · Calm Water | Naxos</image:title>
       <image:caption>Kalantos Beach Sandy beach in Naxos, Greece Calm waters</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/kalithea-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Kalithea_Xalkidiki_GREECE_-_panoramio.jpg/1024px-Kalithea_Xalkidiki_GREECE_-_panoramio.jpg?20170108091746</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/da087e76-6c5f-4df5-9b61-738fd30ee99b/photo.jpg</image:loc>
       <image:title>Kalithea beach: Family Beach | Chalkidiki</image:title>
       <image:caption>Kalithea beach Beach in Chalkidiki, Greece Calm waters with Lifeguard on duty, Family-friendly and 13 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/kalo-livadi-mykonos</loc>
-    <lastmod>2025-10-13</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/6/69/Mykonos_Kalo_Livadi_01.jpg</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d9759f1e-de45-4b9e-ae97-88526e642f7f/photo.jpg</image:loc>
       <image:title>Kalo Livadi: Sandy Beach · Calm Water | Mykonos</image:title>
       <image:caption>Kalo Livadi Sandy beach in Mykonos, Greece Calm waters with Organized beach, Lifeguard on duty and 9 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/santorini/kamari-beach-santorini</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Kamari_Santorini.jpg/1024px-Kamari_Santorini.jpg?20130320001452</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/9321e9b7-7822-4426-ad46-f92186b1b610/photo.jpg</image:loc>
       <image:title>Kamari beach: Blue Flag · Family Beach | Santorini</image:title>
       <image:caption>Kamari beach Sandy beach in Santorini, Greece Calm waters with Blue Flag certified, Organized beach, Lifeguard on duty, Family-friendly and 14 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/kapari-beach-mykonos</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Beach_near_Kapari%2C_Mykonos%2C_224479.jpg/1024px-Beach_near_Kapari%2C_Mykonos%2C_224479.jpg?20230106215110</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/35da20ea-d2f8-4f00-a45d-b4ec0e44a24c/photo.jpg</image:loc>
       <image:title>Kapari beach: Sandy Beach · Calm Water | Mykonos</image:title>
       <image:caption>Kapari beach Sandy beach in Mykonos, Greece Calm waters and 2 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/karydi-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Vourvourou_beach_sithonia_01.jpg/1024px-Vourvourou_beach_sithonia_01.jpg?20060328121328</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/5cc963e1-d798-46d0-8e75-1ad84e45df25/photo.jpg</image:loc>
       <image:title>Karydi beach: Family Beach | Chalkidiki</image:title>
       <image:caption>Karydi beach Sandy beach in Chalkidiki, Greece Calm waters with Family-friendly and 3 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/kastraki-beach-naxos</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Kastraki_Naxos_Greece_2018080418420NP3273.jpg/1024px-Kastraki_Naxos_Greece_2018080418420NP3273.jpg?20180916052325</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/324976f2-2620-4d76-8613-1e1b8a648aee/photo.jpg</image:loc>
       <image:title>Kastraki beach: Family Beach · Organized | Naxos</image:title>
       <image:caption>Kastraki beach Sandy beach in Naxos, Greece Moderate waves with Organized beach, Family-friendly and 7 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada/kathisma-beach-lefkada</loc>
-    <lastmod>2025-10-13</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Kathisma_beach%2C_lefkada_pic2.JPG/1024px-Kathisma_beach%2C_lefkada_pic2.JPG?20140611210905</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/b46e82e4-9ccc-424b-bb0a-a6bc9fb0806f/photo.jpg</image:loc>
       <image:title>Kathisma beach: Organized · Beach Bar | Lefkada</image:title>
       <image:caption>Kathisma beach Mixed sand and pebble beach in Lefkada, Greece Moderate waves with Organized beach and 6 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/kavouri-beach-attica</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/%CE%9A%CE%B1%CE%B2%CE%BF%CF%8D%CF%81%CE%B9_IMG_20230807_160927.jpg/1024px-%CE%9A%CE%B1%CE%B2%CE%BF%CF%8D%CF%81%CE%B9_IMG_20230807_160927.jpg?20230902134105</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/ed72f07b-78de-47ab-9a4e-e0aaa653b303/photo.jpg</image:loc>
       <image:title>Kavouri beach: Family Beach · Organized | Attica</image:title>
       <image:caption>Kavouri beach Sandy beach in Attica, Greece Calm waters with Organized beach, Family-friendly and 8 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/kavourotrypes-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Halkidiki_Kavourotrypes_beach_4.jpg/1024px-Halkidiki_Kavourotrypes_beach_4.jpg?20231018174506</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/32b88748-357d-4fe9-9b40-d057f0ccd436/photo.jpg</image:loc>
       <image:title>Kavourotrypes beach: Calm Water · Beach Bar | Chalkidiki</image:title>
       <image:caption>Kavourotrypes beach Mixed sand and pebble beach in Chalkidiki, Greece Calm waters and 7 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/keri-beach-zakynthos</loc>
-    <lastmod>2025-10-02</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Limni_Keriou%2C_Greece_-_panoramio.jpg/1024px-Limni_Keriou%2C_Greece_-_panoramio.jpg?20161114111454</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/76b5a590-973b-4aeb-8425-943bb85798fb/photo.jpg</image:loc>
       <image:title>Keri beach: Family Beach · Organized | Zakynthos</image:title>
       <image:caption>Keri beach Mixed sand and pebble beach in Zakynthos, Greece Calm waters with Organized beach, Family-friendly and 9 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/kleftiko-milos</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Sailing_yachts_near_the_caves_at_Kleftiko_on_Milos_Island%2C_Greece.jpg/1024px-Sailing_yachts_near_the_caves_at_Kleftiko_on_Milos_Island%2C_Greece.jpg?20210317194940</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/21c47887-cb57-485a-b173-f646e4420ca2/photo.jpg</image:loc>
       <image:title>Kleftiko: Calm Water · Snorkeling | Milos</image:title>
       <image:caption>Kleftiko Beach in Milos, Greece Calm waters and 4 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/kolymbithres-beach-paros</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Naousa_beach.jpg/1024px-Naousa_beach.jpg?20090315180929</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/229e43f7-632f-4a33-83bb-5e4d6c29d8c4/photo.jpg</image:loc>
       <image:title>Kolymbithres beach: Family Beach · Organized | Paros</image:title>
       <image:caption>Kolymbithres beach Mixed sand and pebble beach in Paros, Greece Calm waters with Organized beach, Family-friendly and 11 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/kontogialos-beach-corfu</loc>
-    <lastmod>2025-10-01</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Aerial_view_of_Kontogialos_Beach_in_Corfu%2C_Greece_%2853697814281%29.jpg/1024px-Aerial_view_of_Kontogialos_Beach_in_Corfu%2C_Greece_%2853697814281%29.jpg?20240504155553</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/6e67dc58-dfcf-4d57-8b65-1de9f2a5accf/photo.jpg</image:loc>
       <image:title>Kontogialos beach: Family Beach · Organized | Corfu</image:title>
       <image:caption>Kontogialos beach Sandy beach in Corfu, Greece Moderate waves with Organized beach, Family-friendly and 9 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/korakonisi-zakynthos</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/e/e0/%CE%9A%CE%BF%CF%81%CE%B1%CE%BA%CE%BF%CE%BD%CE%B7%CF%83%CE%B9.jpg</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/ea924948-2d6f-444f-9edc-ea6bc59b9257/photo.jpg</image:loc>
       <image:title>Korakonisi: Snorkeling | Zakynthos</image:title>
       <image:caption>Korakonisi Beach in Zakynthos, Greece Moderate waves and 4 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/kryopigi-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Kriopigi-Beach_-_panoramio.jpg/1024px-Kriopigi-Beach_-_panoramio.jpg?20160110093448</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/a2fd0973-507a-45cd-899d-18266a00627b/photo.jpg</image:loc>
       <image:title>Kryopigi beach: Blue Flag · Family Beach | Chalkidiki</image:title>
       <image:caption>Kryopigi beach Sandy beach in Chalkidiki, Greece Calm waters with Blue Flag certified, Organized beach, Family-friendly and 7 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/laganas-beach-zakynthos</loc>
-    <lastmod>2025-10-02</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Laganas_Beach%2C_Zakyntos%2C_Greece_-_panoramio.jpg/1024px-Laganas_Beach%2C_Zakyntos%2C_Greece_-_panoramio.jpg?20160819071625</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/a6d9a0ac-f804-4cf2-9f90-08f6f9fc5629/photo.jpg</image:loc>
       <image:title>Laganas beach: Family Beach · Organized | Zakynthos</image:title>
       <image:caption>Laganas beach Sandy beach in Zakynthos, Greece Calm waters with Organized beach, Family-friendly and 11 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/lageri-beach-paros</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Cyclades_Paros_Lageri_Plage_04092014_-_panoramio_%281%29.jpg/1024px-Cyclades_Paros_Lageri_Plage_04092014_-_panoramio_%281%29.jpg?20170512074517</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/658b64b1-889d-4432-a254-46f8b53bb52f/photo.jpg</image:loc>
       <image:title>Lageri beach: Sandy Beach · Calm Water | Paros</image:title>
       <image:caption>Lageri beach Sandy beach in Paros, Greece Calm waters</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/lagomandra-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Lagomandra%2C_Sitonia%2C_Gr%C4%8Dka_-_panoramio_%285%29.jpg/1024px-Lagomandra%2C_Sitonia%2C_Gr%C4%8Dka_-_panoramio_%285%29.jpg?20170505165315</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d01512b9-08e8-4f3e-b196-e953671cbab8/photo.jpg</image:loc>
       <image:title>Lagomandra beach: Blue Flag · Family Beach | Chalkidiki</image:title>
       <image:caption>Lagomandra beach Sandy beach in Chalkidiki, Greece Calm waters with Blue Flag certified, Organized beach, Family-friendly and 11 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/lia-beach-mykonos</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Mykonos_Lia_01.jpg/1024px-Mykonos_Lia_01.jpg?20140829143027</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/f2525b7f-b454-4398-9354-6ffb348b2565/photo.jpg</image:loc>
       <image:title>Lia beach: Sandy Beach · Calm Water | Mykonos</image:title>
       <image:caption>Lia beach Sandy beach in Mykonos, Greece Calm waters with Organized beach and 8 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/liapades-beach-corfu</loc>
-    <lastmod>2025-10-01</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/Liapades_Beach_in_Corfu_%282%29.jpg/1024px-Liapades_Beach_in_Corfu_%282%29.jpg?20211130194055</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/df2e38c3-747b-4930-9a3a-4372b19af68d/photo.jpg</image:loc>
       <image:title>Liapades beach: Organized · Beach Bar | Corfu</image:title>
       <image:caption>Liapades beach Pebble beach in Corfu, Greece Moderate waves with Organized beach and 10 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/lissos-beach-crete</loc>
-    <lastmod>2025-09-26</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/2/25/Lisos.jpg?20071125191432</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/c1fbf709-50b2-4b35-bedb-9b59992dbff6/photo.jpg</image:loc>
       <image:title>Lissos Beach: Calm Water | Crete</image:title>
       <image:caption>Lissos Beach Mixed sand and pebble beach in Crete, Greece Calm waters and 3 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/loggas-beach-corfu</loc>
-    <lastmod>2025-10-01</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Peroulades_490_81%2C_Greece_-_panoramio_%286%29.jpg/1024px-Peroulades_490_81%2C_Greece_-_panoramio_%286%29.jpg?20170412104707</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/3b86d296-f027-470c-8afe-5d4e94d7c2e7/photo.jpg</image:loc>
       <image:title>Loggas beach: Taverna | Corfu</image:title>
       <image:caption>Loggas beach Mixed sand and pebble beach in Corfu, Greece and 2 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/logora-beach-paros</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Cyclades_Paros_Marpissa_Logora_Beach_06092014_-_panoramio.jpg/1024px-Cyclades_Paros_Marpissa_Logora_Beach_06092014_-_panoramio.jpg?20170512133958</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/33785c60-c7fa-4366-9505-1407b2a4f765/photo.jpg</image:loc>
       <image:title>Logora beach: Blue Flag · Family Beach | Paros</image:title>
       <image:caption>Logora beach Sandy beach in Paros, Greece Calm waters with Blue Flag certified, Organized beach, Family-friendly and 9 amenities</image:caption>
     </image:image>
@@ -1436,517 +1436,517 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/marathi-beach-crete</loc>
-    <lastmod>2025-09-26</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Kato_Marathi_-_panoramio_%289%29.jpg/1024px-Kato_Marathi_-_panoramio_%289%29.jpg?20170330003245</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/adbf9219-1c5c-42ae-bfd1-96d7338f535c/photo.jpg</image:loc>
       <image:title>Marathi beach: Family Beach · Organized | Crete</image:title>
       <image:caption>Marathi beach Sandy beach in Crete, Greece Calm waters with Organized beach, Family-friendly and 11 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/marathias-beach-zakynthos</loc>
-    <lastmod>2025-10-02</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Zakynthos_May_2009_Marathias_Beach_2_-_panoramio.jpg/1024px-Zakynthos_May_2009_Marathias_Beach_2_-_panoramio.jpg?20161028083912</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/a65a5513-688d-49ca-af8e-a703773041d8/photo.jpg</image:loc>
       <image:title>Marathias beach: Calm Water · Organized | Zakynthos</image:title>
       <image:caption>Marathias beach Pebble beach in Zakynthos, Greece Calm waters with Organized beach and 5 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/marathias-beach-corfu</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Marathias_Strand.JPG/1024px-Marathias_Strand.JPG?20121115102446</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/fa33ab43-5f43-45d8-a861-f4f7b3413fda/photo.jpg</image:loc>
       <image:title>Marathias beach: Family Beach · Organized | Corfu</image:title>
       <image:caption>Marathias beach Sandy beach in Corfu, Greece Calm waters with Organized beach, Family-friendly and 9 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/marathon-beach-attica</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Marathon%2C_Greece_%281%29.jpg/1024px-Marathon%2C_Greece_%281%29.jpg?20110925000823</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/e1e8a08c-3f91-4f4a-9a33-d98f444a6a23/photo.jpg</image:loc>
       <image:title>Marathon beach: Family Beach · Organized | Attica</image:title>
       <image:caption>Marathon beach Sandy beach in Attica, Greece Calm waters with Organized beach, Lifeguard on duty, Family-friendly and 11 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada/megali-petra-beach-lefkada</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/85.Plaja_Megali_Petra_%28Piatra_Mare%29_-_panoramio.jpg/1024px-85.Plaja_Megali_Petra_%28Piatra_Mare%29_-_panoramio.jpg?20170108153442</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d5a684eb-9a54-4350-8b34-2cc8c9ae34d7/photo.jpg</image:loc>
       <image:title>Megali Petra beach: Organized · Sunbeds | Lefkada</image:title>
       <image:caption>Megali Petra beach Mixed sand and pebble beach in Lefkada, Greece with Organized beach and 4 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/santorini/mesa-pigadia-beach-santorini</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Mesa_Pigadia_01.jpg/1024px-Mesa_Pigadia_01.jpg?20140126152114</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/ddb56f77-2736-425f-88de-b71f588f497c/photo.jpg</image:loc>
       <image:title>Mesa Pigadia beach: Family Beach · Organized | Santorini</image:title>
       <image:caption>Mesa Pigadia beach Mixed sand and pebble beach in Santorini, Greece Calm waters with Organized beach, Family-friendly and 8 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/messongi-beach-corfu</loc>
-    <lastmod>2025-10-01</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/1_1_paralia_messongi_on_july_2025_t_z.jpg/512px-1_1_paralia_messongi_on_july_2025_t_z.jpg?20250926172747</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/4a058503-f10a-47ba-bf94-98c84d3c4680/photo.jpg</image:loc>
       <image:title>Messongi beach: Family Beach · Organized | Corfu</image:title>
       <image:caption>Messongi beach Mixed sand and pebble beach in Corfu, Greece Calm waters with Organized beach, Family-friendly and 10 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/metamorfosi-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Metamorfosi._Beach._-_panoramio.jpg/1024px-Metamorfosi._Beach._-_panoramio.jpg?20161203191234</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/ccae44d1-8f47-4949-8538-f1d282259c42/photo.jpg</image:loc>
       <image:title>Metamorfosi beach: Blue Flag · Family Beach | Chalkidiki</image:title>
       <image:caption>Metamorfosi beach Sandy beach in Chalkidiki, Greece Calm waters with Blue Flag certified, Organized beach, Family-friendly and 11 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/mikri-vigla-naxos</loc>
-    <lastmod>2025-10-13</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/b/bb/Naxos_Mikri_Vigla_2025-06-19_0857.jpg</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/2a346125-f027-472d-ac1e-9ae7507276e6/photo.jpg</image:loc>
       <image:title>Mikri Vigla: Sandy Beach · Organized | Naxos</image:title>
       <image:caption>Mikri Vigla Sandy beach in Naxos, Greece Moderate waves with Organized beach and 8 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/mizithres-beach-zakynthos</loc>
-    <lastmod>2025-09-26</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Mizithres_Rocks%2C_Keri%2C_Zakynthos%2C_Greece_02.jpg/2048px-Mizithres_Rocks%2C_Keri%2C_Zakynthos%2C_Greece_02.jpg?20121225150514</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/73d42d48-c552-44bb-b566-05a0d8d43326/photo.jpg</image:loc>
       <image:title>Mizithres Beach: Sandy Beach | Zakynthos</image:title>
       <image:caption>Mizithres Beach Sandy beach in Zakynthos, Greece Moderate waves and 3 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/molos-beach-paros</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Cyclades_Paros_Molos_Beach_Vue_Naxos_-_panoramio.jpg/1024px-Cyclades_Paros_Molos_Beach_Vue_Naxos_-_panoramio.jpg?20170512133918</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/cd204ec1-f631-4256-b2d6-1a882f3bb256/photo.jpg</image:loc>
       <image:title>Molos beach: Sandy Beach · Calm Water | Paros</image:title>
       <image:caption>Molos beach Sandy beach in Paros, Greece Calm waters and 3 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/mon-repos-beach-corfu</loc>
-    <lastmod>2025-10-01</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Korfu%2C_mo%C5%99sk%C3%BD_b%C5%99eh_u_Mon_Repos.jpg/1024px-Korfu%2C_mo%C5%99sk%C3%BD_b%C5%99eh_u_Mon_Repos.jpg?20250620070359</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/e7feb3b0-41e3-4f79-b0b9-6d9114dd3803/photo.jpg</image:loc>
       <image:title>Mon Repos beach: Family Beach · Organized | Corfu</image:title>
       <image:caption>Mon Repos beach Mixed sand and pebble beach in Corfu, Greece Calm waters with Organized beach, Family-friendly and 7 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/monastiri-beach-paros</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Cyclades_Paros_Agios_Ioanis_Plage_04092014_-_panoramio.jpg/1024px-Cyclades_Paros_Agios_Ioanis_Plage_04092014_-_panoramio.jpg?20170512074356</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/92d01f38-b6c2-4243-83e6-65c9352508dd/photo.jpg</image:loc>
       <image:title>Monastiri beach: Family Beach · Organized | Paros</image:title>
       <image:caption>Monastiri beach Sandy beach in Paros, Greece Calm waters with Organized beach, Family-friendly and 9 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/moraitika-beach-corfu</loc>
-    <lastmod>2025-10-01</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Beachlife_Moraitika.JPG/1024px-Beachlife_Moraitika.JPG?20121114215022</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/407d2017-23ab-451d-9bfa-3e81f555053c/photo.jpg</image:loc>
       <image:title>Moraitika beach: Family Beach · Organized | Corfu</image:title>
       <image:caption>Moraitika beach Mixed sand and pebble beach in Corfu, Greece Calm waters with Organized beach, Family-friendly and 11 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada/mylos-beach-lefkada</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/66.Agios_Nikitas_-_Plaja_Mylos_vazuta_de_sus_-_panoramio.jpg/1024px-66.Agios_Nikitas_-_Plaja_Mylos_vazuta_de_sus_-_panoramio.jpg?20170108152800</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/16771493-ea8f-4899-84b1-cddf416d6a72/photo.jpg</image:loc>
       <image:title>Mylos beach | Lefkada</image:title>
       <image:caption>Mylos beach Mixed sand and pebble beach in Lefkada, Greece and 3 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/myrtiotissa-beach-corfu</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Corfu_September_2009_-_Myrtiotissa_-_panoramio_-_maczopikczu_%282%29.jpg/1024px-Corfu_September_2009_-_Myrtiotissa_-_panoramio_-_maczopikczu_%282%29.jpg?20161107205446</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/fb7d4233-175f-4b12-ae13-ea3787a6c722/photo.jpg</image:loc>
       <image:title>Myrtiotissa beach: Sandy Beach · Calm Water | Corfu</image:title>
       <image:caption>Myrtiotissa beach Sandy beach in Corfu, Greece Calm waters and 5 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/mytakas-beach-milos</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Mytakas_beach%2C_Milos%2C_152894q.jpg/1024px-Mytakas_beach%2C_Milos%2C_152894q.jpg?20151029191406</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/3d0e0042-9d9c-4cb1-9059-77e1b55f6f80/photo.jpg</image:loc>
       <image:title>Mytakas beach: Sandy Beach · Calm Water | Milos</image:title>
       <image:caption>Mytakas beach Sandy beach in Milos, Greece Calm waters with Organized beach and 4 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/navagio-shipwreck-beach-zakynthos</loc>
-    <lastmod>2025-10-01</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Navagio_Beach._View_of_the_Shipwreck_Beach.jpg/1024px-Navagio_Beach._View_of_the_Shipwreck_Beach.jpg?20240411095050</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/7bb25652-3d03-4329-a984-9a92f62b4649/photo.jpg</image:loc>
       <image:title>Navagio (Shipwreck beach) | Zakynthos</image:title>
       <image:caption>Navagio (Shipwreck beach) Mixed sand and pebble beach in Zakynthos, Greece Moderate waves and 3 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/nea-fokea-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Nea_Fokea_Strand.jpg/1024px-Nea_Fokea_Strand.jpg?20121115103400</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/399a9546-957c-498e-9b29-abb4d2a6d70d/photo.jpg</image:loc>
       <image:title>Nea Fokea beach: Family Beach · Organized | Chalkidiki</image:title>
       <image:caption>Nea Fokea beach Sandy beach in Chalkidiki, Greece Calm waters with Organized beach, Lifeguard on duty, Family-friendly and 8 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/nea-moudania-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Nea_Moudania-001.JPG/1024px-Nea_Moudania-001.JPG?20120501170312</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/89749bd9-d4aa-4867-91e3-16cafa2aef45/photo.jpg</image:loc>
       <image:title>Nea Moudania beach: Blue Flag · Family Beach | Chalkidiki</image:title>
       <image:caption>Nea Moudania beach Sandy beach in Chalkidiki, Greece Calm waters with Blue Flag certified, Organized beach, Family-friendly and 11 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/new-golden-beach-paros</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/New_golden_beach_-_panoramio_-_brunobarbato_%281%29.jpg/1024px-New_golden_beach_-_panoramio_-_brunobarbato_%281%29.jpg?20160310051155</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/24f03ef7-a733-47bd-a4f9-aeb3dd2eb279/photo.jpg</image:loc>
       <image:title>New Golden beach: Family Beach · Good for Surfing | Paros</image:title>
       <image:caption>New Golden beach Sandy beach in Paros, Greece Good for surfing with Organized beach, Family-friendly and 9 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada/nidri-beach-lefkada</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Nydri%2C_Lefkada_IMG_5055.jpg_-_panoramio.jpg/1024px-Nydri%2C_Lefkada_IMG_5055.jpg_-_panoramio.jpg?20170620093324</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/5e60309f-06d8-481f-aa60-a237df57b818/photo.jpg</image:loc>
       <image:title>Nidri beach: Family Beach · Organized | Lefkada</image:title>
       <image:caption>Nidri beach Mixed sand and pebble beach in Lefkada, Greece Calm waters with Organized beach, Family-friendly and 8 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada/nikiana-beach-lefkada</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/1_a_nikiana_beach_july_2024_t.jpg/1024px-1_a_nikiana_beach_july_2024_t.jpg?20240916171907</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d4eb9dbe-ac5a-4d09-85ae-e3e7c7824834/photo.jpg</image:loc>
       <image:title>Nikiana beach: Family Beach · Organized | Lefkada</image:title>
       <image:caption>Nikiana beach Mixed sand and pebble beach in Lefkada, Greece Calm waters with Organized beach, Family-friendly and 7 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/orkos-beach-naxos</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Naxos_Mikri_Vigla_2025-06-27_1577_Orkos_Kirades.jpg/1024px-Naxos_Mikri_Vigla_2025-06-27_1577_Orkos_Kirades.jpg?20250719202858</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/fc453144-20b0-4422-a578-da880b037bee/photo.jpg</image:loc>
       <image:title>Orkos beach: Sandy Beach | Naxos</image:title>
       <image:caption>Orkos beach Sandy beach in Naxos, Greece</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/ornos-mykonos</loc>
-    <lastmod>2025-10-13</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Mikonos_Spiaggia_di_Ornos_-_panoramio.jpg/2048px-Mikonos_Spiaggia_di_Ornos_-_panoramio.jpg?20170508184142</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d93b34d8-ee7b-498a-8b75-ffa1ab25f76a/photo.jpg</image:loc>
       <image:title>Ornos: Family Beach · Organized | Mykonos</image:title>
       <image:caption>Ornos Sandy beach in Mykonos, Greece Calm waters with Organized beach, Family-friendly and 6 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/orthi-ammos-beach-crete</loc>
-    <lastmod>2025-09-26</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Orthi_Ammos_3.jpg/1024px-Orthi_Ammos_3.jpg?20151218114709</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d5feb480-f032-4cca-8fac-7a4f6df9c39a/photo.jpg</image:loc>
       <image:title>Orthi Ammos beach: Calm Water | Crete</image:title>
       <image:caption>Orthi Ammos beach Mixed sand and pebble beach in Crete, Greece Calm waters</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/pahia-ammos-beach-crete</loc>
-    <lastmod>2025-09-26</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Pahia_Ammos_2012-09-13.jpg/1024px-Pahia_Ammos_2012-09-13.jpg?20121026222436</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/0565c78f-f5fe-44b8-bc58-36cef4cfb706/photo.jpg</image:loc>
       <image:title>Pahia Ammos beach: Sunbeds | Crete</image:title>
       <image:caption>Pahia Ammos beach Mixed sand and pebble beach in Crete, Greece Moderate waves and 3 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/paleochori-beach-milos</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Cyclades_Milos_Paleochori_Plage_-_panoramio_%281%29.jpg/1024px-Cyclades_Milos_Paleochori_Plage_-_panoramio_%281%29.jpg?20170512063409</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/46dcf523-7bbf-41e2-9975-38dc2d8b2c58/photo.jpg</image:loc>
       <image:title>Paleochori beach: Calm Water · Organized | Milos</image:title>
       <image:caption>Paleochori beach Mixed sand and pebble beach in Milos, Greece Calm waters with Organized beach and 9 amenities</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://beachesofgreece.com/mykonos/panormos-beach-mykonos</loc>
-    <lastmod>2025-10-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Mykonos_Panormos_01.jpg/1024px-Mykonos_Panormos_01.jpg?20140820183246</image:loc>
-      <image:title>Panormos beach: Sandy Beach · Calm Water | Mykonos</image:title>
-      <image:caption>Panormos beach Sandy beach in Mykonos, Greece Calm waters and 5 amenities</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://beachesofgreece.com/naxos/panormos-beach-naxos</loc>
-    <lastmod>2025-10-06</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Panormos_SE_Naxos_119596.jpg/1024px-Panormos_SE_Naxos_119596.jpg?20140415120735</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/7a0d79c6-7b63-4319-b63e-d51588314b21/photo.jpg</image:loc>
       <image:title>Panormos beach: Family Beach | Naxos</image:title>
       <image:caption>Panormos beach Mixed sand and pebble beach in Naxos, Greece Calm waters with Family-friendly and 3 amenities</image:caption>
     </image:image>
   </url>
   <url>
-    <loc>https://beachesofgreece.com/milos/papafragas-beach-milos</loc>
-    <lastmod>2025-10-05</lastmod>
+    <loc>https://beachesofgreece.com/mykonos/panormos-beach-mykonos</loc>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Papafragas_Beach_between_cliffs_on_Milos_Island%2C_Greece.jpg/1024px-Papafragas_Beach_between_cliffs_on_Milos_Island%2C_Greece.jpg?20210317193443</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/5fd4c11a-7a05-432f-a11a-9fbcb33cfba0/photo.jpg</image:loc>
+      <image:title>Panormos beach: Sandy Beach · Calm Water | Mykonos</image:title>
+      <image:caption>Panormos beach Sandy beach in Mykonos, Greece Calm waters and 5 amenities</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://beachesofgreece.com/milos/papafragas-beach-milos</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/f1b21c22-a4e8-4428-9c4e-557853319b84/photo.jpg</image:loc>
       <image:title>Papafragas beach: Sandy Beach · Snorkeling | Milos</image:title>
       <image:caption>Papafragas beach Sandy beach in Milos, Greece and 3 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/papikinou-beach-milos</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Cyclades_Milos_Papikinou_Plage_Taverne_O%5E_Hamos_-_panoramio.jpg/1024px-Cyclades_Milos_Papikinou_Plage_Taverne_O%5E_Hamos_-_panoramio.jpg?20170512063745</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/ce5f3931-96cb-405b-9545-63cfe6de62d2/photo.jpg</image:loc>
       <image:title>Papikinou beach: Family Beach · Organized | Milos</image:title>
       <image:caption>Papikinou beach Mixed sand and pebble beach in Milos, Greece Calm waters with Organized beach, Family-friendly and 6 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/paradise-beach-mykonos</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/USMC-100624-M-4784A-001.jpg/1024px-USMC-100624-M-4784A-001.jpg?20121205224651</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/e3e2e45a-1b8c-44a7-bd20-6db938165c32/photo.jpg</image:loc>
       <image:title>Paradise beach: Sandy Beach · Calm Water | Mykonos</image:title>
       <image:caption>Paradise beach Sandy beach in Mykonos, Greece Calm waters with Organized beach, Lifeguard on duty and 11 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/paramonas-beach-corfu</loc>
-    <lastmod>2025-10-15</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/GRC_%E2%80%94_Region_Ionische_Inseln_%E2%80%94_Regionalbezirk_Kerkyra_%E2%80%94_Paramonas_%28Strand%29_Mattes_2021.jpg/1024px-GRC_%E2%80%94_Region_Ionische_Inseln_%E2%80%94_Regionalbezirk_Kerkyra_%E2%80%94_Paramonas_%28Strand%29_Mattes_2021.jpg?20210924193454</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/1bc2dc49-b02e-4758-b0fa-532b5f9d31c8/photo.jpg</image:loc>
       <image:title>Paramonas beach: Organized · Sunbeds | Corfu</image:title>
       <image:caption>Paramonas beach Pebble beach in Corfu, Greece Moderate waves with Organized beach and 7 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada/pefkoulia-beach-lefkada</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Lefkas13.JPG/1024px-Lefkas13.JPG?20140617121402</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/53b0e0fc-a5d2-4ab1-960b-f8f96d01056b/photo.jpg</image:loc>
       <image:title>Pefkoulia beach: Organized · Beach Bar | Lefkada</image:title>
       <image:caption>Pefkoulia beach Mixed sand and pebble beach in Lefkada, Greece with Organized beach and 6 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/perigiali-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Perigialli_Beach.jpg/1024px-Perigialli_Beach.jpg?20110505195536</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/62a0c6b5-4345-41d5-a96c-1eb7c4279aef/photo.jpg</image:loc>
       <image:title>Perigiali beach: Calm Water · Snorkeling | Chalkidiki</image:title>
       <image:caption>Perigiali beach Mixed sand and pebble beach in Chalkidiki, Greece Calm waters and 4 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/santorini/perivolos-beach-santorini</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/By_the_Seaside_%284355217836%29.jpg/1024px-By_the_Seaside_%284355217836%29.jpg?20130327160246</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/ec6f72ce-6214-4294-9ed4-577c3aa9acc2/photo.jpg</image:loc>
       <image:title>Perivolos beach: Blue Flag · Family Beach | Santorini</image:title>
       <image:caption>Perivolos beach Mixed sand and pebble beach in Santorini, Greece Calm waters with Blue Flag certified, Organized beach, Lifeguard on duty, Family-friendly and 12 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/piperi-beach-paros</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/GR-paros-naoussa-piperi-strand.jpg/1024px-GR-paros-naoussa-piperi-strand.jpg?20121114005851</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/0a3eb2ab-3b2c-4744-92c6-a66779b323b0/photo.jpg</image:loc>
       <image:title>Piperi beach: Family Beach | Paros</image:title>
       <image:caption>Piperi beach Mixed sand and pebble beach in Paros, Greece Calm waters with Family-friendly and 3 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/piso-livadi-beach-paros</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/GR-paros-piso-livada-beach.jpg/1024px-GR-paros-piso-livada-beach.jpg?20121114010307</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/213f9cf9-9113-49e8-822f-a784f6820317/photo.jpg</image:loc>
       <image:title>Piso Livadi beach: Family Beach | Paros</image:title>
       <image:caption>Piso Livadi beach Mixed sand and pebble beach in Paros, Greece Moderate waves with Family-friendly and 4 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/plaka-beach-naxos</loc>
-    <lastmod>2025-10-13</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/2/2b/The_nudists%27_part_of_Plaka_beach%2C_Naxos_island%2C_Greece_-_panoramio.jpg</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/b66af734-fb6b-4d4f-a9ba-e0d716b6f3b0/photo.jpg</image:loc>
       <image:title>Plaka Beach: Sandy Beach · Calm Water | Naxos</image:title>
       <image:caption>Plaka Beach Sandy beach in Naxos, Greece Calm waters with Organized beach and 4 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/plakias-beach-crete</loc>
-    <lastmod>2025-10-13</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/Plakias_Beach_02.JPG/1024px-Plakias_Beach_02.JPG?20140827183542</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/1412cee5-dfc4-4da6-b2ba-26d5873a4434/photo.jpg</image:loc>
       <image:title>Plakias beach: Family Beach · Organized | Crete</image:title>
       <image:caption>Plakias beach Mixed sand and pebble beach in Crete, Greece Calm waters with Organized beach, Family-friendly and 7 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/plathiena-beach-milos</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Milos-2.jpg/1024px-Milos-2.jpg?20090321201504</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/e5be7b9f-b2da-459e-8391-a864da412a0e/photo.jpg</image:loc>
       <image:title>Plathiena beach: Family Beach · Organized | Milos</image:title>
       <image:caption>Plathiena beach Mixed sand and pebble beach in Milos, Greece Moderate waves with Organized beach, Family-friendly and 7 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/platis-gialos-mykonos</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Platis_Gialos_-_panoramio.jpg/1024px-Platis_Gialos_-_panoramio.jpg?20160226145235</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/44862029-c521-4dfd-9346-e1ff293d55b2/photo.jpg</image:loc>
       <image:title>Platis Gialos: Sandy Beach · Calm Water | Mykonos</image:title>
       <image:caption>Platis Gialos Sandy beach in Mykonos, Greece Calm waters with Organized beach, Lifeguard on duty and 7 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/pollonia-beach-milos</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Pollonia%2C_Milos%2C_152933q.jpg/1024px-Pollonia%2C_Milos%2C_152933q.jpg?20151029123308</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/bce07683-94f8-4ec7-892e-d041c4d3416e/photo.jpg</image:loc>
       <image:title>Pollonia beach: Family Beach · Organized | Milos</image:title>
       <image:caption>Pollonia beach Sandy beach in Milos, Greece Calm waters with Organized beach, Family-friendly and 9 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada/porto-katsiki-lefkada</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Lefkada_kosta.jpg/1024px-Lefkada_kosta.jpg?20080308000529</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/92c8ce37-6ccb-4807-847e-1bed0a701343/photo.jpg</image:loc>
       <image:title>Porto Katsiki: Beach Bar | Lefkada</image:title>
       <image:caption>Porto Katsiki Mixed sand and pebble beach in Lefkada, Greece Moderate waves and 5 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/porto-koufo-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Strand_von_Porto_Koufo.jpg/1024px-Strand_von_Porto_Koufo.jpg?20181001183951</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/5d9edbdc-7b71-493c-a427-63ecd7401b9a/photo.jpg</image:loc>
       <image:title>Porto Koufo beach: Sandy Beach · Calm Water | Chalkidiki</image:title>
       <image:caption>Porto Koufo beach Sandy beach in Chalkidiki, Greece Calm waters and 10 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/porto-limnionas-zakynthos</loc>
-    <lastmod>2025-09-26</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Porto_Limnionas_%2846425770262%29.jpg/2048px-Porto_Limnionas_%2846425770262%29.jpg?20190519134132</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/60bc1a43-5edc-4519-86c3-2afddba44fdf/photo.jpg</image:loc>
       <image:title>Porto Limnionas: Taverna | Zakynthos</image:title>
       <image:caption>Porto Limnionas Beach in Zakynthos, Greece Moderate waves and 5 amenities</image:caption>
     </image:image>
@@ -1964,451 +1964,451 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/porto-roxa-zakynthos</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/4/43/Zakynthos_May_2009_Porto_Roxa_3_-_panoramio.jpg</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/b6b96745-6fe0-4bf2-8705-1bca18e2646d/photo.jpg</image:loc>
       <image:title>Porto Roxa: Beach Bar | Zakynthos</image:title>
       <image:caption>Porto Roxa Beach in Zakynthos, Greece Moderate waves and 5 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/porto-timoni-beach-corfu</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Porto_timoni.jpg/1024px-Porto_timoni.jpg?20250711160147</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/bb73a552-f4a1-400b-bf80-2056966416f7/photo.jpg</image:loc>
       <image:title>Porto Timoni: Calm Water · Snorkeling | Corfu</image:title>
       <image:caption>Porto Timoni Pebble beach in Corfu, Greece Calm waters and 4 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/porto-vromi-beach-zakynthos</loc>
-    <lastmod>2025-10-02</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Porto_Vromi%2C_Maries_side%2C_Zakynthos%2C_Greece_01.jpg/1024px-Porto_Vromi%2C_Maries_side%2C_Zakynthos%2C_Greece_01.jpg?20080801112054</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/0d8635cf-eb73-4c8f-9448-710b38173c2a/photo.jpg</image:loc>
       <image:title>Porto Vromi beach: Sandy Beach · Calm Water | Zakynthos</image:title>
       <image:caption>Porto Vromi beach Sandy beach in Zakynthos, Greece Calm waters with Organized beach and 7 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/possidi-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/%D0%9F%D0%BE%D1%81%D0%B8%D0%B4%D0%B8_-_%D0%A5%D0%B0%D0%BB%D0%BA%D0%B8%D0%B4%D0%B8%D0%BA%D0%B8.jpg/1024px-%D0%9F%D0%BE%D1%81%D0%B8%D0%B4%D0%B8_-_%D0%A5%D0%B0%D0%BB%D0%BA%D0%B8%D0%B4%D0%B8%D0%BA%D0%B8.jpg?20231103161601</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/f0d9892c-5832-4188-880d-e2698dbabb7d/photo.jpg</image:loc>
       <image:title>Possidi beach: Family Beach · Organized | Chalkidiki</image:title>
       <image:caption>Possidi beach Sandy beach in Chalkidiki, Greece Calm waters with Organized beach, Lifeguard on duty, Family-friendly and 14 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/pounta-beach-paros</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Paros_pounda_-_panoramio_-_brunobarbato_%283%29.jpg/1024px-Paros_pounda_-_panoramio_-_brunobarbato_%283%29.jpg?20160322125223</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/f23be0b6-b37d-47c8-8cf8-a4277a03aafa/photo.jpg</image:loc>
       <image:title>Pounta beach: Sandy Beach · Organized | Paros</image:title>
       <image:caption>Pounta beach Sandy beach in Paros, Greece with Organized beach and 3 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/preveli-beach-crete</loc>
-    <lastmod>2025-09-26</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Preveli_Palm_Beach_Panorama_02.JPG/1024px-Preveli_Palm_Beach_Panorama_02.JPG?20141209200757</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/1a14800c-4bcd-4c9c-b4c6-dc72dddd5fcf/photo.jpg</image:loc>
       <image:title>Preveli beach: Calm Water · Beach Bar | Crete</image:title>
       <image:caption>Preveli beach Mixed sand and pebble beach in Crete, Greece Calm waters and 4 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/provatas-beach-milos</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Cyclades_Milos_Provatas_Plage_-_panoramio.jpg/1024px-Cyclades_Milos_Provatas_Plage_-_panoramio.jpg?20170512063424</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/3e1ed0d4-5aaf-45ae-94f1-582661b4aee2/photo.jpg</image:loc>
       <image:title>Provatas beach: Family Beach · Organized | Milos</image:title>
       <image:caption>Provatas beach Sandy beach in Milos, Greece Calm waters with Organized beach, Family-friendly and 7 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/psakoudia-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/%CE%A0%CE%B1%CF%81%CE%B1%CE%BB%CE%AF%CE%B1_%CE%A8%CE%B1%CE%BA%CE%BF%CF%85%CE%B4%CE%B9%CF%8E%CE%BD_-_panoramio.jpg/1024px-%CE%A0%CE%B1%CF%81%CE%B1%CE%BB%CE%AF%CE%B1_%CE%A8%CE%B1%CE%BA%CE%BF%CF%85%CE%B4%CE%B9%CF%8E%CE%BD_-_panoramio.jpg?20161209120335</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/92335ccf-dd8a-4d0e-94ce-5e7e5afc9455/photo.jpg</image:loc>
       <image:title>Psakoudia beach: Blue Flag · Family Beach | Chalkidiki</image:title>
       <image:caption>Psakoudia beach Sandy beach in Chalkidiki, Greece Calm waters with Blue Flag certified, Organized beach, Family-friendly and 10 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/psarou-beach-mykonos</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Cyclades_Mykonos_Psarou_Plage_23062013_-_panoramio.jpg/1024px-Cyclades_Mykonos_Psarou_Plage_23062013_-_panoramio.jpg?20170307145325</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/85f73e51-ad1e-45ed-911f-75abbd3b2816/photo.jpg</image:loc>
       <image:title>Psarou beach: Family Beach · Organized | Mykonos</image:title>
       <image:caption>Psarou beach Sandy beach in Mykonos, Greece Calm waters with Organized beach, Lifeguard on duty, Family-friendly and 11 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/pyrgaki-beach-naxos</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Naxos_-_Pirgaki_-_Sand_Beach_-_panoramio.jpg/1024px-Naxos_-_Pirgaki_-_Sand_Beach_-_panoramio.jpg?20161202142717</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/80205b7b-b48d-4873-9f15-135d5ed49ea1/photo.jpg</image:loc>
       <image:title>Pyrgaki beach: Family Beach | Naxos</image:title>
       <image:caption>Pyrgaki beach Sandy beach in Naxos, Greece Moderate waves with Family-friendly and 3 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/santorini/red-beach-santorini</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/d/d2/Red_Beach_-_Panorama_-_Santorini_-_Grecia_-_agosto_2018.jpg</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/6c920d1f-f9cc-475f-982b-c70bf1b8c0af/photo.jpg</image:loc>
       <image:title>Red Beach: Sandy Beach · Calm Water | Santorini</image:title>
       <image:caption>Red Beach Sandy beach in Santorini, Greece Calm waters with Organized beach and 3 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/roda-beach-corfu</loc>
-    <lastmod>2025-10-01</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Corfu_Roda_R01.jpg/1024px-Corfu_Roda_R01.jpg?20130123202225</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/eb8a082a-3ba7-43e0-bb19-34169a11ea07/photo.jpg</image:loc>
       <image:title>Roda beach: Family Beach · Organized | Corfu</image:title>
       <image:caption>Roda beach Mixed sand and pebble beach in Corfu, Greece Calm waters with Organized beach, Family-friendly and 10 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/rovinia-beach-corfu</loc>
-    <lastmod>2025-09-26</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Corfu_September_2009_-_little_twin_beach_near_Liapades_-_panoramio.jpg/1024px-Corfu_September_2009_-_little_twin_beach_near_Liapades_-_panoramio.jpg?20161107205002</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/8d98aa88-31f9-4625-aefd-a0c6bebaa160/photo.jpg</image:loc>
       <image:title>Rovinia beach: Calm Water · Snorkeling | Corfu</image:title>
       <image:caption>Rovinia beach Mixed sand and pebble beach in Corfu, Greece Calm waters and 4 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/saint-nicholas-beach-zakynthos</loc>
-    <lastmod>2025-10-01</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/St._Nikolaus_Panorama_-_panoramio.jpg/1024px-St._Nikolaus_Panorama_-_panoramio.jpg?20170601140823</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/69789407-9736-45bd-8bde-e4af6215840e/photo.jpg</image:loc>
       <image:title>Saint Nicholas beach: Family Beach · Organized | Zakynthos</image:title>
       <image:caption>Saint Nicholas beach Sandy beach in Zakynthos, Greece Calm waters with Organized beach, Family-friendly and 10 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/sani-beach-chalkidiki</loc>
-    <lastmod>2025-10-13</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Sani_3-Sani_Club_02.jpg/1024px-Sani_3-Sani_Club_02.jpg?20230516152104</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/e05a4b31-4f85-4776-a0ab-4d776204b163/photo.jpg</image:loc>
       <image:title>Sani beach: Family Beach · Organized | Chalkidiki</image:title>
       <image:caption>Sani beach Sandy beach in Chalkidiki, Greece Calm waters with Organized beach, Lifeguard on duty, Family-friendly and 16 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/santa-maria-beach-paros</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Spiaggia_di_santa_maria_-_panoramio_-_brunobarbato.jpg/1024px-Spiaggia_di_santa_maria_-_panoramio_-_brunobarbato.jpg?20160310050905</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/2b198d56-b412-449e-9e86-174f34b1256a/photo.jpg</image:loc>
       <image:title>Santa Maria beach: Family Beach · Organized | Paros</image:title>
       <image:caption>Santa Maria beach Sandy beach in Paros, Greece Calm waters with Organized beach, Family-friendly and 10 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/sarakiniko-beach-milos</loc>
-    <lastmod>2025-10-04</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Sarakiniko_Beach_on_Milos_Island%2C_Greece_with_a_view_of_the_Aegean_Sea.jpg/1024px-Sarakiniko_Beach_on_Milos_Island%2C_Greece_with_a_view_of_the_Aegean_Sea.jpg?20210317192745</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/6fee82ef-0507-477e-93b3-f94c9cfe6578/photo.jpg</image:loc>
       <image:title>Sarakiniko beach: Calm Water · Snorkeling | Milos</image:title>
       <image:caption>Sarakiniko beach Beach in Milos, Greece Calm waters and 3 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/sarti-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Sarti_630_72%2C_Greece_-_panoramio_%281%29.jpg/1024px-Sarti_630_72%2C_Greece_-_panoramio_%281%29.jpg?20170508165722</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/4afc1100-e0c5-4552-8a9c-7992dfb5f613/photo.jpg</image:loc>
       <image:title>Sarti beach: Blue Flag · Family Beach | Chalkidiki</image:title>
       <image:caption>Sarti beach Sandy beach in Chalkidiki, Greece Calm waters with Blue Flag certified, Organized beach, Lifeguard on duty, Family-friendly and 12 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/sidari-beach-corfu</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Unnamed_Road%2C_Sidari_490_81%2C_Greece_-_panoramio_%288%29.jpg/1024px-Unnamed_Road%2C_Sidari_490_81%2C_Greece_-_panoramio_%288%29.jpg?20170521230146</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/c8dfe4ef-585b-451b-ab09-44f982cd468f/photo.jpg</image:loc>
       <image:title>Sidari beach: Family Beach · Organized | Corfu</image:title>
       <image:caption>Sidari beach Sandy beach in Corfu, Greece Calm waters with Organized beach, Lifeguard on duty, Family-friendly and 11 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/sougia-beach-crete</loc>
-    <lastmod>2025-09-26</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Sougia%2C_von_Westen_gesehen.jpg/1024px-Sougia%2C_von_Westen_gesehen.jpg?20241209150805</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/a4f7d29f-d98f-431b-8d0b-8ac58ca6df0d/photo.jpg</image:loc>
       <image:title>Sougia Beach: Family Beach · Organized | Crete</image:title>
       <image:caption>Sougia Beach Mixed sand and pebble beach in Crete, Greece Calm waters with Organized beach, Lifeguard on duty, Family-friendly and 5 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/spathies-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/1/13/Spathies_beach_in_Nikiti.jpg?20120531233401</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/7c10bb0c-0d50-4b9b-9f99-ac6efe3e4e3e/photo.jpg</image:loc>
       <image:title>Spathies beach: Sandy Beach · Calm Water | Chalkidiki</image:title>
       <image:caption>Spathies beach Sandy beach in Chalkidiki, Greece Calm waters and 4 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/stelida-beach-naxos</loc>
-    <lastmod>2025-10-06</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Stelida%2C_Naxos_-_panoramio.jpg/1024px-Stelida%2C_Naxos_-_panoramio.jpg?20161130112647</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/107626e7-6168-4f32-ba9f-949b07629328/photo.jpg</image:loc>
       <image:title>Stelida beach: Organized · Sunbeds | Naxos</image:title>
       <image:caption>Stelida beach Mixed sand and pebble beach in Naxos, Greece Moderate waves with Organized beach and 2 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/super-paradise-beach-mykonos</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Cyclades_Mykonos_Super_Paradise_Plage_23062013_-_panoramio.jpg/1024px-Cyclades_Mykonos_Super_Paradise_Plage_23062013_-_panoramio.jpg?20170307145645</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/982a651a-09c0-4f51-9a08-71ab4681be95/photo.jpg</image:loc>
       <image:title>Super Paradise beach: Sandy Beach · Calm Water | Mykonos</image:title>
       <image:caption>Super Paradise beach Sandy beach in Mykonos, Greece Calm waters with Organized beach, Lifeguard on duty and 11 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/toroni-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Toroni%2C_Sitonia%2C_Gr%C4%8Dka_-_panoramio_%286%29.jpg/1024px-Toroni%2C_Sitonia%2C_Gr%C4%8Dka_-_panoramio_%286%29.jpg?20170505165345</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/ed372ffa-b5be-4d28-8fd4-c19733789711/photo.jpg</image:loc>
       <image:title>Toroni beach: Blue Flag · Family Beach | Chalkidiki</image:title>
       <image:caption>Toroni beach Sandy beach in Chalkidiki, Greece Calm waters with Blue Flag certified, Organized beach, Family-friendly and 8 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/tripiti-beach-paros</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Cyclades_Paros_Tripiti_Beach_06092014_-_panoramio.jpg/1024px-Cyclades_Paros_Tripiti_Beach_06092014_-_panoramio.jpg?20170512134008</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/b297bcc3-f2e7-414b-9d89-7659a5ceba1a/photo.jpg</image:loc>
       <image:title>Tripiti beach: Calm Water | Paros</image:title>
       <image:caption>Tripiti beach Mixed sand and pebble beach in Paros, Greece Calm waters</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/tsigrado-beach-milos</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Cliffs_surrounding_Tsigrado_Beach_on_Milos_Island%2C_Greece.jpg/1024px-Cliffs_surrounding_Tsigrado_Beach_on_Milos_Island%2C_Greece.jpg?20210317193303</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/cff6922f-e51c-418c-b930-14de0d9d5218/photo.jpg</image:loc>
       <image:title>Tsigrado beach: Calm Water · Snorkeling | Milos</image:title>
       <image:caption>Tsigrado beach Mixed sand and pebble beach in Milos, Greece Calm waters and 4 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/tsilivi-beach-zakynthos</loc>
-    <lastmod>2025-10-02</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Tsilivi_Beach_%2C_Zakinthos_-_panoramio.jpg/1024px-Tsilivi_Beach_%2C_Zakinthos_-_panoramio.jpg?20170416005859</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/677c9373-41eb-443d-bd03-87d3d7f2db9c/photo.jpg</image:loc>
       <image:title>Tsilivi beach: Blue Flag · Family Beach | Zakynthos</image:title>
       <image:caption>Tsilivi beach Sandy beach in Zakynthos, Greece Calm waters with Blue Flag certified, Organized beach, Family-friendly and 10 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/vani-beach-milos</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Cape_Vani%2C_Milos%2C_15M6073.jpg/1024px-Cape_Vani%2C_Milos%2C_15M6073.jpg?20151102133906</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/273645bb-be11-476e-b2b9-e5ddd04a107e/photo.jpg</image:loc>
       <image:title>Vani beach | Milos</image:title>
       <image:caption>Vani beach Pebble beach in Milos, Greece and 3 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/varkiza-beach-attica</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/VARKIZA_0018.JPG/1024px-VARKIZA_0018.JPG?20071219173944</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/9d959d5f-c1cb-4b83-b46a-1193083a192f/photo.jpg</image:loc>
       <image:title>Varkiza beach: Blue Flag · Family Beach | Attica</image:title>
       <image:caption>Varkiza beach Mixed sand and pebble beach in Attica, Greece Calm waters with Blue Flag certified, Organized beach, Lifeguard on duty, Family-friendly and 11 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada/vasiliki-beach-lefkada</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Beach_in_Vasiliki_Lefkada.jpg/1024px-Beach_in_Vasiliki_Lefkada.jpg?20240103204353</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/29f275e6-d911-4ebb-8089-280b57befe69/photo.jpg</image:loc>
       <image:title>Vasiliki beach: Family Beach · Organized | Lefkada</image:title>
       <image:caption>Vasiliki beach Mixed sand and pebble beach in Lefkada, Greece Moderate waves with Organized beach, Family-friendly and 8 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/santorini/vlychada-beach-santorini</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/6/67/Vlychada_Strand_05.jpg</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/35ca2940-c664-4b68-a079-3c2f93847318/photo.jpg</image:loc>
       <image:title>Vlychada Beach: Sandy Beach · Organized | Santorini</image:title>
       <image:caption>Vlychada Beach Sandy beach in Santorini, Greece Moderate waves with Organized beach and 4 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/voula-beach-attica</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Voula_-_panoramio_%286%29.jpg/1024px-Voula_-_panoramio_%286%29.jpg?20170410201335</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/1f9f7b59-6434-4550-b284-c3db56da1c46/photo.jpg</image:loc>
       <image:title>Voula beach: Blue Flag · Family Beach | Attica</image:title>
       <image:caption>Voula beach Sandy beach in Attica, Greece Calm waters with Blue Flag certified, Organized beach, Lifeguard on duty, Family-friendly and 11 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/akti-vouliagmenis-attica</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Vouliagmeni_-_panoramio_%2810%29.jpg/1024px-Vouliagmeni_-_panoramio_%2810%29.jpg?20170410033610</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/095c15ab-dd37-4768-9998-e3eb3eed28bf/photo.jpg</image:loc>
       <image:title>Vouliagmeni beach: Blue Flag · Family Beach | Attica</image:title>
       <image:caption>Vouliagmeni beach Sandy beach in Attica, Greece Calm waters with Blue Flag certified, Organized beach, Lifeguard on duty, Family-friendly and 8 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/lake-vouliagmeni-attica</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Vouliagmenis_lake_5.JPG/1024px-Vouliagmenis_lake_5.JPG?20140512135120</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/61666d33-affa-4e6e-a449-b5b259b1393e/photo.jpg</image:loc>
       <image:title>Vouliagmeni Lake: Family Beach · Organized | Attica</image:title>
       <image:caption>Vouliagmeni Lake Beach in Attica, Greece Calm waters with Organized beach, Lifeguard on duty, Family-friendly and 10 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/vourvourou-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Vourvourou_beach_sithonia_01.jpg/1024px-Vourvourou_beach_sithonia_01.jpg?20060328121328</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/a2988c01-2060-4365-944a-76e3c4d9804e/photo.jpg</image:loc>
       <image:title>Vourvourou beach: Family Beach · Organized | Chalkidiki</image:title>
       <image:caption>Vourvourou beach Sandy beach in Chalkidiki, Greece Calm waters with Organized beach, Family-friendly and 12 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/voutakos-beach</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2026-02-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/2/2a/Cyclades_Paros_Voutakos_Beach_-_panoramio_%281%29.jpg</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beaches/beaches/voutakos-beach/cover.jpg</image:loc>
       <image:title>Voutakos Beach: Calm Water | Paros</image:title>
       <image:caption>Voutakos Beach Beach in Paros, Greece Calm waters</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/vravrona-beach-attica</loc>
-    <lastmod>2025-09-30</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Vravrona_Beach.jpg/512px-Vravrona_Beach.jpg?20140523115742</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d8abec37-1a7e-4ec2-8827-8ee19147ea27/photo.jpg</image:loc>
       <image:title>Vravrona beach: Calm Water · Taverna | Attica</image:title>
       <image:caption>Vravrona beach Mixed sand and pebble beach in Attica, Greece Calm waters and 5 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/santorini/white-beach-santorini</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/4/46/AspriParalia.jpg</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/87ba02ac-b17f-4302-a52f-937a37b3c441/photo.jpg</image:loc>
       <image:title>White Beach | Santorini</image:title>
       <image:caption>White Beach Beach in Santorini, Greece Moderate waves</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/xifara-beach-paros</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/%CE%9E%CE%B9%CF%86%CE%AC%CF%81%CE%B1_2.jpg/1024px-%CE%9E%CE%B9%CF%86%CE%AC%CF%81%CE%B1_2.jpg?20170510225406</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/5d82a902-7e73-48de-888e-144565b74a98/photo.jpg</image:loc>
       <image:title>Xifara beach: Snorkeling | Paros</image:title>
       <image:caption>Xifara beach Mixed sand and pebble beach in Paros, Greece Moderate waves and 1 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/xigia-sulfur-beach-zakynthos</loc>
-    <lastmod>2025-10-02</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Xigia_sulfur_beach.jpg/1024px-Xigia_sulfur_beach.jpg?20250830080752</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/15377bd1-cb8f-44ea-86c3-ad86ed65e1e2/photo.jpg</image:loc>
       <image:title>Xigia Sulfur beach: Organized · Taverna | Zakynthos</image:title>
       <image:caption>Xigia Sulfur beach Mixed sand and pebble beach in Zakynthos, Greece Moderate waves with Organized beach and 6 amenities</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/zografou-beach-chalkidiki</loc>
-    <lastmod>2025-09-29</lastmod>
+    <lastmod>2026-03-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
-      <image:loc>https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Zografou_Beach%2C_Sithonia%2C_Chalkidiki%2C_Greece_03.jpg/1024px-Zografou_Beach%2C_Sithonia%2C_Chalkidiki%2C_Greece_03.jpg?20080513150131</image:loc>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/25aa0d75-f420-4e25-9645-2400e6c8d4ec/photo.jpg</image:loc>
       <image:title>Zografou beach: Calm Water · Taverna | Chalkidiki</image:title>
       <image:caption>Zografou beach Mixed sand and pebble beach in Chalkidiki, Greece Calm waters and 7 amenities</image:caption>
     </image:image>
