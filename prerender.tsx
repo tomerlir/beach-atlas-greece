@@ -87,14 +87,20 @@ async function loadPrerenderData(): Promise<PrerenderData | null> {
 const SITE_URL = "https://beachesofgreece.com";
 
 /**
- * Build a QueryClient pre-seeded with the data each route's components will
- * read via useQuery. Keys MUST match what page components use in App code.
+ * Build a QueryClient pre-seeded with ONLY the data the requested route renders.
+ *
+ * Why route-aware: seeding the global ["beaches"] (~280KB inlined JSON) for
+ * pages that don't render the full grid (e.g. /about, /faq, beach detail,
+ * area pages) wastes bytes on every page. We narrow per-route so static pages
+ * carry no data and per-area/per-beach pages only carry their own slice.
+ *
+ * Keys MUST match what page components use via useQuery — see Index.tsx,
+ * Map.tsx, Area.tsx, Areas.tsx, BeachDetail.tsx, useAreas.ts.
  */
 function buildSeededQueryClient(url: string, data: PrerenderData): QueryClient {
   const client = new QueryClient({
     defaultOptions: {
       queries: {
-        // During SSR we never want refetch behavior; we just render with seeded data.
         staleTime: Infinity,
         retry: false,
         gcTime: Infinity,
@@ -102,12 +108,22 @@ function buildSeededQueryClient(url: string, data: PrerenderData): QueryClient {
     },
   });
 
-  // Global queries (Index, Map, Areas)
-  client.setQueryData(["beaches"], data.allBeaches);
-  client.setQueryData(["areas"], data.allAreas);
-  client.setQueryData(["areas-with-beach-count"], data.allAreas);
+  // Routes that render the full beaches grid client-side (need ["beaches"]).
+  // Index uses the full set for filtering/sorting/pagination; Map plots all markers.
+  const NEEDS_ALL_BEACHES = url === "/" || url === "/map";
 
-  // Per-area: ["beaches", area.id]
+  // Routes that render the area listing page (need ["areas-with-beach-count"]).
+  const NEEDS_AREAS_LIST = url === "/areas";
+
+  if (NEEDS_ALL_BEACHES) {
+    client.setQueryData(["beaches"], data.allBeaches);
+  }
+
+  if (NEEDS_AREAS_LIST) {
+    client.setQueryData(["areas-with-beach-count"], data.allAreas);
+  }
+
+  // Area detail page: ["beaches", area.id] + area lookup.
   const areaData = data.areaByPath[url];
   if (areaData) {
     const areaBeaches = data.beachesByAreaId[areaData.id] || [];
@@ -116,17 +132,17 @@ function buildSeededQueryClient(url: string, data: PrerenderData): QueryClient {
     client.setQueryData(["area-by-slug", areaData.slug], areaData);
   }
 
-  // Per-beach: ["beach", beachSlug]
+  // Beach detail page: ["beach", slug] + parent area context.
   const beachData = data.beachByPath[url];
   if (beachData) {
     client.setQueryData(["beach", beachData.slug], beachData);
-    // BeachDetail also queries area context
     const parentArea = data.allAreas.find((a) => a.id === beachData.area_id);
     if (parentArea) {
       client.setQueryData(["area-by-slug", parentArea.slug], parentArea);
     }
   }
 
+  // Static pages (/about, /faq, /guide, /privacy, /ontology, /404) seed nothing.
   return client;
 }
 
@@ -204,21 +220,32 @@ function buildHeadElements(
     } else if (url === "/ontology") {
       title = "Beach Ontology | Beaches of Greece";
       description = "How we classify and describe Greek beaches.";
+    } else if (url === "/404") {
+      title = "Page Not Found | Beaches of Greece";
+      description = "The page you're looking for could not be found.";
     }
   }
 
   const canonicalHref = url === "/" ? SITE_URL : `${SITE_URL}${url}`;
+  const isNotFoundPage = url === "/404";
 
   elements.add({ type: "meta", props: { name: "description", content: description } });
   elements.add({ type: "meta", props: { property: "og:title", content: title } });
   elements.add({ type: "meta", props: { property: "og:description", content: description } });
-  elements.add({ type: "meta", props: { property: "og:url", content: canonicalHref } });
   elements.add({ type: "meta", props: { property: "og:type", content: "website" } });
   elements.add({ type: "meta", props: { property: "og:site_name", content: "Beaches of Greece" } });
   elements.add({ type: "meta", props: { name: "twitter:card", content: "summary_large_image" } });
   elements.add({ type: "meta", props: { name: "twitter:title", content: title } });
   elements.add({ type: "meta", props: { name: "twitter:description", content: description } });
-  elements.add({ type: "link", props: { rel: "canonical", href: canonicalHref } });
+
+  if (isNotFoundPage) {
+    // Don't emit canonical or og:url on the 404 shell — it's served for
+    // many different unknown URLs. noindex prevents the 404 from being indexed.
+    elements.add({ type: "meta", props: { name: "robots", content: "noindex" } });
+  } else {
+    elements.add({ type: "meta", props: { property: "og:url", content: canonicalHref } });
+    elements.add({ type: "link", props: { rel: "canonical", href: canonicalHref } });
+  }
 
   if (jsonLdData) {
     elements.add({

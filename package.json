@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && npm run postbuild:404",
+    "postbuild:404": "tsx scripts/post-prerender.ts",
     "build:dev": "vite build --mode development",
     "build:analyze": "vite-bundle-visualizer",
     "lint": "eslint .",

@@ -120,8 +120,11 @@ async function generateRoutes(): Promise<PrerenderPayload> {
   const areaByPath: Record<string, FullArea> = {};
   const beachesByAreaId: Record<string, FullBeach[]> = {};
 
-  // Static pages
-  routes.push("/", "/about", "/areas", "/map", "/ontology", "/faq", "/guide", "/privacy");
+  // Static pages.
+  // "/404" is included so vite-prerender-plugin emits a real 404.html that
+  // nginx can serve via `error_page 404 /404.html;`. It is intentionally NOT
+  // added to sitemap.xml (see scripts/generate-sitemap.ts).
+  routes.push("/", "/about", "/areas", "/map", "/ontology", "/faq", "/guide", "/privacy", "/404");
 
   // Fetch all active areas — full row
   const { data: areas, error: areasError } = await supabase
