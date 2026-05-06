@@ -25,7 +25,7 @@
     "deps:check": "depcheck",
     "deps:update": "ncu -u",
     "deps:audit": "npm audit",
-    "prebuild": "npm run lint && npm run format:check && npm run generate-routes && npm run validate:schemas"
+    "prebuild": "npm run lint && npm run format:check && npm run generate-routes && npm run generate-sitemap && npm run validate:schemas"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
