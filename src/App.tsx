@@ -1,15 +1,35 @@
 import { Toaster } from "@/components/ui/toaster";
-import { useState, Suspense, lazy } from "react";
+import { useState, useEffect, Suspense, lazy } from "react";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  QueryClient,
+  QueryClientProvider,
+  HydrationBoundary,
+  type DehydratedState,
+} from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { useServiceWorker } from "@/hooks/useServiceWorker";
 import ScrollToTop from "@/components/ScrollToTop";
 import AnalyticsRouter from "@/components/AnalyticsRouter";
 
-// Lazy load non-critical components
+// Eager imports for prerendered public pages: SSR (renderToString) does not
+// resolve React.lazy boundaries — they would render Suspense fallback only.
+// Eager-importing ensures the actual page HTML reaches crawlers.
+import Index from "./pages/Index";
+import About from "./pages/About";
+import Areas from "./pages/Areas";
+import Ontology from "./pages/Ontology";
+import Guide from "./pages/Guide";
+import Privacy from "./pages/Privacy";
+import FAQ from "./pages/FAQ";
+import BeachDetail from "./pages/BeachDetail";
+import Area from "./pages/Area";
+import NotFound from "./pages/NotFound";
+import MapPage from "./pages/Map";
+
+// Non-critical lazy components
 const ConsentBanner = lazy(() => import("@/components/ConsentBanner"));
 const AnalyticsInspector = lazy(() => import("@/lib/AnalyticsInspector"));
 const AuthProvider = lazy(() =>
@@ -17,20 +37,7 @@ const AuthProvider = lazy(() =>
 );
 const ProtectedRoute = lazy(() => import("@/components/auth/ProtectedRoute"));
 
-// Lazy load all pages for better code splitting
-const Index = lazy(() => import("./pages/Index"));
-const About = lazy(() => import("./pages/About"));
-const Areas = lazy(() => import("./pages/Areas"));
-const Ontology = lazy(() => import("./pages/Ontology"));
-const Guide = lazy(() => import("./pages/Guide"));
-const Privacy = lazy(() => import("./pages/Privacy"));
-const FAQ = lazy(() => import("./pages/FAQ"));
-const BeachDetail = lazy(() => import("./pages/BeachDetail"));
-const Area = lazy(() => import("./pages/Area"));
-const NotFound = lazy(() => import("./pages/NotFound"));
-const MapPage = lazy(() => import("./pages/Map"));
-
-// Lazy load admin components
+// Admin pages stay lazy: never prerendered, only loaded on-demand
 const AdminLayout = lazy(() => import("@/components/admin/AdminLayout"));
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
@@ -44,7 +51,12 @@ const ImportExport = lazy(() => import("./pages/admin/ImportExport"));
 const AdminSettings = lazy(() => import("./pages/admin/AdminSettings"));
 const AcceptInvite = lazy(() => import("./pages/admin/AcceptInvite"));
 
-// Admin route wrapper components - Wrapped in Suspense since AuthProvider is lazy
+const PageLoadingFallback = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+  </div>
+);
+
 const AdminAcceptInvite = () => (
   <Suspense fallback={<PageLoadingFallback />}>
     <AuthProvider>
@@ -71,16 +83,16 @@ const AdminDashboardWrapper = () => (
   </Suspense>
 );
 
-const queryClient = new QueryClient({
+const defaultQueryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 5 * 60 * 1000, // 5 minutes
-      gcTime: 30 * 60 * 1000, // 30 minutes (renamed from cacheTime)
-      retry: 1, // Reduce retry attempts
-      refetchOnWindowFocus: false, // Prevent unnecessary refetches
-      refetchOnMount: false, // Use cached data when available
-      refetchOnReconnect: "always", // Refetch when reconnecting
-      networkMode: "offlineFirst", // Support offline mode
+      staleTime: 5 * 60 * 1000,
+      gcTime: 30 * 60 * 1000,
+      retry: 1,
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+      refetchOnReconnect: "always",
+      networkMode: "offlineFirst",
     },
     mutations: {
       retry: 1,
@@ -89,30 +101,33 @@ const queryClient = new QueryClient({
   },
 });
 
-// Loading fallback component
-const PageLoadingFallback = () => (
-  <div className="min-h-screen flex items-center justify-center">
-    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-  </div>
-);
-
-const AppContent = () => {
-  // Register service worker for caching and offline support
+/**
+ * Router-agnostic core. Used by App (BrowserRouter) on the client and by
+ * prerender.tsx (StaticRouter) on the server. Wrap with a router before use.
+ */
+export const AppCoreContent = () => {
+  // Service worker registration is browser-only via useEffect; safe under SSR.
   useServiceWorker();
   const [inspectorVisible, setInspectorVisible] = useState(false);
 
+  // Render lazy widgets only after client mount. Prevents React error #419
+  // (Suspense boundaries that don't resolve during renderToString) and keeps
+  // SSR HTML in lockstep with the client's first render.
+  const [isClient, setIsClient] = useState(false);
+  useEffect(() => setIsClient(true), []);
+
   return (
-    <BrowserRouter>
+    <>
       <ScrollToTop />
       <AnalyticsRouter />
 
-      {/* Lazy load ConsentBanner since it's not critical for FCP */}
-      <Suspense fallback={null}>
-        <ConsentBanner />
-      </Suspense>
+      {isClient && (
+        <Suspense fallback={null}>
+          <ConsentBanner />
+        </Suspense>
+      )}
 
-      {/* Dev-only inspector - lazy loaded */}
-      {!import.meta.env.PROD && (
+      {isClient && !import.meta.env.PROD && (
         <Suspense fallback={null}>
           <AnalyticsInspector
             isVisible={inspectorVisible}
@@ -134,7 +149,6 @@ const AppContent = () => {
           <Route path="/:areaSlug" element={<Area />} />
           <Route path="/:area/:beach-name" element={<BeachDetail />} />
 
-          {/* Admin routes with AuthProvider */}
           <Route path="/admin/accept-invite" element={<AdminAcceptInvite />} />
           <Route path="/admin/login" element={<AdminLoginPage />} />
           <Route path="/admin" element={<AdminDashboardWrapper />}>
@@ -149,24 +163,50 @@ const AppContent = () => {
             <Route path="settings" element={<AdminSettings />} />
           </Route>
 
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
-    </BrowserRouter>
+    </>
   );
 };
 
-const App = () => (
+interface AppProvidersProps {
+  children: React.ReactNode;
+  queryClient?: QueryClient;
+  helmetContext?: object;
+  dehydratedState?: DehydratedState;
+}
+
+/**
+ * Provider stack shared by client (App) and server (prerender.tsx).
+ * `queryClient` and `helmetContext` allow callers to inject SSR-specific
+ * instances; `dehydratedState` rehydrates the client cache from server output.
+ */
+export const AppProviders = ({
+  children,
+  queryClient = defaultQueryClient,
+  helmetContext,
+  dehydratedState,
+}: AppProvidersProps) => (
   <QueryClientProvider client={queryClient}>
-    <HelmetProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <AppContent />
-      </TooltipProvider>
-    </HelmetProvider>
+    <HydrationBoundary state={dehydratedState}>
+      <HelmetProvider context={helmetContext}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          {children}
+        </TooltipProvider>
+      </HelmetProvider>
+    </HydrationBoundary>
   </QueryClientProvider>
+);
+
+const App = ({ dehydratedState }: { dehydratedState?: DehydratedState } = {}) => (
+  <AppProviders dehydratedState={dehydratedState}>
+    <BrowserRouter>
+      <AppCoreContent />
+    </BrowserRouter>
+  </AppProviders>
 );
 
 export default App;

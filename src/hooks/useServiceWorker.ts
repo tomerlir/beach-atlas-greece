@@ -11,7 +11,7 @@ export const useServiceWorker = (): ServiceWorkerState => {
   const [state, setState] = useState<ServiceWorkerState>({
     isSupported: false,
     isRegistered: false,
-    isOnline: navigator.onLine,
+    isOnline: typeof navigator !== "undefined" ? navigator.onLine : true,
     registration: null,
   });
 

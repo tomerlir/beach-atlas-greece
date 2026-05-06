@@ -655,7 +655,7 @@ const BeachDetail = () => {
           <ShareDialog
             isOpen={isShareDialogOpen}
             onClose={() => setIsShareDialogOpen(false)}
-            url={window.location.href}
+            url={typeof window !== "undefined" ? window.location.href : ""}
             title={beach.name}
             description={`Discover ${beach.name} in ${beach.area}, Greece`}
           />

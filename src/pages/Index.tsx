@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { generateHomeMetaTitle, generateHomeMetaDescription } from "@/lib/seo";
@@ -158,8 +159,10 @@ const Index = () => {
   const seoDescription = generateHomeMetaDescription();
   const canonicalUrl = "https://beachesofgreece.com";
 
-  // Prevent indexing of filtered/paginated URLs (canonical points to clean URL)
-  const hasQueryParams = window.location.search.length > 0;
+  // Prevent indexing of filtered/paginated URLs (canonical points to clean URL).
+  // Use react-router's useLocation so this works in both SSR (StaticRouter) and client.
+  const routerLocation = useLocation();
+  const hasQueryParams = routerLocation.search.length > 0;
   const shouldNoIndex = hasQueryParams;
 
   // Generate optimized JSON-LD structured data - use all beaches, not paginated

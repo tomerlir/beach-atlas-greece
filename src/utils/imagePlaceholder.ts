@@ -43,6 +43,9 @@ export const generateBeachBlurPlaceholder = (
   height: number,
   palette: keyof typeof BEACH_COLOR_PALETTES = "default"
 ): string => {
+  // SSR guard: canvas APIs require a DOM. During prerender we return an empty
+  // data URL; the client will regenerate placeholders on first interactive frame.
+  if (typeof document === "undefined") return "";
   // Create a small canvas for performance (max 40x23 to maintain 16:9 ratio)
   const canvas = document.createElement("canvas");
   // Use a more conservative scale for mobile compatibility
@@ -100,6 +103,7 @@ export const generateBeachBlurPlaceholder = (
  * @returns Base64 encoded image data URL
  */
 export const generateSimpleGradientPlaceholder = (width: number, height: number): string => {
+  if (typeof document === "undefined") return "";
   const canvas = document.createElement("canvas");
   canvas.width = Math.min(width, 40);
   canvas.height = Math.min(height, 23);

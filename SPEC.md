@@ -12,7 +12,7 @@
 - **Domain**: `beachesofgreece.com`
 - **Stack**: React 18 + TypeScript + Vite + Tailwind CSS + Supabase (PostgreSQL)
 - **Deployment**: Pre-rendered static site (SSG) with client-side hydration
-- **Database**: ~8,000+ beaches across ~19 areas (Greek islands and regions)
+- **Database**: ~200+ beaches across ~10 areas (Greek islands and regions)
 
 ---
 
@@ -550,7 +550,7 @@ All pages and the admin section are lazy-loaded via `React.lazy()`. Vite config 
 
 ### 10.5 Prerendering (SSG)
 
-- All public routes (~8,000+) pre-rendered at build time
+- All public routes pre-rendered at build time
 - Route list generated from Supabase data via `scripts/generate-routes.ts`
 - Metadata for each route stored in `prerender-data.json`
 - Client-side hydration after initial static HTML load

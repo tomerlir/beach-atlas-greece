@@ -1,30 +1,38 @@
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { preloadCommonPlaceholders } from "./utils/imagePlaceholder";
 import { analytics } from "./lib/analytics";
+import type { DehydratedState } from "@tanstack/react-query";
 
-// Render app IMMEDIATELY for fastest FCP
-createRoot(document.getElementById("root")!).render(<App />);
+declare global {
+  interface Window {
+    __REACT_QUERY_STATE__?: DehydratedState;
+  }
+}
 
-// Defer analytics initialization to avoid blocking main thread
-// Moved AFTER render to not delay FCP
-if ("requestIdleCallback" in window) {
-  requestIdleCallback(() => {
-    analytics.init({
-      enabled: true,
-      debug: !import.meta.env.PROD,
-    });
-    // Preload placeholders during idle time, not during critical path
-    preloadCommonPlaceholders();
-  });
+const rootEl = document.getElementById("root")!;
+const dehydratedState = window.__REACT_QUERY_STATE__;
+
+// Hydrate when prerendered HTML is present (root has children); otherwise
+// render fresh (dev mode or non-prerendered route fallback).
+if (rootEl.firstElementChild) {
+  hydrateRoot(rootEl, <App dehydratedState={dehydratedState} />);
 } else {
-  // Fallback for browsers without requestIdleCallback
-  setTimeout(() => {
-    analytics.init({
-      enabled: true,
-      debug: !import.meta.env.PROD,
-    });
-    preloadCommonPlaceholders();
-  }, 100); // Small delay to allow initial render
+  createRoot(rootEl).render(<App dehydratedState={dehydratedState} />);
+}
+
+// Defer analytics to avoid blocking main thread; runs after first paint.
+const initAnalytics = () => {
+  analytics.init({
+    enabled: true,
+    debug: !import.meta.env.PROD,
+  });
+  preloadCommonPlaceholders();
+};
+
+if ("requestIdleCallback" in window) {
+  requestIdleCallback(initAnalytics);
+} else {
+  setTimeout(initAnalytics, 100);
 }

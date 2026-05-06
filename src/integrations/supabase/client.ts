@@ -21,11 +21,15 @@ export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABL
   },
 });
 
-// Authenticated client for admin operations (with cookies)
+// Authenticated client for admin operations (with cookies).
+// SSR-safe: localStorage is unavailable during prerender; admin routes are
+// never prerendered, so falling back to in-memory storage on the server is fine.
+const isBrowser = typeof window !== "undefined";
+
 export const authSupabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
   auth: {
-    storage: localStorage,
-    persistSession: true,
-    autoRefreshToken: true,
+    storage: isBrowser ? window.localStorage : undefined,
+    persistSession: isBrowser,
+    autoRefreshToken: isBrowser,
   },
 });

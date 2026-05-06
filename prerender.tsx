@@ -1,20 +1,35 @@
-// Import your actual SEO generators
+/**
+ * Prerender entry for vite-prerender-plugin.
+ *
+ * Renders the full React app to static HTML for each route, seeding the
+ * React Query cache from prerender-data.json so pages have content (and
+ * crawlable internal links) without client-side JS execution. The dehydrated
+ * cache is inlined as a <script> so the browser hydrates without re-fetching.
+ *
+ * Why this matters: previously the body was empty and only <head> metadata
+ * was emitted, leaving crawlers (Ahrefs, non-JS Googlebot pass) with zero
+ * outlinks and no content to index.
+ */
+import { renderToString } from "react-dom/server";
+import { StaticRouter } from "react-router-dom/server";
+import { QueryClient, dehydrate } from "@tanstack/react-query";
 import {
   generateBeachMetaTitle,
   generateBeachMetaDescription,
   generateAreaMetaTitle,
   generateAreaMetaDescription,
+  generateHomeMetaTitle,
+  generateHomeMetaDescription,
 } from "./src/lib/seo";
 import {
   generateBeachWebPageSchema,
   generateAreaWebPageSchema,
   generateHomeWebPageSchema,
 } from "./src/lib/structured-data";
+import { AppProviders, AppCoreContent } from "./src/App";
 import type { Tables } from "./src/integrations/supabase/types";
 import type { Area } from "./src/types/area";
 
-// Metadata structure matches what's in generate-routes.ts
-// Using subset of Tables<"beaches"> fields needed for SEO
 interface BeachMetadata {
   slug: string;
   name: string;
@@ -34,29 +49,33 @@ interface AreaMetadata {
   beachCount: number;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type FullBeach = Record<string, any>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type FullArea = Record<string, any> & { beach_count?: number };
+
 interface PrerenderData {
   routes: string[];
   beachMetadata: Record<string, BeachMetadata>;
   areaMetadata: Record<string, AreaMetadata>;
+  allBeaches: FullBeach[];
+  allAreas: FullArea[];
+  beachByPath: Record<string, FullBeach>;
+  areaByPath: Record<string, FullArea>;
+  beachesByAreaId: Record<string, FullBeach[]>;
 }
 
-// Cache for loaded data
 let prerenderDataCache: PrerenderData | null = null;
 
-/**
- * Load prerender data - import directly as JSON module
- */
 async function loadPrerenderData(): Promise<PrerenderData | null> {
-  if (prerenderDataCache) {
-    return prerenderDataCache;
-  }
-
+  if (prerenderDataCache) return prerenderDataCache;
   try {
-    // Import JSON data directly (Vite handles this)
     const data = await import("./src/prerender-data.json");
     prerenderDataCache = data.default as PrerenderData;
     console.warn(
-      `✅ Loaded prerender data with ${Object.keys(prerenderDataCache!.beachMetadata).length} beaches`
+      `✅ Prerender data: ${prerenderDataCache!.allBeaches?.length ?? 0} beaches, ${
+        prerenderDataCache!.allAreas?.length ?? 0
+      } areas`
     );
     return prerenderDataCache;
   } catch (error) {
@@ -65,190 +84,197 @@ async function loadPrerenderData(): Promise<PrerenderData | null> {
   }
 }
 
+const SITE_URL = "https://beachesofgreece.com";
+
 /**
- * Prerender function for vite-prerender-plugin
- *
- * This function generates static HTML shells with proper meta tags for SEO,
- * using your actual SEO generator logic with real beach/area data.
+ * Build a QueryClient pre-seeded with the data each route's components will
+ * read via useQuery. Keys MUST match what page components use in App code.
  */
+function buildSeededQueryClient(url: string, data: PrerenderData): QueryClient {
+  const client = new QueryClient({
+    defaultOptions: {
+      queries: {
+        // During SSR we never want refetch behavior; we just render with seeded data.
+        staleTime: Infinity,
+        retry: false,
+        gcTime: Infinity,
+      },
+    },
+  });
+
+  // Global queries (Index, Map, Areas)
+  client.setQueryData(["beaches"], data.allBeaches);
+  client.setQueryData(["areas"], data.allAreas);
+  client.setQueryData(["areas-with-beach-count"], data.allAreas);
+
+  // Per-area: ["beaches", area.id]
+  const areaData = data.areaByPath[url];
+  if (areaData) {
+    const areaBeaches = data.beachesByAreaId[areaData.id] || [];
+    client.setQueryData(["beaches", areaData.id], areaBeaches);
+    client.setQueryData(["area", areaData.slug], areaData);
+    client.setQueryData(["area-by-slug", areaData.slug], areaData);
+  }
+
+  // Per-beach: ["beach", beachSlug]
+  const beachData = data.beachByPath[url];
+  if (beachData) {
+    client.setQueryData(["beach", beachData.slug], beachData);
+    // BeachDetail also queries area context
+    const parentArea = data.allAreas.find((a) => a.id === beachData.area_id);
+    if (parentArea) {
+      client.setQueryData(["area-by-slug", parentArea.slug], parentArea);
+    }
+  }
+
+  return client;
+}
+
+interface HeadElement {
+  type: "meta" | "link" | "script";
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  props: Record<string, any>;
+}
+
+function buildHeadElements(
+  url: string,
+  data: PrerenderData | null,
+  dehydratedState: unknown
+): { title: string; elements: Set<HeadElement> } {
+  const elements = new Set<HeadElement>();
+  let title = "Beaches of Greece";
+  let description = "Discover the best beaches in Greece with verified data and smart search.";
+  let jsonLdData: unknown = null;
+
+  if (data) {
+    const beachData = data.beachMetadata[url];
+    const areaData = data.areaMetadata[url];
+
+    if (beachData) {
+      const beach = beachData as Partial<Tables<"beaches">> & BeachMetadata;
+      title = generateBeachMetaTitle(beach as Tables<"beaches">);
+      description = generateBeachMetaDescription(beach as Tables<"beaches">);
+      const canonicalUrl = `${SITE_URL}${url}`;
+      jsonLdData = generateBeachWebPageSchema(beach as Tables<"beaches">, canonicalUrl);
+    } else if (areaData) {
+      const area: Area = {
+        id: "",
+        name: areaData.name,
+        slug: url.replace("/", ""),
+        description: areaData.description,
+        hero_photo_url: null,
+        hero_photo_source: null,
+        status: "ACTIVE",
+        created_at: null,
+        updated_at: null,
+      };
+      title = generateAreaMetaTitle(area, areaData.beachCount);
+      description = areaData.description || generateAreaMetaDescription(area, areaData.beachCount);
+      const canonicalUrl = `${SITE_URL}${url}`;
+      const areaBeaches = Object.values(data.beachByPath).filter((b) => b.area === areaData.name);
+      jsonLdData = generateAreaWebPageSchema(
+        area,
+        areaBeaches as Tables<"beaches">[],
+        canonicalUrl
+      );
+    } else if (url === "/") {
+      const allBeaches = data.allBeaches as Tables<"beaches">[];
+      jsonLdData = generateHomeWebPageSchema(allBeaches);
+      title = generateHomeMetaTitle();
+      description = generateHomeMetaDescription();
+    } else if (url === "/about") {
+      title = "About Us | Verified Greek Beach Data & Smart Search";
+      description =
+        "Beaches of Greece is a comprehensive platform that helps travelers find the perfect Greek beach through natural language search and verified data.";
+    } else if (url === "/areas") {
+      title = "Greek Beach Areas";
+      description = "Browse all Greek beach areas and discover the perfect destination.";
+    } else if (url === "/faq") {
+      title = "Frequently Asked Questions | Beaches of Greece";
+      description = "Common questions about using Beaches of Greece.";
+    } else if (url === "/guide") {
+      title = "How to Choose the Perfect Greek Beach | Beaches of Greece";
+      description = "A guide to choosing the right beach in Greece based on your preferences.";
+    } else if (url === "/privacy") {
+      title = "Privacy Policy | Beaches of Greece";
+      description = "Privacy policy for Beaches of Greece.";
+    } else if (url === "/map") {
+      title = "Map of Greek Beaches - Explore on an Interactive Map";
+      description = "Explore Greek beaches on an interactive map.";
+    } else if (url === "/ontology") {
+      title = "Beach Ontology | Beaches of Greece";
+      description = "How we classify and describe Greek beaches.";
+    }
+  }
+
+  const canonicalHref = url === "/" ? SITE_URL : `${SITE_URL}${url}`;
+
+  elements.add({ type: "meta", props: { name: "description", content: description } });
+  elements.add({ type: "meta", props: { property: "og:title", content: title } });
+  elements.add({ type: "meta", props: { property: "og:description", content: description } });
+  elements.add({ type: "meta", props: { property: "og:url", content: canonicalHref } });
+  elements.add({ type: "meta", props: { property: "og:type", content: "website" } });
+  elements.add({ type: "meta", props: { property: "og:site_name", content: "Beaches of Greece" } });
+  elements.add({ type: "meta", props: { name: "twitter:card", content: "summary_large_image" } });
+  elements.add({ type: "meta", props: { name: "twitter:title", content: title } });
+  elements.add({ type: "meta", props: { name: "twitter:description", content: description } });
+  elements.add({ type: "link", props: { rel: "canonical", href: canonicalHref } });
+
+  if (jsonLdData) {
+    elements.add({
+      type: "script",
+      props: {
+        type: "application/ld+json",
+        children: JSON.stringify(jsonLdData),
+      },
+    });
+  }
+
+  // Inline dehydrated React Query state for client hydration.
+  // We escape `<` to prevent any embedded JSON from terminating the script tag.
+  const stateJson = JSON.stringify(dehydratedState).replace(/</g, "\\u003c");
+  elements.add({
+    type: "script",
+    props: {
+      children: `window.__REACT_QUERY_STATE__=${stateJson};`,
+    },
+  });
+
+  return { title, elements };
+}
+
 export async function prerender(data: { url: string }) {
   const { url } = data;
 
   try {
-    // Return empty string - the #root div already exists in index.html
-    // Prerender plugin will inject our meta tags into <head>, not replace <body>
-    const html = "";
-
-    // Initialize head elements
-    const headElements = new Set();
-    let title = "Beaches of Greece";
-    let description = "Discover the best beaches in Greece with verified data and smart search.";
-    let jsonLdData: Record<string, unknown> | null = null;
-
-    // Load prerender data
     const prerenderData = await loadPrerenderData();
-
-    // Generate SEO based on route type and actual data
-    if (prerenderData) {
-      const beachData = prerenderData.beachMetadata[url];
-      const areaData = prerenderData.areaMetadata[url];
-
-      if (beachData) {
-        // Beach page - use your actual SEO generator!
-        // Cast to partial Tables<"beaches"> with the fields we have
-        const beach = beachData as Partial<Tables<"beaches">> & BeachMetadata;
-
-        title = generateBeachMetaTitle(beach as Tables<"beaches">);
-        description = generateBeachMetaDescription(beach as Tables<"beaches">);
-
-        // Generate structured data
-        const canonicalUrl = `https://beachesofgreece.com${url}`;
-        jsonLdData = generateBeachWebPageSchema(beach as Tables<"beaches">, canonicalUrl);
-      } else if (areaData) {
-        // Area page - use your area SEO generator!
-        const area: Area = {
-          id: "", // Not needed for SEO generation
-          name: areaData.name,
-          slug: url.replace("/", ""),
-          description: areaData.description,
-          hero_photo_url: null,
-          hero_photo_source: null,
-          status: "ACTIVE",
-          created_at: null,
-          updated_at: null,
-        };
-
-        title = generateAreaMetaTitle(area, areaData.beachCount);
-        description =
-          areaData.description || generateAreaMetaDescription(area, areaData.beachCount);
-
-        // Generate structured data for area pages
-        const canonicalUrl = `https://beachesofgreece.com${url}`;
-        const areaBeaches = Object.values(prerenderData.beachMetadata)
-          .filter((beach: BeachMetadata) => beach.area === area.name)
-          .map((beach: BeachMetadata) => beach as Tables<"beaches">);
-        jsonLdData = generateAreaWebPageSchema(area, areaBeaches, canonicalUrl);
-      } else {
-        // Static pages - use generators where available
-        if (url === "/") {
-          // Import and use the actual generators
-          const { generateHomeMetaTitle, generateHomeMetaDescription } = await import(
-            "./src/lib/seo"
-          );
-          title = generateHomeMetaTitle();
-          description = generateHomeMetaDescription();
-
-          // Generate structured data for homepage
-          const allBeaches = Object.values(prerenderData.beachMetadata).map(
-            (beach: BeachMetadata) => beach as Tables<"beaches">
-          );
-          jsonLdData = generateHomeWebPageSchema(allBeaches);
-        } else if (url === "/about") {
-          title = "About Us | Verified Greek Beach Data & Smart Search";
-          description =
-            "Beaches of Greece is a comprehensive platform that helps travelers find the perfect Greek beach through natural language search and verified data.";
-        } else if (url === "/areas") {
-          title = "Greek Beach Areas";
-          description =
-            "Browse all Greek beach areas and discover the perfect destination for your beach vacation.";
-        } else if (url === "/faq") {
-          title = "Frequently Asked Questions | Beaches of Greece";
-          description =
-            "Common questions about using Beaches of Greece to find your perfect beach in Greece.";
-        } else if (url === "/guide") {
-          title = "How to Choose the Perfect Greek Beach | Beaches of Greece";
-          description =
-            "A comprehensive guide to choosing the right beach in Greece based on your preferences.";
-        } else if (url === "/privacy") {
-          title = "Privacy Policy | Beaches of Greece";
-          description =
-            "Our privacy policy: cookieless analytics, GDPR compliance, minimal data collection & your rights.";
-        }
-      }
-    } else {
-      // Fallback if data file not loaded (should not happen in production)
-      console.warn(`No metadata for ${url}, using fallback`);
-      if (url.match(/^\/[^/]+\/[^/]+$/)) {
-        const parts = url.split("/").filter(Boolean);
-        const beachSlug = parts[1]?.replace(/-/g, " ");
-        title = `${beachSlug} Beach | Beaches of Greece`;
-        description = `Discover ${beachSlug} beach in Greece with verified information on amenities, parking, and conditions.`;
-      } else if (url.match(/^\/[^/]+$/)) {
-        const areaSlug = url.split("/").filter(Boolean)[0];
-        const areaName = areaSlug?.replace(/-/g, " ");
-        title = `${areaName} Beaches | Greece`;
-        description = `Explore verified beaches in ${areaName}, Greece with detailed information on amenities and conditions.`;
-      }
+    if (!prerenderData) {
+      // No data — fall back to empty body, head-only.
+      return { html: "", head: { lang: "en", title: "Beaches of Greece" } };
     }
 
-    // Add meta tags to head elements
-    headElements.add({
-      type: "meta",
-      props: { name: "description", content: description },
-    });
+    const queryClient = buildSeededQueryClient(url, prerenderData);
+    const helmetContext: Record<string, unknown> = {};
 
-    headElements.add({
-      type: "meta",
-      props: { property: "og:title", content: title },
-    });
+    // Render the full app for this URL into static HTML. AppCoreContent has
+    // no router; StaticRouter provides location for the server pass.
+    const html = renderToString(
+      <AppProviders queryClient={queryClient} helmetContext={helmetContext}>
+        <StaticRouter location={url}>
+          <AppCoreContent />
+        </StaticRouter>
+      </AppProviders>
+    );
 
-    headElements.add({
-      type: "meta",
-      props: { property: "og:description", content: description },
-    });
+    const dehydratedState = dehydrate(queryClient);
+    const { title, elements } = buildHeadElements(url, prerenderData, dehydratedState);
 
-    const canonicalHref =
-      url === "/" ? "https://beachesofgreece.com" : `https://beachesofgreece.com${url}`;
-
-    headElements.add({
-      type: "meta",
-      props: { property: "og:url", content: canonicalHref },
-    });
-
-    headElements.add({
-      type: "meta",
-      props: { name: "twitter:title", content: title },
-    });
-
-    headElements.add({
-      type: "meta",
-      props: { name: "twitter:description", content: description },
-    });
-
-    headElements.add({
-      type: "link",
-      props: { rel: "canonical", href: canonicalHref },
-    });
-
-    // Add JSON-LD structured data if available
-    if (jsonLdData) {
-      const jsonLdString = JSON.stringify(jsonLdData, null, 2);
-      headElements.add({
-        type: "script",
-        props: {
-          type: "application/ld+json",
-          children: jsonLdString,
-        },
-      });
-    }
-
-    return {
-      html,
-      head: {
-        lang: "en",
-        title: title,
-        elements: headElements,
-      },
-    };
+    return { html, head: { lang: "en", title, elements } };
   } catch (error) {
-    console.error(`Error prerendering ${url}:`, error);
-    // Return empty HTML on error to prevent build failure
+    console.error(`❌ Prerender error for ${url}:`, error);
     return {
       html: "",
-      head: {
-        lang: "en",
-        title: "Beaches of Greece",
-      },
+      head: { lang: "en", title: "Beaches of Greece" },
     };
   }
 }

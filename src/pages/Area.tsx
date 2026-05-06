@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import { generateAreaMetaTitle, generateAreaMetaDescription } from "@/lib/seo";
@@ -36,6 +36,9 @@ const BEACHES_PER_PAGE = 9;
 
 const Area = () => {
   const { areaSlug } = useParams<{ areaSlug: string }>();
+  // useLocation must be called before any conditional return (rules-of-hooks).
+  const routerLocation = useLocation();
+  const hasQueryParams = routerLocation.search.length > 0;
   const {
     location,
     isLoading: isLoadingLocation,
@@ -229,8 +232,7 @@ const Area = () => {
       : "The requested area could not be found.";
   const canonicalUrl = areaName ? `https://beachesofgreece.com/${areaSlug}` : undefined;
 
-  // Prevent indexing of filtered/paginated URLs (canonical points to clean URL)
-  const hasQueryParams = window.location.search.length > 0;
+  // hasQueryParams hoisted above the conditional return; see top of component.
   const shouldNoIndex = hasQueryParams;
 
   // Generate optimized JSON-LD structured data - use all beaches, not paginated
