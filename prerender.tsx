@@ -101,9 +101,12 @@ function buildSeededQueryClient(url: string, data: PrerenderData): QueryClient {
   const client = new QueryClient({
     defaultOptions: {
       queries: {
+        // Seeded data is treated as fresh for the duration of this render.
         staleTime: Infinity,
         retry: false,
-        gcTime: Infinity,
+        // gcTime must be FINITE — Infinity schedules timers that prevent the
+        // Node build process from exiting (multiplied across 222 routes).
+        gcTime: 0,
       },
     },
   });
@@ -294,6 +297,9 @@ export async function prerender(data: { url: string }) {
     );
 
     const dehydratedState = dehydrate(queryClient);
+    // Drop the cache so any remaining gc timers are released and the build
+    // process can exit cleanly after all routes are rendered.
+    queryClient.clear();
     const { title, elements } = buildHeadElements(url, prerenderData, dehydratedState);
 
     return { html, head: { lang: "en", title, elements } };
