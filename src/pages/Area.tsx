@@ -24,7 +24,7 @@ import { useImagePreloader } from "@/hooks/useImagePreloader";
 import { useAreaBySlugOptimistic, useNearbyAreas } from "@/hooks/useAreas";
 import { Beach } from "@/types/beach";
 import type { Area } from "@/types/area";
-import heroImage from "@/assets/hero-background.png";
+import heroImage from "@/assets/hero-background.jpg";
 import EmptyState from "@/components/EmptyState";
 import NotFound from "@/pages/NotFound";
 import PhotoAttribution from "@/components/PhotoAttribution";
@@ -258,7 +258,7 @@ const Area = () => {
           property="og:image"
           content={
             area?.hero_photo_url ||
-            `${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.png`
+            `${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.jpg`
           }
         />
         <meta property="og:site_name" content="Beaches of Greece" />
@@ -271,7 +271,7 @@ const Area = () => {
           name="twitter:image"
           content={
             area?.hero_photo_url ||
-            `${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.png`
+            `${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.jpg`
           }
         />
       </Helmet>

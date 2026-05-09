@@ -11,7 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Beach } from "@/types/beach";
 import { useBeachFiltering } from "@/hooks/useBeachFiltering";
 import { Helmet } from "react-helmet-async";
-import heroImage from "@/assets/hero-background.png";
+import heroImage from "@/assets/hero-background.jpg";
 import ResultsSummary from "@/components/ResultsSummary";
 import { analytics } from "@/lib/analytics";
 import { createMapOpenEvent } from "@/lib/analyticsEvents";

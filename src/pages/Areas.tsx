@@ -61,7 +61,7 @@ const Areas = () => {
         <meta property="og:url" content={canonicalUrl} />
         <meta
           property="og:image"
-          content={`${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.png`}
+          content={`${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.jpg`}
         />
         <meta property="og:site_name" content="Beaches of Greece" />
 
@@ -71,7 +71,7 @@ const Areas = () => {
         <meta name="twitter:description" content={seoDescription} />
         <meta
           name="twitter:image"
-          content={`${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.png`}
+          content={`${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.jpg`}
         />
       </Helmet>
 
@@ -89,7 +89,7 @@ const Areas = () => {
           {/* Responsive hero background image */}
           <ResponsivePicture
             baseName="area-hero"
-            fallbackExt="png"
+            fallbackExt="jpg"
             widths={[640, 828, 1024, 1280, 1920]}
             alt=""
             sizes="100vw"

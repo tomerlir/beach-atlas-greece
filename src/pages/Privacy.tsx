@@ -33,7 +33,7 @@ const Privacy = () => {
         <meta property="og:url" content={canonicalUrl} />
         <meta
           property="og:image"
-          content={`${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.png`}
+          content={`${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.jpg`}
         />
         <meta property="og:site_name" content="Beaches of Greece" />
 
@@ -43,7 +43,7 @@ const Privacy = () => {
         <meta name="twitter:description" content={seoDescription} />
         <meta
           name="twitter:image"
-          content={`${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.png`}
+          content={`${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.jpg`}
         />
       </Helmet>
 

@@ -13,13 +13,13 @@ interface ImageConfig {
 
 const images: ImageConfig[] = [
   {
-    input: 'public/hero-background.png',
+    input: 'public/hero-background.jpg',
     outputName: 'hero-background',
     sizes: [640, 828, 1024, 1280, 1920, 2560],
     quality: { webp: 75, avif: 65 },
   },
   {
-    input: 'public/area-hero.png',
+    input: 'public/area-hero.jpg',
     outputName: 'area-hero',
     sizes: [640, 828, 1024, 1280, 1920],
     quality: { webp: 75, avif: 65 },

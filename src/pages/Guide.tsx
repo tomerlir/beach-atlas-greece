@@ -42,7 +42,7 @@ const Guide = () => {
         "@type": "HowToStep",
         name: "Pick your vibe and beach type",
         text: "Choose between sandy, pebbly, or mixed beaches. Decide if you want an organized beach with facilities or a natural, quiet one.",
-        image: `${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.png`,
+        image: `${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.jpg`,
       },
       {
         "@type": "HowToStep",
@@ -66,7 +66,7 @@ const Guide = () => {
       },
     ],
     image: [
-      `${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.png`,
+      `${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.jpg`,
     ],
     datePublished: "2024-01-01",
     dateModified: new Date().toISOString().split("T")[0],
@@ -94,7 +94,7 @@ const Guide = () => {
         <meta property="og:url" content={canonicalUrl} />
         <meta
           property="og:image"
-          content={`${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.png`}
+          content={`${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.jpg`}
         />
         <meta property="og:site_name" content="Beaches of Greece" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -102,7 +102,7 @@ const Guide = () => {
         <meta name="twitter:description" content={seoDescription} />
         <meta
           name="twitter:image"
-          content={`${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.png`}
+          content={`${import.meta.env.VITE_SITE_URL || "https://beachesofgreece.com"}/hero-background.jpg`}
         />
       </Helmet>
 

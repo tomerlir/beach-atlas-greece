@@ -205,7 +205,7 @@ const Index = () => {
           {/* Responsive hero background image with modern formats */}
           <ResponsivePicture
             baseName="hero-background"
-            fallbackExt="png"
+            fallbackExt="jpg"
             widths={[640, 828, 1024, 1280, 1920, 2560]}
             alt=""
             sizes="100vw"

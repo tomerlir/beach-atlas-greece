@@ -1,5 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import heroImage from "@/assets/hero-background.png";
+import heroImage from "@/assets/hero-background.jpg";
 
 const AreaHeroSkeleton = () => {
   return (
