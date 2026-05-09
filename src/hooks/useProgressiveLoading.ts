@@ -21,12 +21,20 @@ export const useProgressiveLoading = (
 ) => {
   const { contentDelay = 0, imageDelay = 100, enableProgressiveMode = true } = options;
 
-  const [state, setState] = useState<ProgressiveLoadingState>({
-    contentLoaded: false,
-    imageLoaded: false,
-    isFullyLoaded: false,
-    showContent: false,
-    showImage: false,
+  // Compute initial state synchronously so SSR/prerender renders gated
+  // content (H1, body) immediately when data is already available — useEffect
+  // doesn't run during renderToString, so deferring to it leaves the first
+  // paint (and crawler-visible HTML) empty.
+  const [state, setState] = useState<ProgressiveLoadingState>(() => {
+    const contentReady = !isLoading;
+    const imageReady = contentReady && (!enableProgressiveMode || !hasImage);
+    return {
+      contentLoaded: contentReady,
+      imageLoaded: false,
+      isFullyLoaded: false,
+      showContent: contentReady,
+      showImage: imageReady,
+    };
   });
 
   // Handle content loading
