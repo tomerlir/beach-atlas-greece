@@ -17,10 +17,7 @@ export function MoreInArea({ area, beaches }: { area: SlimArea; beaches: Beach[]
       <div className="mt-4 -mx-4 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         <div className="flex gap-4 pb-4 pl-4">
           {beaches.map((b) => (
-            <div
-              key={b.slug}
-              className="flex-none w-[85%] sm:w-[45%] lg:w-[30%]"
-            >
+            <div key={b.slug} className="flex-none w-[85%] sm:w-[45%] lg:w-[30%]">
               <BeachCard beach={b} showDistance={false} compact engagementSource="browsing" />
             </div>
           ))}
