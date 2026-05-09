@@ -5,14 +5,14 @@
   <!-- HIGH PRIORITY: Core Pages -->
   <url>
     <loc>https://beachesofgreece.com</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
     <loc>https://beachesofgreece.com/areas</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -20,14 +20,14 @@
   <!-- MEDIUM-HIGH PRIORITY: Main Content Sections -->
   <url>
     <loc>https://beachesofgreece.com/map</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://beachesofgreece.com/about</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -35,21 +35,21 @@
   <!-- MEDIUM PRIORITY: Content Pages -->
   <url>
     <loc>https://beachesofgreece.com/guide</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://beachesofgreece.com/faq</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://beachesofgreece.com/ontology</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -57,7 +57,7 @@
   <!-- LOW PRIORITY: Utility Pages -->
   <url>
     <loc>https://beachesofgreece.com/privacy</loc>
-    <lastmod>2026-05-06</lastmod>
+    <lastmod>2026-05-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
@@ -65,7 +65,7 @@
   <!-- AREA PAGES: Geographic Content Hubs -->
   <url>
     <loc>https://beachesofgreece.com/attica</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -76,7 +76,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -87,7 +87,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -98,7 +98,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -109,7 +109,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -120,7 +120,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -131,7 +131,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -142,7 +142,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -153,7 +153,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -164,7 +164,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/santorini</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -175,7 +175,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -187,7 +187,7 @@
   <!-- BEACH DETAIL PAGES: Core Content with Rich Metadata -->
   <url>
     <loc>https://beachesofgreece.com/corfu/boukari-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -198,7 +198,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/firiplaka-beach-milos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -209,7 +209,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/firopotamos-beach-milos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -220,7 +220,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/maragkas-beach-naxos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -231,7 +231,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/polychrono-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -242,7 +242,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/acharavi-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -252,19 +252,8 @@
     </image:image>
   </url>
   <url>
-    <loc>https://beachesofgreece.com/mykonos/agia-anna-beach-mykonos</loc>
-    <lastmod>2026-03-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/efccc3a2-0aca-446a-a3b8-bafd662fce74/photo.jpg</image:loc>
-      <image:title>Agia Anna beach: Family Beach · Organized | Mykonos</image:title>
-      <image:caption>Agia Anna beach Sandy beach in Mykonos, Greece Calm waters with Organized beach, Family-friendly and 9 amenities</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://beachesofgreece.com/naxos/agia-anna-beach-naxos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -274,8 +263,19 @@
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/mykonos/agia-anna-beach-mykonos</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/efccc3a2-0aca-446a-a3b8-bafd662fce74/photo.jpg</image:loc>
+      <image:title>Agia Anna beach: Family Beach · Organized | Mykonos</image:title>
+      <image:caption>Agia Anna beach Sandy beach in Mykonos, Greece Calm waters with Organized beach, Family-friendly and 9 amenities</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/paros/agia-irini-beach-paros</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -286,7 +286,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/agia-marina-beach-aegina-attica</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -297,7 +297,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/agia-marina-beach-crete</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -308,7 +308,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/agiassos-beach-naxos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -319,7 +319,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/agiofaraggo-beach-crete</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -330,7 +330,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada/agiofili-beach-lefkada</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -341,7 +341,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/agios-georgios-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -351,19 +351,8 @@
     </image:image>
   </url>
   <url>
-    <loc>https://beachesofgreece.com/chalkidiki/agios-georgios-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/63329a98-f0d1-41dd-bb8d-25d50392c93d/photo.jpg</image:loc>
-      <image:title>Agios Georgios beach: Family Beach · Organized | Chalkidiki</image:title>
-      <image:caption>Agios Georgios beach Sandy beach in Chalkidiki, Greece Calm waters with Organized beach, Family-friendly and 9 amenities</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://beachesofgreece.com/naxos/agios-georgios-beach-naxos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -373,8 +362,19 @@
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/chalkidiki/agios-georgios-beach-chalkidiki</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/63329a98-f0d1-41dd-bb8d-25d50392c93d/photo.jpg</image:loc>
+      <image:title>Agios Georgios beach: Family Beach · Organized | Chalkidiki</image:title>
+      <image:caption>Agios Georgios beach Sandy beach in Chalkidiki, Greece Calm waters with Organized beach, Family-friendly and 9 amenities</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/corfu/agios-gordios-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -384,19 +384,8 @@
     </image:image>
   </url>
   <url>
-    <loc>https://beachesofgreece.com/lefkada/agios-ioannis-beach-lefkada</loc>
-    <lastmod>2026-03-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d8b6b2ef-eae5-4da8-85b0-b9c8f44fe720/photo.jpg</image:loc>
-      <image:title>Agios Ioannis beach: Blue Flag · Organized | Lefkada</image:title>
-      <image:caption>Agios Ioannis beach Mixed sand and pebble beach in Lefkada, Greece Moderate waves with Blue Flag certified, Organized beach, Lifeguard on duty and 7 amenities</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://beachesofgreece.com/chalkidiki/agios-ioannis-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -406,8 +395,19 @@
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/lefkada/agios-ioannis-beach-lefkada</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/d8b6b2ef-eae5-4da8-85b0-b9c8f44fe720/photo.jpg</image:loc>
+      <image:title>Agios Ioannis beach: Blue Flag · Organized | Lefkada</image:title>
+      <image:caption>Agios Ioannis beach Mixed sand and pebble beach in Lefkada, Greece Moderate waves with Blue Flag certified, Organized beach, Lifeguard on duty and 7 amenities</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/chalkidiki/agios-mamas-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -418,7 +418,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada/agios-nikitas-beach-lefkada</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -429,7 +429,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/agios-nikolaos-beach-zakynthos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -440,7 +440,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/agios-prokopios-naxos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -451,7 +451,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/agios-sostis-beach-mykonos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -462,7 +462,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/agios-spyridon-palaiokastritsa-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -473,7 +473,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/agios-spyridon-beach-peritheia-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -484,7 +484,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/agios-stefanos-mykonos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -495,7 +495,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/agios-stefanos-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -506,7 +506,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/agkali-beach-milos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -517,7 +517,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/agrari-beach-mykonos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -528,7 +528,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/aliki-beach-paros</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -539,7 +539,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/alogomandra-beach-milos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -550,7 +550,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/alykanas-beach-zakynthos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -561,7 +561,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/alykes-beach-zakynthos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -572,7 +572,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/alyko-beach-naxos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -583,7 +583,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/anavissos-beach-attica</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -594,7 +594,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/anemomylos-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -605,7 +605,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/anidri-beach-crete</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -616,7 +616,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/apollonas-beach-naxos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -627,7 +627,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/argassi-beach-zakynthos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -638,7 +638,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/arillas-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -649,7 +649,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/artemida-beach-attica</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -660,7 +660,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/asteras-glyfada-beach-attica</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -671,7 +671,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/avlaki-beach-attica</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -682,7 +682,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/azalas-beach-naxos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -693,7 +693,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/balos-beach-crete</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -704,7 +704,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/banana-beach-zakynthos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -715,7 +715,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/barbati-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -726,7 +726,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/bataria-beach-kassiopi-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -737,7 +737,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/santorini/baxedes-beach-santorini</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -748,7 +748,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/benitses-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -759,7 +759,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/santorini/black-beach-santorini</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -770,7 +770,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/canal-damour-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -781,7 +781,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/sounio-beach-attica</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -792,7 +792,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/chalikounas-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -803,7 +803,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/chora-beach-mykonos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -814,7 +814,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/dafni-beach-zakynthos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -825,7 +825,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/dassia-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -836,7 +836,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada/desimi-beach-lefkada</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -847,7 +847,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/divounia-beach-mykonos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -858,7 +858,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada/egremni-beach-lefkada</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -869,7 +869,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/elafonissi-beach-crete</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -879,19 +879,8 @@
     </image:image>
   </url>
   <url>
-    <loc>https://beachesofgreece.com/chalkidiki/elia-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/dc07d3ed-314c-4ea4-802f-e77644fe853c/photo.jpg</image:loc>
-      <image:title>Elia beach: Family Beach · Organized | Chalkidiki</image:title>
-      <image:caption>Elia beach Mixed sand and pebble beach in Chalkidiki, Greece Calm waters with Organized beach, Family-friendly and 8 amenities</image:caption>
-    </image:image>
-  </url>
-  <url>
     <loc>https://beachesofgreece.com/mykonos/elia-beach-mykonos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -901,8 +890,19 @@
     </image:image>
   </url>
   <url>
+    <loc>https://beachesofgreece.com/chalkidiki/elia-beach-chalkidiki</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://xnkyfxvncpawqpqccdby.supabase.co/storage/v1/object/public/beach-photos/beaches/dc07d3ed-314c-4ea4-802f-e77644fe853c/photo.jpg</image:loc>
+      <image:title>Elia beach: Family Beach · Organized | Chalkidiki</image:title>
+      <image:caption>Elia beach Mixed sand and pebble beach in Chalkidiki, Greece Calm waters with Organized beach, Family-friendly and 8 amenities</image:caption>
+    </image:image>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/corfu/ermones-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -913,7 +913,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/santorini/exomitis-beach-santorini</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -924,7 +924,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/falasarna-beach-crete</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -935,7 +935,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/faliraki-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -946,7 +946,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/faragas-beach</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -957,7 +957,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/fava-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -968,7 +968,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/flogita-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -979,7 +979,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/ftelia-beach-mykonos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -990,7 +990,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/gardeno-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1001,13 +1001,13 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/gerakas-beach-zakynthos</loc>
-    <lastmod>2025-10-01</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/gerakas-beach-milos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1018,7 +1018,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/gerakini-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -1029,7 +1029,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/gialiskari-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1040,7 +1040,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/santorini/gialos-beach-santorini</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1051,7 +1051,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/glyfa-beach-paros</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1062,7 +1062,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/glyfada-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -1073,7 +1073,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/hanioti-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -1084,7 +1084,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/ipsos-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1095,7 +1095,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/issos-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1106,7 +1106,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/istro-beach-crete</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1117,7 +1117,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/kalafatis-beach-mykonos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1128,7 +1128,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/kalamaki-beach-zakynthos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1139,7 +1139,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/kalami-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1150,7 +1150,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/kalamitsi-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1161,7 +1161,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/kalantos-beach-naxos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1172,7 +1172,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/kalithea-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1183,7 +1183,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/kalo-livadi-mykonos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1194,7 +1194,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/santorini/kamari-beach-santorini</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -1205,7 +1205,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/kapari-beach-mykonos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1216,7 +1216,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/karydi-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1227,7 +1227,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/kastraki-beach-naxos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1238,7 +1238,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada/kathisma-beach-lefkada</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1249,7 +1249,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/kavouri-beach-attica</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1260,7 +1260,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/kavourotrypes-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1271,7 +1271,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/keri-beach-zakynthos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1282,7 +1282,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/kleftiko-milos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1293,7 +1293,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/kolymbithres-beach-paros</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1304,7 +1304,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/kontogialos-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1315,7 +1315,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/korakonisi-zakynthos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1326,7 +1326,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/kryopigi-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -1337,7 +1337,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/laganas-beach-zakynthos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1348,7 +1348,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/lageri-beach-paros</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1359,7 +1359,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/lagomandra-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -1370,7 +1370,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/lia-beach-mykonos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1381,7 +1381,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/liapades-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1392,7 +1392,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/lissos-beach-crete</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1403,7 +1403,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/loggas-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1414,7 +1414,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/logora-beach-paros</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -1425,7 +1425,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/makris-gialos-zakynthos</loc>
-    <lastmod>2025-09-23</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1436,7 +1436,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/marathi-beach-crete</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1447,7 +1447,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/marathias-beach-zakynthos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1458,7 +1458,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/marathias-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1469,7 +1469,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/marathon-beach-attica</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -1480,7 +1480,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada/megali-petra-beach-lefkada</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1491,7 +1491,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/santorini/mesa-pigadia-beach-santorini</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1502,7 +1502,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/messongi-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1513,7 +1513,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/metamorfosi-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -1524,7 +1524,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/mikri-vigla-naxos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1535,7 +1535,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/mizithres-beach-zakynthos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1546,7 +1546,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/molos-beach-paros</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1557,7 +1557,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/mon-repos-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1568,7 +1568,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/monastiri-beach-paros</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1579,7 +1579,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/moraitika-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1590,7 +1590,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada/mylos-beach-lefkada</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1601,7 +1601,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/myrtiotissa-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1612,7 +1612,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/mytakas-beach-milos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1623,7 +1623,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/navagio-shipwreck-beach-zakynthos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1634,7 +1634,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/nea-fokea-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -1645,7 +1645,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/nea-moudania-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -1656,7 +1656,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/new-golden-beach-paros</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1667,7 +1667,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada/nidri-beach-lefkada</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1678,7 +1678,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada/nikiana-beach-lefkada</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1689,7 +1689,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/orkos-beach-naxos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1700,7 +1700,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/ornos-mykonos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1711,7 +1711,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/orthi-ammos-beach-crete</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1722,7 +1722,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/pahia-ammos-beach-crete</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1733,7 +1733,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/paleochori-beach-milos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1744,7 +1744,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/panormos-beach-naxos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1755,7 +1755,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/panormos-beach-mykonos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1766,7 +1766,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/papafragas-beach-milos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1777,7 +1777,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/papikinou-beach-milos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1788,7 +1788,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/paradise-beach-mykonos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1799,7 +1799,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/paramonas-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1810,7 +1810,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada/pefkoulia-beach-lefkada</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1821,7 +1821,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/perigiali-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1832,7 +1832,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/santorini/perivolos-beach-santorini</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -1843,7 +1843,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/piperi-beach-paros</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1854,7 +1854,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/piso-livadi-beach-paros</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1865,7 +1865,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/plaka-beach-naxos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1876,7 +1876,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/plakias-beach-crete</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1887,7 +1887,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/plathiena-beach-milos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1898,7 +1898,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/platis-gialos-mykonos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1909,7 +1909,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/pollonia-beach-milos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1920,7 +1920,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada/porto-katsiki-lefkada</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1931,7 +1931,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/porto-koufo-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1942,7 +1942,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/porto-limnionas-zakynthos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1953,7 +1953,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/porto-roma-zakynthos</loc>
-    <lastmod>2025-10-13</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1964,7 +1964,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/porto-roxa-zakynthos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1975,7 +1975,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/porto-timoni-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -1986,7 +1986,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/porto-vromi-beach-zakynthos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1997,7 +1997,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/possidi-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -2008,7 +2008,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/pounta-beach-paros</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -2019,7 +2019,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/preveli-beach-crete</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -2030,7 +2030,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/provatas-beach-milos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -2041,7 +2041,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/psakoudia-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -2052,7 +2052,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/psarou-beach-mykonos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -2063,7 +2063,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/pyrgaki-beach-naxos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -2074,7 +2074,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/santorini/red-beach-santorini</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -2085,7 +2085,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/roda-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -2096,7 +2096,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/rovinia-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -2107,7 +2107,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/saint-nicholas-beach-zakynthos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -2118,7 +2118,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/sani-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -2129,7 +2129,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/santa-maria-beach-paros</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -2140,7 +2140,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/sarakiniko-beach-milos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -2151,7 +2151,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/sarti-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -2162,7 +2162,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/corfu/sidari-beach-corfu</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -2173,7 +2173,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/crete/sougia-beach-crete</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -2184,7 +2184,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/spathies-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -2195,7 +2195,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/naxos/stelida-beach-naxos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -2206,7 +2206,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/mykonos/super-paradise-beach-mykonos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -2217,7 +2217,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/toroni-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -2228,7 +2228,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/tripiti-beach-paros</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -2239,7 +2239,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/tsigrado-beach-milos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -2250,7 +2250,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/tsilivi-beach-zakynthos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -2261,7 +2261,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/milos/vani-beach-milos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -2272,7 +2272,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/varkiza-beach-attica</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -2283,7 +2283,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/lefkada/vasiliki-beach-lefkada</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -2294,7 +2294,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/santorini/vlychada-beach-santorini</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -2305,7 +2305,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/voula-beach-attica</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -2316,7 +2316,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/akti-vouliagmenis-attica</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -2327,7 +2327,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/lake-vouliagmeni-attica</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -2338,7 +2338,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/vourvourou-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -2349,7 +2349,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/voutakos-beach</loc>
-    <lastmod>2026-02-15</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -2360,7 +2360,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/attica/vravrona-beach-attica</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -2371,7 +2371,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/santorini/white-beach-santorini</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -2382,7 +2382,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/paros/xifara-beach-paros</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>
@@ -2393,7 +2393,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/zakynthos/xigia-sulfur-beach-zakynthos</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -2404,7 +2404,7 @@
   </url>
   <url>
     <loc>https://beachesofgreece.com/chalkidiki/zografou-beach-chalkidiki</loc>
-    <lastmod>2026-03-02</lastmod>
+    <lastmod>2026-05-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <image:image>

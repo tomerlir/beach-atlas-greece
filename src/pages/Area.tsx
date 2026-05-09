@@ -4,6 +4,7 @@ import { useParams, Link, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import { generateAreaMetaTitle, generateAreaMetaDescription } from "@/lib/seo";
+import { generateBeachUrl } from "@/lib/utils";
 import { generateAreaWebPageSchema } from "@/lib/structured-data";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -460,6 +461,31 @@ const Area = () => {
                     onPageChange={(page) => updateFilters({ page })}
                   />
                 </div>
+              )}
+
+              {/* Full beach index — ensures every beach in this area has an
+                  internal href in the prerendered HTML, regardless of pagination.
+                  Without this, only the 9 beaches on page 1 are linked and the
+                  rest become orphan pages for crawlers. */}
+              {beaches.length > BEACHES_PER_PAGE && (
+                <nav
+                  aria-label={`All beaches in ${areaName}`}
+                  className="mt-12 pt-8 border-t border-border/40"
+                >
+                  <h2 className="text-lg font-semibold mb-4">All beaches in {areaName}</h2>
+                  <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-2 text-sm">
+                    {beaches.map((beach) => (
+                      <li key={beach.id}>
+                        <Link
+                          to={generateBeachUrl(beach.area, beach.slug)}
+                          className="text-muted-foreground hover:text-foreground hover:underline"
+                        >
+                          {beach.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
               )}
 
               {/* Nearby Areas Chips */}

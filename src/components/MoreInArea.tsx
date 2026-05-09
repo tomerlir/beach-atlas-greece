@@ -19,12 +19,12 @@ export function MoreInArea({ area, beaches }: { area: SlimArea; beaches: Beach[]
           {beaches.map((b) => (
             <div
               key={b.slug}
-              className="flex-none w-[85%] sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)]"
+              className="flex-none w-[85%] sm:w-[45%] lg:w-[30%]"
             >
               <BeachCard beach={b} showDistance={false} compact engagementSource="browsing" />
             </div>
           ))}
-          <div className="flex-none w-[85%] sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.667rem)]">
+          <div className="flex-none w-[85%] sm:w-[45%] lg:w-[30%]">
             <Link
               to={areaHref}
               className="block h-full w-full border rounded-lg hover:bg-muted/50 transition-colors"

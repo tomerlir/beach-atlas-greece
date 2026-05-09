@@ -135,13 +135,23 @@ function buildSeededQueryClient(url: string, data: PrerenderData): QueryClient {
     client.setQueryData(["area-by-slug", areaData.slug], areaData);
   }
 
-  // Beach detail page: ["beach", slug] + parent area context.
+  // Beach detail page: ["beach", slug] + parent area context + siblings.
   const beachData = data.beachByPath[url];
   if (beachData) {
     client.setQueryData(["beach", beachData.slug], beachData);
     const parentArea = data.allAreas.find((a) => a.id === beachData.area_id);
     if (parentArea) {
       client.setQueryData(["area-by-slug", parentArea.slug], parentArea);
+      // Seed sibling beaches so the "More in {area}" section emits real
+      // <a href> links in the prerendered HTML — otherwise crawlers see
+      // an empty siblings array and beach pages have no beach↔beach links.
+      // Key shape must match BeachDetail.tsx: ["more-in-area", areaSlug, beachSlug].
+      const siblings = (data.beachesByAreaId[beachData.area_id] || [])
+        .filter((b) => b.slug !== beachData.slug)
+        .slice()
+        .sort((a, b) => String(a.name).localeCompare(String(b.name)))
+        .slice(0, 8);
+      client.setQueryData(["more-in-area", parentArea.slug, beachData.slug], siblings);
     }
   }
 

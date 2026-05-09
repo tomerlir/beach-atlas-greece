@@ -167,7 +167,7 @@ const BeachDetail = () => {
     queryKey: ["more-in-area", area, beachName],
     queryFn: async () => {
       if (!area || !beachName) return [] as Beach[];
-      return fetchMoreInArea(area, beachName, 2);
+      return fetchMoreInArea(area, beachName, 8);
     },
     enabled: !!area && !!beachName,
     staleTime: 5 * 60 * 1000,
