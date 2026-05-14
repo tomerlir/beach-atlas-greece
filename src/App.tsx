@@ -28,6 +28,7 @@ import BeachDetail from "./pages/BeachDetail";
 import Area from "./pages/Area";
 import NotFound from "./pages/NotFound";
 import MapPage from "./pages/Map";
+import Best from "./pages/Best";
 
 // Non-critical lazy components
 const ConsentBanner = lazy(() => import("@/components/ConsentBanner"));
@@ -146,6 +147,7 @@ export const AppCoreContent = () => {
           <Route path="/guide" element={<Guide />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/best/:slug" element={<Best />} />
           <Route path="/:areaSlug" element={<Area />} />
           <Route path="/:area/:beach-name" element={<BeachDetail />} />
 

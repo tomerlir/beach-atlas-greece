@@ -126,6 +126,21 @@ async function generateRoutes(): Promise<PrerenderPayload> {
   // added to sitemap.xml (see scripts/generate-sitemap.ts).
   routes.push("/", "/about", "/areas", "/map", "/ontology", "/faq", "/guide", "/privacy", "/404");
 
+  // /best/<slug> ranked-list pages. Slugs kept in sync with
+  // src/lib/best-lists.ts. Hardcoded here to avoid bundling the full
+  // best-lists.ts module (with rationale functions etc.) into the build
+  // scripts — only the slugs are needed for routing.
+  const BEST_SLUGS = [
+    "family-friendly-beaches-greece",
+    "blue-flag-beaches-greece",
+    "snorkeling-beaches-greece",
+    "calm-water-beaches-greece",
+    "sandy-beaches-greece",
+    "unspoiled-beaches-greece",
+    "easy-access-beaches-greece",
+  ];
+  for (const s of BEST_SLUGS) routes.push(`/best/${s}`);
+
   // Fetch all active areas — full row
   const { data: areas, error: areasError } = await supabase
     .from("areas")
