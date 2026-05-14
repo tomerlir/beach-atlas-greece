@@ -16,7 +16,6 @@ const OrganizationSchema = () => {
     description:
       "Comprehensive directory of Greek beaches with detailed information about amenities, accessibility, and conditions. Find the perfect beach in Greece for your next visit.",
     foundingDate: "2024",
-    sameAs: ["https://beachesofgreece.com"],
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "Customer Service",
