@@ -28,8 +28,9 @@ import {
   generateHomeWebPageSchema,
   generateBestListWebPageSchema,
   generateBestListFAQSchema,
+  generateBestListsIndexSchema,
 } from "./src/lib/structured-data";
-import { getBestListBySlug, rankBeachesForList } from "./src/lib/best-lists";
+import { getBestListBySlug, rankBeachesForList, BEST_LISTS } from "./src/lib/best-lists";
 import { AppProviders, AppCoreContent } from "./src/App";
 import type { Tables } from "./src/integrations/supabase/types";
 import type { Area } from "./src/types/area";
@@ -230,6 +231,11 @@ function buildHeadElements(
       jsonLdData = generateHomeWebPageSchema(allBeaches);
       title = generateHomeMetaTitle();
       description = generateHomeMetaDescription();
+    } else if (url === "/best") {
+      title = "Best Beach Lists in Greece — Ranked by Verified Criteria";
+      description =
+        "Curated, methodology-backed lists of the best Greek beaches by use case: family-friendly, Blue Flag, snorkeling, calm water, sandy, wild, and easy-access.";
+      jsonLdData = generateBestListsIndexSchema(BEST_LISTS, `${SITE_URL}${url}`);
     } else if (url.startsWith("/best/")) {
       const slug = url.slice("/best/".length);
       const list = getBestListBySlug(slug);

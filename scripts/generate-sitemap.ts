@@ -178,6 +178,12 @@ function generateSitemap(beaches: Beach[], areas: Area[]): string {
 
   <!-- "BEST" RANKED LIST PAGES — high priority for AI citations -->
   <url>
+    <loc>${escapeXml(`${SITE_URL}/best`)}</loc>
+    <lastmod>${currentDate}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>${escapeXml(`${SITE_URL}/best/family-friendly-beaches-greece`)}</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>weekly</changefreq>

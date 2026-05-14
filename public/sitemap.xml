@@ -34,6 +34,12 @@
 
   <!-- "BEST" RANKED LIST PAGES — high priority for AI citations -->
   <url>
+    <loc>https://beachesofgreece.com/best</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://beachesofgreece.com/best/family-friendly-beaches-greece</loc>
     <lastmod>2026-05-14</lastmod>
     <changefreq>weekly</changefreq>

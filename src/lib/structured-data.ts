@@ -561,6 +561,47 @@ export function generateBestListFAQSchema(
 }
 
 /**
+ * "/best" hub — CollectionPage listing each of the ranked best-of lists as
+ * its own ItemList entry. Gives AI engines a category-of-categories surface
+ * for "what kinds of best-beach lists do you have?" type queries.
+ */
+export function generateBestListsIndexSchema(
+  lists: Array<{ slug: string; h1: string; metaDescription: string }>,
+  canonicalUrl: string
+) {
+  const dateModified = new Date().toISOString().split("T")[0];
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": canonicalUrl,
+    name: "Best Beach Lists in Greece",
+    description:
+      "Index of methodology-backed best-of lists for Greek beaches by use case (family, snorkeling, calm water, sandy, wild, easy-access, Blue Flag).",
+    url: canonicalUrl,
+    datePublished: "2024-01-01",
+    dateModified,
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: lists.length,
+      itemListElement: lists.map((list, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: `${BASE_URL}/best/${list.slug}`,
+        name: list.h1,
+        description: list.metaDescription,
+      })),
+    },
+    breadcrumb: {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: BASE_URL },
+        { "@type": "ListItem", position: 2, name: "Best Lists", item: canonicalUrl },
+      ],
+    },
+  };
+}
+
+/**
  * Generate Map page schema with ItemList of beaches
  */
 export function generateMapWebPageSchema(beaches: Beach[], canonicalUrl: string) {
