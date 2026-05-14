@@ -4,6 +4,7 @@ import { openInMaps } from "@/lib/maps";
 import { generateBeachMetaTitle, generateBeachMetaDescription } from "@/lib/seo";
 import { generateBeachWebPageSchema, generateBeachFAQSchema } from "@/lib/structured-data";
 import { generateBeachOverview, generateBeachFAQs, generateAmenitiesAnswer } from "@/lib/beach-faq";
+import { BEST_LISTS } from "@/lib/best-lists";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
@@ -390,6 +391,13 @@ const BeachDetail = () => {
   const faqJsonLd = generateBeachFAQSchema(beach, canonicalUrl, dbContent?.faqs);
   const verifiedTimestamp = beach.verified_at || beach.updated_at;
 
+  // Reverse-index against /best/<slug> lists — every list whose filter()
+  // accepts this beach gets a link here. Builds the topical cluster: each
+  // beach detail page anchors into the relevant best-of pages, and the
+  // best-of pages link back to each beach. Critical for AEO/GEO because
+  // engines reward strongly interconnected category clusters.
+  const appearsInLists = BEST_LISTS.filter((list) => list.filter(beach));
+
   return (
     <>
       <Helmet>
@@ -711,6 +719,29 @@ const BeachDetail = () => {
                       </details>
                     ))}
                   </div>
+                </section>
+              )}
+
+              {appearsInLists.length > 0 && (
+                <section aria-labelledby="appears-in-heading" className="mt-10">
+                  <h2 id="appears-in-heading" className="text-xl font-semibold mb-3">
+                    Featured in our best-of lists
+                  </h2>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    {beach.name} matches the criteria for these curated rankings of Greek beaches.
+                  </p>
+                  <ul className="flex flex-wrap gap-2">
+                    {appearsInLists.map((list) => (
+                      <li key={list.slug}>
+                        <Link
+                          to={`/best/${list.slug}`}
+                          className="inline-block px-3 py-1.5 text-sm rounded-full border border-border bg-muted/40 hover:bg-muted text-foreground transition-colors"
+                        >
+                          {list.h1}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
                 </section>
               )}
             </div>

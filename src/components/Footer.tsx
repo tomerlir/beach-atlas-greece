@@ -11,6 +11,9 @@ const Footer = () => {
           <Link to="/guide" className="text-muted-foreground hover:text-primary transition-colors">
             Guide
           </Link>
+          <Link to="/best" className="text-muted-foreground hover:text-primary transition-colors">
+            Best lists
+          </Link>
           <Link
             to="/ontology"
             className="text-muted-foreground hover:text-primary transition-colors"

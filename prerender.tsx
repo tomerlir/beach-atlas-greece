@@ -26,7 +26,11 @@ import {
   generateBeachFAQSchema,
   generateAreaWebPageSchema,
   generateHomeWebPageSchema,
+  generateBestListWebPageSchema,
+  generateBestListFAQSchema,
+  generateBestListsIndexSchema,
 } from "./src/lib/structured-data";
+import { getBestListBySlug, rankBeachesForList, BEST_LISTS } from "./src/lib/best-lists";
 import { AppProviders, AppCoreContent } from "./src/App";
 import type { Tables } from "./src/integrations/supabase/types";
 import type { Area } from "./src/types/area";
@@ -113,8 +117,9 @@ function buildSeededQueryClient(url: string, data: PrerenderData): QueryClient {
   });
 
   // Routes that render the full beaches grid client-side (need ["beaches"]).
-  // Index uses the full set for filtering/sorting/pagination; Map plots all markers.
-  const NEEDS_ALL_BEACHES = url === "/" || url === "/map";
+  // Index, Map, and Best (which filters all beaches to rank a subset) all
+  // need the full beaches list seeded so SSR renders real <a> links.
+  const NEEDS_ALL_BEACHES = url === "/" || url === "/map" || url.startsWith("/best/");
 
   // Routes that render the area listing page (need ["areas-with-beach-count"]).
   const NEEDS_AREAS_LIST = url === "/areas";
@@ -226,6 +231,23 @@ function buildHeadElements(
       jsonLdData = generateHomeWebPageSchema(allBeaches);
       title = generateHomeMetaTitle();
       description = generateHomeMetaDescription();
+    } else if (url === "/best") {
+      title = "Best Beach Lists in Greece — Ranked by Verified Criteria";
+      description =
+        "Curated, methodology-backed lists of the best Greek beaches by use case: family-friendly, Blue Flag, snorkeling, calm water, sandy, wild, and easy-access.";
+      jsonLdData = generateBestListsIndexSchema(BEST_LISTS, `${SITE_URL}${url}`);
+    } else if (url.startsWith("/best/")) {
+      const slug = url.slice("/best/".length);
+      const list = getBestListBySlug(slug);
+      if (list) {
+        title = list.metaTitle;
+        description = list.metaDescription;
+        const canonicalUrl = `${SITE_URL}${url}`;
+        const allBeaches = data.allBeaches as Tables<"beaches">[];
+        const ranked = rankBeachesForList(allBeaches, list);
+        jsonLdData = generateBestListWebPageSchema(list, ranked, canonicalUrl);
+        extraJsonLd.push(generateBestListFAQSchema(list, canonicalUrl));
+      }
     } else if (url === "/about") {
       title = "About Us | Verified Greek Beach Data & Smart Search";
       description =
