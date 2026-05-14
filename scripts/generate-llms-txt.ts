@@ -37,6 +37,7 @@ if (existsSync(envPath)) {
 }
 
 const SITE_URL = "https://beachesofgreece.com";
+const MAX_DESC_LEN = 140;
 const SUPABASE_URL = process.env.VITE_SUPABASE_URL || "";
 const SUPABASE_ANON_KEY =
   process.env.VITE_SUPABASE_PUBLISHABLE_KEY || process.env.VITE_SUPABASE_ANON_KEY || "";
@@ -62,6 +63,14 @@ interface BeachRow {
   slug: string;
   area: string;
   area_id: string | null;
+}
+
+function truncateAtWord(text: string, maxLen: number): string {
+  if (text.length <= maxLen) return text;
+  const cut = text.slice(0, maxLen);
+  const lastSpace = cut.lastIndexOf(" ");
+  const trimmed = lastSpace > 0 ? cut.slice(0, lastSpace) : cut;
+  return `${trimmed.replace(/[,;:.\-—\s]+$/, "")}…`;
 }
 
 function buildLlmsTxt(areas: AreaRow[], beaches: BeachRow[]): string {
@@ -139,7 +148,7 @@ function buildLlmsTxt(areas: AreaRow[], beaches: BeachRow[]): string {
   for (const area of sortedAreas) {
     const count = area.beach_count ?? beaches.filter((b) => b.area === area.name).length;
     const desc = (area.description || "").replace(/\s+/g, " ").trim();
-    const tagline = desc ? ` — ${desc.slice(0, 140)}${desc.length > 140 ? "…" : ""}` : "";
+    const tagline = desc ? ` — ${truncateAtWord(desc, MAX_DESC_LEN)}` : "";
     lines.push(`- [${area.name}](${SITE_URL}/${area.slug}): ${count} beaches${tagline}`);
   }
   lines.push("");
@@ -165,7 +174,7 @@ function buildLlmsTxt(areas: AreaRow[], beaches: BeachRow[]): string {
     lines.push("");
     const sorted = [...areaBeaches].sort((a, b) => a.name.localeCompare(b.name));
     for (const beach of sorted) {
-      lines.push(`- [${beach.name}](${SITE_URL}/${area.slug}/${beach.slug})`);
+      lines.push(`- [${beach.name.trim()}](${SITE_URL}/${area.slug}/${beach.slug})`);
     }
     lines.push("");
   }
@@ -205,13 +214,13 @@ async function main() {
   }
 
   if (!areas || areas.length === 0) {
-    console.warn("⚠️  No areas found in database");
-    return;
+    console.error("❌ No active areas found in database — refusing to overwrite llms.txt.");
+    process.exit(1);
   }
 
   if (!beaches || beaches.length === 0) {
-    console.warn("⚠️  No beaches found in database");
-    return;
+    console.error("❌ No active beaches found in database — refusing to overwrite llms.txt.");
+    process.exit(1);
   }
 
   const content = buildLlmsTxt(areas as AreaRow[], beaches as BeachRow[]);
