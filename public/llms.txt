@@ -1,0 +1,291 @@
+# Beaches of Greece
+
+> Verified directory of 203 Greek beaches across 11 regions, with structured data on amenities, parking, wave conditions, Blue Flag status, beach type (sandy/pebbly/mixed), and organized vs. unorganized classification. Designed to answer "best beach for X" questions with cited, comparable facts.
+
+## Methodology
+
+- Data sourced from OpenStreetMap (geolocation), official tourism boards, the Blue Flag Foundation (https://www.blueflag.global), and on-site verification.
+- Each beach record carries a `verified_at` timestamp shown on its detail page.
+- The full ontology — field definitions, enums, and allowed values — is published at `/ontology`.
+- Photo credits and Creative Commons licenses are preserved per Wikimedia Commons attribution requirements.
+
+## Core pages
+
+- [Beaches of Greece — homepage](https://beachesofgreece.com): natural-language search across the full directory
+- [Beach selection guide](https://beachesofgreece.com/guide): how to choose by use case
+- [FAQ](https://beachesofgreece.com/faq): common questions about Greek beaches and the directory
+- [Beach ontology](https://beachesofgreece.com/ontology): field definitions, enums, and schema
+- [Browse all areas](https://beachesofgreece.com/areas): index of regions
+- [Interactive map](https://beachesofgreece.com/map): all beaches plotted geographically
+- [About](https://beachesofgreece.com/about): mission and data philosophy
+
+## Best-of lists (ranked category pages)
+
+Each list is a ranked, methodology-backed cut of the directory for a specific intent. Direct, citable source for "best X beaches in Greece" queries.
+
+- [Best family-friendly beaches in Greece](https://beachesofgreece.com/best/family-friendly-beaches-greece): calm water + lifeguards + amenities scoring
+- [Blue Flag beaches in Greece](https://beachesofgreece.com/best/blue-flag-beaches-greece): verified registry from the FEE Blue Flag programme
+- [Best snorkeling beaches in Greece](https://beachesofgreece.com/best/snorkeling-beaches-greece): clear water, rocky shorelines, snorkeling-listed amenity
+- [Best calm-water beaches in Greece for swimming](https://beachesofgreece.com/best/calm-water-beaches-greece): sheltered bays, leeward coasts, protected coves
+- [Best sandy beaches in Greece](https://beachesofgreece.com/best/sandy-beaches-greece): SANDY beach-type classification, ranked by amenity completeness
+- [Best wild & unspoiled beaches in Greece](https://beachesofgreece.com/best/unspoiled-beaches-greece): unorganized, remote-access, minimal facilities
+- [Easy-access Greek beaches with parking](https://beachesofgreece.com/best/easy-access-beaches-greece): large parking lots, organized facilities, short walks
+
+## Regions
+
+- [Attica](https://beachesofgreece.com/attica): 13 beaches — The Attica coastline is surprisingly diverse, offering everything from organized city beaches to secluded coves. The water is generally…
+- [Chalkidiki](https://beachesofgreece.com/chalkidiki): 28 beaches — Famous for its three peninsulas stretching into the Aegean—Kassandra, Sithonia, and Mount Athos—Chalkidiki blends pine forests with…
+- [Corfu](https://beachesofgreece.com/corfu): 36 beaches — Corfu, or Kérkyra, is a lush Greek island in the Ionian Sea, known for its stunning natural beauty with green landscapes and beaches, as…
+- [Crete](https://beachesofgreece.com/crete): 14 beaches — Crete is Greece's largest island and a major Mediterranean destination, famed for its rich history, including the ancient Minoan…
+- [Lefkada](https://beachesofgreece.com/lefkada): 13 beaches — Lefkada is a Greek island in the Ionian Sea, known for its dramatic landscapes with towering white cliffs and stunning turquoise beaches…
+- [Milos](https://beachesofgreece.com/milos): 16 beaches — Milos is a volcanic Greek island in the Cyclades group, famous for its unique volcanic landscape with colorful cliffs, caves, and over 70…
+- [Mykonos](https://beachesofgreece.com/mykonos): 18 beaches — Mykonos is a glamorous Greek island known for its iconic white-washed architecture, famous windmills, and stunning beaches, offering a mix…
+- [Naxos](https://beachesofgreece.com/naxos): 16 beaches — Naxos is a large, green island in Greece's Cyclades group, known for its beautiful sandy beaches, charming mountain villages, fertile…
+- [Paros](https://beachesofgreece.com/paros): 17 beaches — Paros is a popular Greek island in the central Aegean Sea, known for its picturesque Cycladic villages, golden beaches, vibrant nightlife…
+- [Santorini](https://beachesofgreece.com/santorini): 10 beaches — Santorini is a world-famous Greek island in the Aegean Sea, known for its breathtaking caldera views, picturesque villages with whitewashed…
+- [Zakynthos](https://beachesofgreece.com/zakynthos): 22 beaches — Zakynthos (also known as Zante) is a verdant Greek island in the Ionian Sea, famous for its diverse landscapes, from dramatic cliffs and…
+
+## Beaches
+
+Full beach inventory, grouped by region. Each link resolves to a detail page with full schema.org `Beach`+`TouristAttraction` JSON-LD, amenities, parking, wave conditions, and a per-beach FAQ block.
+
+### Attica
+
+- [Agia Marina](https://beachesofgreece.com/attica/agia-marina-beach-aegina-attica)
+- [Anavissos beach](https://beachesofgreece.com/attica/anavissos-beach-attica)
+- [Artemida beach](https://beachesofgreece.com/attica/artemida-beach-attica)
+- [Asteras beach](https://beachesofgreece.com/attica/asteras-glyfada-beach-attica)
+- [Avlaki beach](https://beachesofgreece.com/attica/avlaki-beach-attica)
+- [Cape Sounion beach](https://beachesofgreece.com/attica/sounio-beach-attica)
+- [Kavouri beach](https://beachesofgreece.com/attica/kavouri-beach-attica)
+- [Marathon beach](https://beachesofgreece.com/attica/marathon-beach-attica)
+- [Varkiza beach](https://beachesofgreece.com/attica/varkiza-beach-attica)
+- [Voula beach](https://beachesofgreece.com/attica/voula-beach-attica)
+- [Vouliagmeni beach](https://beachesofgreece.com/attica/akti-vouliagmenis-attica)
+- [Vouliagmeni Lake](https://beachesofgreece.com/attica/lake-vouliagmeni-attica)
+- [Vravrona beach](https://beachesofgreece.com/attica/vravrona-beach-attica)
+
+### Chalkidiki
+
+- [Polychrono beach](https://beachesofgreece.com/chalkidiki/polychrono-beach-chalkidiki)
+- [Agios Georgios beach](https://beachesofgreece.com/chalkidiki/agios-georgios-beach-chalkidiki)
+- [Agios Ioannis beach](https://beachesofgreece.com/chalkidiki/agios-ioannis-beach-chalkidiki)
+- [Agios Mamas beach](https://beachesofgreece.com/chalkidiki/agios-mamas-beach-chalkidiki)
+- [Elia beach](https://beachesofgreece.com/chalkidiki/elia-beach-chalkidiki)
+- [Fava beach](https://beachesofgreece.com/chalkidiki/fava-beach-chalkidiki)
+- [Flogita beach](https://beachesofgreece.com/chalkidiki/flogita-beach-chalkidiki)
+- [Gerakini beach](https://beachesofgreece.com/chalkidiki/gerakini-beach-chalkidiki)
+- [Hanioti beach](https://beachesofgreece.com/chalkidiki/hanioti-beach-chalkidiki)
+- [Kalamitsi beach](https://beachesofgreece.com/chalkidiki/kalamitsi-beach-chalkidiki)
+- [Kalithea beach](https://beachesofgreece.com/chalkidiki/kalithea-beach-chalkidiki)
+- [Karydi beach](https://beachesofgreece.com/chalkidiki/karydi-beach-chalkidiki)
+- [Kavourotrypes beach](https://beachesofgreece.com/chalkidiki/kavourotrypes-beach-chalkidiki)
+- [Kryopigi beach](https://beachesofgreece.com/chalkidiki/kryopigi-beach-chalkidiki)
+- [Lagomandra beach](https://beachesofgreece.com/chalkidiki/lagomandra-beach-chalkidiki)
+- [Metamorfosi beach](https://beachesofgreece.com/chalkidiki/metamorfosi-beach-chalkidiki)
+- [Nea Fokea beach](https://beachesofgreece.com/chalkidiki/nea-fokea-beach-chalkidiki)
+- [Nea Moudania beach](https://beachesofgreece.com/chalkidiki/nea-moudania-beach-chalkidiki)
+- [Perigiali beach](https://beachesofgreece.com/chalkidiki/perigiali-beach-chalkidiki)
+- [Porto Koufo beach](https://beachesofgreece.com/chalkidiki/porto-koufo-beach-chalkidiki)
+- [Possidi beach](https://beachesofgreece.com/chalkidiki/possidi-beach-chalkidiki)
+- [Psakoudia beach](https://beachesofgreece.com/chalkidiki/psakoudia-beach-chalkidiki)
+- [Sani beach](https://beachesofgreece.com/chalkidiki/sani-beach-chalkidiki)
+- [Sarti beach](https://beachesofgreece.com/chalkidiki/sarti-beach-chalkidiki)
+- [Spathies beach](https://beachesofgreece.com/chalkidiki/spathies-beach-chalkidiki)
+- [Toroni beach](https://beachesofgreece.com/chalkidiki/toroni-beach-chalkidiki)
+- [Vourvourou beach](https://beachesofgreece.com/chalkidiki/vourvourou-beach-chalkidiki)
+- [Zografou beach](https://beachesofgreece.com/chalkidiki/zografou-beach-chalkidiki)
+
+### Corfu
+
+- [Boukari beach](https://beachesofgreece.com/corfu/boukari-beach-corfu)
+- [Acharavi beach](https://beachesofgreece.com/corfu/acharavi-beach-corfu)
+- [Agios Georgios beach](https://beachesofgreece.com/corfu/agios-georgios-beach-corfu)
+- [Agios Gordios beach](https://beachesofgreece.com/corfu/agios-gordios-beach-corfu)
+- [Agios Spyridon Palaiokastritsa beach](https://beachesofgreece.com/corfu/agios-spyridon-palaiokastritsa-beach-corfu)
+- [Agios Spyridon Peritheia beach](https://beachesofgreece.com/corfu/agios-spyridon-beach-peritheia-corfu)
+- [Agios Stefanos beach](https://beachesofgreece.com/corfu/agios-stefanos-beach-corfu)
+- [Anemomylos beach](https://beachesofgreece.com/corfu/anemomylos-beach-corfu)
+- [Arillas beach](https://beachesofgreece.com/corfu/arillas-beach-corfu)
+- [Barbati beach](https://beachesofgreece.com/corfu/barbati-beach-corfu)
+- [Bataria Kassiopi beach](https://beachesofgreece.com/corfu/bataria-beach-kassiopi-corfu)
+- [Benitses beach](https://beachesofgreece.com/corfu/benitses-beach-corfu)
+- [Canal d'Amour](https://beachesofgreece.com/corfu/canal-damour-corfu)
+- [Chalikounas beach](https://beachesofgreece.com/corfu/chalikounas-beach-corfu)
+- [Dassia beach](https://beachesofgreece.com/corfu/dassia-beach-corfu)
+- [Ermones beach](https://beachesofgreece.com/corfu/ermones-beach-corfu)
+- [Faliraki beach](https://beachesofgreece.com/corfu/faliraki-beach-corfu)
+- [Gardeno beach](https://beachesofgreece.com/corfu/gardeno-beach-corfu)
+- [Gialiskari beach](https://beachesofgreece.com/corfu/gialiskari-beach-corfu)
+- [Glyfada beach](https://beachesofgreece.com/corfu/glyfada-beach-corfu)
+- [Ipsos beach](https://beachesofgreece.com/corfu/ipsos-beach-corfu)
+- [Issos beach](https://beachesofgreece.com/corfu/issos-beach-corfu)
+- [Kalami beach](https://beachesofgreece.com/corfu/kalami-beach-corfu)
+- [Kontogialos beach](https://beachesofgreece.com/corfu/kontogialos-beach-corfu)
+- [Liapades beach](https://beachesofgreece.com/corfu/liapades-beach-corfu)
+- [Loggas beach](https://beachesofgreece.com/corfu/loggas-beach-corfu)
+- [Marathias beach](https://beachesofgreece.com/corfu/marathias-beach-corfu)
+- [Messongi beach](https://beachesofgreece.com/corfu/messongi-beach-corfu)
+- [Mon Repos beach](https://beachesofgreece.com/corfu/mon-repos-beach-corfu)
+- [Moraitika beach](https://beachesofgreece.com/corfu/moraitika-beach-corfu)
+- [Myrtiotissa beach](https://beachesofgreece.com/corfu/myrtiotissa-beach-corfu)
+- [Paramonas beach](https://beachesofgreece.com/corfu/paramonas-beach-corfu)
+- [Porto Timoni](https://beachesofgreece.com/corfu/porto-timoni-beach-corfu)
+- [Roda beach](https://beachesofgreece.com/corfu/roda-beach-corfu)
+- [Rovinia beach](https://beachesofgreece.com/corfu/rovinia-beach-corfu)
+- [Sidari beach](https://beachesofgreece.com/corfu/sidari-beach-corfu)
+
+### Crete
+
+- [Agia Marina Beach](https://beachesofgreece.com/crete/agia-marina-beach-crete)
+- [Agiofaraggo beach](https://beachesofgreece.com/crete/agiofaraggo-beach-crete)
+- [Anidri Beach](https://beachesofgreece.com/crete/anidri-beach-crete)
+- [Balos beach](https://beachesofgreece.com/crete/balos-beach-crete)
+- [Elafonissi beach](https://beachesofgreece.com/crete/elafonissi-beach-crete)
+- [Falasarna Beach](https://beachesofgreece.com/crete/falasarna-beach-crete)
+- [Istro beach](https://beachesofgreece.com/crete/istro-beach-crete)
+- [Lissos Beach](https://beachesofgreece.com/crete/lissos-beach-crete)
+- [Marathi beach](https://beachesofgreece.com/crete/marathi-beach-crete)
+- [Orthi Ammos beach](https://beachesofgreece.com/crete/orthi-ammos-beach-crete)
+- [Pahia Ammos beach](https://beachesofgreece.com/crete/pahia-ammos-beach-crete)
+- [Plakias beach](https://beachesofgreece.com/crete/plakias-beach-crete)
+- [Preveli beach](https://beachesofgreece.com/crete/preveli-beach-crete)
+- [Sougia Beach](https://beachesofgreece.com/crete/sougia-beach-crete)
+
+### Lefkada
+
+- [Agiofili beach](https://beachesofgreece.com/lefkada/agiofili-beach-lefkada)
+- [Agios Ioannis beach](https://beachesofgreece.com/lefkada/agios-ioannis-beach-lefkada)
+- [Agios Nikitas beach](https://beachesofgreece.com/lefkada/agios-nikitas-beach-lefkada)
+- [Desimi beach](https://beachesofgreece.com/lefkada/desimi-beach-lefkada)
+- [Egremni beach](https://beachesofgreece.com/lefkada/egremni-beach-lefkada)
+- [Kathisma beach](https://beachesofgreece.com/lefkada/kathisma-beach-lefkada)
+- [Megali Petra beach](https://beachesofgreece.com/lefkada/megali-petra-beach-lefkada)
+- [Mylos beach](https://beachesofgreece.com/lefkada/mylos-beach-lefkada)
+- [Nidri beach](https://beachesofgreece.com/lefkada/nidri-beach-lefkada)
+- [Nikiana beach](https://beachesofgreece.com/lefkada/nikiana-beach-lefkada)
+- [Pefkoulia beach](https://beachesofgreece.com/lefkada/pefkoulia-beach-lefkada)
+- [Porto Katsiki](https://beachesofgreece.com/lefkada/porto-katsiki-lefkada)
+- [Vasiliki beach](https://beachesofgreece.com/lefkada/vasiliki-beach-lefkada)
+
+### Milos
+
+- [Firiplaka beach](https://beachesofgreece.com/milos/firiplaka-beach-milos)
+- [Firopotamos beach](https://beachesofgreece.com/milos/firopotamos-beach-milos)
+- [Agkali beach](https://beachesofgreece.com/milos/agkali-beach-milos)
+- [Alogomandra beach](https://beachesofgreece.com/milos/alogomandra-beach-milos)
+- [Gerakas beach](https://beachesofgreece.com/milos/gerakas-beach-milos)
+- [Kleftiko](https://beachesofgreece.com/milos/kleftiko-milos)
+- [Mytakas beach](https://beachesofgreece.com/milos/mytakas-beach-milos)
+- [Paleochori beach](https://beachesofgreece.com/milos/paleochori-beach-milos)
+- [Papafragas beach](https://beachesofgreece.com/milos/papafragas-beach-milos)
+- [Papikinou beach](https://beachesofgreece.com/milos/papikinou-beach-milos)
+- [Plathiena beach](https://beachesofgreece.com/milos/plathiena-beach-milos)
+- [Pollonia beach](https://beachesofgreece.com/milos/pollonia-beach-milos)
+- [Provatas beach](https://beachesofgreece.com/milos/provatas-beach-milos)
+- [Sarakiniko beach](https://beachesofgreece.com/milos/sarakiniko-beach-milos)
+- [Tsigrado beach](https://beachesofgreece.com/milos/tsigrado-beach-milos)
+- [Vani beach](https://beachesofgreece.com/milos/vani-beach-milos)
+
+### Mykonos
+
+- [Agia Anna beach](https://beachesofgreece.com/mykonos/agia-anna-beach-mykonos)
+- [Agios Sostis beach](https://beachesofgreece.com/mykonos/agios-sostis-beach-mykonos)
+- [Agios Stefanos](https://beachesofgreece.com/mykonos/agios-stefanos-mykonos)
+- [Agrari beach](https://beachesofgreece.com/mykonos/agrari-beach-mykonos)
+- [Chora beach](https://beachesofgreece.com/mykonos/chora-beach-mykonos)
+- [Divounia beach](https://beachesofgreece.com/mykonos/divounia-beach-mykonos)
+- [Elia beach](https://beachesofgreece.com/mykonos/elia-beach-mykonos)
+- [Ftelia beach](https://beachesofgreece.com/mykonos/ftelia-beach-mykonos)
+- [Kalafatis beach](https://beachesofgreece.com/mykonos/kalafatis-beach-mykonos)
+- [Kalo Livadi](https://beachesofgreece.com/mykonos/kalo-livadi-mykonos)
+- [Kapari beach](https://beachesofgreece.com/mykonos/kapari-beach-mykonos)
+- [Lia beach](https://beachesofgreece.com/mykonos/lia-beach-mykonos)
+- [Ornos](https://beachesofgreece.com/mykonos/ornos-mykonos)
+- [Panormos beach](https://beachesofgreece.com/mykonos/panormos-beach-mykonos)
+- [Paradise beach](https://beachesofgreece.com/mykonos/paradise-beach-mykonos)
+- [Platis Gialos](https://beachesofgreece.com/mykonos/platis-gialos-mykonos)
+- [Psarou beach](https://beachesofgreece.com/mykonos/psarou-beach-mykonos)
+- [Super Paradise beach](https://beachesofgreece.com/mykonos/super-paradise-beach-mykonos)
+
+### Naxos
+
+- [Maragkas beach](https://beachesofgreece.com/naxos/maragkas-beach-naxos)
+- [Agia Anna beach](https://beachesofgreece.com/naxos/agia-anna-beach-naxos)
+- [Agiassos beach](https://beachesofgreece.com/naxos/agiassos-beach-naxos)
+- [Agios Georgios beach](https://beachesofgreece.com/naxos/agios-georgios-beach-naxos)
+- [Agios Prokopios](https://beachesofgreece.com/naxos/agios-prokopios-naxos)
+- [Alyko beach](https://beachesofgreece.com/naxos/alyko-beach-naxos)
+- [Apollonas Beach](https://beachesofgreece.com/naxos/apollonas-beach-naxos)
+- [Azalas Beach](https://beachesofgreece.com/naxos/azalas-beach-naxos)
+- [Kalantos Beach](https://beachesofgreece.com/naxos/kalantos-beach-naxos)
+- [Kastraki beach](https://beachesofgreece.com/naxos/kastraki-beach-naxos)
+- [Mikri Vigla](https://beachesofgreece.com/naxos/mikri-vigla-naxos)
+- [Orkos beach](https://beachesofgreece.com/naxos/orkos-beach-naxos)
+- [Panormos beach](https://beachesofgreece.com/naxos/panormos-beach-naxos)
+- [Plaka Beach](https://beachesofgreece.com/naxos/plaka-beach-naxos)
+- [Pyrgaki beach](https://beachesofgreece.com/naxos/pyrgaki-beach-naxos)
+- [Stelida beach](https://beachesofgreece.com/naxos/stelida-beach-naxos)
+
+### Paros
+
+- [Agia Irini beach](https://beachesofgreece.com/paros/agia-irini-beach-paros)
+- [Aliki Beach](https://beachesofgreece.com/paros/aliki-beach-paros)
+- [Faragas Beach](https://beachesofgreece.com/paros/faragas-beach)
+- [Glyfa Beach](https://beachesofgreece.com/paros/glyfa-beach-paros)
+- [Kolymbithres beach](https://beachesofgreece.com/paros/kolymbithres-beach-paros)
+- [Lageri beach](https://beachesofgreece.com/paros/lageri-beach-paros)
+- [Logora beach](https://beachesofgreece.com/paros/logora-beach-paros)
+- [Molos beach](https://beachesofgreece.com/paros/molos-beach-paros)
+- [Monastiri beach](https://beachesofgreece.com/paros/monastiri-beach-paros)
+- [New Golden beach](https://beachesofgreece.com/paros/new-golden-beach-paros)
+- [Piperi beach](https://beachesofgreece.com/paros/piperi-beach-paros)
+- [Piso Livadi beach](https://beachesofgreece.com/paros/piso-livadi-beach-paros)
+- [Pounta beach](https://beachesofgreece.com/paros/pounta-beach-paros)
+- [Santa Maria beach](https://beachesofgreece.com/paros/santa-maria-beach-paros)
+- [Tripiti beach](https://beachesofgreece.com/paros/tripiti-beach-paros)
+- [Voutakos Beach](https://beachesofgreece.com/paros/voutakos-beach)
+- [Xifara beach](https://beachesofgreece.com/paros/xifara-beach-paros)
+
+### Santorini
+
+- [Baxedes beach](https://beachesofgreece.com/santorini/baxedes-beach-santorini)
+- [Black Beach](https://beachesofgreece.com/santorini/black-beach-santorini)
+- [Exomitis beach](https://beachesofgreece.com/santorini/exomitis-beach-santorini)
+- [Gialos Beach](https://beachesofgreece.com/santorini/gialos-beach-santorini)
+- [Kamari beach](https://beachesofgreece.com/santorini/kamari-beach-santorini)
+- [Mesa Pigadia beach](https://beachesofgreece.com/santorini/mesa-pigadia-beach-santorini)
+- [Perivolos beach](https://beachesofgreece.com/santorini/perivolos-beach-santorini)
+- [Red Beach](https://beachesofgreece.com/santorini/red-beach-santorini)
+- [Vlychada Beach](https://beachesofgreece.com/santorini/vlychada-beach-santorini)
+- [White Beach](https://beachesofgreece.com/santorini/white-beach-santorini)
+
+### Zakynthos
+
+- [Agios Nikolaos beach](https://beachesofgreece.com/zakynthos/agios-nikolaos-beach-zakynthos)
+- [Alykanas beach](https://beachesofgreece.com/zakynthos/alykanas-beach-zakynthos)
+- [Alykes beach](https://beachesofgreece.com/zakynthos/alykes-beach-zakynthos)
+- [Argassi beach](https://beachesofgreece.com/zakynthos/argassi-beach-zakynthos)
+- [Banana beach](https://beachesofgreece.com/zakynthos/banana-beach-zakynthos)
+- [Dafni beach](https://beachesofgreece.com/zakynthos/dafni-beach-zakynthos)
+- [Gerakas beach](https://beachesofgreece.com/zakynthos/gerakas-beach-zakynthos)
+- [Kalamaki beach](https://beachesofgreece.com/zakynthos/kalamaki-beach-zakynthos)
+- [Keri beach](https://beachesofgreece.com/zakynthos/keri-beach-zakynthos)
+- [Korakonisi](https://beachesofgreece.com/zakynthos/korakonisi-zakynthos)
+- [Laganas beach](https://beachesofgreece.com/zakynthos/laganas-beach-zakynthos)
+- [Makris Gialos](https://beachesofgreece.com/zakynthos/makris-gialos-zakynthos)
+- [Marathias beach](https://beachesofgreece.com/zakynthos/marathias-beach-zakynthos)
+- [Mizithres Beach](https://beachesofgreece.com/zakynthos/mizithres-beach-zakynthos)
+- [Navagio (Shipwreck beach)](https://beachesofgreece.com/zakynthos/navagio-shipwreck-beach-zakynthos)
+- [Porto Limnionas](https://beachesofgreece.com/zakynthos/porto-limnionas-zakynthos)
+- [Porto Roma](https://beachesofgreece.com/zakynthos/porto-roma-zakynthos)
+- [Porto Roxa](https://beachesofgreece.com/zakynthos/porto-roxa-zakynthos)
+- [Porto Vromi beach](https://beachesofgreece.com/zakynthos/porto-vromi-beach-zakynthos)
+- [Saint Nicholas beach](https://beachesofgreece.com/zakynthos/saint-nicholas-beach-zakynthos)
+- [Tsilivi beach](https://beachesofgreece.com/zakynthos/tsilivi-beach-zakynthos)
+- [Xigia Sulfur beach](https://beachesofgreece.com/zakynthos/xigia-sulfur-beach-zakynthos)
+
+## Machine-readable indexes
+
+- [sitemap.xml](https://beachesofgreece.com/sitemap.xml): full URL inventory with lastmod
+- [robots.txt](https://beachesofgreece.com/robots.txt): crawler permissions — GPTBot, ClaudeBot, PerplexityBot, Google-Extended are explicitly allowed
