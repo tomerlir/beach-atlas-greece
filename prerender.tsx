@@ -23,6 +23,7 @@ import {
 } from "./src/lib/seo";
 import {
   generateBeachWebPageSchema,
+  generateBeachFAQSchema,
   generateAreaWebPageSchema,
   generateHomeWebPageSchema,
 } from "./src/lib/structured-data";
@@ -174,17 +175,31 @@ function buildHeadElements(
   let title = "Beaches of Greece";
   let description = "Discover the best beaches in Greece with verified data and smart search.";
   let jsonLdData: unknown = null;
+  // Additional JSON-LD blocks to emit alongside the main schema (e.g. FAQPage).
+  const extraJsonLd: unknown[] = [];
 
   if (data) {
+    // Prefer the full beach row (beachByPath) over the narrow beachMetadata —
+    // schema generation needs verified_at, latitude, longitude, photo fields,
+    // none of which are in BeachMetadata.
+    const fullBeach = data.beachByPath[url];
     const beachData = data.beachMetadata[url];
     const areaData = data.areaMetadata[url];
 
-    if (beachData) {
-      const beach = beachData as Partial<Tables<"beaches">> & BeachMetadata;
-      title = generateBeachMetaTitle(beach as Tables<"beaches">);
-      description = generateBeachMetaDescription(beach as Tables<"beaches">);
+    if (fullBeach && beachData) {
+      const beach = fullBeach as Tables<"beaches">;
+      title = generateBeachMetaTitle(beach);
+      description = generateBeachMetaDescription(beach);
       const canonicalUrl = `${SITE_URL}${url}`;
-      jsonLdData = generateBeachWebPageSchema(beach as Tables<"beaches">, canonicalUrl);
+      jsonLdData = generateBeachWebPageSchema(beach, canonicalUrl);
+      // Pull the embedded beach_content (set by generate-routes.ts) so the
+      // FAQPage schema uses AI-generated Q&A from the DB rather than the
+      // local template fallback.
+      const embeddedContent = (fullBeach as { beach_content?: { faqs?: unknown } }).beach_content;
+      const dbFaqs = Array.isArray(embeddedContent?.faqs)
+        ? (embeddedContent!.faqs as Array<{ question: string; answer: string }>)
+        : undefined;
+      extraJsonLd.push(generateBeachFAQSchema(beach, canonicalUrl, dbFaqs));
     } else if (areaData) {
       const area: Area = {
         id: "",
@@ -266,6 +281,16 @@ function buildHeadElements(
       props: {
         type: "application/ld+json",
         children: JSON.stringify(jsonLdData),
+      },
+    });
+  }
+
+  for (const extra of extraJsonLd) {
+    elements.add({
+      type: "script",
+      props: {
+        type: "application/ld+json",
+        children: JSON.stringify(extra),
       },
     });
   }

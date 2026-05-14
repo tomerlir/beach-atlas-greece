@@ -8,6 +8,7 @@
 import { Tables } from "@/integrations/supabase/types";
 import type { Area } from "@/types/area";
 import { generateAreaSlug, slugify } from "@/lib/utils";
+import { generateBeachFAQs } from "@/lib/beach-faq";
 
 type Beach = Tables<"beaches">;
 
@@ -93,6 +94,20 @@ export function generateBeachPlaceSchema(beach: Beach, canonicalUrl: string) {
     amenityFeature: amenityFeatures,
     // Additional beach-specific properties
     additionalProperty: generateBeachProperties(beach),
+    // Cite the Blue Flag Foundation for certified beaches — gives AI engines
+    // a verifiable upstream source for the claim.
+    ...(beach.blue_flag && {
+      citation: {
+        "@type": "CreativeWork",
+        name: "Blue Flag certified beaches",
+        publisher: {
+          "@type": "Organization",
+          name: "Foundation for Environmental Education",
+          url: "https://www.fee.global",
+        },
+        url: "https://www.blueflag.global/all-bf-sites?country=GR",
+      },
+    }),
     // Rating/review data - omitted until reviews are implemented
     // Opening hours for organized beaches - only include if organized
     ...(beach.organized && {
@@ -103,6 +118,16 @@ export function generateBeachPlaceSchema(beach: Beach, canonicalUrl: string) {
   };
 
   return placeSchema;
+}
+
+/**
+ * Format an ISO date string as YYYY-MM-DD, or undefined if invalid/missing.
+ */
+function toIsoDate(value: string | null | undefined): string | undefined {
+  if (!value) return undefined;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return undefined;
+  return date.toISOString().split("T")[0];
 }
 
 /**
@@ -267,6 +292,13 @@ export function generateBeachWebPageSchema(beach: Beach, canonicalUrl: string) {
   const beachName = cleanText(beach.name, "Unnamed Beach");
   const beachArea = cleanText(beach.area, "Greece");
 
+  // Prefer verified_at (on-site verification timestamp) over updated_at, which
+  // moves uniformly on bulk edits and signals "automated update" to AI engines.
+  const dateModified =
+    toIsoDate(beach.verified_at) ??
+    toIsoDate(beach.updated_at) ??
+    new Date().toISOString().split("T")[0];
+
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -274,12 +306,8 @@ export function generateBeachWebPageSchema(beach: Beach, canonicalUrl: string) {
     name: `${beachName} - ${beachArea} | Greek Beaches`,
     description: generateBeachDescription(beach),
     url: canonicalUrl,
-    datePublished: beach.created_at
-      ? new Date(beach.created_at).toISOString().split("T")[0]
-      : "2024-01-01",
-    dateModified: beach.updated_at
-      ? new Date(beach.updated_at).toISOString().split("T")[0]
-      : new Date().toISOString().split("T")[0],
+    datePublished: toIsoDate(beach.created_at) ?? "2024-01-01",
+    dateModified,
     mainEntity: generateBeachPlaceSchema(beach, canonicalUrl),
     // Add breadcrumb structured data
     breadcrumb: {
@@ -327,12 +355,8 @@ export function generateAreaWebPageSchema(area: Area, beaches: Beach[], canonica
     name: `${area.name} Beaches | Greek Beaches`,
     description: area.description || `Explore beaches in ${area.name}, Greece`,
     url: canonicalUrl,
-    datePublished: area.created_at
-      ? new Date(area.created_at).toISOString().split("T")[0]
-      : "2024-01-01",
-    dateModified: area.updated_at
-      ? new Date(area.updated_at).toISOString().split("T")[0]
-      : new Date().toISOString().split("T")[0],
+    datePublished: toIsoDate(area.created_at) ?? "2024-01-01",
+    dateModified: toIsoDate(area.updated_at) ?? new Date().toISOString().split("T")[0],
     mainEntity: {
       "@type": "ItemList",
       name: `Beaches in ${area.name}`,
@@ -403,6 +427,53 @@ export function generateHomeWebPageSchema(beaches: Beach[]) {
         item: generateBeachPlaceSchema(beach, buildBeachCanonicalUrl(beach)),
       })),
     },
+  };
+}
+
+/**
+ * Generate FAQPage schema for a beach detail page.
+ *
+ * Each Q&A surfaces as a directly-citable answer in AI engines. The questions
+ * are intentionally aligned with how users prompt ChatGPT/Perplexity/Claude
+ * ("Is X family-friendly?", "Does X have parking?") so the questions
+ * themselves act as retrieval anchors. The visible accordion on the detail
+ * page is generated from the same source — so rendered text and structured
+ * data never diverge.
+ */
+export function generateBeachFAQSchema(
+  beach: Beach,
+  canonicalUrl: string,
+  dbFaqs?: Array<{ question: string; answer: string }>
+) {
+  const dateModified =
+    toIsoDate(beach.verified_at) ??
+    toIsoDate(beach.updated_at) ??
+    new Date().toISOString().split("T")[0];
+
+  // Prefer AI-generated DB content. Fall back to template generator only when
+  // a beach has no row in beach_content (e.g., newly added before regenerate).
+  const faqs =
+    dbFaqs && dbFaqs.length > 0
+      ? dbFaqs.map((f) => ({ question: f.question, answer: f.answer }))
+      : generateBeachFAQs(beach);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${canonicalUrl}#faq`,
+    url: canonicalUrl,
+    name: `${cleanText(beach.name, "Beach")} — frequently asked questions`,
+    description: `Common questions about ${cleanText(beach.name, "this beach")} in ${cleanText(beach.area, "Greece")}, with answers drawn from our verified beach record.`,
+    datePublished: toIsoDate(beach.created_at) ?? "2024-01-01",
+    dateModified,
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
   };
 }
 

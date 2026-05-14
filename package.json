@@ -16,6 +16,7 @@
     "preview": "vite preview",
     "generate-sitemap": "tsx scripts/generate-sitemap.ts",
     "generate-routes": "tsx scripts/generate-routes.ts",
+    "generate-beach-content": "tsx scripts/generate-beach-content.ts",
     "validate:schemas": "tsx scripts/validate-schemas.ts",
     "test": "vitest",
     "test:ui": "vitest --ui",
