@@ -90,7 +90,6 @@ const BeachDetail = () => {
   const { navigateBack } = useNavigationState();
 
   // State management
-  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
 
   // Fetch beach data with embedded AI-generated content (overview, amenities
@@ -354,11 +353,6 @@ const BeachDetail = () => {
     );
   }
 
-  // Always render the FULL description in the DOM so AI engines and non-JS
-  // crawlers can lift it verbatim. Visual truncation is CSS-only via
-  // line-clamp, toggled by the Read more button below.
-  const shouldShowReadMore = !!beach.description && beach.description.length > 280;
-
   // Generate SEO data with benefit-focused meta tags
   const seoTitle = generateBeachMetaTitle(beach);
   const seoDescription = generateBeachMetaDescription(beach);
@@ -612,30 +606,12 @@ const BeachDetail = () => {
               {/* Divider between sections */}
               {beach.description && <hr className="border-neutral-200/30" />}
 
-              {/* About Section — full description is always in the DOM so
-                  crawlers and AI engines see the entire text. Visual collapse
-                  uses CSS line-clamp toggled by the Read more button. */}
               {beach.description && (
                 <section>
                   <h2 className="text-2xl font-semibold mb-4">About {beach.name}</h2>
-                  <div>
-                    <p
-                      className={`text-muted-foreground whitespace-pre-line leading-relaxed${
-                        shouldShowReadMore && !isDescriptionExpanded ? " line-clamp-4" : ""
-                      }`}
-                    >
-                      {beach.description}
-                    </p>
-                    {shouldShowReadMore && (
-                      <Button
-                        variant="link"
-                        onClick={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
-                        className="p-0 h-auto mt-2"
-                      >
-                        {isDescriptionExpanded ? "Read less" : "Read more"}
-                      </Button>
-                    )}
-                  </div>
+                  <p className="text-muted-foreground whitespace-pre-line leading-relaxed">
+                    {beach.description}
+                  </p>
                 </section>
               )}
 
