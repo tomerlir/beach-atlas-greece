@@ -190,15 +190,20 @@ export function generateBeachMetaDescription(beach: Beach): string {
   // Construct description
   let description = `${parts[0]} - ${attributes.slice(0, 3).join(", ")}.`;
 
-  // Add call to action with platform USP if space allows
-  const cta = " Verified data.";
-  if (description.length + cta.length <= maxLength) {
-    description += cta;
-  } else {
-    // Try shorter CTA
-    const shortCta = " Verified data.";
-    if (description.length + shortCta.length <= maxLength) {
-      description += shortCta;
+  // Append the richest suffix that still fits maxLength. Sparse beaches (no
+  // Blue Flag, not organized, basic type) used to produce 60-80 char meta
+  // descriptions that Ahrefs flagged as too short. The tiered fallback fills
+  // the snippet space (target ~140-155) without exceeding 160.
+  const suffixes = [
+    " Plan your visit with verified info on amenities, parking, wave conditions and what to expect.",
+    " Plan your visit with verified parking, amenities & wave conditions.",
+    " Verified parking, amenities & wave conditions.",
+    " Verified data.",
+  ];
+  for (const suffix of suffixes) {
+    if (description.length + suffix.length <= maxLength) {
+      description += suffix;
+      break;
     }
   }
 

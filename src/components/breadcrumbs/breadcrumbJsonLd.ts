@@ -43,13 +43,15 @@ export function breadcrumbJsonLd(
 
       // Determine item URL:
       // - Prefer crumb.href if present (absolute or relative)
-      // - Else, if last crumb, use currentPageUrl (preferred) or fallback to baseUrl
-      // - Else (mid-trail with no href), omit item to avoid emitting a wrong URL
+      // - Else, if last crumb AND currentPageUrl was provided, use it
+      // - Else, omit item. Google explicitly allows omitting `item` on the
+      //   final crumb, and falling back to baseUrl pointed every leaf to the
+      //   homepage — a worse outcome than no URL at all.
       let itemUrl: string | undefined;
       if (crumb.href) {
         itemUrl = toAbsolute(crumb.href, baseUrl);
-      } else if (isLast) {
-        itemUrl = normalizedCurrent ?? baseUrl;
+      } else if (isLast && normalizedCurrent) {
+        itemUrl = normalizedCurrent;
       }
 
       const listItem: BreadcrumbListItem = {

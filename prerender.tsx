@@ -21,11 +21,6 @@ import {
   generateHomeMetaTitle,
   generateHomeMetaDescription,
 } from "./src/lib/seo";
-import {
-  generateBeachWebPageSchema,
-  generateAreaWebPageSchema,
-  generateHomeWebPageSchema,
-} from "./src/lib/structured-data";
 import { AppProviders, AppCoreContent } from "./src/App";
 import type { Tables } from "./src/integrations/supabase/types";
 import type { Area } from "./src/types/area";
@@ -142,15 +137,15 @@ function buildSeededQueryClient(url: string, data: PrerenderData): QueryClient {
     const parentArea = data.allAreas.find((a) => a.id === beachData.area_id);
     if (parentArea) {
       client.setQueryData(["area-by-slug", parentArea.slug], parentArea);
-      // Seed sibling beaches so the "More in {area}" section emits real
-      // <a href> links in the prerendered HTML — otherwise crawlers see
-      // an empty siblings array and beach pages have no beach↔beach links.
+      // Seed the FULL sibling list (alphabetized, current beach excluded) so
+      // both the "More in {area}" carousel AND the "All beaches in {area}"
+      // text nav have real <a href> links in the prerendered HTML.
+      // The carousel slices to 8 in BeachDetail.tsx; the nav uses all.
       // Key shape must match BeachDetail.tsx: ["more-in-area", areaSlug, beachSlug].
       const siblings = (data.beachesByAreaId[beachData.area_id] || [])
         .filter((b) => b.slug !== beachData.slug)
         .slice()
-        .sort((a, b) => String(a.name).localeCompare(String(b.name)))
-        .slice(0, 8);
+        .sort((a, b) => String(a.name).localeCompare(String(b.name)));
       client.setQueryData(["more-in-area", parentArea.slug, beachData.slug], siblings);
     }
   }
@@ -173,7 +168,6 @@ function buildHeadElements(
   const elements = new Set<HeadElement>();
   let title = "Beaches of Greece";
   let description = "Discover the best beaches in Greece with verified data and smart search.";
-  let jsonLdData: unknown = null;
 
   if (data) {
     const beachData = data.beachMetadata[url];
@@ -183,8 +177,6 @@ function buildHeadElements(
       const beach = beachData as Partial<Tables<"beaches">> & BeachMetadata;
       title = generateBeachMetaTitle(beach as Tables<"beaches">);
       description = generateBeachMetaDescription(beach as Tables<"beaches">);
-      const canonicalUrl = `${SITE_URL}${url}`;
-      jsonLdData = generateBeachWebPageSchema(beach as Tables<"beaches">, canonicalUrl);
     } else if (areaData) {
       const area: Area = {
         id: "",
@@ -199,16 +191,7 @@ function buildHeadElements(
       };
       title = generateAreaMetaTitle(area, areaData.beachCount);
       description = areaData.description || generateAreaMetaDescription(area, areaData.beachCount);
-      const canonicalUrl = `${SITE_URL}${url}`;
-      const areaBeaches = Object.values(data.beachByPath).filter((b) => b.area === areaData.name);
-      jsonLdData = generateAreaWebPageSchema(
-        area,
-        areaBeaches as Tables<"beaches">[],
-        canonicalUrl
-      );
     } else if (url === "/") {
-      const allBeaches = data.allBeaches as Tables<"beaches">[];
-      jsonLdData = generateHomeWebPageSchema(allBeaches);
       title = generateHomeMetaTitle();
       description = generateHomeMetaDescription();
     } else if (url === "/about") {
@@ -217,22 +200,28 @@ function buildHeadElements(
         "Beaches of Greece is a comprehensive platform that helps travelers find the perfect Greek beach through natural language search and verified data.";
     } else if (url === "/areas") {
       title = "Greek Beach Areas";
-      description = "Browse all Greek beach areas and discover the perfect destination.";
+      description =
+        "Browse every Greek beach region — Corfu, Mykonos, Santorini, Chalkidiki, Crete and more. Find the perfect destination with verified beach data.";
     } else if (url === "/faq") {
       title = "Frequently Asked Questions | Beaches of Greece";
-      description = "Common questions about using Beaches of Greece.";
+      description =
+        "Answers to common questions about Greek beaches, Blue Flag certification, data accuracy, beach amenities and how to use Beaches of Greece.";
     } else if (url === "/guide") {
       title = "How to Choose the Perfect Greek Beach | Beaches of Greece";
-      description = "A guide to choosing the right beach in Greece based on your preferences.";
+      description =
+        "A practical guide to choosing the perfect Greek beach: how to weigh waves, sand vs pebbles, amenities, parking and Blue Flag certifications.";
     } else if (url === "/privacy") {
       title = "Privacy Policy | Beaches of Greece";
-      description = "Privacy policy for Beaches of Greece.";
+      description =
+        "How Beaches of Greece handles your data: strictly necessary tech only, cookieless analytics, and no third-party tracking. Read the full details.";
     } else if (url === "/map") {
       title = "Map of Greek Beaches - Explore on an Interactive Map";
-      description = "Explore Greek beaches on an interactive map.";
+      description =
+        "Explore Greek beaches on an interactive map. Filter by region, amenities and wave conditions, then zoom to matching beaches automatically.";
     } else if (url === "/ontology") {
       title = "Beach Ontology | Beaches of Greece";
-      description = "How we classify and describe Greek beaches.";
+      description =
+        "See how we classify Greek beaches by type, wave conditions, organization, parking, amenities and certifications — the data model behind the site.";
     } else if (url === "/404") {
       title = "Page Not Found | Beaches of Greece";
       description = "The page you're looking for could not be found.";
@@ -260,15 +249,10 @@ function buildHeadElements(
     elements.add({ type: "link", props: { rel: "canonical", href: canonicalHref } });
   }
 
-  if (jsonLdData) {
-    elements.add({
-      type: "script",
-      props: {
-        type: "application/ld+json",
-        children: JSON.stringify(jsonLdData),
-      },
-    });
-  }
+  // JSON-LD is emitted from the React tree via <JsonLdScript> components and
+  // captured by renderToString. Do NOT duplicate it here — emitting the same
+  // schema from both the head and the body produces two scripts per page with
+  // the same @id, which Ahrefs flags as a Schema.org validation error.
 
   // Inline dehydrated React Query state for client hydration.
   // We escape `<` to prevent any embedded JSON from terminating the script tag.

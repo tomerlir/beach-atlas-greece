@@ -75,8 +75,7 @@ const Privacy = () => {
 
         <main className="container mx-auto px-4 py-12">
           <div className="max-w-3xl mx-auto prose prose-lg dark:prose-invert prose-headings:text-foreground prose-p:text-muted-foreground prose-li:marker:text-primary prose-a:text-primary hover:prose-a:underline prose-a:no-underline">
-            <h1 className="!mb-2">Privacy Policy</h1>
-            <p className="text-muted-foreground !mt-0">
+            <p className="text-muted-foreground !mt-0 !mb-6">
               Last updated: {new Date().toISOString().split("T")[0]}
             </p>
 

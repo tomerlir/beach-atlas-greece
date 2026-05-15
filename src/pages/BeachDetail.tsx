@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { generateAreaSlug, formatRelativeTime } from "@/lib/utils";
+import { generateAreaSlug, generateBeachUrl, formatRelativeTime } from "@/lib/utils";
 import { openInMaps } from "@/lib/maps";
 import { generateBeachMetaTitle, generateBeachMetaDescription } from "@/lib/seo";
 import { generateBeachWebPageSchema } from "@/lib/structured-data";
@@ -162,12 +162,14 @@ const BeachDetail = () => {
     }
   }, [beach]);
 
-  // Fetch siblings in same area, excluding current beach
+  // Fetch ALL siblings in same area, excluding current beach. The full list
+  // powers the "All beaches in {area}" nav below for internal-link coverage;
+  // the visual carousel slices the first 8 below.
   const { data: siblings = [] } = useQuery({
     queryKey: ["more-in-area", area, beachName],
     queryFn: async () => {
       if (!area || !beachName) return [] as Beach[];
-      return fetchMoreInArea(area, beachName, 8);
+      return fetchMoreInArea(area, beachName, 200);
     },
     enabled: !!area && !!beachName,
     staleTime: 5 * 60 * 1000,
@@ -637,15 +639,42 @@ const BeachDetail = () => {
           )}
         </main>
 
-        {/* More in Area Section */}
+        {/* More in Area Section — visual carousel, first 8 siblings */}
         {beach && siblings.length > 0 && (
           <MoreInArea
             area={{
               name: beach.area,
               slug: generateAreaSlug(beach.area),
             }}
-            beaches={siblings}
+            beaches={siblings.slice(0, 8)}
           />
+        )}
+
+        {/* All beaches in {area} — full text-only sibling list. Mirrors the
+            pattern in Area.tsx and gives every beach detail page N-1 inlinks
+            to its siblings, dramatically improving internal-link coverage for
+            beaches that would otherwise sit outside the alphabetical-first 8. */}
+        {beach && siblings.length > 0 && (
+          <div className="max-w-4xl md:max-w-5xl mx-auto px-4">
+            <nav
+              aria-label={`All beaches in ${beach.area}`}
+              className="mt-12 pt-8 border-t border-border/40"
+            >
+              <h2 className="text-lg font-semibold mb-4">All beaches in {beach.area}</h2>
+              <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-2 text-sm">
+                {siblings.map((sibling) => (
+                  <li key={sibling.id}>
+                    <Link
+                      to={generateBeachUrl(sibling.area, sibling.slug)}
+                      className="text-muted-foreground hover:text-foreground hover:underline"
+                    >
+                      {sibling.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
         )}
 
         <Footer />

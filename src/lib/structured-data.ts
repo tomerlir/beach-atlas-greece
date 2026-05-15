@@ -267,6 +267,8 @@ export function generateBeachWebPageSchema(beach: Beach, canonicalUrl: string) {
   const beachName = cleanText(beach.name, "Unnamed Beach");
   const beachArea = cleanText(beach.area, "Greece");
 
+  // Breadcrumb data is emitted separately as a top-level BreadcrumbList by
+  // <BreadcrumbsWithJsonLd> on the page — do not nest a second copy here.
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
@@ -281,36 +283,6 @@ export function generateBeachWebPageSchema(beach: Beach, canonicalUrl: string) {
       ? new Date(beach.updated_at).toISOString().split("T")[0]
       : new Date().toISOString().split("T")[0],
     mainEntity: generateBeachPlaceSchema(beach, canonicalUrl),
-    // Add breadcrumb structured data
-    breadcrumb: {
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: "https://beachesofgreece.com",
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Areas",
-          item: "https://beachesofgreece.com/areas",
-        },
-        {
-          "@type": "ListItem",
-          position: 3,
-          name: beachArea,
-          item: `https://beachesofgreece.com/${generateAreaSlug(beachArea)}`,
-        },
-        {
-          "@type": "ListItem",
-          position: 4,
-          name: beach.name,
-          item: canonicalUrl,
-        },
-      ],
-    },
   };
 }
 
@@ -348,30 +320,8 @@ export function generateAreaWebPageSchema(area: Area, beaches: Beach[], canonica
         };
       }),
     },
-    // Breadcrumb structured data
-    breadcrumb: {
-      "@type": "BreadcrumbList",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Home",
-          item: "https://beachesofgreece.com",
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Areas",
-          item: "https://beachesofgreece.com/areas",
-        },
-        {
-          "@type": "ListItem",
-          position: 3,
-          name: area.name,
-          item: canonicalUrl,
-        },
-      ],
-    },
+    // Breadcrumb is emitted separately as a top-level BreadcrumbList by
+    // <BreadcrumbsWithJsonLd> on the area page — do not nest a copy here.
   };
 }
 

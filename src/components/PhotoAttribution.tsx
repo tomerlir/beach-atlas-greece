@@ -12,7 +12,7 @@ interface PhotoAttributionProps {
  * Follows industry standards for legal protection and aesthetic appeal
  *
  * Expected photo_source format examples:
- * - "dronepicr, CC BY 2.0 <https://creativecommons.org/licenses/by/2.0>, via Wikimedia Commons"
+ * - "dronepicr, CC BY 2.0 <https://creativecommons.org/licenses/by/2.0/>, via Wikimedia Commons"
  * - "Photo by John Smith via Unsplash"
  * - "Image by Jane Doe, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0/>"
  */

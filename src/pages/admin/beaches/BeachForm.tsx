@@ -637,7 +637,7 @@ const BeachForm: React.FC = () => {
               name="photo_source"
               value={draft.photo_source}
               onChange={(e) => updateDraft({ photo_source: e.target.value })}
-              placeholder="e.g., dronepicr, CC BY 2.0 <https://creativecommons.org/licenses/by/2.0>, via Wikimedia Commons"
+              placeholder="e.g., dronepicr, CC BY 2.0 <https://creativecommons.org/licenses/by/2.0/>, via Wikimedia Commons"
             />
             <div className="flex flex-wrap gap-2">
               <span className="text-xs text-muted-foreground">Quick options:</span>
