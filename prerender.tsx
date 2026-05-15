@@ -190,7 +190,10 @@ function buildHeadElements(
         updated_at: null,
       };
       title = generateAreaMetaTitle(area, areaData.beachCount);
-      description = areaData.description || generateAreaMetaDescription(area, areaData.beachCount);
+      // Call generateAreaMetaDescription rather than using areaData.description
+      // directly — the helper enforces the 160-char meta-description limit
+      // (smart-truncating editorial copy or falling back to a template).
+      description = generateAreaMetaDescription(area, areaData.beachCount);
     } else if (url === "/") {
       title = generateHomeMetaTitle();
       description = generateHomeMetaDescription();

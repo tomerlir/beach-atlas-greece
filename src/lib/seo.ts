@@ -249,13 +249,15 @@ export function generateAreaMetaDescription(area: Area, beachCount?: number): st
   const maxLength = 160;
   const areaName = area.name.trim();
 
-  // Use custom description if available (trim it)
-  if (
-    area.description &&
-    area.description.trim().length > 0 &&
-    area.description.trim().length <= maxLength
-  ) {
-    return area.description.trim();
+  // Use custom editorial description when available. If it fits, keep it as-is.
+  // If it's too long, smart-truncate at a clean sentence/clause boundary so we
+  // preserve the regional flavor rather than falling through to the generic
+  // template. Only fall back to the template when no clean truncation exists.
+  const editorial = area.description?.trim() ?? "";
+  if (editorial.length > 0) {
+    if (editorial.length <= maxLength) return editorial;
+    const truncated = smartTruncateForMeta(editorial, maxLength);
+    if (truncated) return truncated;
   }
 
   // Generate description
@@ -295,6 +297,36 @@ export function generateHomeMetaTitle(): string {
  */
 export function generateHomeMetaDescription(): string {
   return "Tired of beach disappointment? Our verified data & AI search finds beaches matching YOUR needs - calm waters, parking, facilities. No more guesswork.";
+}
+
+/**
+ * Smart-truncate a description for use as a meta description. Tries clean
+ * boundaries in priority order: sentence ending, then clause ending. Returns
+ * null if no boundary lands the result in [minLength, maxLength] — caller
+ * should then fall back to a generated template (which is region-aware and
+ * search-friendly, so a better outcome than an awkward word-boundary cut).
+ *
+ * The output ends with `.` (sentence cut keeps existing period; clause cut
+ * replaces trailing `,` / `;` with `.`). Word-boundary fallback is intentionally
+ * NOT used — `centered at…` reads worse than a clean templated description.
+ */
+function smartTruncateForMeta(text: string, maxLength: number, minLength = 110): string | null {
+  if (text.length <= maxLength) return text;
+  const slice = text.slice(0, maxLength);
+
+  // Sentence boundary: keep up to and including the period.
+  const lastSentence = slice.lastIndexOf(". ");
+  if (lastSentence !== -1 && lastSentence + 1 >= minLength) {
+    return slice.slice(0, lastSentence + 1);
+  }
+
+  // Clause boundary: replace the trailing `,` / `;` with `.`.
+  const lastClause = Math.max(slice.lastIndexOf(", "), slice.lastIndexOf("; "));
+  if (lastClause !== -1 && lastClause + 1 >= minLength) {
+    return slice.slice(0, lastClause) + ".";
+  }
+
+  return null;
 }
 
 /**
