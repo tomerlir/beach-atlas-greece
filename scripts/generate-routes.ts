@@ -148,8 +148,35 @@ async function generateRoutes(): Promise<PrerenderPayload> {
     throw new Error(`Failed to fetch beaches: ${beachesError.message}`);
   }
 
+  // Fetch AI-generated content (overview, amenities summary, FAQs, keywords).
+  // Embedded onto beachByPath rows so beach-detail prerendering can read it
+  // without a second round trip. Missing content is fine — the renderer falls
+  // back to template generators in src/lib/beach-faq.ts.
+  const { data: contents, error: contentsError } = await supabase
+    .from("beach_content")
+    .select("beach_id, overview, amenities_summary, faqs, keywords");
+  if (contentsError) {
+    throw new Error(`Failed to fetch beach_content: ${contentsError.message}`);
+  }
+  const contentByBeachId = new Map<string, FullBeach>();
+  for (const c of contents || []) {
+    contentByBeachId.set((c as { beach_id: string }).beach_id, c as FullBeach);
+  }
+
   const safeAreas: FullArea[] = areas || [];
-  const safeBeaches: FullBeach[] = beaches || [];
+  const safeBeaches: FullBeach[] = (beaches || []).map((b) => {
+    const content = contentByBeachId.get(b.id);
+    if (!content) return b;
+    return {
+      ...b,
+      beach_content: {
+        overview: content.overview,
+        amenities_summary: content.amenities_summary,
+        faqs: content.faqs,
+        keywords: content.keywords,
+      },
+    };
+  });
 
   // Group beaches by area_id for fast SSR seeding of area pages
   safeBeaches.forEach((beach) => {

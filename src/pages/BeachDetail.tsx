@@ -2,7 +2,8 @@ import { useParams, Link } from "react-router-dom";
 import { generateAreaSlug, formatRelativeTime } from "@/lib/utils";
 import { openInMaps } from "@/lib/maps";
 import { generateBeachMetaTitle, generateBeachMetaDescription } from "@/lib/seo";
-import { generateBeachWebPageSchema } from "@/lib/structured-data";
+import { generateBeachWebPageSchema, generateBeachFAQSchema } from "@/lib/structured-data";
+import { generateBeachOverview, generateBeachFAQs, generateAmenitiesAnswer } from "@/lib/beach-faq";
 import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
@@ -19,6 +20,7 @@ import {
   Share2,
   MessageSquare,
   Clock,
+  ChevronDown,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -88,10 +90,11 @@ const BeachDetail = () => {
   const { navigateBack } = useNavigationState();
 
   // State management
-  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
 
-  // Fetch beach data with optimized caching
+  // Fetch beach data with embedded AI-generated content (overview, amenities
+  // summary, FAQs, keywords) via Supabase FK relationship. Falls back to
+  // local template generators (src/lib/beach-faq.ts) if content row missing.
   const {
     data: beach,
     isLoading,
@@ -103,7 +106,9 @@ const BeachDetail = () => {
 
       const { data, error } = await supabase
         .from("beaches")
-        .select("*")
+        .select(
+          "*, beach_content(overview, amenities_summary, faqs, keywords, generator, prompt_version)"
+        )
         .eq("slug", beachName)
         .eq("status", "ACTIVE")
         .single();
@@ -348,12 +353,6 @@ const BeachDetail = () => {
     );
   }
 
-  const shouldShowReadMore = beach.description && beach.description.length > 200;
-  const displayDescription =
-    shouldShowReadMore && !isDescriptionExpanded
-      ? beach.description.slice(0, 200) + "..."
-      : beach.description;
-
   // Generate SEO data with benefit-focused meta tags
   const seoTitle = generateBeachMetaTitle(beach);
   const seoDescription = generateBeachMetaDescription(beach);
@@ -361,6 +360,29 @@ const BeachDetail = () => {
 
   // Generate optimized JSON-LD structured data
   const jsonLd = generateBeachWebPageSchema(beach, canonicalUrl);
+
+  // Extract AI-generated beach_content (joined via FK). Supabase returns
+  // one-to-one FK relationships as either object | null OR a single-element
+  // array depending on schema introspection — handle both shapes.
+  type EmbeddedContent = {
+    overview: string;
+    amenities_summary: string | null;
+    faqs: Array<{ question: string; answer: string }>;
+    keywords?: string[];
+  };
+  const rawContent = (beach as Beach & { beach_content?: unknown }).beach_content;
+  const dbContent: EmbeddedContent | null = Array.isArray(rawContent)
+    ? ((rawContent[0] as EmbeddedContent) ?? null)
+    : ((rawContent as EmbeddedContent) ?? null);
+
+  // Prefer DB content (unique per beach, AI-generated). Fall back to local
+  // template generators only when a beach has no content row yet.
+  const beachOverview = dbContent?.overview ?? generateBeachOverview(beach);
+  const amenitiesAnswer = dbContent?.amenities_summary ?? generateAmenitiesAnswer(beach);
+  const beachFaqs =
+    dbContent?.faqs && dbContent.faqs.length > 0 ? dbContent.faqs : generateBeachFAQs(beach);
+  const faqJsonLd = generateBeachFAQSchema(beach, canonicalUrl, dbContent?.faqs);
+  const verifiedTimestamp = beach.verified_at || beach.updated_at;
 
   return (
     <>
@@ -384,8 +406,10 @@ const BeachDetail = () => {
         {beach.photo_url && <meta name="twitter:image" content={beach.photo_url} />}
       </Helmet>
 
-      {/* JSON-LD structured data */}
+      {/* JSON-LD structured data — WebPage + Beach entity, plus a separate
+          FAQPage block per beach so each Q&A becomes a citable AI surface. */}
       <JsonLdScript schema={jsonLd} id="beach-schema" />
+      <JsonLdScript schema={faqJsonLd} id="beach-faq-schema" />
 
       <div className="min-h-screen bg-background">
         <Header />
@@ -509,13 +533,14 @@ const BeachDetail = () => {
                   <span className="font-medium">{beach.area}</span>
                 </Link>
                 <div
-                  aria-label={`Information last verified ${beach.updated_at ? formatRelativeTime(beach.updated_at) : "recently"}`}
+                  aria-label={`Information last verified ${verifiedTimestamp ? formatRelativeTime(verifiedTimestamp) : "recently"}`}
                   className="inline-flex items-center gap-2 text-sm md:text-base rounded-full border border-border/50 bg-muted/40 px-3 py-1 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                   role="status"
                 >
                   <Clock className="h-4 w-4 md:h-5 md:w-5 text-secondary" aria-hidden="true" />
                   <span className="font-medium">
-                    Verified {beach.updated_at ? formatRelativeTime(beach.updated_at) : "recently"}
+                    Verified{" "}
+                    {verifiedTimestamp ? formatRelativeTime(verifiedTimestamp) : "recently"}
                   </span>
                 </div>
               </div>
@@ -528,9 +553,13 @@ const BeachDetail = () => {
               {/* Divider between header/meta and first content section */}
               <hr className="border-neutral-200/30" />
 
-              {/* At a Glance */}
+              {/* At a Glance — opens with a Q-shaped heading and a narrative
+                  overview paragraph so AI engines have an answer-shaped chunk
+                  of prose to lift directly into responses. The structured
+                  grid below the paragraph stays for visual scanning. */}
               <section>
-                <h2 className="text-2xl font-semibold mb-6">Summary</h2>
+                <h2 className="text-2xl font-semibold mb-3">What to expect at {beach.name}</h2>
+                <p className="text-muted-foreground leading-relaxed mb-6">{beachOverview}</p>
                 <dl className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="flex items-center gap-3">
                     <Palmtree className="h-5 w-5 text-secondary" aria-hidden="true" />
@@ -575,38 +604,18 @@ const BeachDetail = () => {
               </section>
 
               {/* Divider between sections */}
-              {beach.description && <hr className="border-neutral-200/30" />}
-
-              {/* About Section */}
-              {beach.description && (
-                <section>
-                  <h2 className="text-2xl font-semibold mb-4">Description</h2>
-                  <div>
-                    <p className="text-muted-foreground whitespace-pre-line leading-relaxed">
-                      {displayDescription}
-                    </p>
-                    {shouldShowReadMore && (
-                      <Button
-                        variant="link"
-                        onClick={() => setIsDescriptionExpanded(!isDescriptionExpanded)}
-                        className="p-0 h-auto mt-2"
-                      >
-                        {isDescriptionExpanded ? "Read less" : "Read more"}
-                      </Button>
-                    )}
-                  </div>
-                </section>
-              )}
-
-              {/* Divider between sections */}
               {beach.amenities && beach.amenities.length > 0 && (
                 <hr className="border-neutral-200/30" />
               )}
 
-              {/* Amenities */}
+              {/* Amenities — Q-shaped heading + one-sentence narrative answer
+                  above the icon grid. The grid stays for visual scanning. */}
               {beach.amenities && beach.amenities.length > 0 && (
                 <section>
-                  <h2 className="text-2xl font-semibold mb-6">Amenities</h2>
+                  <h2 className="text-2xl font-semibold mb-3">
+                    What amenities does {beach.name} have?
+                  </h2>
+                  <p className="text-muted-foreground leading-relaxed mb-6">{amenitiesAnswer}</p>
                   <div className="space-y-6">
                     {Object.entries(amenitiesByCategory).map(([category, amenities]) => (
                       <div key={category}>
@@ -629,6 +638,41 @@ const BeachDetail = () => {
                           ))}
                         </div>
                       </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* Divider before FAQ */}
+              {beachFaqs.length > 0 && <hr className="border-neutral-200/30" />}
+
+              {/* Per-beach FAQ — native <details> instead of Radix Collapsible
+                  so the answer text is always in the rendered DOM (Radix
+                  unmounts collapsed content, leaving an empty container that
+                  AI crawlers and text-mode bots see as blank). Same Q&A source
+                  drives the FAQPage JSON-LD above, so the structured data and
+                  the visible HTML never diverge. This is the highest-leverage
+                  AI-citation surface on the page. */}
+              {beachFaqs.length > 0 && (
+                <section aria-labelledby="beach-faq-heading">
+                  <h2 id="beach-faq-heading" className="text-2xl font-semibold mb-6">
+                    Common questions about {beach.name}
+                  </h2>
+                  <div className="space-y-3">
+                    {beachFaqs.map((faq, index) => (
+                      <details
+                        key={index}
+                        className="group bg-card border border-border rounded-lg px-5 shadow-soft"
+                      >
+                        <summary className="flex justify-between items-center cursor-pointer list-none py-4 hover:opacity-80 transition-opacity">
+                          <span className="font-semibold text-foreground pr-4">{faq.question}</span>
+                          <ChevronDown
+                            className="h-5 w-5 text-muted-foreground transition-transform duration-200 group-open:rotate-180 flex-shrink-0"
+                            aria-hidden="true"
+                          />
+                        </summary>
+                        <p className="text-muted-foreground pb-4 leading-relaxed">{faq.answer}</p>
+                      </details>
                     ))}
                   </div>
                 </section>
