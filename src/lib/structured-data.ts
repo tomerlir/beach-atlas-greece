@@ -50,13 +50,22 @@ export function generateBeachPlaceSchema(beach: Beach, canonicalUrl: string) {
   // Convert amenities to structured format
   const amenityFeatures = generateAmenityFeatures(beach.amenities || []);
 
+  // Prefer the AI-generated overview from beach_content (when prerender or
+  // BeachDetail embedded it on the beach row) — that's the prose users see
+  // on the page. Fall back to the legacy column, then to an auto-generated
+  // description for beaches with neither.
+  const embedded = (beach as Beach & { beach_content?: { overview?: string | null } })
+    .beach_content;
+  const beachDescription =
+    embedded?.overview?.trim() || beach.description || generateBeachDescription(beach);
+
   // Generate comprehensive place schema
   const placeSchema = {
     "@type": schemaTypes,
     "@id": canonicalUrl,
     name: beachName,
     alternateName: beachName, // Could be expanded with local names
-    description: beach.description || generateBeachDescription(beach),
+    description: beachDescription,
     url: canonicalUrl,
     address: {
       "@type": "PostalAddress",

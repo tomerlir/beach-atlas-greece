@@ -604,18 +604,6 @@ const BeachDetail = () => {
               </section>
 
               {/* Divider between sections */}
-              {beach.description && <hr className="border-neutral-200/30" />}
-
-              {beach.description && (
-                <section>
-                  <h2 className="text-2xl font-semibold mb-4">About {beach.name}</h2>
-                  <p className="text-muted-foreground whitespace-pre-line leading-relaxed">
-                    {beach.description}
-                  </p>
-                </section>
-              )}
-
-              {/* Divider between sections */}
               {beach.amenities && beach.amenities.length > 0 && (
                 <hr className="border-neutral-200/30" />
               )}
